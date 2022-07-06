@@ -1,0 +1,68 @@
+@use '../../src/styles/mixins/colours';
+
+@import '../../src/styles/variables/colours';
+
+.HomePage {
+    .page-header-section {
+        padding-bottom: 0.1px; /* stop margin collapse */
+        background-color: #{colours.get-static('colour-bg-standard-tint-1')};
+        background-color: var(--colour-bg-standard-tint-1);
+
+        .HeaderBar {
+            text-align: center;
+
+            .AppBar {
+                justify-content: flex-end;
+
+                &.showBar {
+                    justify-content: space-between;
+                    -ms-flex-pack: justify;
+                }
+            }
+
+            .homepage-logo {
+                display: block;
+                width: 200px;
+                margin: 10px auto;
+            }
+
+            .primary {
+                font-size: 1.5em;
+                font-weight: bold;
+            }
+
+            .secondary {
+                font-weight: 500;
+            }
+        }
+    }
+
+    .AlertBannerList {
+        text-align: right;
+
+        .AlertBannerButton {
+            margin: 15px;
+        }
+    }
+
+    .search {
+        margin: 1em;
+        background-color: #{colours.get-static('colour-bg-standard-tint-1')};
+        background-color: var(--colour-bg-standard-tint-1);
+
+        &.locationSet {
+            padding-bottom: 0;
+        }
+
+        h2 {
+            color: #{colours.get-static('colour-text-dark')};
+            color: var(--colour-text-dark);
+            margin: 10px 0;
+            font-size: 1.13em;
+        }
+    }
+
+    .QuestionStepper {
+        margin: 1em;
+    }
+}

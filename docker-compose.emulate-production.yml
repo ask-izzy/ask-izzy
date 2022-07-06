@@ -1,0 +1,27 @@
+version: "3.4"
+
+services:
+  app:
+    build:
+      context: .
+      args:
+        - VERSION=emulated-production
+    command: "serve"
+    environment:
+      STATIC_PAGE_REGENERATION_SECRET: "hunter2"
+      STATIC_PAGE_PREVIEW_SECRET: "hunter2"
+    volumes:
+      - .env.production.local:/app/.env.production.local
+      - storage:/storage
+
+  load-balancer:
+    image: nginx
+    volumes:
+      - ./config/nginx-emulate-production.conf:/etc/nginx/conf.d/default.conf:ro
+    depends_on:
+      - app
+    ports:
+      - "8000:8000"
+
+volumes:
+  storage:

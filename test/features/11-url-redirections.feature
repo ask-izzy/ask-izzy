@@ -16,7 +16,7 @@ Feature: Landing page
 
     Scenario: Visit Housing page
         When I visit /category/housing/
-        Then I should be at /housing
+        Then I should be at /housing/Melbourne-VIC
 
     Scenario: Visit Housing page with location
         When I visit /category/housing/in/Sydney-NSW
@@ -24,7 +24,7 @@ Feature: Landing page
 
     Scenario: Visit Everyday things page
         When I visit /category/everyday-things
-        Then I should be at /everyday-things
+        Then I should be at /everyday-things/Melbourne-VIC
 
     Scenario: Visit Everyday things page with location
         When I visit /category/everyday-things/in/Sydney-NSW
@@ -36,4 +36,4 @@ Feature: Landing page
 
     Scenario: Visit legacy Have your say page
         When I visit /have-your-say
-        Then I should be at /advocacy
+        Then I should be at /advocacy/Melbourne-VIC

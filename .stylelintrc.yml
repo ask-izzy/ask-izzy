@@ -8,10 +8,13 @@ ignoreFiles:
     - "**/node_modules/**"
     - "src/styles/fonts.scss"
     - "src/styles/normalize.scss"
-    - "public/static/*"
     - "public/components-catalog/**"
+    - "public/fonts/**"
 rules:
     indentation: 4
+    no-invalid-position-at-import-rule: null # We must disable this rule as
+        # it conflicts with sass's requirement that @use always comes first.
+        # https://github.com/stylelint/stylelint/issues/5133#issuecomment-834466368
     # The following style sins were grandfathered in. Please re-enable and
     # resolve issues for these rules over time.
     function-parentheses-space-inside: null

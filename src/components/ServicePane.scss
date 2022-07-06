@@ -16,25 +16,24 @@
 
     .row {
         width: 100%;
-        display: inline-flex;
+        display: grid;
 
-        .leftColumn {
-            width: 50%;
-        }
+        @media ($tablet) {
+            grid-template-columns: 1fr 1fr;
+            grid-template-areas:
+                'left-column right-column'
+                'left-column right-column'
+                'left-column right-column';
 
-        .rightColumn {
-            width: 50%;
-        }
-
-        @media (max-width: 768px) {
-            display: block;
-
-            .leftColumn {
-                width: 100%;
+            .header,
+            .provisions,
+            .siblings-container {
+                grid-column: left-column;
             }
 
-            .rightColumn {
-                width: 100%;
+            .BoxedText {
+                grid-column: right-column;
+                grid-row: right-column;
             }
         }
     }
@@ -73,14 +72,6 @@
         padding-bottom: 1px;
         background-color: #{colours.get-static('raw-colour-pure-white')};
         background-color: var(--raw-colour-pure-white);
-    }
-
-    @media ($tablet) {
-        .header {
-            clear: both;
-            background-color: #{colours.get-static('raw-colour-pure-white')};
-            background-color: var(--raw-colour-pure-white);
-        }
     }
 
     // FIXME: Modifying child component styles

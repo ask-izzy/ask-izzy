@@ -1,5 +1,30 @@
 @use '../styles/mixins/colours';
 
+.LogoWithTextBoxContainer.Link {
+    text-decoration: none;
+
+    &:visited,
+    &:hover {
+        color: unset;
+        text-decoration: none;
+    }
+
+    .showAsLink {
+        color: #{colours.get-static('colour-link')};
+        color: var(--colour-link);
+        text-decoration: underline;
+    }
+
+    &:visited .showAsLink {
+        color: #{colours.get-static('colour-link-visited')};
+        color: var(--colour-link-visited);
+    }
+
+    &:hover .showAsLink {
+        text-decoration: none;
+    }
+}
+
 .LogoWithTextBox {
     display: flex;
     flex-direction: column;
@@ -43,11 +68,6 @@
         .Chevron {
             display: inline;
             font-weight: normal;
-        }
-
-        .Link {
-            display: inline;
-            font-weight: 500;
         }
 
         @media (max-width: 768px) {

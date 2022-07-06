@@ -1,27 +1,33 @@
 /* @flow */
 import * as React from "react";
+import {useRouter} from "next/router"
 
 import PhoneButton from "./PhoneButton";
 import StrapiMarkdown from "./StrapiMarkdown";
 import Link from "./base/Link";
 import * as gtm from "../google-tag-manager";
-import { useRouterContext } from "../contexts/router-context";
 
-type Callout = {
-    id: string,
-    ShowHeading: boolean,
-    Link?: ?string,
-    className?: ?{className: string},
+export type CalloutType = {
+    id: number,
+    Key: string,
     Heading: string,
-    Body?: ?string,
-    Style?: ?Object,
-    Phone?: ?string
+    ShowHeading: boolean,
+    Body: string,
+    Style: Object | null,
+    Phone: string,
+    Link: string | null,
+    className: number,
+    created_at: string,
+    updated_at: string,
 }
 
-type CalloutBoxType = {
+export type CalloutBoxType = {
+    id: number,
+    callout: CalloutType,
     Top: boolean,
     Bottom: boolean,
-    callout: Callout
+    created_at: string,
+    updated_at: string,
 }
 
 type Props = {
@@ -43,9 +49,9 @@ function CalloutBox(
     {calloutBoxes, position, embedded}: Props
 ): React.Node | null {
 
-    const {navigate} = useRouterContext();
+    const router = useRouter();
 
-    function getAnalyticsEvent(callout: Callout) {
+    function getAnalyticsEvent(callout: CalloutType) {
         return {
             event: `Link Followed - Callout`,
             eventCat: "Link followed",
@@ -55,7 +61,7 @@ function CalloutBox(
         }
     }
 
-    const onClickBox = (callout: Callout): void => {
+    const onClickBox = (callout: CalloutType): void => {
         const {Link: path, Heading} = callout
         if (!path) {
             return;
@@ -74,7 +80,7 @@ function CalloutBox(
         // if the path is local (as defined by prefixed slash)
         // go to the internal link, else open it externally
         if (path.charAt(0) === "/") {
-            navigate(path);
+            router.push(path);
         } else {
             window.location = path;
         }

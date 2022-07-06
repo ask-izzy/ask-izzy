@@ -28,7 +28,6 @@ import Service from "../iss/Service";
 import icons from "../icons";
 import Storage from "../storage";
 import ScreenReader from "./ScreenReader";
-import {MobileDetect} from "../effects/MobileDetect";
 import UrlsToLinks from "./UrlsToLink"
 import {getSiblingServices} from "../iss/load-services"
 
@@ -38,8 +37,6 @@ type Props = {
 
 function ServicePane({service}: Props): ReactNode {
     const [siblings, setSiblings] = useState<Array<Service>>([])
-
-    const isMobile = MobileDetect()
 
     useEffect(() => {
         async function loadSiblings(): Promise<void> {
@@ -185,81 +182,68 @@ function ServicePane({service}: Props): ReactNode {
                 aria-label="Service details"
                 className="row"
             >
-                <div
-                    role="region"
-                    className="leftColumn"
-                    aria-label="Service description"
-                >
-                    <div className="header">
-                        <div>
-                            <IndigenousServiceIcon object={service} />
-                            <LgbtiqIcon object={service} />
-                        </div>
-                        {renderDescription()}
+                <div className="header">
+                    <div>
+                        <IndigenousServiceIcon object={service} />
+                        <LgbtiqIcon object={service} />
                     </div>
+                    {renderDescription()}
+                </div>
 
-                    <div className="provisions">
-                        <Eligibility {...service} />
-                        {renderServiceProvisions()}
-                        {!isMobile && renderSiblings()}
-                    </div>
+                <div className="provisions">
+                    <Eligibility {...service} />
+                    {renderServiceProvisions()}
                 </div>
-                <div
-                    role="region"
-                    aria-label="Service Info"
-                    className="rightColumn"
-                >
-                    <BoxedText>
-                        <div className="practicalities-container">
-                            <CollapsedOpeningTimes
-                                object={service.open}
-                                serviceId={service.id}
-                            />
-                            <Accessibility
-                                service={service}
-                                withSpacer={true}
-                            />
-                            <Ndis
-                                className="ndis"
-                                compact={false}
-                                object={service}
-                                spacer={true}
-                            />
-                            <Address
+                <BoxedText>
+                    <div className="practicalities-container">
+                        <CollapsedOpeningTimes
+                            object={service.open}
+                            serviceId={service.id}
+                        />
+                        <Accessibility
+                            service={service}
+                            withSpacer={true}
+                        />
+                        <Ndis
+                            className="ndis"
+                            compact={false}
+                            object={service}
+                            spacer={true}
+                        />
+                        <Address
+                            location={service.location}
+                            site={service.site}
+                            withSpacer={true}
+                        />
+                        {service.location && service.travelTimes &&
+                            <TransportTime
                                 location={service.location}
-                                site={service.site}
                                 withSpacer={true}
+                                travelTimes={service.travelTimes}
                             />
-                            {service.location && service.travelTimes &&
-                                <TransportTime
-                                    location={service.location}
-                                    withSpacer={true}
-                                    travelTimes={service.travelTimes}
+                        }
+                        {!service.location?.isConfidential() &&
+                        <GoogleMapsLink
+                            to={service.location}
+                            className={Storage.getUserGeolocation() ?
+                                "withTimes" : "withoutTimes"}
+                            onClick={recordClick}
+                            hideSpacer={true}
+                        >
+                            <span className="googleMapsLink">
+                                Get directions in Google Maps
+                                <icons.ExternalLink
+                                    className="ExternalLinkIcon"
                                 />
-                            }
-                            {!service.location?.isConfidential() &&
-                            <GoogleMapsLink
-                                to={service.location}
-                                className={Storage.getUserGeolocation() ?
-                                    "withTimes" : "withoutTimes"}
-                                onClick={recordClick}
-                                hideSpacer={true}
-                            >
-                                <span className="googleMapsLink">
-                                    Get directions in Google Maps
-                                    <icons.ExternalLink
-                                        className="ExternalLinkIcon"
-                                    />
-                                </span>
-                            </GoogleMapsLink>
-                            }
-                            <ContactMethods object={service} />
-                            <ImportantInformation object={service}/>
-                            <Feedback object={service} />
-                        </div>
-                    </BoxedText>
-                    {isMobile && renderSiblings()}
-                </div>
+                            </span>
+                        </GoogleMapsLink>
+                        }
+                        <ContactMethods object={service} />
+                        <ImportantInformation object={service}/>
+                        <Feedback object={service} />
+                    </div>
+                </BoxedText>
+                { renderSiblings() }
             </main>
         </div>
     );

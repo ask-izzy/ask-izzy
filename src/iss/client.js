@@ -5,9 +5,10 @@ import type {ISS3Client} from "../ix-web-js-client/apis/iss/v3"
 import type {ISS4Client} from "../ix-web-js-client/apis/iss/v4"
 
 export function getIssVersion(): "3" | "4" {
-    const issVersion = window.ISS_VERSION
+    const issVersion = process.env.NEXT_PUBLIC_ISS_VERSION
     if (["3", "4"].includes(issVersion)) {
-        return issVersion
+        // It's necessary to restate the value to keep flow happy :/
+        return issVersion === "3" ? "3" : "4"
     } else {
         throw Error(`Unknown ISS version: ${issVersion}`)
     }
@@ -26,8 +27,8 @@ async function getIssClient(
         if (!iss3Client) {
             iss3Client = await createClient(
                 {
-                    baseUrl: window.ISS_BASE_URL,
-                    key: window.ISS_API_KEY,
+                    baseUrl: process.env.NEXT_PUBLIC_ISS_BASE_URL,
+                    key: process.env.NEXT_PUBLIC_ISS_API_KEY,
                 },
                 "3"
             )
@@ -37,8 +38,8 @@ async function getIssClient(
         if (!iss4Client) {
             iss4Client = await createClient(
                 {
-                    baseUrl: window.ISS_BASE_URL,
-                    token: window.ISS_API_TOKEN,
+                    baseUrl: process.env.NEXT_PUBLIC_ISS_BASE_URL,
+                    token: process.env.NEXT_PUBLIC_ISS_API_TOKEN || "<not set>",
                 },
                 "4"
             )

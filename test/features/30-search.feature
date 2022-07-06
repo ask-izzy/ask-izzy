@@ -14,7 +14,7 @@ Feature: Search
 
     Scenario: Search for "pets" using keyboard
         When I search for "pet food" and press enter
-        Then I should be at /search/pet food
+        Then I should be at /search/pet food/Melbourne-VIC
         # FIXME: make the mock produce more meaningful results
         And I should see the results
         ----------------------------------------------------
@@ -29,7 +29,7 @@ Feature: Search
     Scenario: Search for pets using keyboard and mouse
         When I search for "pet food"
         And I click the "Search" button
-        Then I should be at /search/pet food
+        Then I should be at /search/pet food/Melbourne-VIC
 
     Scenario: Search on blank does not search
         When I click the "Search" button
@@ -48,4 +48,4 @@ Feature: Search
         When I search for "domestic violence" and press enter
         Then I should see "Are you safe right now?"
         And I click the "Yes" button
-        Then I should see "I'm looking for help for"
+        Then I should see "Showing “domestic violence” services"

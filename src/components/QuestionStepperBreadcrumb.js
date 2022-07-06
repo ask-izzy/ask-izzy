@@ -1,17 +1,19 @@
 /* @flow */
 
-import React, {useContext} from "react";
+import React from "react";
 import type {Node as ReactNode} from "react";
 import cnx from "classnames";
+import { useRouter } from "next/router"
 
-import routerContext from "../contexts/router-context";
 import MapIcon from "../icons/Map";
 import Link from "./base/Link";
 import {
-    getFullPathForPersonalisationSubpath,
     prettyPrintAnswer,
     getSavedPersonalisationAnswer,
 } from "../utils/personalisation"
+import {
+    getServicesPath,
+} from "@/src/utils/routing"
 import type {PersonalisationPage} from "../../flow/personalisation-page"
 
 type Props = {|
@@ -27,20 +29,21 @@ export default function QuestionStepperBreadcrumb({
     showQuestionIcons,
     contentToAppend,
 }: Props): ReactNode {
-    const {router} = useContext(routerContext)
+    const router = useRouter()
 
     const currentlyEditing =
-        personalisationPage.name === router.match.params.subpage
+        personalisationPage.name === router.query.personalisationSlug
 
 
     function AnswerContainer(props): ReactNode {
-        if (currentlyEditing) {
+        // The question stepper is also rendered on the home page. However
+        // in the context of the homepage there is no category set so there
+        // is no route that would make sense to link to to edit any
+        // personalisation questions.
+        if (currentlyEditing || !router.isReady || router.pathname === "/") {
             return <span {...props} />
         } else {
-            const url = getFullPathForPersonalisationSubpath(
-                router,
-                `personalise/page/${personalisationPage.name}`
-            )
+            const url = getServicesPath({router, personalisationPage})
             return (
                 <Link
                     to={url}

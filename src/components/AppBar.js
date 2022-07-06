@@ -1,13 +1,13 @@
 /* @flow */
 
-import type {Node as ReactNode} from "React";
-import React, {useContext} from "react";
+import React from "react";
+import type {Node as ReactNode} from "react";
+import { useRouter } from "next/router"
 
 import IconButton from "./IconButton";
-import icons from "../icons";
+import ChevronBack from "../icons/ChevronBack"
 import QuickExit from "./QuickExit";
 import classnames from "classnames";
-import routerContext from "../contexts/router-context";
 import {getScrollPosition} from "../effects/scrollPosition";
 import Storage from "../storage";
 import categories from "../constants/categories";
@@ -22,7 +22,7 @@ type Props = {
     breakpoint? : number,
 }
 
-const LOGO = "/static/images/ask-izzy-logo-single-line-yellow.svg";
+const LOGO = "/images/ask-izzy-logo-single-line-yellow.svg";
 const STICKY_HEADER_BREAKPOINT = 50;
 
 function AppBar(
@@ -37,7 +37,7 @@ function AppBar(
 
     const scrollPosY = getScrollPosition();
 
-    const {router} = useContext(routerContext);
+    const router = useRouter();
 
     const unsetSavedAnswersForCategory = (category: Category): void => {
         const savedAnswers = category.personalisation.filter(personalisation =>
@@ -50,16 +50,16 @@ function AppBar(
 
     const goHome = (): void => {
         const category = categories.find(category =>
-            category.key === router.match.params.page
+            category.key === router.query.categoryOrContentPageSlug
         )
-        if (category && router.match.params?.subpage) {
+        if (category && router.query?.personalisationPage) {
             unsetSavedAnswersForCategory(category)
         }
 
-        if (router.location.pathname === "/") {
+        if (router.asPath === "/") {
             window.scrollTo(0, 0);
         } else {
-            router.navigate("/");
+            router.push("/");
         }
     }
 
@@ -104,7 +104,7 @@ function AppBar(
                                 className="backButton"
                                 aria-hidden="true"
                             >
-                                <icons.ChevronBack />
+                                <ChevronBack />
                                 <span className="back-label">
                                     {backMessage}
                                 </span>
@@ -131,4 +131,4 @@ AppBar.defaultProps = {
     hideLogoWhenNotABar: false,
 }
 
-export default AppBar;
+export default AppBar

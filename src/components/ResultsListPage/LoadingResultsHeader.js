@@ -4,7 +4,6 @@ import * as React from "react";
 
 import HeaderBar from "../HeaderBar";
 import type Category from "../../constants/Category";
-import routerContext from "../../contexts/router-context";
 import {getBannerName} from "../../utils/personalisation"
 import type Service from "../../iss/Service"
 
@@ -32,14 +31,12 @@ type Props = {
     error: string,
     statusCode: number,
     loading: boolean,
-    category?: ?Category,
+    category: Category,
     title: string,
     services: Array<Service>,
 }
 
 class LoadingResultsHeader extends React.Component<Props, void> {
-    static contextType: any = routerContext;
-
     render(): React.Node {
         const {
             error,
@@ -64,12 +61,12 @@ class LoadingResultsHeader extends React.Component<Props, void> {
                         </div>
                     }
                     bannerName={bannerName}
-                    alternateBackgroundColor={false}
                 />
             );
         }
-        const primaryText = (category?: ?Category) => (
-            category ? "Sorry, we weren't able to find any " +
+        const primaryText = (category: Category) => (
+            category.key !== "search" ?
+                "Sorry, we weren't able to find any " +
                     "services for this search."
                 : `Sorry, we weren't able to find any
                     services matching your search for ${title}.`
@@ -82,7 +79,6 @@ class LoadingResultsHeader extends React.Component<Props, void> {
                         className="LoadingResultsHeader"
                         primaryText={primaryText(category)}
                         bannerName={bannerName}
-                        alternateBackgroundColor={false}
                     />
                 );
             }
@@ -92,7 +88,6 @@ class LoadingResultsHeader extends React.Component<Props, void> {
                     className="LoadingResultsHeader"
                     primaryText={primaryText(category)}
                     bannerName={bannerName}
-                    alternateBackgroundColor={false}
                 />
             );
         }

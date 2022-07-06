@@ -5,7 +5,6 @@ import React from "react";
 import { action } from "@storybook/addon-actions";
 
 import GeolocationButton from "./GeolocationButton";
-import { injectEnvVars } from "../storybook/loaders";
 import { addGoogleMapsScript } from "../storybook/decorators";
 
 /**
@@ -20,7 +19,6 @@ export default {
     args: {
         onSuccess: (action("succeeded"): any),
     },
-    loaders: [injectEnvVars],
     decorators: [addGoogleMapsScript],
 };
 

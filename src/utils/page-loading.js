@@ -5,25 +5,31 @@
 // Sometimes we want to do something after a page has finished fully loading
 // including any data fetching need when loading that page. This allows
 // components to registered load dep
-import { Location } from "react-router-dom";
 import {isDebugMode} from "../contexts/debug-mode-context";
 
-let currentLocation = {}
+let currentPagePath = {}
 let currentDependencies = []
 let currentSubscribers = []
 
 export function addPageLoadDependencies(
-    location: typeof Location,
+    pagePath: string,
     ...dependencies: string[]
 ) {
-    if (location !== currentLocation) {
-        currentLocation = location
+    if (typeof window === "undefined") {
+        return
+    }
+
+    if (pagePath !== currentPagePath) {
+        currentPagePath = pagePath
         clearPageLoad()
     }
 
     for (const dependency of dependencies) {
         if (currentDependencies.includes(dependency)) {
-            console.warn("Tried to add the same page load dependency twice")
+            console.warn(
+                "Tried to add the same page load dependency twice: " +
+                    dependency
+            )
             continue
         }
 
@@ -32,17 +38,21 @@ export function addPageLoadDependencies(
         if (isDebugMode()) {
             console.info(
                 `Registering page dependency "${dependency}", there are ` +
-                    `currently ${currentDependencies.length} dependencies`
+                    `currently ${currentDependencies.length} dependencies ` + pagePath
             )
         }
     }
 }
 
 export function closePageLoadDependencies(
-    location: typeof Location,
+    pagePath: string,
     ...dependencies: string[]
 ) {
-    if (location !== currentLocation) {
+    if (typeof window === "undefined") {
+        return
+    }
+
+    if (pagePath !== currentPagePath) {
         return
     }
 
@@ -71,6 +81,11 @@ export function closePageLoadDependencies(
 }
 
 function pageLoaded() {
+    if (isDebugMode()) {
+        console.info(
+            `Notifying ${currentSubscribers.length} subscribers of page load`
+        )
+    }
     for (const subscriber of currentSubscribers) {
         subscriber.resolve()
     }
@@ -92,6 +107,9 @@ if (typeof window !== "undefined") {
 }
 
 function clearPageLoad() {
+    if (isDebugMode()) {
+        console.info("Page dependencies cleared")
+    }
     for (const subscriber of currentSubscribers) {
         subscriber.reject()
     }

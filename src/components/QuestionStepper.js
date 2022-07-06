@@ -3,11 +3,12 @@
 import React from "react";
 import type {Node as ReactNode} from "react";
 import cnx from "classnames"
+import { useRouter } from "next/router"
+import type { NextRouter } from "next/router"
 
 import QuestionStepperBreadcrumb from "./QuestionStepperBreadcrumb";
 import Link from "../components/base/Link";
 import {ensureURLHasTrailingSlash} from "../utils/url"
-import {useRouterContext} from "../contexts/router-context"
 import Button from "../components/base/Button"
 import storage from "../storage"
 import LocationPage from "../constants/personalisation-pages/Location"
@@ -22,9 +23,7 @@ import {
 } from "../utils/routing"
 import usePostInitialRender from "../hooks/usePostInitialRender"
 import type {PersonalisationPage} from "../../flow/personalisation-page"
-import SearchIcon from "../icons/Search"
 import ProgressBar from "./general/ProgressBar"
-import type { RouterContextObject } from "../contexts/router-context";
 
 type Props = {|
     showQuestionIcons?: boolean,
@@ -48,7 +47,7 @@ export default function QuestionStepper({
 }: Props): ReactNode {
     let personalisationPages: Array<PersonalisationPage> = []
 
-    const router = useRouterContext()
+    const router = useRouter()
 
     const postInitialRender = usePostInitialRender()
 
@@ -80,11 +79,10 @@ export default function QuestionStepper({
         )
     }
     const category = getCategoryFromRouter(router)
-    const SearchTypeIcon = category?.icon ||
-        (() => <SearchIcon viewBox="14 14 35 35" />)
-    const title = category ?
-        category.name
-        : `Search for “${router.match.params.search}”`
+    const CategoryIcon = category?.icon || (() => null)
+    const title = category?.key !== "search" ?
+        category?.name
+        : `Search for “${decodeURIComponent(router.query.search)}”`
 
     function renderProgressBar() {
         const stepTotal = getTotalSteps(router)
@@ -106,7 +104,7 @@ export default function QuestionStepper({
 
     return (
         <div className={cnx("QuestionStepper")}>
-            {hideStepInfo || <SearchTypeIcon />}
+            {hideStepInfo || <CategoryIcon />}
             <div className="content">
                 {!hideStepInfo && postInitialRender && renderProgressBar()}
                 <ol
@@ -134,7 +132,7 @@ export default function QuestionStepper({
                         <Link
                             to={
                                 ensureURLHasTrailingSlash(
-                                    router.location.pathname
+                                    router.isReady ? router.asPath : "/"
                                 ) + "personalise/summary"
                             }
                         >
@@ -148,7 +146,7 @@ export default function QuestionStepper({
 }
 
 export const getPersonlisationPagesForQuestionStepper = (
-    router: $PropertyType<RouterContextObject, 'router'>,
+    router: NextRouter,
 ): Array<PersonalisationPage> => {
     const pages: Array<PersonalisationPage> = [];
 
@@ -174,7 +172,7 @@ export const getPersonlisationPagesForQuestionStepper = (
 }
 
 export function getTotalSteps(
-    router: $PropertyType<RouterContextObject, 'router'>,
+    router: NextRouter,
 ): number {
     const pages = getPersonalisationPages(router)
         .filter(page => !page.noQuestionStepperStep)
@@ -183,7 +181,7 @@ export function getTotalSteps(
 }
 
 export function getStepsRemaining(
-    router: $PropertyType<RouterContextObject, 'router'>,
+    router: NextRouter,
 ): number {
     const pagesToShow = getPersonalisationPagesToShow(router)
         .filter(page => !page.noQuestionStepperStep)

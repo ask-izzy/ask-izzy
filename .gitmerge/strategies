@@ -1,6 +1,0 @@
-[merge "scss-code-generation"]
-    name = regenerate and copy bundle.scss
-    driver = ./.gitmerge/codegen ./src/styles/bundle.scss %A
-[merge "component-code-generation"]
-    name = regenerate and copy components.js
-    driver = ./.gitmerge/codegen  ./src/components.js %A

@@ -35,9 +35,13 @@ export async function seleniumBrowser(
  * @return {string} - Root url for the application under test.
  */
 export function baseUrl(): string {
-    const port = process.env.PORT || 8000;
+    const port = process.env.PORT;
 
-    return process.env.IZZY_TEST_URL || `http://localhost:${port}`;
+    if (!port) {
+        throw Error("PORT env var not set")
+    }
+
+    return `http://localhost:${port}`;
 }
 
 /**
@@ -55,13 +59,12 @@ export async function gotoUrl(
     await driver.get(baseUrl() + url);
 }
 
-/**
+/*
  * Build a webdriver.
  *
  * @return {Promise<Webdriver.Webdriver>} requested webdriver.
  */
-export default async function webDriverInstance(
-): Promise<typeof Webdriver.WebDriver> {
+export default async function webDriverInstance(): Promise<typeof Webdriver.WebDriver> {
     // Remove version from browserName (not supported)
     const browserName = (process.env.SELENIUM_BROWSER || "").split(/:/)[0];
     const preferences = new Webdriver.logging.Preferences();
@@ -88,10 +91,11 @@ export default async function webDriverInstance(
                     "no-sandbox",
                     "acceptInsecureCerts=true",
                     "ignore-certificate-errors",
+                    "disable-dev-shm-usage", // https://developers.google.com/web/tools/puppeteer/troubleshooting#running_on_alpine
                 ])
-                // Increase window size to make it easer to analyse failure
-                // screenshots
-                .windowSize({width: 1000, height: 1000})
+                .windowSize(
+                    {width: 1000, height: 1000}
+                )
         )
         .build();
 
@@ -174,6 +178,10 @@ export async function cleanDriverSession(
     driver: typeof Webdriver.WebDriver
 ): Promise<void> {
     await driver.executeScript(() => console.log("Clearing browsing session"))
+    const url = await driver.getCurrentUrl()
+    if (!url.includes("localhost")) {
+        await gotoUrl(driver, "/")
+    }
     await waitForStorage(driver);
     await driver.removeAllScriptsBeforeLoad()
     await driver.executeScript(() => {

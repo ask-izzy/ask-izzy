@@ -1,375 +1,80 @@
 # Ask Izzy
 
-## Dependencies
+Ask Izzy is a website where anyone needing help can quickly and easily find relevant health and welfare services near them. It's built with [Next.js](https://nextjs.org/) and uses [Infoxchange's directory of Australian services](https://www.infoxchange.org/au/products-and-services/service-directory) (commonly referred to as ISS).
 
-If you're working on this codebase, some understanding of the following will
-help:
+## Getting Started
 
- * Node (version 12)
- * npm (versions 6.x and above)
- * yarn
- * webpack
- * React
- * jsx (inline templating)
- * babel (es6 transpiler)
- * [flow typesystem](http://flowtype.org)
- * mocha (unit testing)
- * yadda (BDD testing)
+### First Time Setup
+Ask Izzy is designed to be run using Docker so that should be [installed](https://docs.docker.com/install/) before continuing (although you may be able to [run it without docker if you prefer](#alternative-dev-process-no-docker)).
 
-## Getting the code
+To install the required Node.js modules run:
+```bash
+docker compose run --rm app shell yarn install
+```
 
-Run the following terminal commands:
+Environment variables are setup using the standard [Next.js dotenv system](https://nextjs.org/docs/basic-features/environment-variables). There are several required variables which you can set by copying the provided sample files (`cp .env.development.local.sample .env.development.local`), and filling in the values.
+
+## Running Ask Izzy
+
+Once setup you can start it using:
+```bash
+docker compose up
+```
+
+Once started it should be accessible at: http://localhost:8000.
+
+All commands for running tests, linters, etc are managed using run scripts in the [package.json](package.json) file. To make things simple `yarn run` is used as the entrypoint for the docker image meaning that you can easily run any of the in the package.json file with this command: `docker compose run --rm app <package.json run script>`
+
+For example if you want to run all the linters and automaticity fix any issue where possible you would run: `docker compose run --rm app lint-fix`
+
+## Testing
+Testing can be run with `docker compose run --rm app test-dev` which will sequentially run all testing programs.
+
+- **Mocha**\
+  Currently used for e2e and unit tests. It's split up into 4 testing suites, which can be individually run with `docker-compose run -p 3000:3000 -p 5000:5000 -p 5001:5001 app test-dev-mocha-<test suite name>`
+    - **personalisation**\
+      For e2e tests related to the personalisation flow in Ask Izzy.
+    - **map**\
+      e2e tests for the map view are here.
+    - **features**\
+      Other features are e2e tested here.
+    - **unit**\
+      All unit tests are here.
+
+## Linting
+All linters can be run using `docker compose run --rm app lint`. You can use `lint-fix` instead of `lint` to also try and automatically correct any issues where that is possible. Indvidual linters can be run using: `docker compose run --rm app lint-<linter name>` (if the linter supports it `-fix` can be append to the end of the linter name to auto-fix issues.)
+
+- **ESLint**\
+  For JavaScript errors and style violations
+- **Flow.js**\
+  For static type checking. Most JavaScript in Ask Izzy is written with [Flow.js](https://flow.org/) types with Babel.js used to compile it into plain JavaScript so it can be executed by browsers. This decision was made before it was clear that TypeScript would win the the JavaScript typing wars. At some point we hope to migrate to TypeScript.
+- **stylelint**\
+  Stylelint is used for linting SASS/CSS files.
+- **jsonlint**\
+  Shockingly jsonlint is used for linting JSON files.
+- **hadolint**\
+  hadolint is used for linting the Dockerfile.
+- **shellcheck**\
+  shellcheck is used for linting any shell scripts.
+
+
+## Emulating the Production Setup
+To make the development process more pleasant the [docker compose.yml](docker compose.yml) file is setup to run code in a dev mode which includes things like live reloading. However it is sometimes desirable to replicate the production setup as close as possible such as to track down a bug only exhibited in production. That can be done with this command:
 
 ```bash
-git clone git@github.com:ask-izzy/ask-izzy.git
-cd ask-izzy
-yarn
+docker compose -p ask-izzy-prod -f docker-compose.emulate-production.yml up --build --scale app=2
 ```
 
-## Running the dev server
+## Alternative Dev Process (No Docker)
+Using docker is recommended to ensure a consistent environment. However if desired testing, linting and serving of  Ask Izzy can be directly on the host without running in a docker container. To do so a modern version of [Node](https://nodejs.org/en/) and [Yarn](https://yarnpkg.com/lang/en/) will need to be installed. Also be aware that [Node modules may need to be re-installed if running into issues](#node-modules-binary-compatibility).
 
-You will need to create a file in the root directory called `.env` with environment variables for the [ISS](https://api.serviceseeker.com.au/) and Google API keys plus any desired optional env keys like `FAIL_FAST` (see *Development debugging* section for more).
+To load the necessary environment variables a .env file can be used. You can copy the sample one with `cp .env.sample .env`. Then any docker run commands like `docker compose run --rm app <remaining command>` can be instead called without using docker by instead using `yarn run <remaining command>`. To replace `docker compose up` use `yarn run dev`.
 
-```bash
-# Contents of .env
-ISS_BASE_URL="https://<iss domain>"
-ISS_API_KEY="<username>:<token>"
-ISS_VERSION="3"
-GOOGLE_API_KEY="Rlf90...S0fwV"
-FAIL_FAST=true
-```
+## Troubleshooting / Gotchas
 
-You can then start the dev server like so:
+### Node Modules Binary Compatibility
+As docker compose mounts the app source from the host machine into the app source directory (/app) in the docker container, all Node modules that were installed into the node_modules directory at image build time will be mounted over the top of by the host system's node_modules dir (when running locally with docker compose that is). Sometimes this can cause issues since it means the same node_modules directory is used whether a command (like lint) is run directly on the host or inside the docker container. If the host system environment is close enough to the environment of the container (eg some variant of linux) this shouldn't be an issue. However if the host OS is MacOS or Windows then some of the installed node packages may not be compatible with the environment of the host system. In this case you have two options.
 
-```bash
-docker-compose up
-```
+  1) (The recommended option.) Ensure the node modules have been installed by running the install command inside the docker container: `docker compose run --rm app shell yarn install`. Then exclusively run all code in docker using `docker compose up` and `docker compose run`.
 
-Once started it should then be accessible at [http://localhost:8000/](http://localhost:8000/).
-
-Alternatively you can run it without docker via:
-```bash
-ENVIRONMENT="dev_local" NODE_ENV="development" ISS_BASE_URL="$ISS_BASE_URL" ISS_API_KEY="$ISS_API_KEY" ISS_VERSION="3" GOOGLE_API_KEY="$G_API_KEY" ./script/dev-server
-```
-
-## Remote access
-To access the site from a different device to the one that the dev server is running on (say for example to test the site on a phone) the server can be started with a proxy. This proxies external resources that would normally require a VPN to access though the machine the dev server is running on:
-```bash
-docker-compose -f docker-compose.yml -f docker-compose.with-proxy.yml up
-```
-
-The first time you run this you'll have to install the required packages first:
-```bash
-docker-compose -f docker-compose.yml -f docker-compose.with-proxy.yml run --rm external-resources-proxy shell -c 'yarn install'
-```
-
-If you have a firewall running on the same machine that's running the dev server you should open ports 8000 to 8099.
-
-Ask Izzy should now be accessible at `http://<ip address or hostname of host computer>:8000` on other devices connected to the same network.
-
-## Dealing with HTTP and browsers
-
-Ask Izzy is a fully static site in production
-(see `conf/nginx.conf` for the rewrite rules that make this
-work - there is duplicated logic from `routes.js`).
-
-Pages which do not require ISS data are pre-generated and generally work
-without javascript.
-See `HtmlDocument.js`, `server/render-static.js` (prod) and `server/render.js` (dev).
-
-Once the page JS loads:
-
- * React attaches the react-router component to the document
- * react-router looks at the page url to decide which components to render (see `routes.js`)
- * component 'mount' hooks fire and start fetching data from ISS
- * components build a model of the DOM they expect (in `render`)
- * the page is updated with any differences between the expected DOM and actual DOM (usually none)
- * once any async data arrives from ISS, the page is updated again
-
-## Ask Izzy Routes
-
-Here are the explict paths that AskIzzy supports:
-
-````
-/service/<service-id>
-/service/<service-id>/
-
-/search/<search-term>
-/search/<search-term>/
-/search/<search-term>/<personalise-path>
-/search/<search-term>/<suburb>-<state>
-/search/<search-term>/<suburb>-<state>/
-/search/<search-term>/<suburb>-<state>/<personalise-path>
-/search/<search-term>/in/<suburb>-<state>
-/search/<search-term>/in/<suburb>-<state>/
-
-/category/<category-name>
-/category/<category-name>/
-/category/<category-name>/in/<suburb>-<state>
-/category/<category-name>/in/<suburb>-<state>/
-
-/<category-name>
-/<category-name>/
-/<category-name>/<suburb>-<state>
-/<category-name>/<suburb>-<state>/
-/<category-name>/<suburb>-<state>/<personalise-path>
-/<category-name>/<personalise-path>
-
-/<static-pages>
-/<static-pages>/
-````
-
-Examples for routes terms are given below:
-
-````
-<service-id> e.g. 820532-infoxchange
-<personalise-path> e.g. personalise/, personalise/summary, personalise/page/location
-<category-name> e.g. housing, food, money-help
-<suburb> e.g. Melbourne, Richmond, Run-O-Waters
-<state> e.g. VIC, NSW, Victoria
-<static-pages> e.g. about, homeless-shelters
-````
-
-Note: Ask Izzy categories or static pages must NEVER be named "search", "static", "session", "service", "category" or "in".
-
-### Building HTML pages
-
-See `server/render-static.js`.
-
-### Building JS and CSS
-
-Ask Izzy uses Webpack to organize building JS / CSS.
-
-Webpack configuration is very powerful but unfortunately quite complex.
-The current configuration compiles javascript files using babel (for JSX and flow) and CSS files using sass,
-then writes the result to `public/static/main-<MD5>.<css|js>`.
-The file `server/webpack-stats.json` is also generated, so that our code can find the
-path to the files.
-
-By convention, we have one SCSS and one JS file per react component.
-Each component renders an element with a `class` equal to the name of the component.
-This class is used in the SCSS file to avoid rules applying to the wrong component.
-`script/generate-component-index` is required to be manually run each time you introduce a new react component.
-
-## Javascript features
-
-The babel compiler and polyfill allows us to use advanced features
-which are not yet available in all browsers.
-
-### Promises, async and await
-
-We've used `async` and `await` extensively in Ask Izzy.
-Under the hood these are syntactic sugar for promises
-(which are well documented online).
-
-Any function defined as `async function foo()` will
-have its return value converted to a promise (any
-exception will result in a promise error and the
-result is the promise result).
-
-Within an `async function`, you can use `[my variable] = await [a promise]`
-which will pause the function until the given promise
-resolves to a value or an error. If it's a value it's
-returned, if the promise has an error an exception is
-raised.
-
-Promises are part of the JS standard and are supported
-natively in every browser except IE (where they are polyfilled),
-but async and await are not yet standardized (see
-https://github.com/tc39/ecmascript-asyncawait
-for the in-progress standard).
-
-## Search query generation
-
-When a `ResultsPage` is added to the page, it builds a query
-by calling `issParams` which iterates through
-`personalisationComponents` and calls `getSearch` to build up a search object which is
-passed to `search` in `iss.js`.
-
-If any personalisation component has not been answered, it
-will return `null` from `getSearch`, and the `ResultsPage`
-will redirect to the personalisation page to answer the question.
-
-The whole personalisation space is a twisty mess of side effects
-and inheritance. Changes which fit into the existing model are
-super easy but I would be very careful testing any changes to
-the control code.
-
-The question classes mostly derive from `BaseQuestion`.
-
-## Google services
-
-### Analytics
-The Google Tag Manager (GTM) tracker is enabled if the required environmental variables are set. Google Analytics (GA) can be configured via GTM.
-
-For Infoxchange devs see the internal dev wiki for specifics on GTM/GA dev and testing workflow in the Infoxchange context.
-
-#### Google Tag Manager
-Required environment variables:
-```yaml
-GOOGLE_TAG_MANAGER_ID: 'GTM-ABC123'
-GOOGLE_TAG_MANAGER_AUTH: 'a1b2c3d5e6f7g8'
-GOOGLE_TAG_MANAGER_ENV: 'env-1'
-```
-
-GTM events are triggered by the `gtm.emit` method in `google-tag-manager.js` like so:
-```javascript
-import * as gtm from "../google-tag-manager";
-gtm.emit({
-    event: "categoryPageLoad",
-    additionalData: "foo",
-    additionalData2: "bar",
-});
-```
-
-Note: Due to the way the GTM client JS file is proxied the GTM debug console cannot be triggered as normal. (Technical side note: the normal way relies on setting cookies which are scoped to the domain which the GTM JS file is served from.) Instead it can be enabled by including query string parameter "gtm_debug" set to a true value. For example: http://localhost:8000/?gtm_debug=1
-
-### Maps
-
-We use the react-google-maps component to handle the maps integration.
-
-### Directions / travel times
-
-We use the google directions matrix API to fetch transit / walking times.
-See `maps.js` for the implementation, called from `iss.js`
-
-### Places autocomplete
-
-We use the google places API to autocomplete place names.
-See `locationSuggestions.js` for implementation.
-
-This approach means that we frequently have bugs where a location
-is known to google but not ISS. The obvious fix would be to use ISS
-as the source of location autocomplete data.
-
-## Outstanding issues
-
-The search implementation attempts to build a free-text query.
-This is fundamentally not really a workable approach but for
-organisational and technical reasons it's very difficult to
-make changes to ISS3 which serves the queries.
-
-## Development debugging
-The following environment variables an be set to any string in order to enable different behaviours to assist debugging:
-  - DEBUG
-  This will increase the verbosity of a number of scripts, usually printing each command before it's executed in shell scripts.
-
-  - SCREENSHOT_FAILURES
-  This will generate screenshots when a test fails.
-
-  - FAIL_FAST
-  Setting this flag will halt testing as soon as one test fails. This also include the pa11y lint/test.
-
-  - PAUSE_AFTER_FAIL
-  If true this will wait before exiting after test failure to allow a chance to manual debug the situation while the Ask Izzy and Mock ISS servers are still running.
-
-  - USE_REMOTE_REACT_DEVTOOLS
-  If true the the client will attempt to connect to a remote instance of React Devtools. `npx react-devtools` can be used to launch an instance.
-
-## Linters
-A number of linters are used for assessing and maintaining code quality. These are useful to run during development but are also used by the CI system and pre-commit git hooks.
-
-All linters except for hadolint and pa11y can be run using `docker-compose run --rm app lint`
-
-### ESLint
-ESLint lints JavaScript code quality and is configured using the `.eslintrc` file.
-
-Issues that can be automatically fixed can be resolved using `docker-compose run --rm app lint-fix-eslint`.
-
-### Flow
-Flow is a static type checker similar to TypeScript. JS files in Ask Izzy include additional non-standard markup which is used by Flow to help assess type correctness. As this markup is not understood by any JavaScript engines babel is used to strip this away before execution.
-
-Flow can be run on it's own using `docker-compose run --rm app shell -c "npx flow-bin"`.
-
-Config is done with the `.flowconfig` file and files starting with `/* @flow */` are checked for type correctness while files starting with `/* $FlowIgnore */` are not. Libraries which aren't part of the code have type definitions in the `interfaces` directory.
-
-### stylelint
-stylelint is used for linting sass files.
-
-Issues that can be automatically fixed can be resolved using `docker-compose run --rm app lint-fix-stylelint`
-
-### hadolint
-hadolint is used for linting the Dockerfile. It can be run using `make lint-dockerfile`.
-
-### JSONLint
-JSONLint is currently only used for linting `package.json`.
-
-### pa11y
-pa11y is used for automated accessibility testing. It can be run using `docker-compose run --rm app shell -c './invoke.sh shell script/build-assets && ./invoke.sh lint-pa11y'`. To ignore existing issues and only report new ones add the argument `--ignore-existing-issues` after `lint-pa11y`. Keep in mind this command is effected by the `FAIL_FAST` environmental variable and if true the command will exit after the first failed page.
-
-Since pa11y tests against the statically rendered output of Ask Izzy the following command, which re-renders and runs pa11y, may be helpful when making changes:
-```bash
-docker-compose run --rm app shell -c "script/run-node-script ./src/server/render-static.js" && docker-compose run --rm app lint-pa11y --ignore-existing-issues
-```
-
-## Tests
-All tests live in the `test` top level directory.
-
-Unit tests live in `test/unit` and are invoked from `test/unit.js`. They use `mocha`.
-BDD features live in `test/features` with step definitions in `test/steps` invoked from `test/feature.js`. They use `yadda`.
-Maps features live in `test/maps` with step definitions in `test/steps` invoked from `test/maps.js`. They use `yadda`.
-Personalisation features live in `test/personalisation` with step definitions in `test/steps` invoked from `test/personlisation.js`. They use `yadda`.
-
-See the *Development debugging* section for more info on environmental commands that effect the execution of tests.
-
-There's a mock ISS server available as `./script/mock-iss`. This will
-start a server on `localhost:5000`.
-
-There is also a mock CMS server that can be run with `docker-compose run -p 5001:5001 --rm app shell -c 'env STRAPI_URL="http://0.0.0.0:5001" script/run-node-script test/support/mock-cms/index.js'` and accessed on `localhost:5001`. The schema for the mock CMS server can be updated by pulling the graphql schema directly from a Ask Izzy CMS instance using `docker-compose run -p 5001:5001 --rm app shell -c "env NODE_EXTRA_CA_CERTS=/etc/ssl/certs/ca-certificates.crt npx get-graphql-schema $ASK_IZZY_CMS_URL/graphql > test/support/mock-cms/strapi-schema.graphql"`.
-
-### Docker
-
-The dockerfile can run the tests but there's currently
-no development server in `invoke.sh` (should be an easy
-fix but docker isn't typically run locally).
-
-### Adding new icons
-Original icons files are stored in a separate repo hosted on GitHub. To add new icons to Ask Izzy they must be added to that repo first then compiled and copied into this repo using the iconify script.
-
-1) Clone designs repo: `git clone https://github.com/ask-izzy/designs ../ask-izzy-designs`
-2) Add desired icons to designs repo and commit
-3) Run the iconify script: `./script/iconify ../ask-izzy-designs/icons/*.svg`
-
-The icons/index.js file will be updated, and a new js file for the icon will be generated in /icons.
-
-## Contributing
-
-Link up the git hooks:
-
-    ln -s ../.githooks .git/hooks
-
-Add the git merge strategies to your `.git/config` file:
-
-    [include]
-        path = ../.gitmerge/strategies
-
-Check the Linters section for info on how to lint.
-
-Running the tests:
-````bash
-docker-compose run --rm app unit-test
-docker-compose run --rm -p 8010:8010 -p 5000:5000 -p 5001:5001 app feature-test
-docker-compose run --rm -p 8010:8010 -p 5000:5000 -p 5001:5001 app personalisation-test
-docker-compose run --rm -p 8010:8010 -p 5000:5000 -p 5001:5001 app maps-test
-# or without docker:
-./script/unit-test
-./script/feature-test
-./script/personalisation-test
-./script/maps-test
-````
-
-Pass `SELENIUM_BROWSER=firefox|phantomjs|chrome` to choose a
-browser to run the feature tests with (default is chrome)
-
-If you have issues running tests on Ubuntu, follow the steps here:
-https://christopher.su/2015/selenium-chromedriver-ubuntu/
-
-Then use Chrome as the selenium browser to run the tests.
-
-If you're using a virtual machine open a terminal in the VM to run them.
-
-## Attribution
-
-Bits of the repo setup were based on
-https://github.com/gpbl/isomorphic500 @ 413c6533ae23
-under the MIT licence
+  2) Avoid using docker entirely, remove the node_module directory, and reinstall the node modules by running the command on the host system (`rm -rf node_modules && yarn install`). Then [avoid using docker and run all code directly on the host](#alternative-dev-process-no-docker).

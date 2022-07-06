@@ -124,7 +124,7 @@ function SitesMap(
                         <Marker
                             title="You are here"
                             icon={{
-                                url: "/static/images/you-are-here.png",
+                                url: "/images/you-are-here.png",
                                 scaledSize: {width: 32, height: 32},
                             }}
                             position={{
@@ -143,8 +143,8 @@ function SitesMap(
                             }}
                             icon={{
                                 url: marker.selected ?
-                                    "/static/images/map-marker-with-dot.png"
-                                    : "/static/images/map-marker.png",
+                                    "/images/map-marker-with-dot.png"
+                                    : "/images/map-marker.png",
                                 scaledSize: {width: 27, height: 43},
                             }}
                             onClick={() => markerOnClickHandler(marker)}

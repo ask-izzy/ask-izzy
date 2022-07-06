@@ -23,6 +23,7 @@ export default class LinkListItem extends React.Component<Props, void> {
             ...rest
         } = this.props;
 
+
         return (
             <ListItem
                 {...rest}

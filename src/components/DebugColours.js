@@ -4,7 +4,7 @@ import React, {useState, useEffect} from "react";
 import convert from "color-convert";
 import {useDebugModeContext} from "../contexts/debug-mode-context";
 
-export default function() {
+export default function DebugColours() {
     const [debugMode] = useDebugModeContext()
 
     const [colourVarsOriginals, setColourVarsOriginals] = useState({})

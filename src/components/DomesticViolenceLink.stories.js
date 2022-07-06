@@ -6,7 +6,7 @@ import React from "react";
 import DomesticViolenceLink from "./DomesticViolenceLink";
 
 export default {
-    title: "App Components/BaseLogoWithTextBox/DomesticViolenceLink",
+    title: "App Components/LogoWithTextBox/DomesticViolenceLink",
     component: DomesticViolenceLink,
 };
 

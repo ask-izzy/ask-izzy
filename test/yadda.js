@@ -15,22 +15,13 @@ import {
     getSceenshotPath,
 } from "./support/debug";
 import chalk from "chalk";
-import fs from "fs-extra";
-import path from "path";
 
 Yadda.plugins.mocha.StepLevelPlugin.init();
 
 import libraries from "./steps";
 
-/* eslint-disable no-unused-vars */
-import serverAskIzzy from "../src/server"; // Start AskIzzy server
-import serverMockISS from "./support/mock_iss/server"; // Start Mock ISS server
-import serverMockCMS from "./support/mock-cms"; // Start Mock CMS server
-/* eslint-enable no-unused-vars */
-
-/* create the webdriver, we will reuse this promise multiple times */
-const driverPromise = webDriverInstance();
-let driver: Webdriver.WebDriver;
+let driverPromise: Promise<Webdriver.WebDriver>,
+    driver: Webdriver.WebDriver;
 const testHarnessLog = [];
 const testBrowserLog = [];
 const indent = " ".repeat(10)
@@ -55,16 +46,6 @@ let processFile = (file) => {
                     console.log("URL: " + location.href)
                 });
 
-                await driver.executeScriptBeforeLoad(
-                    await fs.readFile(
-                        path.resolve(
-                            __dirname,
-                            "../public/static/testharness.js"
-                        ),
-                        "utf8"
-                    )
-                );
-
                 // Flush any logs from previous tests
                 testHarnessLog.length = 0
                 testBrowserLog.length = 0
@@ -88,13 +69,17 @@ let processFile = (file) => {
 
         afterEach(async function(): Promise<void> {
             try {
+                const browserLog = await Promise.race([
+                    driver.manage().logs().get("browser"),
+                    new Promise((resolve, reject) => setTimeout(reject, 1000 * 5)),
+                ])
+
                 testBrowserLog.push({
                     step: this.currentTest.title,
-                    browserLog: await driver.manage().logs().get("browser"),
+                    browserLog,
                 })
             } catch (err) {
-                console.error("Can not connect to the browser")
-                return
+                console.error("Can't connect to the browser so can't fetch browser logs")
             }
             if (this.currentTest.state !== "passed") {
                 testFailed = true;
@@ -122,29 +107,25 @@ let processFile = (file) => {
                     )
                 }
 
-                if (process.env.SCREENSHOT_FAILURES) {
-                    try {
-                        const filepath = await takeScreenshot(
-                            driver,
-                            getSceenshotPath(this.currentTest)
-                        )
+                try {
+                    const filepath = await takeScreenshot(
+                        driver,
+                        getSceenshotPath(this.currentTest)
+                    )
 
-                        console.log(
-                            indent + `Screenshot saved to "${filepath}"`
-                        );
-                    } catch (err) {
-                        console.log(indent + "Failed to take screenshot");
-                        console.log(indent + err);
-                    }
+                    console.log(
+                        indent + `Screenshot saved to "${filepath}"`
+                    );
+                } catch (err) {
+                    console.log(indent + "Failed to take screenshot");
+                    console.log(indent + err);
                 }
             } else {
-                if (process.env.SCREENSHOT_FAILURES) {
-                    if (
-                        !this.currentTest.title
-                            .match(/I take a screenshot/i)
-                    ) {
-                        await deleteSceenshot(this.currentTest)
-                    }
+                if (
+                    !this.currentTest.title
+                        .match(/I take a screenshot/i)
+                ) {
+                    await deleteSceenshot(this.currentTest)
                 }
             }
         });
@@ -209,6 +190,11 @@ let processFile = (file) => {
  * @returns {undefined}
  */
 export default function runTests(directory: string) {
+    if (!process.env.PORT) {
+        throw Error("Env var PORT must be set")
+    }
+
+    driverPromise = webDriverInstance();
     new Yadda.FeatureFileSearch(directory).each(processFile);
 
     after(async function(): Promise<void> {
@@ -217,7 +203,7 @@ export default function runTests(directory: string) {
         // cleaner solution if you come across anything.
         if (process.env.PAUSE_AFTER_FAIL && testFailed) {
             this.timeout(0)
-            const port = serverAskIzzy.get("port");
+            const port = process.env.PORT;
             console.info(
                 `Press any key to exit. (meanwhile Ask Izzy is accessible ` +
                 `at: http://localhost:${port})`
@@ -226,6 +212,7 @@ export default function runTests(directory: string) {
             process.stdin.resume();
             await new Promise(resolve => process.stdin.on("data", resolve));
         }
-        await driver.quit();
+        const driver = await driverPromise
+        driver.quit()
     });
 }

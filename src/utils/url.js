@@ -1,47 +1,5 @@
 /* @flow */
 
-export const replaceUrlLocation = (
-    location: string,
-    parts: Array<string>,
-): Array<string> => {
-    // Rewrites a URL consisting of parts based on provided location.
-    const newUrlLocation = location
-        .split(", ")
-        .map(encodeURIComponent)
-        .join("-");
-    const includesHyphen = (index) => {
-        return parts[index].includes("-") &&
-            !parts[index].includes(" -") &&
-            !parts[index].includes("%20-")
-    };
-
-    // If URL has suburb, replace the existing suburb.
-    // Do not replace if the url looks to include a '-' as
-    // part of the ISS search query.
-    if (parts.length > 3 &&
-            includesHyphen(3)
-    ) {
-        parts.splice(3, 1, newUrlLocation)
-    } else if (parts.length > 2 &&
-            includesHyphen(2)
-    ) {
-        if (parts[1].includes("search")) {
-            parts.splice(3, 0, newUrlLocation)
-        } else {
-            parts.splice(2, 1, newUrlLocation)
-        }
-    } else {
-        // We didn't find any suburb
-        // just add the new location to the url
-        if (parts[1].includes("search")) {
-            parts.splice(3, 0, newUrlLocation)
-        } else {
-            parts.splice(2, 0, newUrlLocation)
-        }
-    }
-    return parts;
-}
-
 /** Takes a route path and substitutes in param values
  *
  * @param {string} path - A path with colon-formatted params.

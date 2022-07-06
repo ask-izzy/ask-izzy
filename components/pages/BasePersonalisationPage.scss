@@ -1,0 +1,165 @@
+@use '../../src/styles/mixins/colours';
+
+.PersonalisationPage {
+    .link-text {
+        text-decoration: underline;
+    }
+
+    .page-header-section {
+        padding-bottom: 0.1px; /* stop margin collapse */
+        background-color: #{colours.get-static('colour-bg-standard-tint-1')};
+        background-color: var(--colour-bg-standard-tint-1);
+    }
+
+    .questionsBar {
+        margin: 1.5em 20px;
+    }
+
+    .search {
+        width: 100%;
+        box-sizing: border-box;
+
+        input {
+            display: block;
+            width: 96%;
+            padding: 10px 2%;
+            border: 1px solid #{colours.get-static('colour-border-list-item-dark')};
+            border: 1px solid var(--colour-border-list-item-dark);
+            border-radius: $rounded-border;
+            -webkit-appearance: none;
+        }
+    }
+
+    .progress {
+        width: 100%;
+
+        & > * {
+            display: block;
+            width: 60px;
+            height: 60px;
+            margin-right: auto;
+            margin-left: auto;
+        }
+    }
+
+    .done-button,
+    .okay-button,
+    .clear-button,
+    .location-button {
+        width: 100%;
+
+        button {
+            display: block;
+            width: calc(100% - 40px);
+            margin: 20px auto;
+        }
+    }
+
+    .TextBannerContainer {
+        margin: 20px;
+    }
+
+    .ClearResults {
+        margin: 20px;
+        color: #{colours.get-static('colour-text-mid')};
+        color: var(--colour-text-mid);
+        font-size: 16px;
+        line-height: 140%;
+        text-align: center;
+    }
+
+    .clear-button {
+        margin: 0.5em 0;
+
+        a {
+            color: #{colours.get-static('colour-text-dark')};
+            color: var(--colour-text-dark);
+        }
+    }
+
+    .List {
+        padding: 0;
+
+        ul {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+    }
+
+    .List.floatingDoneButton {
+        padding-bottom: 60px;
+    }
+
+    .service-list {
+        .leftIcon {
+            top: 18px;
+        }
+
+        .rightIcon {
+            top: 26px;
+        }
+
+        .primaryText {
+            font-weight: 500;
+        }
+    }
+
+    .SummaryItem {
+        @include clearfix;
+        @include colours.define(
+            'colour-primary',
+            'PersonalisationPage',
+            'colour-bg-standard-tint-2'
+        );
+        @include colours.define(
+            'colour-primary-tint-1',
+            'PersonalisationPage',
+            colours.lighten('colour-primary', 'PersonalisationPage', -10%)
+        );
+        @include colours.define(
+            'colour-primary-tint-2',
+            'PersonalisationPage',
+            colours.lighten('colour-primary', 'PersonalisationPage', -15%)
+        );
+
+        border-bottom: 1px solid #{colours.get-static('colour-primary-tint-2', 'PersonalisationPage')};
+        border-bottom: 1px solid var(--colour-primary-tint-2);
+        background-color: #{colours.get-static('colour-primary', 'PersonalisationPage')};
+        background-color: var(--colour-primary);
+
+        &:focus {
+            background-color: #{colours.get-static('colour-primary-tint-1', 'PersonalisationPage')};
+            background-color: var(--colour-primary-tint-1);
+        }
+
+        > div > .label {
+            > .primaryText {
+                display: inline-block;
+                width: auto;
+                max-width: 70%;
+                margin-right: 0.75ex;  /* leave one character spacing */
+                color: #{colours.get-static('colour-text-mid')};
+                color: var(--colour-text-mid);
+            }
+
+            > .secondaryText {
+                display: inline-block;
+                float: right;
+                color: #{colours.get-static('colour-link')};
+                color: var(--colour-link);
+                font-size: 16px;
+                text-decoration: underline;
+                white-space: initial;
+
+                &:hover {
+                    text-decoration: none;
+                }
+            }
+        }
+    }
+
+    .padded {
+        padding: 20px;
+    }
+}

@@ -1,6 +1,6 @@
 /* @flow */
 import objectMerge, {utils} from "@clevercanyon/js-object-mc";
-import type { RouterContextObject } from "../contexts/router-context";
+import type { NextRouter } from "next/router";
 import {
     getSearchQueryChanges,
 } from "../utils/personalisation"
@@ -122,44 +122,26 @@ export function modifySearchQuery(
 }
 
 export function getSearchQueryModifiers(
-    router: $PropertyType<RouterContextObject, 'router'>
+    router: NextRouter
 ): Array<SearchQueryModifier | null> {
     const layers: Array<SearchQueryModifier | null> = []
     const category = getCategoryFromRouter(router)
 
-    if (category) {
-        layers.push({
-            name: `category - ${category.key}`,
-            changes: {
-                catchment: "prefer",
-                ...category.searchQueryChanges,
-            },
-        })
-    } else if (router.match.params.search) {
-        const searchTerm = decodeURIComponent(router.match.params.search)
-        layers.push({
-            name: `search - ${searchTerm}`,
-            changes: {
-                $push: {
-                    term: searchTerm,
-                },
-            },
-        });
-
-        // A special case for the "Find advocacy" button on the
-        // DisabilityAdvocacyFinder page.
-        if (searchTerm === "Disability Advocacy Providers") {
-            layers.push({
-                name: `DisabilityAdvocacyFinder override`,
-                changes: {
-                    term: ["disability"],
-                    $push: {
-                        serviceTypesRaw: "disability advocacy",
-                    },
-                },
-            })
-        }
+    if (!category) {
+        throw Error("Tried to get search queries for a page without a category")
     }
+
+    const categorySearchQueryChanges =
+        typeof category.searchQueryChanges === "function" ?
+            category.searchQueryChanges(router)
+            : category.searchQueryChanges
+
+    layers.push({
+        name: `category - ${category.key}`,
+        changes: {
+            ...categorySearchQueryChanges,
+        },
+    })
 
     const personalisationPages = getPersonalisationPages(router)
 

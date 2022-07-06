@@ -83,11 +83,19 @@ async function assertTransitMethodNot(method) {
  * @returns {Promise} promise that resolves when the script executes.
  */
 async function instrumentDistanceMatrix(results) {
-    await this.driver.executeScriptBeforeLoad((results) => {
+    await this.driver.executeScriptBeforeLoad(createMocks, results);
+
+    const url = await this.driver.getCurrentUrl()
+    if (url.includes("localhost")) {
+        await this.driver.executeScript(createMocks, results);
+    }
+
+    function createMocks(results) {
+        console.log("Registering google maps api distance matrix mock")
         window.googleMocks = window.googleMocks || []
         window.googleMocks.push({
             maps: {
-                DistanceMatrixService() {
+                DistanceMatrixService: function() {
                     return {
                         getDistanceMatrix: function(params, callback) {
                             const clonedResults = JSON.parse(
@@ -108,7 +116,7 @@ async function instrumentDistanceMatrix(results) {
                 },
             },
         });
-    }, results);
+    }
 }
 
 /**

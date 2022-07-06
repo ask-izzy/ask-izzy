@@ -4,8 +4,8 @@
         "ecmaVersion": 6,
         "sourceType": "module",
         "ecmaFeatures": {
-            "jsx": true,
-        },
+            "jsx": true
+        }
     },
     "env": {
         "browser": true,
@@ -13,7 +13,7 @@
     },
     "parser": "babel-eslint",
     "plugins": [
-        "react",
+        "react"
     ],
     "extends": "eslint:recommended",
     "rules": {
@@ -39,7 +39,7 @@
         "indent": [2, 4],
         "jsx-quotes": 2,
         "key-spacing": [2, {"beforeColon": false, "afterColon": true}],
-        "max-len": [2, 80, 4, { "ignoreUrls": true }],
+        "max-len": [2, 120, 4, { "ignoreUrls": true }],
         "new-parens": 2,
         /* FIXME: Deprecated. Issues with let see: https://github.com/babel/babel-eslint/issues/771 */
         "newline-after-var": 0,
@@ -116,6 +116,6 @@
         "react/no-did-mount-set-state": 0, /* ismorphic rendering does not play nice with this rule */
         "react/prop-types": 0, // Does not track proptypes across inheritance / mixins / composition
         "react/react-in-jsx-scope": 2,
-        "react/self-closing-comp": 2,
+        "react/self-closing-comp": 2
     }
 }

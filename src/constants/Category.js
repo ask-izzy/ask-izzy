@@ -1,6 +1,7 @@
 /* @flow */
 
 import { slugify } from "underscore.string";
+import type { NextRouter } from "next/router";
 
 
 import type {SearchQueryChanges} from "../iss/searchQueryBuilder";
@@ -10,8 +11,10 @@ type Props = {
     name: string,
     byline: string,
     icon: React$ComponentType<any>,
-    searchQueryChanges: SearchQueryChanges,
+    searchQueryChanges: SearchQueryChanges
+        | (NextRouter) => SearchQueryChanges,
     personalisation: Array<PersonalisationPage>,
+    dontShowInCategoryList?: boolean,
 };
 
 export default class Category {
@@ -19,8 +22,10 @@ export default class Category {
     name: string;
     byline: string;
     icon: React$ComponentType<any>;
-    searchQueryChanges: SearchQueryChanges;
+    searchQueryChanges: SearchQueryChanges
+        | (NextRouter) => SearchQueryChanges;
     personalisation: Array<PersonalisationPage>;
+    dontShowInCategoryList: boolean;
 
     constructor(props: Props) {
         this.name = props.name;
@@ -29,5 +34,6 @@ export default class Category {
         this.key = slugify(this.name);
         this.searchQueryChanges = props.searchQueryChanges;
         this.personalisation = props.personalisation;
+        this.dontShowInCategoryList = props.dontShowInCategoryList ?? false;
     }
 }

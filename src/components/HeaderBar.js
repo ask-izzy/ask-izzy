@@ -3,10 +3,9 @@
 import * as React from "react";
 import AppBar from "./AppBar";
 import {useEffect, useState} from "react";
+import { useRouter } from "next/router"
 
-type AppBarProps = React.ElementProps<typeof AppBar>
-
-type Props = {
+type Props = {|
     primaryText: string | React.Node,
     secondaryText?: string | React.Node,
     infoText?: string | React.Node,
@@ -16,31 +15,39 @@ type Props = {
     taperColour?: string,
     fixedAppBar?: boolean,
     hideLogoWhenNotABar?: boolean,
-    goBack?: {
-        onBackTouchTap?: $PropertyType<AppBarProps, 'onBackTouchTap'>,
-        backMessage?: $PropertyType<AppBarProps, 'backMessage'>,
-    },
-}
+    backUrl?: string,
+    backMessage?: string,
+|}
 
-function HeaderBar(
-    {
-        bannerName,
-        className,
-        taperColour,
-        primaryText,
-        children,
-        secondaryText,
-        infoText,
-        fixedAppBar,
-        hideLogoWhenNotABar,
-        goBack = {},
-    }: Props): React.Node {
+export default function HeaderBar({
+    bannerName,
+    className,
+    taperColour,
+    primaryText,
+    children,
+    secondaryText,
+    infoText,
+    fixedAppBar,
+    hideLogoWhenNotABar,
+    backUrl,
+    backMessage,
+}: Props): React.Node {
+    const router = useRouter()
+
+    // At some point we should rewrite appBar not to use js for navigation
+    // and instead use links which are better for accessibility.
+    const appBarGoBack = backUrl || backMessage ?
+        {
+            onBackTouchTap: () => router.push(backUrl ?? "/"),
+            backMessage: backMessage || "Back",
+        }
+        : {}
 
 
-    const [headerBarClassName, setHeaderBarClassName] = useState("HeaderBar")
+    const [headerBarClassName, setHeaderBarClassName] = useState(getClassName())
 
-    useEffect(() => {
-        let newHeaderName = headerBarClassName
+    function getClassName(): string {
+        let newHeaderName = "HeaderBar"
         if (bannerName) {
             newHeaderName += ` ${bannerName}`;
         }
@@ -57,14 +64,19 @@ function HeaderBar(
             newHeaderName += ` taperColour${taperColour}`;
         }
 
-        setHeaderBarClassName(newHeaderName)
-        // Because the taperColour changes as the question stepper
-        // is loaded it is a dependency
-    }, [taperColour])
+        return newHeaderName
+    }
+
+    // Because the taperColour changes as the question stepper
+    // is loaded it is a dependency
+    useEffect(
+        () => setHeaderBarClassName(getClassName()),
+        [taperColour, bannerName]
+    )
 
     // Older Ios Versions have trouble with overflow-x: hidden
     // which causes the app bar to disappear
-    const getOlderSafari = (): boolean => {
+    function getOlderSafari(): boolean {
         // We'll be going as far back as version 10
         // because as of 2021 the currently supported version is 12
         // and it's very unlikely someone is still using a version before 10
@@ -116,7 +128,7 @@ function HeaderBar(
                 transition={!fixedAppBar}
                 hideLogoWhenNotABar={hideLogoWhenNotABar}
                 breakpoint={hideLogoWhenNotABar ? 100 : 30}
-                {...goBack}
+                {...appBarGoBack}
             />
             <header aria-label="Page header">
                 <div className="primary">
@@ -138,5 +150,3 @@ HeaderBar.defaultProps = {
     fixedAppBar: false,
     hideLogoWhenNotABar: false,
 }
-
-export default HeaderBar;

@@ -4,11 +4,10 @@ import type {Element as ReactElement} from "React";
 import React from "react";
 import Link from "../components/base/Link";
 import icons from "../icons"
-import config from "../config";
 import { donateLink, aboutLink } from "../constants/urls.js"
 
 export default function BrandedFooter(): ReactElement<"footer"> {
-    const LOGO = "/static/images/ask-izzy-logo-single-line-yellow.svg";
+    const LOGO = "/images/ask-izzy-logo-single-line-yellow.svg";
 
     return (
         <footer
@@ -97,7 +96,7 @@ export default function BrandedFooter(): ReactElement<"footer"> {
                         <li>
                             <Link
                                 to={
-                                    `mailto:${config.default.siteMail}` +
+                                    `mailto:${process.env.NEXT_PUBLIC_SITE_EMAIL}` +
                                         "?subject=" +
                                         encodeURIComponent(
                                             `Your Ask Izzy feedback`) +
@@ -140,7 +139,7 @@ export default function BrandedFooter(): ReactElement<"footer"> {
                         <li>
                             <Link
                                 to={
-                                    `mailto:${config.default.siteMail}` +
+                                    `mailto:${process.env.NEXT_PUBLIC_SITE_EMAIL}` +
                                     "?subject=" +
                                     encodeURIComponent(
                                         `Update service details`) +

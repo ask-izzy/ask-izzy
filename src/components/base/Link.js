@@ -1,10 +1,9 @@
 /* @flow */
 
 import * as React from "react";
-import { Link as InternalLink } from "react-router-dom";
+import InternalLink from "next/link";
 import classnames from "classnames";
 
-import routerContext from "../../contexts/router-context";
 import * as gtm from "../../google-tag-manager"
 import type {AnalyticsEvent} from "../../google-tag-manager"
 
@@ -12,7 +11,8 @@ type Props = {
     to: string,
     children?: React.Node,
     className?: string,
-    analyticsEvent?: AnalyticsEvent
+    analyticsEvent?: AnalyticsEvent,
+    onClick?: (event: SyntheticEvent<HTMLAnchorElement>) => void
 }
 
 type State = {
@@ -25,15 +25,13 @@ type State = {
 }
 
 export default class Link extends React.Component<Props, State> {
-    static contextType: any = routerContext;
-
     constructor(props: Object) {
         super(props);
         const {
             protocol,
             domain,
             path,
-        } = this.getUriParts(this.props.to)
+        } = getUriParts(this.props.to)
 
         this.state = {
             protocol,
@@ -45,6 +43,26 @@ export default class Link extends React.Component<Props, State> {
                 false
                 : Boolean(!domain && path),
         };
+
+        function getUriParts(uri: string): {|
+            domain: null | string,
+            path: string,
+            protocol: null | string
+        |} {
+            const [, protocol, domain, path] =
+                    // urls
+                    props.to.match(/^([^/]*)\/\/([^/]+)(.*)/) ||
+                    // non-url uri's like mailto
+                    (props.to.match(/^[^/]+:/) && [props.to]) ||
+                    // just a path
+                    [null, null, null, props.to]
+
+            return {
+                protocol,
+                domain,
+                path,
+            }
+        }
     }
 
     componentDidMount(): void {
@@ -66,39 +84,18 @@ export default class Link extends React.Component<Props, State> {
         });
     }
 
-    getUriParts: (
-        (uri: string) => {|
-            domain: null | string,
-            path: string,
-            protocol: null | string
-        |}
-    ) = (uri: string) => {
-        const [, protocol, domain, path] =
-                // urls
-                this.props.to.match(/^([^/]*)\/\/([^/]+)(.*)/) ||
-                // non-url uri's like mailto
-                (this.props.to.match(/^[^/]+:/) && [this.props.to]) ||
-                // just a path
-                [null, null, null, this.props.to]
-
-        return {
-            protocol,
-            domain,
-            path,
-        }
-    }
-
     render(): React.Node | React.Element<"a"> {
         let {
             to,
             children,
             className,
             analyticsEvent: additionalAnalyticsEventDetails,
+            onClick: onClickProp,
             ...remainingProps
         } = this.props;
 
         function onClickHandler(
-            event: SyntheticEvent<HTMLButtonElement>
+            event: SyntheticEvent<HTMLAnchorElement>
         ): void {
             const linkType = this.state.isInternal ? "Internal" : "External"
             const linkText = event.currentTarget.innerText || "<no text>"
@@ -113,21 +110,25 @@ export default class Link extends React.Component<Props, State> {
                 sendDirectlyToGA: true,
                 ...additionalAnalyticsEventDetails,
             });
+            onClickProp?.(event)
         }
 
         if (this.state.useRouterLinkElement) {
             return (
                 <InternalLink
-                    to={this.props.to}
-                    {...(remainingProps: any)}
-                    onClick={onClickHandler.bind(this)}
-                    className={classnames(
-                        "Link",
-                        this.state.isInternal ? "internal" : "external",
-                        className,
-                    )}
+                    href={this.props.to}
                 >
-                    {children}
+                    <a
+                        {...(remainingProps: any)}
+                        onClick={onClickHandler.bind(this)}
+                        className={classnames(
+                            "Link",
+                            this.state.isInternal ? "internal" : "external",
+                            className,
+                        )}
+                    >
+                        {children}
+                    </a>
                 </InternalLink>
             )
         }

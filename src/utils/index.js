@@ -1,14 +1,15 @@
 /* @flow */
+import type {NextRouter} from "next/router"
+
 import storage from "../storage";
 
 import {titleize} from "underscore.string";
-import {getCategory} from "../constants/categories";
 import Storage from "../storage";
 import {
     getCurrentPersonalisationPage,
     currentRouteIsPersonalised,
-} from "../utils/routing"
-import type { RouterContextObject } from "../contexts/router-context";
+    getCategoryFromRouter,
+} from "@/src/utils/routing"
 
 export function stateFromLocation(): string {
     const states = [
@@ -28,15 +29,16 @@ export function stateFromLocation(): string {
 }
 
 // eslint-disable-next-line complexity
-export const makeTitle = (
+export const getFullPageTitle = (
     title: string,
-    router: $PropertyType<RouterContextObject, 'router'>
+    router: NextRouter,
+    pageType?: Array<string>
 ): string => {
-    const {match: {params, props: {type: pageType}}} = router
+    const params = router.query
 
     const pageTitleArr = [];
 
-    const category = getCategory(params.page)
+    const category = getCategoryFromRouter(router)
 
     if (pageType?.[1] === "Results Map") {
         pageTitleArr.push("Map of");
@@ -89,5 +91,5 @@ export const makeTitle = (
 }
 
 export default {
-    makeTitle,
+    getFullPageTitle,
 }

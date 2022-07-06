@@ -2,9 +2,10 @@
 import gql from "graphql-tag";
 
 const CalloutQuery = gql`
-query Callout($key: String) {
-    callouts(where: {Key: $key}) {
+query Callout($keys: [String]!) {
+    callouts(where: {Key: $keys}) {
         id,
+        Key,
         ShowHeading,
         Link,
         className {

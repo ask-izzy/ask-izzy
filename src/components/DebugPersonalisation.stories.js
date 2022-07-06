@@ -8,7 +8,6 @@ import { getCategory } from "../constants/categories";
 import {
     setPersonalisationAnswers,
     setDebugModeContext,
-    setRouterContext,
 } from "../storybook/decorators";
 
 export default {
@@ -17,7 +16,6 @@ export default {
     decorators: [
         setPersonalisationAnswers,
         setDebugModeContext,
-        setRouterContext,
     ],
 };
 

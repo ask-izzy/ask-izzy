@@ -8,7 +8,6 @@ import { getCategory } from "../../constants/categories";
 import Category from "../../constants/Category"
 import {
     setPersonalisationAnswers,
-    setRouterContext,
 } from "../../storybook/decorators";
 
 export default {
@@ -16,7 +15,6 @@ export default {
     component: LoadingResultsHeader,
     decorators: [
         setPersonalisationAnswers,
-        setRouterContext,
     ],
     args: {
         category: (getCategory("housing"): ?Category),

@@ -2,7 +2,6 @@
 
 import type {Node as ReactNode} from "React";
 import React from "react";
-import PropTypes from "proptypes";
 
 import Link from "./base/Link";
 import Service from "../iss/Service";
@@ -42,10 +41,6 @@ type Props = {
 
 class CrisisLineItem extends React.Component<Props, void> {
     static displayName: ?string = "CrisisLineItem";
-
-    static propTypes = {
-        service: PropTypes.object.isRequired,
-    };
 
     PhoneButtonDetails: ReactNode =
         <div className="detailsCollapser">

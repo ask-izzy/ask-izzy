@@ -4,7 +4,7 @@ import storage from "../storage";
 
 import AreYouSafe from "../constants/personalisation-pages/AreYouSafe";
 import OnlineSafetyScreen from
-    "../constants/personalisation-pages/OnlineSafetyScreen";
+"../constants/personalisation-pages/OnlineSafetyScreen";
 import {getSavedPersonalisationAnswer} from "./personalisation"
 
 export const resetDfvOptions = (): void => {

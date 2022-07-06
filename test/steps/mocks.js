@@ -8,7 +8,7 @@ import Yadda from "yadda";
 import type { LibraryEnglish as YaddaLibraryEnglish } from "yadda";
 
 import dictionary from "../support/dictionary";
-import { mock, mockSearch } from "../support/mock_iss/server";
+import fetch from "node-fetch";
 import Service from "../../src/iss/Service";
 
 import { visitUrl } from "./browser";
@@ -31,14 +31,32 @@ async function visitMockedService() {
 
 async function mockService(service: Service) {
     mockedService = service;
-    mock(service);
+    const res = await fetch(`${process.env.NEXT_PUBLIC_ISS_BASE_URL}/mock/service`, {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify(service),
+    })
+    if (res.status < 200 || res.status > 299) {
+        throw Error("Could not mock service")
+    }
 }
 
 async function mockSearchForServices(
     search: string,
     services: Array<Service>
 ): Promise<void> {
-    mockSearch(search, services);
+    const res = await fetch(`${process.env.NEXT_PUBLIC_ISS_BASE_URL}/mock/search`, {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify({search, services}),
+    })
+    if (res.status < 200 || res.status > 299) {
+        throw Error("Could not mock search")
+    }
 }
 
 module.exports = ((function(): YaddaLibraryEnglish {

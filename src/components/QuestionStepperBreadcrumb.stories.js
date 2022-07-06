@@ -9,7 +9,6 @@ import type {
 import QuestionStepperBreadcrumb from "./QuestionStepperBreadcrumb";
 import {
     setPersonalisationAnswers,
-    setRouterContext,
 } from "../storybook/decorators";
 import LocationPage from "../constants/personalisation-pages/Location"
 import DemographicsPage from "../constants/personalisation-pages/Demographics"
@@ -19,7 +18,6 @@ export default {
     component: QuestionStepperBreadcrumb,
     decorators: [
         setPersonalisationAnswers,
-        setRouterContext,
     ],
 };
 

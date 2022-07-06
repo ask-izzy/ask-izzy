@@ -19,7 +19,7 @@ Feature: Question Flow Breadcrumb
         And I am 17 years old
         And I click the link with "Housing" substring
         Then I should see "I'm looking for help for"
-        And I should be at /housing/Melbourne-VIC/personalise/page/who-is-looking-for-help
+        And I should be at /housing/Melbourne-VIC/personalise/page/who-is-looking-for-help-housing
         When I click the "Myself" button # Intro
         And I should see "Safe tonight | Melbourne, VIC | Women | 0-17"
 
@@ -31,7 +31,7 @@ Feature: Question Flow Breadcrumb
         And I am 17 years old
         And I click the link with "Housing" substring
         Then I should see "I'm looking for help for"
-        And I should be at /housing/Melbourne-VIC/personalise/page/who-is-looking-for-help
+        And I should be at /housing/Melbourne-VIC/personalise/page/who-is-looking-for-help-housing
         When I click the "Myself" button
         And I click back from the browser UI
         Then I should see "Melbourne, VIC"

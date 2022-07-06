@@ -13,7 +13,7 @@ type Props = {
     travelTimes: ?Array<travelTime>,
     children?: any,
     className: ?string,
-    onClick?: ?function,
+    onClick?: (event: SyntheticEvent<HTMLAnchorElement>) => void,
     hideSpacer?: ?boolean,
 }
 
