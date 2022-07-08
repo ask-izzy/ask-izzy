@@ -19,4 +19,10 @@
     flex-direction: column;
     gap: 1em;
     margin: 1em;
+
+    .includeOtherDetails {
+        input {
+            margin-right: 0.5em;
+        }
+    }
 }

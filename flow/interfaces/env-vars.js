@@ -8,6 +8,7 @@ declare class ProcessWithEnvVars extends Process {
         NEXT_PUBLIC_PROXY_DOMAINS: string,
         NEXT_PUBLIC_STRAPI_URL: string,
         NEXT_PUBLIC_SITE_EMAIL: string,
+        NEXT_PUBLIC_SITE_BASE_URL: string,
         VERSION: string,
         [key: string] : string | void,
     },

@@ -1,60 +1,69 @@
 /* @flow */
 import {createNotificationsAPIClient} from "@/src/ix-web-js-client"
+import {getService} from "@/src/iss/load-services"
+import {getMessageText, normalisePhoneNumber} from "@/components/share/SendForm"
+import Service from "@/src/iss/Service"
+import {sendSMS} from "@/src/utils/sms"
 
 // We'll type these correctly with typescript
 export default async function handler(req: any, res: any): any {
-    // const secret = req.query.secret;
-    // const path = req.query.slug;'
-
     const body = req.body
     console.log("body:", body)
 
-    let captchaCodeIsValid
-
     try {
-        captchaCodeIsValid = validateCaptchaCode(req.body.captchaCode)
+        if (!validateCaptchaCode(req.body.captchaCode)) {
+            return res.status(422).json({
+                message: "Unprocessable request, Invalid captcha code",
+            });
+        }
     } catch (error) {
         console.log(error);
         return res.status(422).json({ message: "Something went wrong" });
     }
 
-    if (captchaCodeIsValid) {
-        return res.status(422).json({
-            message: "Unproccesable request, Invalid captcha code",
-        });
+    let services: Array<Service>
+
+    try {
+        services = await Promise.all(
+            body.services.map(id => getService(id))
+        )
+    } catch (error) {
+        console.log(error);
+        return res.status(500).json({ message: "Could not load details for services" });
+    }
+
+    try {
+        const messageText = getMessageText({
+            services,
+            toName: body.toName,
+            fromName: body.fromName,
+            fromRole: body.fromRole,
+            fromContactDetails: body.fromContactDetails,
+        })
+
+        const subject = `${ body.fromName } has shared an Ask Izzy service with you`
+
+        if (body.toEmail) {
+            await sendEmail(
+                body.toEmail,
+                "testing@infoxchange.net.au",
+                subject,
+                messageText
+            )
+        } else {
+            const phoneNumber = normalisePhoneNumber(body.toPhoneNumber)
+            await sendSMS(
+                phoneNumber,
+                messageText
+            )
+        }
+    } catch (error) {
+        console.log(error);
+        return res.status(500).json({ message: "Could not send message" });
 
     }
 
-    console.log("captchaCodeIsValid", captchaCodeIsValid)
-
-    const notificationsAPIClient = await createNotificationsAPIClient({
-        baseUrl: "https://notifications-api.docker.dev",
-        apiKey: "JdGuT3Gr.sGv08CM6Jk3whfYutViqoObMHJvXacFN",
-    })
-
-    res.json(
-        await notificationsAPIClient.send({
-            "action": "email",
-            "environment": "askizzy",
-            "provider": "smtp",
-            "notifications": {
-                "template": "share-service-list",
-                "notifications": [
-                    {
-                        "to": body.toEmail,
-                        "from": "testing@infoxchange.net.au",
-                        "replacements": {
-                            "subject": "quick brown fox",
-                            "object": "lazy dog",
-                            "toName": body.toName,
-                            fromName: body.fromName,
-
-                        },
-                    },
-                ],
-            },
-        })
-    )
+    res.end()
 }
 
 async function validateCaptchaCode(captchaCode) {
@@ -81,4 +90,30 @@ async function validateCaptchaCode(captchaCode) {
          }
         */
     return captchaValidation.success
+}
+
+async function sendEmail(to, from, subject, body) {
+    const notificationsAPIClient = await createNotificationsAPIClient({
+        baseUrl: "https://notifications-api.docker.dev",
+        apiKey: "JdGuT3Gr.sGv08CM6Jk3whfYutViqoObMHJvXacFN",
+    })
+
+    await notificationsAPIClient.send({
+        action: "email",
+        environment: "askizzy",
+        provider: "smtp",
+        notifications: {
+            template: "share-service-list",
+            notifications: [
+                {
+                    to: to,
+                    from: from,
+                    replacements: {
+                        subject: subject,
+                        body: body,
+                    },
+                },
+            ],
+        },
+    })
 }

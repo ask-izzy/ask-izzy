@@ -11,13 +11,16 @@ import StandardButton from "@/components/general/StandardButton"
 import Input from "@/src/components/base/Input"
 import EmailIcon from "@/src/icons/Email"
 import PhoneIcon from "@/src/icons/Phone"
+import Service from "@/src/iss/Service"
 
 type Props = {
-    onCloseRequested: () => void
+    onCloseRequested: () => void,
+    services: Array<Service>
 }
 
 function ShareServices({
     onCloseRequested,
+    services,
 }: Props): React.Node {
     const [screen, setScreen] = React.useState<"Directly" | "Via Ask Izzy">("Directly")
 
@@ -49,10 +52,10 @@ function ShareServices({
                             <span>&times;</span>
                         </Button>
                     </header>
-                    {screen === "Directly" && <ShareDirectlyOptions />}
+                    {screen === "Directly" && <ShareDirectlyOptions services={services} />}
                     <main>
                         {screen === "Directly" && renderViaAskIzzyInfoBox()}
-                        {screen === "Via Ask Izzy" && <SendForm />}
+                        {screen === "Via Ask Izzy" && <SendForm services={services} />}
                     </main>
                 </div>
             )}

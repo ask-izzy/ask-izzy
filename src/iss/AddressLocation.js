@@ -122,4 +122,10 @@ export default class AddressLocation {
             titleize(this.postcode),
         ].join(" ").trim();
     }
+
+    singleLineStreetAddress(): string {
+        return [this.streetAddressLine1(), this.streetAddressLine2()]
+            .filter(text => text)
+            .join(", ")
+    }
 }
