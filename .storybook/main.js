@@ -33,6 +33,10 @@ module.exports = {
             }),
         )
 
+        config.resolve.fallback = config.resolve.fallback || {}
+        config.resolve.fallback.net = false
+        config.resolve.fallback.tls = false
+
         return config
     },
     features: {

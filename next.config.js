@@ -98,6 +98,14 @@ const nextConfig = {
     experimental: {
         isrMemoryCacheSize: 0,
     },
+    webpack: (config) => {
+        config.resolve.fallback = {
+            net: false,
+            tls: false,
+        };
+
+        return config;
+    },
 }
 
 const nextConfigWithTranspiledNodeModules = withTM([
