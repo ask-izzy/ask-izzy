@@ -16,6 +16,7 @@ import {MobileDetect} from "@/src/effects/MobileDetect";
 import Spacer from "@/src/components/Spacer";
 import {getService} from "@/src/iss/load-services"
 import ToastMessageMyList from "@/src/components/ResultsListPage/ToastMessageMyList"
+import Service from "@/src/iss/Service"
 
 type myListObjType = {string: Object}
 
@@ -41,8 +42,14 @@ function MyListPage(): ReactNode {
         return cleanup
     }, [])
 
+    const [selectedServices, setSelectedServices] = useState<Array<Service>>([])
+
     useEffect(() => {
         myListObjHelper.current = myListObj
+        setSelectedServices(
+            Object.values(myListObj)
+                .map(serviceData => new Service(serviceData))
+        )
     }, [myListObj])
 
     function subscribeToJsonChange() {
@@ -145,7 +152,10 @@ function MyListPage(): ReactNode {
                         yourself now?
                     </div>
                     <br/>
-                    <ShareButton hasTextDescription={true}/>
+                    <ShareButton
+                        hasTextDescription={true}
+                        services={selectedServices}
+                    />
                 </div>
                 {renderSaveList("bottom")}
             </div>
@@ -209,7 +219,10 @@ function MyListPage(): ReactNode {
             <div className={classnames("top-button-container", {"web": !isMobile})}>
                 <div className={classnames("count-container", {"mobile": isMobile})}>
                     {`${serviceCount} service${serviceCount > 1 ? "s" : ""} in your list`}
-                    {isMobile && <ShareButton hasTextDescription={true}/>}
+                    {isMobile && <ShareButton
+                        hasTextDescription={true}
+                        services={selectedServices}
+                    />}
                 </div>
 
                 {isMobile && <Spacer />}
@@ -223,7 +236,10 @@ function MyListPage(): ReactNode {
                     >
                         Clear All
                     </Button>
-                    {!isMobile && <ShareButton hasTextDescription={true}/>}
+                    {!isMobile && <ShareButton
+                        hasTextDescription={true}
+                        services={selectedServices}
+                    />}
                 </div>
             </div>
         )
