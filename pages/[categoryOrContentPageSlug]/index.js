@@ -25,6 +25,7 @@ type Props = {
 }
 
 export const getStaticPaths: GetStaticPaths = async() => {
+    console.log('getting paths')
     const categoryPaths = categories.map(category => ({
         params: { categoryOrContentPageSlug: category.key},
     }))
@@ -32,14 +33,20 @@ export const getStaticPaths: GetStaticPaths = async() => {
     let contentPages
 
     try {
+        console.log('getting pages', process.env.HTTP_PROXY)
+        await fetch("https://example.com")
+        console.log('getting pages2', process.env.HTTP_PROXY)
         const { data } = await queryGraphQlWithErrorLogging({
             query: cmsAllPagesQuery,
             fetchPolicy: "no-cache",
         })
+        console.log('done getting pages')
         contentPages = data.pages
     } catch (error) {
+        console.error('err done getting pages', error)
         throw error
     }
+
 
     // Load static pages to make sure the paths don't clash the the paths of
     // pages in the CMS.
@@ -64,6 +71,8 @@ export const getStaticPaths: GetStaticPaths = async() => {
             params: {categoryOrContentPageSlug: slug},
         }))
 
+    console.log('done getting paths')
+
     return {
         paths: [
             ...categoryPaths,
@@ -74,6 +83,7 @@ export const getStaticPaths: GetStaticPaths = async() => {
 }
 
 export const getStaticProps: GetStaticProps<Props> = async({params}) => {
+    console.log('getting props')
     const category = getCategory(params.categoryOrContentPageSlug)
     if (category) {
         return {

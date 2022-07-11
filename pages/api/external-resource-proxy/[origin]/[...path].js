@@ -22,6 +22,7 @@ const proxyMiddleware = createProxyMiddleware({
         return path.replace(/^\/api\/external-resource-proxy\/[^/]+\//, "/")
     },
     onProxyRes: responseInterceptor(async(responseBuffer, proxyRes, req, res) => {
+        console.log("got resssss")
         const hasPrefix = res.getHeader("location")?.startsWith("/api/external-resource-proxy/")
         if (!hasPrefix) {
             res.setHeader(
@@ -37,6 +38,7 @@ export default function handler(req: any, res: any): void {
         return res.status(400).send("Route not available");
     }
     proxyMiddleware(req, res, (result: any) => {
+        console.log("got ressss2")
         if (result instanceof Error) {
             throw result;
         }

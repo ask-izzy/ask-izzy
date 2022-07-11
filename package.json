@@ -10,7 +10,7 @@
     "build": "next build",
     "start": "next start -p 8000",
     "deploy": "true",
-    "serve": "scripts/link-dist-dir.sh && yarn build && yarn start",
+    "serve": "scripts/link-dist-dir.sh && env && yarn build && yarn start",
     "test-mocha-personalisation": "mocha test/personalisation.js",
     "test-mocha-features": "mocha test/feature.js",
     "test-mocha-maps": "mocha test/maps.js",

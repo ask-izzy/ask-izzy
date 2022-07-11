@@ -9,6 +9,7 @@ services:
       PAUSE_AFTER_FAIL: 1
       STATIC_PAGE_REGENERATION_SECRET: "hunter2"
       STATIC_PAGE_PREVIEW_SECRET: "hunter2"
+      NODE_EXTRA_CA_CERTS: "/app/mitmproxy-ca-cert.pem"
     ports:
       - "8000:8000"
     volumes:

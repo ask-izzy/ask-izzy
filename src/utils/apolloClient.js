@@ -8,6 +8,8 @@ const client: any = new ApolloClient({
     cache: new InMemoryCache(),
 });
 
+console.log(`------------${process.env.NEXT_PUBLIC_STRAPI_URL}/graphql`)
+
 export default client;
 
 // We'll type these property when moving to typescript
