@@ -148,8 +148,9 @@ RUN yarn install --frozen-lockfile && yarn cache clean
 COPY --chown=$UID_GID . /app
 
 ARG VERSION
-RUN echo $VERSION > ./public/VERSION.txt && \
-    yarn with --test-env --mocks build-storybook
+RUN echo $VERSION > ./public/VERSION.txt
+# && \
+    # yarn with --test-env --mocks build-storybook
 
 ENV VERSION=$VERSION
 
