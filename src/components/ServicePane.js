@@ -184,6 +184,7 @@ function ServicePane({service}: Props): ReactNode {
                 <div className="compare-share-container">
                     <ShareButton
                         hasTextDescription={true}
+                        services={[service]}
                     />
                     {addToCompareButtonComponent}
                 </div>
@@ -193,6 +194,7 @@ function ServicePane({service}: Props): ReactNode {
                 <div className="compare-share-container mobile">
                     <ShareButton
                         hasTextDescription={true}
+                        services={[service]}
                     />
                     {addToCompareButtonComponent}
                 </div>
