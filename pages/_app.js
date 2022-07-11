@@ -8,6 +8,7 @@ import Head from "next/head"
 import { useRouter } from "next/router"
 import type { NextRouter } from "next/router"
 
+import "@/src/utils/global-setup"
 import "../src/styles/bundle.scss"
 import {DebugModeProvider} from "@/src/contexts/debug-mode-context";
 import { getFullPageTitle } from "@/src/utils";
@@ -20,12 +21,7 @@ import {
     closePageLoadDependencies,
 } from "@/src/utils/page-loading"
 
-import initialiseRequestInterceptor from "@/lib/request-interceptor.js"
 import "@/src/analytics"
-
-if (typeof window !== "undefined") {
-    initialiseRequestInterceptor()
-}
 
 function App(appProps: AppProps): ReactNode {
     const { Component, pageProps } = appProps
