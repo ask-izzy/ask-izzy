@@ -37,7 +37,6 @@ build-development:
 
 build-distribution:
   stage: Build
-  needs: ['build-development']
   script:
     - docker --version
     - 'echo Cache: $([ -n "$DISABLE_CACHE" ] && echo disabled || echo enabled)'
