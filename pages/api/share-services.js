@@ -75,6 +75,7 @@ export default async function handler(req: any, res: any): any {
     try {
         const messageText = getShareMessage({
             services,
+            baseUrl: `${process.env.SITE_PROTOCOL}://${process.env.SITE_DOMAIN}`,
             toName: body.toName,
             fromName: body.fromName,
             fromRole: body.fromRole,
@@ -135,8 +136,8 @@ async function validateCaptchaCode(captchaCode) {
 
 async function sendEmail(to, from, subject, body) {
     const notificationsAPIClient = await createNotificationsAPIClient({
-        baseUrl: "https://notifications-api.docker.dev",
-        apiKey: "JdGuT3Gr.sGv08CM6Jk3whfYutViqoObMHJvXacFN",
+        baseUrl: process.env.NEXT_PUBLIC_NOTIFICATIONS_API_BASE_URL,
+        apiKey: process.env.NEXT_PUBLIC_NOTIFICATIONS_API_KEY,
     })
 
     await notificationsAPIClient.send({

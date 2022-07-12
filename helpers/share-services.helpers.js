@@ -8,6 +8,7 @@ export type MessageType = "SMS" | "Email"
 
 type GetMessageProps = {
     services: Array<Service>,
+    baseUrl: string,
     toName: ?string,
     fromName: ?string,
     fromRole: ?string,
@@ -16,15 +17,13 @@ type GetMessageProps = {
 
 // eslint-disable-next-line complexity
 export function getShareMessage(args: GetMessageProps): { subject: string, body: string } {
-    const {services} = args
+    const {services, baseUrl} = args
     const toName = args.toName && htmlEscape(args.toName)
     const fromName = args.fromName && htmlEscape(args.fromName)
     const fromRole = args.fromRole && htmlEscape(args.fromRole)
     const fromContactDetails = args.fromContactDetails && htmlEscape(args.fromContactDetails)
 
     const isPlural = services.length > 1;
-
-    const baseUrl = process.env.NEXT_PUBLIC_SITE_BASE_URL;
 
     let messageText = `Hi ${toName || "[name of recipient]"}, `;
     if (isPlural) {
@@ -56,8 +55,8 @@ export function getShareMessage(args: GetMessageProps): { subject: string, body:
         `message since we don't store a copy for privacy reasons.`;
 
     const subject = isPlural ?
-        `${fromName || "[name of recipient]"} has shared an Ask Izzy service with you`
-        : `${fromName || "[name of recipient]"} has shared some Ask Izzy services with you`;
+        `${fromName || "[name of recipient]"} has shared some Ask Izzy services with you`
+        : `${fromName || "[name of recipient]"} has shared an Ask Izzy service with you`;
 
     return {
         subject,

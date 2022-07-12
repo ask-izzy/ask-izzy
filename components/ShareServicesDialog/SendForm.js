@@ -18,6 +18,7 @@ import FormSection from "@/components/general/FormSection"
 import {getShareMessage, getShareReqSchema} from "@/helpers/share-services.helpers.js"
 import type { MessageType } from "@/helpers/share-services.helpers.js"
 import useSubmitForm from "./use-submit-form.hook.js"
+import useIsMounted from "@/hooks/useIsMounted"
 
 type Props = {
     services: Array<Service>,
@@ -40,6 +41,8 @@ function SendForm({
 
     const { submitForm, currentlySubmitting } = useSubmitForm(services)
 
+    const isMounted = useIsMounted()
+
     async function onSubmit(data) {
         const status = await submitForm(data)
         recaptchaRef.current?.reset();
@@ -54,6 +57,7 @@ function SendForm({
 
     const messageText = getShareMessage({
         services,
+        baseUrl: isMounted ? location.origin : "",
         toName: watch("toName"),
         fromName: watch("fromName"),
         fromRole: watch("fromRole"),
