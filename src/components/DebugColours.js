@@ -158,16 +158,16 @@ function getColourVars() {
                     ...Array.from(sheet.cssRules).reduce(
                         (def, rule) =>
                             (def =
-                                rule.selectorText === ":root"
-                                ? [
-                                    ...def,
-                                    ...Array.from(rule.style).filter(name =>
-                                        name.match(/^--(?:raw-)?colour-/)
-                                    )
+                                rule.selectorText === ":root" ?
+                                    [
+                                        ...def,
+                                        ...Array.from(rule.style).filter(name =>
+                                            name.match(/^--(?:raw-)?colour-/)
+                                        ),
                                     ]
-                                : def),
+                                    : def),
                         []
-                    )
+                    ),
                 ]),
             []
         )

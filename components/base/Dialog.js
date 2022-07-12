@@ -1,9 +1,9 @@
 /* @flow */
-import React, {useState, useEffect} from "react"
+import React, {useEffect} from "react"
 import type {Node as ReactNode} from "react"
 import cnx from "classnames"
-import { useA11yDialog } from 'react-a11y-dialog'
-import ReactDOM from 'react-dom'
+import { useA11yDialog } from "react-a11y-dialog"
+import ReactDOM from "react-dom"
 
 import isMounted from "@/hooks/useIsMounted"
 import useUniqueId from "@/hooks/useUniqueId"
@@ -55,7 +55,7 @@ export default function Dialog(
             ReactDOM.createPortal(
                 <div
                     {...attr.container}
-                    className="Dialog"
+                    className={cnx("Dialog", className)}
                 >
                     <div
                         {...attr.overlay}

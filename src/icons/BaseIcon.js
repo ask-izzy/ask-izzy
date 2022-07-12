@@ -1,7 +1,7 @@
 /* @flow */
 
 import * as React from "react";
-import parse from 'html-react-parser';
+import parse from "html-react-parser";
 import classnames from "classnames";
 
 type Props = {
@@ -65,8 +65,3 @@ class BaseIcon extends React.Component<Props, void> {
 }
 
 export default BaseIcon;
-
-
-const RawHtml = ({ html = "" }) => (
-    <div style={{display: "none"}} dangerouslySetInnerHTML={{ __html: html }} />
-);

@@ -5,7 +5,7 @@ import type { GetStaticProps } from "next"
 
 import ShareServices from "@/components/ShareServicesDialog"
 import type {RouteSharedProps} from "@/flow/routes"
-import {ixaService, housingService} from "@/fixtures/services";
+import {ixaService} from "@/fixtures/services";
 
 export const getStaticProps: GetStaticProps<RouteSharedProps> = async({params}) => {
     return {
@@ -21,13 +21,13 @@ export const getStaticProps: GetStaticProps<RouteSharedProps> = async({params}) 
 export default function ShareServicesPage(props: RouteSharedProps): React.Node {
     const [open, setOpen] = useState(true)
 
-
-
     return <div>
         <button onClick={() => setOpen(true)}>Share</button>
-        {open && <ShareServices
-            onCloseRequested={() => setOpen(false)}
-            services={[ixaService/*, housingService*/]}
-        />}
+        {open && (
+            <ShareServices
+                onCloseRequested={() => setOpen(false)}
+                services={[ixaService]}
+            />
+        )}
     </div>
 }

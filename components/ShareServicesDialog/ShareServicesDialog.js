@@ -1,16 +1,12 @@
 /* @flow */
 
 import * as React from "react";
-import {useState} from "react";
 
 import ShareDirectlyOptions from "./ShareDirectlyOptions"
 import SendForm from "./SendForm"
 import Dialog from "@/components/base/Dialog"
 import Button from "@/src/components/base/Button"
 import StandardButton from "@/components/general/StandardButton"
-import Input from "@/src/components/base/Input"
-import EmailIcon from "@/src/icons/Email"
-import PhoneIcon from "@/src/icons/Phone"
 import Service from "@/src/iss/Service"
 
 type Props = {

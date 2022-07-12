@@ -17,12 +17,12 @@ export default function(services: Array<Service>): {
                 services: services.map(service => service.id),
             })
 
-            const res = await fetch('/api/share-services', {
+            const res = await fetch("/api/share-services", {
                 body,
                 headers: {
-                    'Content-Type': 'application/json',
+                    "Content-Type": "application/json",
                 },
-                method: 'POST',
+                method: "POST",
             });
 
             if (res.status === 429) {

@@ -113,6 +113,7 @@ export async function getRequestType(request): Promise<MessageType | null> {
 
 export function normalisePhoneNumber(phoneNumber: string): string {
     return phoneNumber
+        // $FlowIgnore flow is out of date and replaceAll exists
         .replaceAll(/(?:[ ()-]|(?<!^)\+)/g, "")
         .replace(/^0/, "+61");
 }

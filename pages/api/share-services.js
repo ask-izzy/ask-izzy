@@ -1,5 +1,5 @@
 /* @flow */
-import BadWordsFilter from 'bad-words'
+import BadWordsFilter from "bad-words"
 
 import {createNotificationsAPIClient} from "@/src/ix-web-js-client"
 import {getService} from "@/src/iss/load-services"
@@ -86,6 +86,7 @@ export default async function handler(req: any, res: any): any {
                 body.toEmail,
                 "testing@infoxchange.net.au",
                 messageText.subject,
+                // $FlowIgnore flow is out of date and replaceAll exists
                 messageText.body.replaceAll("\n", "<br />")
             )
         } else {

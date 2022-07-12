@@ -1,8 +1,10 @@
+/* @flow */
+
 import AWS from "aws-sdk";
-// Set region
+
 AWS.config.update({ region: "ap-southeast-2" });
 
-export async function sendSMS(to, message): Promise<void> {
+export async function sendSMS(to: string, message: string): Promise<void> {
     // Create publish parameters
     const params = {
         Message: message,

@@ -14,7 +14,7 @@ type autocompleteObjValue = {
     label: ReactNode
 }
 
-type Props = {
+type Props = {|
     className?: string,
     value: string,
     onChange: (SyntheticInputEvent<HTMLInputElement>) => void,
@@ -28,7 +28,7 @@ type Props = {
     onKeyDown?: (SyntheticKeyboardEvent<HTMLInputElement>) => void,
     onBlur?: (SyntheticFocusEvent<HTMLInputElement>) => void,
     onFocus?: (SyntheticFocusEvent<HTMLInputElement>) => void,
-}
+|}
 
 type refType = { current: null | HTMLInputElement } |
     ((null | HTMLInputElement) => mixed)
@@ -282,6 +282,7 @@ function InputWithDropdown({
             value={value}
             containerProps={downshiftCombobox?.getComboboxProps()}
             customInputElement={(inputProps) =>
+                // $FlowIgnore It's okay if otherInputProps overrides inputProps
                 <input
                     {...inputProps}
                     {...otherInputProps}
@@ -291,41 +292,6 @@ function InputWithDropdown({
             extraContainerChildren={renderAutoCompleteList()}
         />
     )
-
-    // return (
-    //     <div
-    //         className={cnx(
-    //             "Input InputWithDropdown",
-    //             className,
-    //             {isAutocompleteSuggestions: getIsAutocompleteSuggestions()},
-    //         )}
-    //         {...}
-    //     >
-    //         {icon &&
-    //             <div className={cnx(
-    //                 "icon",
-    //                 {
-    //                     "iconLeft": (iconPosition === "left"),
-    //                     "iconRight": (iconPosition === "right"),
-    //                 }
-    //             )}
-    //             >
-    //                 {icon}
-    //             </div>
-    //         }
-    //         <input
-    //             {...otherInputProps}
-    //             className={cnx({
-    //                 "includes-icon": icon,
-    //                 "includes-clear": showClearButton,
-    //                 "iconLeft": (iconPosition === "left" && icon),
-    //                 "iconRight": (iconPosition === "right" && icon),
-    //             })}
-    //         />
-    //         {renderAutoCompleteList()}
-    //         {renderClearBtn()}
-    //     </div>
-    // )
 }
 
 export default (

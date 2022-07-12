@@ -35,7 +35,7 @@ type Props = {
     }
     |
     {
-        customInputElement: (props: {[string]: any}) => ReactElement<"input">,
+        customInputElement: (props: HTMLInputElement) => ReactElement<"input">,
     }
 )
 

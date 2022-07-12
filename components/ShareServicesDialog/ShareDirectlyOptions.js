@@ -2,15 +2,10 @@
 
 import * as React from "react";
 import {useState, useEffect} from "react";
-import {CopyToClipboard} from 'react-copy-to-clipboard';
+import {CopyToClipboard} from "react-copy-to-clipboard";
 
 import isMounted from "@/hooks/useIsMounted"
-import SendForm from "./SendForm"
-import Dialog from "@/components/base/Dialog"
 import StandardButton from "@/components/general/StandardButton"
-import Input from "@/src/components/base/Input"
-import EmailIcon from "@/src/icons/Email"
-import PhoneIcon from "@/src/icons/Phone"
 import Service from "@/src/iss/Service"
 
 type Props = {
@@ -34,13 +29,15 @@ function ShareDirectlyOptions({
             Address: ${(service.location?.singleLineStreetAddress() ?? "")}
             ${service.location?.details ?? ""}
             More info: ${baseUrl}/service/${service.slug}
-        `.replaceAll(/\n {12}/g, "\n").replaceAll(/\n(?=\n)/g, "").trim()).join("\n\n")
+        `
+            // $FlowIgnore flow is out of date and replaceAll exists
+            .replaceAll(/\n {12}/g, "\n").replaceAll(/\n(?=\n)/g, "").trim()).join("\n\n")
     } else {
         textToShare = services.map(service => `${baseUrl}/service/${service.slug}`).join("\n")
     }
 
     const shareData = {
-        title: 'List of Ask Izzy services',
+        title: "List of Ask Izzy services",
     }
 
     if (isPlural) {
@@ -55,7 +52,7 @@ function ShareDirectlyOptions({
             navigator.share &&
             (!navigator.canShare || navigator.canShare(shareData))
         ) {
-            console.log('navigator.canShare?.(shareData)', navigator.canShare?.(shareData))
+            console.log("navigator.canShare?.(shareData)", navigator.canShare?.(shareData))
             setNativeShareSupported(true)
         }
     }, [])

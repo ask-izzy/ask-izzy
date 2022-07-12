@@ -1,14 +1,12 @@
 /* @flow */
 
 import * as React from "react";
-import {useState, useEffect} from "react";
+import {useEffect} from "react";
 import { useForm } from "react-hook-form";
 import ReCAPTCHA from "react-google-recaptcha";
-import { yupResolver } from '@hookform/resolvers/yup';
+import { yupResolver } from "@hookform/resolvers/yup";
 
 import Form from "@/components/forms/Form"
-import isMounted from "@/hooks/useIsMounted"
-import Button from "@/src/components/base/Button"
 import StandardButton from "@/components/general/StandardButton"
 import EmailIcon from "@/src/icons/Email"
 import PhoneIcon from "@/src/icons/Phone"
@@ -44,7 +42,7 @@ function SendForm({
 
     async function onSubmit(data) {
         const status = await submitForm(data)
-        recaptchaRef.current.reset();
+        recaptchaRef.current?.reset();
         setSentStatus(status)
     }
 
@@ -62,8 +60,8 @@ function SendForm({
         fromContactDetails: watch("fromContactDetails"),
     })
 
-    const onVerifyCaptcha = (token) => setValue('captchaCode', token);
-    useEffect(() => register('captchaCode'), []);
+    const onVerifyCaptcha = (token) => setValue("captchaCode", token);
+    useEffect(() => register("captchaCode"), []);
 
     if (sentStatus) {
         return (
@@ -95,7 +93,9 @@ function SendForm({
                     className={messageType === "Email" ? "tint-2" : "tint-1"}
                     onClick={() => setMessageType("Email")}
                 >
-                    <EmailIcon noSpanWrapper={true} viewBox="15 22 34 24" />Email
+                    <EmailIcon noSpanWrapper={true}
+                        viewBox="15 22 34 24"
+                    />Email
                 </StandardButton>
             </nav>
         </div>

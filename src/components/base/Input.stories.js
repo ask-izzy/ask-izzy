@@ -5,7 +5,6 @@ import type {
     Node as ReactNode,
     ElementConfig as ReactElementConfig,
 } from "React";
-import escapeStringRegexp from "escape-string-regexp";
 
 import Input from "./Input"
 import SearchIcon from "../../icons/Search"
