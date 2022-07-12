@@ -63,6 +63,7 @@ module.exports = (function() {
         })
         .when("I scroll to element \"$STRING\"", scrollToElement)
         .when("I take a screenshot", takeScreenshot)
+        .when("I enable debug mode", enableDebugMode)
         .when("I show the mouse cursor", showCursor)
         .then("I should be at $URL", checkURL)
         .then("I should see \"$STRING\"", thenISee)
@@ -93,7 +94,7 @@ module.exports = (function() {
 module.exports.documentReady = async function documentReady(
     driver: Webdriver.WebDriver
 ): Promise<boolean> {
-    return driver.executeAsyncScript((callback) => {
+    const result = await driver.executeAsyncScript((callback) => {
         const intervalId = setInterval(() => {
             // Internal page
             if (window.location.hostname === "localhost") {
@@ -111,7 +112,16 @@ module.exports.documentReady = async function documentReady(
                 }
             }
         }, 10);
+
+        setTimeout(
+            () => callback("Timed out"),
+            1000 * 10
+        )
     })
+
+    if (result === "Timed out") {
+        throw new Error("Timed out waiting for page to be ready")
+    }
 };
 
 async function visitUrl(url: string): Promise<void> {
@@ -475,6 +485,10 @@ async function takeScreenshot(): Promise<void> {
     )
 
     console.log(`${this.indent}  Screenshot saved to "${filepath}"`);
+}
+
+async function enableDebugMode(): Promise<void> {
+    await debug.enableDebugMode(this.driver)
 }
 
 async function showCursor(): Promise<void> {
