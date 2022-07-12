@@ -3,7 +3,7 @@ import * as React from "react";
 import {useState} from "react";
 import type { GetStaticProps } from "next"
 
-import ShareServices from "@/components/share/ShareServices"
+import ShareServices from "@/components/ShareServicesDialog"
 import type {RouteSharedProps} from "@/flow/routes"
 import {ixaService, housingService} from "@/fixtures/services";
 

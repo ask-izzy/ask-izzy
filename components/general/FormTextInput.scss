@@ -1,0 +1,22 @@
+.FormTextInput {
+    label {
+        display: inline-block;
+        margin: 1.3em 0 0.4em;
+        .title {
+            font-weight: bold;
+            display: inline-block;
+        }
+    }
+
+    .Input {
+        width: 100%;
+
+        input {
+            line-height: 2em;
+        }
+    }
+
+    .errorMessage {
+        margin: 0.5em;
+    }
+}

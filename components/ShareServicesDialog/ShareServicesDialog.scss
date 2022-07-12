@@ -1,6 +1,6 @@
 @use '../../src/styles/mixins/colours';
 
-.ShareServices {
+.ShareServicesDialog {
     border-radius: 0.5em;
     background-color: #{colours.get-static('colour-bg-standard')};
     background-color: var(--colour-bg-standard);

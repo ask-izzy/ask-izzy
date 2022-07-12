@@ -48,11 +48,23 @@ export async function request<ResBody = Object, ReqPayload = Object>(
     }
     const res = await fetch(url, options)
     if (res.status < 200 || res.status >= 300) {
-        console.info(url, options)
-        throw Error(
-            `Got error status "${res.status}" for <${url}>:\n\t` +
-                `${await res.text()}`
+        const statusCode = res.status
+        const resBodyText = await res.text()
+        let resBodyJSON = null
+        try {
+            resBodyJSON = JSON.parse(resBodyText)
+        } catch (error) {
+            // Body might not be JSON so we don't care if this fails
+        }
+        const error = Error(
+            `Got error status "${statusCode}" for <${url}>:\n\t` +
+                `${resBodyText}`
         )
+        error.statusCode = statusCode
+        error.resBodyText = resBodyText
+        error.resBodyJSON = resBodyJSON
+        error.url = url
+        throw error
     }
     return await res.json()
 }

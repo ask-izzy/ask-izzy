@@ -18,7 +18,7 @@ type Props = {
     services: Array<Service>
 }
 
-function ShareServices({
+function ShareServicesDialog({
     onCloseRequested,
     services,
 }: Props): React.Node {
@@ -42,7 +42,7 @@ function ShareServices({
             onClose={onCloseRequested}
         >
             {({titleProps}) => (
-                <div className="ShareServices">
+                <div className="ShareServicesDialog">
                     <header>
                         <h1 {...titleProps}>Share My List</h1>
                         <Button
@@ -55,7 +55,12 @@ function ShareServices({
                     {screen === "Directly" && <ShareDirectlyOptions services={services} />}
                     <main>
                         {screen === "Directly" && renderViaAskIzzyInfoBox()}
-                        {screen === "Via Ask Izzy" && <SendForm services={services} />}
+                        {screen === "Via Ask Izzy" && (
+                            <SendForm
+                                services={services}
+                                onCloseRequest={() => setScreen("Directly")}
+                            />
+                        )}
                     </main>
                 </div>
             )}
@@ -64,4 +69,4 @@ function ShareServices({
 
 }
 
-export default ShareServices
+export default ShareServicesDialog

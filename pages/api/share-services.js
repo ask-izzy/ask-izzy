@@ -1,14 +1,42 @@
 /* @flow */
+import BadWordsFilter from 'bad-words'
+
 import {createNotificationsAPIClient} from "@/src/ix-web-js-client"
 import {getService} from "@/src/iss/load-services"
-import {getShareMessage, normalisePhoneNumber} from "@/components/share/SendForm"
 import Service from "@/src/iss/Service"
-import {sendSMS} from "@/src/utils/sms"
+import { sendSMS } from "@/src/utils/sms"
+import { getRateLimitMiddlewares } from "@/src/utils/rate-limiting"
+import { callMiddlewares } from "@/src/utils/middleware"
+import {
+    getRequestType,
+    getShareMessage,
+    normalisePhoneNumber,
+} from "@/helpers/share-services.helpers.js"
+
+const middlewares = getRateLimitMiddlewares({
+    limit: 10,
+    windowMs: 1000 * 60 * 30,
+    delayAfter: 5,
+    delayMs: 500,
+})
 
 // We'll type these correctly with typescript
 export default async function handler(req: any, res: any): any {
     const body = req.body
-    console.log("body:", body)
+
+    try {
+        await callMiddlewares(middlewares, req, res)
+    } catch {
+        return res.status(429).json({ message: "Too many requests" })
+    }
+
+    const messageRequestType = await getRequestType(body)
+
+    console.log(messageRequestType)
+
+    if (!messageRequestType) {
+        return res.status(400).json({message: "Invalid request"})
+    }
 
     try {
         if (!validateCaptchaCode(req.body.captchaCode)) {
@@ -32,6 +60,18 @@ export default async function handler(req: any, res: any): any {
         return res.status(500).json({ message: "Could not load details for services" });
     }
 
+    const badWordsFilter = new BadWordsFilter()
+
+    const abusiveLanguageUsed = [
+        body.toName,
+        body.fromName,
+        body.fromRole,
+    ].some(text => badWordsFilter.isProfane(text))
+
+    if (abusiveLanguageUsed) {
+        return res.status(403).json({ message: "Abusive language detected" })
+    }
+
     try {
         const messageText = getShareMessage({
             services,
@@ -41,7 +81,7 @@ export default async function handler(req: any, res: any): any {
             fromContactDetails: body.fromContactDetails,
         })
 
-        if (body.toEmail) {
+        if (messageRequestType === "Email") {
             await sendEmail(
                 body.toEmail,
                 "testing@infoxchange.net.au",
@@ -56,7 +96,10 @@ export default async function handler(req: any, res: any): any {
             )
         }
     } catch (error) {
-        console.log(error);
+        console.log(error, error.status, error.statusCode, error.code);
+        if (error.statusCode === 429) {
+            return res.status(429).json({ message: "Too many requests to external service" });
+        }
         return res.status(500).json({ message: "Could not send message" });
     }
 
