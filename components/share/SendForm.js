@@ -69,7 +69,7 @@ function SendForm({
 
     console.log("toName----", watch("toName"))
 
-    const messageText = getMessageText({
+    const messageText = getShareMessage({
         services,
         toName: watch("toName"),
         fromName: watch("fromName"),
@@ -253,7 +253,7 @@ function renderSubmitDetailsSection(errors, recaptchaRef, onVerifyCaptcha, curre
                     className="messageText"
                 >
 
-                    {messageText}
+                    {messageText.body}
                 </div>
             </div>
             <div className="recapture">
@@ -291,13 +291,14 @@ function renderSubmitDetailsSection(errors, recaptchaRef, onVerifyCaptcha, curre
     )
 }
 
-export function getMessageText({
+// eslint-disable-next-line complexity
+export function getShareMessage({
     services,
     toName,
     fromName,
     fromRole,
     fromContactDetails,
-}: GetMessageProps): string {
+}: GetMessageProps): {subject: string, body: string} {
     const isPlural = services.length > 1
 
     const baseUrl = process.env.NEXT_PUBLIC_SITE_BASE_URL
@@ -323,8 +324,18 @@ export function getMessageText({
     if (fromContactDetails) {
         messageText += `\nContact details: ${fromContactDetails}`
     }
-    messageText += `\n\nThis message was sent by a user of askizzy.org.au. Report this message`
-    return messageText
+    messageText += `\n\nThis message was sent by a user of askizzy.org.au. If this message is offensive ` +
+        `please report it to ${process.env.NEXT_PUBLIC_SITE_EMAIL} and include the entire text of this ` +
+        `message since we don't store a copy for privacy reasons.`
+
+    const subject = isPlural ?
+        `${ fromName || "[name of recipient]" } has shared an Ask Izzy service with you`
+        : `${ fromName || "[name of recipient]" } has shared some Ask Izzy services with you`
+
+    return {
+        subject,
+        body: messageText,
+    }
 }
 
 export function normalisePhoneNumber(phoneNumber: string): string {

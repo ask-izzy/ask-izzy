@@ -1,7 +1,7 @@
 /* @flow */
 import {createNotificationsAPIClient} from "@/src/ix-web-js-client"
 import {getService} from "@/src/iss/load-services"
-import {getMessageText, normalisePhoneNumber} from "@/components/share/SendForm"
+import {getShareMessage, normalisePhoneNumber} from "@/components/share/SendForm"
 import Service from "@/src/iss/Service"
 import {sendSMS} from "@/src/utils/sms"
 
@@ -33,7 +33,7 @@ export default async function handler(req: any, res: any): any {
     }
 
     try {
-        const messageText = getMessageText({
+        const messageText = getShareMessage({
             services,
             toName: body.toName,
             fromName: body.fromName,
@@ -41,26 +41,23 @@ export default async function handler(req: any, res: any): any {
             fromContactDetails: body.fromContactDetails,
         })
 
-        const subject = `${ body.fromName } has shared an Ask Izzy service with you`
-
         if (body.toEmail) {
             await sendEmail(
                 body.toEmail,
                 "testing@infoxchange.net.au",
-                subject,
-                messageText
+                messageText.subject,
+                messageText.body.replaceAll("\n", "<br />")
             )
         } else {
             const phoneNumber = normalisePhoneNumber(body.toPhoneNumber)
             await sendSMS(
                 phoneNumber,
-                messageText
+                messageText.body
             )
         }
     } catch (error) {
         console.log(error);
         return res.status(500).json({ message: "Could not send message" });
-
     }
 
     res.end()
