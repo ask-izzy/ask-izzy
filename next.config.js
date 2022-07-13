@@ -4,6 +4,7 @@ const globImporter = require("node-sass-glob-importer");
 const fs = require("fs");
 const _string = require("underscore.string");
 const withTM = require("next-transpile-modules")
+const { withSentryConfig } = require("@sentry/nextjs");
 
 require("./lib/env-var-check.js")
 
@@ -106,6 +107,9 @@ const nextConfig = {
 
         return config;
     },
+    env: {
+        ENVIRONMENT: process.env.ENVIRONMENT,
+    },
 }
 
 const nextConfigWithTranspiledNodeModules = withTM([
@@ -161,3 +165,12 @@ function getRewritesForCategories() {
 }
 
 module.exports = nextConfigWithTranspiledNodeModules
+
+if (process.env.NODE_ENV !== "test") {
+    module.exports = withSentryConfig(
+        module.exports,
+        {
+            silent: true,
+        }
+    )
+}

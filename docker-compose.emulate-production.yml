@@ -10,6 +10,7 @@ services:
     environment:
       STATIC_PAGE_REGENERATION_SECRET: "hunter2"
       STATIC_PAGE_PREVIEW_SECRET: "hunter2"
+      ENVIRONMENT: "emulated production"
     volumes:
       - .env.production.local:/app/.env.production.local
       - storage:/storage
