@@ -100,9 +100,6 @@ export const getStaticProps: GetStaticProps<Props> = async({params}) => {
         const contentPage = data.pages[0]
 
         if (contentPage) {
-            if (!contentPage.Body) {
-                console.log("blar----'", contentPage)
-            }
             const embeddedCalloutSlugs = [
                 ...(contentPage.Body || "")
                     .matchAll(/>\s+\[callout\(([^)]+)\)\]\s*(?:\n|$)/g),
@@ -150,10 +147,11 @@ export const getStaticProps: GetStaticProps<Props> = async({params}) => {
             console.error(error.networkError.message)
             console.error(error.networkError.result)
         }
-        throw Error(
-            "Error when getting props for category/content page: " +
-                error.message
+        console.info("Request params:", params)
+        console.error(
+            "Error when getting props for category/content page: " + error.message
         )
+        return { notFound: true };
     }
 }
 

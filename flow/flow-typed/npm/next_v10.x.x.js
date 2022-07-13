@@ -72,7 +72,7 @@ declare module "next" {
 
   declare export type GetStaticProps<Props, Params = {[string]: string}> = (context: {
     params: Params,
-  }) => Promise<{props: Props}> | {props: Props}
+  }) => Promise<{props: Props} | { notFound: boolean }> | {props: Props} | { notFound: boolean }
 
   declare export default (opts: Options) => NextApp;
 }
