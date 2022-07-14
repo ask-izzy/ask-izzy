@@ -2,6 +2,7 @@
 .env.local
 .env.*.local
 docker-compose.override.yml
+docker-compose.*.override.yml
 yarn-error.log
 node_modules/
 npm-debug.log*
