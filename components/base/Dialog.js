@@ -50,27 +50,23 @@ export default function Dialog(
         return null
     }
 
-    return <div>
-        {
-            ReactDOM.createPortal(
-                <div
-                    {...attr.container}
-                    className={cnx("Dialog", className)}
-                >
-                    <div
-                        {...attr.overlay}
-                        className="overlay"
-                    />
+    return ReactDOM.createPortal(
+        <div
+            {...attr.container}
+            className={cnx("Dialog", className)}
+        >
+            <div
+                {...attr.overlay}
+                className="overlay"
+            />
 
-                    <div
-                        {...attr.dialog}
-                        className="content"
-                    >
-                        {children && children({titleProps: attr.title})}
-                    </div>
-                </div>,
-                document.body
-            )
-        }
-    </div>
+            <div
+                {...attr.dialog}
+                className="content"
+            >
+                {children && children({titleProps: attr.title})}
+            </div>
+        </div>,
+        document.body
+    )
 }

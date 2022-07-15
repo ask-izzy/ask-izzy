@@ -28,7 +28,7 @@
         }
     }
 
-    main {
+    .highlighted-box {
         background-color: #{colours.get-static('colour-bg-highlight')};
         background-color: var(--colour-bg-highlight);
         color: #{colours.get-static('colour-text-very-light')};
@@ -57,5 +57,10 @@
                 }
             }
         }
+    }
+
+    .info {
+        margin: 1.5em 1em 2em;
+        font-size: 1.3em;
     }
 }

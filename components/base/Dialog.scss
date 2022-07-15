@@ -48,7 +48,7 @@
         z-index: 2; /* 2 */
         position: relative; /* 2 */
         max-height: calc( 100vh - 4em );
-        overflow: scroll;
+        overflow: auto;
         box-sizing: border-box;
     }
 }

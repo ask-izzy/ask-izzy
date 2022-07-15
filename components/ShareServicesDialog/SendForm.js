@@ -220,7 +220,7 @@ function renderSubmitDetailsSection(
                                 noSpanWrapper={true}
                                 viewBox="15 15 31 31"
                             />
-                            Submit
+                            Send
                         </>
                     }
                 </StandardButton>

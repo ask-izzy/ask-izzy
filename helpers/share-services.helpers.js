@@ -64,12 +64,12 @@ export function getShareMessage(args: GetMessageProps): { subject: string, body:
     };
 }
 
-const maxErrorMessage = 'Maxiumum of ${max} characters'
+const maxErrorMessage = 'Maximum of ${max} characters'
 
 const sharedSchema = yup.object({
     toName: yup.string().required().max(30, maxErrorMessage).trim(),
     fromName: yup.string().required().max(30, maxErrorMessage).trim(),
-    fromRole: yup.string().max(60, maxErrorMessage  ).trim(),
+    fromRole: yup.string().max(60, maxErrorMessage ).trim(),
     fromContactDetails: yup.string().trim(),
     captchaCode: yup.string().required(),
 });
@@ -87,7 +87,7 @@ export const smsSchema = sharedSchema.shape({
 });
 
 export const emailSchema = sharedSchema.shape({
-    toEmail: yup.string().required().email(),
+    toEmail: yup.string().required().email("Invalid email address"),
 });
 
 export type MessageRequestSchema = typeof smsSchema | typeof emailSchema
