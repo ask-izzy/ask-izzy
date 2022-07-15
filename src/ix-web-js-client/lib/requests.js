@@ -60,9 +60,15 @@ export async function request<ResBody = Object, ReqPayload = Object>(
             `Got error status "${statusCode}" for <${url}>:\n\t` +
                 `${resBodyText}`
         )
+
+        // Type correctly with typescript
+        // $FlowIgnore
         error.statusCode = statusCode
+        // $FlowIgnore
         error.resBodyText = resBodyText
+        // $FlowIgnore
         error.resBodyJSON = resBodyJSON
+        // $FlowIgnore
         error.url = url
         throw error
     }

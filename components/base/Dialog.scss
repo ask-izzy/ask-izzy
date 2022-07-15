@@ -1,5 +1,4 @@
 
-
 .Dialog {
     /**
     * 1. Make the dialog container, and its child overlay spread across
@@ -7,11 +6,11 @@
     */
     &,
     .overlay {
-      position: fixed; /* 1 */
-      top: 0; /* 1 */
-      right: 0; /* 1 */
-      bottom: 0; /* 1 */
-      left: 0; /* 1 */
+        position: fixed; /* 1 */
+        top: 0; /* 1 */
+        right: 0; /* 1 */
+        bottom: 0; /* 1 */
+        left: 0; /* 1 */
     }
 
     .overlay {

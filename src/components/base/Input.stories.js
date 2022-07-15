@@ -30,16 +30,10 @@ export default {
 };
 
 type InputProps = ReactElementConfig<typeof Input>
-type InputRequiredProps = $Diff<
-    InputProps,
-    {
-        onChange: $PropertyType<InputProps, 'onChange'>,
-        value: $PropertyType<InputProps, 'value'>,
-    }
->
 
 const Template = (args: InputProps): ReactNode => {
-    (Template.args: InputRequiredProps);
+    (Template.args: any);
+    // $FlowIgnore
     return <Input {...args} />;
 };
 

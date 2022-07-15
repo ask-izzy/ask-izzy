@@ -4,6 +4,7 @@
     // @include colours.define('colour-button-primary', 'global', 'colour-brand-primary');
 
     $lightness-button-hover: 10%;
+
     @include colours.define(
         'colour-button-primary',
         'global',

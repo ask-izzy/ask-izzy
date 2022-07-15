@@ -36,9 +36,9 @@ function ShareDirectlyOptions({
         textToShare = services.map(service => `${baseUrl}/service/${service.slug}`).join("\n")
     }
 
-    const shareData = {
-        title: "List of Ask Izzy services",
-    }
+    const shareData = {}
+
+    shareData.title = "List of Ask Izzy services"
 
     if (isPlural) {
         shareData.text = textToShare
@@ -50,9 +50,9 @@ function ShareDirectlyOptions({
         if (
             typeof navigator !== "undefined" &&
             navigator.share &&
+            // $FlowIgnore Flow.js currently out-of-date and doesn't know about the share API
             (!navigator.canShare || navigator.canShare(shareData))
         ) {
-            console.log("navigator.canShare?.(shareData)", navigator.canShare?.(shareData))
             setNativeShareSupported(true)
         }
     }, [])
@@ -68,9 +68,12 @@ function ShareDirectlyOptions({
                     Copy link{isPlural ? "s" : ""}
                 </StandardButton>
             </CopyToClipboard>
-            {nativeShareSupported && <StandardButton onClick={() => navigator.share(shareData)}>
-                More
-            </StandardButton>}
+            {nativeShareSupported && (
+                // $FlowIgnore Flow.js currently out-of-date and doesn't know about the share API
+                <StandardButton onClick={() => navigator.share(shareData)}>
+                    More
+                </StandardButton>
+            )}
             <div className="includeOtherDetails">
                 <input
                     type="checkbox"

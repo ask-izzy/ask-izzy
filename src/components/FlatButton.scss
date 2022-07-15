@@ -45,11 +45,11 @@
             fill: var(--colour-brand-primary);
         }
 
-        &:hover, &:focus {
+        &:hover,
+        &:focus {
             background-color: #{colours.get-static('colour-bg-standard-tint-3')};
             background-color: var(--colour-bg-standard-tint-3);
         }
-
     }
 
     &:hover,

@@ -64,17 +64,17 @@ export function getShareMessage(args: GetMessageProps): { subject: string, body:
     };
 }
 
-const maxErrorMessage = 'Maximum of ${max} characters'
+const maxErrorMessage = "Maximum of ${max} characters"
 
 const sharedSchema = yup.object({
     toName: yup.string().required().max(30, maxErrorMessage).trim(),
     fromName: yup.string().required().max(30, maxErrorMessage).trim(),
-    fromRole: yup.string().max(60, maxErrorMessage ).trim(),
+    fromRole: yup.string().max(60, maxErrorMessage).trim(),
     fromContactDetails: yup.string().trim(),
     captchaCode: yup.string().required(),
 });
 
-export const smsSchema = sharedSchema.shape({
+export const smsSchema = (sharedSchema.shape({
     toPhoneNumber: yup
         .string()
         .required()
@@ -84,11 +84,11 @@ export const smsSchema = sharedSchema.shape({
             "Must be a valid Australian phone number",
             verifyPhoneNumber
         ),
-});
+}): any);
 
-export const emailSchema = sharedSchema.shape({
+export const emailSchema = (sharedSchema.shape({
     toEmail: yup.string().required().email("Invalid email address"),
-});
+}): any);
 
 export type MessageRequestSchema = typeof smsSchema | typeof emailSchema
 
@@ -100,6 +100,7 @@ export function getShareReqSchema(messageType: MessageType): MessageRequestSchem
     }
 }
 
+// $FlowIgnore we can type this nicely when moving to typescript using Yup's InferType
 export async function getRequestType(request): Promise<MessageType | null> {
     if (await smsSchema.isValid(request)) {
         return "SMS";

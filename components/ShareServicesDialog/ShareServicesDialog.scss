@@ -20,7 +20,7 @@
         }
 
         .close {
-            border: none;
+            border: 0;
             background-color: unset;
             font-size: 2em;
             color: #{colours.get-static('colour-text-mid')};
@@ -37,12 +37,12 @@
 
         .viaAskIzzyInfoBox {
             --button-border: var(--colour-text-very-light) solid 1px;
+
             display: flex;
             flex-direction: column;
             overflow: auto;
             padding: 0.3em 1.3em 1.3em;
         }
-
 
         nav.messageType {
             display: flex;

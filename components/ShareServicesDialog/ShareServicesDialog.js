@@ -9,6 +9,7 @@ import Dialog from "@/components/base/Dialog"
 import Button from "@/src/components/base/Button"
 import StandardButton from "@/components/general/StandardButton"
 import Service from "@/src/iss/Service"
+import storage from "@/src/storage";
 
 type Props = {
     onCloseRequested: () => void,
@@ -114,7 +115,8 @@ function renderViaAskIzzyScreen({services, setScreenName}): ReactNode {
 function renderNoServicesScreen(): ReactNode {
     return <>
         <div className="info">
-            No services currently selected. To share several services first click the plus button next to the services you'd like to share.
+            No services currently selected. To share several services first click the plus button next to the services
+            you'd like to share.
         </div>
     </>
 }

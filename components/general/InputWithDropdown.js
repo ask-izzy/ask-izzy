@@ -14,7 +14,7 @@ type autocompleteObjValue = {
     label: ReactNode
 }
 
-type Props = {|
+type Props = {
     className?: string,
     value: string,
     onChange: (SyntheticInputEvent<HTMLInputElement>) => void,
@@ -28,7 +28,7 @@ type Props = {|
     onKeyDown?: (SyntheticKeyboardEvent<HTMLInputElement>) => void,
     onBlur?: (SyntheticFocusEvent<HTMLInputElement>) => void,
     onFocus?: (SyntheticFocusEvent<HTMLInputElement>) => void,
-|}
+}
 
 type refType = { current: null | HTMLInputElement } |
     ((null | HTMLInputElement) => mixed)
