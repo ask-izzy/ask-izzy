@@ -59,10 +59,19 @@ All linters can be run using `docker compose run --rm app lint`. You can use `li
 
 
 ## Emulating the Production Setup
-To make the development process more pleasant the [docker compose.yml](docker compose.yml) file is setup to run code in a dev mode which includes things like live reloading. However it is sometimes desirable to replicate the production setup as close as possible such as to track down a bug only exhibited in production. That can be done with this command:
+To make the development process more pleasant the [docker compose.yml](docker compose.yml) file is setup to run code in a dev mode which includes things like live reloading. However it is sometimes desirable to replicate the production setup as close as possible such as to track down a bug only exhibited in production.
+
+First
+```bash
+cp docker-compose.emulate-production.override.yml.sample docker-compose.emulate-production.override.yml
+```
+
+Then edit `docker-compose.emulate-production.override.yml` and fill in the appropriate values.
+
+Once that is setup the emulated prod environment can be spun up with this command:
 
 ```bash
-docker compose -p ask-izzy-prod -f docker-compose.emulate-production.yml up --build --scale app=2
+docker compose -p ask-izzy-prod -f docker-compose.emulate-production.yml -f docker-compose.emulate-production.override.yml up --build --scale app=2
 ```
 
 ## Alternative Dev Process (No Docker)
