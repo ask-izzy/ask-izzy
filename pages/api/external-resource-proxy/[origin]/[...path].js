@@ -4,10 +4,13 @@
 // proxying the google maps api
 import { createProxyMiddleware, responseInterceptor } from "http-proxy-middleware";
 
+console.log('creating middleware proxy')
+
 const proxyMiddleware = createProxyMiddleware({
     router: req => req.query.origin,
     changeOrigin: true,
     pathRewrite: function(path, req) {
+        console.log("rewrite request", path)
         // Annoyingly Next.js can either be set to rewrite all urls to have trailing slashs or to not have trailing
         //slashes. (See <https://github.com/vercel/next.js/issues/15148>.) Generally we want our site routes to
         // redirects to without trailing slashes but if we're using this proxy route to a domain that requires trailing
@@ -21,13 +24,16 @@ const proxyMiddleware = createProxyMiddleware({
         }
         return path.replace(/^\/api\/external-resource-proxy\/[^/]+\//, "/")
     },
-    onProxyRes: responseInterceptor(async(responseBuffer, proxyRes, req, res) => {
+    onProxyRes: responseInterceptor((responseBuffer, proxyRes, req, res) => {
+        console.log("got response")
         const hasPrefix = res.getHeader("location")?.startsWith("/api/external-resource-proxy/")
         if (!hasPrefix) {
+            console.log("trying to set header")
             res.setHeader(
                 "location",
                 `/api/external-resource-proxy/${encodeURIComponent(req.query.origin)}${res.getHeader("location")}`
             );
+            console.log("set header")
         }
     }),
 });

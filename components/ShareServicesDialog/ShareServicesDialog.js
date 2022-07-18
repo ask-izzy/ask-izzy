@@ -14,8 +14,6 @@ import storage from "@/src/storage";
 type Props = {
     onCloseRequested: () => void,
     services: Array<Service>,
-    title?: string,
-    viaIzzyDescription?: string,
 }
 
 type ScreenNames = "Directly" | "Via Ask Izzy" | "No services"
@@ -23,31 +21,14 @@ type ScreenNames = "Directly" | "Via Ask Izzy" | "No services"
 function ShareServicesDialog({
     onCloseRequested,
     services,
-    title,
-    viaIzzyDescription,
 }: Props): React.Node {
     const [screenName, setScreenName] = React.useState<ScreenNames>(
         services.length ? "Directly" : "No services"
     )
 
-    const userIsServiceWorker = storage.getItem("who-is-looking-for-help") === "User Worker"
+    const isSingleService = services.length === 1
 
-    if (!title) {
-        if (services.length === 1) {
-            title = "Share service"
-        } else {
-            title = "Share services"
-        }
-    }
-
-    if (!viaIzzyDescription) {
-        if (userIsServiceWorker) {
-            viaIzzyDescription = `Share service${services.length > 1 ? "s" : ""} using Ask Izzy's messaging service.`
-        } else {
-            viaIzzyDescription = `No data or credit? Share services free, via SMS or email directly from Ask Izzy.`
-        }
-
-    }
+    const title = isSingleService ? "Share this service" : "Share services"
 
     return (
         <Dialog
@@ -57,7 +38,7 @@ function ShareServicesDialog({
             {({titleProps}) => (
                 <div className="ShareServicesDialog">
                     <header>
-                        <h1 {...titleProps}>{title}</h1>
+                        <h1 {...titleProps}>{title}{isSingleService}</h1>
                         <Button
                             onClick={onCloseRequested}
                             className="close"
@@ -65,7 +46,7 @@ function ShareServicesDialog({
                             <span>&times;</span>
                         </Button>
                     </header>
-                    {renderScreen(screenName, {setScreenName, services, viaIzzyDescription})}
+                    {renderScreen(screenName, {setScreenName, services})}
                 </div>
             )}
         </Dialog>
@@ -84,7 +65,16 @@ function renderScreen(screenName: ScreenNames, args): ReactNode {
     }
 }
 
-function renderDirectlyScreen({services, setScreenName, viaIzzyDescription}) {
+function renderDirectlyScreen({services, setScreenName}) {
+    const userIsServiceWorker = storage.getItem("who-is-looking-for-help") === "User Worker"
+
+    let viaIzzyDescription
+    if (userIsServiceWorker) {
+        viaIzzyDescription = `Share service details using Ask Izzy's messaging service.`
+    } else {
+        viaIzzyDescription = `No data or credit? Share services free, via SMS or email directly from Ask Izzy.`
+    }
+
     return <>
         <ShareDirectlyOptions services={services} />
         <div className="highlighted-box">
