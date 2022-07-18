@@ -3,6 +3,7 @@ import * as yup from "yup";
 import {htmlEscape} from "escape-goat"
 
 import Service from "@/src/iss/Service"
+import {lookbehindIsSupported} from "@/helpers/regex.helpers.js"
 
 export type MessageType = "SMS" | "Email"
 
@@ -112,17 +113,49 @@ export async function getRequestType(request): Promise<MessageType | null> {
 }
 
 export function normalisePhoneNumber(phoneNumber: string): string {
+    // Remove this when regex lookbehinds are supported in all browsers we
+    // support.
+    if (!lookbehindIsSupported()) {
+        return phoneNumber
+            // $FlowIgnore flow is out of date and replaceAll exists
+            .replaceAll(/[ ()-]/g, "")
+            .replaceAll(
+                /[ ()-+]/g,
+                // If we match with a leading + then add that + back
+                (match, offset, all) => (
+                    match === "+" && offset === 0 ? match : ""
+                )
+            )
+            .replace(/^0/, "+61");
+    }
+
     return phoneNumber
+        // RegEx must be created via a string rather than a literal otherwise
+        // it will bork browsers that don't support lookbehinds even if those
+        // browsers never execute this line.
         // $FlowIgnore flow is out of date and replaceAll exists
-        .replaceAll(/(?:[ ()-]|(?<!^)\+)/g, "")
+        .replaceAll(new RegExp("(?:[ ()-]|(?<!^)\\+)", "g"), "")
         .replace(/^0/, "+61");
 }
 
 export function verifyPhoneNumber(phoneNumber: string): boolean {
+    let hasNonLeadingPlus = false
+
+    if (lookbehindIsSupported()) {
+        // RegEx must be created via a string rather than a literal otherwise
+        // it will bork browsers that don't support lookbehinds even if those
+        // browsers never execute this line.
+        hasNonLeadingPlus = phoneNumber.match(new RegExp("(?<!^\\s*)\\+", "g"))
+    } else {
+        // Remove this when regex lookbehinds are supported in all browsers we
+        // support.
+        hasNonLeadingPlus = phoneNumber.match(/^\s*\+/g)?.length !== phoneNumber.match(/\s*\+/g)?.length
+    }
+
     // Phone number should only have numbers, separating chars, or and leading +
     if (
         phoneNumber.match(/[^0-9+ ()-]/g) ||
-        phoneNumber.match(/(?<!^\s*)\+/g)
+        hasNonLeadingPlus
     ) {
         return false;
     }
