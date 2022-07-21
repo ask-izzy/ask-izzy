@@ -72,7 +72,6 @@ $lightness-button-hover: 10%;
     /* Backgrounds */
 
     @include colours.define('colour-bg-standard', 'global', 'raw-colour-pure-white');
-    @include colours.define('colour-bg-gray', 'global', 'raw-colour-warm-gray');
     @include colours.define(
         'colour-bg-standard-tint-1',
         'global',
@@ -114,6 +113,11 @@ $lightness-button-hover: 10%;
     /* Borders */
     @include colours.define('colour-border-list-item', 'global', 'raw-colour-warm-white');
     @include colours.define('colour-border-list-item-dark', 'global', 'raw-colour-slate-gray');
+    @include colours.define(
+        'colour-border-list-item-mid',
+        'global',
+        colours.lighten('raw-colour-pure-white', 'global', -54%)
+    );
     @include colours.define('colour-border-list-item-gray', 'global', 'raw-colour-warm-gray');
     @include colours.define('colour-border-standard-callout', 'global', 'colour-brand-primary');
     @include colours.define(

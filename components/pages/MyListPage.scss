@@ -66,9 +66,10 @@
 
         .clear-all {
             border: 0;
+            font-weight: bolder;
             background-color: transparent;
-            color: #{colours.get-static('colour-text-dark')};
-            color: var(--colour-text-dark);
+            color: #{colours.get-static('colour-text-mid')};
+            color: var(--colour-text-mid);
         }
 
         .Spacer {
@@ -109,16 +110,11 @@
     }
 
     .my-list-results-container {
-        background-color: #{colours.get-static('colour-bg-gray')};
-        background-color: var(--colour-bg-gray);
-
         .save-list {
             text-align: center;
             padding: 15px;
 
             &.top {
-                background-color: #{colours.get-static('colour-bg-gray')};
-                background-color: var(--colour-bg-gray);
                 color: #{colours.get-static('colour-text-dark')};
                 color: var(--colour-text-dark);
 
@@ -168,6 +164,9 @@
     }
 
     .information-container {
+        color: #{colours.get-static('colour-text-dark')};
+        color: var(--colour-text-dark);
+        
         .information-text {
             text-align: center;
             padding: 0 60px;
