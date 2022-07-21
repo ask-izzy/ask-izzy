@@ -27,7 +27,7 @@ export default function ToastMessageMyList({
     const [message, setMessage] = useState<string>("")
     const [typeOfFunction, setTypeOfFunction] = useState<string>("")
     const [actionDescriptor, setActionDescriptor] = useState<ReactNode>(<></>)
-    const [addedServiceSignal, setAddedServiceSignal] = useState<boolean>(false)
+    const [servicesChangedSignal, setServicesChangedSignal] = useState<boolean>(false)
     const [myListCache, setMyListCache] = useState<myListObjType>({})
     // ref is to fix the stale closure issue
     // caused by updateServices callback
@@ -47,10 +47,10 @@ export default function ToastMessageMyList({
     }, [myListCache])
 
     useEffect(() => {
-        if (addedServiceSignal) {
-            setAddedServiceSignal(false)
+        if (servicesChangedSignal) {
+            setServicesChangedSignal(false)
         }
-    }, [addedServiceSignal])
+    }, [servicesChangedSignal])
 
     const jsonStorageObj = "my-list-services"
 
@@ -81,13 +81,13 @@ export default function ToastMessageMyList({
             const storageLength = Object.keys(myList).length
             if (isAdd && storageLength > cacheLength) {
                 // service was added to my list
-                setAddedServiceSignal(true)
+                setServicesChangedSignal(true)
                 setMessage("Service added to your list")
                 setActionDescriptor(actionDescriptorAdd)
                 setTypeOfFunction("add")
             } else if (isUndo && storageLength < cacheLength) {
                 // service was removed from my list
-                setAddedServiceSignal(true)
+                setServicesChangedSignal(true)
                 const curMessage = cacheLength - storageLength > 1 ?
                     "Services removed"
                     : "Service removed"
@@ -109,7 +109,7 @@ export default function ToastMessageMyList({
     return (
         <div className="ToastMessageMyList">
             <ToastMessage
-                open={addedServiceSignal}
+                open={servicesChangedSignal}
                 onClick={() => {
                     if (typeOfFunction === "add") {
                         onClickAdd()

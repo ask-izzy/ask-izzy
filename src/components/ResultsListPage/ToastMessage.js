@@ -30,10 +30,10 @@ export default function ToastMessage({
 
     useEffect(() => {
         if (open) {
-            clearTimeout(focusTimer)
             setIsOpen(true)
+            clearTimeout(focusTimer)
             setFocus()
-            // toast message stops autoclose timer
+            // toast message stops autoclose-timer
             // after losing focus, so timeout is necessary
             setFocusTimer(setTimeout(
                 () => setIsOpen(false), autoHideDuration
@@ -82,7 +82,6 @@ export default function ToastMessage({
         <div className="ToastMessage">
             <Snackbar
                 open={isOpen}
-                onClose={() => setIsOpen(false)}
                 message={message}
                 action={action}
                 anchorOrigin={{vertical: "bottom", horizontal: "center"}}
