@@ -142,9 +142,7 @@ function MyListPage(): ReactNode {
                 <div className="information-text">
                     <h2>How long will services stay in My List?</h2>
                     <div>
-                        Services will be kept here for XXXXX. If you clear
-                        your browsing history the services from My List will
-                        be removed.
+                        Services will be kept here until you remove them or your browsing history is cleared.
                     </div>
                     <br/>
                     <div>
