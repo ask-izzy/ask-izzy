@@ -171,6 +171,11 @@ $lightness-button-hover: 10%;
         'global',
         'raw-colour-pure-white'
     );
+    @include colours.define(
+        'colour-text-brand',
+        'global',
+        'colour-brand-primary'
+    );
     @include colours.define('colour-text-highlight', 'global', 'colour-brand-primary');
 
     @include colours.define(
