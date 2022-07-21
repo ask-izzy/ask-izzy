@@ -23,13 +23,13 @@
         .RemoveFromCompareIcon {
             &.has-no-text {
                 rect {
-                    stroke: #{colours.get-static('colour-border-list-item-dark')};
-                    stroke: var(--colour-border-list-item-dark);
+                    stroke: #{colours.get-static('colour-border-list-item-mid')};
+                    stroke: var(--colour-border-list-item-mid);
                 }
 
                 line {
-                    stroke: #{colours.get-static('colour-border-list-item-dark')};
-                    stroke: var(--colour-border-list-item-dark);
+                    stroke: #{colours.get-static('colour-border-list-item-mid')};
+                    stroke: var(--colour-border-list-item-mid);
                 }
             }
         }

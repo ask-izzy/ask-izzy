@@ -1,8 +1,8 @@
 @use '../styles/mixins/colours';
 
 .MyListResults {
-    background-color: #{colours.get-static('colour-bg-gray')};
-    background-color: var(--colour-bg-gray);
+    background-color: #{colours.get-static('colour-bg-standard-tint-2')};
+    background-color: var(--colour-bg-standard-tint-2);
     min-height: 73vh;
     display: flex;
     flex-direction: column;
