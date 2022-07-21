@@ -155,7 +155,6 @@ function MyListPage(): ReactNode {
                         services={selectedServices}
                     />
                 </div>
-                {renderSaveList("bottom")}
             </div>
 
         )
@@ -203,7 +202,7 @@ function MyListPage(): ReactNode {
                         results={myListObj}
                         resultsLoading={isLoading}
                         travelTimesStatus={"loaded"}
-                        extraInformation = {renderSaveList}
+                        extraInformation = {() => null}
                     >
                         {renderInformationText()}
                     </MyListResults>
