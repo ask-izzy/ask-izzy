@@ -18,45 +18,6 @@ APP_NEXT_DIR="/app/.next"
 APP_NEXT_CACHE_DIR="$APP_NEXT_DIR/cache"
 BUILD_COMPLETE_FILE="$STORAGE_BUILD_DIR/.build-complete"
 
-# If a deploy fails before a build completes it is possible to get into the
-# circumstance where re-deploying that same image will result in a deadlock.
-# If this occurs it must be resolved manually by setting the BUILD_CACHE_CLEAR_KEY
-# env var which will ensure the previous failed build is removed before continuing.
-
-BUILD_CACHE_CLEAR_KEY="${BUILD_CACHE_CLEAR_KEY:-}"
-if [ -n "$BUILD_CACHE_CLEAR_KEY" ]; then
-    CLEAR_PREV_BUILD_STARTED_DIR="/storage/$VERSION-$BUILD_CACHE_CLEAR_KEY"
-    CLEAR_PREV_BUILD_FINISHED_FILE="/$CLEAR_PREV_BUILD_STARTED_DIR/finished"
-
-    CREATE_CLEAR_PREV_BUILD_STARTED_DIR_LOG=$(mkdir "$CLEAR_PREV_BUILD_STARTED_DIR" 2>&1) \
-        && CREATE_CLEAR_PREV_BUILD_STARTED_DIR_EXIT_STATUS=$? \
-        || CREATE_CLEAR_PREV_BUILD_STARTED_DIR_EXIT_STATUS=$?
-
-    if [ $CREATE_CLEAR_PREV_BUILD_STARTED_DIR_EXIT_STATUS -eq 0 ]; then
-        if [ -d "$STORAGE_BUILD_DIR" ]; then
-            echo "Removing previous build"
-            rm -r "$STORAGE_BUILD_DIR"
-            echo "Finished removing previous build"
-        else
-            echo "Previous build doesn't exist, no need to remove. You can unset the BUILD_CACHE_CLEAR_KEY env var to stop this message showing up."
-        fi
-        touch "$CLEAR_PREV_BUILD_FINISHED_FILE"
-    else
-        if [ ! -d "$CLEAR_PREV_BUILD_STARTED_DIR" ]; then
-            echo "CLEAR_PREV_BUILD_STARTED_DIR doesn't exist but got this error when trying to create one:" 1>&2
-            echo "$CREATE_CLEAR_PREV_BUILD_STARTED_DIR_LOG" 1>&2
-            exit 1
-        fi
-        if [ ! -f "$CLEAR_PREV_BUILD_FINISHED_FILE" ]; then
-            echo "It appears another container is currently removing a state build. If this hangs try redeploying with a different env var BUILD_CACHE_CLEAR_KEY value."
-        fi
-        while [ ! -f "$CLEAR_PREV_BUILD_FINISHED_FILE" ]; do
-            sleep 1
-        done
-        echo "The other container has finished removing the previous build"
-    fi
-fi
-
 # The first container that attempts to create the build dir is responsible for building.
 # If the build dir creation fails it means another container has already claimed that job
 # so we just wait until it's done.
@@ -114,15 +75,5 @@ else
     while [ ! -f "$BUILD_COMPLETE_FILE" ]; do
         sleep 1
     done
-    cp -a "$STORAGE_COPY_OF_NEXT_DIR" "$APP_NEXT_DIR"
+    echo "The container responsible for building has signalled it is finished."
 fi
-
-# This is intended as an interim solution. Ideally we wouldn't mess with
-# individual items inside the .next directory. But at the moment the IX
-# hosting infrastructure doesn't support changing the mount location
-# of the static/storage volumes and we can't symlink the whole .next
-# dir to the static/storage mounts since next.js freaks out. But we can
-# symlink just the cache dir inside the .next dir and that *seems* to
-# work okay.
-
-ln -s "$STORAGE_NEXT_CACHE_DIR" "$APP_NEXT_CACHE_DIR"
