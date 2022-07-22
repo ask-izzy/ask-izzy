@@ -6,7 +6,7 @@ services:
       context: .
       args:
         - VERSION=emulated-production
-    command: "serve"
+    command: "shell bash -c 'yarn run deploy && yarn run serve'"
     environment:
       STATIC_PAGE_REGENERATION_SECRET: "hunter2"
       STATIC_PAGE_PREVIEW_SECRET: "hunter2"
