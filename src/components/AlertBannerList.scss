@@ -3,12 +3,21 @@
 .AlertBannerList {
     margin-top: 0.5em;
 
+    .alert-container {
+        overflow: hidden;
+        margin: 15px;
+        margin-top: 13px;
+    }
+
     .AlertBannerButton {
         background-color: #{colours.get-static('colour-bg-alert')};
         background-color: var(--colour-bg-alert);
         border-radius: 4px;
-        padding: 6px 13px;
+        padding: 10px 20px;
+        margin-top: 4px;
+        margin-right: 15px;
         border: 0;
+        font-size: 18px;
 
         .InfoIcon {
             width: 40px;
@@ -27,23 +36,20 @@
         display: flex;
         align-items: center;
         justify-content: space-between;
-        min-height: 60px;
-        padding: 0 1em;
+        padding: 0 0 0 1em;
         background-color: #{colours.get-static('colour-bg-alert')};
         background-color: var(--colour-bg-alert);
-        border-radius: 10px 10px 0 0;
+        border-radius: 4px 4px 0 0;
 
         .AlertListTitle {
             display: flex;
             align-items: center;
 
             .icon {
-                margin: 0 0.4em;
-
                 .InfoIcon {
-                    width: 47px;
-                    height: 47px;
-                    margin: -8.5px;
+                    width: 40px;
+                    height: auto;
+                    margin: -8px -7px -13px -13px;
                 }
             }
 
@@ -57,24 +63,38 @@
             margin-right: 7px;
             border: 0;
             background-color: transparent;
+            overflow: hidden;
+            width: 20px;
+
+            .icon {
+                .CrossIcon {
+                    width: 55px;
+                    height: auto;
+                    margin: -7px -12px -12px -27px;
+                }
+            }
         }
     }
 
-    > ul {
+    ul {
         padding-left: 0;
-        margin: 0.8em;
+        margin: 0;
         border: #{colours.get-static('colour-border-list-item-gray')} solid 1px;
         border: var(--colour-border-list-item-gray) solid 1px;
-        border-radius: 10px;
+        border-radius: 5px;
 
         > li {
             list-style-type: none;
             text-align: left;
+            border-bottom: #{colours.get-static('colour-border-list-item-gray')} solid 1px;
+            border-bottom: var(--colour-border-list-item-gray) solid 1px;
 
             &:last-child {
+                border-bottom: 0;
+                border-radius: 0 0 4px 4px;
+
                 .AlertBanner {
-                    border-bottom: 0;
-                    border-radius: 0 0 10px 10px;
+                    border-radius: 0 0 4px 4px;
                 }
             }
         }

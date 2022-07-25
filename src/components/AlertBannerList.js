@@ -5,6 +5,7 @@ import { useQuery } from "@apollo/client";
 import classnames from "classnames";
 
 import AlertBanner from "./AlertBanner";
+import Cross from "../icons/Cross"
 import StrapiMarkdown from "./StrapiMarkdown";
 import Link from "./base/Link";
 import Info from "./../icons/Info";
@@ -23,7 +24,7 @@ export default function AlertBannerList({
     screenLocation,
     format,
 }: Props): React.Node {
-    const [isCollapsed, setIsCollapsed] = useState(true)
+    const [isCollapsed, setIsCollapsed] = useState<boolean>(true)
 
     const { loading, error, data } = useQuery(alertsQuery, {
         variables: {
@@ -31,7 +32,7 @@ export default function AlertBannerList({
             screenLocation,
         },
     });
-    useEffect(checkCollapsedStatus, [data]);
+    useEffect(checkCollapsedStatus, [data])
 
     if (loading) {
         return null;
@@ -92,8 +93,11 @@ export default function AlertBannerList({
         }
     }
 
-    function onCollapseButtonClick(event: SyntheticEvent<HTMLButtonElement>) {
+    function onCollapseButtonClick(
+        event: SyntheticEvent<HTMLButtonElement>
+    ) {
         setIsCollapsed(!isCollapsed)
+
     }
 
     return (
@@ -104,23 +108,27 @@ export default function AlertBannerList({
                     format
                 )}
             >
-                {isCollapsed &&
-                <Button
-                    alt="Alert List"
-                    className="AlertBannerButton"
-                    onClick={onCollapseButtonClick}
-                >
-                    <div className="AlertBannerContent">
-                        <Info/>
-                        {alerts.length}
-                    </div>
-                </Button>
+                {
+                    isCollapsed &&
+                    <Button
+                        alt="Alert List"
+                        className="AlertBannerButton"
+                        onClick={onCollapseButtonClick}
+                    >
+                        <div className="AlertBannerContent">
+                            <Info/>
+                            {alerts.length}
+                        </div>
+                    </Button>
                 }
-                {!isCollapsed &&
-                <ul aria-label="Alerts">
-                    {renderAlertListTitle()}
-                    {alerts.map(renderAlert)}
-                </ul>
+                {
+                    !isCollapsed &&
+                    <div className="alert-container">
+                        <ul aria-label="Alerts">
+                            {renderAlertListTitle()}
+                            {alerts.map(renderAlert)}
+                        </ul>
+                    </div>
                 }
             </div>
         ) : null
@@ -147,19 +155,23 @@ export default function AlertBannerList({
                     <Info />
                     <span className="text">
                         {
-                            `${alerts.length} Notification${alerts.length > 1 ?
-                                "s" : ""}`
+                            `${alerts.length} Notification${
+                                alerts.length > 1 ?
+                                    "s" : ""
+                            }`
                         }
                     </span>
 
                 </span>
-                <Button
-                    className="DismissAlertList"
-                    alt="Dismiss Alert List"
-                    onClick={onCollapseButtonClick}
-                >
-                    X
-                </Button>
+                {
+                    <Button
+                        className="DismissAlertList"
+                        alt="Dismiss Alert List"
+                        onClick={onCollapseButtonClick}
+                    >
+                        <Cross />
+                    </Button>
+                }
             </li>
         )
     }
