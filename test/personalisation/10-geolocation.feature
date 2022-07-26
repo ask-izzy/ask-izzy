@@ -67,13 +67,11 @@ Feature: Geolocation
         -------------------------------------------
         And the button "Next" should be disabled
 
-        When I show the mouse cursor
         When I click the "Carlton, VIC" dropdown option
         Then search box should contain "Carlton, VIC"
         And the button "Next" should be enabled
 
         When I click the "×" button
-        When I search for blank
         When I click the "Get your location" button
         Then I should see "Found your location"
         And search box should contain "Richmond, VIC"
