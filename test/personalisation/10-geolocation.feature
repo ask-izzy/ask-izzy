@@ -67,7 +67,6 @@ Feature: Geolocation
         -------------------------------------------
         And the button "Next" should be disabled
 
-        When I show the mouse cursor
         When I click the "Carlton, VIC" dropdown option
         Then search box should contain "Carlton, VIC"
         And the button "Next" should be enabled
