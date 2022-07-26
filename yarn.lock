@@ -3576,6 +3576,13 @@ JSV@^4.0.x:
   resolved "https://registry.npmjs.org/JSV/-/JSV-4.0.2.tgz#d077f6825571f82132f9dffaed587b4029feff57"
   integrity sha1-0Hf2glVx+CEy+d/67Vh7QCn+/1c=
 
+a11y-dialog@^7.1.0:
+  version "7.5.0"
+  resolved "https://registry.yarnpkg.com/a11y-dialog/-/a11y-dialog-7.5.0.tgz#1540627b18e3b1e266e0dcbdb5d1e7ac52079fe1"
+  integrity sha512-UF7cy4lfZQtvjRV5N4xdWFba+Pb1qW6FPp0p58dLjMTJ4PwIGGekTbmqUt3etBBRo9HbTqhlNsXQhzIuXeJpng==
+  dependencies:
+    focusable-selectors "^0.3.1"
+
 abbrev@1:
   version "1.1.1"
   resolved "https://registry.npmjs.org/abbrev/-/abbrev-1.1.1.tgz#f8f2c887ad10bf67f634f005b6987fed3179aac8"
@@ -7235,6 +7242,11 @@ focus-within-polyfill@^5.2.1:
   version "5.2.1"
   resolved "https://registry.npmjs.org/focus-within-polyfill/-/focus-within-polyfill-5.2.1.tgz#bea7ed0689516ef76f3f226a7a66399ce5c45789"
   integrity sha512-24dSGm2euJ0V+blff5Yj0IXtemjjGIoT6/OjmvICZ80NIgnyXDpthfxdkJAJWCDs0BaUvdB+2RParJ9b7X4EuQ==
+
+focusable-selectors@^0.3.1:
+  version "0.3.1"
+  resolved "https://registry.yarnpkg.com/focusable-selectors/-/focusable-selectors-0.3.1.tgz#7eacbca8dc6cc8d7f7563e5f5cc3699b91e20aaa"
+  integrity sha512-5JLtr0e1YJIfmnVlpLiG+av07dd0Xkf/KfswsXcei5KmLfdwOysTQsjF058ynXniujb1fvev7nql1x+CkC5ikw==
 
 follow-redirects@^1.0.0, follow-redirects@^1.14.0:
   version "1.15.0"
@@ -11872,6 +11884,13 @@ rc@^1.2.8:
     ini "~1.3.0"
     minimist "^1.2.0"
     strip-json-comments "~2.0.1"
+
+react-a11y-dialog@^6.1.5:
+  version "6.1.5"
+  resolved "https://registry.yarnpkg.com/react-a11y-dialog/-/react-a11y-dialog-6.1.5.tgz#dd9355db1cad592a44fb1e3cc80a9e9b7e834a2c"
+  integrity sha512-m27GkGWPveioXJ/0sqQ24JMuqK/ZWR1tHpDfLy5luZjc9koaebp/kXSZrvczNP/Pjgrj6UAJIhYdH5NDjwg+bQ==
+  dependencies:
+    a11y-dialog "^7.1.0"
 
 react-colorful@^5.1.2:
   version "5.5.1"
