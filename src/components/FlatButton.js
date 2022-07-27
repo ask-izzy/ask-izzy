@@ -1,4 +1,7 @@
 /* @flow */
+// !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+// ! WARNING: FlatButton is deprecated. Use StandardButton instead. !
+// !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
 import type {Element as ReactElement} from "React";
 import React, {useState} from "react";
