@@ -83,7 +83,10 @@ function GeolocationButton({
     }
 
     async function onGeolocationClick(event): Promise<void> {
-        event.stopPropagation()
+        if (event) {
+            event.stopPropagation()
+        }
+
         if (status.type !== "NOT_STARTED") {
             return;
         }

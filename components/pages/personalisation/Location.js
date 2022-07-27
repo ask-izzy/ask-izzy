@@ -239,7 +239,6 @@ class Location extends React.Component<Props, State> {
         const matchingAutocomplete = this.state.autocompletions.find(
             area => `${area.name}, ${area.state}` === newValue
         )
-        console.log("----", newValue, this.state.autocompletions)
         if (matchingAutocomplete) {
             return this.selectAutocomplete(matchingAutocomplete)
         }
@@ -415,6 +414,7 @@ class Location extends React.Component<Props, State> {
                                             ""
                                             : "Press enter to get your location."
                                     }
+                                    loadingResults={this.state.gettingAutocompletionsInProgress}
                                     autocompleteValues={
                                         this.state.autocompletions
                                             .map(location => ({

@@ -28,6 +28,7 @@ type Props = {
     onKeyDown?: (SyntheticKeyboardEvent<HTMLInputElement>) => void,
     onBlur?: (SyntheticFocusEvent<HTMLInputElement>) => void,
     onFocus?: (SyntheticFocusEvent<HTMLInputElement>) => void,
+    loadingResults?: boolean,
 }
 
 type refType = { current: null | HTMLInputElement } |
@@ -41,8 +42,9 @@ function InputWithDropdown({
     showClearButton = false,
     initialSuggestions = [],
     onInitialSuggestionsSelected = () => {},
-    initialSuggestionsA11yStatusMessage,
+    initialSuggestionsA11yStatusMessage = "",
     autocompleteValues = [],
+    loadingResults = false,
     ...otherProps
 }: Props, ref: ?refType): ReactNode {
     //previousAutocompleteLength is used to solve regression AI-41 caused by
@@ -203,16 +205,19 @@ function InputWithDropdown({
             return ""
         }
 
-        if (initialSuggestionsA11yStatusMessage && showInitialSuggestions) {
+        if (showInitialSuggestions) {
             return initialSuggestionsA11yStatusMessage
         }
 
+        if (resultCount === previousAutocompleteLength[0] || loadingResults) {
+            return ""
+        }
 
-        if (!resultCount && resultCount !== previousAutocompleteLength[0]) {
+        if (resultCount == 0 && autocompleteValues.length === 0) {
             return "No results are available."
         }
 
-        if (resultCount !== previousAutocompleteLength[0]) {
+        if (resultCount != 0 && autocompleteValues.length !== 0) {
             setPreviousAutocompleteLength(
                 [previousAutocompleteLength[1], autocompleteValues.length]
             )
