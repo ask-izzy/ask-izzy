@@ -16,6 +16,7 @@ import "@/src/utils/page-loading"
 import apolloClient from "@/src/utils/apolloClient";
 import usePageViewAnalytics from "@/hooks/usePageViewAnalytics";
 import useFocusOnHeader from "@/hooks/useFocusOnHeader";
+import DebugColours from "@/src/components/DebugColours"
 import {
     addPageLoadDependencies,
     closePageLoadDependencies,
@@ -64,6 +65,7 @@ function App(appProps: AppProps): ReactNode {
         <ApolloProvider client={apolloClient}>
             <DebugModeProvider>
                 {renderHeadMetadata(pageInfo, router)}
+                <DebugColours />
                 <div className="BasePage">
                     <Component {...pageProps} />
                 </div>
