@@ -165,6 +165,7 @@ test-mocha-unit:
 deploy:
   stage: Deploy
   script:
+    - docker pull $TAG_DISTRIBUTION_STAGE
     - docker tag $TAG_DISTRIBUTION_STAGE $TAG_PRODUCTION
     - docker push $TAG_PRODUCTION
     - echo "The production image tag is $TAG_PRODUCTION"
