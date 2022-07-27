@@ -6,6 +6,8 @@ services:
       context: .
       target: development
     environment:
+      SITE_PROTOCOL: "http"
+      SITE_DOMAIN: "localhost"
       PAUSE_AFTER_FAIL: 1
       STATIC_PAGE_REGENERATION_SECRET: "hunter2"
       STATIC_PAGE_PREVIEW_SECRET: "hunter2"
