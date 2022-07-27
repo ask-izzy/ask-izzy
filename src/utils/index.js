@@ -45,7 +45,7 @@ export const getFullPageTitle = (
     }
 
     if (params?.search) {
-        pageTitleArr.push(`Search "${titleize(params.search)}"`);
+        pageTitleArr.push(`Search "${titleize(decodeURIComponent(params.search))}"`);
     } else if (category?.name) {
         pageTitleArr.push(category.name);
     } else if (title) {
@@ -79,7 +79,9 @@ export const getFullPageTitle = (
                 pageTitleArr.push(`in ${Storage.getSearchArea()}`)
             }
         } else {
-            pageTitleArr.push(`in ${params?.suburb}, ${params?.state}`)
+            pageTitleArr.push(
+                `in ${decodeURIComponent(params?.suburb)}, ${decodeURIComponent(params?.state)}`
+            )
         }
     }
 
