@@ -118,12 +118,13 @@ test-mocha-personalisation:
   needs: ['build-development']
   script:
     - CONTAINER_ID=$(docker create -t $TAG_DEVELOPMENT_STAGE with --test-env --built --mocks test-mocha-personalisation)
-    - docker start -a "$CONTAINER_ID"; exitCode=$?; true
+    - docker start -a "$CONTAINER_ID" && exitCode=$? || exitCode=$?
     - docker cp "$CONTAINER_ID:/app/testing-screenshots" testing-screenshots || true
-    - exit $?
+    - exit $exitCode
   artifacts:
     paths:
       - testing-screenshots
+    when: on_failure
     expire_in: 1 week
 
 test-mocha-features:
@@ -131,12 +132,13 @@ test-mocha-features:
   needs: ['build-development']
   script:
     - CONTAINER_ID=$(docker create -t $TAG_DEVELOPMENT_STAGE with --test-env --built --mocks test-mocha-features)
-    - docker start -a "$CONTAINER_ID"; exitCode=$?; true
+    - docker start -a "$CONTAINER_ID" && exitCode=$? || exitCode=$?
     - docker cp "$CONTAINER_ID:/app/testing-screenshots" testing-screenshots || true
-    - exit $?
+    - exit $exitCode
   artifacts:
     paths:
       - testing-screenshots
+    when: on_failure
     expire_in: 1 week
 
 test-mocha-maps:
@@ -144,12 +146,13 @@ test-mocha-maps:
   needs: ['build-development']
   script:
     - CONTAINER_ID=$(docker create -t $TAG_DEVELOPMENT_STAGE with --test-env --built --mocks test-mocha-maps)
-    - docker start -a "$CONTAINER_ID"; exitCode=$?; true
+    - docker start -a "$CONTAINER_ID" && exitCode=$? || exitCode=$?
     - docker cp "$CONTAINER_ID:/app/testing-screenshots" testing-screenshots || true
-    - exit $?
+    - exit $exitCode
   artifacts:
     paths:
       - testing-screenshots
+    when: on_failure
     expire_in: 1 week
 
 test-mocha-unit:
