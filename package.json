@@ -120,6 +120,7 @@
     "react": "^17.0.0",
     "react-a11y-dialog": "^6.1.5",
     "react-dom": "^17.0.0",
+    "react-hook-form": "^7.33.1",
     "react-markdown": "5.0.2",
     "react-mixin": "4.0.0",
     "remark-gfm": "1.0.0",
