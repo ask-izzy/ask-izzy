@@ -109,10 +109,6 @@ class ResultsPage<ChildProps = {...}, ChildState = {...}>
             getPersonalisationNextPath({router})
 
         if (pathWithPersonalisationIfNeeded !== router.asPath) {
-            closePageLoadDependencies(
-                router.asPath,
-                "resultsLoad"
-            )
             router.replace(pathWithPersonalisationIfNeeded)
             return
         }
