@@ -9,7 +9,7 @@ stages:
 
 default:
   before_script:
-    - VERSION=$(git describe) && echo $VERSION
+    - VERSION=$(git describe | sed 's/-g/-/') && echo $VERSION
     - TAG_DEVELOPMENT_STAGE=${DOCKER_REPO}:$VERSION-dev && echo $TAG_DEVELOPMENT_STAGE
     - TAG_DISTRIBUTION_STAGE=${DOCKER_REPO}:$VERSION-dist && echo $TAG_DISTRIBUTION_STAGE
     - TAG_PRODUCTION=${DOCKER_REPO}:$VERSION && echo $TAG_PRODUCTION
@@ -22,9 +22,11 @@ build-development:
   script:
     - docker --version
     - 'echo Cache: $([ -n "$DISABLE_CACHE" ] && echo disabled || echo enabled)'
+    - TAG_CACHE_MAIN_BRANCH_DEV_STAGE=${DOCKER_REPO}:cache-$CI_DEFAULT_BRANCH-dev
     - time docker build
       $([ -n "$DISABLE_CACHE" ] && echo --no-cache)
       --cache-from $TAG_CACHE_DEV_STAGE
+      --cache-from $TAG_CACHE_MAIN_BRANCH_DEV_STAGE
       --build-arg BUILDKIT_INLINE_CACHE=1
       --build-arg VERSION=$VERSION
       -t $TAG_DEVELOPMENT_STAGE
@@ -41,9 +43,12 @@ build-distribution:
   script:
     - docker --version
     - 'echo Cache: $([ -n "$DISABLE_CACHE" ] && echo disabled || echo enabled)'
+    - TAG_CACHE_MAIN_BRANCH_DIST_STAGE=${DOCKER_REPO}:cache-$CI_DEFAULT_BRANCH-dist
     - time docker build
-      $([ -n "$DISABLE_CACHE" ] || echo --cache-from $TAG_CACHE_DIST_STAGE)
-      $([ -n "$DISABLE_CACHE" ] || echo --cache-from $TAG_CACHE_DEV_STAGE)
+      $([ -n "$DISABLE_CACHE" ] && echo --no-cache)
+      --cache-from $TAG_CACHE_DIST_STAGE
+      --cache-from $TAG_CACHE_DEV_STAGE
+      --cache-from $TAG_CACHE_MAIN_BRANCH_DIST_STAGE
       --build-arg BUILDKIT_INLINE_CACHE=1
       --build-arg VERSION=$VERSION
       -t $TAG_DISTRIBUTION_STAGE
