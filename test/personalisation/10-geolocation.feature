@@ -11,11 +11,11 @@ Feature: Geolocation
         And google api geocode will return location name Richmond, VIC
         When I visit /housing/personalise/page/location
         Then I should see "Where are you looking for help?"
-        When I search for blank
+        When I clear the first search box
         And I should see "Get your location"
         And the button "Next" should be disabled
 
-        When I search for blank
+        When I clear the first search box
         When I click the "Get your location" button
         Then I should see "Locating you..."
 
@@ -29,7 +29,7 @@ Feature: Geolocation
         Given GPS will hang in the loading state
         When I visit /housing/personalise/page/location
 
-        When I search for blank
+        When I clear the first search box
         When I click the "Get your location" button
         Then I should see "Locating you..."
 
@@ -43,11 +43,11 @@ Feature: Geolocation
         Given GPS will hang in the loading state
         And google api geocode will return location name Richmond, VIC
         When I visit /housing/personalise/page/location
-        When I search for blank
+        When I clear the first search box
         And I should see "Get your location"
         And the button "Next" should be disabled
 
-        When I search for blank
+        When I clear the first search box
         When I click the "Get your location" button
         Then I should see "Locating you..."
 
@@ -73,7 +73,6 @@ Feature: Geolocation
         And the button "Next" should be enabled
 
         When I click the "×" button
-        When I search for blank
         When I click the "Get your location" button
         Then I should see "Found your location"
         And search box should contain "Richmond, VIC"
@@ -85,19 +84,19 @@ Feature: Geolocation
         And the button "Next" should be disabled
 
         When I reload the page
-        When I search for blank
+        When I clear the first search box
         Then I should see "Get your location"
         And search box should contain ""
         And the button "Next" should be disabled
 
-        When I search for blank
+        When I clear the first search box
         When I click the "Get your location" button
         Then I should see "Found your location"
         And search box should contain "Richmond, VIC"
         And the button "Next" should be enabled
 
         When I reload the page
-        When I search for blank
+        When I clear the first search box
         Then I should see "Get your location"
         And search box should contain ""
         And the button "Next" should be disabled
