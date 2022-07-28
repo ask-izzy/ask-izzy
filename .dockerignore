@@ -14,6 +14,8 @@ public/VERSION.txt
 testing-screenshots
 .githooks
 /public/storybook
+.editorconfig
+README.md
 docker-compose.yml
-docker-compose.emulate-production.yml
-storage
+docker-compose.*.yml
+docker-compose.*.yml.sample
