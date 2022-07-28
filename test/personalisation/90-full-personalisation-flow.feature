@@ -21,7 +21,7 @@ Feature: Personalisation
 
         When I click the "Myself" button
 
-        When I search for blank
+        When I clear the first search box
         When I click the "Get your location" button
 
         Given the GPS returns 37.823S 144.998E
@@ -55,7 +55,7 @@ Feature: Personalisation
         When I click the "Myself" button
         Then I should see "Where are you looking for help?"
 
-        When I search for blank
+        When I clear the first search box
         When I click the "Get your location" button
 
         Given the GPS returns 37.823S 144.998E
@@ -83,7 +83,7 @@ Feature: Personalisation
         When I click the "Myself" button
         Then I should see "Where are you looking for help?"
 
-        When I search for blank
+        When I clear the first search box
         When I click the "Get your location" button
 
         Given the GPS returns 37.823S 144.998E
