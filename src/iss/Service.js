@@ -27,7 +27,7 @@ export type ServiceProps = {
 }
 
 export default class Service {
-    constructor(props: ServiceProps) {
+    constructor(props: any) {
         const {location, ...remainingProps} = props
         if (location) {
             this.location = new AddressLocation(props.location);

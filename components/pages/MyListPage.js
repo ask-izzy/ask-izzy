@@ -17,12 +17,14 @@ import Spacer from "@/src/components/Spacer";
 import {getService} from "@/src/iss/load-services"
 import ToastMessageMyList from "@/src/components/ResultsListPage/ToastMessageMyList"
 import Service from "@/src/iss/Service"
+import ClearMyListDialog from "@/src/components/ClearMyListDialog"
 
 type myListObjType = {string: Object}
 
 function MyListPage(): ReactNode {
     const isMobile = MobileDetect(500)
     const [myListObj, setMyListObj] = useState<myListObjType>({})
+    const [openClearAllDialog, setOpenClearAllDialog] = useState<boolean>(false)
 
     const [isLoading, setIsLoading] = useState<boolean>(true)
     const [serviceCount, setServiceCount] = useState<number>(0)
@@ -225,11 +227,12 @@ function MyListPage(): ReactNode {
                 {isMobile && <Spacer />}
                 <div className={classnames("clear-all-container", {"mobile": isMobile})}>
                     <Button className={classnames("clear-all", {"mobile": isMobile})}
-                        onClick={() => {
-                            storage.setJSON(
-                                "my-list-services", {}
-                            )
-                        }}
+                        // onClick={() => {
+                        //     storage.setJSON(
+                        //         "my-list-services", {}
+                        //     )
+                        // }}
+                        onClick={() => {setOpenClearAllDialog(true), console.log("in")}}
                     >
                         Clear All
                     </Button>
@@ -262,6 +265,18 @@ function MyListPage(): ReactNode {
                 onClickUndo={undoLastChange}
                 isUndo={true}
             />
+            {
+                openClearAllDialog &&
+                <ClearMyListDialog
+                    onCloseRequested={() => setOpenClearAllDialog(false)}
+                    onClearMyList={() => {
+                            storage.setJSON(
+                                "my-list-services", {}
+                            ),
+                            setOpenClearAllDialog(false)
+                        }}
+                />
+            }
         </div>
     );
 }
