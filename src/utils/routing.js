@@ -252,7 +252,12 @@ export function getServicesPath({
 
 export function getPersonalisationNextPath(args: getServicesPathProps): string {
     const {router} = args
-    const currentPersonalisationPage = getCurrentPersonalisationPage(router)
+    const category = typeof args.category === "object" ?
+        args.category
+        : getCategory(args.category || "")
+    const currentPersonalisationPage = category && (category === getCategoryFromRouter(router)) ?
+        getCurrentPersonalisationPage(router)
+        : null
     const personalisationPagesToIgnore = currentPersonalisationPage ?
         [currentPersonalisationPage]
         : []
