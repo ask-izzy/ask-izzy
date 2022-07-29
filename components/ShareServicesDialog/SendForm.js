@@ -62,6 +62,7 @@ function SendForm({
         fromName: watch("fromName"),
         fromRole: watch("fromRole"),
         fromContactDetails: watch("fromContactDetails"),
+        messageType,
     })
 
     const onVerifyCaptcha = (token) => setValue("captchaCode", token);

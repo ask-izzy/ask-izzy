@@ -80,6 +80,7 @@ export default async function handler(req: any, res: any): any {
             fromName: body.fromName,
             fromRole: body.fromRole,
             fromContactDetails: body.fromContactDetails,
+            messageType: messageRequestType,
         })
 
         if (messageRequestType === "Email") {
@@ -88,7 +89,7 @@ export default async function handler(req: any, res: any): any {
                 "testing@infoxchange.net.au",
                 messageText.subject,
                 // $FlowIgnore flow is out of date and replaceAll exists
-                messageText.body.replaceAll("\n", "<br />")
+                messageText.body
             )
         } else {
             const phoneNumber = normalisePhoneNumber(body.toPhoneNumber)

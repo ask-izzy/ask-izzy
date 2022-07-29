@@ -14,11 +14,12 @@ type GetMessageProps = {
     fromName: ?string,
     fromRole: ?string,
     fromContactDetails: ?string,
+    messageType: MessageType,
 };
 
 // eslint-disable-next-line complexity
 export function getShareMessage(args: GetMessageProps): { subject: string, body: string } {
-    const {services, baseUrl} = args
+    const {services, baseUrl, messageType} = args
     const toName = args.toName && htmlEscape(args.toName)
     const fromName = args.fromName && htmlEscape(args.fromName)
     const fromRole = args.fromRole && htmlEscape(args.fromRole)
@@ -50,10 +51,19 @@ export function getShareMessage(args: GetMessageProps): { subject: string, body:
     if (fromContactDetails) {
         messageText += `\nContact details: ${fromContactDetails}`;
     }
-    messageText +=
-        `\n\nThis message was sent by a user of askizzy.org.au. If this message is offensive ` +
-        `please report it to ${process.env.NEXT_PUBLIC_SITE_EMAIL} and include the entire text of this ` +
-        `message since we don't store a copy for privacy reasons.`;
+    messageText += `\n\nThis message was sent by a user of askizzy.org.au. `
+    if (messageType === "Email") {
+        messageText += `If this message is offensive ` +
+            `please let us know by forwarding this email to ${process.env.NEXT_PUBLIC_SITE_EMAIL}. Make sure the ` +
+            `contents of this message is included as we don't store a copy of any sent messages for privacy reasons.`;
+
+    } else if (messageType === "SMS") {
+        messageText += `If this message is offensive ` +
+            `please report it to ${process.env.NEXT_PUBLIC_SITE_EMAIL} and include the entire text of this ` +
+            `message since we don't store a copy for privacy reasons.`;
+    } else {
+        throw Error(`Unknown message type: ${messageType}`)
+    }
 
     const subject = isPlural ?
         `${fromName || "[name of recipient]"} has shared some Ask Izzy services with you`
