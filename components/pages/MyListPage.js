@@ -16,6 +16,7 @@ import {MobileDetect} from "@/src/effects/MobileDetect";
 import Spacer from "@/src/components/Spacer";
 import {getService} from "@/src/iss/load-services"
 import ToastMessageMyList from "@/src/components/ResultsListPage/ToastMessageMyList"
+import Service from "@/src/iss/Service"
 
 type myListObjType = {string: Object}
 
@@ -41,8 +42,14 @@ function MyListPage(): ReactNode {
         return cleanup
     }, [])
 
+    const [selectedServices, setSelectedServices] = useState<Array<Service>>([])
+
     useEffect(() => {
         myListObjHelper.current = myListObj
+        setSelectedServices(
+            Object.values(myListObj)
+                .map(serviceData => new Service(serviceData))
+        )
     }, [myListObj])
 
     function subscribeToJsonChange() {
@@ -135,9 +142,7 @@ function MyListPage(): ReactNode {
                 <div className="information-text">
                     <h2>How long will services stay in My List?</h2>
                     <div>
-                        Services will be kept here for XXXXX. If you clear
-                        your browsing history the services from My List will
-                        be removed.
+                        Services will be kept here until you remove them or your browsing history is cleared.
                     </div>
                     <br/>
                     <div>
@@ -145,9 +150,11 @@ function MyListPage(): ReactNode {
                         yourself now?
                     </div>
                     <br/>
-                    <ShareButton hasTextDescription={true}/>
+                    <ShareButton
+                        hasTextDescription={true}
+                        services={selectedServices}
+                    />
                 </div>
-                {renderSaveList("bottom")}
             </div>
 
         )
@@ -195,7 +202,7 @@ function MyListPage(): ReactNode {
                         results={myListObj}
                         resultsLoading={isLoading}
                         travelTimesStatus={"loaded"}
-                        extraInformation = {renderSaveList}
+                        extraInformation = {() => null}
                     >
                         {renderInformationText()}
                     </MyListResults>
@@ -209,7 +216,10 @@ function MyListPage(): ReactNode {
             <div className={classnames("top-button-container", {"web": !isMobile})}>
                 <div className={classnames("count-container", {"mobile": isMobile})}>
                     {`${serviceCount} service${serviceCount > 1 ? "s" : ""} in your list`}
-                    {isMobile && <ShareButton hasTextDescription={true}/>}
+                    {isMobile && <ShareButton
+                        hasTextDescription={true}
+                        services={selectedServices}
+                    />}
                 </div>
 
                 {isMobile && <Spacer />}
@@ -223,7 +233,10 @@ function MyListPage(): ReactNode {
                     >
                         Clear All
                     </Button>
-                    {!isMobile && <ShareButton hasTextDescription={true}/>}
+                    {!isMobile && <ShareButton
+                        hasTextDescription={true}
+                        services={selectedServices}
+                    />}
                 </div>
             </div>
         )
