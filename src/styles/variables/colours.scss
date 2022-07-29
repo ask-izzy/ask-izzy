@@ -104,6 +104,12 @@ $lightness-button-hover: 10%;
         colours.lighten('colour-bg-highlight', 'global', -30%)
     );
 
+    @include colours.define(
+        'colour-bg-highlight-tint-2',
+        'global',
+        colours.lighten('colour-bg-highlight', 'global', -50%)
+    );
+
 
     /* Borders */
     @include colours.define('colour-border-list-item', 'global', 'raw-colour-warm-white');
@@ -166,4 +172,10 @@ $lightness-button-hover: 10%;
         'raw-colour-pure-white'
     );
     @include colours.define('colour-text-highlight', 'global', 'colour-brand-primary');
+
+    @include colours.define(
+        'colour-text-error',
+        'global',
+        colours.lighten('raw-colour-bright-red', 'global', 50%)
+    );
 }

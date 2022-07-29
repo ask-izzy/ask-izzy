@@ -1,0 +1,29 @@
+@use '../../src/styles/mixins/colours';
+
+.ShareDirectlyOptions {
+    // @include colours.define('colour-button-primary', 'global', 'colour-brand-primary');
+
+    $lightness-button-hover: 10%;
+
+    @include colours.define(
+        'colour-button-primary',
+        'global',
+        colours.lighten('raw-colour-pure-white', 'global', -80%)
+    );
+    @include colours.define(
+        'colour-button-primary-hover',
+        'global',
+        colours.lighten('colour-button-primary', 'global', 10%),
+    );
+
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+    margin: 1em;
+
+    .includeOtherDetails {
+        input {
+            margin-right: 0.5em;
+        }
+    }
+}
