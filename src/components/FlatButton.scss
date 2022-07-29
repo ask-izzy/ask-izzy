@@ -10,7 +10,47 @@
     font-size: 18px;
     font-weight: 400;
     line-height: 36px;
+    padding: 0 0.7em;
     -webkit-appearance: button;
+
+    svg {
+        height: 18px;
+        width: unset;
+
+        path {
+            fill: #{colours.get-static('colour-text-very-light')};
+            fill: var(--colour-text-very-light);
+        }
+    }
+
+    &.tint-1 {
+        background-color: #{colours.get-static('colour-bg-highlight-tint-1')};
+        background-color: var(--colour-bg-highlight-tint-1);
+
+        &:hover,
+        &:focus {
+            background-color: #{colours.get-static('colour-button-primary-hover')};
+            background-color: var(--colour-button-primary-hover);
+        }
+    }
+
+    &.tint-2 {
+        background-color: #{colours.get-static('colour-bg-standard')};
+        background-color: var(--colour-bg-standard);
+        color: #{colours.get-static('colour-text-highlight')};
+        color: var(--colour-text-highlight);
+
+        path {
+            fill: #{colours.get-static('colour-brand-primary')};
+            fill: var(--colour-brand-primary);
+        }
+
+        &:hover,
+        &:focus {
+            background-color: #{colours.get-static('colour-bg-standard-tint-3')};
+            background-color: var(--colour-bg-standard-tint-3);
+        }
+    }
 
     &:hover,
     &:focus {
