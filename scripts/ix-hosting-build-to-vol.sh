@@ -70,7 +70,7 @@ else
         exit 1
     fi
     if [ ! -f "$BUILD_COMPLETE_FILE" ]; then
-        echo "It appears a build is already in progress by a different container so waiting for that build to complete. If the process which created it has died before completing try redeploying with the env var BUILD_CACHE_CLEAR_KEY set to any unique value in order to purge the old build."
+        echo "It appears a build is already in progress by a different container so waiting for that build to complete."
     fi
     while [ ! -f "$BUILD_COMPLETE_FILE" ]; do
         sleep 1
