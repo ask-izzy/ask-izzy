@@ -9,7 +9,7 @@ stages:
 
 default:
   before_script:
-    - VERSION=$(git describe) && echo $VERSION
+    - VERSION=$(git describe | sed 's/-g/-/') && echo $VERSION
     - TAG_DEVELOPMENT_STAGE=${DOCKER_REPO}:$VERSION-dev && echo $TAG_DEVELOPMENT_STAGE
     - TAG_DISTRIBUTION_STAGE=${DOCKER_REPO}:$VERSION-dist && echo $TAG_DISTRIBUTION_STAGE
     - TAG_PRODUCTION=${DOCKER_REPO}:$VERSION && echo $TAG_PRODUCTION
@@ -22,9 +22,11 @@ build-development:
   script:
     - docker --version
     - 'echo Cache: $([ -n "$DISABLE_CACHE" ] && echo disabled || echo enabled)'
+    - TAG_CACHE_MAIN_BRANCH_DEV_STAGE=${DOCKER_REPO}:cache-$CI_DEFAULT_BRANCH-dev
     - time docker build
       $([ -n "$DISABLE_CACHE" ] && echo --no-cache)
       --cache-from $TAG_CACHE_DEV_STAGE
+      --cache-from $TAG_CACHE_MAIN_BRANCH_DEV_STAGE
       --build-arg BUILDKIT_INLINE_CACHE=1
       --build-arg VERSION=$VERSION
       -t $TAG_DEVELOPMENT_STAGE
@@ -41,9 +43,12 @@ build-distribution:
   script:
     - docker --version
     - 'echo Cache: $([ -n "$DISABLE_CACHE" ] && echo disabled || echo enabled)'
+    - TAG_CACHE_MAIN_BRANCH_DIST_STAGE=${DOCKER_REPO}:cache-$CI_DEFAULT_BRANCH-dist
     - time docker build
-      $([ -n "$DISABLE_CACHE" ] || echo --cache-from $TAG_CACHE_DIST_STAGE)
-      $([ -n "$DISABLE_CACHE" ] || echo --cache-from $TAG_CACHE_DEV_STAGE)
+      $([ -n "$DISABLE_CACHE" ] && echo --no-cache)
+      --cache-from $TAG_CACHE_DIST_STAGE
+      --cache-from $TAG_CACHE_DEV_STAGE
+      --cache-from $TAG_CACHE_MAIN_BRANCH_DIST_STAGE
       --build-arg BUILDKIT_INLINE_CACHE=1
       --build-arg VERSION=$VERSION
       -t $TAG_DISTRIBUTION_STAGE
@@ -113,12 +118,13 @@ test-mocha-personalisation:
   needs: ['build-development']
   script:
     - CONTAINER_ID=$(docker create -t $TAG_DEVELOPMENT_STAGE with --test-env --built --mocks test-mocha-personalisation)
-    - docker start -a "$CONTAINER_ID"; exitCode=$?; true
+    - docker start -a "$CONTAINER_ID" && exitCode=$? || exitCode=$?
     - docker cp "$CONTAINER_ID:/app/testing-screenshots" testing-screenshots || true
-    - exit $?
+    - exit $exitCode
   artifacts:
     paths:
       - testing-screenshots
+    when: on_failure
     expire_in: 1 week
 
 test-mocha-features:
@@ -126,12 +132,13 @@ test-mocha-features:
   needs: ['build-development']
   script:
     - CONTAINER_ID=$(docker create -t $TAG_DEVELOPMENT_STAGE with --test-env --built --mocks test-mocha-features)
-    - docker start -a "$CONTAINER_ID"; exitCode=$?; true
+    - docker start -a "$CONTAINER_ID" && exitCode=$? || exitCode=$?
     - docker cp "$CONTAINER_ID:/app/testing-screenshots" testing-screenshots || true
-    - exit $?
+    - exit $exitCode
   artifacts:
     paths:
       - testing-screenshots
+    when: on_failure
     expire_in: 1 week
 
 test-mocha-maps:
@@ -139,12 +146,13 @@ test-mocha-maps:
   needs: ['build-development']
   script:
     - CONTAINER_ID=$(docker create -t $TAG_DEVELOPMENT_STAGE with --test-env --built --mocks test-mocha-maps)
-    - docker start -a "$CONTAINER_ID"; exitCode=$?; true
+    - docker start -a "$CONTAINER_ID" && exitCode=$? || exitCode=$?
     - docker cp "$CONTAINER_ID:/app/testing-screenshots" testing-screenshots || true
-    - exit $?
+    - exit $exitCode
   artifacts:
     paths:
       - testing-screenshots
+    when: on_failure
     expire_in: 1 week
 
 test-mocha-unit:
@@ -157,6 +165,7 @@ test-mocha-unit:
 deploy:
   stage: Deploy
   script:
+    - docker pull $TAG_DISTRIBUTION_STAGE
     - docker tag $TAG_DISTRIBUTION_STAGE $TAG_PRODUCTION
     - docker push $TAG_PRODUCTION
     - echo "The production image tag is $TAG_PRODUCTION"
