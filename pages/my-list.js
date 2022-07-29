@@ -8,7 +8,7 @@ export const getStaticProps: GetStaticProps<RouteSharedProps> = (context) => {
     return {
         props: {
             pageTitle: "My List",
-            pageType: ["Service"],
+            pageType: ["Service List"],
         },
     }
 }

@@ -87,6 +87,7 @@ function getPageInfo({ Component, pageProps }: AppProps): PageInfo {
     const type = pageProps.pageType ?? Component.pageType ??
         (router.pathname === "/_error" ? ["500"] : undefined)
     if (title === undefined || type === undefined) {
+        console.error(Component, pageProps)
         throw Error(`Route ${router.pathname} is missing shared props.`)
     }
     return {title, type}
