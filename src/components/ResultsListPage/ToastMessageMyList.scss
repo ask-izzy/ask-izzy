@@ -1,0 +1,16 @@
+@use '../../styles/mixins/colours';
+
+.ToastMessageMyList {
+    .action-descriptor {
+        svg {
+            width: 25px;
+            height: 25px;
+            margin-bottom: -8px;
+
+            path {
+                fill: #{colours.get-static('raw-colour-warm-white')};
+                fill: var(--raw-colour-warm-white);
+            }
+        }
+    }
+}

@@ -23,6 +23,7 @@ export type Geolocation = {
 }
 
 const Storage = {
+    subscribedJsonEvents: undefined,
     getSearch(): string {
         return sessionStore.getItem("search") || "";
     },
@@ -188,6 +189,7 @@ const Storage = {
         }
 
         this.setItem(key, JSON.stringify(obj));
+        this.onJsonChange(key)
     },
 
     setGeolocationMock(success: boolean, result: any): void {
@@ -207,6 +209,32 @@ const Storage = {
     removeItem(key: string): void {
         persistentStore.removeItem(key);
         sessionStore.removeItem(key);
+    },
+
+    subscribeToJsonChange(key: string, uniqueCallbackKey: string, callback: function) {
+        if (!this.subscribedJsonEvents) {
+            this.subscribedJsonEvents = {}
+        }
+        if (this.subscribedJsonEvents && !this.subscribedJsonEvents[key]) {
+            this.subscribedJsonEvents[key] = {}
+        }
+        this.subscribedJsonEvents[key][uniqueCallbackKey] = callback
+
+    },
+    unsubscribeToJsonChange(key: string, uniqueCallbackKey: string) {
+        if (this.subscribedJsonEvents && this.subscribedJsonEvents[key]) {
+            delete this.subscribedJsonEvents[key][uniqueCallbackKey]
+        }
+    },
+
+    onJsonChange(key: string) {
+        if (this.subscribedJsonEvents && this.subscribedJsonEvents[key]) {
+            for (let funcName of Object.keys(this.subscribedJsonEvents[key])) {
+                Object.keys(this.subscribedJsonEvents[key])
+                this.subscribedJsonEvents[key][funcName]()
+            }
+        }
+
     },
 }
 

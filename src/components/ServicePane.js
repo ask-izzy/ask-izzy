@@ -24,19 +24,24 @@ import Chevron from "../icons/Chevron";
 import IndigenousServiceIcon from "./IndigenousServiceIcon";
 import LgbtiqIcon from "./LgbtiqIcon";
 import AlertBannerList from "../components/AlertBannerList";
+import AddToCompareButton from "../components/AddToCompareButton"
 import Service from "../iss/Service";
 import icons from "../icons";
+import ShareButton from "../components/ShareButton"
 import Storage from "../storage";
 import ScreenReader from "./ScreenReader";
 import UrlsToLinks from "./UrlsToLink"
 import {getSiblingServices} from "../iss/load-services"
-
+import {MobileDetect} from "../effects/MobileDetect";
+import { useRouter } from "next/router"
+import ToastMessageMyList from "../components/ResultsListPage/ToastMessageMyList"
 type Props = {
     service: Service,
 }
 
 function ServicePane({service}: Props): ReactNode {
     const [siblings, setSiblings] = useState<Array<Service>>([])
+    const isMobile = MobileDetect(799)
 
     useEffect(() => {
         async function loadSiblings(): Promise<void> {
@@ -44,6 +49,9 @@ function ServicePane({service}: Props): ReactNode {
         }
         loadSiblings();
     }, [service])
+
+    const router = useRouter()
+    const jsonStorageObj = "my-list-services"
 
     const recordAlsoAtThisLocation = (service: Service) => {
         gtm.emit({
@@ -161,6 +169,41 @@ function ServicePane({service}: Props): ReactNode {
         )
     }
 
+    const addToCompareButtonComponent = (
+        <AddToCompareButton
+            hasTextDescription={true}
+            serviceID={service.id}
+        />
+    )
+
+    function renderCompareShare(typeOfDevice) {
+        // required due to different positioning
+        // with mobile and computer rendering
+        if (typeOfDevice === "web" && !isMobile) {
+            return (
+                <div className="compare-share-container">
+                    <ShareButton
+                        hasTextDescription={true}
+                    />
+                    {addToCompareButtonComponent}
+                </div>
+            )
+        } else if (typeOfDevice === "mobile" && isMobile) {
+            return (
+                <div className="compare-share-container mobile">
+                    <ShareButton
+                        hasTextDescription={true}
+                    />
+                    {addToCompareButtonComponent}
+                </div>
+            )
+        }
+        return (
+             <></>
+        )
+
+    }
+
     return (
         <div className="ServicePane">
             <div>
@@ -183,6 +226,7 @@ function ServicePane({service}: Props): ReactNode {
                 className="row"
             >
                 <div className="header">
+                    {renderCompareShare("mobile")}
                     <div>
                         <IndigenousServiceIcon object={service} />
                         <LgbtiqIcon object={service} />
@@ -194,56 +238,70 @@ function ServicePane({service}: Props): ReactNode {
                     <Eligibility {...service} />
                     {renderServiceProvisions()}
                 </div>
-                <BoxedText>
-                    <div className="practicalities-container">
-                        <CollapsedOpeningTimes
-                            object={service.open}
-                            serviceId={service.id}
-                        />
-                        <Accessibility
-                            service={service}
-                            withSpacer={true}
-                        />
-                        <Ndis
-                            className="ndis"
-                            compact={false}
-                            object={service}
-                            spacer={true}
-                        />
-                        <Address
-                            location={service.location}
-                            site={service.site}
-                            withSpacer={true}
-                        />
-                        {service.location && service.travelTimes &&
-                            <TransportTime
-                                location={service.location}
-                                withSpacer={true}
-                                travelTimes={service.travelTimes}
+                <div className= "boxed-text-container">
+                    {renderCompareShare("web")}
+                    <BoxedText>
+                        <div className="practicalities-container">
+                            <CollapsedOpeningTimes
+                                object={service.open}
+                                serviceId={service.id}
                             />
-                        }
-                        {!service.location?.isConfidential() &&
-                        <GoogleMapsLink
-                            to={service.location}
-                            className={Storage.getUserGeolocation() ?
-                                "withTimes" : "withoutTimes"}
-                            onClick={recordClick}
-                            hideSpacer={true}
-                        >
-                            <span className="googleMapsLink">
-                                Get directions in Google Maps
-                                <icons.ExternalLink
-                                    className="ExternalLinkIcon"
+                            <Accessibility
+                                service={service}
+                                withSpacer={true}
+                            />
+                            <Ndis
+                                className="ndis"
+                                compact={false}
+                                object={service}
+                                spacer={true}
+                            />
+                            <Address
+                                location={service.location}
+                                site={service.site}
+                                withSpacer={true}
+                            />
+                            {service.location && service.travelTimes &&
+                                <TransportTime
+                                    location={service.location}
+                                    withSpacer={true}
+                                    travelTimes={service.travelTimes}
                                 />
-                            </span>
-                        </GoogleMapsLink>
-                        }
-                        <ContactMethods object={service} />
-                        <ImportantInformation object={service}/>
-                        <Feedback object={service} />
-                    </div>
-                </BoxedText>
+                            }
+                            {!service.location?.isConfidential() &&
+                            <GoogleMapsLink
+                                to={service.location}
+                                className={Storage.getUserGeolocation() ?
+                                    "withTimes" : "withoutTimes"}
+                                onClick={recordClick}
+                                hideSpacer={true}
+                            >
+                                <span className="googleMapsLink">
+                                    Get directions in Google Maps
+                                    <icons.ExternalLink
+                                        className="ExternalLinkIcon"
+                                    />
+                                </span>
+                            </GoogleMapsLink>
+                            }
+                            <ContactMethods object={service} />
+                            <ImportantInformation object={service}/>
+                            <Feedback object={service} />
+                        </div>
+                    </BoxedText>
+                </div>
+
                 { renderSiblings() }
+                <ToastMessageMyList
+                    uniqueStorageSubscriptionKey="servicePaneAddServiceKey"
+                    onClickAdd={() => router.push("/my-list")}
+                    onClickUndo={() => {
+                        const key = service.id.toString()
+                        Storage.setJSON(jsonStorageObj, {...Storage.getJSON(jsonStorageObj), [key]: true})
+                    }}
+                    isAdd={true}
+                    isUndo={true}
+                />
             </main>
         </div>
     );

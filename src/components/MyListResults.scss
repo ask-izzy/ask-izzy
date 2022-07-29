@@ -1,0 +1,37 @@
+@use '../styles/mixins/colours';
+
+.MyListResults {
+    background-color: #{colours.get-static('colour-bg-gray')};
+    background-color: var(--colour-bg-gray);
+    min-height: 73vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    > ol {
+        padding-left: 0;
+        margin: 0;
+
+        > li {
+            list-style-type: none;
+        }
+    }
+
+    &.crisisResults {
+        background-color: colours.get-static('colour-brand-primary-mid');
+        background-color: var(--colour-brand-primary-mid);
+
+        ol {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+
+            @media (max-width: 720px) {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            @media (max-width: 500px) {
+                grid-template-columns: repeat(1, 1fr);
+            }
+        }
+    }
+}

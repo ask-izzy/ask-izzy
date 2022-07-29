@@ -12,6 +12,7 @@ import {getScrollPosition} from "../effects/scrollPosition";
 import Storage from "../storage";
 import categories from "../constants/categories";
 import Category from "../constants/Category";
+import MyListButton from "./MyListButton"
 
 type Props = {
     transition?: boolean,
@@ -118,9 +119,12 @@ function AppBar(
                         )}
                     </IconButton>
                 )}
-                <QuickExit
-                    className={showBar()}
-                />
+                <div className={classnames(showBar(), "widget-container")}>
+                    <MyListButton />
+                    <QuickExit
+                        className={showBar()}
+                    />
+                </div>
             </div>
         </nav>
     )

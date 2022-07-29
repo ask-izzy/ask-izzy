@@ -1,0 +1,51 @@
+@use '../styles/mixins/colours';
+
+.MyListButton {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-right: 10px;
+    text-decoration: none;
+
+    .list-button {
+        grid-area: list-button;
+        background-color: transparent;
+        border: 0;
+
+        svg {
+            margin-top: 4px;
+
+            path {
+                fill: #{colours.get-static('colour-crisis-white')};
+                fill: var(--colour-crisis-white);
+            }
+        }
+    }
+
+    .title {
+        grid-area: title;
+        color: #{colours.get-static('colour-text-very-light')};
+        color: var(--colour-text-very-light);
+        padding: 0 4px;
+    }
+
+    .count {
+        grid-area: count;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 25px;
+        height: 25px;
+        border-radius: 15px;
+        background-color: #{colours.get-static('colour-bg-standard')};
+        background-color: var(--colour-bg-standard);
+        color: #{colours.get-static('colour-text-dark')};
+        color: var(--colour-text-dark);
+    }
+
+    @media (max-width: 500px) {
+        .title {
+            display: none;
+        }
+    }
+}

@@ -1,0 +1,193 @@
+@use '../styles/mixins/colours';
+
+.MyListPage {
+    display: flex;
+    flex-direction: column;
+
+    .progress {
+        display: flex;
+        flex: 1 1 100%;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        padding-top: 20px;
+        padding-bottom: 20px;
+
+        & > * {
+            display: block;
+            width: 57px;
+            height: 57px;
+            margin-right: auto;
+            margin-left: auto;
+        }
+    }
+
+    .ShareButton {
+        background-color: #{colours.get-static('colour-brand-primary')};
+        background-color: var(--colour-brand-primary);
+        padding: 5px 1px;
+        border-radius: 3px;
+
+        .main-container {
+            .text-description {
+                color: #{colours.get-static('colour-share-white')};
+                color: var(--colour-share-white);
+            }
+        }
+
+        .SvgIcon {
+            path {
+                fill: #{colours.get-static('colour-share-white')};
+                fill: var(--colour-share-white);
+            }
+        }
+    }
+
+    .top-button-container {
+        &.web {
+            margin: 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .count-container {
+            color: #{colours.get-static('colour-text-mid')};
+            color: var(--colour-text-mid);
+
+            &.mobile {
+                margin: 15px;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+            }
+        }
+
+        .clear-all {
+            border: 0;
+            background-color: transparent;
+            color: #{colours.get-static('colour-text-dark')};
+            color: var(--colour-text-dark);
+        }
+
+        .Spacer {
+            margin: 10px 0;
+        }
+
+        .clear-all-container {
+            display: flex;
+            column-gap: 20px;
+
+            &.mobile {
+                justify-content: right;
+
+                .clear-all {
+                    margin: 15px;
+                }
+            }
+        }
+    }
+
+    .empty-list-container {
+        text-align: center;
+
+        .back-to-home-link {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            background-color: #{colours.get-static('colour-brand-primary')};
+            background-color: var(--colour-brand-primary);
+            color: #{colours.get-static('colour-text-very-light')};
+            color: var(--colour-text-very-light);
+            width: 170px;
+            height: 40px;
+            margin: 10px auto;
+            border-radius: 5px;
+        }
+    }
+
+    .my-list-results-container {
+        background-color: #{colours.get-static('colour-bg-gray')};
+        background-color: var(--colour-bg-gray);
+
+        .save-list {
+            text-align: center;
+            padding: 15px;
+
+            &.top {
+                background-color: #{colours.get-static('colour-bg-gray')};
+                background-color: var(--colour-bg-gray);
+                color: #{colours.get-static('colour-text-dark')};
+                color: var(--colour-text-dark);
+
+                &.mobile {
+                    display: none;
+                }
+
+                .save-list-button {
+                    color: #{colours.get-static('colour-brand-primary')};
+                    color: var(--colour-brand-primary);
+                }
+            }
+
+            &.bottom {
+                background-color: #{colours.get-static('colour-bg-opposite-light')};
+                background-color: var(--colour-bg-opposite-light);
+                color: #{colours.get-static('raw-colour-pure-white')};
+                color: var(--raw-colour-pure-white);
+            }
+
+            .save-list-button {
+                border: 0;
+                background-color: transparent;
+                font-weight: 600;
+            }
+        }
+    }
+
+    .GeolocationButtonForTravelTimes {
+        padding: 0;
+        justify-content: flex-end;
+    }
+
+    .map {
+        flex: 1 0 200px;
+        transition: flex-basis 0.3s;
+
+        .SitesMap {
+            height: 100%;
+        }
+    }
+
+    .List {
+        width: 100%;
+        max-width: $max-width;
+        padding: 0;
+    }
+
+    .information-container {
+        .information-text {
+            text-align: center;
+            padding: 0 60px;
+            margin-bottom: 90px;
+        }
+    }
+
+    @media (max-width: 500px) {
+        .my-list-results-container {
+            .save-list {
+                &.top {
+                    &.web {
+                        display: none;
+                    }
+
+                    &.mobile {
+                        display: block;
+                    }
+                }
+            }
+        }
+    }
+}
