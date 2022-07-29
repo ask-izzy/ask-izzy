@@ -142,10 +142,10 @@ async function sendEmail(to, from, subject, body) {
 
     await notificationsAPIClient.send({
         action: "email",
-        environment: "askizzy",
-        provider: "smtp",
+        environment: process.env.NEXT_PUBLIC_SHARE_SERVICES_EMAIL_ENVIRONMENT,
+        provider: process.env.NEXT_PUBLIC_SHARE_SERVICES_EMAIL_PROVIDER,
         notifications: {
-            template: "share-service-list",
+            template: process.env.NEXT_PUBLIC_SHARE_SERVICES_EMAIL_TEMPLATE,
             notifications: [
                 {
                     to: to,
