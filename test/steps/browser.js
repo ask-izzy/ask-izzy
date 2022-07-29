@@ -299,6 +299,10 @@ async function checkURL(expected: string): Promise<void> {
 }
 
 async function thenISee(expected: string): Promise<void> {
+    // driver.findElement() seems to be very slow to return when
+    // there is no matching element on the page.
+    this.mochaState.timeout(45000)
+    this.mochaState.slow(5000)
     await assert.withRetries(assert.textIsVisible)(this.driver, expected);
 }
 

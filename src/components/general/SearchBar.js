@@ -6,14 +6,15 @@ import type {
 } from "react"
 import classnames from "classnames";
 
-import Input from "../base/Input";
+import InputWithDropdown from "@/components/general/InputWithDropdown";
+import Input from "@/src/components/base/Input";
 import FlatButton from "../FlatButton";
 import SearchIcon from "../../icons/Search"
 
 type Props = {
     className?: string,
     initialValue?: string,
-    onChange?: (string) => void,
+    onChange?: (SyntheticInputEvent<HTMLInputElement>) => void,
     onSubmit: (string) => void,
     placeholder?: string,
     iconPosition?: $PropertyType<
@@ -34,10 +35,10 @@ export default function SearchBar({
     autocompleteValues,
     inputAriaLabel,
 }: Props): ReactNode {
-    const [value, setValueDirect] = useState<string>(initialValue || "")
-    function setValue(newValue) {
-        setValueDirect(newValue)
-        onChange?.(newValue)
+    const [value, setValue] = useState<string>(initialValue || "")
+    function handleOnChange(event) {
+        setValue(event.target.value)
+        onChange?.(event)
     }
     useEffect(() => {
         initialValue && setValue(initialValue)
@@ -51,9 +52,9 @@ export default function SearchBar({
                 className,
             )}
         >
-            <Input
+            <InputWithDropdown
                 type="search"
-                onChange={setValue}
+                onChange={handleOnChange}
                 value={value}
                 onKeyDown={event => {
                     event.key === "Enter" && value && onSubmit(value)

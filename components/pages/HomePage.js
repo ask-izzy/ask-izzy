@@ -78,8 +78,8 @@ function HomePage(): ReactNode {
 
                         inputAriaLabel="Search for services"
                         onSubmit={onSearchSubmit}
-                        onChange={newValue => {
-                            if (!newValue) {
+                        onChange={event => {
+                            if (!event.target.value) {
                                 storage.setSearch("")
                             }
                         }}

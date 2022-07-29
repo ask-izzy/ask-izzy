@@ -8,7 +8,7 @@ import type {
 import { action } from "@storybook/addon-actions";
 
 import SearchBar from "./SearchBar"
-import {autocompleteDecorator} from "../base/Input.stories"
+import {autocompleteDecorator} from "@/components/general/InputWithDropdown.stories"
 
 export default {
     title: "General Components/SearchBar",
@@ -55,7 +55,7 @@ export const WithInitialValueAndAutocomplete: typeof Template =
     Template.bind({});
 WithInitialValueAndAutocomplete.args = {
     placeholder: "Try searching \"apple\"",
-    initialValue: "Initial search value",
+    initialValue: "app",
 };
 WithInitialValueAndAutocomplete.parameters = {
     autocompleteFullList: ["apple", "berry", "orange"],
