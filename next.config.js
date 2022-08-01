@@ -109,6 +109,7 @@ const nextConfig = {
     },
     env: {
         ENVIRONMENT: process.env.ENVIRONMENT,
+        DOMAINS_TO_PROXY: getDomainsToProxy(),
     },
 }
 
@@ -172,5 +173,18 @@ if (process.env.NODE_ENV !== "test") {
         {
             silent: true,
         }
+    )
+}
+
+function getDomainsToProxy() {
+    const proxyDomainEnvVarPrefix = "PROXY_DOMAIN_"
+    return Object.fromEntries(
+        Object.keys(process.env)
+            .filter(varName => varName.startsWith(proxyDomainEnvVarPrefix))
+            .map(varName => varName.replace(proxyDomainEnvVarPrefix, ""))
+            .map(domainToProxy => ([
+                domainToProxy.replaceAll("__", "-").replaceAll("_", "."),
+                process.env[`${proxyDomainEnvVarPrefix}${domainToProxy}`],
+            ]))
     )
 }
