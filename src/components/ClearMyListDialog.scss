@@ -1,0 +1,39 @@
+@use '../../src/styles/mixins/colours';
+
+.ClearMyListDialog {
+    border-radius: 0.5em;
+    background-color: #{colours.get-static('colour-bg-standard')};
+    background-color: var(--colour-bg-standard);
+    min-width: 300px;
+    min-height: 100px;
+    overflow: auto;
+    text-align: center;
+    color: #{colours.get-static('colour-text-dark')};
+    color: var(--colour-text-dark);
+
+    header {
+        margin: 1em;
+    }
+
+    .ClearMyListOptions{
+        display: flex;
+        margin: 1em;
+        justify-content: space-between;
+        font-weight: bold;
+        .cancel-button {
+            border: none;
+            background-color: transparent;
+            color: #{colours.get-static('colour-text-brand')};
+            color: var(--colour-text-brand);
+        }
+        .clear-button {
+            border: none;
+            border-radius: 5px;
+            padding: 9px;
+            background-color: #{colours.get-static('colour-text-brand')};
+            background-color: var(--colour-text-brand);
+            color: #{colours.get-static('colour-text-very-light')};
+            color: var(--colour-text-very-light);
+        }
+    }
+}

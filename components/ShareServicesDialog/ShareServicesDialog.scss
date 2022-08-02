@@ -1,0 +1,66 @@
+@use '../../src/styles/mixins/colours';
+
+.ShareServicesDialog {
+    border-radius: 0.5em;
+    background-color: #{colours.get-static('colour-bg-standard')};
+    background-color: var(--colour-bg-standard);
+    max-width: 700px;
+    overflow: auto;
+
+    header {
+        display: flex;
+        align-items: center;
+        margin: 1em;
+
+        h1 {
+            color: #{colours.get-static('colour-text-highlight')};
+            color: var(--colour-text-highlight);
+            flex: 1 1 auto;
+            margin: 0.3em 0;
+        }
+
+        .close {
+            border: 0;
+            background-color: unset;
+            font-size: 2em;
+            color: #{colours.get-static('colour-text-mid')};
+            color: var(--colour-text-mid);
+        }
+    }
+
+    .highlighted-box {
+        background-color: #{colours.get-static('colour-bg-highlight')};
+        background-color: var(--colour-bg-highlight);
+        color: #{colours.get-static('colour-text-very-light')};
+        color: var(--colour-text-very-light);
+        border-radius: 1.5em 1.5em 0 0;
+
+        .viaAskIzzyInfoBox {
+            --button-border: var(--colour-text-very-light) solid 1px;
+
+            display: flex;
+            flex-direction: column;
+            overflow: auto;
+            padding: 0.3em 1.3em 1.3em;
+        }
+
+        nav.messageType {
+            display: flex;
+            gap: 1em;
+
+            button {
+                display: flex;
+                gap: 0.5em;
+
+                svg {
+                    align-self: center;
+                }
+            }
+        }
+    }
+
+    .info {
+        margin: 1.5em 1em 2em;
+        font-size: 1.3em;
+    }
+}

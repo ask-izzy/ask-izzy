@@ -21,7 +21,7 @@ export function addPageLoadDependencies(
 
     if (pagePath !== currentPagePath) {
         currentPagePath = pagePath
-        clearPageLoad()
+        clearPageDependencies()
     }
 
     for (const dependency of dependencies) {
@@ -90,7 +90,7 @@ function pageLoaded() {
         subscriber.resolve()
     }
     currentSubscribers = []
-    clearPageLoad()
+    clearPageDependencies()
 }
 
 export async function waitTillPageLoaded(): Promise<void> {
@@ -106,13 +106,9 @@ if (typeof window !== "undefined") {
     window.waitTillPageLoaded = waitTillPageLoaded
 }
 
-function clearPageLoad() {
+function clearPageDependencies() {
     if (isDebugMode()) {
         console.info("Page dependencies cleared")
     }
-    for (const subscriber of currentSubscribers) {
-        subscriber.reject()
-    }
     currentDependencies = []
-    currentSubscribers = []
 }

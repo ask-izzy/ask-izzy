@@ -27,6 +27,16 @@
         }
     }
 
+    .title-container {
+        display: flex;
+        justify-content: space-between;
+
+        .compare-share-container {
+            display: flex;
+            column-gap: 20px;
+        }
+    }
+
     .Eligibility {
         padding-right: 0;
         padding-left: 0;
@@ -104,6 +114,12 @@
         .TransportTime {
             display: flex;
             flex-direction: column;
+        }
+
+        .compare-share-container {
+            .ShareButton {
+                display: none;
+            }
         }
     }
 }

@@ -11,6 +11,8 @@ import DebugQueryScore from "./DebugQueryScore";
 import DebugServiceRecord from "./DebugServiceRecord";
 
 import Eligibility from "./Eligibility";
+import AddToCompareButton from "./AddToCompareButton"
+import ShareButton from "./ShareButton"
 import ServiceProvisions from "./service/ServiceProvisions"
 import Accessibility from "./Accessibility";
 import OpeningTimes from "./OpeningTimes";
@@ -23,6 +25,7 @@ import ScreenReader from "./ScreenReader";
 import ListItem from "./ListItem";
 import Link from "./base/Link";
 import type {travelTimesStatus} from "../hooks/useTravelTimesUpdater";
+
 
 type Props = {
     service: Service,
@@ -77,22 +80,30 @@ function ResultListItem({
             rootElement="li"
             className="plain-text ResultListItem"
         >
-            <div className="name">
-                <Link
-                    to={`/service/${service.slug}`}
-                    analyticsEvent={{
-                        event: `Link Followed - Service Result`,
-                        eventAction: "Service result",
-                        eventLabel: `Standard service - number ` +
-                            `${resultNumber}`,
-                    }}
-                    aria-label={`Service: ${service.name}`}
-                >
-                    <h2>{service.name}</h2>
-                </Link>
-                <div className="flags">
-                    <IndigenousServiceIcon object={service} />
-                    <LgbtiqIcon object={service} />
+            <div className="title-container">
+                <div className="name">
+                    <Link
+                        to={`/service/${service.slug}`}
+                        analyticsEvent={{
+                            event: `Link Followed - Service Result`,
+                            eventAction: "Service result",
+                            eventLabel: `Standard service - number ` +
+                                `${resultNumber}`,
+                        }}
+                        aria-label={`Service: ${service.name}`}
+                    >
+                        <h2>{service.name}</h2>
+                    </Link>
+                    <div className="flags">
+                        <IndigenousServiceIcon object={service} />
+                        <LgbtiqIcon object={service} />
+                    </div>
+                </div>
+                <div className="compare-share-container">
+                    <ShareButton services={[service]} />
+                    <AddToCompareButton
+                        serviceID={service.id}
+                    />
                 </div>
             </div>
             <div className="site_name">
@@ -112,7 +123,7 @@ function ResultListItem({
                 service={service}
             />
             <div className="description">
-                {service.shortDescription.map(
+                {service.shortDescription?.map(
                     (sentence, i) =>
                         <p key={i}>{sentence}</p>
                 )}

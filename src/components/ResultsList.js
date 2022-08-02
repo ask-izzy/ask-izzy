@@ -1,8 +1,9 @@
 /* @flow */
 
-import * as React from "react";
+import React from "react";
 import type {Node as ReactNode} from "react";
 import cnx from "classnames";
+import { useRouter } from "next/router"
 import ResultListItem from "../components/ResultListItem";
 import CrisisLineItem from "../components/CrisisLineItem";
 import CrisisHeader from "../components/CrisisHeader";
@@ -15,6 +16,7 @@ import Service, {sortServices} from "../iss/Service";
 import type {SortType} from "./base/Dropdown";
 import type {travelTimesStatus} from "../hooks/useTravelTimesUpdater";
 import ScreenReader from "../components/ScreenReader";
+import ToastMessageMyList from "../components/ResultsListPage/ToastMessageMyList"
 
 type Props = {
     results: Array<Service>,
@@ -31,6 +33,8 @@ function ResultsList({
     crisisResults,
     sortBy,
 }: Props): ReactNode {
+    const router = useRouter()
+
     let filteredResults = crisisResults ?
         onlyCrisisResults(results)
         : onlyNonCrisisResults(results)
@@ -43,8 +47,6 @@ function ResultsList({
         crisisResults ?
             CrisisLineItem
             : ResultListItem
-
-
 
     return (
         <div className={cnx("ResultsList", {crisisResults})}>
@@ -78,6 +80,11 @@ function ResultsList({
                     />
                 ))}
             </ol>
+            <ToastMessageMyList
+                uniqueStorageSubscriptionKey="resultsPageAddServiceKey"
+                onClickAdd={() => router.push("/my-list")}
+                isAdd={true}
+            />
         </div>
     );
 

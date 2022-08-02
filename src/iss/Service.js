@@ -19,6 +19,7 @@ import type {
 import ServiceOpening from "./ServiceOpening";
 import type {SortType} from "../components/base/Dropdown"
 import {getIssClient, getIssVersion} from "./client"
+import {lookbehindIsSupported} from "@/helpers/regex.helpers.js"
 
 export type ServiceProps = {
     ...Service,
@@ -26,7 +27,7 @@ export type ServiceProps = {
 }
 
 export default class Service {
-    constructor(props: ServiceProps) {
+    constructor(props: any) {
         const {location, ...remainingProps} = props
         if (location) {
             this.location = new AddressLocation(props.location);
@@ -171,23 +172,6 @@ export default class Service {
         // it will bork browsers that don't support lookbehinds even if those
         // browsers never execute this line.
         return this.description.split(new RegExp("(?<=\\.\\s+)(?=\\S)", "g"))
-
-        function lookbehindIsSupported() {
-            try {
-                return !!(
-                "text-test1-behind-test2-test3"
-                    .match(
-                        new RegExp("(?<=behind)-test\\d", "g")
-                    )?.[0] === "-test2" &&
-                "behind-test1-test2"
-                    .match(
-                        new RegExp("(?<!behind)-test\\d", "g")
-                    )?.[0] === "-test2"
-                );
-            } catch (error) {
-                return false;
-            }
-        }
     }
 
     /**

@@ -14,7 +14,7 @@ fi
 
 for file in $( git ls-files 'components/*.js' 'components/**/*.js' 'src/components/*.js' 'src/components/**/*.js'); do
     if [ -e "$file" ] ; then
-        if [[ "$file" == *.stories.js || "$file" == *.service.js  || "$file" == components/pages/* ]]; then
+        if [[ "$file" == *.stories.js || "$file" == *.service.js  || "$file" == *.hook.js  || "$file" == */index.js  || "$file" == components/pages/* ]]; then
             continue
         fi
         parentDir=$(dirname "$file")

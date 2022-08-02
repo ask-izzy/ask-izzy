@@ -67,6 +67,7 @@ $lightness-button-hover: 10%;
         colours.set-transparency('raw-colour-pure-black', 'global', 0.5)
     );
 
+    @include colours.define('colour-share-white', 'global', 'raw-colour-pure-white');
 
     /* Backgrounds */
 
@@ -90,15 +91,33 @@ $lightness-button-hover: 10%;
     );
 
     @include colours.define('colour-bg-opposite', 'global', 'raw-colour-slate-gray');
+    @include colours.define('colour-bg-opposite-light', 'global', colours.lighten('raw-colour-warm-gray', 'global', -60%));
 
     @include colours.define('colour-bg-code', 'global', 'raw-colour-slate-gray');
     @include colours.define('colour-bg-highlight', 'global', 'raw-colour-rich-purple');
     @include colours.define('colour-bg-alert', 'global', 'raw-colour-sunflower');
 
+    @include colours.define(
+        'colour-bg-highlight-tint-1',
+        'global',
+        colours.lighten('colour-bg-highlight', 'global', -30%)
+    );
+
+    @include colours.define(
+        'colour-bg-highlight-tint-2',
+        'global',
+        colours.lighten('colour-bg-highlight', 'global', -50%)
+    );
+
 
     /* Borders */
     @include colours.define('colour-border-list-item', 'global', 'raw-colour-warm-white');
     @include colours.define('colour-border-list-item-dark', 'global', 'raw-colour-slate-gray');
+    @include colours.define(
+        'colour-border-list-item-mid',
+        'global',
+        colours.lighten('raw-colour-pure-white', 'global', -54%)
+    );
     @include colours.define('colour-border-list-item-gray', 'global', 'raw-colour-warm-gray');
     @include colours.define('colour-border-standard-callout', 'global', 'colour-brand-primary');
     @include colours.define(
@@ -155,5 +174,17 @@ $lightness-button-hover: 10%;
         'colour-text-very-light',
         'global',
         'raw-colour-pure-white'
+    );
+    @include colours.define(
+        'colour-text-brand',
+        'global',
+        'colour-brand-primary'
+    );
+    @include colours.define('colour-text-highlight', 'global', 'colour-brand-primary');
+
+    @include colours.define(
+        'colour-text-error',
+        'global',
+        colours.lighten('raw-colour-bright-red', 'global', 50%)
     );
 }

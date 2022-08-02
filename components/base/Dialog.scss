@@ -1,0 +1,33 @@
+
+.Dialog {
+    z-index: 2;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    &[aria-hidden='true'] {
+        display: none;
+    }
+
+    &,
+    .overlay {
+        position: fixed;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+    }
+
+    .overlay {
+        background-color: rgba(43, 46, 56, 0.9);
+    }
+
+    .content {
+        margin: auto;
+        z-index: 2;
+        position: relative;
+        max-height: calc( 100vh - 4em );
+        overflow: auto;
+        box-sizing: border-box;
+    }
+}

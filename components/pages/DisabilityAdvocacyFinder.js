@@ -29,7 +29,8 @@ function DisabilityAdvocacyFinder(): ReactNode {
     const [autocompleteValues, setAutocompleteValues] =
         useState<Array<string>>([])
 
-    function updateAutocomplete(inputValue) {
+    function updateAutocomplete(event) {
+        const inputValue = event.target.value
         const newAutocompleteValues = []
         /* Start looking for matches after at least 3 chars have been
          * entered. Then check to see if input matches a key in out

@@ -1,0 +1,98 @@
+@use '../styles/mixins/colours';
+
+:root {
+    // We want to allow the css of the parent component to specify some styling
+    // preferences for this component so for example if we use the button in parent
+    // component with a dark background that parent component tell can tell it's
+    // children to account for that. CSS doesn't support using CSS Vars conditionally
+    // but we can sort of fudge it by setting a blank default and specifying a fallback
+    // value when using it.
+    --button-border: ; /* stylelint-disable-line declaration-block-semicolon-space-before */
+}
+
+.StandardButton {
+    border: var(--button-border, 0);
+    border-radius: $rounded-border;
+    font-size: 18px;
+    font-weight: 400;
+    line-height: 36px;
+    padding: 0 0.7em;
+    -webkit-appearance: button;
+
+    &.type-primary {
+        background-color: #{colours.get-static('colour-button-primary')};
+        background-color: var(--colour-button-primary);
+        color: #{colours.get-static('colour-text-very-light')};
+        color: var(--colour-text-very-light);
+
+        &.invert-colour-contrast {
+            background-color: #{colours.get-static('colour-bg-standard')};
+            background-color: var(--colour-bg-standard);
+            color: #{colours.get-static('colour-text-highlight')};
+            color: var(--colour-text-highlight);
+
+            path {
+                fill: #{colours.get-static('colour-text-highlight')};
+                fill: var(--colour-text-highlight);
+            }
+
+            &:hover,
+            &:focus {
+                background-color: #{colours.get-static('colour-bg-standard-tint-3')};
+                background-color: var(--colour-bg-standard-tint-3);
+            }
+        }
+    }
+
+    &.type-secondary {
+        background-color: #{colours.get-static('colour-bg-standard')};
+        background-color: var(--colour-bg-standard);
+        color: #{colours.get-static('colour-text-highlight')};
+        color: var(--colour-text-highlight);
+        border: #{colours.get-static('colour-text-highlight')} solid 1px;
+        border: var(--colour-text-highlight) solid 1px;
+
+        path {
+            fill: #{colours.get-static('colour-text-highlight')};
+            fill: var(--colour-text-highlight);
+        }
+
+        &:hover,
+        &:focus {
+            background-color: #{colours.get-static('colour-bg-standard-tint-1')};
+            background-color: var(--colour-bg-standard-tint-1);
+        }
+
+        &.invert-colour-contrast {
+            background-color: #{colours.get-static('colour-bg-highlight-tint-1')};
+            background-color: var(--colour-bg-highlight-tint-1);
+            border: 0;
+            color: #{colours.get-static('colour-text-very-light')};
+            color: var(--colour-text-very-light);
+
+            path {
+                fill: #{colours.get-static('colour-text-very-light')};
+                fill: var(--colour-text-very-light);
+            }
+
+            &:hover,
+            &:focus {
+                background-color: #{colours.get-static('colour-button-primary-hover')};
+                background-color: var(--colour-button-primary-hover);
+            }
+        }
+    }
+
+    svg {
+        height: 18px;
+        width: unset;
+    }
+
+    &[disabled] {
+        font-weight: 500;
+        color: #{colours.get-static('colour-text-mid')};
+        color: var(--colour-text-mid);
+        background-color: #{colours.get-static('colour-button-disabled')};
+        background-color: var(--colour-button-disabled);
+    }
+}

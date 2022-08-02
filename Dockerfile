@@ -117,15 +117,30 @@ USER $UID_GID
 COPY ./package.json ./yarn.lock /app/
 RUN yarn install --frozen-lockfile && yarn cache clean
 
-# Copy in app source
+# Copy in just the files need to build source to avoid cache invalidation from changes to unrelated files
+COPY --chown=$UID_GID ./components /app/components
+COPY --chown=$UID_GID ./src /app/src
+COPY --chown=$UID_GID ./scripts/run-with.js /app/scripts/
+COPY --chown=$UID_GID ./hooks /app/hooks
+COPY --chown=$UID_GID ./helpers /app/helpers
+COPY --chown=$UID_GID ./lib /app/lib
+COPY --chown=$UID_GID ./pages /app/pages
+COPY --chown=$UID_GID ./public/images/banners /app/public/images/banners
+COPY --chown=$UID_GID ./fixtures /app/fixtures
+COPY --chown=$UID_GID ./test/support/mock-cms /app/test/support/mock-cms/
+COPY --chown=$UID_GID ./test/support/mock-iss /app/test/support/mock-iss/
+COPY --chown=$UID_GID ./.env ./.env.test ./babel.config.json ./next.config.js /app/
+
+# Build Ask Izzy
+RUN yarn with --test-env --mocks build
+
+# Copy in all remaining files not excluded by .gitignore
 COPY --chown=$UID_GID . /app
 
 # Note this essentially guarantees cache invalidation from this point for builds
 # of different versions.
 ARG VERSION
-RUN echo $VERSION > ./public/VERSION.txt && \
-    # Build Ask Izzy
-    yarn with --test-env --mocks build
+RUN echo $VERSION > ./public/VERSION.txt
 
 ENV VERSION=$VERSION
 
@@ -144,12 +159,29 @@ ARG UID_GID
 COPY ./package.json ./yarn.lock /app/
 RUN yarn install --frozen-lockfile && yarn cache clean
 
-# Copy in app source
+# Copy in just the files need to build source to avoid cache invalidation from changes to unrelated files
+COPY --chown=$UID_GID ./components /app/components
+COPY --chown=$UID_GID ./src /app/src
+COPY --chown=$UID_GID ./scripts/run-with.js /app/scripts/
+COPY --chown=$UID_GID ./hooks /app/hooks
+COPY --chown=$UID_GID ./helpers /app/helpers
+COPY --chown=$UID_GID ./lib /app/lib
+COPY --chown=$UID_GID ./pages /app/pages
+COPY --chown=$UID_GID ./.storybook /app/.storybook
+COPY --chown=$UID_GID ./public/images/banners /app/public/images/banners
+COPY --chown=$UID_GID ./public/images/ask-izzy-logo-single-line-purple.svg /app/public/images/ask-izzy-logo-single-line-purple.svg
+COPY --chown=$UID_GID ./fixtures /app/fixtures
+COPY --chown=$UID_GID ./test/support/mock-cms /app/test/support/mock-cms/
+COPY --chown=$UID_GID ./test/support/mock-iss /app/test/support/mock-iss/
+COPY --chown=$UID_GID ./.env ./.env.test ./babel.config.json ./next.config.js /app/
+
+RUN yarn with --test-env --mocks build-storybook
+
+# Copy in all remaining files not excluded by .gitignore
 COPY --chown=$UID_GID . /app
 
 ARG VERSION
-RUN echo $VERSION > ./public/VERSION.txt && \
-    yarn with --test-env --mocks build-storybook
+RUN echo $VERSION > ./public/VERSION.txt
 
 ENV VERSION=$VERSION
 

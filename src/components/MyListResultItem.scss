@@ -1,0 +1,83 @@
+@use '../styles/mixins/colours';
+
+.MyListResultItem {
+    font-size: 14px;
+    font-weight: 400;
+    background-color: #{colours.get-static('colour-bg-standard')};
+    background-color: var(--colour-bg-standard);
+    margin: 5px 10px;
+    border-radius: 10px;
+
+    .name {
+        display: block;
+        margin-top: 5px;
+
+        h2 {
+            display: inline-block;
+            margin: 0 0.5em 0 0;
+            font-size: 18px;
+            font-weight: 500;
+            text-decoration: underline;
+
+            &:hover {
+                text-decoration: none;
+            }
+        }
+    }
+
+    .title-container {
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .location {
+        position: relative;
+        right: 6px;
+        bottom: 2px;
+        color: #{colours.get-static('colour-text-dark')};
+        color: var(--colour-text-dark);
+        font-weight: 500;
+    }
+
+    p {
+        color: #{colours.get-static('colour-text-dark')};
+        color: var(--colour-text-dark);
+    }
+
+    li {
+        color: #{colours.get-static('colour-text-dark')};
+        color: var(--colour-text-dark);
+    }
+
+    .MapIcon {
+        position: relative;
+        top: 7px;
+        left: 0;
+        width: 25px;
+        height: 25px;
+        margin: 0;
+    }
+
+    .site_name {
+        margin-bottom: 15px;
+        color: #{colours.get-static('colour-text-mid')};
+        color: var(--colour-text-mid);
+    }
+
+    .OpeningTimes {
+        margin-bottom: 15px;
+
+        .until,
+        .open {
+            color: #{colours.get-static('colour-text-mid')};
+            color: var(--colour-text-mid);
+        }
+
+        .ColoredIcon {
+            top: 0;
+            left: -2px;
+            width: 20px;
+            height: 20px;
+        }
+    }
+}

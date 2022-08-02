@@ -20,7 +20,7 @@ import QuestionStepper from "@/src/components/QuestionStepper";
 import WithStickyFooter from "@/src/components/WithStickyFooter";
 import ScreenReader from "@/src/components/ScreenReader";
 import FlatButton from "@/src/components/FlatButton";
-import Input from "@/src/components/base/Input";
+import InputWithDropdown from "@/components/general/InputWithDropdown";
 import GeolocationButton from "@/src/components/GeolocationButton";
 import HeaderBar from "@/src/components/HeaderBar";
 import type {GeolocationStatus} from "@/src/components/GeolocationButton";
@@ -234,10 +234,12 @@ class Location extends React.Component<Props, State> {
         }
     }
 
-    onSearchChange(newValue: string): void {
+    onSearchChange(event: SyntheticInputEvent<HTMLInputElement>): void {
+        const newValue = event.target.value
         const matchingAutocomplete = this.state.autocompletions.find(
             area => `${area.name}, ${area.state}` === newValue
         )
+        console.log("----", newValue, this.state.autocompletions)
         if (matchingAutocomplete) {
             return this.selectAutocomplete(matchingAutocomplete)
         }
@@ -392,7 +394,7 @@ class Location extends React.Component<Props, State> {
                                 Where are you looking for help?
                             </legend>
                             <div className="search">
-                                <Input
+                                <InputWithDropdown
                                     ref={this.searchInputRef}
                                     type="search"
                                     showClearButton={true}

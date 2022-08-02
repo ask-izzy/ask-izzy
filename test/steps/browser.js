@@ -48,7 +48,7 @@ module.exports = (function() {
         .when("I click the \"$STRING\" dropdown option", clickDropdownOption)
         .when("I click the \"$STRING\" collapsible section", clickDetails)
         .when("I search for \"$STRING\"", doSearch)
-        .when("I search for blank", doBlankSearch)
+        .when("I clear the first search box", clearFirstSearchBox)
         .when("I search for \"$STRING\" and press enter", doSearchAndEnter)
         .when("I click home from the title bar", clickHome)
         .when("I click back from the title bar", clickBack)
@@ -63,6 +63,7 @@ module.exports = (function() {
         })
         .when("I scroll to element \"$STRING\"", scrollToElement)
         .when("I take a screenshot", takeScreenshot)
+        .when("I enable debug mode", enableDebugMode)
         .when("I show the mouse cursor", showCursor)
         .then("I should be at $URL", checkURL)
         .then("I should see \"$STRING\"", thenISee)
@@ -93,7 +94,7 @@ module.exports = (function() {
 module.exports.documentReady = async function documentReady(
     driver: Webdriver.WebDriver
 ): Promise<boolean> {
-    return driver.executeAsyncScript((callback) => {
+    const result = await driver.executeAsyncScript((callback) => {
         const intervalId = setInterval(() => {
             // Internal page
             if (window.location.hostname === "localhost") {
@@ -111,7 +112,16 @@ module.exports.documentReady = async function documentReady(
                 }
             }
         }, 10);
+
+        setTimeout(
+            () => callback("Timed out"),
+            1000 * 10
+        )
     })
+
+    if (result === "Timed out") {
+        throw new Error("Timed out waiting for page to be ready")
+    }
 };
 
 async function visitUrl(url: string): Promise<void> {
@@ -289,6 +299,10 @@ async function checkURL(expected: string): Promise<void> {
 }
 
 async function thenISee(expected: string): Promise<void> {
+    // driver.findElement() seems to be very slow to return when
+    // there is no matching element on the page.
+    this.mochaState.timeout(45000)
+    this.mochaState.slow(5000)
     await assert.withRetries(assert.textIsVisible)(this.driver, expected);
 }
 
@@ -341,12 +355,11 @@ async function doSearch(search: string): Promise<void> {
 }
 
 
-async function doBlankSearch(): Promise<void> {
-    let element = await getSearchElement(this.driver);
-    await element.clear();
-
-
+async function clearFirstSearchBox(): Promise<void> {
     await module.exports.documentReady(this.driver);
+    const element = await getSearchElement(this.driver);
+    await element.clear();
+    await element.click();
 }
 
 async function doSearchAndEnter(search: string): Promise<void> {
@@ -475,6 +488,10 @@ async function takeScreenshot(): Promise<void> {
     )
 
     console.log(`${this.indent}  Screenshot saved to "${filepath}"`);
+}
+
+async function enableDebugMode(): Promise<void> {
+    await debug.enableDebugMode(this.driver)
 }
 
 async function showCursor(): Promise<void> {

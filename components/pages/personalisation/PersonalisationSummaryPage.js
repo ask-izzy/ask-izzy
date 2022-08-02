@@ -65,7 +65,10 @@ class PersonalisationSummaryPage extends React.Component<Props> {
 
     clearAll(event: SyntheticInputEvent<>): void {
         event.preventDefault();
+        const myList = storage.getJSON("my-list-services");
         storage.clear();
+        storage.setJSON("my-list-services", myList)
+
         let redirectUrl = "/"
         if (isDisabilityAdvocacySearch(this.props.router)) {
             redirectUrl = "/disability-advocacy-finder"

@@ -2,12 +2,7 @@
 
 .LogoWithTextBoxContainer.Link {
     text-decoration: none;
-
-    &:visited,
-    &:hover {
-        color: unset;
-        text-decoration: none;
-    }
+    color: unset;
 
     .showAsLink {
         color: #{colours.get-static('colour-link')};

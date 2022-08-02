@@ -60,6 +60,16 @@ export function getSceenshotPath(test) {
     return `testing-screenshots/${slug}.png`
 }
 
+export async function enableDebugMode(driver) {
+    await driver.executeScript(() => {
+        if (typeof pi === "function") {
+            pi()
+        } else {
+            console.warn("pi function not yet set so can't enable debug mode")
+        }
+    })
+}
+
 export async function showCursorPosition(driver) {
     // based off https://stackoverflow.com/a/67180588
     await driver.executeScript(() => {
