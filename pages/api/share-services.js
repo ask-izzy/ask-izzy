@@ -86,7 +86,7 @@ export default async function handler(req: any, res: any): any {
         if (messageRequestType === "Email") {
             await sendEmail(
                 body.toEmail,
-                "testing@infoxchange.net.au",
+                process.env.NEXT_PUBLIC_SITE_EMAIL,
                 messageText.subject,
                 // $FlowIgnore flow is out of date and replaceAll exists
                 messageText.body
