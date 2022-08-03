@@ -34,7 +34,7 @@ import UrlsToLinks from "./UrlsToLink"
 import {getSiblingServices} from "../iss/load-services"
 import {MobileDetect} from "../effects/MobileDetect";
 import { useRouter } from "next/router"
-import ToastMessageMyList from "../components/ResultsListPage/ToastMessageMyList"
+import ToastMessageMyList from "../components/ToastMessageMyList"
 type Props = {
     service: Service,
 }

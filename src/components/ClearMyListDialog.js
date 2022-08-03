@@ -1,11 +1,6 @@
 /* @flow */
 import * as React from "react";
-import {useState} from "react";
-import type { GetStaticProps } from "next"
 
-import ShareServices from "@/components/ShareServicesDialog"
-import type {RouteSharedProps} from "@/flow/routes"
-import {ixaService} from "@/fixtures/services";
 import Dialog from "@/components/base/Dialog"
 import Button from "@/src/components/base/Button"
 
@@ -18,11 +13,9 @@ export default function ShareServicesPage({
     onCloseRequested,
     onClearMyList,
 }: Props): React.Node {
-    const [open, setOpen] = useState(true)
-
     return <div>
         <Dialog
-            open={open}
+            open={true}
             onClose={onCloseRequested}
         >
             {
@@ -34,7 +27,9 @@ export default function ShareServicesPage({
                             </div>
                         </header>
                         <div className="ClearMyListOptions">
-                            <Button className="cancel-button" onClick={onCloseRequested}>
+                            <Button className="cancel-button"
+                                onClick={onCloseRequested}
+                            >
                                 Cancel
                             </Button>
                             <Button

@@ -93,19 +93,15 @@
     .empty-list-container {
         text-align: center;
 
-        .back-to-home-link {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-decoration: none;
+        .back-to-home {
             background-color: #{colours.get-static('colour-brand-primary')};
             background-color: var(--colour-brand-primary);
             color: #{colours.get-static('colour-text-very-light')};
             color: var(--colour-text-very-light);
-            width: 170px;
             height: 40px;
-            margin: 10px auto;
+            margin: 20px auto;
             border-radius: 5px;
+            border: 0;
         }
     }
 
@@ -166,7 +162,7 @@
     .information-container {
         color: #{colours.get-static('colour-text-dark')};
         color: var(--colour-text-dark);
-        
+
         .information-text {
             text-align: center;
             padding: 0 60px;

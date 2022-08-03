@@ -28,9 +28,9 @@ function DisabilityAdvocacyFinder(): ReactNode {
     });
     const disabilityGatewayURL = "https://www.disabilitygateway.gov.au/";
     const disabilityAdvocacyURL =
-        "https://www.dss.gov.au/our-responsibilities/disability-and-carers/"
-        + "program-services/for-people-with-disability/"
-        + "national-disability-advocacy-program-ndap"
+        "https://www.dss.gov.au/our-responsibilities/disability-and-carers/" +
+        "program-services/for-people-with-disability/" +
+        "national-disability-advocacy-program-ndap"
     const [autocompleteValues, setAutocompleteValues] =
         useState<Array<string>>([])
 

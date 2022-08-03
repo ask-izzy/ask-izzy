@@ -27,7 +27,9 @@ function SuggestionBox(
 
     const clearAnswers = () => {
         const location = Storage.getSearchArea();
+        const myList = Storage.getJSON("my-list-services");
         Storage.clear();
+        Storage.setJSON("my-list-services", myList)
         Storage.setSearchArea(location)
     }
 

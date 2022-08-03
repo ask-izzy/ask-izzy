@@ -24,7 +24,7 @@ function AddToCompareButton({
     const addToCompareText = "Add to My List"
     const removeFromCompareText = "Remove from My List"
     const textDescription = isRemove ? removeFromCompareText : addToCompareText
-    const uniqueStorageSubscriptionKey = "addToCompareButtonKey"
+    const uniqueStorageSubscriptionKey = "addToCompareButtonKey" + serviceID.toString()
 
     useEffect(() => {
         const cleanup = subscribeToJsonChange()
@@ -96,12 +96,15 @@ function AddToCompareButton({
         });
     }
 
-
-
-
     return (
         <Button
-            className={classnames("AddToCompareButton", className)}
+            className={
+                classnames(
+                    "AddToCompareButton",
+                    className,
+                    {"AddToCompare": !isRemove, "RemoveFromCompare": isRemove}
+                )
+            }
             onClick={onClick}
             aria-label={isRemove ? "Remove from my list" : "Add to my list"}
             analyticsEvent={{

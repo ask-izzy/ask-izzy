@@ -6,12 +6,12 @@ import MyListResultItem from "../components/MyListResultItem";
 
 import type {travelTimesStatus} from "../hooks/useTravelTimesUpdater";
 import ScreenReader from "../components/ScreenReader";
+import Service from "../iss/Service";
 
 type Props = {
-    results: any, //change type to obj
+    results: {string: Service},
     resultsLoading: boolean,
     travelTimesStatus: travelTimesStatus,
-    extraInformation: function,
     children?: ReactNode,
 }
 
@@ -19,7 +19,6 @@ function MyListResults({
     results,
     resultsLoading,
     travelTimesStatus,
-    extraInformation,
     children,
 }: Props): ReactNode {
     return (
@@ -35,12 +34,11 @@ function MyListResults({
                     otherwise VoiceOver won't treat this as a list even after
                     services have loaded.
                  */}
-                {resultsLoading && results.length === 0 &&
+                {resultsLoading && Object.keys(results).length === 0 &&
                     <li key={0}>
                         <ScreenReader>Loading services…</ScreenReader>
                     </li>
                 }
-                {extraInformation("top", "web")}
                 {Object.keys(results).flatMap((key, index) => {
                     const newList = []
                     newList.push(
@@ -51,13 +49,6 @@ function MyListResults({
                             resultNumber={index + 1}
                         />
                     )
-                    if (index === 0) {
-                        newList.push(
-                            <div key={0}>
-                                {extraInformation("top", "mobile")}
-                            </div>
-                        )
-                    }
                     return newList
                 })}
             </ol>

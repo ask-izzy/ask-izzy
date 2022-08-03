@@ -2,8 +2,9 @@
 
 import React, {useEffect, useState, useRef} from "react";
 import type {Node as ReactNode} from "react"
-import Button from "@mui/material/Button";
+import Button from "@/src/components/base/Button";
 import Snackbar from "@mui/material/Snackbar";
+import Cross from "@/src/icons/Cross"
 import useMoveFocus from "@/hooks/useMoveFocus";
 
 
@@ -12,7 +13,7 @@ type Props = {
   onClick?: function,
   message?: string,
   hasActionButton: boolean,
-  actionDescriptor: ReactNode,
+  actionDescriptor?: ReactNode,
 }
 
 export default function ToastMessage({
@@ -20,13 +21,13 @@ export default function ToastMessage({
     onClick = () => {},
     message = "",
     hasActionButton,
-    actionDescriptor,
+    actionDescriptor = <></>,
 }: Props): ReactNode {
     const [isOpen, setIsOpen] = useState<boolean>(false);
     const [focusTimer, setFocusTimer] = useState();
     const toastMessageRef = useRef()
     const [setFocus, revertFocus] = useMoveFocus(toastMessageRef)
-    const autoHideDuration = 5000
+    const autoHideDuration = 8000
 
     useEffect(() => {
         if (open) {
@@ -59,18 +60,25 @@ export default function ToastMessage({
     const action = (
         <>
             {
-                hasActionButton &&
-                <div >
+                <div className="action-container">
+                    {
+                        hasActionButton &&
+                        <Button
+                            className="try"
+                            ref={toastMessageRef}
+                            onClick={handleAction}
+                        >
+                            {actionDescriptor}
+                        </Button>
+                    }
                     <Button
-                        color="secondary"
-                        size="small"
-                        ref={toastMessageRef}
-                        onClick={handleAction}
-                        sx={{
-                            color: "var(--raw-colour-warm-white)",
+                        className="try"
+                        onClick={() => {
+                            setIsOpen(false)
                         }}
+                        onBlur={revertFocus}
                     >
-                        {actionDescriptor}
+                        <Cross />
                     </Button>
                 </div>
             }
@@ -91,6 +99,7 @@ export default function ToastMessage({
                         minWidth: "auto",
                         backgroundColor: "var(--colour-brand-primary)",
                         color: "var(--raw-colour-warm-white)",
+                        fontWeight: "lighter",
                     },
                 }}
             />

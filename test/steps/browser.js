@@ -41,6 +41,7 @@ module.exports = (function() {
             clickLinkWithSubstring
         )
         .when("I click the \"$STRING\" button", clickButton)
+        .when("I click the button with \"$STRING\" class name", clickButtonWithClassName)
         .when("I click the alert button with \"$STRING\" alerts",
             clickAlertButton
         )
@@ -67,6 +68,7 @@ module.exports = (function() {
         .when("I show the mouse cursor", showCursor)
         .then("I should be at $URL", checkURL)
         .then("I should see \"$STRING\"", thenISee)
+        .then("I should see \"$STRING\" services in my list", thenISeeServicesInMyList)
         .then("I should see\n$STRING", thenISee)
         .then("I should not see \"$STRING\"", thenIDontSee)
         .then("search box should contain \"$STRING\"", searchContains)
@@ -146,6 +148,14 @@ async function clickLinkWithSubstring(linkText: string) {
 
 async function clickButton(buttonText: string) {
     await clickElementWithText(this.driver, buttonText, "button")
+}
+
+async function clickButtonWithClassName(className: string): Promise<void> {
+    await this.driver.findElement(By.css(
+        className
+    ))
+        .click();
+    await module.exports.documentReady(this.driver);
 }
 
 async function clickAlertButton(buttonText: string) {
@@ -301,6 +311,15 @@ async function checkURL(expected: string): Promise<void> {
 async function thenISee(expected: string): Promise<void> {
     // driver.findElement() seems to be very slow to return when
     // there is no matching element on the page.
+    this.mochaState.timeout(45000)
+    this.mochaState.slow(5000)
+    await assert.withRetries(assert.textIsVisible)(this.driver, expected);
+}
+
+async function thenISeeServicesInMyList(expected: string): Promise<void> {
+    await this.driver.findElement(By.css(
+        ".my-list-count"
+    ))
     this.mochaState.timeout(45000)
     this.mochaState.slow(5000)
     await assert.withRetries(assert.textIsVisible)(this.driver, expected);
