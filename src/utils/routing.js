@@ -163,6 +163,7 @@ type getServicesPathProps = {|
     summary?: boolean,
     searchText?: string,
     location?: string,
+    pageMounted?: boolean,
 |}
 // The only reason this is too complex is because Ask Izzy's routes are too
 // complex :/
@@ -180,6 +181,7 @@ export function getServicesPath({
     summary,
     searchText,
     location,
+    pageMounted = true,
 }: getServicesPathProps): string {
     // If a value is not given then set it based on the current route
     if (category === undefined) {
@@ -193,10 +195,10 @@ export function getServicesPath({
     if (summary === undefined) {
         summary = router.pathname.includes("/summary")
     }
-    if (searchText === undefined) {
+    if (searchText === undefined && pageMounted) {
         searchText = router.query.search && decodeURIComponent(router.query.search)
     }
-    if (location === undefined) {
+    if (location === undefined && pageMounted) {
         location = storage.getSearchArea();
     }
     if (!category) {
@@ -222,13 +224,12 @@ export function getServicesPath({
         const personalisationPages =
             getPersonalisationPagesToShowFromCategory(category)
                 .filter(page => {
-                    if (personalisationPagesToIgnore === "all") {
+                    if (!pageMounted || personalisationPagesToIgnore === "all") {
                         return false
                     } else if (personalisationPagesToIgnore) {
                         return !personalisationPagesToIgnore.includes(page)
-                    } else {
-                        return true
                     }
+                    return true
                 })
         personalisationPage = personalisationPages[0]
     }
@@ -252,15 +253,18 @@ export function getServicesPath({
 
 export function getPersonalisationNextPath(args: getServicesPathProps): string {
     const {router} = args
-    const category = typeof args.category === "object" ?
-        args.category
-        : getCategory(args.category || "")
-    const currentPersonalisationPage = category && (category === getCategoryFromRouter(router)) ?
-        getCurrentPersonalisationPage(router)
-        : null
-    const personalisationPagesToIgnore = currentPersonalisationPage ?
-        [currentPersonalisationPage]
-        : []
+    let {personalisationPagesToIgnore} = args
+    if (!personalisationPagesToIgnore) {
+        const category = typeof args.category === "object" ?
+            args.category
+            : getCategory(args.category || "")
+        const currentPersonalisationPage = category && (category === getCategoryFromRouter(router)) ?
+            getCurrentPersonalisationPage(router)
+            : null
+        personalisationPagesToIgnore = currentPersonalisationPage ?
+            [currentPersonalisationPage]
+            : []
+    }
     return getServicesPath({
         ...args,
         personalisationPagesToIgnore,

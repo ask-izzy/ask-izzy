@@ -13,6 +13,8 @@ import {
     goToPersonalisationNextPath,
     getPersonalisationNextPath,
 } from "@/src/utils/routing"
+import isMounted from "@/hooks/useIsMounted"
+
 
 function DisabilityAdvocacyFinder(): ReactNode {
 
@@ -22,6 +24,7 @@ function DisabilityAdvocacyFinder(): ReactNode {
         router,
         category: "search",
         searchText: "Disability Advocacy Providers",
+        pageMounted: isMounted(),
     });
     const disabilityGatewayURL = "https://www.disabilitygateway.gov.au/";
     const disabilityAdvocacyURL =
@@ -93,6 +96,7 @@ function DisabilityAdvocacyFinder(): ReactNode {
                         placeholder="Search advocate type"
                         onSubmit={(searchText) => {
                             if (searchText) {
+                                searchText = `Disability Advocacy Providers - ${searchText}`
                                 goToPersonalisationNextPath({
                                     router,
                                     category: "search",
@@ -156,17 +160,22 @@ export default DisabilityAdvocacyFinder;
 
 
 const autocompleteMap = {
-    Disability: [
+    "Disability Advocacy": [
         "Disability Royal Commission Advocacy",
         "Disability Advocacy",
     ],
+    "Disability Royal Commission Advocacy": "Disability Royal Commission Advocacy",
     DRC: "Disability Royal Commission Advocacy",
+    "Royal Commission Advocacy": "Disability Royal Commission Advocacy",
     Help: [
         "Disability Royal Commission Advocacy",
         "Disability Advocacy",
         "NDIS Appeals",
     ],
-    NDIS: "NDIS Appeals",
+    "NDIS Appeals": [
+        "NDIS Appeals",
+        "Disability Advocacy",
+    ],
     Appeals: "NDIS Appeals",
     Advocacy: "Disability Advocacy",
     NDAP: "Disability Advocacy",

@@ -437,11 +437,13 @@ const categories = [
         searchQueryChanges(router: NextRouter) {
             const searchTerm = decodeURIComponent(router.query.search)
 
+            const [isDAFSearch, DAFSearchTerm] = searchTerm.match(/^Disability Advocacy Providers(?: - )?(.*)/) || []
+
             // A special case for the "Find advocacy" button on the
             // DisabilityAdvocacyFinder page.
-            if (searchTerm === "Disability Advocacy Providers") {
+            if (isDAFSearch) {
                 return {
-                    term: ["disability"],
+                    term: [DAFSearchTerm || "disability"],
                     $push: {
                         serviceTypesRaw: "disability advocacy",
                     },
