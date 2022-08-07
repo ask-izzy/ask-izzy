@@ -1,5 +1,4 @@
 /* @flow */
-// import colourStyles from "../src/styles/variables/colours.scss"
 import React, {useEffect} from "react";
 import type { Node as ReactNode } from "react"
 import type { AppProps } from "next/app"
@@ -21,8 +20,9 @@ import {
     addPageLoadDependencies,
     closePageLoadDependencies,
 } from "@/src/utils/page-loading"
-
 import "@/src/analytics"
+import * as gtm from "@/src/google-tag-manager";
+import storage from "@/src/storage";
 
 function App(appProps: AppProps): ReactNode {
     const { Component, pageProps } = appProps
@@ -53,6 +53,18 @@ function App(appProps: AppProps): ReactNode {
         fetch("https://cloud.typography.com/7948374/730248/css/fonts.css", {
             redirect: "manual",
         }).catch(() => {})
+
+        const myListLength = Object.keys(
+            storage.getJSON("my-list-services") || {}
+        ).length
+        gtm.emit({
+            event: "State Changed - List Size On First Page Load",
+            eventCat: "State changed",
+            eventAction: "List size on first page load",
+            eventLabel: null,
+            eventValue: myListLength,
+            sendDirectlyToGA: true,
+        });
     }, [])
 
     const pageInfo = getPageInfo(appProps)

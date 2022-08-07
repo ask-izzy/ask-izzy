@@ -37,6 +37,10 @@ import {
 import Category from "@/src/constants/Category"
 import WhoIsLookingForHelpPage
 from "@/src/constants/personalisation-pages/WhoIsLookingForHelp.js"
+import { usersnapFireEvent } from "@/helpers/usersnap.helpers.js"
+import WhoIsLookingForHelpBaseInfo from
+"@/src/constants/personalisation-pages/WhoIsLookingForHelp"
+import type { UserType } from "@/components/pages/personalisation/WhoIsLookingForHelp"
 
 type Props = {
     router: NextRouter
@@ -85,6 +89,7 @@ class ResultsPage<ChildProps = {...}, ChildState = {...}>
     componentDidMount() {
         if (this.props.router.isReady) {
             this.initSearch()
+            usersnapFireEventPageView()
         }
     }
 
@@ -95,6 +100,7 @@ class ResultsPage<ChildProps = {...}, ChildState = {...}>
         ) {
             // router ready here when loading the page for the first time
             this.initSearch()
+            usersnapFireEventPageView()
         }
     }
 
@@ -278,3 +284,10 @@ class ResultsPage<ChildProps = {...}, ChildState = {...}>
 }
 
 export default ResultsPage;
+
+function usersnapFireEventPageView() {
+    const userType = ((storage.getItem(WhoIsLookingForHelpBaseInfo.name): any): UserType);
+    if (userType === "User Worker") {
+        usersnapFireEvent("viewed-results-page")
+    }
+}

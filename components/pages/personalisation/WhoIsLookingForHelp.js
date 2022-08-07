@@ -30,6 +30,8 @@ type State = {
     category: ?Category,
 }
 
+export type UserType = "User Worker" | "User Myself"| "User Someone Else"
+
 class WhoIsLookingForHelp extends React.Component<Props, State> {
     constructor(props: Object) {
         super(props);
@@ -41,8 +43,8 @@ class WhoIsLookingForHelp extends React.Component<Props, State> {
     }
 
     handleButtonClick: (
-        (userType: string) => (event: SyntheticEvent<HTMLButtonElement>) => void
-    ) = (userType: string) =>
+        (userType: UserType) => (event: SyntheticEvent<HTMLButtonElement>) => void
+    ) = (userType: UserType) =>
         (event: SyntheticEvent<HTMLButtonElement>): void => {
             storage.setItem(this.props.details.name, userType);
             storage.setItem(WhoIsLookingForHelpBaseInfo.name, userType);

@@ -26,7 +26,7 @@ export default function ShareServicesPage({
             onClose={onCloseRequested}
         >
             {
-                ({titleProps}) => 
+                ({titleProps}) =>
                     <div className="ClearMyListDialog">
                         <header>
                             <div {...titleProps}>
@@ -37,7 +37,15 @@ export default function ShareServicesPage({
                             <Button className="cancel-button" onClick={onCloseRequested}>
                                 Cancel
                             </Button>
-                            <Button className="clear-button" onClick={onClearMyList}>
+                            <Button
+                                className="clear-button"
+                                onClick={onClearMyList}
+                                analyticsEvent={{
+                                    event: "Action Triggered - List Cleared",
+                                    eventAction: "List cleared",
+                                    eventLabel: null,
+                                }}
+                            >
                                 Clear My List
                             </Button>
                         </div>

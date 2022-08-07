@@ -161,18 +161,6 @@ function MyListPage(): ReactNode {
 
         )
     }
-    function renderSaveList(position, className) {
-        return (
-            <div className={classnames("save-list", position, className)}>
-                Would you like to save this list?
-                <Button className="save-list-button"
-                    aria-label="Save this list forever"
-                >
-                    Yes
-                </Button>
-            </div>
-        )
-    }
 
     function renderResults() {
         if (isLoading) {
