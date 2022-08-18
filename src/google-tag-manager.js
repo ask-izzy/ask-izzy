@@ -11,7 +11,7 @@ export function emit(event: GTMEvent): void {
     // Fix a weird GTM bug where if you set an existing variable to an array
     // that is shorter than the array it previously contained then the old
     // array values will remain
-    if (window.google_tag_manager) {
+    if (window.google_tag_manager?.[process.env.NEXT_PUBLIC_GOOGLE_TAG_MANAGER_ID]) {
         for (const key in event) {
             if (Array.isArray(event[key])) {
                 window.google_tag_manager[process.env.NEXT_PUBLIC_GOOGLE_TAG_MANAGER_ID]
@@ -42,7 +42,7 @@ export function emit(event: GTMEvent): void {
     ).filter(key => !persistentVars.has(key))
 
     // If GTM has loaded then flush directly
-    if (window.google_tag_manager) {
+    if (window.google_tag_manager?.[process.env.NEXT_PUBLIC_GOOGLE_TAG_MANAGER_ID]) {
         for (const key of varsToFlush) {
             window.google_tag_manager[process.env.NEXT_PUBLIC_GOOGLE_TAG_MANAGER_ID]
                 .dataLayer.set(key, undefined)

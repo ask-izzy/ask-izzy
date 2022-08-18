@@ -7,6 +7,7 @@ import AddToCompare from "../icons/AddToCompare"
 import RemoveFromCompare from "../icons/RemoveFromCompare"
 import storage from "../storage";
 import classnames from "classnames";
+import * as gtm from "@/src/google-tag-manager";
 
 type Props = {
     hasTextDescription?: boolean,
@@ -62,22 +63,37 @@ function AddToCompareButton({
     }
 
     function changeServiceStorage(removeFromStorage) {
-        const myList = storage.getJSON("my-list-services")
+        const myList = storage.getJSON("my-list-services") || {}
+        const oldMyListLength = Object.keys(myList).length
+
         if (removeFromStorage) {
-            if (myList) {
-                delete myList[serviceID]
-            }
-            storage.setJSON(
-                "my-list-services", {...myList}
-            )
+            delete myList[serviceID]
         } else {
-            const newService = {}
-            newService[serviceID] = true
-            storage.setJSON(
-                "my-list-services", {...myList, ...newService}
-            )
+            myList[serviceID] = true
         }
 
+        storage.setJSON("my-list-services", myList)
+
+        const myListLength = Object.keys(myList).length
+
+        if (oldMyListLength === 0) {
+            gtm.emit({
+                event: "Action Triggered - New List",
+                eventCat: "Action triggered",
+                eventAction: "New list",
+                eventLabel: null,
+                eventValue: myListLength,
+                sendDirectlyToGA: true,
+            });
+        }
+        gtm.emit({
+            event: "Action Triggered - List Size Changed",
+            eventCat: "Action triggered",
+            eventAction: "List size changed",
+            eventLabel: null,
+            eventValue: myListLength,
+            sendDirectlyToGA: true,
+        });
     }
 
 
@@ -88,6 +104,11 @@ function AddToCompareButton({
             className={classnames("AddToCompareButton", className)}
             onClick={onClick}
             aria-label={isRemove ? "Remove from my list" : "Add to my list"}
+            analyticsEvent={{
+                event: `Action Triggered - Service ${isRemove ? "Removed From" : "Added To"} List`,
+                eventAction: `Service ${isRemove ? "removed from" : "added to"} list`,
+                eventLabel: String(serviceID),
+            }}
         >
             <div className="main-container">
                 {

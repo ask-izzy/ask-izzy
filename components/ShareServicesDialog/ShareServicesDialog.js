@@ -83,7 +83,14 @@ function renderDirectlyScreen({services, setScreenName}) {
                 <p>
                     {viaIzzyDescription}
                 </p>
-                <StandardButton onClick={() => setScreenName("Via Ask Izzy")}>
+                <StandardButton
+                    onClick={() => setScreenName("Via Ask Izzy")}
+                    analyticsEvent={{
+                        event: "Action Triggered - Opened Share Services Via Ask Izzy",
+                        eventAction: "Opened share services via Ask Izzy",
+                        eventLabel: null,
+                    }}
+                >
                     Send via Ask Izzy
                 </StandardButton>
             </div>

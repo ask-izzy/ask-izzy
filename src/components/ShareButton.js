@@ -24,6 +24,11 @@ function ShareButton({
         <Button
             className="ShareButton"
             onClick={() => setOpen(true)}
+            analyticsEvent={{
+                event: "Action Triggered - Share Services Opened",
+                eventAction: "Share services opened",
+                eventLabel: null,
+            }}
         >
             <div className="main-container"
                 aria-label="Share"

@@ -19,6 +19,8 @@ import {getShareMessage, getShareReqSchema} from "@/helpers/share-services.helpe
 import type { MessageType } from "@/helpers/share-services.helpers.js"
 import useSubmitForm from "./use-submit-form.hook.js"
 import useIsMounted from "@/hooks/useIsMounted"
+import { usersnapFireEvent } from "@/helpers/usersnap.helpers.js"
+import * as gtm from "@/src/google-tag-manager";
 
 type Props = {
     services: Array<Service>,
@@ -46,6 +48,36 @@ function SendForm({
     async function onSubmit(data) {
         const status = await submitForm(data)
         recaptchaRef.current?.reset();
+        if (status === "Message is sent") {
+            usersnapFireEvent("services-shared")
+            gtm.emit({
+                event: "Action Triggered - Services Shared Via Ask Izzy",
+                eventCat: "Action triggered",
+                eventAction: "Services shared",
+                eventLabel: `${messageType} via Ask Izzy`,
+                eventValue: services.length,
+                sendDirectlyToGA: true,
+            });
+            for (const service of services) {
+                gtm.emit({
+                    event: "Action Triggered - Services Shared Via Ask Izzy (individual)",
+                    eventCat: "Action triggered",
+                    eventAction: "Services shared (individual)",
+                    eventLabel: `${messageType} via Ask Izzy`,
+                    eventValue: service.id,
+                    sendDirectlyToGA: true,
+                });
+            }
+        } else {
+            gtm.emit({
+                event: "Action Triggered - Failed To Share Services",
+                eventCat: "Action triggered",
+                eventAction: "Failed to share services",
+                eventLabel: `${messageType} via Ask Izzy - ${status}`,
+                eventValue: services.length,
+                sendDirectlyToGA: true,
+            });
+        }
         setSentStatus(status)
     }
 

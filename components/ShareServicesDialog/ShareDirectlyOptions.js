@@ -7,6 +7,7 @@ import {CopyToClipboard} from "react-copy-to-clipboard";
 import isMounted from "@/hooks/useIsMounted"
 import StandardButton from "@/components/general/StandardButton"
 import Service from "@/src/iss/Service"
+import * as gtm from "@/src/google-tag-manager";
 
 type Props = {
     services: Array<Service>
@@ -57,20 +58,58 @@ function ShareDirectlyOptions({
         }
     }, [])
 
-
+    function GAIndividualServices(event: string, eventLabel: string) {
+        for (const service of services) {
+            gtm.emit({
+                event: event,
+                eventCat: "Action triggered",
+                eventAction: "Services shared (individual)",
+                eventLabel: eventLabel,
+                eventValue: service.id,
+                sendDirectlyToGA: true,
+            });
+        }
+    }
 
     return (
         <div className="ShareDirectlyOptions">
             <CopyToClipboard
                 text={textToShare}
             >
-                <StandardButton onClick={() => {}}>
+                <StandardButton
+                    onClick={() => {
+                        GAIndividualServices(
+                            "Action Triggered - Services Shared Via Clipboard (individual)",
+                            "Clipboard"
+                        )
+                    }}
+                    analyticsEvent={{
+                        event: "Action Triggered - Services Shared Via Clipboard",
+                        eventAction: "Services shared",
+                        eventLabel: "Clipboard",
+                        eventValue: services.length,
+                    }}
+                >
                     Copy link{isPlural ? "s" : ""}
                 </StandardButton>
             </CopyToClipboard>
             {nativeShareSupported && (
-                // $FlowIgnore Flow.js currently out-of-date and doesn't know about the share API
-                <StandardButton onClick={() => navigator.share(shareData)}>
+                <StandardButton
+                    onClick={() => {
+                        GAIndividualServices(
+                            "Action Triggered - Services Shared Via Web Share API (individual)",
+                            "Web Share API"
+                        )
+                        // $FlowIgnore Flow.js currently out-of-date and doesn't know about the share API
+                        navigator.share(shareData)
+                    }}
+                    analyticsEvent={{
+                        event: "Action Triggered - Services Shared Via Web Share API",
+                        eventAction: "Services shared",
+                        eventLabel: "Web Share API",
+                        eventValue: services.length,
+                    }}
+                >
                     More
                 </StandardButton>
             )}
