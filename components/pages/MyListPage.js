@@ -142,12 +142,12 @@ function MyListPage(): ReactNode {
         return (
             <div className="information-container">
                 <div className="information-text">
-                    <h2>How long will services stay in My List?</h2>
-                    <div>
+                    <h3>How long will services stay in My List?</h3>
+                    <div className="information-text-body">
                         Services will be kept here until you remove them or your browsing history is cleared.
                     </div>
                     <br/>
-                    <div>
+                    <div className="information-text-body">
                         Why not send the services on this list to
                         yourself now?
                     </div>
