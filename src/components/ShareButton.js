@@ -9,13 +9,13 @@ import Service from "@/src/iss/Service"
 import ShareServicesDialog from "@/components/ShareServicesDialog"
 
 type Props = {
-    services: Array<Service>,
+    services?: Array<Service>,
     hasTextDescription?: boolean,
 }
 
 function ShareButton({
     hasTextDescription = false,
-    services,
+    services = [],
 }: Props): ReactNode {
     const textDescription = "Share"
     const [open, setOpen] = useState(false)
@@ -41,10 +41,12 @@ function ShareButton({
                 }
             </div>
         </Button>
-        {open && <ShareServicesDialog
-            onCloseRequested={() => setOpen(false)}
-            services={services}
-        />}
+        {open &&
+            <ShareServicesDialog
+                onCloseRequested={() => setOpen(false)}
+                services={services}
+            />
+        }
     </>
 }
 

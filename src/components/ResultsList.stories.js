@@ -3,7 +3,8 @@
 import type {Node as ReactNode} from "React";
 import React from "react";
 
-import ResultsList from "./ResultsList";import {
+import ResultsList from "./ResultsList";
+import {
     ixaService,
     susansHouseService,
     domesticViolenceService,

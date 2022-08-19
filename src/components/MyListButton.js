@@ -47,8 +47,8 @@ function MyListButton({
                 <MyList />
             </div>
             <span className="title">My List</span>
-            <div className="count">
-                {serviceCount}
+            <div className="my-list-count">
+                {serviceCount < 100 ? serviceCount : "99+"}
             </div>
         </Link>
     )

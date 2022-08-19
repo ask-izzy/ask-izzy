@@ -15,19 +15,21 @@
         margin: 1em;
     }
 
-    .ClearMyListOptions{
+    .ClearMyListOptions {
         display: flex;
         margin: 1em;
         justify-content: space-between;
         font-weight: bold;
+
         .cancel-button {
-            border: none;
+            border: 0;
             background-color: transparent;
             color: #{colours.get-static('colour-text-brand')};
             color: var(--colour-text-brand);
         }
+
         .clear-button {
-            border: none;
+            border: 0;
             border-radius: 5px;
             padding: 9px;
             background-color: #{colours.get-static('colour-text-brand')};

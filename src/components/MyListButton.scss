@@ -6,6 +6,7 @@
     align-items: center;
     margin-right: 10px;
     text-decoration: none;
+    font-size: 16px;
 
     .list-button {
         grid-area: list-button;
@@ -29,14 +30,14 @@
         padding: 0 4px;
     }
 
-    .count {
+    .my-list-count {
         grid-area: count;
         display: flex;
         justify-content: center;
         align-items: center;
-        width: 25px;
-        height: 25px;
-        border-radius: 15px;
+        width: 35px;
+        height: 35px;
+        border-radius: 50%;
         background-color: #{colours.get-static('colour-bg-standard')};
         background-color: var(--colour-bg-standard);
         color: #{colours.get-static('colour-text-dark')};

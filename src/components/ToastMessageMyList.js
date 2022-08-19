@@ -1,50 +1,44 @@
 /* @flow */
 
-import React, {useEffect, useState, useRef} from "react";
+import React, {useEffect, useState} from "react";
 import type {Node as ReactNode} from "react"
-import ToastMessage from "../../components/ResultsListPage/ToastMessage"
-import MyList from "../../icons/MyList"
-import Undo from "../../icons/Undo"
-import storage from "../../storage"
+import { useRouter } from "next/router"
+
+
+import useTrackDifference from "../../hooks/useTrackDifference"
+import ToastMessage from "../components/ToastMessage"
+import MyList from "../icons/MyList"
+import Undo from "../icons/Undo"
+import storage from "../storage"
 
 
 type Props = {
     uniqueStorageSubscriptionKey: string,
-    onClickAdd?: function,
-    onClickUndo?: function,
     isUndo?: boolean,
     isAdd?: boolean,
 }
-type myListObjType = {string: Object}
 
 export default function ToastMessageMyList({
     uniqueStorageSubscriptionKey,
-    onClickAdd = () => {},
-    onClickUndo = () => {},
     isUndo = false,
     isAdd = false,
 }: Props): ReactNode {
+    const router = useRouter()
     const [message, setMessage] = useState<string>("")
-    const [typeOfFunction, setTypeOfFunction] = useState<string>("")
+    const [typeOfMessage, setTypeOfMessage] = useState<string>("")
     const [actionDescriptor, setActionDescriptor] = useState<ReactNode>(<></>)
     const [servicesChangedSignal, setServicesChangedSignal] = useState<boolean>(false)
-    const [myListCache, setMyListCache] = useState<myListObjType>({})
-    // ref is to fix the stale closure issue
-    // caused by updateServices callback
-    // fix requires using a ref and a useState hook
-    // https://stackoverflow.com/questions/
-    // 62806541/how-to-solve-the-react-hook-closure-issue
-    const myListCacheRef = useRef()
+    const [
+        updateServices,
+        findRemovedServices,
+        currentServicesLengthDifference,
+    ] = useTrackDifference()
 
     useEffect(() => {
         updateToastMessage(true)
         const cleanup = subscribeToJsonChange()
         return cleanup
     }, [])
-
-    useEffect(() => {
-        myListCacheRef.current = myListCache
-    }, [myListCache])
 
     useEffect(() => {
         if (servicesChangedSignal) {
@@ -68,35 +62,57 @@ export default function ToastMessageMyList({
             aria-label="Press enter to access My List"
         >
             <MyList />
-            <span>View My List</span>
+            <span>VIEW MY LIST</span>
         </div>
     )
 
     const updateToastMessage = (initial: boolean) => {
         const myList = storage.getJSON(jsonStorageObj)
+        updateServices(myList)
+        const difference = currentServicesLengthDifference()
+        const serviceAdded = difference > 0
+        const serviceRemoved = difference < 0
         if (!initial && myList) {
-            const cacheLength = myListCacheRef.current ?
-                Object.keys(myListCacheRef.current).length
-                : 0
-            const storageLength = Object.keys(myList).length
-            if (isAdd && storageLength > cacheLength) {
-                // service was added to my list
+            if (isAdd && serviceAdded) {
                 setServicesChangedSignal(true)
                 setMessage("Service added to your list")
                 setActionDescriptor(actionDescriptorAdd)
-                setTypeOfFunction("add")
-            } else if (isUndo && storageLength < cacheLength) {
-                // service was removed from my list
+                setTypeOfMessage("add")
+
+            } else if (isUndo && serviceRemoved) {
                 setServicesChangedSignal(true)
-                const curMessage = cacheLength - storageLength > 1 ?
-                    "Services removed"
-                    : "Service removed"
+                const oneServiceRemoved = difference == -1
+                const curMessage = oneServiceRemoved ?
+                    "Service removed"
+                    : "Services removed"
+
                 setMessage(curMessage)
                 setActionDescriptor(actionDescriptorUndo)
-                setTypeOfFunction("undo")
+                setTypeOfMessage("undo")
             }
         }
-        setMyListCache(myList)
+    }
+
+    const undoLastChange = () => {
+        const myList = storage.getJSON(jsonStorageObj)
+        // add all missing services
+        const removedServices = findRemovedServices()
+        if (myList) {
+            removedServices.forEach(
+                (key) => {
+                    myList[key.toString()] = true
+                }
+            )
+
+            storage.setJSON(
+                "my-list-services", myList
+            )
+        }
+
+    }
+
+    const viewMyList = () => {
+        router.push("/my-list")
     }
 
     function subscribeToJsonChange() {
@@ -111,11 +127,11 @@ export default function ToastMessageMyList({
             <ToastMessage
                 open={servicesChangedSignal}
                 onClick={() => {
-                    if (typeOfFunction === "add") {
-                        onClickAdd()
+                    if (typeOfMessage === "add") {
+                        viewMyList()
                     }
-                    if (typeOfFunction === "undo") {
-                        onClickUndo()
+                    if (typeOfMessage === "undo") {
+                        undoLastChange()
                     }
                 }}
                 message={message}
