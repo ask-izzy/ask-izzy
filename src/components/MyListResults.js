@@ -9,7 +9,7 @@ import ScreenReader from "../components/ScreenReader";
 import Service from "../iss/Service";
 
 type Props = {
-    results: {string: Service},
+    results: Array<[string, Service, number]>,
     resultsLoading: boolean,
     travelTimesStatus: travelTimesStatus,
     children?: ReactNode,
@@ -34,18 +34,18 @@ function MyListResults({
                     otherwise VoiceOver won't treat this as a list even after
                     services have loaded.
                  */}
-                {resultsLoading && Object.keys(results).length === 0 &&
+                {resultsLoading && results.length === 0 &&
                     <li key={0}>
                         <ScreenReader>Loading services…</ScreenReader>
                     </li>
                 }
-                {Object.keys(results).flatMap((key, index) => {
+                {results.flatMap((item, index) => {
                     const newList = []
                     newList.push(
                         <MyListResultItem
-                            key={key}
+                            key={item[0]}
                             travelTimesStatus={travelTimesStatus}
-                            service={results[key]}
+                            service={item[1]}
                             resultNumber={index + 1}
                         />
                     )

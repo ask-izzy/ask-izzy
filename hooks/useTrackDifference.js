@@ -23,11 +23,16 @@ export default (): Array<function> => {
         const differences = []
         for (let key in previousList.current) {
             if (!Object.keys(currentList.current).includes(key)) {
-                differences.push(key)
+                differences.push([key, previousList.current[key]])
             }
         }
         return differences
     }
+    const getPreviousList = () => {
+        // change to this instead of finding the difference
+        return previousList.current
+    }
+
     const currentListLengthDifference = () => {
         // returns integer of length differences between
         // currentList and previousList, a positive integer
@@ -35,6 +40,6 @@ export default (): Array<function> => {
         return Object.keys(currentList.current).length - Object.keys(previousList.current).length
 
     }
-    return [updateCurrent, findRemovedFromPreviousList, currentListLengthDifference]
+    return [updateCurrent, findRemovedFromPreviousList, currentListLengthDifference, getPreviousList]
 };
 

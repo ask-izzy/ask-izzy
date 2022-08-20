@@ -8,6 +8,7 @@ import RemoveFromCompare from "../icons/RemoveFromCompare"
 import storage from "../storage";
 import classnames from "classnames";
 import * as gtm from "@/src/google-tag-manager";
+import useNextServiceId from "@/hooks/useNextServiceId"
 
 type Props = {
     hasTextDescription?: boolean,
@@ -21,6 +22,7 @@ function AddToCompareButton({
     className,
 }: Props): ReactNode {
     const [isRemove, setIsRemove] = useState<boolean>(getInitialState())
+    const getNextIdx = useNextServiceId()
     const addToCompareText = "Add to My List"
     const removeFromCompareText = "Remove from My List"
     const textDescription = isRemove ? removeFromCompareText : addToCompareText
@@ -69,7 +71,7 @@ function AddToCompareButton({
         if (removeFromStorage) {
             delete myList[serviceID]
         } else {
-            myList[serviceID] = true
+            myList[serviceID] = getNextIdx()
         }
 
         storage.setJSON("my-list-services", myList)
