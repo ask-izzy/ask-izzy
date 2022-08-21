@@ -4,6 +4,11 @@
     .action-container {
         display: flex;
         align-items: center;
+        column-gap: 7px;
+
+        .close-toast-message-button {
+            overflow: hidden;
+        }
     }
 
     button {

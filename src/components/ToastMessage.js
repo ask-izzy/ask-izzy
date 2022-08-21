@@ -27,7 +27,7 @@ export default function ToastMessage({
     const [focusTimer, setFocusTimer] = useState();
     const toastMessageRef = useRef()
     const [setFocus, revertFocus] = useMoveFocus(toastMessageRef)
-    const autoHideDuration = 8000
+    const autoHideDuration = 800000
 
     useEffect(() => {
         if (open) {
@@ -64,7 +64,6 @@ export default function ToastMessage({
                     {
                         hasActionButton &&
                         <Button
-                            className="try"
                             ref={toastMessageRef}
                             onClick={handleAction}
                         >
@@ -72,7 +71,7 @@ export default function ToastMessage({
                         </Button>
                     }
                     <Button
-                        className="try"
+                        className="close-toast-message-button"
                         onClick={() => {
                             setIsOpen(false)
                         }}
@@ -96,10 +95,13 @@ export default function ToastMessage({
                 key={"bottomcenter"}
                 sx={{
                     "& .MuiPaper-elevation": {
-                        minWidth: "auto",
+                        minWidth: {xs: "auto", sm: 325, md: 325, lg: 325, xl: 325},
                         backgroundColor: "var(--colour-brand-primary)",
                         color: "var(--raw-colour-warm-white)",
                         fontWeight: "lighter",
+                        "& .MuiSnackbarContent-action": {
+                            paddingLeft: "11px"
+                        },
                     },
                 }}
             />

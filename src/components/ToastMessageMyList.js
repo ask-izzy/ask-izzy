@@ -10,6 +10,7 @@ import ToastMessage from "../components/ToastMessage"
 import MyList from "../icons/MyList"
 import Undo from "../icons/Undo"
 import storage from "../storage"
+import {MobileDetect} from "../effects/MobileDetect";
 
 
 type Props = {
@@ -47,6 +48,7 @@ export default function ToastMessageMyList({
     }, [servicesChangedSignal])
 
     const jsonStorageObj = "my-list-services"
+    const isMobile = MobileDetect(500)
 
     const actionDescriptorUndo = (
         <div className="action-descriptor"
@@ -61,7 +63,7 @@ export default function ToastMessageMyList({
         <div className="action-descriptor"
             aria-label="Press enter to access My List"
         >
-            <MyList />
+            {!isMobile && <MyList />}
             <span>VIEW MY LIST</span>
         </div>
     )
@@ -82,11 +84,11 @@ export default function ToastMessageMyList({
             } else if (isUndo && serviceRemoved) {
                 setServicesChangedSignal(true)
                 const oneServiceRemoved = difference == -1
-                const curMessage = oneServiceRemoved ?
+                const undoMessage = oneServiceRemoved ?
                     "Service removed"
                     : "Services removed"
 
-                setMessage(curMessage)
+                setMessage(undoMessage)
                 setActionDescriptor(actionDescriptorUndo)
                 setTypeOfMessage("undo")
             }
