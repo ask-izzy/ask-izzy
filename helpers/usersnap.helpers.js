@@ -1,4 +1,4 @@
-/* @Flow */
+/* @flow */
 
 export function usersnapFireEvent(event: string) {
     if (typeof window !== "undefined") {

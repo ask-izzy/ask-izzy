@@ -2,8 +2,6 @@
 
 .AlertBanner {
     padding: 0.1px; /* force margins not to collapse */
-    border: #{colours.get-static('colour-border-alert')} solid 1px;
-    border: var(--colour-border-alert) solid 1px;
     background-color: #{colours.get-static('colour-bg-standard')};
     background-color: var(--colour-bg-standard);
     color: #{colours.get-static('colour-text-dark')};
@@ -54,7 +52,7 @@
 
     &[open] {
         .title-container .ChevronIcon {
-            transform: rotate(-90deg);
+            transform: rotate(90deg);
         }
     }
 
@@ -63,21 +61,23 @@
         align-items: center;
         justify-content: space-between;
         min-height: 60px;
-        padding: 0 1em;
+        padding: 0 0 0 1em;
 
         .title {
             display: flex;
             align-items: center;
 
             .icon {
-                margin-right: 0.4em;
-                margin-left: 0.4em;
-
                 .InfoIcon {
-                    /* Counteract margin in SVG */
-                    width: 47px;
-                    height: 47px;
-                    margin: -8.5px;
+                    width: 40px;
+                    height: auto;
+                    margin: -8px -7px -13px -13px;
+                }
+
+                .WarningIcon {
+                    width: 23px;
+                    height: auto;
+                    margin: -15px 1px -13px -5px;
                 }
             }
 
