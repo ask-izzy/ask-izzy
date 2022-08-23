@@ -48,6 +48,11 @@
                     padding: 1em;
                     max-height: 13.5em;
                     overflow: auto;
+
+                    a,
+                    a:visited {
+                        color: inherit;
+                    }
                 }
             }
 

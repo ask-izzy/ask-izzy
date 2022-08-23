@@ -205,6 +205,7 @@ function SendForm({
                 messageText,
                 onCloseRequest,
                 formState,
+                messageType,
             )}
         </Form>
     </div>
@@ -219,7 +220,11 @@ function renderSubmitDetailsSection(
     messageText,
     onCloseRequest,
     formState,
+    messageType,
 ) {
+    const messagePreviewContentsProp = messageType === "Email" ?
+        {dangerouslySetInnerHTML: {__html: messageText.body}}
+        : {children: messageText.body}
     return (
         <FormSection
             className="submitDetails"
@@ -231,10 +236,8 @@ function renderSubmitDetailsSection(
                 </div>
                 <div
                     className="messageText"
-                >
-
-                    {messageText.body}
-                </div>
+                    {...messagePreviewContentsProp}
+                />
             </div>
             <div className="recapture">
                 <ReCAPTCHA

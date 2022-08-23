@@ -1,6 +1,4 @@
 /* @flow */
-import "core-js/actual/string/replace-all";
-
 import type {
     PersonalisationPage,
 } from "../../flow/personalisation-page"
@@ -138,7 +136,7 @@ export function convertRouteToPath(
     route: string,
     params: {[string]: [string]}
 ): string {
-    // $FlowIgnore We import a polyfill for replaceAll
+    // $FlowIgnore polyfill for replaceAll is imported in _app.js
     return route.replaceAll(
         /\[([^/\]]+?)\]/g,
         (fullMatch, param) => {
