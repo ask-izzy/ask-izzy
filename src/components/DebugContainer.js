@@ -4,7 +4,7 @@ import type {Element as ReactElement} from "React";
 import React from "react";
 
 import Collapser from "./general/Collapser";
-import debugModeContext from "../contexts/debug-mode-context";
+import debugModeContext from "@/contexts/debug-mode-context";
 
 type Props = {
     message: string,

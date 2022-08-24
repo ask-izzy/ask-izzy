@@ -9,7 +9,7 @@ import type { NextRouter } from "next/router"
 
 import "@/src/utils/global-setup"
 import "../src/styles/bundle.scss"
-import {DebugModeProvider} from "@/src/contexts/debug-mode-context";
+import {DebugModeProvider} from "@/contexts/debug-mode-context";
 import { getFullPageTitle } from "@/src/utils";
 import "@/src/utils/page-loading"
 import apolloClient from "@/src/utils/apolloClient";

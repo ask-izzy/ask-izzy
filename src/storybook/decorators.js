@@ -6,7 +6,7 @@ import {LoadScript} from "@react-google-maps/api";
 import { ApolloProvider } from "@apollo/client";
 
 import storage from "../storage";
-import { DebugModeProvider } from "../contexts/debug-mode-context";
+import { DebugModeProvider } from "@/contexts/debug-mode-context";
 import createApolloClient from "../utils/apolloClient";
 import {browserEventName as gtmBrowserEventName} from "../google-tag-manager"
 
