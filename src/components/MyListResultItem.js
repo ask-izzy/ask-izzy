@@ -67,9 +67,7 @@ function ResultListItem({
                         <h2>{service.name}</h2>
                     </Link>
                 </div>
-                <AddToCompareButton serviceID={service.id}
-                    serviceObj={service}
-                />
+                <AddToCompareButton service={service}/>
             </div>
 
 

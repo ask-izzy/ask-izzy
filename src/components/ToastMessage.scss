@@ -1,9 +1,23 @@
 @use '../styles/mixins/colours';
 
 .ToastMessage {
+    font-weight: lighter;
+
     .action-container {
         display: flex;
         align-items: center;
+        font-weight: bolder;
+
+        svg {
+            width: 25px;
+            height: 25px;
+            margin-bottom: -4px;
+
+            path {
+                fill: #{colours.get-static('raw-colour-warm-white')};
+                fill: var(--raw-colour-warm-white);
+            }
+        }
     }
 
     button {

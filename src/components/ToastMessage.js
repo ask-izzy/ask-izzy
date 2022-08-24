@@ -6,77 +6,87 @@ import Button from "@/src/components/base/Button";
 import Snackbar from "@mui/material/Snackbar";
 import Cross from "@/src/icons/Cross"
 import useMoveFocus from "@/hooks/useMoveFocus";
+import useToastMessage from "@/hooks/useToastMessage";
 
 
-type Props = {
-  open?: boolean,
-  onClick?: function,
-  message?: string,
-  hasActionButton: boolean,
-  actionDescriptor?: ReactNode,
-}
-
-export default function ToastMessage({
-    open = false,
-    onClick = () => {},
-    message = "",
-    hasActionButton,
-    actionDescriptor = <></>,
-}: Props): ReactNode {
-    const [isOpen, setIsOpen] = useState<boolean>(false);
-    const [focusTimer, setFocusTimer] = useState();
-    const toastMessageRef = useRef()
-    const [setFocus, revertFocus] = useMoveFocus(toastMessageRef)
+export default function ToastMessage(): ReactNode {
     const autoHideDuration = 8000
+    const [focusTimer, setFocusTimer] = useState()
+    const ActionDescriptorRef = useRef()
+    const closeButtonRef = useRef()
+    const snackBarRef = useRef()
+    const [setFocus, revertFocus] = useMoveFocus()
+
+    const {
+        open,
+        setOpen,
+        message,
+        actionDescriptor,
+        onActionDescriptorClick,
+        forceToastMessageUpdateState,
+    } = useToastMessage()
 
     useEffect(() => {
+        // toast message stops autoclose-timer
+        // after losing focus, so manual timeout is necessary
         if (open) {
-            setIsOpen(true)
             clearTimeout(focusTimer)
-            setFocus()
-            // toast message stops autoclose-timer
-            // after losing focus, so timeout is necessary
+            const refToFocus = actionDescriptor ? ActionDescriptorRef : closeButtonRef
+            setFocus(refToFocus)
             setFocusTimer(setTimeout(
-                () => setIsOpen(false), autoHideDuration
+                () => setOpen(false), autoHideDuration
             ))
+        } else {
+            clearTimeout(focusTimer)
+            revertFocus()
+        }
+    }, [open, forceToastMessageUpdateState])
+
+    useEffect(() => {
+        // accessibility work around if toast bar is the last element in the document
+        function skipLastTab(event) {
+            const focusableELements = document.querySelectorAll(
+                "button, [href], input, select, textarea, [tabindex]:not([tabindex=\"-1\"])"
+            )
+            const lastFocusableElement = focusableELements[focusableELements.length - 1]
+            if (
+                event.code === "Tab" &&
+                document.activeElement === lastFocusableElement
+            ) {
+                revertFocus()
+                event.preventDefault()
+                event.stopPropagation()
+            }
+        }
+        if (open) {
+            snackBarRef.current?.addEventListener("keydown", skipLastTab)
+        } else {
+            snackBarRef.current?.removeEventListener("keydown", skipLastTab)
         }
     }, [open])
 
-    useEffect(() => {
-        // used for accessibility
-        if (isOpen) {
-            setFocus()
-        } else {
-            revertFocus()
-            clearTimeout(focusTimer)
-        }
-    }, [isOpen])
-
-    function handleAction(event, reason) {
-        setIsOpen(false)
-        onClick()
-    }
 
     const action = (
         <>
             {
                 <div className="action-container">
                     {
-                        hasActionButton &&
+                        actionDescriptor &&
                         <Button
-                            className="try"
-                            ref={toastMessageRef}
-                            onClick={handleAction}
+                            ref={ActionDescriptorRef}
+                            onClick={onActionDescriptorClick}
                         >
                             {actionDescriptor}
                         </Button>
                     }
                     <Button
-                        className="try"
+                        ref={closeButtonRef}
                         onClick={() => {
-                            setIsOpen(false)
+                            setOpen(false)
                         }}
-                        onBlur={revertFocus}
+                        onBlur={() => {
+                            revertFocus()
+                        }}
                     >
                         <Cross />
                     </Button>
@@ -89,7 +99,8 @@ export default function ToastMessage({
     return (
         <div className="ToastMessage">
             <Snackbar
-                open={isOpen}
+                open={open}
+                ref={snackBarRef}
                 message={message}
                 action={action}
                 anchorOrigin={{vertical: "bottom", horizontal: "center"}}
