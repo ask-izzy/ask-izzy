@@ -38,6 +38,11 @@ export default function BrandedFooter(): ReactElement<"footer"> {
                             </Link>
                         </li>
                         <li>
+                            <Link to="/data-privacy">
+                                Data Privacy
+                            </Link>
+                        </li>
+                        <li>
                             <Link to="/online-safety">
                                 Online Safety
                             </Link>
@@ -86,6 +91,11 @@ export default function BrandedFooter(): ReactElement<"footer"> {
                         <li>
                             <Link to={aboutLink}>
                                 About Ask Izzy
+                            </Link>
+                        </li>
+                        <li>
+                            <Link to="/what-is-new">
+                                What's new
                             </Link>
                         </li>
                         <li>
