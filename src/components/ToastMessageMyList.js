@@ -99,8 +99,8 @@ export default function ToastMessageMyList({
         const removedServices = findRemovedServices()
         if (myList) {
             removedServices.forEach(
-                (key) => {
-                    myList[key.toString()] = true
+                (item) => {
+                    myList[item[0].toString()] = item[1]
                 }
             )
 

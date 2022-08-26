@@ -19,13 +19,14 @@ import ToastMessageMyList from "@/src/components/ToastMessageMyList"
 import Service from "@/src/iss/Service"
 import ClearMyListDialog from "@/src/components/ClearMyListDialog"
 
-type myListObjType = {string: Object}
+type myListArrayType = Array<[string, Service, number]>
+type cacheType = {string: Object}
 
 function MyListPage(): ReactNode {
     const router = useRouter()
     const isMobile = MobileDetect(500)
-    const [myListObj, setMyListObj] = useState<myListObjType>({})
-    const [cache, setCache] = useState<myListObjType>({})
+    const [myListArray, setMyListArray] = useState<myListArrayType>([])
+    const [cache, setCache] = useState<cacheType>({})
     const [openClearAllDialog, setOpenClearAllDialog] = useState<boolean>(false)
 
     const [isLoading, setIsLoading] = useState<boolean>(true)
@@ -36,7 +37,8 @@ function MyListPage(): ReactNode {
     // fix requires using a ref and a useState hook
     // https://stackoverflow.com/questions/
     // 62806541/how-to-solve-the-react-hook-closure-issue
-    const cacheRef = useRef<myListObjType>({});
+    // this ref is read only except for useEffect hook
+    const cacheRef = useRef<cacheType>({});
 
     const jsonStorageObj = "my-list-services"
     const uniqueStorageSubscriptionKey = "myListUndoKey"
@@ -50,12 +52,16 @@ function MyListPage(): ReactNode {
     const [selectedServices, setSelectedServices] = useState<Array<Service>>([])
 
     useEffect(() => {
-        cacheRef.current = myListObj
-        setSelectedServices(
-            Object.values(myListObj)
-                .map(serviceData => new Service(serviceData))
-        )
+        cacheRef.current = cache
     }, [cache])
+
+    useEffect(() => {
+        // update selectedServices to share services
+        setSelectedServices(
+            myListArray
+                .map(serviceData => new Service(serviceData[1]))
+        )
+    }, [myListArray])
 
     function subscribeToJsonChange() {
         storage.subscribeToJsonChange(jsonStorageObj, uniqueStorageSubscriptionKey, updateServices)
@@ -77,20 +83,43 @@ function MyListPage(): ReactNode {
     }
 
     const updateServices = (initialLoadObj) => {
-        let myCurrentList = {}
+        let myCurrentList = storage.getJSON(jsonStorageObj)
+        let myListServices
         if (initialLoadObj) {
             // only executed when component is mounted
-            myCurrentList = initialLoadObj
+            myListServices = initialLoadObj
             setIsLoading(false)
         } else {
-            // update removed services
-            myCurrentList = storage.getJSON(jsonStorageObj)
-            for (let key of Object.keys(myCurrentList)) {
-                myCurrentList[key] = cacheRef.current[key]
+            // update services
+            myListServices = storage.getJSON(jsonStorageObj)
+            for (let key of Object.keys(myListServices)) {
+                myListServices[key] = cacheRef.current[key]
             }
         }
-        setMyListObj(myCurrentList)
+
+        setMyListArray(
+            sortServicesArray(
+                myListServicesToArray(myListServices, myCurrentList)
+
+            )
+        )
         setServiceCount(Object.keys(myCurrentList).length)
+    }
+
+    function myListServicesToArray(myListServices, myCurrentList) {
+        const array = []
+        for (let key in myListServices) {
+            array.push([key, myListServices[key], myCurrentList[key]])
+        }
+        return array
+    }
+
+    function sortServicesArray(servicesArray) {
+        let sortedServicesArray = servicesArray.sort((a, b) => {
+            return Number(b[2]) - Number(a[2])
+        });
+
+        return sortedServicesArray
     }
 
     async function getServiceObjs(myCurrentList) {
@@ -159,7 +188,7 @@ function MyListPage(): ReactNode {
             return (
                 <div className="my-list-results-container">
                     <MyListResults
-                        results={myListObj}
+                        results={myListArray}
                         resultsLoading={isLoading}
                         travelTimesStatus={"loaded"}
                     >
