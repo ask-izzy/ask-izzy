@@ -26,13 +26,17 @@
     .ShareButton {
         background-color: #{colours.get-static('colour-brand-primary')};
         background-color: var(--colour-brand-primary);
-        padding: 5px 1px;
-        border-radius: 3px;
+        padding: 9px 8px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-radius: 4px;
 
         .main-container {
             .text-description {
                 color: #{colours.get-static('colour-share-white')};
                 color: var(--colour-share-white);
+                padding: 0 6px;
             }
         }
 
@@ -90,8 +94,14 @@
         }
     }
 
+    .instructions {
+        font-size: 14px;
+    }
+
     .empty-list-container {
         text-align: center;
+        color: #{colours.get-static('colour-text-dark')};
+        color: var(--colour-text-dark);
 
         .back-to-home {
             background-color: #{colours.get-static('colour-brand-primary')};
@@ -164,7 +174,10 @@
         color: var(--colour-text-dark);
 
         .information-text {
-            text-align: center;
+            display: flex;
+            flex-direction: column;
+            row-gap: 15px;
+            align-items: center;
             padding: 0 60px;
             margin-bottom: 90px;
         }

@@ -141,21 +141,20 @@ function MyListPage(): ReactNode {
         return (
             <div className="information-container">
                 <div className="information-text">
-                    <h2>How long will services stay in My List?</h2>
-                    <div>
+                    <h3>How long will services stay in My List?</h3>
+                    <div className="instructions">
                         Services will be kept here until you remove them or your browsing history is cleared.
                     </div>
-                    <br/>
-                    <div>
+                    <div className="instructions">
                         Why not send the services on this list to
                         yourself now?
                     </div>
-                    <br/>
                     <ShareButton
                         hasTextDescription={true}
                         services={selectedServices}
                     />
                 </div>
+
             </div>
 
         )
@@ -171,10 +170,10 @@ function MyListPage(): ReactNode {
         } else if (serviceCount == 0) {
             return (
                 <div className="empty-list-container">
-                    <h2>
+                    <h3>
                         Your list is empty
-                    </h2>
-                    <div>
+                    </h3>
+                    <div className="instructions">
                         Search Ask Izzy to add services here.
                     </div>
                     <Button onClick={() => router.push("/")}
