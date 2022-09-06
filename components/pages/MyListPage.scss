@@ -102,6 +102,7 @@
         text-align: center;
         color: #{colours.get-static('colour-text-dark')};
         color: var(--colour-text-dark);
+        margin: 100px 0;
 
         .back-to-home {
             background-color: #{colours.get-static('colour-brand-primary')};

@@ -28,7 +28,7 @@ Feature: My List
         When I click the button with ".RemoveFromCompare" class name
         Then I should see "0" services in my list
 
-    Scenario: Add / Remove items to my list from service page
+    Scenario: Add / Remove my list items from service page
         Given A service with:
         ----------------------------------------------
         description: There is a service here, and its really quite helpful. You can get all sorts of things - blankets, food, other stuff too. I suggest you drop by and check us out. Our service is the best, its really just the best. Not sure why you're still reading at this point. Also we have penguins.
@@ -39,7 +39,8 @@ Feature: My List
         Then I should see "1" services in my list
         When I click the button with ".RemoveFromCompare" class name
         Then I should see "0" services in my list
-
+        
+        
     Scenario: Clear all from My List page
         When I visit /housing
         And I should see the results
@@ -70,6 +71,10 @@ Feature: My List
         And Then I should see "0" services in my list
         And Then I should see "UNDO"
 
+        ---------------
+        And I should see the branding footer
+
+        
 
 
 

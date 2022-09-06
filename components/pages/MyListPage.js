@@ -18,6 +18,7 @@ import {getService} from "@/src/iss/load-services"
 import ToastMessageMyList from "@/src/components/ToastMessageMyList"
 import Service from "@/src/iss/Service"
 import ClearMyListDialog from "@/src/components/ClearMyListDialog"
+import BrandedFooter from "@/src/components/BrandedFooter"
 
 type myListArrayType = Array<[string, Service, number]>
 type cacheType = {string: Object}
@@ -249,6 +250,7 @@ function MyListPage(): ReactNode {
                 uniqueStorageSubscriptionKey="myListPageUndoKey"
                 isUndo={true}
             />
+            <BrandedFooter />
             {
                 openClearAllDialog &&
                 <ClearMyListDialog
