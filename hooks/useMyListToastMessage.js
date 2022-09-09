@@ -22,7 +22,7 @@ export default (): UseMyListToastMessage => {
             aria-label="Press enter to undo"
         >
             <UndoIcon aria-label=""/>
-            <span>UNDO</span>
+            <span>Undo</span>
         </div>
     )
 
@@ -31,7 +31,7 @@ export default (): UseMyListToastMessage => {
             aria-label="Press enter to access My List"
         >
             <MyListIcon />
-            <span>VIEW MY LIST</span>
+            <span>View My List</span>
         </div>
     )
 
