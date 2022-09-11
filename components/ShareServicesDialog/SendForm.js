@@ -20,6 +20,7 @@ import type { MessageType } from "@/helpers/share-services.helpers.js"
 import useSubmitForm from "./use-submit-form.hook.js"
 import useIsMounted from "@/hooks/useIsMounted"
 import { usersnapFireEvent } from "@/helpers/usersnap.helpers.js"
+import useToastMessage from "@/hooks/useToastMessage"
 import * as gtm from "@/src/google-tag-manager";
 
 type Props = {
@@ -40,6 +41,7 @@ function SendForm({
     const {watch, formState, register, setValue} = formProps
     const [sentStatus, setSentStatus] = React.useState("")
     const recaptchaRef = React.useRef();
+    const {openToastMessage} = useToastMessage()
 
     const { submitForm, currentlySubmitting } = useSubmitForm(services)
 
@@ -48,7 +50,11 @@ function SendForm({
     async function onSubmit(data) {
         const status = await submitForm(data)
         recaptchaRef.current?.reset();
+        let displayToastMessage = () => {}
         if (status === "Message is sent") {
+            displayToastMessage = () => {
+                openToastMessage(`${messageType} sent via Ask Izzy`)
+            }
             usersnapFireEvent("services-shared")
             gtm.emit({
                 event: "Action Triggered - Services Shared Via Ask Izzy",
@@ -69,6 +75,9 @@ function SendForm({
                 });
             }
         } else {
+            displayToastMessage = () => {
+                openToastMessage("Error sharing services, please try again")
+            }
             gtm.emit({
                 event: "Action Triggered - Failed To Share Services",
                 eventCat: "Action triggered",
@@ -79,6 +88,9 @@ function SendForm({
             });
         }
         setSentStatus(status)
+        onCloseRequest()
+        setTimeout(displayToastMessage, 0)
+
     }
 
     if (typeof window !== "undefined" && !window.recaptchaOptions) {

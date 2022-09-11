@@ -3,6 +3,7 @@ import {useState, useEffect, useRef} from "react";
 
 type refType = { current: null | HTMLElement | typeof undefined} | null
 
+
 export default (): [(refType) => void, () => void] => {
     const [prevFocus, setPrevFocus] = useState<HTMLElement | null>(null)
     const prevFocusRef = useRef()

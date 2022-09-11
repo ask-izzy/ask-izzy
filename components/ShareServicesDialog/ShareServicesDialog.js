@@ -46,7 +46,7 @@ function ShareServicesDialog({
                             <span>&times;</span>
                         </Button>
                     </header>
-                    {renderScreen(screenName, {setScreenName, services})}
+                    {renderScreen(screenName, {setScreenName, services, onCloseRequested})}
                 </div>
             )}
         </Dialog>
@@ -65,7 +65,7 @@ function renderScreen(screenName: ScreenNames, args): ReactNode {
     }
 }
 
-function renderDirectlyScreen({services, setScreenName}) {
+function renderDirectlyScreen({services, onCloseRequested, setScreenName}) {
     const userIsServiceWorker = storage.getItem("who-is-looking-for-help") === "User Worker"
 
     let viaIzzyDescription
@@ -76,7 +76,9 @@ function renderDirectlyScreen({services, setScreenName}) {
     }
 
     return <>
-        <ShareDirectlyOptions services={services} />
+        <ShareDirectlyOptions services={services}
+            onClose={onCloseRequested}
+        />
         <div className="highlighted-box">
             <div className="viaAskIzzyInfoBox">
                 <h3>Why not message from Ask Izzy?</h3>
@@ -98,12 +100,12 @@ function renderDirectlyScreen({services, setScreenName}) {
     </>
 }
 
-function renderViaAskIzzyScreen({services, setScreenName}): ReactNode {
+function renderViaAskIzzyScreen({services, setScreenName, onCloseRequested}): ReactNode {
     return <>
         <div className="highlighted-box">
             <SendForm
                 services={services}
-                onCloseRequest={() => setScreenName("Directly")}
+                onCloseRequest={onCloseRequested}
             />
         </div>
     </>
