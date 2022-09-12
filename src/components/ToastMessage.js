@@ -38,7 +38,6 @@ export default function ToastMessage(): ReactNode {
             ))
         } else {
             clearTimeout(focusTimer)
-            revertFocus()
         }
     }, [open, forceToastMessageUpdateState])
 
@@ -65,34 +64,31 @@ export default function ToastMessage(): ReactNode {
         }
     }, [open])
 
+    function onActionClick(): void {
+        onActionDescriptorClick()
+        revertFocus()
+    }
 
     const action = (
-        <>
+        <div className="action-container">
             {
-                <div className="action-container">
-                    {
-                        actionDescriptor &&
-                        <Button
-                            ref={ActionDescriptorRef}
-                            onClick={onActionDescriptorClick}
-                        >
-                            {actionDescriptor}
-                        </Button>
-                    }
-                    <Button
-                        ref={closeButtonRef}
-                        onClick={() => {
-                            setOpen(false)
-                        }}
-                        onBlur={() => {
-                            revertFocus()
-                        }}
-                    >
-                        <Cross />
-                    </Button>
-                </div>
+                actionDescriptor &&
+                <Button
+                    ref={ActionDescriptorRef}
+                    onClick={onActionClick}
+                >
+                    {actionDescriptor}
+                </Button>
             }
-        </>
+            <Button
+                ref={closeButtonRef}
+                aria-label="Dismiss toast message"
+                onClick={() => setOpen(false)}
+                onBlur={() => revertFocus()}
+            >
+                <Cross/>
+            </Button>
+        </div>
     );
 
 
@@ -101,6 +97,7 @@ export default function ToastMessage(): ReactNode {
             <Snackbar
                 open={open}
                 ref={snackBarRef}
+                aria-label="Please read this"
                 message={message}
                 action={action}
                 anchorOrigin={{vertical: "bottom", horizontal: "center"}}

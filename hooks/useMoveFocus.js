@@ -6,11 +6,12 @@ type refType = { current: null | HTMLElement | typeof undefined} | null
 
 export default (): [(refType) => void, () => void] => {
     const [prevFocus, setPrevFocus] = useState<HTMLElement | null>(null)
+    // required to solve react closure issue
+    // stackoverflow.com/questions/62806541/
+    // how-to-solve-the-react-hook-closure-issue
     const prevFocusRef = useRef()
 
     useEffect(() => {
-        // required to solve react closure issue
-        // stackoverflow.com/questions/62806541/how-to-solve-the-react-hook-closure-issue
         prevFocusRef.current = prevFocus
     }, [prevFocus])
 
