@@ -17,6 +17,11 @@ default:
     - TAG_CACHE_DIST_STAGE=${DOCKER_REPO}:cache-$CI_COMMIT_BRANCH-dist && echo $TAG_CACHE_DIST_STAGE
     - export DOCKER_BUILDKIT=1
 
+include:
+  - project: 'developers/aws-ecr'
+    ref: main
+    file: '.aws-ecr.yml'
+
 build-development:
   stage: Build
   script:
