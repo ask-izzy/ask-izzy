@@ -115,7 +115,7 @@ RUN apt-get -y update && \
 USER $UID_GID
 
 COPY ./package.json ./yarn.lock /app/
-RUN yarn install --frozen-lockfile && yarn cache clean
+RUN yarn install --network-timeout 100000 --frozen-lockfile && yarn cache clean --force
 
 # Copy in just the files need to build source to avoid cache invalidation from changes to unrelated files
 COPY --chown=$UID_GID ./components /app/components
@@ -157,7 +157,7 @@ FROM base as distribution
 ARG UID_GID
 
 COPY ./package.json ./yarn.lock /app/
-RUN yarn install --frozen-lockfile && yarn cache clean
+RUN yarn install --network-timeout 100000 --frozen-lockfile && yarn cache clean --force
 
 # Copy in just the files need to build source to avoid cache invalidation from changes to unrelated files
 COPY --chown=$UID_GID ./components /app/components
