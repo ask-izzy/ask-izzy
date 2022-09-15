@@ -9,7 +9,10 @@ import type { NextRouter } from "next/router"
 
 import "@/src/utils/global-setup"
 import "../src/styles/bundle.scss"
-import {DebugModeProvider} from "@/src/contexts/debug-mode-context";
+import {DebugModeProvider} from "@/contexts/debug-mode-context";
+import {MyListProvider} from "@/contexts/my-list-context";
+import {ToastMessageProvider} from "@/contexts/toast-message-context";
+import ToastMessage from "@/src/components/ToastMessage"
 import { getFullPageTitle } from "@/src/utils";
 import "@/src/utils/page-loading"
 import apolloClient from "@/src/utils/apolloClient";
@@ -76,11 +79,16 @@ function App(appProps: AppProps): ReactNode {
     return (
         <ApolloProvider client={apolloClient}>
             <DebugModeProvider>
-                {renderHeadMetadata(pageInfo, router)}
-                <DebugColours />
-                <div className="BasePage">
-                    <Component {...pageProps} />
-                </div>
+                <ToastMessageProvider>
+                    <MyListProvider>
+                        {renderHeadMetadata(pageInfo, router)}
+                        <DebugColours />
+                        <div className="BasePage">
+                            <Component {...pageProps} />
+                        </div>
+                        <ToastMessage/>
+                    </MyListProvider>
+                </ToastMessageProvider>
             </DebugModeProvider>
         </ApolloProvider>
     )

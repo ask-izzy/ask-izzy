@@ -1,7 +1,7 @@
 /* @flow */
 import React, {useContext, createContext, useState, useEffect} from "react";
 import type {Node as ReactNode} from "react";
-import storage from "../storage"
+import storage from "@/src/storage"
 
 type Context = [
     boolean,

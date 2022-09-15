@@ -1,9 +1,12 @@
 /* @flow */
 
 import type {Node as ReactNode} from "React";
-import React, {useState, useEffect} from "react";
+import React, {useState} from "react";
 
 import ToastMessageComponent from "./ToastMessage";
+import useToastMessage from "@/hooks/useToastMessage";
+import useMyListToastMessage from "@/hooks/useMyListToastMessage"
+
 
 export default {
     title: "App Components/ToastMessage",
@@ -12,39 +15,32 @@ export default {
 
 
 export const ToastMessage = (args: Object): ReactNode => {
-    const [servicesChangedSignal, setServicesChangedSignal] = useState(true)
-    useEffect(() => {
-        if (servicesChangedSignal) {
-            setServicesChangedSignal(false)
-        }
-    }, [servicesChangedSignal])
+    const [index, setIndex] = useState(0)
+    const {openToastMessage} = useToastMessage()
 
     return <>
-        <button onClick={() => setServicesChangedSignal(true)}>Open dialog</button>
-        <ToastMessageComponent
-            open={servicesChangedSignal}
-            hasActionButton ={false}
-            message="This is a test toast message"
-        />
+        <button
+            onClick={
+                () => {
+                    setIndex(index + 1),
+                    openToastMessage(`message ${index}`)
+                }
+            }
+        >Open toast message</button>
+        <ToastMessageComponent/>
     </>;
 }
-export const ToastMessageWithActionButton = (args: Object): ReactNode => {
-    const [servicesChangedSignal, setServicesChangedSignal] = useState(true)
-    useEffect(() => {
-        if (servicesChangedSignal) {
-            setServicesChangedSignal(false)
-        }
-    }, [servicesChangedSignal])
-
+export const ToastMessageWithActionButtonViewMyList = (args: Object): ReactNode => {
+    const {serviceAddedToMyList} = useMyListToastMessage()
     return <>
-        <button onClick={() => setServicesChangedSignal(true)}>Open dialog</button>
-        <ToastMessageComponent
-            open={servicesChangedSignal}
-            message="This is a test toast message"
-            hasActionButton={true}
-            actionDescriptor={
-                <span>Action Button</span>
-            }
-        />
+        <button onClick={() => serviceAddedToMyList()}>Open toast message</button>
+        <ToastMessageComponent/>
+    </>;
+}
+export const ToastMessageWithActionButtonUndoServiceAdded = (args: Object): ReactNode => {
+    const {serviceRemovedFromMyList} = useMyListToastMessage()
+    return <>
+        <button onClick={() => serviceRemovedFromMyList(() => {})}>Open toast message</button>
+        <ToastMessageComponent/>
     </>;
 }

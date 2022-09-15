@@ -9,7 +9,7 @@ import ScreenReader from "../components/ScreenReader";
 import Service from "../iss/Service";
 
 type Props = {
-    results: Array<[string, Service, number]>,
+    results: Array<Service>,
     resultsLoading: boolean,
     travelTimesStatus: travelTimesStatus,
     children?: ReactNode,
@@ -39,13 +39,13 @@ function MyListResults({
                         <ScreenReader>Loading services…</ScreenReader>
                     </li>
                 }
-                {results.flatMap((item, index) => {
+                {results.flatMap((myListService, index) => {
                     const newList = []
                     newList.push(
                         <MyListResultItem
-                            key={item[0]}
+                            key={index}
                             travelTimesStatus={travelTimesStatus}
-                            service={item[1]}
+                            service={myListService}
                             resultNumber={index + 1}
                         />
                     )

@@ -14,8 +14,7 @@ import {
 import Service, {sortServices} from "../iss/Service";
 import type {SortType} from "./base/Dropdown";
 import type {travelTimesStatus} from "../hooks/useTravelTimesUpdater";
-import ScreenReader from "../components/ScreenReader";
-import ToastMessageMyList from "../components/ToastMessageMyList"
+import ScreenReader from "../components/ScreenReader"
 
 type Props = {
     results: Array<Service>,
@@ -78,11 +77,6 @@ function ResultsList({
                     />
                 ))}
             </ol>
-            <ToastMessageMyList
-                uniqueStorageSubscriptionKey="resultsPageAddServiceKey"
-                isAdd={true}
-                isUndo={true}
-            />
         </div>
     );
 

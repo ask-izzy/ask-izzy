@@ -4,6 +4,7 @@ import type {Node as ReactNode} from "React";
 import React from "react";
 
 import AddToCompareButton from "./AddToCompareButton";
+import {ixaService} from "../../fixtures/services";
 
 export default {
     title: "App Components/AddToCompareButton",
@@ -11,7 +12,7 @@ export default {
 };
 
 const Template = (args: Object): ReactNode => {
-    (Template.args: any); return <AddToCompareButton serviceID={12345678}/>;
+    (Template.args: any); return <AddToCompareButton service={ixaService}/>;
 };
 
 export const Example: typeof Template = Template.bind({});

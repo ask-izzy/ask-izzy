@@ -1,101 +1,63 @@
 /* @flow */
 
 import type {Node as ReactNode} from "react"
-import React, {useState, useEffect} from "react";
+import React from "react";
 import Button from "./base/Button";
 import AddToCompare from "../icons/AddToCompare"
 import RemoveFromCompare from "../icons/RemoveFromCompare"
-import storage from "../storage";
 import classnames from "classnames";
+import useMyList from "@/hooks/useMyList"
+import Service from "@/src/iss/Service"
 import * as gtm from "@/src/google-tag-manager";
-import useNextServiceId from "@/hooks/useNextServiceId"
 
 type Props = {
     hasTextDescription?: boolean,
-    serviceID: number,
+    service: Service,
     className?: string,
 }
 
 function AddToCompareButton({
     hasTextDescription = false,
-    serviceID,
+    service,
     className,
 }: Props): ReactNode {
-    const [isRemove, setIsRemove] = useState<boolean>(getInitialState())
-    const getNextIdx = useNextServiceId()
+    const {
+        myListServices,
+        addServiceToMyList,
+        removeServiceFromMyList,
+    } = useMyList()
+
+    let serviceIsInList = myListServices.some((myListService) => myListService.id === service.id)
+
     const addToCompareText = "Add to My List"
     const removeFromCompareText = "Remove from My List"
-    const textDescription = isRemove ? removeFromCompareText : addToCompareText
-    const uniqueStorageSubscriptionKey = "addToCompareButtonKey" + serviceID.toString()
+    const textDescription = serviceIsInList ? removeFromCompareText : addToCompareText
 
-    useEffect(() => {
-        const cleanup = subscribeToJsonChange()
-        return cleanup
-    }, [])
-
-    const jsonStorageObj = "my-list-services"
-
-    function subscribeToJsonChange() {
-        storage.subscribeToJsonChange(jsonStorageObj, uniqueStorageSubscriptionKey, updateButton)
-        return function cleanup() {
-            storage.unsubscribeToJsonChange(jsonStorageObj, uniqueStorageSubscriptionKey)
-        };
-    }
-
-    const updateButton = () => {
-        const myList = storage.getJSON(jsonStorageObj)
-        if (Object.keys(myList).includes(serviceID.toString())) {
-            setIsRemove(true)
+    function onClick(): void {
+        if (serviceIsInList) {
+            removeServiceFromMyList(service)
         } else {
-            setIsRemove(false)
-        }
-    }
 
-    function getInitialState() {
-        const myList = storage.getJSON("my-list-services")
-        if (myList) {
-            return serviceID in myList
-        }
-        return false
-    }
-
-    function onClick() {
-        changeServiceStorage(isRemove)
-        setIsRemove(!isRemove)
-    }
-
-    function changeServiceStorage(removeFromStorage) {
-        const myList = storage.getJSON("my-list-services") || {}
-        const oldMyListLength = Object.keys(myList).length
-
-        if (removeFromStorage) {
-            delete myList[serviceID]
-        } else {
-            myList[serviceID] = getNextIdx()
-        }
-
-        storage.setJSON("my-list-services", myList)
-
-        const myListLength = Object.keys(myList).length
-
-        if (oldMyListLength === 0) {
+            if (myListServices.length === 0) {
+                gtm.emit({
+                    event: "Action Triggered - New List",
+                    eventCat: "Action triggered",
+                    eventAction: "New list",
+                    eventLabel: null,
+                    eventValue: myListServices.length,
+                    sendDirectlyToGA: true,
+                });
+            }
             gtm.emit({
-                event: "Action Triggered - New List",
+                event: "Action Triggered - List Size Changed",
                 eventCat: "Action triggered",
-                eventAction: "New list",
+                eventAction: "List size changed",
                 eventLabel: null,
-                eventValue: myListLength,
+                eventValue: myListServices.length,
                 sendDirectlyToGA: true,
             });
+            addServiceToMyList(service)
         }
-        gtm.emit({
-            event: "Action Triggered - List Size Changed",
-            eventCat: "Action triggered",
-            eventAction: "List size changed",
-            eventLabel: null,
-            eventValue: myListLength,
-            sendDirectlyToGA: true,
-        });
     }
 
     return (
@@ -104,20 +66,20 @@ function AddToCompareButton({
                 classnames(
                     "AddToCompareButton",
                     className,
-                    {"AddToCompare": !isRemove, "RemoveFromCompare": isRemove}
+                    {"AddToCompare": !serviceIsInList, "RemoveFromCompare": serviceIsInList}
                 )
             }
             onClick={onClick}
-            aria-label={isRemove ? "Remove from my list" : "Add to my list"}
+            aria-label={serviceIsInList ? "Remove from my list" : "Add to my list"}
             analyticsEvent={{
-                event: `Action Triggered - Service ${isRemove ? "Removed From" : "Added To"} List`,
-                eventAction: `Service ${isRemove ? "removed from" : "added to"} list`,
-                eventLabel: String(serviceID),
+                event: `Action Triggered - Service ${serviceIsInList ? "Removed From" : "Added To"} List`,
+                eventAction: `Service ${serviceIsInList ? "removed from" : "added to"} list`,
+                eventLabel: String(service.id),
             }}
         >
             <div className="main-container">
                 {
-                    isRemove ? <RemoveFromCompare className={classnames({"has-no-text": !hasTextDescription})}/>
+                    serviceIsInList ? <RemoveFromCompare className={classnames({"has-no-text": !hasTextDescription})}/>
                         : <AddToCompare className={classnames({"has-no-text": !hasTextDescription})}/>
                 }
                 {

@@ -1,6 +1,6 @@
 /* @flow */
 
-import React, {useEffect, useState, useRef} from "react";
+import React, {useState} from "react";
 import type {Node as ReactNode} from "react";
 import { useRouter } from "next/router"
 
@@ -10,133 +10,22 @@ import Button from "@/src/components/base/Button"
 import Loading from "@/src/icons/Loading"
 import ScrollToTop from "@/src/components/ResultsListPage/ScrollToTop"
 import ShareButton from "@/src/components/ShareButton"
-import storage from "@/src/storage"
 import classnames from "classnames";
 import {MobileDetect} from "@/src/effects/MobileDetect";
 import Spacer from "@/src/components/Spacer";
-import {getService} from "@/src/iss/load-services"
-import ToastMessageMyList from "@/src/components/ToastMessageMyList"
-import Service from "@/src/iss/Service"
+import useMyList from "@/hooks/useMyList"
 import ClearMyListDialog from "@/src/components/ClearMyListDialog"
 import BrandedFooter from "@/src/components/BrandedFooter"
-
-type myListArrayType = Array<[string, Service, number]>
-type cacheType = {string: Object}
 
 function MyListPage(): ReactNode {
     const router = useRouter()
     const isMobile = MobileDetect(500)
-    const [myListArray, setMyListArray] = useState<myListArrayType>([])
-    const [cache, setCache] = useState<cacheType>({})
+    const {
+        myListServices,
+        clearAllMyListServices,
+        isLoading,
+    } = useMyList()
     const [openClearAllDialog, setOpenClearAllDialog] = useState<boolean>(false)
-
-    const [isLoading, setIsLoading] = useState<boolean>(true)
-    const [serviceCount, setServiceCount] = useState<number>(0)
-
-    // ref is to fix the stale closure issue
-    // caused by updateServices callback
-    // fix requires using a ref and a useState hook
-    // https://stackoverflow.com/questions/
-    // 62806541/how-to-solve-the-react-hook-closure-issue
-    // this ref is read only except for useEffect hook
-    const cacheRef = useRef<cacheType>({});
-
-    const jsonStorageObj = "my-list-services"
-    const uniqueStorageSubscriptionKey = "myListUndoKey"
-
-    useEffect(() => {
-        getInitialServices()
-        const cleanup = subscribeToJsonChange()
-        return cleanup
-    }, [])
-
-    const [selectedServices, setSelectedServices] = useState<Array<Service>>([])
-
-    useEffect(() => {
-        cacheRef.current = cache
-    }, [cache])
-
-    useEffect(() => {
-        // update selectedServices to share services
-        setSelectedServices(
-            myListArray
-                .map(serviceData => new Service(serviceData[1]))
-        )
-    }, [myListArray])
-
-    function subscribeToJsonChange() {
-        storage.subscribeToJsonChange(jsonStorageObj, uniqueStorageSubscriptionKey, updateServices)
-        return function cleanup() {
-            storage.unsubscribeToJsonChange(jsonStorageObj, uniqueStorageSubscriptionKey)
-        };
-    }
-
-    const getInitialServices = async() => {
-        const myCurrentList = storage.getJSON(jsonStorageObj)
-        let obj = {}
-
-        if (myCurrentList) {
-            obj = await getServiceObjs(myCurrentList)
-        }
-
-        updateServices(obj)
-        setCache(obj)
-    }
-
-    const updateServices = (initialLoadObj) => {
-        let myCurrentList = storage.getJSON(jsonStorageObj)
-        let myListServices
-        if (initialLoadObj) {
-            // only executed when component is mounted
-            myListServices = initialLoadObj
-            setIsLoading(false)
-        } else {
-            // update services
-            myListServices = storage.getJSON(jsonStorageObj)
-            for (let key of Object.keys(myListServices)) {
-                myListServices[key] = cacheRef.current[key]
-            }
-        }
-
-        setMyListArray(
-            sortServicesArray(
-                myListServicesToArray(myListServices, myCurrentList)
-
-            )
-        )
-        setServiceCount(Object.keys(myCurrentList).length)
-    }
-
-    function myListServicesToArray(myListServices, myCurrentList) {
-        const array = []
-        for (let key in myListServices) {
-            array.push([key, myListServices[key], myCurrentList[key]])
-        }
-        return array
-    }
-
-    function sortServicesArray(servicesArray) {
-        let sortedServicesArray = servicesArray.sort((a, b) => {
-            return Number(b[2]) - Number(a[2])
-        });
-
-        return sortedServicesArray
-    }
-
-    async function getServiceObjs(myCurrentList) {
-        const services = {}
-        // get service information from ISS
-        const myListArray = await Promise.all(Object.keys(myCurrentList).map(async id => {
-            const serviceObj = await getService(Number(id));
-            return serviceObj
-        }));
-
-        for (let item of myListArray) {
-            services[item.id] = item
-        }
-
-        return services
-    }
 
     function renderInformationText() {
         return (
@@ -152,7 +41,7 @@ function MyListPage(): ReactNode {
                     </div>
                     <ShareButton
                         hasTextDescription={true}
-                        services={selectedServices}
+                        services={myListServices}
                     />
                 </div>
 
@@ -168,7 +57,7 @@ function MyListPage(): ReactNode {
                     <Loading className="big" />
                 </div>
             )
-        } else if (serviceCount == 0) {
+        } else if (myListServices.length == 0) {
             return (
                 <div className="empty-list-container">
                     <h3>
@@ -188,7 +77,7 @@ function MyListPage(): ReactNode {
             return (
                 <div className="my-list-results-container">
                     <MyListResults
-                        results={myListArray}
+                        results={myListServices}
                         resultsLoading={isLoading}
                         travelTimesStatus={"loaded"}
                     >
@@ -203,11 +92,13 @@ function MyListPage(): ReactNode {
         return (
             <div className={classnames("top-button-container", {"web": !isMobile})}>
                 <div className={classnames("count-container", {"mobile": isMobile})}>
-                    {`${serviceCount} service${serviceCount > 1 ? "s" : ""} in your list`}
+                    {
+                        `${myListServices.length} service${myListServices.length > 1 ? "s" : ""} in your list`
+                    }
                     {isMobile &&
                         <ShareButton
                             hasTextDescription={true}
-                            services={selectedServices}
+                            services={myListServices}
                         />}
                 </div>
 
@@ -223,7 +114,7 @@ function MyListPage(): ReactNode {
                     {!isMobile &&
                         <ShareButton
                             hasTextDescription={true}
-                            services={selectedServices}
+                            services={myListServices}
                         />
                     }
                 </div>
@@ -241,24 +132,18 @@ function MyListPage(): ReactNode {
                     infoText={"Services on this page will only remain here temporarily"}
                     bannerName="housing"
                 />
-                {serviceCount !== 0 && renderTopButtonContainer()}
+                {myListServices.length !== 0 && renderTopButtonContainer()}
 
             </div>
             {renderResults()}
             <ScrollToTop label="To top"/>
-            <ToastMessageMyList
-                uniqueStorageSubscriptionKey="myListPageUndoKey"
-                isUndo={true}
-            />
             <BrandedFooter />
             {
                 openClearAllDialog &&
                 <ClearMyListDialog
                     onCloseRequested={() => setOpenClearAllDialog(false)}
                     onClearMyList={() => {
-                        storage.setJSON(
-                            "my-list-services", {}
-                        ),
+                        clearAllMyListServices()
                         setOpenClearAllDialog(false)
                     }}
                 />

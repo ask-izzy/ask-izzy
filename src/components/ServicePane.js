@@ -33,8 +33,6 @@ import ScreenReader from "./ScreenReader";
 import UrlsToLinks from "./UrlsToLink"
 import {getSiblingServices} from "../iss/load-services"
 import {MobileDetect} from "../effects/MobileDetect";
-import { useRouter } from "next/router"
-import ToastMessageMyList from "../components/ToastMessageMyList"
 type Props = {
     service: Service,
 }
@@ -49,9 +47,6 @@ function ServicePane({service}: Props): ReactNode {
         }
         loadSiblings();
     }, [service])
-
-    const router = useRouter()
-    const jsonStorageObj = "my-list-services"
 
     const recordAlsoAtThisLocation = (service: Service) => {
         gtm.emit({
@@ -172,7 +167,7 @@ function ServicePane({service}: Props): ReactNode {
     const addToCompareButtonComponent = (
         <AddToCompareButton
             hasTextDescription={true}
-            serviceID={service.id}
+            service={service}
         />
     )
 
@@ -294,16 +289,6 @@ function ServicePane({service}: Props): ReactNode {
                 </div>
 
                 { renderSiblings() }
-                <ToastMessageMyList
-                    uniqueStorageSubscriptionKey="servicePaneAddServiceKey"
-                    onClickAdd={() => router.push("/my-list")}
-                    onClickUndo={() => {
-                        const key = service.id.toString()
-                        Storage.setJSON(jsonStorageObj, {...Storage.getJSON(jsonStorageObj), [key]: true})
-                    }}
-                    isAdd={true}
-                    isUndo={true}
-                />
             </main>
         </div>
     );
