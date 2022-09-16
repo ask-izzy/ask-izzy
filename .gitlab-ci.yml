@@ -1,5 +1,7 @@
 variables:
   DOCKER_REPO: ${IX_REGISTRY}/ask_izzy
+  IX_APP_NAME: ask_izzy
+  AWS_APP_NAME: ask_izzy
 
 stages:
   - Build
@@ -16,8 +18,6 @@ default:
     - TAG_CACHE_DEV_STAGE=${DOCKER_REPO}:cache-$CI_COMMIT_BRANCH-dev && echo $TAG_CACHE_DEV_STAGE
     - TAG_CACHE_DIST_STAGE=${DOCKER_REPO}:cache-$CI_COMMIT_BRANCH-dist && echo $TAG_CACHE_DIST_STAGE
     - export DOCKER_BUILDKIT=1
-    - export IX_APP_NAME=ask_izzy
-    - export AWS_APP_NAME=ask_izzy
 
 include:
   - project: 'developers/aws-ecr'
