@@ -170,12 +170,14 @@ COPY --chown=$UID_GID ./helpers /app/helpers
 COPY --chown=$UID_GID ./lib /app/lib
 COPY --chown=$UID_GID ./pages /app/pages
 COPY --chown=$UID_GID ./.storybook /app/.storybook
+RUN mkdir -p /app/public/images && chown -R $UID_GID /app/public
 COPY --chown=$UID_GID ./public/images/banners /app/public/images/banners
 COPY --chown=$UID_GID ./public/images/ask-izzy-logo-single-line-purple.svg /app/public/images/ask-izzy-logo-single-line-purple.svg
 COPY --chown=$UID_GID ./fixtures /app/fixtures
 COPY --chown=$UID_GID ./test/support/mock-cms /app/test/support/mock-cms/
 COPY --chown=$UID_GID ./test/support/mock-iss /app/test/support/mock-iss/
 COPY --chown=$UID_GID ./.env ./.env.test ./babel.config.json ./next.config.js /app/
+
 
 RUN yarn with --test-env --mocks build-storybook
 

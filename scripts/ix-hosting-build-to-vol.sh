@@ -13,9 +13,7 @@ echo ------------ Deployment ID: "$DEPLOYMENT_ID" -----------
 
 STORAGE_BUILD_DIR="/storage/$VERSION/$DEPLOYMENT_ID"
 STORAGE_COPY_OF_NEXT_DIR="$STORAGE_BUILD_DIR/copy-of-next-dir"
-STORAGE_NEXT_CACHE_DIR="$STORAGE_BUILD_DIR/shared-cache"
 APP_NEXT_DIR="/app/.next"
-APP_NEXT_CACHE_DIR="$APP_NEXT_DIR/cache"
 BUILD_COMPLETE_FILE="$STORAGE_BUILD_DIR/.build-complete"
 
 # The first container that attempts to create the build dir is responsible for building.
@@ -33,8 +31,6 @@ if [ $CREATE_STORAGE_BUILD_DIR_EXIT_STATUS -eq 0 ]; then
     echo "This container is in charge of building the app"
     yarn build
     cp -a "$APP_NEXT_DIR" "$STORAGE_COPY_OF_NEXT_DIR"
-    mv "$STORAGE_COPY_OF_NEXT_DIR/cache" "$STORAGE_NEXT_CACHE_DIR"
-    rm -r "$APP_NEXT_CACHE_DIR"
 
     # Create build complete file to let other containers know we've finished building
     touch "$BUILD_COMPLETE_FILE"

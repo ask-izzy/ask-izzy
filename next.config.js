@@ -92,13 +92,6 @@ const nextConfig = {
             },
         ]
     },
-    // We need to disable this due to load balancing. If any rendered static pages change
-    // we want this update to occur simultaneously across all containers. We use a shared
-    // fs to make sure all containers have access to the latest renders but we need to
-    // disable in memory cache to ensure no stale renders are served from memory.
-    experimental: {
-        isrMemoryCacheSize: 0,
-    },
     webpack: (config) => {
         config.resolve.fallback = {
             net: false,
