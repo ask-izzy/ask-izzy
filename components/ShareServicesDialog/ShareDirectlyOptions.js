@@ -7,17 +7,21 @@ import {CopyToClipboard} from "react-copy-to-clipboard";
 import isMounted from "@/hooks/useIsMounted"
 import StandardButton from "@/components/general/StandardButton"
 import Service from "@/src/iss/Service"
+import useToastMessage from "@/hooks/useToastMessage"
 import * as gtm from "@/src/google-tag-manager";
 
 type Props = {
-    services: Array<Service>
+    services: Array<Service>,
+    onClose: () => void
 }
 
 function ShareDirectlyOptions({
     services,
+    onClose,
 }: Props): React.Node {
     const [nativeShareSupported, setNativeShareSupported] = useState(false)
     const [includeOtherDetails, setIncludeOtherDetails] = useState<boolean>(false)
+    const {openToastMessage} = useToastMessage()
 
     const isPlural = services.length > 1
 
@@ -82,6 +86,8 @@ function ShareDirectlyOptions({
                             "Action Triggered - Services Shared Via Clipboard (individual)",
                             "Clipboard"
                         )
+                        onClose()
+                        openToastMessage(`Link${isPlural ? "s" : ""} copied`)
                     }}
                     analyticsEvent={{
                         event: "Action Triggered - Services Shared Via Clipboard",
