@@ -25,17 +25,15 @@ function UrlsToLink({children}: Props): ReactNode {
         return childrenArray
     }
     return (
-        <>
+        <div>
             {findLinks().map((string, index) => {
                 string = string.replace(/(\r\n|\n|\r)/gm, "<br />")
                 if (string.includes("<url>")) {
                     let url = string.replace("<url>", "")
                     return (
-                        <p key={index}>
-                            <Link to={url.indexOf("https://") < 0 ? "https://" + url : url}>
-                                {url}
-                            </Link>
-                        </p>
+                        <Link to={url.indexOf("https://") < 0 ? "https://" + url : url}>
+                            {url}
+                        </Link>
                     )
                 }
                 if (string.includes("<br />")) {
@@ -44,11 +42,10 @@ function UrlsToLink({children}: Props): ReactNode {
                 if (string.includes("<a>")) {
                     return null
                 }
-                return (<p key={index}>{string}</p>)
+                return (string)
             })}
-
-        </>
-    )
+        </div>
+    );
 }
 
 export default UrlsToLink

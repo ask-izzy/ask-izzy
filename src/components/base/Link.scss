@@ -3,6 +3,7 @@
 .Link {
     color: #{colours.get-static('colour-link')};
     color: var(--colour-link);
+    word-break: break-all;
 
     &:visited {
         color: #{colours.get-static('colour-link-visited')};
