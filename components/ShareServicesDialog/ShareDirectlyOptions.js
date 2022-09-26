@@ -2,13 +2,13 @@
 
 import * as React from "react";
 import {useState, useEffect} from "react";
-import {CopyToClipboard} from "react-copy-to-clipboard";
 
 import isMounted from "@/hooks/useIsMounted"
 import StandardButton from "@/components/general/StandardButton"
 import Service from "@/src/iss/Service"
 import useToastMessage from "@/hooks/useToastMessage"
 import * as gtm from "@/src/google-tag-manager";
+import {CopyToClipboard} from "@/helpers/copy-to-clipboard.helpers.js"
 
 type Props = {
     services: Array<Service>,
@@ -36,20 +36,16 @@ function ShareDirectlyOptions({
             More info: ${baseUrl}/service/${service.slug}
         `
             // $FlowIgnore flow is out of date and replaceAll exists
-            .replaceAll(/\n {12}/g, "\n").replaceAll(/\n(?=\n)/g, "").trim()).join("\n\n")
+            .replace(/\n {12}/g, "\n").replace(/\n(?=\n)/g, "").trim()).join("\n\n")
     } else {
-        textToShare = services.map(service => `${baseUrl}/service/${service.slug}`).join("\n")
+        textToShare = services.map(service => `${baseUrl}/service/${service.slug}`).join("\n\n")
     }
 
     const shareData = {}
 
     shareData.title = "List of Ask Izzy services"
+    shareData.text = textToShare
 
-    if (isPlural) {
-        shareData.text = textToShare
-    } else {
-        shareData.url = textToShare
-    }
 
     useEffect(() => {
         if (
@@ -77,37 +73,43 @@ function ShareDirectlyOptions({
 
     return (
         <div className="ShareDirectlyOptions">
-            <CopyToClipboard
-                text={textToShare}
+            <StandardButton
+                onClick={async function() {
+                    CopyToClipboard(textToShare)
+                    GAIndividualServices(
+                        "Action Triggered - Services Shared Via Clipboard (individual)",
+                        "Clipboard"
+                    )
+                    onClose()
+                    openToastMessage(`Link${isPlural ? "s" : ""} copied`)
+                }}
+                analyticsEvent={{
+                    event: "Action Triggered - Services Shared Via Clipboard",
+                    eventAction: "Services shared",
+                    eventLabel: "Clipboard",
+                    eventValue: services.length,
+                }}
+                aria-label={`Copy link${isPlural ? "s" : ""}`}
             >
-                <StandardButton
-                    onClick={() => {
-                        GAIndividualServices(
-                            "Action Triggered - Services Shared Via Clipboard (individual)",
-                            "Clipboard"
-                        )
-                        onClose()
-                        openToastMessage(`Link${isPlural ? "s" : ""} copied`)
-                    }}
-                    analyticsEvent={{
-                        event: "Action Triggered - Services Shared Via Clipboard",
-                        eventAction: "Services shared",
-                        eventLabel: "Clipboard",
-                        eventValue: services.length,
-                    }}
-                >
-                    Copy link{isPlural ? "s" : ""}
-                </StandardButton>
-            </CopyToClipboard>
+                Copy link{isPlural ? "s" : ""}
+            </StandardButton>
             {nativeShareSupported && (
                 <StandardButton
-                    onClick={() => {
+                    onClick={async() => {
                         GAIndividualServices(
                             "Action Triggered - Services Shared Via Web Share API (individual)",
                             "Web Share API"
                         )
-                        // $FlowIgnore Flow.js currently out-of-date and doesn't know about the share API
-                        navigator.share(shareData)
+                        try {
+                            // $FlowIgnore Flow.js currently out-of-date and doesn't know about the share API
+                            await navigator.share(shareData)
+                        } catch (error) {
+                            console.log(
+                                `Native share was not able to share service${isPlural ? "s" : ""}. ` +
+                                `Error message: ${error.message}`
+                            )
+                        }
+
                     }}
                     analyticsEvent={{
                         event: "Action Triggered - Services Shared Via Web Share API",

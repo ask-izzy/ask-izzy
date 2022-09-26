@@ -12,8 +12,8 @@ import useToastMessage from "@/hooks/useToastMessage";
 export default function ToastMessage(): ReactNode {
     const autoHideDuration = 8000
     const [focusTimer, setFocusTimer] = useState()
-    const actionDescriptorRef = useRef()
-    const closeButtonRef = useRef()
+    const actionDescriptorRef = useRef(null)
+    const closeButtonRef = useRef(null)
     const snackBarRef = useRef()
     const [setFocus, revertFocus] = useMoveFocus()
 

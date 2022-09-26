@@ -14,7 +14,6 @@ import type {HTMLElementProps} from "../../../flow/shared/html-elements"
 type Props = {
     children: ReactNode,
     onClick?: (event: SyntheticEvent<HTMLButtonElement>) => any,
-    innerRef?: any,
     analyticsEvent?: AnalyticsEvent,
     className?: string,
 } & HTMLElementProps
@@ -25,7 +24,6 @@ type refType = { current: null | HTMLButtonElement } |
 function Button({
     className,
     onClick: onClickFromParent,
-    innerRef,
     analyticsEvent,
     ...otherProps
 }: Props, ref: ?refType): ReactElement<"button"> {

@@ -87,3 +87,13 @@ As docker compose mounts the app source from the host machine into the app sourc
   1) (The recommended option.) Ensure the node modules have been installed by running the install command inside the docker container: `docker compose run --rm app shell yarn install`. Then exclusively run all code in docker using `docker compose up` and `docker compose run`.
 
   2) Avoid using docker entirely, remove the node_module directory, and reinstall the node modules by running the command on the host system (`rm -rf node_modules && yarn install`). Then [avoid using docker and run all code directly on the host](#alternative-dev-process-no-docker).
+
+  ### Adding new icons
+Original icons files are stored in a separate repo hosted on GitHub. To add new icons to Ask Izzy they must be added to that repo first then compiled and copied into this repo using the iconify script.
+
+1) Clone designs repo: `git clone https://github.com/ask-izzy/designs ../ask-izzy-designs`
+2) Add desired icons to designs repo and commit
+3) Run the iconify script: `./scripts/iconify ../ask-izzy-designs/icons/*.svg`
+
+The icons/index.js file will be updated, and a new js file for the icon will be generated in /icons.
+

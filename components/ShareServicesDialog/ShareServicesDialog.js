@@ -42,6 +42,7 @@ function ShareServicesDialog({
                         <Button
                             onClick={onCloseRequested}
                             className="close"
+                            aria-label="Close dialog"
                         >
                             <span>&times;</span>
                         </Button>
