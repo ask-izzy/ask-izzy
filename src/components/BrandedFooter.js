@@ -6,7 +6,7 @@ import Link from "../components/base/Link";
 import icons from "../icons"
 import { donateLink, aboutLink } from "../constants/urls.js"
 
-export default function BrandedFooter(): ReactElement<"footer"> {
+function BrandedFooter(): ReactElement<"footer"> {
     const LOGO = "/images/ask-izzy-logo-single-line-yellow.svg";
 
     return (
@@ -265,3 +265,5 @@ export default function BrandedFooter(): ReactElement<"footer"> {
         </footer>
     )
 }
+
+export default BrandedFooter

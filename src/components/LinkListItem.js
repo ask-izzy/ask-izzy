@@ -15,24 +15,19 @@ type Props = $Diff<
     $Exact<PropsRest> & {rootElement: any}
 > & PropsRest
 
-export default class LinkListItem extends React.Component<Props, void> {
+function LinkListItem({className, ...rest}: Props): ReactNode {
 
-    render(): ReactNode {
-        const {
-            className,
-            ...rest
-        } = this.props;
+    return (
+        <ListItem
+            {...rest}
+            rootElement={Link}
+            className={classnames(
+                "plain-text",
+                className,
+            )}
+        />
+    )
 
-
-        return (
-            <ListItem
-                {...rest}
-                rootElement={Link}
-                className={classnames(
-                    "plain-text",
-                    className,
-                )}
-            />
-        );
-    }
 }
+
+export default LinkListItem

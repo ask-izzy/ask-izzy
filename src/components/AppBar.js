@@ -31,8 +31,8 @@ function AppBar(
         onBackTouchTap,
         backMessage,
         containerClassName,
-        transition,
-        hideLogoWhenNotABar,
+        transition = false,
+        hideLogoWhenNotABar = false,
         breakpoint = STICKY_HEADER_BREAKPOINT,
     }: Props): ReactNode {
 
@@ -130,9 +130,4 @@ function AppBar(
     )
 }
 
-AppBar.defaultProps = {
-    transition: false,
-    hideLogoWhenNotABar: false,
-}
-
-export default AppBar
+export default AppBar;
