@@ -29,10 +29,10 @@ export default function UrlsToLink({children}: Props): ReactNode {
             {findLinks().map((string, index) => {
                 string = string.replace(/(\r\n|\n|\r)/gm, "<br />")
                 if (string.includes("<url>")) {
-                    const url = string.replace("<url>", "");
+                    let url = string.replace("<url>", "");
                     return (
                         <p key={index}>
-                            <Link to={url}>
+                            <Link to={url.indexOf("https://") < 0 ? "https://" + url : url}>
                                 {url}
                             </Link>
                         </p>
