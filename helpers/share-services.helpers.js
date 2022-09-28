@@ -20,54 +20,71 @@ type GetMessageProps = {
 // eslint-disable-next-line complexity
 export function getShareMessage(args: GetMessageProps): { subject: string, body: string } {
     const {services, baseUrl, messageType} = args
-    const toName = args.toName && htmlEscape(args.toName)
-    const fromName = args.fromName && htmlEscape(args.fromName)
-    const fromRole = args.fromRole && htmlEscape(args.fromRole)
-    const fromContactDetails = args.fromContactDetails && htmlEscape(args.fromContactDetails)
+    const toName = escapeText(args.toName)
+    const fromName = escapeText(args.fromName)
+    const fromRole = escapeText(args.fromRole)
+    const fromContactDetails = escapeText(args.fromContactDetails, {multiline: true})
+    const abuseReportEmail = process.env.NEXT_PUBLIC_SITE_EMAIL;
 
     const isPlural = services.length > 1;
 
-    let messageText = `Hi ${toName || "[name of recipient]"}, `;
-    if (isPlural) {
-        messageText += `here are some links to services`;
-        for (const service of services) {
-            messageText +=
-                `\n\n${service.name}\n` +
-                "Address: " +
-                (service.location?.singleLineStreetAddress() ?? "") +
-                `\nMore info: ${baseUrl}/service/${service.slug}`;
+    let messageText = `You've received a message from someone using the Ask Izzy website:\n\n` +
+        `Hi ${toName || "[name of recipient]"}, ` +
+        `${isPlural ?
+            "here are some links to support services"
+            : "here's a link to a support service"
+        },`
+    for (const service of services) {
+        const serviceURL = `${baseUrl}/service/${service.slug}`
+        const serviceAddress = service.location?.singleLineStreetAddress()
+        if (messageType === "Email") {
+            messageText += `\n\n${service.name}` +
+                (serviceAddress ? `\n${serviceAddress}` : "") +
+                `\n<a href="${serviceURL}">View this service in Ask Izzy</a>`
+        } else {
+            messageText += `\n\n${service.name}` +
+                    (serviceAddress ? `\n${serviceAddress}` : "") +
+                    `\n${serviceURL}`;
         }
-    } else {
-        const service = services[0];
-        messageText +=
-            `here's a link to ${service.name}\n\n` +
-            (service.location?.singleLineStreetAddress() ?? "") +
-            `\n\n${baseUrl}/service/${service.slug}`;
     }
-    messageText += `\n\nFrom, ${fromName || "[name of sender]"}`;
+
+    messageText += `\n\nFrom,\n${fromName || "[name of sender]"}`;
     if (fromRole) {
         messageText += `\n${fromRole}`;
     }
     if (fromContactDetails) {
-        messageText += `\nContact details: ${fromContactDetails}`;
+        messageText += `\nContact details:${messageType === "Email" ? " " : "\n"}` +
+        `${
+            fromContactDetails.indexOf("@") > -1 ?
+                messageType === "Email" ?
+                    `<a href="mailto: ${fromContactDetails}">${fromContactDetails}</a>`
+                    : fromContactDetails
+                : fromContactDetails
+        }`
     }
-    messageText += `\n\nThis message was sent by a user of askizzy.org.au. `
     if (messageType === "Email") {
-        messageText += `If this message is offensive ` +
-            `please let us know by forwarding this email to ${process.env.NEXT_PUBLIC_SITE_EMAIL}. Make sure the ` +
-            `contents of this message is included as we don't store a copy of any sent messages for privacy reasons.`;
-
+        messageText += `\n\nReport this email:\nIf this message is unwanted ` +
+        `or offensive please forward this email to ${abuseReportEmail} ` +
+        `and make sure the contents of this message is included as we ` +
+        `don't store a copy for privacy reasons.` +
+        `\n\nThis message has been sent to you via <a href="https://www.askizzy.org.au">askizzy.org.au</a>`
     } else if (messageType === "SMS") {
-        messageText += `If this message is offensive ` +
-            `please report it to ${process.env.NEXT_PUBLIC_SITE_EMAIL} and include the entire text of this ` +
-            `message since we don't store a copy for privacy reasons.`;
+        messageText += `\n\nReport this message:\nIf this message is unwanted ` +
+        `or offensive please email ${abuseReportEmail} and include the text in ` +
+        `this message as we don't store a copy for privacy reasons.` +
+        `\n\nThis message has been sent to you via askizzy.org.au`
     } else {
         throw Error(`Unknown message type: ${messageType}`)
     }
 
+    if (messageType === "Email") {
+        // $FlowIgnore polyfill for replaceAll is imported in _app.js
+        messageText = messageText.replaceAll("\n", "<br />")
+    }
+
     const subject = isPlural ?
-        `${fromName || "[name of recipient]"} has shared some Ask Izzy services with you`
-        : `${fromName || "[name of recipient]"} has shared an Ask Izzy service with you`;
+        `${fromName || "[name of recipient]"} has shared services from Ask Izzy  with you`
+        : `${fromName || "[name of recipient]"} has shared a service from Ask Izzy with you`
 
     return {
         subject,
@@ -175,4 +192,28 @@ export function verifyPhoneNumber(phoneNumber: string): boolean {
         return false;
     }
     return true;
+}
+
+type EscapeTextOptions = {
+    multiline: boolean
+}
+
+function escapeText(text: ?string, options: EscapeTextOptions = {}): string | null {
+    if (typeof text !== "string") {
+        return null
+    }
+    let escapedText = htmlEscape(text)
+    if (!options.multiline) {
+        escapedText = escapedText
+            .replaceAll("\n", " ")
+            .trim()
+    } else {
+        // Only allow one newline char at a time
+        escapedText = escapedText
+            .replaceAll(/\n+/g, "\n")
+            .split("\n")
+            .map(line => line.trim())
+            .join("\n")
+    }
+    return escapedText
 }

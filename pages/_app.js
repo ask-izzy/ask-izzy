@@ -6,6 +6,7 @@ import { ApolloProvider } from "@apollo/client";
 import Head from "next/head"
 import { useRouter } from "next/router"
 import type { NextRouter } from "next/router"
+import "core-js/actual/string/replace-all";
 
 import "@/src/utils/global-setup"
 import "../src/styles/bundle.scss"
