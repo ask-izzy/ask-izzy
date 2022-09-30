@@ -3,7 +3,7 @@
 import * as React from "react";
 
 import HeaderBar from "../HeaderBar";
-import type Category from "../../constants/Category";
+import type {categoryType} from "@/src/constants/Category";
 import {getBannerName} from "../../utils/personalisation"
 import type Service from "../../iss/Service"
 
@@ -31,7 +31,7 @@ type Props = {
     error: string,
     statusCode: number,
     loading: boolean,
-    category: Category,
+    category: categoryType,
     title: string,
     services: Array<Service>,
 }
@@ -64,7 +64,7 @@ class LoadingResultsHeader extends React.Component<Props, void> {
                 />
             );
         }
-        const primaryText = (category: Category) => (
+        const primaryText = (category: categoryType) => (
             category.key !== "search" ?
                 "Sorry, we weren't able to find any " +
                     "services for this search."

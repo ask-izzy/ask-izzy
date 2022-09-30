@@ -5,7 +5,7 @@ import React from "react";
 
 import LoadingResultsHeader from "./LoadingResultsHeader";
 import { getCategory } from "../../constants/categories";
-import Category from "../../constants/Category"
+import type {categoryType} from "@/src/constants/Category";
 import {
     setPersonalisationAnswers,
 } from "../../storybook/decorators";
@@ -17,7 +17,7 @@ export default {
         setPersonalisationAnswers,
     ],
     args: {
-        category: (getCategory("housing"): ?Category),
+        category: (getCategory("housing"): ?categoryType),
         title: "Housing",
         location: {pathname: "/"},
         meta: {

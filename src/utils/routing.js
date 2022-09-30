@@ -4,7 +4,7 @@ import type {
 } from "../../flow/personalisation-page"
 import {getCategory} from "../constants/categories";
 import {getSavedPersonalisationAnswer} from "./personalisation"
-import Category from "../constants/Category";
+import type {categoryType} from "@/src/constants/Category";
 import storage from "../storage";
 
 import type { NextRouter } from "next/router"
@@ -25,7 +25,7 @@ export function getPersonalisationPages(
 }
 
 export function getPersonalisationPagesFromCategory(
-    category: Category,
+    category: categoryType,
 ): Array<PersonalisationPage> {
     return category.personalisation.filter(page => {
         if (typeof window !== "undefined") {
@@ -48,7 +48,7 @@ export function getPersonalisationPagesToShow(
 }
 
 export function getPersonalisationPagesToShowFromCategory(
-    category: Category,
+    category: categoryType,
 ): Array<PersonalisationPage> {
     let pages = getPersonalisationPagesFromCategory(category)
 
@@ -95,7 +95,7 @@ export function currentRouteIsPersonalised(
 
 export function getCategoryFromRouter(
     router: NextRouter
-): ?Category {
+): ?categoryType {
     return getCategory(
         router.query.categoryOrContentPageSlug
     )
@@ -154,7 +154,7 @@ export function convertRouteToPath(
 
 type getServicesPathProps = {|
     router: NextRouter,
-    category?: Category | string,
+    category?: categoryType | string,
     personalisationPage?: PersonalisationPage,
     personalisationPagesToIgnore?: Array<PersonalisationPage> | "all",
     map?: boolean,

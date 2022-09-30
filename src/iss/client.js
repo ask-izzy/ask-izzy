@@ -1,8 +1,8 @@
 /* @flow */
 
 import createClient from "../ix-web-js-client/apis/iss"
-import type {ISS3Client} from "../ix-web-js-client/apis/iss/v3"
-import type {ISS4Client} from "../ix-web-js-client/apis/iss/v4"
+import type {ISS3ClientType} from "../ix-web-js-client/apis/iss/v3"
+import type {ISS4ClientType} from "../ix-web-js-client/apis/iss/v4"
 
 export function getIssVersion(): "3" | "4" {
     const issVersion = process.env.NEXT_PUBLIC_ISS_VERSION
@@ -14,15 +14,15 @@ export function getIssVersion(): "3" | "4" {
     }
 }
 
-let iss3Client: ISS3Client,
-    iss4Client: ISS4Client;
+let iss3Client: ISS3ClientType,
+    iss4Client: ISS4ClientType;
 
-declare function getIssClient(version: "3"): Promise<ISS3Client>
-declare function getIssClient(version: "4"): Promise<ISS4Client>
+declare function getIssClient(version: "3"): Promise<ISS3ClientType>
+declare function getIssClient(version: "4"): Promise<ISS4ClientType>
 
 async function getIssClient(
     version: "3" | "4"
-): Promise<ISS3Client | ISS4Client> {
+): Promise<ISS3ClientType | ISS4ClientType> {
     if (version === "3") {
         if (!iss3Client) {
             iss3Client = await createClient(

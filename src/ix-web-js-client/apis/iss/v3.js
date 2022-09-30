@@ -66,53 +66,60 @@ export type ISS3LocationSearchQuery = {|
     kind: Array<string>
 |}
 
-export class ISS3Client {
-    baseUrl: string
-    authString: string;
+export type ISS3ClientType = {
+    authString: string,
+    baseUrl: string,
+    search: (ISS3SearchQueryWithDefaults) => Promise<ISS3SearchResults | null>,
+    getService: (number) => Promise<Object>,
+    searchLocations: (ISS3LocationSearchQuery) => Promise<ISS3LocationSearchResults>
 
-    constructor({baseUrl, key}: ISS3ClientProps) {
-        this.baseUrl = baseUrl
-        this.authString = `Basic ${btoa(key)}`
-    }
+}
 
-    async search(
-        query: ISS3SearchQueryWithDefaults
-    ): Promise<ISS3SearchResults | null> {
-        const queryWithDefaults = {
-            type: "service",
-            limit: 10,
-            ...query,
-        }
+function ISS3Client({key, baseUrl}: ISS3ClientProps): ISS3ClientType {
+    return {
+        authString: `Basic ${btoa(key)}`,
+        baseUrl,
 
-        try {
-            const url = new URL("/api/v3/search/", this.baseUrl)
+        async search(
+            query: ISS3SearchQueryWithDefaults
+        ): Promise<ISS3SearchResults | null> {
+            const queryWithDefaults = {
+                type: "service",
+                limit: 10,
+                ...query,
+            }
 
-            addSearchParamsToUrl(url, queryWithDefaults)
-            return getRequestWithToken<ISS3SearchResults>(
+            try {
+                const url = new URL("/api/v3/search/", this.baseUrl)
+
+                addSearchParamsToUrl(url, queryWithDefaults)
+                return getRequestWithToken<ISS3SearchResults>(
+                    url.href,
+                    this.authString
+                )
+
+            } catch (error) {
+                console.error(error)
+                // We don't currently worry if request failed
+                return null
+            }
+        },
+
+        async getService(serviceId: number): Promise<Object> {
+            const url = new URL(`/api/v3/service/${serviceId}/`, this.baseUrl)
+            return getRequestWithToken(url.href, this.authString)
+        },
+
+        async searchLocations(
+            query: ISS3LocationSearchQuery
+        ): Promise<ISS3LocationSearchResults> {
+            const url = new URL(`/api/v3/location/search/`, this.baseUrl)
+            addSearchParamsToUrl(url, query)
+            return getRequestWithToken<ISS3LocationSearchResults>(
                 url.href,
                 this.authString
             )
-
-        } catch (error) {
-            console.error(error)
-            // We don't currently worry if request failed
-            return null
-        }
-    }
-
-    async getService(serviceId: number): Promise<Object> {
-        const url = new URL(`/api/v3/service/${serviceId}/`, this.baseUrl)
-        return getRequestWithToken(url.href, this.authString)
-    }
-
-    async searchLocations(
-        query: ISS3LocationSearchQuery
-    ): Promise<ISS3LocationSearchResults> {
-        const url = new URL(`/api/v3/location/search/`, this.baseUrl)
-        addSearchParamsToUrl(url, query)
-        return getRequestWithToken<ISS3LocationSearchResults>(
-            url.href,
-            this.authString
-        )
+        },
     }
 }
+export default ISS3Client

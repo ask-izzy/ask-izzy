@@ -5,6 +5,7 @@ import type { NextRouter } from "next/router";
 import icons from "../icons";
 
 import Category from "./Category";
+import type {categoryType} from "./Category";
 
 /* eslint-disable max-len */
 import AddictionSubcategories from "@/src/constants/personalisation-pages/AddictionSubcategories";
@@ -55,7 +56,7 @@ import WhoIsLookingForHelpTechnology from "@/src/constants/personalisation-pages
 /* eslint-enable max-len */
 
 const categories = [
-    (new Category({
+    (Category({
         name: "Housing",
         byline: "A place to stay.",
         icon: icons.House,
@@ -84,8 +85,8 @@ const categories = [
             HousingAreYouSafe,
             OnlineSafetyScreen,
         ],
-    }): Category),
-    (new Category({
+    }): categoryType),
+    (Category({
         name: "Food",
         byline: "Something to eat.",
         icon: icons.Food,
@@ -110,8 +111,8 @@ const categories = [
             WhoIsLookingForHelpFood,
             Location,
         ],
-    }): Category),
-    (new Category({
+    }): categoryType),
+    (Category({
         name: "Everyday things",
         byline: "Swags, clothes, food vouchers etc.",
         icon: icons.Things,
@@ -131,8 +132,8 @@ const categories = [
             WhoIsLookingForHelpEverydayThings,
             Location,
         ],
-    }): Category),
-    (new Category({
+    }): categoryType),
+    (Category({
         name: "Domestic & family violence help",
         byline: "Scared of partner or family member.",
         icon: icons.EscapeViolence,
@@ -157,8 +158,8 @@ const categories = [
             UsingViolenceScreen,
             LgbtiqaDomesticViolenceScreen,
         ],
-    }): Category),
-    (new Category({
+    }): categoryType),
+    (Category({
         name: "Health",
         byline: "Physical, mental, emotional.",
         icon: icons.Health,
@@ -181,8 +182,8 @@ const categories = [
             Location,
             DemographicsIndigenous,
         ],
-    }): Category),
-    (new Category({
+    }): categoryType),
+    (Category({
         name: "Centrelink",
         byline: "Access to services.",
         icon: icons.Centrelink,
@@ -197,8 +198,8 @@ const categories = [
             WhoIsLookingForHelpCentrelink,
             Location,
         ],
-    }): Category),
-    (new Category({
+    }): categoryType),
+    (Category({
         name: "Money help",
         byline: "Emergency funds, bills etc.",
         icon: icons.Money,
@@ -219,8 +220,8 @@ const categories = [
             WhoIsLookingForHelpMoney,
             Location,
         ],
-    }): Category),
-    (new Category({
+    }): categoryType),
+    (Category({
         name: "Support & counselling",
         byline: "Relationships, gambling & LGBTIQA+.",
         icon: icons.Support,
@@ -239,8 +240,8 @@ const categories = [
             Location,
             DemographicsIndigenous,
         ],
-    }): Category),
-    (new Category({
+    }): categoryType),
+    (Category({
         name: "Legal",
         byline: "Police, law & fines.",
         icon: icons.Legal,
@@ -271,8 +272,8 @@ const categories = [
             Location,
             DemographicsIndigenous,
         ],
-    }): Category),
-    (new Category({
+    }): categoryType),
+    (Category({
         name: "Drugs & alcohol",
         byline: "Support & assistance.",
         icon: icons.Addiction,
@@ -294,8 +295,8 @@ const categories = [
             Location,
             DemographicsIndigenous,
         ],
-    }): Category),
-    (new Category({
+    }): categoryType),
+    (Category({
         name: "Life skills & education",
         byline: "Everyday skills & training.",
         icon: icons.Skills,
@@ -318,8 +319,8 @@ const categories = [
             Location,
             DemographicsIndigenous,
         ],
-    }): Category),
-    (new Category({
+    }): categoryType),
+    (Category({
         name: "Finding work",
         byline: "Earning & volunteering.",
         icon: icons.Job,
@@ -338,8 +339,8 @@ const categories = [
             WhoIsLookingForHelpFindingWork,
             Location,
         ],
-    }): Category),
-    (new Category({
+    }): categoryType),
+    (Category({
         name: "Facilities",
         byline: "Toilets.",
         icon: icons.Facilities,
@@ -359,8 +360,8 @@ const categories = [
             WhoIsLookingForHelpFacilities,
             Location,
         ],
-    }): Category),
-    (new Category({
+    }): categoryType),
+    (Category({
         name: "Something to do",
         byline: "Libraries, Community Hubs etc.",
         icon: icons.Entertainment,
@@ -386,8 +387,8 @@ const categories = [
             WhoIsLookingForHelpSomethingToDo,
             Location,
         ],
-    }): Category),
-    (new Category({
+    }): categoryType),
+    (Category({
         name: "Technology",
         byline: "Wifi, charging etc.",
         icon: icons.Tech,
@@ -405,8 +406,8 @@ const categories = [
             WhoIsLookingForHelpTechnology,
             Location,
         ],
-    }): Category),
-    (new Category({
+    }): categoryType),
+    (Category({
         name: "Advocacy",
         byline: "Complaints and advice.",
         icon: icons.Advocacy,
@@ -429,8 +430,8 @@ const categories = [
             WhoIsLookingForHelpAdvocacy,
             Location,
         ],
-    }): Category),
-    (new Category({
+    }): categoryType),
+    (Category({
         name: "Search",
         byline: "Free text search.",
         icon: () => <icons.Search viewBox="14 14 35 35" />,
@@ -463,7 +464,7 @@ const categories = [
             Location,
         ],
         dontShowInCategoryList: true,
-    }): Category),
+    }): categoryType),
 ];
 
 export default categories;
@@ -473,6 +474,6 @@ const categoryMap = Object.fromEntries(
     categories.map(category => [category.key, category])
 )
 
-export function getCategory(key: string): ?Category {
+export function getCategory(key: string): ?categoryType {
     return categoryMap[key];
 }

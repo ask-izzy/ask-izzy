@@ -4,12 +4,12 @@ import * as React from "react";
 
 import Link from "@/src/components/base/Link";
 import Storage from "@/src/storage";
-import Category from "@/src/constants/Category";
+import type {categoryType} from "@/src/constants/Category";
 import Service from "@/src/iss/Service";
 import {ensureURLHasTrailingSlash} from "@/src/utils/url"
 
 type Props = {
-    category: ?Category,
+    category: ?categoryType,
     searchTerm: string,
     pathname: string,
     results: Array<Service>

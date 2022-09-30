@@ -19,7 +19,7 @@ type Props = {|
     backMessage?: string,
 |}
 
-export default function HeaderBar({
+function HeaderBar({
     bannerName,
     className,
     taperColour,
@@ -27,8 +27,8 @@ export default function HeaderBar({
     children,
     secondaryText,
     infoText,
-    fixedAppBar,
-    hideLogoWhenNotABar,
+    fixedAppBar = false,
+    hideLogoWhenNotABar = false,
     backUrl,
     backMessage,
 }: Props): React.Node {
@@ -146,7 +146,4 @@ export default function HeaderBar({
     )
 }
 
-HeaderBar.defaultProps = {
-    fixedAppBar: false,
-    hideLogoWhenNotABar: false,
-}
+export default HeaderBar

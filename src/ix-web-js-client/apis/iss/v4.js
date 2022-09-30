@@ -47,39 +47,45 @@ export type ISS4SearchResults = {
     objects: Array<Object>,
 }
 
-export class ISS4Client {
-    baseUrl: string
-    authString: string;
+export type ISS4ClientType = {
+    authString: string,
+    baseUrl: string,
+    search: (ISS4SearchProps) => Promise<ISS4SearchResults>,
+    getService: (number) => Promise<any>,
+}
 
-    constructor({token, baseUrl}: ISS4ClientProps) {
-        this.baseUrl = baseUrl
-        this.authString = `Token ${token}`
-    }
 
-    async search({
-        serialiser = "detail",
-        ...query
-    }: ISS4SearchProps): Promise<ISS4SearchResults> {
-        const params = {
-            serialiser,
-        }
+function ISS4Client({token, baseUrl}: ISS4ClientProps): ISS4ClientType {
+    return {
+        baseUrl,
+        authString: `Token ${token}`,
+        async search({
+            serialiser = "detail",
+            ...query
+        }: ISS4SearchProps): Promise<ISS4SearchResults> {
+            const params = {
+                serialiser,
+            }
 
-        const url = new URL("/api/search/", this.baseUrl)
-        for (const [key, value] of Object.entries(params)) {
-            url.searchParams.append(key, String(value))
-        }
-        return postRequestWithToken<ISS4SearchResults>(
-            url.href,
-            this.authString,
-            query
-        )
-    }
+            const url = new URL("/api/search/", this.baseUrl)
+            for (const [key, value] of Object.entries(params)) {
+                url.searchParams.append(key, String(value))
+            }
+            return postRequestWithToken<ISS4SearchResults>(
+                url.href,
+                this.authString,
+                query
+            )
+        },
 
-    async getService(serviceId: number): Object {
-        const url = new URL(
-            `/api/directory/services/${serviceId}/`,
-            this.baseUrl
-        ).href
-        return getRequestWithToken(url, this.authString)
+        async getService(serviceId: number): Promise<any> {
+            const url = new URL(
+                `/api/directory/services/${serviceId}/`,
+                this.baseUrl
+            ).href
+            return getRequestWithToken(url, this.authString)
+        },
     }
 }
+
+export default ISS4Client

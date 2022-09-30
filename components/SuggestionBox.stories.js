@@ -5,7 +5,7 @@ import React from "react";
 
 import SuggestionBox from "./SuggestionBox";
 import { getCategory } from "@/src/constants/categories";
-import Category from "@/src/constants/Category"
+import type {categoryType} from "@/src/constants/Category";
 
 export default {
     title: "App Components/SuggestionBox",
@@ -18,7 +18,7 @@ const Template = (args: Object): ReactNode => {
 
 export const Example: typeof Template = Template.bind({});
 Example.args = {
-    category: (getCategory("food"): ?Category),
+    category: (getCategory("food"): ?categoryType),
     searchTerm: "cheep food",
     pathname: "/food",
     results: [],

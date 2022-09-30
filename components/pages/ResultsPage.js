@@ -34,7 +34,7 @@ import {
     getPageTitleFromRouter,
     getPersonalisationNextPath,
 } from "@/src/utils/routing"
-import Category from "@/src/constants/Category"
+import type {categoryType} from "@/src/constants/Category";
 import WhoIsLookingForHelpPage
 from "@/src/constants/personalisation-pages/WhoIsLookingForHelp.js"
 import { usersnapFireEvent } from "@/helpers/usersnap.helpers.js"
@@ -55,7 +55,7 @@ type State = {
     searchType: ?string,
     sortBy: ?SortType,
     travelTimesStatus: travelTimesStatus,
-    category: Category,
+    category: categoryType,
     pageTitle: string,
 }
 

@@ -9,7 +9,7 @@ type Props = {
     total: number,
 }
 
-export default function ProgressBar({
+function ProgressBar({
     className,
     current,
     total,
@@ -39,3 +39,5 @@ export default function ProgressBar({
         </div>
     )
 }
+
+export default ProgressBar

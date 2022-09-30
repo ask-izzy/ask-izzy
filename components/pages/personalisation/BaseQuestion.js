@@ -29,7 +29,7 @@ import SupportSearchBar from "@/src/components/SupportSearchBar";
 import type {
     PersonalisationQuestionPage,
 } from "@/flow/personalisation-page"
-import Category from "@/src/constants/Category";
+import type {categoryType} from "@/src/constants/Category";
 
 type Props = {|
     router: NextRouter,
@@ -38,9 +38,9 @@ type Props = {|
     classNames?: Array<string>,
 |}
 export type State = {
-    category: ?Category,
-    selectedAnswer: ?string | Set<string>, // The answer(s) that a user has
-        // currently selected but not confirmed
+    category: ?categoryType,
+    // The answer(s) that a user has currently selected but not confirmed
+    selectedAnswer: ?string | Set<string>,
 }
 
 class BaseQuestion extends React.Component<Props, State> {

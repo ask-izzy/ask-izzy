@@ -5,7 +5,7 @@ import type {
 import _ from "underscore";
 import type { NextRouter } from "next/router"
 
-import Category from "../constants/Category";
+import type {categoryType} from "@/src/constants/Category";
 import storage from "../storage";
 import type { SearchQueryChanges } from "../../src/iss/searchQueryBuilder";
 import type {
@@ -23,7 +23,7 @@ export function prettyPrintAnswer(
 }
 
 export function getBannerName(
-    category: ?Category,
+    category: ?categoryType,
     questionPageName?: string
 ): string {
     if (questionPageName === "sub-indigenous") {

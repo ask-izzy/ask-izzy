@@ -10,13 +10,13 @@ import type { NextRouter } from "next/router"
 
 import LinkListItem from "./LinkListItem";
 import icons from "../icons";
-import type Category from "../constants/Category";
+import type {categoryType} from "@/src/constants/Category";
 import Storage from "../storage";
 import ScreenReader from "./ScreenReader"
 import { getServicesPath } from "@/src/utils/routing"
 
 type Props = {
-    category: Category,
+    category: categoryType,
     router: NextRouter,
 }
 
