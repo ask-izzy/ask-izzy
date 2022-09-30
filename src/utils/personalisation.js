@@ -5,7 +5,7 @@ import type {
 import _ from "underscore";
 import type { NextRouter } from "next/router"
 
-import Category from "../constants/Category";
+import Category from "@/src/constants/Category";
 import storage from "../storage";
 import type { SearchQueryChanges } from "../../src/iss/searchQueryBuilder";
 import type {

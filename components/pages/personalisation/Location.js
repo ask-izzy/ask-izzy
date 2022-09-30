@@ -4,7 +4,7 @@ import type {
     ElementConfig as ReactElementConfig,
 } from "react"
 
-import React, {createRef} from "react";
+import React, {useRef, useState, useEffect} from "react"
 import _ from "underscore";
 import debounce from "just-debounce-it";
 import { withRouter } from "next/router"
@@ -41,19 +41,11 @@ import {
 } from "@/src/utils/page-loading"
 import Category from "@/src/constants/Category"
 
-type location = {|name: string|} | Geolocation
+type LocationType = {|name: string|} | Geolocation
 
 type Props = {
     router: NextRouter,
     details: PersonalisationLocationPage,
-}
-type State = {
-    category: ?Category,
-    gettingAutocompletionsInProgress: boolean,
-    locationNameInput: string,
-    selectedLocation: ?location,
-    autocompletions: Array<ISS3AreaLocation>,
-    nextDisabled: boolean,
 }
 
 type initialSuggestions = {
@@ -61,88 +53,114 @@ type initialSuggestions = {
     label: ReactNode
 }
 
-class Location extends React.Component<Props, State> {
-    searchInputRef: { current: null | HTMLInputElement } = createRef()
-    GeolocationButtonClickRef: { current: null | () => void } = createRef()
+function Location({router, details}: Props): ReactNode {
+    const searchInputRef = useRef()
+    const GeolocationButtonClickRef = useRef()
+    const locationNameInputRef = useRef()
+    const [gettingAutocompletionsInProgress, setGettingAutocompletionsInProgress] = useState<boolean>(false)
+    const [locationNameInput, setLocationNameInput] = useState<string>("")
+    const [selectedLocation, setSelectedLocation] = useState<LocationType | null>(null)
+    const [autocompletions, setAutocompletionsState] = useState<Array<ISS3AreaLocation>>([])
+    const [prevAutocompletions, setPrevAutocompletions] = useState<Array<ISS3AreaLocation>>([])
+    const [nextDisabled, setNextDisabled] = useState<boolean>(true)
+    const [category] = useState<?Category>(getCategoryFromRouter(router))
 
-    constructor(props: Object) {
-        super(props);
-        this.state = {
-            gettingAutocompletionsInProgress: false,
-            locationNameInput: "",
-            selectedLocation: null,
-            autocompletions: [],
-            nextDisabled: true,
-            category: getCategoryFromRouter(props.router),
-        };
-    }
-
-    componentDidMount(): void {
+    useEffect(() => {
         const userLocation = storage.getUserGeolocation()
         const searchLocation = storage.getSearchArea()
-
-        let location: location
+        let location: LocationType = {}
         if (userLocation) {
-            if (!searchLocation || searchLocation === userLocation.name) {
+
+            if (searchLocation.length == 0 || searchLocation === userLocation.name) {
                 location = userLocation
             }
-        } else if (searchLocation) {
+        } else if (searchLocation.length != 0) {
+
             location = {name: searchLocation}
         }
 
-        if (location) {
-            this.setSelectedLocation(location)
+        if (location && Object.keys(location).length !== 0) {
+            setLocation(location)
         }
+
+    }, [])
+
+    useEffect(() => {
+        // After state updates, make sure you can see the input
+        if (
+            searchInputRef.current &&
+            searchInputRef.current === document.activeElement &&
+            prevAutocompletions !== autocompletions
+        ) {
+            scrollToSearchControl();
+        }
+    }, [])
+
+    const goBackPath = getPersonalisationBackPath(router)
+    const isSummaryRoute = goBackPath.includes("/summary")
+
+    function setLocation(location: LocationType): void {
+        setSelectedLocation(location)
+        setLocationInput(location.name)
+        setNextDisabled(false)
+        setAutocompletions([])
     }
 
-    onDoneTouchTap(event: SyntheticInputEvent<>): void {
-        event.preventDefault();
-        if (this.state.nextDisabled) {
+    function setAutocompletions(newAutocompletions: Array<ISS3AreaLocation>): void {
+        setPrevAutocompletions(autocompletions)
+        setAutocompletionsState(newAutocompletions)
+    }
+
+    function setLocationInput(input: string) {
+        locationNameInputRef.current = input
+        setLocationNameInput(input)
+    }
+
+
+    function onDoneTouchTap(event): void {
+        event.preventDefault()
+        if (nextDisabled) {
             return
         }
-        if (!this.state.selectedLocation) {
+        if (!selectedLocation) {
             console.error(
                 "We should not be able to progress without selecting " +
                     "a location"
             )
             return
         }
-        storage.setSearchArea(this.state.selectedLocation.name);
-        if (isGeolocation(this.state.selectedLocation)) {
-            storage.setUserGeolocation(this.state.selectedLocation);
+        storage.setSearchArea(selectedLocation.name);
+        if (isGeolocation(selectedLocation)) {
+            storage.setUserGeolocation(selectedLocation)
         } else {
             storage.clearUserGeolocation()
         }
-        goToPersonalisationNextPath({router: this.props.router})
+        goToPersonalisationNextPath({router: router})
+
     }
 
-    triggerAutocomplete(newLocationNameInput: string) {
+    function triggerAutocomplete(newLocationNameInput: string): void {
         if (newLocationNameInput.length < 1) {
-            if (this.state.gettingAutocompletionsInProgress) {
+            if (gettingAutocompletionsInProgress) {
                 closePageLoadDependencies(
-                    this.props.router.asPath,
+                    router.asPath,
                     "autocompleteSuggestionsLoad"
                 )
             }
-            this.setState({
-                autocompletions: [],
-                gettingAutocompletionsInProgress: false,
-            });
+            setAutocompletions([])
+            setGettingAutocompletionsInProgress(false)
             return
         }
-
-        this.setState({
-            gettingAutocompletionsInProgress: true,
-        });
+        setGettingAutocompletionsInProgress(true)
 
         addPageLoadDependencies(
-            this.props.router.asPath,
+            router.asPath,
             "autocompleteSuggestionsLoad"
         )
-        this.getAutocompletionSuggestions(newLocationNameInput)
+        getAutocompletionSuggestions(newLocationNameInput)
     }
 
-    getAutocompletionSuggestions: (string) => Promise<void> = debounce(
+    const getAutocompletionSuggestions: (string) => Promise<void> = debounce(
         async(input: string) => {
             let results
             try {
@@ -164,25 +182,22 @@ class Location extends React.Component<Props, State> {
             }
 
             // Check to make sure input hasn't change in the meantime
-            if (input !== this.state.locationNameInput) {
+            if (locationNameInputRef.current && input !== locationNameInputRef.current) {
                 return
             }
 
+
             if (results) {
-                this.setState({
-                    autocompletions: _.uniq(
-                        Array.from(results.objects),
-                        false,
-                        ({name, state}) => name + state
-                    ),
-                });
+                setAutocompletions(_.uniq(
+                    Array.from(results.objects),
+                    false,
+                    ({name, state}) => name + state
+                ))
             }
 
-            this.setState({
-                gettingAutocompletionsInProgress: false,
-            });
+            setGettingAutocompletionsInProgress(false)
             closePageLoadDependencies(
-                this.props.router.asPath,
+                router.asPath,
                 "autocompleteSuggestionsLoad"
             )
         },
@@ -190,109 +205,73 @@ class Location extends React.Component<Props, State> {
         true
     )
 
-    setSelectedLocation(location: location): void {
-        this.setState({
-            selectedLocation: location,
-            locationNameInput: location.name,
-            nextDisabled: false,
-            autocompletions: [],
-        });
+
+
+    function clearSelectedLocation(): void {
+        setSelectedLocation(null)
+        setNextDisabled(true)
     }
 
-    clearSelectedLocation(): void {
-        this.setState({
-            selectedLocation: null,
-            nextDisabled: true,
-        });
-    }
-    clearLocationInput(): void {
-        this.setState({
-            locationNameInput: "",
-            autocompletions: [],
-        });
-    }
-
-    componentDidUpdate(prevProps: Object, prevState: Object): void {
-        // After state updates, make sure you can see the input
-        if (
-            this.searchInputRef.current &&
-            this.searchInputRef.current === document.activeElement &&
-            prevState.autocompletions !== this.state.autocompletions
-        ) {
-            this.scrollToSearchControl();
-        }
-    }
-
-    scrollToSearchControl(): void {
-        if (this.searchInputRef.current) {
+    function scrollToSearchControl(): void {
+        if (searchInputRef.current) {
             // Scroll the input to just under the appbar
             window.scrollTo(
                 0,
-                this.searchInputRef.current.getBoundingClientRect().top +
+                searchInputRef.current.getBoundingClientRect().top +
                     window.scrollY - 50
             );
         }
     }
 
-    onSearchChange(event: SyntheticInputEvent<HTMLInputElement>): void {
+    function onSearchChange(event): void {
         const newValue = event.target.value
-        const matchingAutocomplete = this.state.autocompletions.find(
+        const matchingAutocomplete = autocompletions.find(
             area => `${area.name}, ${area.state}` === newValue
         )
         if (matchingAutocomplete) {
-            return this.selectAutocomplete(matchingAutocomplete)
+            return selectAutocomplete(matchingAutocomplete)
         }
         const newLocationNameInput = newValue.replace(/^\s+/, "")
 
-        this.setState({
-            locationNameInput: newLocationNameInput,
-        });
-
-        this.clearSelectedLocation();
-
-        this.triggerAutocomplete(newLocationNameInput);
+        setLocationInput(newLocationNameInput)
+        clearSelectedLocation()
+        triggerAutocomplete(newLocationNameInput)
     }
 
-    onGeolocationStatusChange(status: GeolocationStatus): void {
+    function onGeolocationStatusChange(status: GeolocationStatus): void {
         if (
             status.type === "COMPLETE" &&
             status.location
         ) {
-            this.setSelectedLocation(status.location);
+            setLocation(status.location)
         }
     }
 
-    selectAutocomplete(result: ISS3AreaLocation): void {
+    function selectAutocomplete(result: ISS3AreaLocation): void {
         /* set the text box to this value
          * and remove the autocompletions */
-        const location: location = {
+        const location: LocationType = {
             name: `${result.name}, ${result.state}`,
-        };
-        this.setSelectedLocation(location);
-        this.setState({
-            autocompletions: [],
-        });
+        }
+        setLocation(location)
+        setAutocompletions([])
     }
 
-    getInitialSuggestions(): Array<initialSuggestions> {
+    function getInitialSuggestions(): Array<initialSuggestions> {
         const GeolocationComponent =
             <div className="GeoLocationButtonContainer" >
                 {browserSupportsGeolocation() &&
                     <>
-                        {isGeolocation(this.state.selectedLocation)}
+                        {isGeolocation(selectedLocation)}
                         <GeolocationButton
-                            onStatusChange={
-                                this.onGeolocationStatusChange
-                                    .bind(this)
-                            }
+                            onStatusChange={onGeolocationStatusChange}
                             locationValue={
-                                isGeolocation(this.state.selectedLocation) ?
-                                    this.state.selectedLocation
+                                isGeolocation(selectedLocation) ?
+                                    selectedLocation
                                     : undefined
                             }
                             buttonClickRef={(clickRef) => {
-                                this.GeolocationButtonClickRef.current =
-                                clickRef
+                                GeolocationButtonClickRef.current = clickRef
                             }}
                         />
                     </>
@@ -312,163 +291,154 @@ class Location extends React.Component<Props, State> {
                     </p>
                 </span>
             </h3>
-
         let initialSuggestions = [{
             value: "",
             label:
                 <div className = "initialSuggestions" >
                     {GeolocationComponent}
                     {
-                        !this.state.selectedLocation &&
+                        !selectedLocation &&
                             Explainer
                     }
                 </div>,
 
         }]
 
-        if (this.state.gettingAutocompletionsInProgress) {
+        if (gettingAutocompletionsInProgress) {
             return []
         }
         return initialSuggestions
     }
 
-    onInitialSuggestionsSelected() {
-        this.GeolocationButtonClickRef.current &&
-        this.GeolocationButtonClickRef.current()
+    function onInitialSuggestionsSelected() {
+        GeolocationButtonClickRef.current &&
+        GeolocationButtonClickRef.current()
 
     }
 
-    render(): ReactNode {
-        const goBackPath = getPersonalisationBackPath(this.props.router)
-        const isSummaryRoute = goBackPath.includes("/summary")
-
-        return (
-            <div className="Location">
-                <div>
-                    <section className="page-header-section">
-                        <HeaderBar
-                            primaryText={
-                                "Where are you looking for help?"
-                            }
-                            secondaryText={
-                                "Find services near you"
-                            }
-                            taperColour={"LighterGrey"}
-                            fixedAppBar={true}
-                            bannerName={getBannerName(
-                                this.state.category,
-                                this.props.details.name
-                            )}
-                            backUrl={isSummaryRoute ? goBackPath : undefined}
-                            backMessage={
-                                isSummaryRoute ? "Back to answers" : undefined
-                            }
-                        />
-                        <div className="questionsBar">
-                            <ScreenReader>
-                                <a
-                                    href="#mainPageContent"
-                                    aria-label={
-                                        "Skip your previously selected " +
-                                        "answers and go straight to the " +
-                                        "options."
-                                    }
-                                >
-                                    Skip to make your selection
-                                </a>
-                            </ScreenReader>
-                            <QuestionStepper />
-                        </div>
-                    </section>
-                </div>
-                <main
-                    id="mainPageContent"
-                    aria-label="Questions"
-                >
-                    <WithStickyFooter
-                        footerContents={this.renderDoneButton()}
-                    >
-                        <fieldset>
-                            <legend>
-                                Where are you looking for help?
-                            </legend>
-                            <div className="search">
-                                <InputWithDropdown
-                                    ref={this.searchInputRef}
-                                    type="search"
-                                    showClearButton={true}
-                                    aria-label="Search for a suburb
-                                    or postcode"
-                                    placeholder="Search for a suburb
-                                    or postcode"
-                                    value={this.state.locationNameInput}
-                                    onChange={this.onSearchChange.bind(this)}
-                                    initialSuggestions={
-                                        this.getInitialSuggestions()
-                                    }
-                                    onInitialSuggestionsSelected = {
-                                        this.onInitialSuggestionsSelected.bind(this)
-                                    }
-                                    initialSuggestionsA11yStatusMessage = {
-                                        this.state.selectedLocation ?
-                                            ""
-                                            : "Press enter to get your location."
-                                    }
-                                    loadingResults={this.state.gettingAutocompletionsInProgress}
-                                    autocompleteValues={
-                                        this.state.autocompletions
-                                            .map(location => ({
-                                                value: `${location.name},` +
-                                                ` ${location.state}`,
-                                                label: <>
-                                                <div className="suburb">
-                                                    {location.name}
-                                                </div>
-                                                <ScreenReader>,{" "}</ScreenReader>
-                                                <div className="state">
-                                                    {location.state}
-                                                </div>
-                                            </>,
-                                            }))
-                                    }
-                                />
-                            </div>
-                            {this.state.gettingAutocompletionsInProgress &&
-                                <div className="progress">
-                                    <icons.Loading
-                                        aria-label="Loading locations"
-                                        className="big"
-                                    />
-                                </div>
-                            }
-                        </fieldset>
-                    </WithStickyFooter>
-                </main>
-            </div>
-        )
-    }
-
-    renderDoneButton(): ReactNode {
+    function renderDoneButton(): ReactNode {
         return (
             <div>
                 <div className="done-button">
                     <FlatButton
                         label="Next"
                         className="doneButton"
-                        onClick={this.onDoneTouchTap.bind(this)}
-                        disabled={this.state.nextDisabled}
+                        onClick={onDoneTouchTap}
+                        disabled={nextDisabled}
                     />
                 </div>
             </div>
         )
     }
-}
 
-// Flow doesn't support the use of "%checks" in class methods so we have to
-// move this function out of the class
-// https://github.com/facebook/flow/issues/7920
-function isGeolocation(location: ?location): boolean %checks {
-    return !!(location && location.longitude && location.latitude)
+    function isGeolocation(location: ?LocationType): boolean %checks {
+        return !!(location && location.longitude && location.latitude)
+    }
+
+    return (
+        <div className="Location">
+            <div>
+                <section className="page-header-section">
+                    <HeaderBar
+                        primaryText={
+                            "Where are you looking for help?"
+                        }
+                        secondaryText={
+                            "Find services near you"
+                        }
+                        taperColour={"LighterGrey"}
+                        fixedAppBar={true}
+                        bannerName={getBannerName(
+                            category,
+                            details.name
+                        )}
+                        backUrl={isSummaryRoute ? goBackPath : undefined}
+                        backMessage={
+                            isSummaryRoute ? "Back to answers" : undefined
+                        }
+                    />
+                    <div className="questionsBar">
+                        <ScreenReader>
+                            <a
+                                href="#mainPageContent"
+                                aria-label={
+                                    "Skip your previously selected " +
+                                    "answers and go straight to the " +
+                                    "options."
+                                }
+                            >
+                                Skip to make your selection
+                            </a>
+                        </ScreenReader>
+                        <QuestionStepper />
+                    </div>
+                </section>
+            </div>
+            <main
+                id="mainPageContent"
+                aria-label="Questions"
+            >
+                <WithStickyFooter
+                    footerContents={renderDoneButton()}
+                >
+                    <fieldset>
+                        <legend>
+                            Where are you looking for help?
+                        </legend>
+                        <div className="search">
+                            <InputWithDropdown
+                                ref={searchInputRef}
+                                type="search"
+                                showClearButton={true}
+                                aria-label="Search for a suburb
+                                or postcode"
+                                placeholder="Search for a suburb
+                                or postcode"
+                                value={locationNameInput}
+                                onChange={onSearchChange}
+                                initialSuggestions={
+                                    getInitialSuggestions()
+                                }
+                                onInitialSuggestionsSelected = {
+                                    onInitialSuggestionsSelected
+                                }
+                                initialSuggestionsA11yStatusMessage = {
+                                    selectedLocation ?
+                                        ""
+                                        : "Press enter to get your location."
+                                }
+                                loadingResults={gettingAutocompletionsInProgress}
+                                autocompleteValues={
+                                    autocompletions
+                                        .map(location => ({
+                                            value: `${location.name},` +
+                                            ` ${location.state}`,
+                                            label: <>
+                                            <div className="suburb">
+                                                {location.name}
+                                            </div>
+                                            <ScreenReader>,{" "}</ScreenReader>
+                                            <div className="state">
+                                                {location.state}
+                                            </div>
+                                        </>,
+                                        }))
+                                }
+                            />
+                        </div>
+                        {gettingAutocompletionsInProgress &&
+                            <div className="progress">
+                                <icons.Loading
+                                    aria-label="Loading locations"
+                                    className="big"
+                                />
+                            </div>
+                        }
+                    </fieldset>
+                </WithStickyFooter>
+            </main>
+        </div>
+    )
 }
 
 export default (

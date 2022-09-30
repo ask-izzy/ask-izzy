@@ -26,15 +26,14 @@ type Props = {
 const LOGO = "/images/ask-izzy-logo-single-line-yellow.svg";
 const STICKY_HEADER_BREAKPOINT = 50;
 
-function AppBar(
-    {
-        onBackTouchTap,
-        backMessage,
-        containerClassName,
-        transition = false,
-        hideLogoWhenNotABar = false,
-        breakpoint = STICKY_HEADER_BREAKPOINT,
-    }: Props): ReactNode {
+function AppBar({
+    onBackTouchTap,
+    backMessage,
+    containerClassName,
+    transition = false,
+    hideLogoWhenNotABar = false,
+    breakpoint = STICKY_HEADER_BREAKPOINT,
+}: Props): ReactNode {
 
     const scrollPosY = getScrollPosition();
 

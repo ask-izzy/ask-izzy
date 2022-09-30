@@ -5,7 +5,7 @@ import React from "react";
 
 import SuggestionBox from "./SuggestionBox";
 import { getCategory } from "@/src/constants/categories";
-import Category from "@/src/constants/Category"
+import Category from "@/src/constants/Category";
 
 export default {
     title: "App Components/SuggestionBox",
