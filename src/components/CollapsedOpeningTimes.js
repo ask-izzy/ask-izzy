@@ -1,7 +1,7 @@
 /* @flow */
 
 
-import type {Element as ReactElement} from "React";
+import type {Node as ReactNode} from "React";
 import React from "react";
 import moment from "moment-timezone";
 import _ from "underscore";
@@ -53,10 +53,30 @@ type Props = {
     moment?: Moment,
 }
 
-// eslint-disable-next-line max-len
-export default class CollapsedOpeningTimes extends React.Component<Props, void> {
 
-    recordExpandOpeningTimes(): void {
+function CollapsedOpeningTimes({
+    object,
+    serviceId,
+    moment,
+}: Props):ReactNode {
+    const order = [
+        "Monday",
+        "Tuesday",
+        "Wednesday",
+        "Thursday",
+        "Friday",
+        "Saturday",
+        "Sunday",
+        "Public Holiday",
+    ];
+
+    let openingHours = _(object.openingTimes)
+        .sortBy(record =>
+            (order.indexOf(record.day) * 24) +
+            (parseInt(record.open))
+        )
+
+    function recordExpandOpeningTimes(): void {
         gtm.emit({
             event: "Opening Times Expanded",
             eventCat: "Content Expanded",
@@ -66,53 +86,36 @@ export default class CollapsedOpeningTimes extends React.Component<Props, void> 
         })
     }
 
-    render(): ReactElement<"div"> {
-        const order = [
-            "Monday",
-            "Tuesday",
-            "Wednesday",
-            "Thursday",
-            "Friday",
-            "Saturday",
-            "Sunday",
-            "Public Holiday",
-        ];
-
-        let openingHours = _(this.props.object.openingTimes)
-            .sortBy(record =>
-                (order.indexOf(record.day) * 24) +
-                (parseInt(record.open))
-            );
-
-        return (
-            <div className="CollapsedOpeningTimes">
-                <OpeningTimes object={this.props.object} />
-                {openingHours.length > 0 && (
-                    <Collapser
-                        expandMessage="Show open hours"
-                        onClick={this.recordExpandOpeningTimes.bind(this)}
-                        analyticsEvent={{
-                            event: `Action Triggered - Opening Times`,
-                            eventAction: "Show opening times",
-                            eventLabel: null,
-                        }}
-                    >
-                        <ul className="AllOpeningTimes">
-                            {openingHours.map((record, idx) =>
-                                <li key={idx} >
-                                    <span className="day">{record.day}</span>
-                                    {" "}
-                                    <span className="time">
-                                        {formatTime(record.open)}
-                                        &ndash;
-                                        {formatTime(record.close)}
-                                    </span>
-                                </li>
-                            )}
-                        </ul>
-                    </Collapser>
-                )}
-            </div>
-        );
-    }
+    return (
+        <div className="CollapsedOpeningTimes">
+            <OpeningTimes object={object} />
+            {openingHours.length > 0 && (
+                <Collapser
+                    expandMessage="Show open hours"
+                    onClick={recordExpandOpeningTimes}
+                    analyticsEvent={{
+                        event: `Action Triggered - Opening Times`,
+                        eventAction: "Show opening times",
+                        eventLabel: null,
+                    }}
+                >
+                    <ul className="AllOpeningTimes">
+                        {openingHours.map((record, idx) =>
+                            <li key={idx} >
+                                <span className="day">{record.day}</span>
+                                {" "}
+                                <span className="time">
+                                    {formatTime(record.open)}
+                                    &ndash;
+                                    {formatTime(record.close)}
+                                </span>
+                            </li>
+                        )}
+                    </ul>
+                </Collapser>
+            )}
+        </div>
+    )
 }
+
+export default CollapsedOpeningTimes

@@ -1,64 +1,63 @@
 /* @flow */
 
-import type {Element as ReactElement} from "React";
-import React from "react";
+import type {Node as ReactNode} from "React"
+import React from "react"
 
-import Link from "./base/Link";
-import * as gtm from "../google-tag-manager";
-import Service from "../iss/Service";
-import Spacer from "./Spacer";
+import Link from "./base/Link"
+import * as gtm from "../google-tag-manager"
+import Service from "../iss/Service"
+import Spacer from "./Spacer"
 
 type Props = {
     object: Service,
 }
 
-export default class Feedback extends React.Component<Props, void> {
-    recordSuggestChange(): void {
+function Feedback({object}: Props): ReactNode {
+    function recordSuggestChange(): void {
         gtm.emit({
             event: "Service Change Requested",
             eventCat: "Feedback Given",
             eventAction: "Service Change Suggestion",
             eventLabel: location.pathname,
-            eventValue: this.props.object.id,
+            eventValue: object.id,
             sendDirectlyToGA: true,
-        });
+        })
     }
 
-    render(): ReactElement<"div"> {
+    return (
+        <div className="Feedback">
+            <Spacer />
+            <p>
+                Email us at{" "}
+                <Link
+                    className="suggestChange"
+                    onClick={recordSuggestChange}
+                    to={
+                        `mailto:${process.env.NEXT_PUBLIC_SITE_EMAIL}` +
+                            "?subject=" +
+                            encodeURIComponent(
+                                `Your Ask Izzy feedback: ` +
+                            `${object.id}`) +
+                            "&body=" +
+                            encodeURIComponent(
+                                `Contact name:
 
-        return (
-            <div className="Feedback">
-                <Spacer />
-                <p>
-                    Email us at{" "}
-                    <Link
-                        className="suggestChange"
-                        onClick={this.recordSuggestChange.bind(this)}
-                        to={
-                            `mailto:${process.env.NEXT_PUBLIC_SITE_EMAIL}` +
-                                "?subject=" +
-                                encodeURIComponent(
-                                    `Your Ask Izzy feedback: ` +
-                                `${this.props.object.id}`) +
-                                "&body=" +
-                                encodeURIComponent(
-                                    `Contact name:
+                                Contact number:
 
-                                    Contact number:
+                                Contact email:
 
-                                    Contact email:
+                                Details of change:
 
-                                    Details of change:
-
-                                    `.replace(/^ +/gm, "")
-                                )
-                        }
-                    >
-                        {process.env.NEXT_PUBLIC_SITE_EMAIL}
-                    </Link> with feedback or changes to service information
-                    if details here need updating.
-                </p>
-            </div>
-        );
-    }
+                                `.replace(/^ +/gm, "")
+                            )
+                    }
+                >
+                    {process.env.NEXT_PUBLIC_SITE_EMAIL}
+                </Link> with feedback or changes to service information
+                if details here need updating.
+            </p>
+        </div>
+    )
 }
+
+export default Feedback

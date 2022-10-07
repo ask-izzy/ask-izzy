@@ -1,9 +1,9 @@
 /* @flow */
 
-import type {Element as ReactElement} from "React";
-import React from "react";
-import Service from "../iss/Service";
-import Spacer from "./Spacer";
+import type {Node as ReactNode} from "React"
+import React from "react"
+import Service from "../iss/Service"
+import Spacer from "./Spacer"
 
 type Props = {
     object: Service,
@@ -11,31 +11,32 @@ type Props = {
     withSpacer?: boolean,
 }
 
-export default class Ndis extends React.Component<Props, void> {
-    static defaultProps: any = {
-        withSpacer: false,
-    };
+function Ndis({
+    object,
+    compact,
+    withSpacer = false,
+}: Props): null | ReactNode {
 
-    render(): null | ReactElement<"div"> {
-        let ndisApproved = this.props.object.ndis_approved;
+    let ndisApproved = object.ndis_approved
 
-        if (ndisApproved) {
-            if (this.props.compact) {
-                return (
-                    <div className="NdisCompact">
-                        Part of NDIS
-                    </div>
-                );
-            }
+    if (ndisApproved) {
+        if (compact) {
             return (
-                <div>
-                    {this.props.withSpacer && (<Spacer />)}
-                    <div className="Ndis">
-                        Part of National Disability Insurance Scheme
-                    </div>
+                <div className="NdisCompact">
+                    Part of NDIS
                 </div>
-            );
+            )
         }
-        return null;
+        return (
+            <div>
+                {withSpacer && (<Spacer />)}
+                <div className="Ndis">
+                    Part of National Disability Insurance Scheme
+                </div>
+            </div>
+        )
     }
+    return null
 }
+
+export default Ndis

@@ -1,5 +1,5 @@
 /* @flow */
-import type {Element as ReactElement, Node as ReactNode} from "React";
+import type {Node as ReactNode} from "React";
 import React from "react";
 import { titleize } from "underscore.string";
 
@@ -15,82 +15,91 @@ import UrlsToLinks from "./UrlsToLink"
 
 type Props = phone & {
     crisis?: boolean,
+    number?: string,
+    kind?: string,
+    comment?: string,
     analyticsEventDetails?: AnalyticsEvent,
     className?: ?string,
     hasDetails?: ReactNode,
     styleType?: string // currently only "hollow" is supported
 }
 
-export default class PhoneButton extends React.Component<Props, void> {
-    static defaultProps: any = {
-        hasDetails: <></>,
+function PhoneButton({
+    crisis,
+    number,
+    kind,
+    comment,
+    analyticsEventDetails,
+    className,
+    hasDetails = <></>,
+    styleType,
+}: Props): ReactNode {
+    const icon = styleType === "hollow" ?
+        <icons.Phone />
+        : <icons.PhoneSolid />
+
+    function href(): string {
+        return "tel:" + number.replace(/[^0-9+]/g, "")
     }
 
-    get href(): string {
-        return "tel:" + this.props.number.replace(/[^0-9+]/g, "");
+    function displayComment(): string {
+        return comment ? comment : titleize(kind)
     }
 
-    get displayComment(): string {
-        return this.props.comment ?
-            this.props.comment
-            : titleize(this.props.kind)
-    }
-
-    recordClick(): void {
+    function recordClick(): void {
         gtm.emit({
             event: "Phone Number Clicked",
             eventCat: "Phone Number Clicked",
             eventAction: "",
-            eventLabel: `${location.pathname} - ${this.props.number}` +
-                `${this.props.crisis ? " (Crisis Number)" : ""}`,
+            eventLabel: `${location.pathname} - ${number}` +
+                `${crisis ? " (Crisis Number)" : ""}`,
             sendDirectlyToGA: true,
-            ...this.props.analyticsEventDetails,
+            ...analyticsEventDetails,
         });
     }
-    recordClick: any = this.recordClick.bind(this)
 
-    render(): ReactElement<"div"> {
-        const className = classnames(
-            "Contact",
-            "Phone",
-            this.props.styleType ?
-                ` ${toCamelCase("style " + this.props.styleType)}`
-                : ""
-        )
-        const icon = this.props.styleType === "hollow" ?
-            <icons.Phone />
-            : <icons.PhoneSolid />
 
-        return (
-            <div className={className}>
-                <ScreenReader>
+
+    return (
+        <div className={
+            classnames(
+                "Contact",
+                "Phone",
+                styleType ?
+                    ` ${toCamelCase("style " + styleType)}`
+                    : ""
+            )
+        }
+        >
+            <ScreenReader>
                     Phone contact:
-                </ScreenReader>
-                <Link
-                    to={this.href}
-                    className="ContactButton"
-                    onClick={this.recordClick}
-                    analyticsEvent={{
-                        event: "Link Followed - Phone Contact",
-                        eventAction: `Contact detail - phone` +
-                            `${this.props.crisis ? " - crisis line" : ""}`,
-                        eventLabel: `${this.props.number}`,
-                    }}
-                >
-                    <div className="Contact-text">
-                        {icon}
-                        <span>Call </span>
-                        <span className="number value">
-                            {this.props.number}
-                        </span>
-                    </div>
-                </Link>
-                <div className="detailsContainer">
-                    <UrlsToLinks>{this.displayComment}</UrlsToLinks>
-                    {this.props.hasDetails}
+            </ScreenReader>
+            <Link
+                to={href()}
+                className="ContactButton"
+                onClick={recordClick}
+                analyticsEvent={{
+                    event: "Link Followed - Phone Contact",
+                    eventAction: `Contact detail - phone` +
+                            `${crisis ? " - crisis line" : ""}`,
+                    eventLabel: `${number}`,
+                }}
+            >
+                <div className="Contact-text">
+                    {icon}
+                    <span>Call </span>
+                    <span className="number value">
+                        {number}
+                    </span>
                 </div>
-
+            </Link>
+            <div className="detailsContainer">
+                <UrlsToLinks>{displayComment()}</UrlsToLinks>
+                {hasDetails}
             </div>
-        );
-    }
+
+        </div>
+    )
 }
+
+export default PhoneButton
