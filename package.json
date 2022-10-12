@@ -70,7 +70,7 @@
     "@storybook/addon-links": "^6.4.22",
     "@storybook/react": "^6.4.22",
     "ansi-escapes": "4.3.1",
-    "apollo-server": "2.19.0",
+    "apollo-server": "2.25.4",
     "autoprefixer-loader": "3.2.0",
     "aws-sdk": "^2.1170.0",
     "babel-eslint": "10.1.0",
