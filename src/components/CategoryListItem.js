@@ -26,7 +26,7 @@ const PERSONALISATIONS_TO_CLEAR = [
     "dfv-demographics",
 ]
 
-class CategoryListItem extends React.Component<Props, void> {
+function CategoryListItem({category, router}: Props): ReactNode {
     /*
      * This is to prevent confusion when going between categories which share,
      * the same questions
@@ -35,46 +35,44 @@ class CategoryListItem extends React.Component<Props, void> {
      *
      * This may not be needed with filters
      */
-    clearAreYouSafe(event: SyntheticEvent<HTMLAnchorElement>): void {
+    function clearAreYouSafe(event): void {
         PERSONALISATIONS_TO_CLEAR.forEach(answer => {
             if (Storage.getItem(answer)) {
                 Storage.removeItem(answer)
             }
         })
         const directPath = getServicesPath({
-            router: this.props.router,
-            category: this.props.category,
+            router: router,
+            category: category,
         })
-        this.props.router.push(directPath)
+        router.push(directPath)
 
         event?.preventDefault()
     }
 
-    render(): ReactNode {
-        let Icon = this.props.category.icon || icons.House;
+    let Icon = category.icon || icons.House;
 
-        return (
-            <LinkListItem
-                className="CategoryListItem hero"
-                to={`/${this.props.category.key}`}
-                leftIcon={
-                    <Icon className="ColoredIcon icon-fg-color big" />
-                }
-                onClick={this.clearAreYouSafe.bind(this)}
-                rightIcon={<icons.Chevron aria-hidden={true} />}
-                primaryText={<>
-                    {this.props.category.name}
-                    <ScreenReader>,</ScreenReader>
-                </>}
-                secondaryText={this.props.category.byline}
-                analyticsEvent={{
-                    event: "Link Followed - Category",
-                    eventAction: "Category",
-                    eventLabel: this.props.category.key,
-                }}
-            />
-        );
-    }
+    return (
+        <LinkListItem
+            className="CategoryListItem hero"
+            to={`/${category.key}`}
+            leftIcon={
+                <Icon className="ColoredIcon icon-fg-color big" />
+            }
+            onClick={clearAreYouSafe}
+            rightIcon={<icons.Chevron aria-hidden={true} />}
+            primaryText={<>
+                {category.name}
+                <ScreenReader>,</ScreenReader>
+            </>}
+            secondaryText={category.byline}
+            analyticsEvent={{
+                event: "Link Followed - Category",
+                eventAction: "Category",
+                eventLabel: category.key,
+            }}
+        />
+    )
 }
 
 export default (

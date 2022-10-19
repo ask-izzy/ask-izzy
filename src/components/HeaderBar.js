@@ -1,9 +1,9 @@
 /* @flow */
 
 import * as React from "react";
-import AppBar from "./AppBar";
 import {useEffect, useState} from "react";
 import { useRouter } from "next/router"
+import AppBar from "./AppBar";
 
 type Props = {|
     primaryText: string | React.Node,
