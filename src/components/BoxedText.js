@@ -1,20 +1,20 @@
 /* @flow */
 
-import type {Element as ReactElement} from "React";
+import type {Node as ReactNode} from "React";
 import React from "react";
 
 type Props = {
     children?: any
 }
 
-export default class BoxedText extends React.Component<Props, {}> {
-    render(): ReactElement<"div"> {
-        return (
-            <div className="BoxedText">
-                <div className="BoxedText-container">
-                    {this.props.children}
-                </div>
+function BoxedText({children}: Props): ReactNode {
+    return (
+        <div className="BoxedText">
+            <div className="BoxedText-container">
+                {children}
             </div>
-        );
-    }
+        </div>
+    )
 }
+
+export default BoxedText

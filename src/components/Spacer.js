@@ -13,4 +13,3 @@ export default ({className}: Props): ReactElement<"hr"> =>
         className={classnames("Spacer", className)}
         aria-hidden={true}
     />
-;

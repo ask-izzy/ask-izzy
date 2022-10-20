@@ -1,9 +1,9 @@
 /* @flow */
 
-import type {Element as ReactElement} from "React";
-import React from "react";
-import _ from "underscore";
-import _string from "underscore.string";
+import type {Node as ReactNode} from "React"
+import React from "react"
+import _ from "underscore"
+import _string from "underscore.string"
 
 import UrlsToLinks from "./UrlsToLink"
 
@@ -15,92 +15,94 @@ type Props = {
     special_requirements: string,
 }
 
-class Eligibility extends React.Component<Props, void> {
-    render(): ReactElement<"div"> {
-        let eligibleMarkup, ineligibleMarkup;
 
-        let eligibleItems = _.compact(_([
-            this.renderCatchment(),
-            this.renderEligibility(
-                this.props.eligibility_info + "\n" +
-                this.props.special_requirements
-            ),
-            this.renderReferralInfo(),
-        ]).flatten());
+function Eligibility({
+    catchment,
+    eligibility_info: eligibilityInfo,
+    ineligibility_info: ineligibilityInfo,
+    referral_info: referralInfo,
+    special_requirements: specialRequirements,
+}: Props): ReactNode {
+    let eligibleMarkup, ineligibleMarkup
 
-        if (!_.isEmpty(eligibleItems)) {
-            eligibleMarkup = (
-                <div className="eligibility">
-                    <h2 aria-label="Eligibility.">
-                        Eligibility
-                    </h2>
-                    <ul>
-                        {eligibleItems}
-                    </ul>
-                </div>
-            );
-        }
+    let eligibleItems = _.compact(_([
+        renderCatchment(),
+        renderEligibility(
+            eligibilityInfo + "\n" +
+            specialRequirements
+        ),
+        renderReferralInfo(),
+    ]).flatten())
 
-        let ineligibleItems = this.renderEligibility(
-            this.props.ineligibility_info
-        );
-
-        if (!_.isEmpty(ineligibleItems)) {
-            ineligibleMarkup = (
-                <div className="ineligibility">
-                    <h2 aria-label="Ineligibility.">
-                        Ineligibility
-                    </h2>
-                    <ul>
-                        {ineligibleItems}
-                    </ul>
-                </div>
-            );
-        }
-
-        return (
-            <div className="Eligibility">
-                {eligibleMarkup}
-                {ineligibleMarkup}
+    if (!_.isEmpty(eligibleItems)) {
+        eligibleMarkup = (
+            <div className="eligibility">
+                <h2 aria-label="Eligibility.">
+                    Eligibility
+                </h2>
+                <ul>
+                    {eligibleItems}
+                </ul>
             </div>
-        );
+        )
     }
 
-    renderCatchment(): void | ReactElement<"li"> {
-        const catchment: string = this.props.catchment;
+    let ineligibleItems = renderEligibility(
+        ineligibilityInfo
+    )
 
+    if (!_.isEmpty(ineligibleItems)) {
+        ineligibleMarkup = (
+            <div className="ineligibility">
+                <h2 aria-label="Ineligibility.">
+                    Ineligibility
+                </h2>
+                <ul>
+                    {ineligibleItems}
+                </ul>
+            </div>
+        )
+    }
+
+    function renderCatchment(): void | ReactNode {
         if (catchment && !catchment.match(/^open.?$/i)) {
-            return this.renderItem(`Located in ${catchment}`);
+            return renderItem(`Located in ${catchment}`)
         }
     }
 
-    renderItem(text: string): void | ReactElement<"li"> {
+    function renderItem(text: string): void | ReactNode {
         if (text) {
             return (
                 <li key={text}>
                     <UrlsToLinks key={text}>{text}</UrlsToLinks>
                 </li>
-            );
+            )
         }
     }
 
-    renderEligibility(eligibility: ?string): any {
+    function renderEligibility(eligibility: ?string): any {
         const eligibilities = _.uniq(
             (eligibility || "")
                 .split(/\n|;/g)
                 .map((str) => _string.capitalize(str.trim()))
-        );
-
-        return _.compact(_(eligibilities).map(this.renderItem));
+        )
+        return _.compact(_(eligibilities).map(renderItem))
     }
 
-    renderReferralInfo(): void | ReactElement<"li"> {
-        const referralInfo = (this.props.referral_info || "").trim();
+    function renderReferralInfo(): void | ReactNode {
+        const referral = (referralInfo || "").trim()
 
-        if (referralInfo && !referralInfo.match(/^self\.?$/i)) {
-            return this.renderItem(`Referred by ${referralInfo}`);
+        if (referral && !referral.match(/^self\.?$/i)) {
+            return renderItem(`Referred by ${referral}`)
         }
     }
+
+    return (
+        <div className="Eligibility">
+            {eligibleMarkup}
+            {ineligibleMarkup}
+        </div>
+    )
 }
 
-export default Eligibility;
+export default Eligibility

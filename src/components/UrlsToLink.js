@@ -1,14 +1,14 @@
 /* @flow */
-import React from "react";
+import React from "react"
 import type {Node as ReactNode} from "react"
 
-import Link from "./base/Link";
+import Link from "./base/Link"
 
 type Props = {
     children: string
 }
 
-export default function UrlsToLink({children}: Props): ReactNode {
+function UrlsToLink({children}: Props): ReactNode {
     // We match any url that starts with "http(s)://" or "www." and we ignore any full stops at the end
     // eslint-disable-next-line  max-len
     const urlRegex = /(?:(https?:\/\/)|www\.)[-a-zA-Z0-9@:%._+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b(?:[-a-zA-Z0-9()@:%_+.~#?&//=]*[-a-zA-Z0-9()@:%_+~#?&//=])?/gi
@@ -29,7 +29,7 @@ export default function UrlsToLink({children}: Props): ReactNode {
             {findLinks().map((string, index) => {
                 string = string.replace(/(\r\n|\n|\r)/gm, "<br />")
                 if (string.includes("<url>")) {
-                    let url = string.replace("<url>", "");
+                    let url = string.replace("<url>", "")
                     return (
                         <p key={index}>
                             <Link to={url.indexOf("https://") < 0 ? "https://" + url : url}>
@@ -48,5 +48,7 @@ export default function UrlsToLink({children}: Props): ReactNode {
             })}
 
         </>
-    );
+    )
 }
+
+export default UrlsToLink

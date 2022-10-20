@@ -69,7 +69,7 @@ export default class Service {
     languages: Array<string>;
     last_updated: ymdWithDashesDate;
     lgbtiqa_plus_specific: boolean;
-    location: ?AddressLocation;
+    location: AddressLocation;
     name: string;
     ndis_approved: boolean;
     now_open: nowOpen;

@@ -12,22 +12,17 @@ type Props = {
     withSpacer?: boolean
 }
 
-class Accessibility extends React.Component<Props, void> {
-    static defaultProps: any = {
-        withSpacer: false,
+function Accessibility({service, withSpacer = false}: Props): ReactNode {
+    let accessibilityMapping = {
+        // "noaccess": "No wheelchair access",
+        // "access": "Partial wheelchair access",
+        "fullaccess": "Full wheelchair access",
     };
+    let issAccessibility = service.accessibility;
 
-    render(): ReactNode | null {
-        const {service, withSpacer} = this.props
-        let accessibilityMapping = {
-            // "noaccess": "No wheelchair access",
-            // "access": "Partial wheelchair access",
-            "fullaccess": "Full wheelchair access",
-        };
-        let issAccessibility = service.accessibility;
-
-        if (issAccessibility === "fullaccess") {
-            return <>
+    if (issAccessibility === "fullaccess") {
+        return (
+            <>
                 {withSpacer && <Spacer />}
                 <div className="Accessibility">
                     <icons.Accessibility
@@ -41,10 +36,10 @@ class Accessibility extends React.Component<Props, void> {
                         {accessibilityMapping[issAccessibility]}
                     </span>
                 </div>
-            </>;
-        }
-        return null;
+            </>
+        )
     }
+    return null
 }
 
-export default Accessibility;
+export default Accessibility
