@@ -30,7 +30,7 @@ import type {travelTimesStatus} from "../hooks/useTravelTimesUpdater";
 type Props = {
     service: Service,
     resultNumber: number,
-    travelTimesStatus: travelTimesStatus,
+    travelTimesStatus: ?travelTimesStatus,
 }
 
 function ResultListItem({

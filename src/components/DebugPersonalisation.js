@@ -33,7 +33,7 @@ type DiffedLayer = {
     diff: DiffType | null
 }
 
-export default function DebugPersonalisation({
+function DebugPersonalisation({
     issQuery,
     setIssParamsOverride,
 }: Props): ReactNode {
@@ -161,3 +161,5 @@ function getDiffedLayers(
     }
     return diffedLayers
 }
+
+export default DebugPersonalisation

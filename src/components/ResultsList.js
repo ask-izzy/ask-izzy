@@ -19,7 +19,7 @@ import ScreenReader from "../components/ScreenReader"
 type Props = {
     results: Array<Service>,
     resultsLoading: boolean,
-    travelTimesStatus: travelTimesStatus,
+    travelTimesStatus: ?travelTimesStatus,
     crisisResults: boolean,
     sortBy: ?SortType
 }

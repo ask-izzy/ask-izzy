@@ -5,12 +5,11 @@ import type {
     Element as ReactElement,
     ElementConfig as ReactElementConfig,
 } from "React";
-import React from "react";
+import React from "react"
 import { withRouter } from "next/router"
 import type { NextRouter } from "next/router"
 
 import DebugPersonalisation from "@/src/components/DebugPersonalisation";
-import ResultsPage from "@/components/pages/ResultsPage";
 import ResultsList from "@/src/components/ResultsList";
 import LoadingResultsHeader from
 "@/src/components/ResultsListPage/LoadingResultsHeader";
@@ -25,49 +24,55 @@ import ScrollToTop from "@/src/components/ResultsListPage/ScrollToTop";
 import Storage from "@/src/storage";
 import Controls from "@/src/components/ResultsListPage/Controls";
 
+import useServiceResults from "@/hooks/useServiceResults"
+
 type Props = {
     router: NextRouter
 }
 
-class ResultsListPage extends ResultsPage<Props> {
-    render(): ReactElement<"div"> | ReactNode {
-        if (this.state.searchType) {
-            return (
-                <div>
-                    {this.renderPage()}
-                </div>
-            )
-        }
+function ResultsListPage({router}: Props): ReactNode {
+    const {
+        searchResults,
+        pageTitle,
+        category,
+        searchIsLoading,
+        searchError,
+        travelTimesStatus,
+        sortBy,
+        searchType,
+        setSortBy,
+        setTravelTimesStatus,
+        getIssSearchQuery,
+        searchHasNextPage,
+        loadNextSearchPage,
+    } = useServiceResults(router)
 
-        return <NotFoundStaticPage/>
-    }
-
-    hasSearchResults(): boolean {
+    function hasSearchResults(): boolean {
         return Boolean(
-            this.state.searchResults &&
-                this.state.searchResults.length > 0
+            searchResults &&
+                searchResults.length > 0
         )
     }
 
-    renderPage: (() => ReactElement<"div">) = () => (
+    const renderPage = (): ReactNode => (
         <div className="ResultsListPage">
             <div>
                 <DebugPersonalisation
-                    issQuery={this.getIssSearchQuery() || {}}
-                    setIssParamsOverride={this.setIssParamsOverride.bind(this)}
+                    issQuery={getIssSearchQuery() || {}}
+                    setIssParamsOverride={setIssParamsOverride}
                 />
                 <LoadingResultsHeader
-                    title={this.state.pageTitle}
-                    category={this.state.category}
-                    services={this.state.searchResults || []}
-                    loading={this.searchIsLoading}
-                    error={this.state.searchError ?
+                    title={pageTitle}
+                    category={category}
+                    services={searchResults || []}
+                    loading={searchIsLoading()}
+                    error={searchError ?
                         "An error occurred. Please try again."
                         : ""
                     }
-                    statusCode={this.state.searchError?.status || 200}
+                    statusCode={searchError?.status || 200}
                 />
-                {this.hasSearchResults() &&
+                {hasSearchResults() &&
                 <AlertBannerList
                     state={stateFromLocation()}
                     screenLocation="resultsPage"
@@ -80,77 +85,75 @@ class ResultsListPage extends ResultsPage<Props> {
                 />
             </div>
             <main aria-label="Search results">
-                {this.renderResults()}
+                {renderResults()}
             </main>
         </div>
     )
 
-    renderResults(): ReactNode {
+    function renderResults(): ReactNode {
         return (
             <div className="List results">
                 <ResultsList
-                    results={this.state.searchResults || []}
-                    resultsLoading={this.searchIsLoading}
+                    results={searchResults || []}
+                    resultsLoading={searchIsLoading()}
                     crisisResults={true}
-                    travelTimesStatus={this.state.travelTimesStatus}
+                    travelTimesStatus={travelTimesStatus}
                     sortBy={undefined}
                 />
-                {this.hasSearchResults() &&
+                {hasSearchResults() &&
                     <Controls
                         onSortByChange={
-                            sortBy => this.setState({sortBy})
+                            sortBy => setSortBy(sortBy)
                         }
                         onTravelTimesStatusChange={
-                            travelTimesStatus => this.setState({
-                                travelTimesStatus,
-                            })
+                            travelTimesStatus => setTravelTimesStatus(travelTimesStatus)
                         }
                         servicesToUpdateTravelTimes={
-                            this.state.searchResults || []
+                            searchResults || []
                         }
                     />
                 }
                 <ResultsList
-                    results={this.state.searchResults || []}
-                    resultsLoading={this.searchIsLoading}
+                    results={searchResults || []}
+                    resultsLoading={searchIsLoading()}
                     crisisResults={false}
-                    travelTimesStatus={this.state.travelTimesStatus}
-                    sortBy={this.state.sortBy}
+                    travelTimesStatus={travelTimesStatus}
+                    sortBy={sortBy}
                 />
-                {this.renderLoadMore()}
-                {this.renderSuggestionBox()}
+                {renderLoadMore()}
+                {renderSuggestionBox()}
                 <ScrollToTop label="To top"/>
             </div>
         )
     }
 
-    renderSuggestionBox(): void | ReactNode {
+    function renderSuggestionBox(): void | ReactNode {
         if (
-            !this.searchHasNextPage &&
-            !this.searchIsLoading
+            !searchHasNextPage() &&
+            !searchIsLoading()
         ) {
             return (
                 <SuggestionBox
-                    category={this.state.category}
-                    searchTerm={this.state.pageTitle
+                    category={category}
+                    searchTerm={pageTitle
                         .replace("“", "")
                         .replace("”", "")
                     }
-                    pathname={this.props.router.asPath}
-                    results={this.state.searchResults || []}
+                    pathname={router.asPath}
+                    results={searchResults || []}
                 />
             )
         }
     }
 
-    renderLoadMore(): void | ReactElement<"div"> | ReactNode {
-        if (this.searchHasNextPage && !this.state.searchError) {
+    function renderLoadMore(): void | ReactElement<"div"> | ReactNode {
+        if (searchHasNextPage() && !searchError) {
             return (
                 <div className="moreResultsContainer">
                     <FlatButton
                         className="MoreResultsButton"
                         label="See more results"
-                        onClick={this.loadNextSearchPage.bind(this)}
+                        onClick={loadNextSearchPage}
                         analyticsEvent={{
                             event: "Action Triggered - Load More Results",
                             eventAction: "Load more results",
@@ -161,7 +164,7 @@ class ResultsListPage extends ResultsPage<Props> {
             );
         }
 
-        if (this.searchIsLoading) {
+        if (searchIsLoading()) {
             return (
                 <div className="progress">
                     <icons.Loading className="big" />
@@ -170,7 +173,7 @@ class ResultsListPage extends ResultsPage<Props> {
         }
     }
 
-    setIssParamsOverride(
+    function setIssParamsOverride(
         issParamsOverride?: { [string]: any },
         triggerNewSearch: boolean = true
     ): void {
@@ -181,10 +184,18 @@ class ResultsListPage extends ResultsPage<Props> {
         }
         if (triggerNewSearch) {
             location.reload();
-        } else {
-            this.forceUpdate()
         }
     }
+
+    if (searchType) {
+        return (
+            <div>
+                {renderPage()}
+            </div>
+        )
+    }
+
+    return <NotFoundStaticPage/>
 }
 
 export default (

@@ -1,12 +1,14 @@
 /* @flow */
-import React from "react"
-import objectHash from "object-hash"
+import {useEffect, useState} from "react"
 import type { NextRouter } from "next/router"
+import objectHash from "object-hash"
 
+import {useServiceResultsContext} from "@/contexts/service-results-context"
+import Service from "@/src/iss/Service"
 import {
     createServiceSearch,
 } from "@/src/iss/serviceSearch";
-import type {
+import {
     PaginatedSearch,
 } from "@/src/iss/serviceSearch";
 import {
@@ -16,8 +18,6 @@ import {
 import type {SearchQuery, SearchQueryModifier}
 from "@/src/iss/searchQueryBuilder"
 import * as gtm from "@/src/google-tag-manager";
-
-import Service from "@/src/iss/Service"
 import {attachTransportTimes} from "@/src/iss/travelTimes"
 import {
     addPageLoadDependencies,
@@ -25,7 +25,7 @@ import {
 } from "@/src/utils/page-loading"
 import storage from "@/src/storage";
 import type {SortType} from "@/src/components/base/Dropdown"
-import type {travelTimesStatus} from "@/src/hooks/useTravelTimesUpdater";
+import type {travelTimesStatus as travelTimesStatusType} from "@/src/hooks/useTravelTimesUpdater";
 import {
     setLocationFromUrl,
 } from "@/src/utils/personalisation"
@@ -42,74 +42,84 @@ import WhoIsLookingForHelpBaseInfo from
 "@/src/constants/personalisation-pages/WhoIsLookingForHelp"
 import type { UserType } from "@/components/pages/personalisation/WhoIsLookingForHelp"
 
-type Props = {
-    router: NextRouter
-}
+type UseServiceResults = {
+    searchResults: Array<Service> | null,
 
-type State = {
-    search: ?PaginatedSearch,
-    searchStatus: "loading" | "error" | "some loaded" |
-        "all loaded",
-    searchResults: ?Array<Service>,
-    searchError: ?{message: string, status: number},
-    searchType: ?string,
-    sortBy: ?SortType,
-    travelTimesStatus: travelTimesStatus,
     category: Category,
+
+    searchError: {message: string, status: number} | null,
+    travelTimesStatus: ?travelTimesStatusType,
+    sortBy: SortType | null,
+    searchType: string | null,
     pageTitle: string,
+
+    setSortBy: (SortType | null) => void,
+    setTravelTimesStatus: (travelTimesStatusType) => void,
+
+    searchIsLoading: () => boolean,
+    getIssSearchQuery: () => SearchQuery | null,
+    searchHasNextPage: () => boolean,
+    loadNextSearchPage: () => Promise<void>,
 }
 
 const previousSearchHashStorageKey = "previousSearchHash"
 const previousSearchDateStorageKey = "previousSearchDate"
 
-class ResultsPage<ChildProps = {...}, ChildState = {...}>
-    extends React.Component<Props & ChildProps, State & ChildState> {
-    constructor(props: Object, context: Object) {
-        super(props, context);
-        addPageLoadDependencies(props.router.asPath, "resultsLoad")
+export default (router: NextRouter): UseServiceResults => {
+    const [searchStatus, setSearchStatus] =
+        useState<"loading" | "error" | "some loaded" | "all loaded">("loading")
+    const [searchResults, setSearchResults] = useState<Array<Service> | null>(null)
+    const [searchError, setSearchError] = useState<{message: string, status: number} | null>(null)
+    const [searchType] = useState<string | null>("true")
+    const [sortBy, setSortBy] = useState<SortType | null>(null)
 
-        const category = getCategoryFromRouter(props.router)
+    const [category] = useState<Category>(getCategory())
+    const [pageTitle] = useState<string>(getPageTitleFromRouter(router))
 
-        if (!category) {
+    const {
+        search,
+        setSearch,
+        travelTimesStatus,
+        setTravelTimesStatus,
+    } = useServiceResultsContext()
+
+    useEffect(() => {
+        if (router.isReady) {
+            if (!search) {
+                initSearch()
+            }
+            // router ready here when loading the page for the first time
+            usersnapFireEventPageView()
+        }
+    }, [router.isReady, router.asPath])
+
+    useEffect(() => {
+        if (router.isReady) {
+            // router ready here when loading the page for the first time
+            // this event is independent from the loading results event
+            usersnapFireEventPageView()
+        }
+    }, [router.isReady])
+
+
+    useEffect(() => {
+        if (search) {
+            loadFirstPage()
+        }
+    }, [search])
+
+
+
+    function getCategory(): Category {
+        const categoryFromRouter = getCategoryFromRouter(router)
+        if (!categoryFromRouter) {
             throw Error("Could not get category for route")
         }
-
-        this.state = {
-            ...super.state,
-            searchStatus: "loading",
-            searchResults: null,
-            searchError: null,
-            sortOption: null,
-            searchType: "true",
-            category,
-            pageTitle: getPageTitleFromRouter(props.router),
-        };
+        return categoryFromRouter
     }
 
-    componentDidMount() {
-        if (this.props.router.isReady) {
-            this.initSearch()
-            usersnapFireEventPageView()
-        }
-    }
-
-    componentDidUpdate(prevProps: Object, prevState: Object): void {
-        if (
-            this.props.router.isReady &&
-                (this.props.router !== prevProps.router)
-        ) {
-            // router ready here when loading the page for the first time
-            this.initSearch()
-            usersnapFireEventPageView()
-        }
-    }
-
-    _component: any;
-
-    initSearch(): void {
-        const {router} = this.props
+    function initSearch(): void {
         setLocationFromUrl(router)
-
 
         const pathWithPersonalisationIfNeeded =
             getPersonalisationNextPath({router})
@@ -119,7 +129,7 @@ class ResultsPage<ChildProps = {...}, ChildState = {...}>
             return
         }
 
-        const query = this.getIssSearchQuery()
+        const query = getIssSearchQuery()
         if (!query) {
             throw Error(
                 "Something wack has happened here. It doesn't look like we " +
@@ -127,56 +137,41 @@ class ResultsPage<ChildProps = {...}, ChildState = {...}>
                 "able to generate a query but we can't."
             )
         }
-        const search = createServiceSearch(query)
-        this.setState({ search }, this.loadFirstPage)
+        const serviceSearch = createServiceSearch(query)
+        setSearch(serviceSearch)
+
     }
 
-    async loadFirstPage() {
-        const { search } = this.state
-        const { router } = this.props
-
+    function loadFirstPage() {
         if (!search) {
             throw Error("loadFirstPage() called before search query is created")
         }
         // If the search already had loaded services that means we're using
         // a cached search so no need to load the first page of services.
         if (search.loadedServices.length > 0) {
-            this.setState({
-                searchStatus: search.isNext ? "some loaded" : "all loaded",
-                searchResults: search.loadedServices,
-                searchError: undefined,
-            });
-            closePageLoadDependencies(
-                router.asPath,
-                "resultsLoad"
-            )
+            setSearchStatus(search.isNext ? "some loaded" : "all loaded")
+            setSearchResults(search.loadedServices)
+            setSearchError(null)
         } else {
-            await this.loadNextSearchPage()
-            closePageLoadDependencies(
-                router.asPath,
-                "resultsLoad"
-            )
+            loadNextSearchPage()
         }
     }
 
-    async loadNextSearchPage(): Promise<void> {
-        const search = this.state.search
-        if (this.state.searchStatus === "all loaded" || !search) {
+    async function loadNextSearchPage(): Promise<void> {
+        if (searchStatus === "all loaded" || !search) {
             return
         }
         addPageLoadDependencies(
-            this.props.router.asPath,
+            router.asPath,
             `requestServices`
         )
 
         try {
-            this.setState({searchStatus: "loading"});
+            setSearchStatus("loading")
             await search.loadNextPage()
         } catch (error) {
-            this.setState({
-                searchError: error,
-                searchStatus: "some loaded",
-            });
+            setSearchError(error)
+            setSearchStatus("some loaded")
             console.error(
                 "The following error occurred when trying to load next page"
             )
@@ -184,12 +179,12 @@ class ResultsPage<ChildProps = {...}, ChildState = {...}>
             return
         } finally {
             closePageLoadDependencies(
-                this.props.router.asPath,
+                router.asPath,
                 `requestServices`
             )
         }
 
-        if (this.queryChangedSinceLastFetch(search)) {
+        if (queryChangedSinceLastFetch(search)) {
             const whoIsLookingForHelp = storage.getItem(WhoIsLookingForHelpPage.name)
             gtm.emit({
                 event: "Action Triggered - New Search",
@@ -201,29 +196,22 @@ class ResultsPage<ChildProps = {...}, ChildState = {...}>
                 sendDirectlyToGA: true,
             });
         }
+        setSearchStatus(search.isNext ? "some loaded" : "all loaded")
+        setSearchResults(search.loadedServices)
 
-        this.setState({
-            searchStatus: search.isNext ? "some loaded" : "all loaded",
-            searchResults: search.loadedServices,
-            searchError: undefined,
-        });
+        setSearchError(null)
 
         if (storage.getSearchArea()) {
             try {
                 attachTransportTimes(search.loadedServices)
-                // Update state to force re-render
-                this.setState(state => ({
-                    ...state,
-                    searchResults: state.searchResults &&
-                        [...state.searchResults],
-                }))
+
             } catch (error) {
                 // We don't currently do anything if fetching travel times fails
             }
         }
     }
 
-    queryChangedSinceLastFetch(search: PaginatedSearch): boolean {
+    function queryChangedSinceLastFetch(search: PaginatedSearch): boolean {
         let queryChangedSinceLastFetch = true
 
         const previousSearchHash = storage.getItem(
@@ -252,7 +240,7 @@ class ResultsPage<ChildProps = {...}, ChildState = {...}>
         return queryChangedSinceLastFetch
     }
 
-    getIssSearchQuery(): SearchQuery | null {
+    function getIssSearchQuery(): SearchQuery | null {
         // Build the search request.
         //
         // If we don't have enough information to build the search request
@@ -261,7 +249,7 @@ class ResultsPage<ChildProps = {...}, ChildState = {...}>
         // We have to do this once the component is mounted (instead of
         // in willTransitionTo because the personalisation components will
         // inspect the session).
-        let modifiers = getSearchQueryModifiers(this.props.router);
+        let modifiers = getSearchQueryModifiers(router);
 
         if (modifiers.includes(null)) {
             return null
@@ -270,20 +258,36 @@ class ResultsPage<ChildProps = {...}, ChildState = {...}>
         // searchQueryModifiers won't contain null at this point.
         modifiers = ((modifiers: any): SearchQueryModifier[])
 
-        return buildSearchQueryFromModifiers(modifiers);
+        return buildSearchQueryFromModifiers(modifiers)
     }
 
-    get searchIsLoading(): boolean {
-        return this.state.searchStatus === "loading"
+    function searchIsLoading(): boolean {
+        return searchStatus === "loading"
     }
 
-    get searchHasNextPage(): boolean {
-        return this.state.searchStatus === "some loaded"
+    function searchHasNextPage(): boolean {
+        return searchStatus === "some loaded"
     }
 
+
+    return {
+        searchResults,
+        pageTitle,
+        category,
+        searchIsLoading,
+        searchError,
+        travelTimesStatus,
+        sortBy,
+        searchType,
+
+        setSortBy,
+        setTravelTimesStatus,
+
+        getIssSearchQuery,
+        searchHasNextPage,
+        loadNextSearchPage,
+    }
 }
-
-export default ResultsPage;
 
 function usersnapFireEventPageView() {
     const userType = ((storage.getItem(WhoIsLookingForHelpBaseInfo.name): any): UserType);

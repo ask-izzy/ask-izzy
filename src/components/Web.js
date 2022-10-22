@@ -22,8 +22,6 @@ function Web({
     const displayedAddress = (parsedUrl.hostname || "") +
             (!parsedUrl.path || (parsedUrl.path === "/") ? "" : parsedUrl.path)
 
-    console.log(url, typeof url, url.toString())
-
     function recordClick(): void {
         gtm.emit({
             event: "Website Address Clicked",
