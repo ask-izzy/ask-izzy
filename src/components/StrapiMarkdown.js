@@ -16,7 +16,7 @@ type Props = {
     renderers?: Renderers
 }
 
-export default function StrapiMarkdown({
+function StrapiMarkdown({
     children,
     renderers: additionalRenderers,
 }: Props): ReactNode {
@@ -52,3 +52,5 @@ export default function StrapiMarkdown({
         />
     )
 }
+
+export default StrapiMarkdown

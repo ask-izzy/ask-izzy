@@ -9,7 +9,7 @@ type Props = {
     className?: string
 }
 
-export default function BlockQuote(
+function BlockQuote(
     {className, ...rest}: Props
 ): ReactElement<"blockquote"> {
     return (
@@ -19,3 +19,5 @@ export default function BlockQuote(
         />
     )
 }
+
+export default BlockQuote
