@@ -1,5 +1,5 @@
 /* @flow */
-import * as React from "react";
+import React, {useState, useEffect } from "react";
 import type {
     Node as ReactNode,
     ElementConfig as ReactElementConfig,
@@ -43,44 +43,41 @@ export type State = {
         // currently selected but not confirmed
 }
 
-class BaseQuestion extends React.Component<Props, State> {
-    constructor(props: Object) {
-        super(props);
-        this.state = {
-            selectedAnswer: props.multipleChoice ? new Set() : null,
-            category: getCategory(
-                props.router.query.categoryOrContentPageSlug
-            ),
-            showSkipToChoice: false,
-        };
-    }
+function BaseQuestion({
+    router,
+    backToAnswers,
+    details,
+    classNames,
+}: Props): ReactNode {
+    const [selectedAnswer, setSelectedAnswer] =
+        useState<?string | Set<string>>(details.multipleChoice ? new Set() : null)
+    const [category] =
+        useState<?Category>(getCategory(
+            router.query.categoryOrContentPageSlug
+        ))
 
-    componentDidMount(): void {
-        if (this.props.router.isReady) {
-            // router ready here when navigated to after first load
-            this.clientSideInit()
+    let listClassName = "List"
+    if (details.name) {
+        listClassName = `${listClassName} ${details.name}`
+    }
+    const goBackPath = getPersonalisationBackPath(router)
+    const isSummaryRoute = goBackPath.includes("/summary")
+
+    useEffect(() => {
+        if (router.isReady) {
+            clientSideInit()
         }
-    }
+    }, [router.isReady])
 
-    componentDidUpdate(prevProps: Object, prevState: Object): void {
-        if (
-            this.props.router.isReady &&
-                (this.props.router !== prevProps.router)
-        ) {
-            // router ready here when loading the page for the first time
-            this.clientSideInit()
-        }
-    }
+    function clientSideInit(): void {
+        const savedAnswer =
+            getSavedPersonalisationAnswer(details)
 
-    clientSideInit(): void {
-        const savedAnswer = getSavedPersonalisationAnswer(
-            this.props.details
-        )
-        this.setState({
-            selectedAnswer: this.props.details.multipleChoice ?
+        setSelectedAnswer(
+            details.multipleChoice ?
                 new Set(savedAnswer)
-                : null,
-        })
+                : null
+        )
     }
 
     /**
@@ -89,182 +86,92 @@ class BaseQuestion extends React.Component<Props, State> {
      * @returns {Array<string>} an array of the valid answers
      * to this question.
      */
-    get arrayOfPossibleAnswers(): Array<string> {
-        return Object.keys(this.props.details.possibleAnswers);
+    function arrayOfPossibleAnswers(): Array<string> {
+        return Object.keys(details.possibleAnswers)
     }
 
-    get question(): string {
-        return this.props.details.question;
-    }
-
-    onNextStep(): void {
-        if (this.state.selectedAnswer instanceof Set) {
+    function onNextStep(answer?: string): void {
+        const selected = answer != undefined ? answer : selectedAnswer
+        if (selected instanceof Set) {
             storage.setJSON(
-                this.props.details.name,
-                Array.from(this.state.selectedAnswer)
+                details.name,
+                Array.from(selected)
             );
         } else {
             storage.setItem(
-                this.props.details.name,
-                this.state.selectedAnswer || "(skipped)"
-            );
+                details.name,
+                selected || "(skipped)"
+            )
         }
-        goToPersonalisationNextPath({router: this.props.router})
+        goToPersonalisationNextPath({router})
     }
 
-    iconFor(answer: string): ReactNode {
-        const Icon = this.props.details.icons?.[answer];
+    function iconFor(answer: string): ReactNode {
+        const Icon = details.icons?.[answer]
         if (Icon) {
             return (
                 <Icon
                     className="ColoredIcon big icon-fg-color"
                 />
-            );
+            )
         }
         return null
     }
 
-    onAnswerTouchTap(answer: string, selectingAnswer: boolean): void {
-        if (this.state.selectedAnswer instanceof Set) {
-            let answers = this.state.selectedAnswer;
+    function onAnswerTouchTap(answer: string, selectingAnswer: boolean): void {
+        if (selectedAnswer instanceof Set) {
+            let answers = new Set(selectedAnswer)
             if (selectingAnswer) {
-                answers.add(answer);
+                answers.add(answer)
             } else {
-                answers.delete(answer);
+                answers.delete(answer)
             }
-            this.setState({selectedAnswer: answers});
+            setSelectedAnswer(answers)
         } else {
-            this.setState({
-                selectedAnswer: answer,
-            }, () => {
-                this.onNextStep()
-            });
+            setSelectedAnswer(answer)
+            onNextStep(answer)
         }
     }
 
-    getDescriptionForAnswer(answer: string): ?string {
-        return this.props.details.descriptionsForAnswers?.[answer] || null
+    function getDescriptionForAnswer(answer: string): ?string {
+        return details.descriptionsForAnswers?.[answer] || null
     }
 
-    render(): React.Node {
-        let listClassName = "List";
 
-        if (this.props.details.name) {
-            listClassName = `${listClassName} ${this.props.details.name}`;
-        }
 
-        const goBackPath = getPersonalisationBackPath(this.props.router)
-        const isSummaryRoute = goBackPath.includes("/summary")
-
-        return (
-            <div
-                className={
-                    classnames("BaseQuestion", this.props.classNames)
-                }
-            >
-                <div>
-                    <section className="page-header-section">
-                        <HeaderBar
-                            primaryText={
-                                <div>
-                                    {this.props.details.question}
-                                </div>
-                            }
-                            infoText={
-                                this.props.details.info
-                            }
-                            secondaryText={
-                                this.props.details.byline
-                            }
-                            fixedAppBar={true}
-                            taperColour={"LighterGrey"}
-                            bannerName={getBannerName(
-                                this.state.category,
-                                this.props.details.name
-                            )}
-                            backUrl={isSummaryRoute ? goBackPath : undefined}
-                            backMessage={
-                                isSummaryRoute ? "Back to answers" : undefined
-                            }
-                        />
-                        <div className="questionsBar">
-                            <ScreenReader>
-                                <a
-                                    href="#mainPageContent"
-                                    aria-label={
-                                        "Skip your previously selected " +
-                                        "answers and go straight to the " +
-                                        "options."
-                                    }
-                                >
-                                    Skip to make your selection
-                                </a>
-                            </ScreenReader>
-                            <QuestionStepper />
-                        </div>
-                    </section>
-                </div>
-                <main
-                    id="mainPageContent"
-                    aria-label="Questions"
-                >
-                    <WithStickyFooter
-                        footerContents={this.renderDoneButton()}
-                    >
-                        <fieldset>
-                            <legend>
-                                {this.props.details.question}
-                            </legend>
-                            <div className={listClassName}>
-                                {this.arrayOfPossibleAnswers.map(
-                                    this.renderAnswer.bind(this)
-                                )}
-                            </div>
-                            {this.props.details.baseTextBoxComponent ?? null}
-                        </fieldset>
-                    </WithStickyFooter>
-                    {this.renderSearchBar()}
-                </main>
-            </div>
-        );
-    }
-
-    renderAnswer(...params: [string, number]): ReactNode {
-        if (this.props.details.multipleChoice) {
-            return this.renderMultiChoiceAnswer(...params)
+    function renderAnswer(answer: string, index: number, array: Array<string>): ReactNode {
+        if (details.multipleChoice) {
+            return renderMultiChoiceAnswer(answer, index)
         } else {
-            return this.renderSingleChoiceAnswer(...params)
+            return renderSingleChoiceAnswer(answer, index)
         }
     }
 
-    renderSingleChoiceAnswer(answer: string, index: number): ReactNode {
+    function renderSingleChoiceAnswer(answer: string, index: number): ReactNode {
         return (
             <InputListItem
                 key={index}
-                leftIcon={this.iconFor(answer)}
+                leftIcon={iconFor(answer)}
                 primaryText={answer}
-                secondaryText={this.getDescriptionForAnswer(answer)}
+                secondaryText={getDescriptionForAnswer(answer)}
                 aria-label={answer}
                 value={answer}
-                onClick={this.onAnswerTouchTap.bind(
-                    this,
-                    answer
-                )}
+                onClick={() => onAnswerTouchTap(answer, false)}
                 readOnly={true}
             />
         )
     }
 
-    renderMultiChoiceAnswer(answer: string, index: number): ReactNode {
-        const currentlySelected = this.state.selectedAnswer instanceof Set ?
-            this.state.selectedAnswer.has(answer)
+    function renderMultiChoiceAnswer(answer: string, index: number): ReactNode {
+        const currentlySelected = selectedAnswer instanceof Set ?
+            selectedAnswer.has(answer)
             : false
         return (
             <InputListItem
                 key={index}
-                leftIcon={this.iconFor(answer)}
+                leftIcon={iconFor(answer)}
                 primaryText={answer}
-                secondaryText={this.getDescriptionForAnswer(answer)}
+                secondaryText={getDescriptionForAnswer(answer)}
                 aria-label={answer}
                 value={answer}
                 type="checkbox"
@@ -279,8 +186,7 @@ class BaseQuestion extends React.Component<Props, State> {
                         className="big"
                     />
                 }
-                onClick={this.onAnswerTouchTap.bind(
-                    this,
+                onClick={() => onAnswerTouchTap(
                     answer,
                     !currentlySelected
                 )}
@@ -288,10 +194,10 @@ class BaseQuestion extends React.Component<Props, State> {
         )
     }
 
-    renderDoneButton(): ReactNode {
+    function renderDoneButton(): ReactNode {
         let label = "Skip"
-        if (this.state.selectedAnswer instanceof Set) {
-            if (this.state.selectedAnswer.size) {
+        if (selectedAnswer instanceof Set) {
+            if (selectedAnswer.size) {
                 label = "Done"
             } else {
                 label = "Skip"
@@ -302,20 +208,92 @@ class BaseQuestion extends React.Component<Props, State> {
                 <FlatButton
                     label={label}
                     className={
-                        this.props.details.multipleChoice ? "" : "text-link"
+                        details.multipleChoice ? "" : "text-link"
                     }
-                    onClick={this.onNextStep.bind(this)}
+                    onClick={() => onNextStep()}
                 />
             </div>
         )
     }
 
-    renderSearchBar(): ReactNode {
-        if (this.props.details.showSupportSearchBar) {
+    function renderSearchBar(): ReactNode {
+        if (details.showSupportSearchBar) {
             return <SupportSearchBar />
         }
         return null
     }
+
+    return (
+        <div
+            className={
+                classnames("BaseQuestion", classNames)
+            }
+        >
+            <div>
+                <section className="page-header-section">
+                    <HeaderBar
+                        primaryText={
+                            <div>
+                                {details.question}
+                            </div>
+                        }
+                        infoText={
+                            details.info
+                        }
+                        secondaryText={
+                            details.byline
+                        }
+                        fixedAppBar={true}
+                        taperColour={"LighterGrey"}
+                        bannerName={getBannerName(
+                            category,
+                            details.name
+                        )}
+                        backUrl={isSummaryRoute ? goBackPath : undefined}
+                        backMessage={
+                            isSummaryRoute ? "Back to answers" : undefined
+                        }
+                    />
+                    <div className="questionsBar">
+                        <ScreenReader>
+                            <a
+                                href="#mainPageContent"
+                                aria-label={
+                                    "Skip your previously selected " +
+                                    "answers and go straight to the " +
+                                    "options."
+                                }
+                            >
+                                Skip to make your selection
+                            </a>
+                        </ScreenReader>
+                        <QuestionStepper />
+                    </div>
+                </section>
+            </div>
+            <main
+                id="mainPageContent"
+                aria-label="Questions"
+            >
+                <WithStickyFooter
+                    footerContents={renderDoneButton()}
+                >
+                    <fieldset>
+                        <legend>
+                            {details.question}
+                        </legend>
+                        <div className={listClassName}>
+                            {arrayOfPossibleAnswers().map(
+                                renderAnswer
+                            )}
+                        </div>
+                        {details.baseTextBoxComponent ?? null}
+                    </fieldset>
+                </WithStickyFooter>
+                {renderSearchBar()}
+            </main>
+        </div>
+    )
 }
 
 export default (

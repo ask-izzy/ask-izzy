@@ -1,5 +1,6 @@
 /* @flow */
 import * as React from "react";
+import type {Node as ReactNode} from "react"
 import { withRouter } from "next/router"
 import type { NextRouter } from "next/router"
 
@@ -27,27 +28,32 @@ type Props = {|
     router: NextRouter
 |}
 
-class BaseStaticPersonalisation extends React.Component<Props> {
-    onDoneTouchTap(): void {
-        storage.setItem(this.props.details.name, true);
-        goToPersonalisationNextPath({router: this.props.router})
+function BaseStaticPersonalisation({details, router}: Props): ReactNode {
+    const category = getCategoryFromRouter(router)
+    const bannerName = getBannerName(category, details.name)
+    const goBackPath = getPersonalisationBackPath(router)
+    const isSummaryRoute = goBackPath.includes("/summary")
+
+    function onDoneTouchTap(): void {
+        storage.setItem(details.name, true);
+        goToPersonalisationNextPath({router})
     }
 
-    renderDoneButton(): ?React.Element<any> {
+    function renderDoneButton(): ReactNode {
         return (
             <div>
                 <div className="done-button">
                     <FlatButton
-                        label={this.props.details.getDoneButtonLabel()}
+                        label={details.getDoneButtonLabel()}
                         autoFocus={true}
-                        onClick={this.onDoneTouchTap.bind(this)}
+                        onClick={onDoneTouchTap}
                     />
                 </div>
             </div>
-        );
+        )
     }
 
-    renderContent(): React.Node {
+    function renderContent(): React.Node {
         const contentComponents = {
             "lgbtiqa-domestic-violence": LgbtiqaDomesticViolenceScreen,
             "under-18-dfv": Under18DomesticViolenceScreen,
@@ -55,46 +61,39 @@ class BaseStaticPersonalisation extends React.Component<Props> {
             "online-safety-screen": OnlineSafetyScreen,
         }
 
-        const ContentComponent = contentComponents[this.props.details.name]
+        const ContentComponent = contentComponents[details.name]
 
         return <ContentComponent />
     }
 
-    render(): React.Node {
-        const category = getCategoryFromRouter(this.props.router)
-        const bannerName = getBannerName(category, this.props.details.name)
-        const goBackPath = getPersonalisationBackPath(this.props.router)
-        const isSummaryRoute = goBackPath.includes("/summary")
-        return (
-            <div>
-                <HeaderBar
-                    primaryText={
-                        <div>
-                            {this.props.details.heading}
-                        </div>
-                    }
-                    secondaryText={
-                        this.props.details.byline
-                    }
-                    fixedAppBar={true}
-                    bannerName={bannerName}
-                    backUrl={isSummaryRoute ? goBackPath : undefined}
-                    backMessage={isSummaryRoute ? "Back to answers" : undefined}
-                />
-                <main>
-                    <div className="body">
-                        {this.renderContent()}
-                        {this.props.details.baseTextBoxComponent && (
-                            <div className="TextBannerContainer">
-                                {this.props.details.baseTextBoxComponent}
-                            </div>
-                        )}
-                        {this.renderDoneButton()}
+
+    return (
+        <div>
+            <HeaderBar
+                primaryText={
+                    <div>
+                        {details.heading}
                     </div>
-                </main>
-            </div>
-        );
-    }
+                }
+                secondaryText={details.byline}
+                fixedAppBar={true}
+                bannerName={bannerName}
+                backUrl={isSummaryRoute ? goBackPath : undefined}
+                backMessage={isSummaryRoute ? "Back to answers" : undefined}
+            />
+            <main>
+                <div className="body">
+                    {renderContent()}
+                    {details.baseTextBoxComponent && (
+                        <div className="TextBannerContainer">
+                            {details.baseTextBoxComponent}
+                        </div>
+                    )}
+                    {renderDoneButton()}
+                </div>
+            </main>
+        </div>
+    )
 }
 
 export default (
