@@ -51,6 +51,7 @@ function SearchBar({
                 "SearchBar",
                 className,
             )}
+            data-cy="SearchBar"
         >
             <InputWithDropdown
                 type="search"

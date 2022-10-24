@@ -87,6 +87,8 @@
     "core-js": "3.22.4",
     "cors": "2.8.4",
     "css-loader": "^5.2.4",
+    "cypress": "^10.10.0",
+    "cypress-cucumber-preprocessor": "^4.3.1",
     "deep-freeze-strict": "^1.1.1",
     "deepmerge": "^4.2.2",
     "details-element-polyfill": "2.4.0",
@@ -160,5 +162,8 @@
     "@storybook/builder-webpack5": "^6.4.22",
     "@storybook/manager-webpack5": "^6.4.22",
     "webpack": "^5.72.1"
+  },
+  "cypress-cucumber-preprocessor": {
+    "nonGlobalStepDefinitions": true
   }
 }
