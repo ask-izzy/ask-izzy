@@ -4,7 +4,7 @@ import type {
 } from "../../flow/personalisation-page"
 import {getCategory} from "../constants/categories";
 import {getSavedPersonalisationAnswer} from "./personalisation"
-import Category from "../constants/Category";
+import Category from "@/src/constants/Category";
 import storage from "../storage";
 
 import type { NextRouter } from "next/router"

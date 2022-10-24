@@ -9,7 +9,7 @@ import FlatButton from "@/src/components/FlatButton";
 import HeaderBar from "@/src/components/HeaderBar";
 import {getCategory} from "@/src/constants/categories";
 import ScreenReader from "@/src/components/ScreenReader";
-import Category from "@/src/constants/Category"
+import Category from "@/src/constants/Category";
 import {
     goToPersonalisationNextPath,
     getPersonalisationBackPath,
