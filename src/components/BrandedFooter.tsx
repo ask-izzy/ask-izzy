@@ -1,5 +1,3 @@
-/* @flow */
-
 import type {Element as ReactElement} from "React";
 import React from "react";
 import Link from "../components/base/Link";
@@ -7,7 +5,7 @@ import icons from "../icons"
 import { donateLink, aboutLink } from "../constants/urls.js"
 
 function BrandedFooter(): ReactElement<"footer"> {
-    const LOGO = "/images/ask-izzy-logo-single-line-yellow.svg";
+    const LOGO: strin = "/images/ask-izzy-logo-single-line-yellow.svg";
 
     return (
         <footer

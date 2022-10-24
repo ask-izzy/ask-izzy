@@ -1,5 +1,6 @@
 {
     "root": true,
+    "parser": "@typescript-eslint/parser",
     "parserOptions": {
         "ecmaVersion": 6,
         "sourceType": "module",
@@ -7,15 +8,19 @@
             "jsx": true
         }
     },
+    
     "env": {
         "browser": true,
         "node": true
     },
-    "parser": "babel-eslint",
     "plugins": [
-        "react"
+        "react",
+        "@typescript-eslint"
     ],
-    "extends": "eslint:recommended",
+    "extends": [
+        "eslint:recommended", 
+        "plugin:@typescript-eslint/recommended"
+    ],
     "rules": {
         "array-bracket-spacing": [2, "never"],
         "arrow-spacing": 2,
