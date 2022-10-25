@@ -19,9 +19,8 @@ jobs:
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v1inputs
-        inputs:
-          path:
-            default: "public/storybook"
+        with:
+          path: "public/storybook"
 
   deploy:
     # Add a dependency to the build job
