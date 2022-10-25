@@ -33,3 +33,4 @@ jobs:
           publish_dir: public/storybook
           keep_files: true
           destination_dir: ${{ steps.version.outputs.VERSION }}
+          publish_branch: storybook-dist
