@@ -2,6 +2,7 @@ variables:
   DOCKER_REPO: ${IX_REGISTRY}/ask_izzy
   IX_APP_NAME: ask_izzy
   AWS_APP_NAME: ask_izzy
+  IMAGE_TAG: set-volume-permissions
 
 stages:
   - Build
