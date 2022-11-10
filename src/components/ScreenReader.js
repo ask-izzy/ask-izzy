@@ -15,7 +15,7 @@ function ScreenReader({children, ariaLabel}: Props): ReactNode {
         >
             {children}
         </div>
-    );
+    )
 }
 
-export default ScreenReader;
+export default ScreenReader

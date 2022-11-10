@@ -1,46 +1,46 @@
 /* @flow */
 
-import type {Node as ReactNode, Element as ReactElement} from "React";
-import React from "react";
+import type {Node as ReactNode} from "React"
+import React from "react"
 
-import Collapser from "./general/Collapser";
-import Spacer from "./Spacer";
-import Email from "./Email";
-import PhoneButton from "./PhoneButton";
-import Web from "./Web";
-import * as gtm from "../google-tag-manager";
+import Collapser from "./general/Collapser"
+import Spacer from "./Spacer"
+import Email from "./Email"
+import PhoneButton from "./PhoneButton"
+import Web from "./Web"
+import * as gtm from "../google-tag-manager"
 
-import Service from "../iss/Service";
+import Service from "../iss/Service"
 
 type Props = {
     object: Service,
 }
 
-class ContactMethods extends React.Component<Props, void> {
-    get contacts(): Array<Service> {
-        return this.foldContacts([0])
+function ContactMethods({object}: Props): ReactNode {
+    const foldPoint = 1
+
+    function contacts(): Array<Service> {
+        return foldContacts([0])
     }
 
-    foldPoint: number = 1
-
-    get contactsBeforeFold(): Array<Service> {
-        return this.foldContacts([0, this.foldPoint])
+    function contactsBeforeFold(): Array<Service> {
+        return foldContacts([0, foldPoint])
     }
 
-    get contactsAfterFold(): Array<Service> {
-        return this.foldContacts([this.foldPoint])
+    function contactsAfterFold(): Array<Service> {
+        return foldContacts([foldPoint])
     }
 
-    foldContacts(foldIndices: Array<number>): Array<Service> {
+    function foldContacts(foldIndices: Array<number>): Array<Service> {
         return [
-            ...this.phones.slice(...foldIndices),
-            ...this.emails.slice(...foldIndices),
-            ...this.websites.slice(...foldIndices),
+            ...phones().slice(...foldIndices),
+            ...emails().slice(...foldIndices),
+            ...websites().slice(...foldIndices),
         ]
     }
 
-    get phones(): Array<Object> {
-        return this.props.object.Phones().map(details => ({
+    function phones(): Array<Object> {
+        return object.Phones().map(details => ({
             type: "Phone",
             component: PhoneButton,
             details: {
@@ -50,25 +50,25 @@ class ContactMethods extends React.Component<Props, void> {
         }))
     }
 
-    get emails(): Array<Object> {
-        return (this.props.object.emails || []).map(details => ({
+    function emails(): Array<Object> {
+        return (object.emails || []).map(details => ({
             type: "Email",
             component: Email,
             details,
-        }));
+        }))
     }
 
-    get websites(): Array<Object> {
-        const url = this.props.object.web
+    function websites(): Array<Object> {
+        const url = object.web
 
         return url && [{
             type: "Website",
             component: Web,
             details: {url},
-        }] || [];
+        }] || []
     }
 
-    foldExpandHandler(): void {
+    function foldExpandHandler(): void {
         gtm.emit({
             event: "Service Contact Details Expanded",
             eventCat: "Content Expanded",
@@ -78,39 +78,7 @@ class ContactMethods extends React.Component<Props, void> {
         })
     }
 
-    render(): ReactElement<"div"> | ReactElement<"span"> {
-        if (this.contacts.length > 0) {
-            /* render one contact method per type and
-             * then put the rest in a collapser */
-            return (
-                <div className="ContactMethods">
-                    <Spacer />
-                    {this.contactsBeforeFold.map(this.renderContactMethod)}
-                    {this.contactsAfterFold.length > 0 &&
-                        <Collapser
-                            expandMessage="Show other contact options"
-                            onClick={this.foldExpandHandler}
-                            analyticsEvent={{
-                                event: "Action Triggered - " +
-                                    "Other Contact Details",
-                                eventAction: "Show other contact details",
-                                eventLabel: null,
-                            }}
-                        >
-                            {this.contactsAfterFold.map(
-                                this.renderContactMethod
-                            )}
-                        </Collapser>
-                    }
-                </div>
-            );
-
-        } else {
-            return <span />;
-        }
-    }
-
-    renderContactMethod(record: Object, idx: number): ReactNode {
+    function renderContactMethod(record: Object, idx: number): ReactNode {
         const props = Object.assign({
             key: idx,
             analyticsEventDetails: {
@@ -118,10 +86,40 @@ class ContactMethods extends React.Component<Props, void> {
                 eventCat: "Service Contact Detail Clicked",
                 eventAction: `${record.type}`,
             },
-        }, record.details);
+        }, record.details)
 
-        return React.createElement(record.component, props);
+        return React.createElement(record.component, props)
+    }
+
+
+    if (contacts().length > 0) {
+        /* render one contact method per type and
+            * then put the rest in a collapser */
+        return (
+            <div className="ContactMethods">
+                <Spacer />
+                {contactsBeforeFold().map(renderContactMethod)}
+                {contactsAfterFold().length > 0 &&
+                    <Collapser
+                        expandMessage="Show other contact options"
+                        onClick={foldExpandHandler}
+                        analyticsEvent={{
+                            event: "Action Triggered - " +
+                                "Other Contact Details",
+                            eventAction: "Show other contact details",
+                            eventLabel: null,
+                        }}
+                    >
+                        {contactsAfterFold().map(
+                            renderContactMethod
+                        )}
+                    </Collapser>
+                }
+            </div>
+        )
+    } else {
+        return <span />
     }
 }
 
-export default ContactMethods;
+export default ContactMethods

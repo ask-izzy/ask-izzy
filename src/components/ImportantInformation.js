@@ -1,17 +1,17 @@
 /* @flow */
 
-import React from "react";
+import React from "react"
 import type {Node as ReactNode} from "react"
 
-import Service from "../iss/Service";
-import Spacer from "./Spacer";
+import Service from "../iss/Service"
+import Spacer from "./Spacer"
 import UrlsToLinks from "./UrlsToLink"
 
 type Props = {
     object: Service,
 }
 
-export default function ImportantInformation({
+function ImportantInformation({
     object,
 }: Props): ReactNode {
     return (
@@ -31,5 +31,7 @@ export default function ImportantInformation({
                     : <div />
             }
         </div>
-    );
+    )
 }
+
+export default ImportantInformation

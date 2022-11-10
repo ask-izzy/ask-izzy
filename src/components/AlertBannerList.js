@@ -19,7 +19,7 @@ type Props = {
     format?: string
 }
 
-export default function AlertBannerList({
+function AlertBannerList({
     state,
     screenLocation,
     format,
@@ -200,3 +200,5 @@ export default function AlertBannerList({
         )
     }
 }
+
+export default AlertBannerList

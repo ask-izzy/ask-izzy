@@ -1,5 +1,5 @@
 /* @flow */
-import type {Element as ReactElement} from "React";
+import type {Node as ReactNode} from "React";
 import React from "react";
 
 import icons from "../icons";
@@ -14,45 +14,43 @@ type Props = {
     analyticsEventDetails?: AnalyticsEvent
 }
 
-export default class Email extends React.Component<Props, void> {
-    recordClick(): void {
+function Email({email, comment, analyticsEventDetails}: Props): ReactNode {
+    function recordClick(): void {
         gtm.emit({
             event: "Email Clicked",
             eventCat: "Email Clicked",
             eventAction: "",
-            eventLabel: `${location.pathname} - ${this.props.email}`,
+            eventLabel: `${location.pathname} - ${email}`,
             sendDirectlyToGA: true,
-            ...this.props.analyticsEventDetails,
+            ...analyticsEventDetails,
         })
     }
 
-    render(): ReactElement<"div"> {
-        const { email } = this.props;
-
-        return (
-            <div className="Contact Email">
-                <ScreenReader>
-                    Email contact:
-                </ScreenReader>
-                <Link
-                    to={`mailto:${email}`}
-                    onClick={this.recordClick.bind(this)}
-                    analyticsEvent={{
-                        event: "Link Followed - Email Contact",
-                        eventAction: "Contact detail - email",
-                        eventLabel: `${email}`,
-                    }}
-                >
-                    <icons.Email aria-hidden={true}/>
-                    <div className="Contact-text">
-                        <span className="kind">
-                            {this.props.comment}
-                        </span>
-                        {this.props.comment && " "}
-                        <span className="email value">{email}</span>
-                    </div>
-                </Link>
-            </div>
-        );
-    }
+    return (
+        <div className="Contact Email">
+            <ScreenReader>
+                Email contact:
+            </ScreenReader>
+            <Link
+                to={`mailto:${email}`}
+                onClick={recordClick}
+                analyticsEvent={{
+                    event: "Link Followed - Email Contact",
+                    eventAction: "Contact detail - email",
+                    eventLabel: `${email}`,
+                }}
+            >
+                <icons.Email aria-hidden={true}/>
+                <div className="Contact-text">
+                    <span className="kind">
+                        {comment}
+                    </span>
+                    {comment && " "}
+                    <span className="email value">{email}</span>
+                </div>
+            </Link>
+        </div>
+    )
 }
+
+export default Email

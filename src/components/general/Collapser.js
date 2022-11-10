@@ -1,10 +1,11 @@
 /* @flow */
-import type {Element as ReactElement} from "React";
-import React, { useState } from "react";
+import type {Element as ReactElement} from "React"
+import React, { useState } from "react"
 import type {Node as ReactNode} from "react"
-import classnames from "classnames";
-import Chevron from "../../icons/Chevron";
-import Button from "../base/Button";
+
+import classnames from "classnames"
+import Chevron from "../../icons/Chevron"
+import Button from "../base/Button"
 import type {AnalyticsEvent} from "../../google-tag-manager"
 
 type Props = {
@@ -20,7 +21,7 @@ type Props = {
 
 // By default, if 'collapseMessage' is not defined, then the component will not
 // display a button to collapse once it has been expanded.
-export default function Collapser({
+function Collapser({
     className,
     expandMessage,
     collapseMessage,
@@ -74,5 +75,7 @@ export default function Collapser({
                 {children}
             </div>
         </div>
-    );
+    )
 }
+
+export default Collapser
