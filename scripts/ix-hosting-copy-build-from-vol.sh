@@ -5,6 +5,12 @@
 set -euo pipefail
 IFS=$'\n\t'
 
+# AWS deployment builds in the serve step rather than the deploy step
+if [ ! -z "$ECS_AGENT_URI" ]; then
+    yarn build
+    exit 0;
+fi
+
 DEPLOYMENT_ID=$(echo "$HOSTNAME" | awk -F "-" '{print $(NF-1)}')
 echo ------------ Deployment ID: "$DEPLOYMENT_ID" -----------
 
