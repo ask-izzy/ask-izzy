@@ -1,53 +1,35 @@
 /* @flow */
-import type {Element as ReactElement} from "React";
-import React from "react";
+import type {Element as ReactElement, Node as ReactNode} from "React";
+import React, {useState, useEffect } from "react";
 
 import Link from "@/src/components/base/Link";
 import HeaderBar from "@/src/components/HeaderBar";
 import BrandedFooter from "@/src/components/BrandedFooter";
 import * as gtm from "@/src/google-tag-manager";
 
-type Props = {}
+function AddServicePage(): ReactNode {
+    const [isFormDone, setIsFormDone] = useState<boolean>(false)
 
-type State = {
-    isFormDone: boolean,
-}
-
-class AddServicePage extends React.Component<Props, State> {
-    handleMessage: Function;
-
-    constructor(props: Object): void {
-        super(props);
-
-        this.state = {
-            isFormDone: false,
-        };
-
-        this.handleMessage = this.handleMessage.bind(this);
-    }
-
-    componentDidMount(): void {
+    useEffect(() => {
         if (typeof window !== "undefined") {
-            window.addEventListener("message", this.handleMessage, false);
+            window.addEventListener("message", handleMessage, false)
         }
-    }
 
-    componentWillUnmount(): void {
-        if (typeof window !== "undefined") {
-            window.removeEventListener("message", this.handleMessage);
+        return () => {
+            if (typeof window !== "undefined") {
+                window.removeEventListener("message", handleMessage)
+            }
         }
-    }
+    }, [])
 
-    handleMessage(event: MessageEvent): void {
+    function handleMessage(event: MessageEvent): void {
         if (event.origin !== process.env.NEXT_PUBLIC_ISS_BASE_URL) {
-            return;
+            return
         }
 
         switch (event.data) {
         case "formSubmitted":
-            this.setState({
-                isFormDone: true,
-            });
+            setIsFormDone(true)
             gtm.emit({
                 event: "Input Submitted - Add Service",
                 eventCat: "Input submitted",
@@ -66,27 +48,9 @@ class AddServicePage extends React.Component<Props, State> {
         }
     }
 
-    render(): ReactElement<"div"> {
-        const body = this.state.isFormDone ? this.renderSuccessMessage()
-            : this.renderForm();
 
-        return (
-            <div className="AddServicePage">
-                <HeaderBar
-                    primaryText="Add a service"
-                    bannerName="homepage"
-                />
-                <main>
-                    <div className="body">
-                        {body}
-                    </div>
-                </main>
-                <BrandedFooter />
-            </div>
-        );
-    }
 
-    renderSuccessMessage(): ReactElement<"div"> {
+    function renderSuccessMessage(): ReactElement<"div"> {
         return (
             <div>
                 <p>Thank you. The information you provided may be adjusted for
@@ -96,7 +60,7 @@ class AddServicePage extends React.Component<Props, State> {
         );
     }
 
-    renderForm(): ReactElement<"div"> {
+    function renderForm(): ReactElement<"div"> {
         const formUrl = process.env.NEXT_PUBLIC_ISS_BASE_URL +
             `/add-service-form?form=ask-izzy`
         return (
@@ -178,8 +142,26 @@ class AddServicePage extends React.Component<Props, State> {
                     src={formUrl}
                 />
             </div>
-        );
+        )
     }
+
+    return (
+        <div className="AddServicePage">
+            <HeaderBar
+                primaryText="Add a service"
+                bannerName="homepage"
+            />
+            <main>
+                <div className="body">
+                    {
+                        isFormDone ? renderSuccessMessage()
+                            : renderForm()
+                    }
+                </div>
+            </main>
+            <BrandedFooter />
+        </div>
+    )
 }
 
-export default AddServicePage;
+export default AddServicePage
