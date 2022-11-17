@@ -3,7 +3,7 @@ import type {Node as ReactNode} from "React";
 import React from "react";
 
 import AlertBannerList from "./AlertBannerList";
-import alertsQuery from "../queries/content/alerts.js";
+import alertsQuery from "../queries/content/alerts";
 import {
     resultsPageAlerts,
 } from "../../test/support/mock-cms/resolvers/alerts.js"
