@@ -1,8 +1,9 @@
-/* @flow */
+import {$PropertyType} from "utility-types"
+
 import {
     getRequestWithToken,
-} from "../../lib/requests.js"
-import {addSearchParamsToUrl} from "../../lib/urls.js"
+} from "@/src/ix-web-js-client/lib/requests"
+import {addSearchParamsToUrl} from "@/src/ix-web-js-client/lib/urls"
 
 export type ISS3ClientProps = {
     key: string,
@@ -14,13 +15,13 @@ export type ISS3SearchResultsMeta = {
     limit: number,
     offset: number,
 
-    previous: ?string,
-    next: ?string,
+    previous: string | null | undefined,
+    next: string | null | undefined,
 }
 
 export type ISS3SearchResults = {
     meta: ISS3SearchResultsMeta,
-    objects: Array<Object>,
+    objects: Array<Record<string, unknown>>,
 }
 
 export type ISS3AreaLocation = {
@@ -36,7 +37,7 @@ export type ISS3LocationSearchResults = {
     objects: Array<ISS3AreaLocation>,
 }
 
-export type ISS3SearchQuery = {|
+export type ISS3SearchQuery = {
     age_group?: string | string[],
     area?: string | string[],
     catchment?: string | string[],
@@ -53,18 +54,17 @@ export type ISS3SearchQuery = {|
     show_in_askizzy_health?: boolean,
     is_bulk_billing?: boolean,
     name?: string,
-|};
+}
 
-export type ISS3SearchQueryWithDefaults = {|
-    ...ISS3SearchQuery,
-    type?: $PropertyType<ISS3SearchQuery, 'type'>,
-    limit?: $PropertyType<ISS3SearchQuery, 'limit'>
-|};
+export type ISS3SearchQueryWithDefaults = {
+    type?: $PropertyType<ISS3SearchQuery, "type">,
+    limit?: $PropertyType<ISS3SearchQuery, "limit">
+} & ISS3SearchQuery
 
-export type ISS3LocationSearchQuery = {|
+export type ISS3LocationSearchQuery = {
     name: string,
     kind: Array<string>
-|}
+}
 
 export class ISS3Client {
     baseUrl: string
@@ -76,12 +76,12 @@ export class ISS3Client {
     }
 
     async search(
-        query: ISS3SearchQueryWithDefaults
+        query: ISS3SearchQueryWithDefaults,
     ): Promise<ISS3SearchResults | null> {
         const queryWithDefaults = {
+            ...query,
             type: "service",
             limit: 10,
-            ...query,
         }
 
         try {
@@ -90,7 +90,7 @@ export class ISS3Client {
             addSearchParamsToUrl(url, queryWithDefaults)
             return getRequestWithToken<ISS3SearchResults>(
                 url.href,
-                this.authString
+                this.authString,
             )
 
         } catch (error) {
@@ -100,19 +100,19 @@ export class ISS3Client {
         }
     }
 
-    async getService(serviceId: number): Promise<Object> {
+    async getService(serviceId: number): Promise<Record<string, unknown>> {
         const url = new URL(`/api/v3/service/${serviceId}/`, this.baseUrl)
         return getRequestWithToken(url.href, this.authString)
     }
 
     async searchLocations(
-        query: ISS3LocationSearchQuery
+        query: ISS3LocationSearchQuery,
     ): Promise<ISS3LocationSearchResults> {
         const url = new URL(`/api/v3/location/search/`, this.baseUrl)
         addSearchParamsToUrl(url, query)
         return getRequestWithToken<ISS3LocationSearchResults>(
             url.href,
-            this.authString
+            this.authString,
         )
     }
 }

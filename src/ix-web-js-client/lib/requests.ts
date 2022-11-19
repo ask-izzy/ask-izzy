@@ -1,15 +1,14 @@
-/* @flow */
-type Headers = {[string]: string}
+type Headers = Record<string, string>;
 
 export async function getRequest<Res = any>(
-    url: string
+    url: string,
 ): Promise<Res> {
     return request(url, "GET")
 }
 
-export async function postRequest<Res = any, Payload = Object>(
+export async function postRequest<Res = any, Payload = Record<string, unknown>>(
     url: string,
-    payload: Payload
+    payload: Payload,
 ): Promise<Res> {
     return request(url, "POST", {}, payload)
 }
@@ -21,19 +20,19 @@ export async function getRequestWithToken<Res = any>(
     return request(url, "GET", {Authorization: authString})
 }
 
-export async function postRequestWithToken<Res = any, Payload = Object>(
+export async function postRequestWithToken<Res = any, Payload = Record<string, unknown>>(
     url: string,
     authString: string,
-    payload: Payload
+    payload: Payload,
 ): Promise<Res> {
     return request(url, "POST", {Authorization: authString}, payload)
 }
 
-export async function request<ResBody = Object, ReqPayload = Object>(
+export async function request<ResBody = Record<string, unknown>, ReqPayload = Record<string, unknown>>(
     url: string,
     method: "POST" | "GET",
     headers?: Headers,
-    payload?: ReqPayload
+    payload?: ReqPayload,
 ): Promise<ResBody> {
     const options: RequestOptions = {
         method,
@@ -50,7 +49,7 @@ export async function request<ResBody = Object, ReqPayload = Object>(
     if (res.status < 200 || res.status >= 300) {
         const statusCode = res.status
         const resBodyText = await res.text()
-        let resBodyJSON = null
+        let resBodyJSON: any = null
         try {
             resBodyJSON = JSON.parse(resBodyText)
         } catch (error) {
@@ -58,17 +57,12 @@ export async function request<ResBody = Object, ReqPayload = Object>(
         }
         const error = Error(
             `Got error status "${statusCode}" for <${url}>:\n\t` +
-                `${resBodyText}`
+                `${resBodyText}`,
         )
 
-        // Type correctly with typescript
-        // $FlowIgnore
         error.statusCode = statusCode
-        // $FlowIgnore
         error.resBodyText = resBodyText
-        // $FlowIgnore
         error.resBodyJSON = resBodyJSON
-        // $FlowIgnore
         error.url = url
         throw error
     }

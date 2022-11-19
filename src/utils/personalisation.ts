@@ -100,7 +100,7 @@ export function getSearchQueryChanges(
         const searchQueryChanges: Array<SearchQueryChanges> = []
         for (const [answer, queryChange] of Object.entries(possibleAnswers)) {
             if (savedAnswer.includes(answer)) {
-                searchQueryChanges.push(queryChange)
+                searchQueryChanges.push(queryChange as SearchQueryChanges)
             }
             if (searchQueryChanges.length >= 2) {
                 break;

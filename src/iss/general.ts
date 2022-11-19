@@ -1,4 +1,3 @@
-/* @flow */
 export type ymdWithDashesDate = string;
 export type hmsWithColonsTime = string;
 export type isoDateAndTime = string;
@@ -27,7 +26,7 @@ export type travelTime = {
 export type nowOpen = {
     local_time: isoDateAndTime,
     notes: string,
-    now_open: ?boolean
+    now_open: boolean | null | undefined
 }
 
 export type openingHours = {
@@ -43,14 +42,15 @@ export type phone = {
     number: string,
 }
 
-export type dayOfWeek = 'Monday' |
-    'Tuesday' |
-    'Wednesday' |
-    'Thursday' |
-    'Friday' |
-    'Saturday' |
-    'Sunday' |
-    'Public Holiday';
+export type dayOfWeek =
+    "Monday" |
+    "Tuesday" |
+    "Wednesday" |
+    "Thursday" |
+    "Friday" |
+    "Saturday" |
+    "Sunday" |
+    "Public Holiday"
 
 export type geoPoint = {
     lat: number,

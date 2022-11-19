@@ -1,30 +1,28 @@
-/* @flow */
 import {
     postRequestWithToken,
     getRequestWithToken,
-} from "../../lib/requests.js"
+} from "@/src/ix-web-js-client/lib/requests"
 
 export type ISS4ClientProps = {
     baseUrl: string,
     token: string,
 }
 
-export type ISS4SearchQuery = {|
-    query?: string,
+export type ISS4SearchQuery = {
+    query?: string;
     page?: {
-        current: number,
-        size: number
-    },
+        current: number;
+        size: number;
+    };
     filters?: {
-        all?: Array<Object>
-    },
-    boosts?: {[string]: Object}
-|}
+        all?: Array<Record<string, any>>;
+    };
+    boosts?: Record<string, Record<string, any>>;
+};
 
-export type ISS4SearchProps = {|
+export type ISS4SearchProps = {
     serialiser?: string,
-    ...ISS4SearchQuery
-|}
+} & ISS4SearchQuery
 
 export type ISS4SearchResultsMeta = {
     alerts: Array<any>,
@@ -44,7 +42,7 @@ export type ISS4SearchResultsMeta = {
 
 export type ISS4SearchResults = {
     meta: ISS4SearchResultsMeta,
-    objects: Array<Object>,
+    objects: Array<Record<string, unknown>>,
 }
 
 export class ISS4Client {
@@ -71,14 +69,14 @@ export class ISS4Client {
         return postRequestWithToken<ISS4SearchResults>(
             url.href,
             this.authString,
-            query
+            query,
         )
     }
 
-    async getService(serviceId: number): Object {
+    async getService(serviceId: number): Promise<Record<string, unknown>> {
         const url = new URL(
             `/api/directory/services/${serviceId}/`,
-            this.baseUrl
+            this.baseUrl,
         ).href
         return getRequestWithToken(url, this.authString)
     }

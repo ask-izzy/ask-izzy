@@ -71,14 +71,8 @@
          * https://github.com/babel/babel-eslint/issues/132#issuecomment-112815926 */
         "no-undef": 0,
         "no-unneeded-ternary": 2,
-        "no-unused-vars": [
-            2,
-            {
-                "vars": "all",
-                "args": "none",
-                "ignoreRestSiblings": true
-            }
-        ],
+        "no-unused-vars": "off",
+        "@typescript-eslint/no-unused-vars": "error",
         "no-use-before-define": 0, // Doesn't work at the moment
         "no-useless-call": 2,
         "no-useless-concat": 2,
