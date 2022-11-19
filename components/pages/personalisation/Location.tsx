@@ -1,17 +1,14 @@
-/* @flow */
-import type {
-    Node as ReactNode,
-    ElementConfig as ReactElementConfig,
-} from "react"
-
-import React, {useRef, useState, useEffect} from "react"
+import React, {useRef, useState, useEffect, ReactNode} from "react"
 import _ from "underscore";
 import debounce from "just-debounce-it";
 import { withRouter } from "next/router"
 import type { NextRouter } from "next/router"
 
 import {browserSupportsGeolocation} from "@/src/geolocation";
-import icons from "@/src/icons";
+import Walk from "@/src/icons/Walk"
+import Tram from "@/src/icons/Tram"
+import Car from "@/src/icons/Car"
+import Loading from "@/src/icons/Loading"
 import storage from "@/src/storage";
 import type {Geolocation} from "@/src/storage";
 import {getIssClient, getIssVersion} from "@/src/iss/client"
@@ -21,9 +18,8 @@ import WithStickyFooter from "@/src/components/WithStickyFooter";
 import ScreenReader from "@/src/components/ScreenReader";
 import FlatButton from "@/src/components/FlatButton";
 import InputWithDropdown from "@/components/general/InputWithDropdown";
-import GeolocationButton from "@/src/components/GeolocationButton";
+import GeolocationButton, {GeolocationStatus} from "@/src/components/GeolocationButton";
 import HeaderBar from "@/src/components/HeaderBar";
-import type {GeolocationStatus} from "@/src/components/GeolocationButton";
 import {
     getCategoryFromRouter,
     goToPersonalisationNextPath,
@@ -31,7 +27,7 @@ import {
 } from "@/src/utils/routing"
 import type {
     PersonalisationLocationPage,
-} from "@/src/../flow/personalisation-page";
+} from "@/types/personalisation-page";
 import {
     getBannerName,
 } from "@/src/utils/personalisation";
@@ -41,7 +37,7 @@ import {
 } from "@/src/utils/page-loading"
 import Category from "@/src/constants/Category"
 
-type LocationType = {|name: string|} | Geolocation
+type LocationType = Geolocation | {name: string}
 
 type Props = {
     router: NextRouter,
@@ -53,29 +49,28 @@ type initialSuggestions = {
     label: ReactNode
 }
 
-function Location({router, details}: Props): ReactNode {
-    const searchInputRef = useRef()
-    const GeolocationButtonClickRef = useRef()
-    const locationNameInputRef = useRef()
+function Location({router, details}: Props) {
+    const searchInputRef = useRef<HTMLInputElement>(null)
+    const GeolocationButtonClickCallback = useRef<() => Promise<void>>()
+    const locationNameInputString = useRef<string>()
     const [gettingAutocompletionsInProgress, setGettingAutocompletionsInProgress] = useState<boolean>(false)
     const [locationNameInput, setLocationNameInput] = useState<string>("")
-    const [selectedLocation, setSelectedLocation] = useState<LocationType | null>(null)
+    const [selectedLocation, setSelectedLocation] = useState<LocationType>()
     const [autocompletions, setAutocompletionsState] = useState<Array<ISS3AreaLocation>>([])
     const [prevAutocompletions, setPrevAutocompletions] = useState<Array<ISS3AreaLocation>>([])
     const [nextDisabled, setNextDisabled] = useState<boolean>(true)
-    const [category] = useState<?Category>(getCategoryFromRouter(router))
+    const [category] = useState<Category | null | undefined>(getCategoryFromRouter(router))
 
     useEffect(() => {
         const userLocation = storage.getUserGeolocation()
         const searchLocation = storage.getSearchArea()
-        let location: LocationType = {}
+        let location: LocationType | undefined = undefined
         if (userLocation) {
 
             if (searchLocation.length == 0 || searchLocation === userLocation.name) {
                 location = userLocation
             }
         } else if (searchLocation.length != 0) {
-
             location = {name: searchLocation}
         }
 
@@ -101,7 +96,7 @@ function Location({router, details}: Props): ReactNode {
 
     function setLocation(location: LocationType): void {
         setSelectedLocation(location)
-        setLocationInput(location.name)
+        setLocationInput((location as Geolocation).name)
         setNextDisabled(false)
         setAutocompletions([])
     }
@@ -112,7 +107,7 @@ function Location({router, details}: Props): ReactNode {
     }
 
     function setLocationInput(input: string) {
-        locationNameInputRef.current = input
+        locationNameInputString.current = input
         setLocationNameInput(input)
     }
 
@@ -125,13 +120,13 @@ function Location({router, details}: Props): ReactNode {
         if (!selectedLocation) {
             console.error(
                 "We should not be able to progress without selecting " +
-                    "a location"
+                    "a location",
             )
             return
         }
         storage.setSearchArea(selectedLocation.name);
         if (isGeolocation(selectedLocation)) {
-            storage.setUserGeolocation(selectedLocation)
+            storage.setUserGeolocation((selectedLocation as Geolocation))
         } else {
             storage.clearUserGeolocation()
         }
@@ -144,7 +139,7 @@ function Location({router, details}: Props): ReactNode {
             if (gettingAutocompletionsInProgress) {
                 closePageLoadDependencies(
                     router.asPath,
-                    "autocompleteSuggestionsLoad"
+                    "autocompleteSuggestionsLoad",
                 )
             }
             setAutocompletions([])
@@ -155,7 +150,7 @@ function Location({router, details}: Props): ReactNode {
 
         addPageLoadDependencies(
             router.asPath,
-            "autocompleteSuggestionsLoad"
+            "autocompleteSuggestionsLoad",
         )
         getAutocompletionSuggestions(newLocationNameInput)
     }
@@ -177,12 +172,12 @@ function Location({router, details}: Props): ReactNode {
             } catch (error) {
                 console.error(
                     "Error trying to get location autocomplete",
-                    error
+                    error,
                 )
             }
 
             // Check to make sure input hasn't change in the meantime
-            if (locationNameInputRef.current && input !== locationNameInputRef.current) {
+            if (locationNameInputString.current && input !== locationNameInputString.current) {
                 return
             }
 
@@ -191,24 +186,24 @@ function Location({router, details}: Props): ReactNode {
                 setAutocompletions(_.uniq(
                     Array.from(results.objects),
                     false,
-                    ({name, state}) => name + state
+                    ({name, state}) => name + state,
                 ))
             }
 
             setGettingAutocompletionsInProgress(false)
             closePageLoadDependencies(
                 router.asPath,
-                "autocompleteSuggestionsLoad"
+                "autocompleteSuggestionsLoad",
             )
         },
         500,
-        true
+        true,
     )
 
 
 
     function clearSelectedLocation(): void {
-        setSelectedLocation(null)
+        setSelectedLocation(undefined)
         setNextDisabled(true)
     }
 
@@ -218,7 +213,7 @@ function Location({router, details}: Props): ReactNode {
             window.scrollTo(
                 0,
                 searchInputRef.current.getBoundingClientRect().top +
-                    window.scrollY - 50
+                    window.scrollY - 50,
             );
         }
     }
@@ -226,7 +221,7 @@ function Location({router, details}: Props): ReactNode {
     function onSearchChange(event): void {
         const newValue = event.target.value
         const matchingAutocomplete = autocompletions.find(
-            area => `${area.name}, ${area.state}` === newValue
+            area => `${area.name}, ${area.state}` === newValue,
         )
         if (matchingAutocomplete) {
             return selectAutocomplete(matchingAutocomplete)
@@ -267,11 +262,11 @@ function Location({router, details}: Props): ReactNode {
                             onStatusChange={onGeolocationStatusChange}
                             locationValue={
                                 isGeolocation(selectedLocation) ?
-                                    selectedLocation
+                                    (selectedLocation as Geolocation)
                                     : undefined
                             }
-                            buttonClickRef={(clickRef) => {
-                                GeolocationButtonClickRef.current = clickRef
+                            buttonClickCallback={(clickRef) => {
+                                GeolocationButtonClickCallback.current = clickRef
                             }}
                         />
                     </>
@@ -280,9 +275,9 @@ function Location({router, details}: Props): ReactNode {
         const Explainer =
             <h3 className="explainer">
                 <span className="explainerIcons">
-                    <icons.Walk/>
-                    <icons.Tram/>
-                    <icons.Car/>
+                    <Walk/>
+                    <Tram/>
+                    <Car/>
                 </span>
                 <span>
                     <p>
@@ -291,7 +286,7 @@ function Location({router, details}: Props): ReactNode {
                     </p>
                 </span>
             </h3>
-        let initialSuggestions = [{
+        const initialSuggestions = [{
             value: "",
             label:
                 <div className = "initialSuggestions" >
@@ -307,12 +302,13 @@ function Location({router, details}: Props): ReactNode {
         if (gettingAutocompletionsInProgress) {
             return []
         }
+        console.log(selectedLocation)
         return initialSuggestions
     }
 
     function onInitialSuggestionsSelected() {
-        GeolocationButtonClickRef.current &&
-        GeolocationButtonClickRef.current()
+        GeolocationButtonClickCallback.current &&
+        GeolocationButtonClickCallback.current()
 
     }
 
@@ -331,8 +327,8 @@ function Location({router, details}: Props): ReactNode {
         )
     }
 
-    function isGeolocation(location: ?LocationType): boolean %checks {
-        return !!(location && location.longitude && location.latitude)
+    function isGeolocation(location: LocationType | null | undefined): boolean {
+        return !!(location && (location as Geolocation).longitude && (location as Geolocation).latitude);
     }
 
     return (
@@ -350,7 +346,7 @@ function Location({router, details}: Props): ReactNode {
                         fixedAppBar={true}
                         bannerName={getBannerName(
                             category,
-                            details.name
+                            details.name,
                         )}
                         backUrl={isSummaryRoute ? goBackPath : undefined}
                         backMessage={
@@ -414,21 +410,21 @@ function Location({router, details}: Props): ReactNode {
                                             value: `${location.name},` +
                                             ` ${location.state}`,
                                             label: <>
-                                            <div className="suburb">
-                                                {location.name}
-                                            </div>
-                                            <ScreenReader>,{" "}</ScreenReader>
-                                            <div className="state">
-                                                {location.state}
-                                            </div>
-                                        </>,
+                                                <div className="suburb">
+                                                    {location.name}
+                                                </div>
+                                                <ScreenReader>,{" "}</ScreenReader>
+                                                <div className="state">
+                                                    {location.state}
+                                                </div>
+                                            </>,
                                         }))
                                 }
                             />
                         </div>
                         {gettingAutocompletionsInProgress &&
                             <div className="progress">
-                                <icons.Loading
+                                <Loading
                                     aria-label="Loading locations"
                                     className="big"
                                 />
@@ -441,14 +437,4 @@ function Location({router, details}: Props): ReactNode {
     )
 }
 
-export default (
-    withRouter(Location):
-        Class<
-            React$Component<
-                $Diff<
-                    ReactElementConfig<typeof Location>,
-                    {router: *}
-                >
-            >
-        >
-)
+export default withRouter(Location)

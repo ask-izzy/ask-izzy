@@ -1,22 +1,23 @@
-/* @flow */
 /**
  * Geolocation functions.
  *
  * @module geolocation
  */
 
-import location from "browser-location";
-import storage from "./storage";
-import Maps from "./maps";
+import location from "browser-location"
+
+import storage from "@/src/storage"
+import Maps from "@/src/maps"
 
 /**
  * Returns a promise to get the user's geolocation from the browser.
  *
  * @param {?PositionOptions} options - position options.
  *
- * @returns {Promise<Position>} the user's position.
+ * @returns {Promise<GeolocationPosition>} the user's position.
  */
-export default function locate(options: ?PositionOptions): Promise<Position> {
+
+export default function locate(options?: PositionOptions | null): Promise<GeolocationPosition> {
     return new Promise((resolve, reject) => {
         const mock = storage.getGeolocationMock();
 
@@ -39,13 +40,13 @@ export default function locate(options: ?PositionOptions): Promise<Position> {
         } else {
             location.get(
                 options || {},
-                (err: PositionError, position: Position) => {
+                (err: GeolocationPositionError, position: GeolocationPosition) => {
                     if (err) {
                         reject(err);
                     } else {
                         resolve(position);
                     }
-                }
+                },
             );
         }
     });
@@ -67,7 +68,7 @@ export function browserSupportsGeolocation(): boolean {
         typeof navigator.geolocation.getCurrentPosition === "function";
 }
 
-export async function guessSuburb(location: Position): Promise<string> {
+export async function guessSuburb(location: GeolocationPosition): Promise<string> {
     const maps = await Maps();
     let possibleLocations
     try {
@@ -100,7 +101,7 @@ export async function guessSuburb(location: Position): Promise<string> {
         ?.long_name
     const state = address
         .find(({types}) => types.some(
-            type => type === "administrative_area_level_1"
+            type => type === "administrative_area_level_1",
         ))
         ?.short_name
 

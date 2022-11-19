@@ -1,4 +1,3 @@
-/* @flow */
 import {useState, useEffect} from "react"
 
 /*
@@ -14,7 +13,7 @@ export default function usePostInitialRender(): boolean {
                 setPostInitialRender(true)
             }
         },
-        []
+        [],
     )
 
     return postInitialRender

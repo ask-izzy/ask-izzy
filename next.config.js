@@ -138,7 +138,7 @@ function getRewritesForCategories() {
     // hack where read the categories.js file in as plain text and regex out the
     // names.
     const categoryKeys = fs.readFileSync(
-        "./src/constants/categories.js",
+        "./src/constants/categories.tsx",
         {encoding: "utf8"}
     )
         .split("\n")

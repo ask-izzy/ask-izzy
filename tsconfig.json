@@ -7,9 +7,14 @@
       "esnext"
     ],
     "baseUrl": ".",
-    "typeRoots": ["./node_modules/@types", "./types"],
+    "typeRoots": [
+      "./node_modules/@types",
+      "./types"
+    ],
     "paths": {
-      "@/*": ["./*"]
+      "@/*": [
+        "./*"
+      ]
     },
     "allowJs": false,
     "checkJs": false,

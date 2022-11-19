@@ -3375,6 +3375,11 @@
   resolved "https://registry.npmjs.org/@types/google.maps/-/google.maps-3.48.6.tgz#5125eb8257beb031b547acb5a690c24c3cabbf59"
   integrity sha512-ZSx2J50Q9qyHhYVO4UdTvt5sHILzenSCiMbr7bjYNCMBkW/sagHMEDPI3Vjlr9i2tlMHIGoLk6DthWJnqFun/A==
 
+"@types/google.maps@^3.50.5":
+  version "3.50.5"
+  resolved "https://registry.yarnpkg.com/@types/google.maps/-/google.maps-3.50.5.tgz#a0d12675b547205fc163c4b8d999db305ba3862a"
+  integrity sha512-RuZf1MJtctGlpW+Gd4a/eGtAufUDjMf+eyN1l+B3fbe2YLScJbg8KEljJfb+6vnSPFAeM1/48geVIEg3vqOkxw==
+
 "@types/graceful-fs@^4.1.2":
   version "4.1.5"
   resolved "https://registry.npmjs.org/@types/graceful-fs/-/graceful-fs-4.1.5.tgz#21ffba0d98da4350db64891f92a9e5db3cdb4e15"

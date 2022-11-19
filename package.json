@@ -70,6 +70,7 @@
     "@storybook/addon-essentials": "^6.4.22",
     "@storybook/addon-links": "^6.4.22",
     "@storybook/react": "^6.4.22",
+    "@types/google.maps": "^3.50.5",
     "@types/jest": "^29.2.0",
     "@types/node": "^18.11.4",
     "@types/react": "^18.0.24",

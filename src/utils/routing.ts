@@ -92,9 +92,9 @@ export function currentRouteIsPersonalised(
 
 export function getCategoryFromRouter(
     router: NextRouter,
-): Category | null | undefined {
+): Category | undefined {
     return getCategory(
-        router.query.categoryOrContentPageSlug,
+        (router.query.categoryOrContentPageSlug as string),
     )
 }
 
