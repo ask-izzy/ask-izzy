@@ -1,10 +1,25 @@
-/* @flow */
-import React from "react"
+import React from "react";
 import type { NextRouter } from "next/router";
 
-import icons from "../icons";
+import Category from "@/src/constants/Category";
 
-import Category from "./Category";
+import House from "@/src/icons/House"
+import Food from "@/src/icons/Food"
+import Things from "@/src/icons/Things"
+import EscapeViolence from "@/src/icons/EscapeViolence"
+import Health from "@/src/icons/Health"
+import Centrelink from "@/src/icons/Centrelink"
+import Money from "@/src/icons/Money"
+import Support from "@/src/icons/Support"
+import Legal from "@/src/icons/Legal"
+import Addiction from "@/src/icons/Addiction"
+import Skills from "@/src/icons/Skills"
+import Job from "@/src/icons/Job"
+import Facilities from "@/src/icons/Facilities"
+import Entertainment from "@/src/icons/Entertainment"
+import Tech from "@/src/icons/Tech"
+import Advocacy from "@/src/icons/Advocacy"
+import Search from "@/src/icons/Search"
 
 /* eslint-disable max-len */
 import AddictionSubcategories from "@/src/constants/personalisation-pages/AddictionSubcategories";
@@ -54,11 +69,11 @@ import WhoIsLookingForHelpSupportAndCounselling from "@/src/constants/personalis
 import WhoIsLookingForHelpTechnology from "@/src/constants/personalisation-pages/WhoIsLookingForHelpTechnology";
 /* eslint-enable max-len */
 
-const categories = [
+const categories: Array<Category> = [
     (new Category({
         name: "Housing",
         byline: "A place to stay.",
-        icon: icons.House,
+        icon: House,
         searchQueryChanges: {
             catchment: "prefer",
             $concat: {
@@ -84,11 +99,11 @@ const categories = [
             HousingAreYouSafe,
             OnlineSafetyScreen,
         ],
-    }): Category),
+    })),
     (new Category({
         name: "Food",
         byline: "Something to eat.",
-        icon: icons.Food,
+        icon: Food,
         searchQueryChanges: {
             catchment: "prefer",
             $concat: {
@@ -110,11 +125,11 @@ const categories = [
             WhoIsLookingForHelpFood,
             Location,
         ],
-    }): Category),
+    })),
     (new Category({
         name: "Everyday things",
         byline: "Swags, clothes, food vouchers etc.",
-        icon: icons.Things,
+        icon: Things,
         searchQueryChanges: {
             catchment: "prefer",
             $concat: {
@@ -131,11 +146,11 @@ const categories = [
             WhoIsLookingForHelpEverydayThings,
             Location,
         ],
-    }): Category),
+    })),
     (new Category({
         name: "Domestic & family violence help",
         byline: "Scared of partner or family member.",
-        icon: icons.EscapeViolence,
+        icon: EscapeViolence,
         searchQueryChanges: {
             catchment: "prefer",
             $concat: {
@@ -157,11 +172,11 @@ const categories = [
             UsingViolenceScreen,
             LgbtiqaDomesticViolenceScreen,
         ],
-    }): Category),
+    })),
     (new Category({
         name: "Health",
         byline: "Physical, mental, emotional.",
-        icon: icons.Health,
+        icon: Health,
         searchQueryChanges: {
             catchment: "prefer",
             $concat: {
@@ -181,11 +196,11 @@ const categories = [
             Location,
             DemographicsIndigenous,
         ],
-    }): Category),
+    })),
     (new Category({
         name: "Centrelink",
         byline: "Access to services.",
-        icon: icons.Centrelink,
+        icon: Centrelink,
         searchQueryChanges: {
             catchment: "prefer",
             $concat: {
@@ -197,11 +212,11 @@ const categories = [
             WhoIsLookingForHelpCentrelink,
             Location,
         ],
-    }): Category),
+    })),
     (new Category({
         name: "Money help",
         byline: "Emergency funds, bills etc.",
-        icon: icons.Money,
+        icon: Money,
         searchQueryChanges: {
             catchment: "prefer",
             $concat: {
@@ -219,11 +234,11 @@ const categories = [
             WhoIsLookingForHelpMoney,
             Location,
         ],
-    }): Category),
+    })),
     (new Category({
         name: "Support & counselling",
         byline: "Relationships, gambling & LGBTIQA+.",
-        icon: icons.Support,
+        icon: Support,
         searchQueryChanges: {
             catchment: "prefer",
             $concat: {
@@ -239,11 +254,11 @@ const categories = [
             Location,
             DemographicsIndigenous,
         ],
-    }): Category),
+    })),
     (new Category({
         name: "Legal",
         byline: "Police, law & fines.",
-        icon: icons.Legal,
+        icon: Legal,
         searchQueryChanges: {
             catchment: "prefer",
             $concat: {
@@ -271,11 +286,11 @@ const categories = [
             Location,
             DemographicsIndigenous,
         ],
-    }): Category),
+    })),
     (new Category({
         name: "Drugs & alcohol",
         byline: "Support & assistance.",
-        icon: icons.Addiction,
+        icon: Addiction,
         searchQueryChanges: {
             catchment: "prefer",
             $concat: {
@@ -294,11 +309,11 @@ const categories = [
             Location,
             DemographicsIndigenous,
         ],
-    }): Category),
+    })),
     (new Category({
         name: "Life skills & education",
         byline: "Everyday skills & training.",
-        icon: icons.Skills,
+        icon: Skills,
         searchQueryChanges: {
             catchment: "prefer",
             $concat: {
@@ -318,11 +333,11 @@ const categories = [
             Location,
             DemographicsIndigenous,
         ],
-    }): Category),
+    })),
     (new Category({
         name: "Finding work",
         byline: "Earning & volunteering.",
-        icon: icons.Job,
+        icon: Job,
         searchQueryChanges: {
             catchment: "prefer",
             $concat: {
@@ -338,11 +353,11 @@ const categories = [
             WhoIsLookingForHelpFindingWork,
             Location,
         ],
-    }): Category),
+    })),
     (new Category({
         name: "Facilities",
         byline: "Toilets.",
-        icon: icons.Facilities,
+        icon: Facilities,
         searchQueryChanges: {
             catchment: "prefer",
             $concat: {
@@ -359,11 +374,11 @@ const categories = [
             WhoIsLookingForHelpFacilities,
             Location,
         ],
-    }): Category),
+    })),
     (new Category({
         name: "Something to do",
         byline: "Libraries, Community Hubs etc.",
-        icon: icons.Entertainment,
+        icon: Entertainment,
         searchQueryChanges: {
             catchment: "prefer",
             $concat: {
@@ -386,11 +401,11 @@ const categories = [
             WhoIsLookingForHelpSomethingToDo,
             Location,
         ],
-    }): Category),
+    })),
     (new Category({
         name: "Technology",
         byline: "Wifi, charging etc.",
-        icon: icons.Tech,
+        icon: Tech,
         searchQueryChanges: {
             catchment: "prefer",
             $concat: {
@@ -405,11 +420,11 @@ const categories = [
             WhoIsLookingForHelpTechnology,
             Location,
         ],
-    }): Category),
+    })),
     (new Category({
         name: "Advocacy",
         byline: "Complaints and advice.",
-        icon: icons.Advocacy,
+        icon: Advocacy,
         searchQueryChanges: {
             catchment: "prefer",
             $concat: {
@@ -429,13 +444,13 @@ const categories = [
             WhoIsLookingForHelpAdvocacy,
             Location,
         ],
-    }): Category),
+    })),
     (new Category({
         name: "Search",
         byline: "Free text search.",
-        icon: () => <icons.Search viewBox="14 14 35 35" />,
+        icon: <Search viewBox="14 14 35 35" />,
         searchQueryChanges(router: NextRouter) {
-            const searchTerm = decodeURIComponent(router.query.search)
+            const searchTerm = decodeURIComponent(String(router.query.search))
 
             const [isDAFSearch, DAFSearchTerm] = searchTerm.match(/^Disability Advocacy Providers(?: - )?(.*)/) || []
 
@@ -463,16 +478,16 @@ const categories = [
             Location,
         ],
         dontShowInCategoryList: true,
-    }): Category),
+    })),
 ];
 
 export default categories;
 
 // $FlowIgnore flowjs needs to be updated to include fromEntries
 const categoryMap = Object.fromEntries(
-    categories.map(category => [category.key, category])
+    categories.map(category => [category.key, category]),
 )
 
-export function getCategory(key: string): ?Category {
+export function getCategory(key: string): Category | undefined {
     return categoryMap[key];
 }

@@ -1,12 +1,10 @@
-/* @flow */
 import type {
-    PersonalisationPage,
-} from "../../../flow/personalisation-page"
-import type { SearchQueryChanges } from "../../iss/searchQueryBuilder";
-import storage from
-"../../storage"
+    PersonalisationLocationPage,
+} from "@/types/personalisation-page"
+import type { SearchQueryChanges } from "@/src/iss/searchQueryBuilder"
+import storage from "@/src/storage"
 
-export default ({
+export default {
     type: "location",
     name: "location",
     title: "Location",
@@ -15,7 +13,7 @@ export default ({
         return storage.getSearchArea();
     },
     get searchQueryChanges(): SearchQueryChanges | null {
-        const searchQuery = {}
+        const searchQuery: any = {}
         /* Location/Area is required */
         const searchArea = storage.getSearchArea();
         if (!searchArea) {
@@ -33,5 +31,5 @@ export default ({
 
         return searchQuery;
     },
-}: PersonalisationPage)
+} as PersonalisationLocationPage
 

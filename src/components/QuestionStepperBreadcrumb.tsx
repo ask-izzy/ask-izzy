@@ -1,41 +1,38 @@
-/* @flow */
-
-import React from "react";
-import type {Node as ReactNode} from "react";
+import React, {ReactNode} from "react";
 import cnx from "classnames";
 import { useRouter } from "next/router"
 
-import MapIcon from "../icons/Map";
-import Link from "./base/Link";
+import MapIcon from "@/src/icons/Map";
+import Link from "@/src/components/base/Link";
 import {
     prettyPrintAnswer,
     getSavedPersonalisationAnswer,
-} from "../utils/personalisation"
+} from "@/src/utils/personalisation"
 import {
     getServicesPath,
 } from "@/src/utils/routing"
-import type {PersonalisationPage} from "../../flow/personalisation-page"
+import type {PersonalisationPage} from "@/types/personalisation-page"
 
-type Props = {|
+type Props = {
     personalisationPage: PersonalisationPage,
     personalisationPages: Array<PersonalisationPage>,
-    showQuestionIcons?: ?boolean,
+    showQuestionIcons?: boolean | null | undefined,
     contentToAppend?: ReactNode
-|}
+}
 
 export default function QuestionStepperBreadcrumb({
     personalisationPage,
     personalisationPages,
     showQuestionIcons,
     contentToAppend,
-}: Props): ReactNode {
+}: Props) {
     const router = useRouter()
 
     const currentlyEditing =
         personalisationPage.name === router.query.personalisationSlug
 
 
-    function AnswerContainer(props): ReactNode {
+    function AnswerContainer(props) {
         // The question stepper is also rendered on the home page. However
         // in the context of the homepage there is no category set so there
         // is no route that would make sense to link to to edit any
@@ -74,7 +71,7 @@ export default function QuestionStepperBreadcrumb({
                 }
                 {breadcrumbIsTruncated(
                     personalisationPage,
-                    personalisationPages
+                    personalisationPages,
                 ) &&
                     " …"
                 }
@@ -88,13 +85,13 @@ export default function QuestionStepperBreadcrumb({
 }
 
 export function getMaxNumberOfAnswersToShowInBreadcrumb(
-    personalisationPages: Array<PersonalisationPage>
+    personalisationPages: Array<PersonalisationPage>,
 ): number {
     const maxBreadcrumbs = 6;
     const numOfSingleChoicePersonalisationPages = personalisationPages.filter(
         // ternary statement required because flow is wack
         // eslint-disable-next-line no-unneeded-ternary
-        page => page.multipleChoice ? false : true
+        page => page.multipleChoice ? false : true,
     ).length
 
     return maxBreadcrumbs - numOfSingleChoicePersonalisationPages;
@@ -102,7 +99,7 @@ export function getMaxNumberOfAnswersToShowInBreadcrumb(
 
 export function getBreadcrumbText(
     personalisationPage: PersonalisationPage,
-    personalisationPages: Array<PersonalisationPage>
+    personalisationPages: Array<PersonalisationPage>,
 ): Array<ReactNode> {
     const possibleAnswers = personalisationPage.possibleAnswers ||
         null
@@ -134,30 +131,30 @@ export function getBreadcrumbText(
         const possibleAnswersIndexMap = Object.fromEntries(
             Array.from(
                 Object.keys(
-                    possibleAnswers
-                ).entries()
-            ).map(([index, answer]) => ([answer, index]))
+                    possibleAnswers,
+                ).entries(),
+            ).map(([index, answer]) => ([answer, index])),
         )
 
         savedAnswers = savedAnswers.sort((answerA, answerB) =>
             possibleAnswersIndexMap[answerA] -
-                possibleAnswersIndexMap[answerB]
+                possibleAnswersIndexMap[answerB],
         )
 
     }
     const prettyPrintedAnswers = savedAnswers.map(
-        answer => prettyPrintAnswer(personalisationPage, answer)
+        answer => prettyPrintAnswer(personalisationPage, answer),
     ).filter(answer => answer)
 
     const maxNumberOfAnswersToShow =
         getMaxNumberOfAnswersToShowInBreadcrumb(personalisationPages)
     const answers = prettyPrintedAnswers.splice(0, maxNumberOfAnswersToShow)
-    const answersWithCommas = []
+    const answersWithCommas: Array<ReactNode> = []
     for (let i = 0; i < answers.length; i++) {
         answersWithCommas.push(answers[i])
         if (i < answers.length - 1) {
             answersWithCommas.push(
-                <span className="breadcrumbAnswerSpacer">{", "}</span>
+                <span className="breadcrumbAnswerSpacer">{", "}</span>,
             )
         }
     }
@@ -166,7 +163,7 @@ export function getBreadcrumbText(
 
 export function breadcrumbIsTruncated(
     personalisationPage: PersonalisationPage,
-    personalisationPages: Array<PersonalisationPage>
+    personalisationPages: Array<PersonalisationPage>,
 ): boolean {
     const prettyPrintedAnswers = [
         getSavedPersonalisationAnswer(personalisationPage),

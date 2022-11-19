@@ -1,11 +1,18 @@
-/* @flow */
 import merge from "deepmerge";
-
-import storage from "./storage";
 import _ from "underscore";
-import checkInactive from "./inactiveTimeout";
 import {Loader} from "@googlemaps/js-api-loader";
-import type {travelTime} from "./iss/general"
+
+import storage from "@/src/storage";
+import checkInactive from "@/src/inactiveTimeout";
+import type {travelTime} from "@/src/iss/general"
+import {
+    GoogleMaps,
+    TravelMode,
+    GeocoderRequest,
+    GeocoderResult,
+    AutocompletionRequest,
+    AutocompletePrediction,
+} from "@/types/interfaces/maps"
 
 export class MapsApi {
     api: GoogleMaps;
@@ -15,7 +22,7 @@ export class MapsApi {
     }
 
     async travelTime(
-        destinations: Array<string>
+        destinations: Array<string>,
     ): Promise<Array<travelTime>> {
         // The google maps api authorization requests time out.
         // We've had issues in test (and will likely have in the field)
@@ -46,7 +53,7 @@ export class MapsApi {
 
         return _.zip(drivingResults, walkingResults, transitResults)
             .map(([driving, walking, transit]) => {
-                let travelTimes = [];
+                const travelTimes: Array<any> = [];
 
                 if (
                     walking.status === "OK" &&
@@ -62,14 +69,13 @@ export class MapsApi {
                 }
 
                 return travelTimes;
-            }
-            )
+            })
     }
 
     batchDirectionsRequest(
-        destinations: Array<string>, mode: TravelMode = "WALKING"
+        destinations: Array<string>, mode: TravelMode = "WALKING",
     ): Promise<Array<travelTime>> {
-        const directionsService = new this.api.DistanceMatrixService();
+        const directionsService = new (this.api.DistanceMatrixService as any)();
         const coords = storage.getUserGeolocation();
         if (!coords) {
             return new Promise(resolve => resolve([]))
@@ -88,7 +94,7 @@ export class MapsApi {
                 params,
                 (response, status) => {
                     if (status === this.api.DirectionsStatus.OK) {
-                        let times = response.rows[0].elements;
+                        const times = response.rows[0].elements;
 
                         times.forEach((transportTime) => {
                             transportTime.mode = mode
@@ -110,7 +116,7 @@ export class MapsApi {
      * geocode results.
      */
     geocode(params: GeocoderRequest): Promise<Array<GeocoderResult>> {
-        let geocoder = new this.api.Geocoder();
+        const geocoder = new (this.api.Geocoder as any)();
 
         return new Promise((resolve, reject) =>
             geocoder.geocode(params, (results, status) => {
@@ -123,9 +129,9 @@ export class MapsApi {
     }
 
     autocompletePlaces(
-        params: AutocompletionRequest
+        params: AutocompletionRequest,
     ): Promise<Array<AutocompletePrediction>> {
-        let autocompleter = new this.api.places.AutocompleteService();
+        const autocompleter = new (this.api.places.AutocompleteService as any)();
 
         return new Promise((resolve, reject) =>
             autocompleter.getPlacePredictions(params, (results, status) => {
@@ -154,7 +160,7 @@ let mapsAPIPromise;
 function maps(): Promise<MapsApi> {
     if (!mapsAPIPromise) {
         const api = new Loader({
-            apiKey: process.env.NEXT_PUBLIC_GOOGLE_API_KEY,
+            apiKey: process.env.NEXT_PUBLIC_GOOGLE_API_KEY as string,
             libraries: ["places"],
         });
         mapsAPIPromise = api.load().then(google => {
@@ -167,7 +173,7 @@ function maps(): Promise<MapsApi> {
                     google = merge(google, googleMock)
                 }
             }
-            return new MapsApi(google.maps);
+            return new MapsApi(google.maps as any);
         })
     }
     return mapsAPIPromise;

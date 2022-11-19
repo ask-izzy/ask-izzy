@@ -1,37 +1,32 @@
-/* @flow */
-
-import React from "react";
-import type {Node as ReactNode} from "react";
+import React, {ReactNode} from "react";
 import cnx from "classnames"
 import { useRouter } from "next/router"
 import type { NextRouter } from "next/router"
 
-import QuestionStepperBreadcrumb from "./QuestionStepperBreadcrumb";
-import Link from "../components/base/Link";
-import {ensureURLHasTrailingSlash} from "../utils/url"
-import Button from "../components/base/Button"
-import storage from "../storage"
-import LocationPage from "../constants/personalisation-pages/Location"
-import {
-    getSavedPersonalisationAnswer,
-} from "../utils/personalisation"
+import QuestionStepperBreadcrumb from "@/src/components/QuestionStepperBreadcrumb";
+import Link from "@/src/components/base/Link";
+import {ensureURLHasTrailingSlash} from "@/src/utils/url"
+import Button from "@/src/components/base/Button"
+import storage from "@/src/storage"
+import LocationPage from "@/src/constants/personalisation-pages/Location"
+import {getSavedPersonalisationAnswer} from "@/src/utils/personalisation"
 import {
     getPersonalisationPages,
     getPersonalisationPagesToShow,
     getCategoryFromRouter,
     currentRouteIsPersonalised,
-} from "../utils/routing"
-import usePostInitialRender from "../hooks/usePostInitialRender"
-import type {PersonalisationPage} from "../../flow/personalisation-page"
-import ProgressBar from "./general/ProgressBar"
+} from "@/src//utils/routing"
+import usePostInitialRender from "@/src/hooks/usePostInitialRender"
+import type {PersonalisationPage} from "@/types/personalisation-page"
+import ProgressBar from "@/src/components/general/ProgressBar"
 
-type Props = {|
+type Props = {
     showQuestionIcons?: boolean,
     showClearLocation?: boolean,
     hideStepInfo?: boolean,
     showEditAnswers?: boolean,
-    onClearLocation?: ?function,
-|}
+    onClearLocation?: () => void,
+}
 
 /*
  * Question stepper displays a row of breadcrumbs where each breadcrumb shows
@@ -44,7 +39,7 @@ function QuestionStepper({
     showEditAnswers = false,
     hideStepInfo = false,
     onClearLocation,
-}: Props): ReactNode {
+}: Props) {
     let personalisationPages: Array<PersonalisationPage> = []
 
     const router = useRouter()
@@ -59,7 +54,7 @@ function QuestionStepper({
 
     function renderClearLocationButton() {
         const locationIsSet = personalisationPages.some(
-            page => page.name === "location"
+            page => page.name === "location",
         )
         if (!locationIsSet || !showClearLocation) {
             return null
@@ -79,10 +74,10 @@ function QuestionStepper({
         )
     }
     const category = getCategoryFromRouter(router)
-    const CategoryIcon = category?.icon || (() => null)
+    const CategoryIcon: ReactNode = category?.icon || <></>
     const title = category?.key !== "search" ?
         category?.name
-        : `Search for “${decodeURIComponent(router.query.search)}”`
+        : `Search for “${decodeURIComponent(router.query.search as string)}”`
 
     function renderProgressBar() {
         const stepTotal = getTotalSteps(router)
@@ -104,7 +99,7 @@ function QuestionStepper({
 
     return (
         <div className={cnx("QuestionStepper")}>
-            {hideStepInfo || <CategoryIcon />}
+            {hideStepInfo || CategoryIcon}
             <div className="content">
                 {!hideStepInfo && postInitialRender && renderProgressBar()}
                 <ol
@@ -124,7 +119,7 @@ function QuestionStepper({
                                     {" | "}
                                 </span>
                             }
-                        </li>
+                        </li>,
                     )}
                 </ol>
                 {showEditAnswers &&
@@ -132,7 +127,7 @@ function QuestionStepper({
                         <Link
                             to={
                                 ensureURLHasTrailingSlash(
-                                    router.isReady ? router.asPath : "/"
+                                    router.isReady ? router.asPath : "/",
                                 ) + "personalise/summary"
                             }
                         >

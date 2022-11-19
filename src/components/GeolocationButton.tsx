@@ -1,30 +1,31 @@
-/* @flow */
-
-import type {Node as ReactNode} from "React";
 import React, {useState, useEffect} from "react";
-import getPosition, {guessSuburb} from "../geolocation";
-import icons from "../icons";
-import * as gtm from "../google-tag-manager";
-import type {Geolocation} from "../storage";
-import Button from "./base/Button";
+import getPosition, {guessSuburb} from "@/src/geolocation";
+import Location from "@/src/icons/Location";
+import Loading from "@/src/icons/Loading"
+import Tick from "@/src/icons/Tick"
+import Cross from "@/src/icons/Cross"
+import * as gtm from "@/src/google-tag-manager";
+import type {Geolocation} from "@/src/storage";
+import Button from "@/src/components/base/Button";
 
-export type GeolocationStatus = {|
+export type GeolocationStatus = {
     type: "COMPLETE",
     location: Geolocation
-|} | {|
+} | {
     type: "FAILED",
     error: Error
-|} | {|
+} | {
     type: "NOT_STARTED" | "RUNNING"
-|}
-type GeolocationButtonProps = {|
+}
+
+type GeolocationButtonProps = {
     onStatusChange?: (GeolocationStatus) => void,
     locationValue?: Geolocation,
     showLocationInSuccessMessage?: boolean,
-    successMessageSuffix?: ?string,
+    successMessageSuffix?: string | null,
     showClearButton?: boolean,
-    buttonClickRef?: ?(function) => void,
-|}
+    buttonClickCallback?: (clickRef: (event?: Event) => Promise<void>) => void,
+}
 
 function GeolocationButton({
     onStatusChange,
@@ -32,8 +33,8 @@ function GeolocationButton({
     showLocationInSuccessMessage = false,
     successMessageSuffix,
     showClearButton = false,
-    buttonClickRef,
-}: GeolocationButtonProps): ReactNode {
+    buttonClickCallback,
+}: GeolocationButtonProps) {
     const [status, directSetStatus] =
         useState<GeolocationStatus>({type: "NOT_STARTED"})
     function setStatus(newStatus: GeolocationStatus) {
@@ -57,8 +58,8 @@ function GeolocationButton({
     }, [locationValue])
 
     useEffect(() => {
-        if (buttonClickRef) {
-            buttonClickRef(onGeolocationClick)
+        if (buttonClickCallback) {
+            buttonClickCallback(onGeolocationClick)
         }
     })
 
@@ -66,8 +67,8 @@ function GeolocationButton({
     // but there can't be multiple elements on a page using the same id. So
     // in case this component is used in multiple location on a page we generate
     // a unique id to use for each instance.
-    let [uniqueMessageElementID] = useState<string>(
-        "statusMessage_" + Math.random()
+    const [uniqueMessageElementID] = useState<string>(
+        "statusMessage_" + Math.random(),
     )
 
     async function getUsersLocation(): Promise<Geolocation> {
@@ -82,7 +83,7 @@ function GeolocationButton({
         return location;
     }
 
-    async function onGeolocationClick(event): Promise<void> {
+    async function onGeolocationClick(event?: Event): Promise<void> {
         if (event) {
             event.stopPropagation()
         }
@@ -98,7 +99,7 @@ function GeolocationButton({
         try {
             location = await getUsersLocation()
         } catch (error) {
-            const newGeolocationStatus = {
+            const newGeolocationStatus: GeolocationStatus = {
                 type: "FAILED",
                 error,
             }
@@ -107,7 +108,7 @@ function GeolocationButton({
             return
         }
 
-        const newGeolocationStatus = {
+        const newGeolocationStatus: GeolocationStatus = {
             type: "COMPLETE",
             location,
         }
@@ -125,7 +126,7 @@ function GeolocationButton({
         <Button
             className="undo"
             onClick={() => {
-                const newGeolocationStatus = {type: "NOT_STARTED"}
+                const newGeolocationStatus: GeolocationStatus = {type: "NOT_STARTED"}
                 setStatus(newGeolocationStatus)
             }}
         >
@@ -154,47 +155,47 @@ function GeolocationButton({
         switch (status.type) {
         case "NOT_STARTED":
             return <>
-                    <icons.Location/>
-                    <span className="primary">
-                        Get your location
-                    </span>
-                </>
+                <Location/>
+                <span className="primary">
+                    Get your location
+                </span>
+            </>
         case "RUNNING":
             return <>
-                    <icons.Loading />
-                    <div className="multiLine">
-                        <span className="primary">
-                            Locating you...
-                        </span>
-                        <span className="secondary">
-                            Please permit us to use your GPS
-                        </span>
-                    </div>
-                </>
+                <Loading />
+                <div className="multiLine">
+                    <span className="primary">
+                        Locating you...
+                    </span>
+                    <span className="secondary">
+                        Please permit us to use your GPS
+                    </span>
+                </div>
+            </>
         case "COMPLETE":
             return <>
-                    <icons.Tick />
-                    <span className="primary">
-                        Found your location
-                        {showLocationInSuccessMessage && status.location &&
-                            ` (in ${status.location.name})`
-                        }
-                        {successMessageSuffix && ` – ${successMessageSuffix}`}
-                        {showClearButton && renderClearButton()}
-                    </span>
-                </>;
+                <Tick />
+                <span className="primary">
+                    Found your location
+                    {showLocationInSuccessMessage && status.location &&
+                        ` (in ${status.location.name})`
+                    }
+                    {successMessageSuffix && ` – ${successMessageSuffix}`}
+                    {showClearButton && renderClearButton()}
+                </span>
+            </>
         case "FAILED":
             return <>
-                    <icons.Cross />
-                    <div className="multiLine">
-                        <span className="primary">
-                            Unable to get your location
-                        </span>
-                        <span className="secondary">
-                            {status.error?.message}
-                        </span>
-                    </div>
-                </>
+                <Cross />
+                <div className="multiLine">
+                    <span className="primary">
+                        Unable to get your location
+                    </span>
+                    <span className="secondary">
+                        {status.error?.message}
+                    </span>
+                </div>
+            </>
         default:
             return null
         }

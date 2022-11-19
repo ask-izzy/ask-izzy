@@ -1,4 +1,3 @@
-/* @flow */
 // Keep track of whether a page has fully loaded or not and notify subscribers
 // when it is.
 
@@ -8,8 +7,11 @@
 import {isDebugMode} from "@/contexts/debug-mode-context";
 
 let currentPagePath = {}
-let currentDependencies = []
-let currentSubscribers = []
+let currentDependencies: Array<string> = []
+let currentSubscribers: Array<{
+    resolve: (value: void | PromiseLike<void>) => void,
+    reject: (reason?: any) => void,
+}> = []
 
 export function addPageLoadDependencies(
     pagePath: string,
@@ -28,7 +30,7 @@ export function addPageLoadDependencies(
         if (currentDependencies.includes(dependency)) {
             console.warn(
                 "Tried to add the same page load dependency twice: " +
-                    dependency
+                    dependency,
             )
             continue
         }
@@ -38,7 +40,7 @@ export function addPageLoadDependencies(
         if (isDebugMode()) {
             console.info(
                 `Registering page dependency "${dependency}", there are ` +
-                    `currently ${currentDependencies.length} dependencies ` + pagePath
+                    `currently ${currentDependencies.length} dependencies ` + pagePath,
             )
         }
     }
@@ -60,7 +62,7 @@ export function closePageLoadDependencies(
         const index = currentDependencies.indexOf(dependency)
         if (index < 0) {
             console.warn(
-                "Tried to mark an unregistered page load dependency as closed"
+                "Tried to mark an unregistered page load dependency as closed",
             )
             continue
         }
@@ -70,7 +72,7 @@ export function closePageLoadDependencies(
         if (isDebugMode()) {
             console.info(
                 `Closing page dependency "${dependency}", there are ` +
-                    `currently ${currentDependencies.length} dependencies`
+                    `currently ${currentDependencies.length} dependencies`,
             )
         }
     }
@@ -83,7 +85,7 @@ export function closePageLoadDependencies(
 function pageLoaded() {
     if (isDebugMode()) {
         console.info(
-            `Notifying ${currentSubscribers.length} subscribers of page load`
+            `Notifying ${currentSubscribers.length} subscribers of page load`,
         )
     }
     for (const subscriber of currentSubscribers) {
@@ -96,7 +98,7 @@ function pageLoaded() {
 export async function waitTillPageLoaded(): Promise<void> {
     if (currentDependencies.length > 0) {
         return new Promise(
-            (resolve, reject) => currentSubscribers.push({resolve, reject})
+            (resolve, reject) => currentSubscribers.push({resolve, reject}),
         )
     }
 }
