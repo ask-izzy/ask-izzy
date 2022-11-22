@@ -11,7 +11,7 @@
     "paths": {
       "@/*": ["./*"]
     },
-    "allowJs": false,
+    "allowJs": true,
     "checkJs": false,
     "maxNodeModuleJsDepth": 0,
     "skipLibCheck": true,

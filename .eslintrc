@@ -1,6 +1,5 @@
 {
     "root": true,
-    "parser": "@typescript-eslint/parser",
     "parserOptions": {
         "ecmaVersion": 2018,
         "sourceType": "module",
@@ -8,7 +7,6 @@
             "jsx": true
         }
     },
-    
     "env": {
         "browser": true,
         "node": true
@@ -19,9 +17,29 @@
     ],
     "extends": [
         "eslint:recommended",
-        "plugin:react/recommended",
-        "plugin:@typescript-eslint/recommended"
+        "plugin:react/recommended"
     ],
+    "overrides": [
+        // typescript
+        {
+            "parser": "@typescript-eslint/parser",
+            "files": ["*.ts", "*.tsx"],
+            "plugins": ["@typescript-eslint"],
+            "extends": [
+                "plugin:@typescript-eslint/eslint-recommended",
+                "plugin:@typescript-eslint/recommended"
+            ],
+            "rules": {
+                "@typescript-eslint/no-explicit-any": "off"
+            }
+        },
+        {
+            // flow
+            "parser": "babel-eslint",
+            "files": ["*.js"]
+        }
+    ],
+
     "rules": {
         "array-bracket-spacing": [2, "never"],
         "arrow-spacing": 2,
@@ -29,7 +47,7 @@
         "block-spacing": 2,
         "brace-style": [2, "1tbs"],
         "camelcase": [2, {"properties": "never"}],
-        "comma-dangle": [2, "always-multiline"],
+        "comma-dangle": 0,
         "comma-spacing": [2, {"before": false, "after": true}],
         "comma-style": [2, "last"],
         "complexity": [2, 10],
@@ -99,7 +117,6 @@
         "space-in-parens": [2, "never"],
         "space-infix-ops": 2,
         "space-unary-ops": [2, { "words": true, "nonwords": false }],
-        "@typescript-eslint/no-explicit-any": "off",
         // spaced-comment doesn't work with flow-escape comments like /*::`*/
         // "spaced-comment": [2, "always"],
         "strict": [2, "global"],

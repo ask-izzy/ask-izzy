@@ -16,7 +16,11 @@ services:
       - "8000:8000"
     volumes:
       - .:/app
+      - yarn-bin:/tmp/home/.yarn/bin
       - yarn-cache:/tmp/home/.cache/yarn
+      - yarn-config:/tmp/home/.config/yarn
 
 volumes:
+  yarn-bin:
   yarn-cache:
+  yarn-config:

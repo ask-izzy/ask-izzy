@@ -35,7 +35,7 @@ export const MyListProvider = (
 
     async function getInitialMyListState() {
         let servicesIdArray = storage.getArray(arrayStorage)
-        let servicesArray: Array<Promise<Service>> = []
+        let servicesArray: Array<Service> = []
 
         // transform previous My List storage system(object) into new My List storage system(array)
         const previousServicesObject = storage.getJSON(previousJsonStorageObj)
