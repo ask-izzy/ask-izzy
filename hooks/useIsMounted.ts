@@ -1,4 +1,3 @@
-/* @flow */
 import React, {useState} from "react"
 
 export default (): boolean => {
