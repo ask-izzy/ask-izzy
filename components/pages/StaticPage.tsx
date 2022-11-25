@@ -1,15 +1,11 @@
-/* @flow */
-/* eslint-disable max-len */
-
-import * as React from "react";
-import type {Node as ReactNode} from "React";
+import React, {ReactNode} from "react";
 import HeaderBar from "@/src/components/HeaderBar";
 import BrandedFooter from "@/src/components/BrandedFooter";
 
 type Props = {
   title: string,
   bannerName: string,
-  children?: React.Node,
+  children?: ReactNode,
   className?: string,
   bannerPrimary?: string,
   bannerSecondary?: string,
@@ -18,11 +14,11 @@ type Props = {
 function StaticPage({
     title,
     bannerName,
-    children = null,
+    children,
     className = "",
     bannerPrimary,
     bannerSecondary,
-}: Props): ReactNode {
+}: Props) {
     return (
         <div className={`StaticPage ${className || ""}`}>
             <div>
