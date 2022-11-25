@@ -1,17 +1,16 @@
 /* @flow */
 
+import React, {useState} from "react"
 import type {
     Node as ReactNode,
     Element as ReactElement,
     ElementConfig as ReactElementConfig,
-} from "React";
-import React from "react";
+} from "React"
 import { withRouter } from "next/router"
 import type { NextRouter } from "next/router"
 
 import AppBar from "@/src/components/AppBar";
 import ResultsList from "@/src/components/ResultsList";
-import ResultsPage from "@/components/pages/ResultsPage";
 import SitesMap from "@/src/components/SitesMap";
 import NotFoundStaticPage from "@/src/../pages/404";
 import icons from "@/src/icons";
@@ -22,31 +21,38 @@ import Service from "@/src/iss/Service"
 import GeolocationButtonForTravelTimes from
 "@/src/components/GeolocationButtonForTravelTimes";
 import { goToPersonalisationNextPath } from "@/src/utils/routing"
+import useServiceResults from "@/hooks/useServiceResults"
 
 type Props = {
     router: NextRouter
 }
 
-type State = {
-    selectedSite: ?site,
-}
+function ResultsMapPage({router}: Props): ReactNode {
+    const {
+        searchResults,
+        searchIsLoading,
+        travelTimesStatus,
+        searchType,
+        setTravelTimesStatus,
+    } = useServiceResults(router)
 
-class ResultsMapPage extends ResultsPage<Props, State> {
-    services(): Array<Service> {
-        if (!this.state.searchResults) {
+    const [selectedSite, setSelectedSite] = useState<?site>()
+
+    function services(): Array<Service> {
+        if (!searchResults) {
             return [];
         }
 
-        return this.state.searchResults.filter(
+        return searchResults.filter(
             service => !service.location?.isConfidential() &&
                 !service.crisis
         );
     }
 
-    get sites(): Array<site> {
+    function getSites(): Array<site> {
         const sites = []
         const siteIds = {}
-        for (const {site} of this.services()) {
+        for (const {site} of services()) {
             const id = site.id.toString()
             if (!siteIds[id]) {
                 sites.push(site)
@@ -57,29 +63,29 @@ class ResultsMapPage extends ResultsPage<Props, State> {
         return sites
     }
 
-    get siteLocations(): Object {
+    function getSiteLocations(): Object {
         const locations = {}
-        for (const service of this.services()) {
+        for (const service of services()) {
             locations[service.site.id.toString()] = service.location
         }
         return locations
     }
 
-    getSiteServices(site: site): Array<Service> {
-        return this.services()
+    function getSiteServices(site: site): Array<Service> {
+        return services()
             .filter(service => service.site.id === site.id)
     }
 
-    get selectedServices(): Array<Service> {
-        if (this.state.selectedSite) {
-            return this.getSiteServices(this.state.selectedSite)
+    function getSelectedServices(): Array<Service> {
+        if (selectedSite) {
+            return getSiteServices(selectedSite)
         }
 
         return []
     }
 
-    calculateMapHeight(): ?string {
-        if (typeof window === "undefined" || !this.state.selectedSite) {
+    function calculateMapHeight(): ?string {
+        if (typeof window === "undefined" || !selectedSite) {
             return undefined;
         }
 
@@ -87,46 +93,38 @@ class ResultsMapPage extends ResultsPage<Props, State> {
 
         let mapHeight =
             window.innerHeight -
-            (document.querySelector(".AppBarContainer")?.offsetHeight || 0);
+            (document.querySelector(".AppBarContainer")?.offsetHeight || 0)
 
         /* resize the map to make room
             * for the selected results */
-        mapHeight -= 150 * this.selectedServices.length;
+        mapHeight -= 150 * getSelectedServices().length
 
         /* limit minimum height to 1/2 of the screen real estate */
         mapHeight = Math.max(mapHeight,
-            window.innerHeight / 2);
+            window.innerHeight / 2)
 
-        return `${mapHeight}px`;
+        return `${mapHeight}px`
     }
 
-    render(): ReactElement<"div"> | ReactNode {
-        if (this.state.searchType) {
-            return this.renderPage()
-        }
-
-        return <NotFoundStaticPage/>
-    }
-
-    renderPage: (() => ReactElement<"div">) = () => (
+    const renderPage: (() => ReactElement<"div">) = () => (
         <div className="ResultsMapPage">
             <AppBar
                 transition={false}
                 onBackTouchTap={() => goToPersonalisationNextPath({
-                    router: this.props.router,
+                    router,
                     map: false,
                 })}
                 backMessage="Back to results list"
             />
             <main aria-label="Map of search results">
-                {this.renderPageBody()}
+                {renderPageBody()}
             </main>
 
         </div>
     )
 
-    renderPageBody(): ReactNode | ReactElement<"div"> {
-        if (this.searchIsLoading) {
+    function renderPageBody(): ReactNode | ReactElement<"div"> {
+        if (searchIsLoading()) {
             return <div className="progress">
                 <icons.Loading className="big" />
             </div>
@@ -135,47 +133,54 @@ class ResultsMapPage extends ResultsPage<Props, State> {
                 <div
                     className="map"
                     style={{
-                        flexBasis: this.calculateMapHeight() || "auto",
+                        flexBasis: calculateMapHeight() || "auto",
                         // On IE11 `display:contents` doesn't work so the map
                         // doesn't show. This is to set the height of the map
                         // if a service is selected it's 60vh otherwise 100vh
-                        height: this.state.selectedSite ? "60vh" : "90vh",
+                        height: selectedSite ? "60vh" : "90vh",
                     }}
                 >
                     <SitesMap
                         onSiteSelect={
                             site => {
-                                // Setting it null first will ensure
-                                // that the new travel times get loaded
-                                // When switching between sites without
-                                // closing the previous one
-                                this.setState({selectedSite: null}, () => {
-                                    this.setState({selectedSite: site})
-                                })
+                                // // Setting it null first will ensure
+                                // // that the new travel times get loaded
+                                // // When switching between sites without
+                                // // closing the previous one
+                                // this.setState({selectedSite: null}, () => {
+                                //     this.setState({selectedSite: site})
+                                // })
+                                setSelectedSite(site)
                             }
                         }
-                        sites={this.sites}
-                        siteLocations={this.siteLocations}
-                        selectedSite={this.state.selectedSite}
+                        sites={getSites()}
+                        siteLocations={getSiteLocations()}
+                        selectedSite={selectedSite}
                     />
                 </div>
                 <GeolocationButtonForTravelTimes
-                    servicesToUpdateTravelTimes={this.selectedServices}
+                    servicesToUpdateTravelTimes={getSelectedServices()}
                     onTravelTimesStatusChange={
-                        travelTimesStatus => this.setState({travelTimesStatus})
+                        travelTimesStatus => setTravelTimesStatus(travelTimesStatus)
                     }
                     showMessage={false}
                 />
                 <ResultsList
                     crisisResults={false}
-                    travelTimesStatus={this.state.travelTimesStatus}
-                    results={this.selectedServices}
-                    resultsLoading={this.searchIsLoading}
+                    travelTimesStatus={travelTimesStatus}
+                    results={getSelectedServices()}
+                    resultsLoading={searchIsLoading()}
                     sortBy={undefined}
                 />
             </>
         }
     }
+
+    if (searchType) {
+        return renderPage()
+    }
+
+    return <NotFoundStaticPage/>
 
 }
 

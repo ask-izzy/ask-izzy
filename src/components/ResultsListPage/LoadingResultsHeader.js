@@ -1,9 +1,10 @@
 /* @flow */
 
-import * as React from "react";
+import React from "react";
+import type {Node as ReactNode} from "React"
 
 import HeaderBar from "../HeaderBar";
-import type Category from "../../constants/Category";
+import Category from "@/src/constants/Category";
 import {getBannerName} from "../../utils/personalisation"
 import type Service from "../../iss/Service"
 
@@ -36,53 +37,41 @@ type Props = {
     services: Array<Service>,
 }
 
-class LoadingResultsHeader extends React.Component<Props, void> {
-    render(): React.Node {
-        const {
-            error,
-            statusCode,
-            loading,
-            category,
-            title,
-            services,
-        } = this.props;
-        const bannerName = getBannerName(
-            this.props.category
-        );
 
-        if (loading) {
-            return (
-                <HeaderBar
-                    className="LoadingResultsHeader"
-                    primaryText="Searching..."
-                    secondaryText={
-                        <div>
+function LoadingResultsHeader({
+    error,
+    statusCode,
+    loading,
+    category,
+    title,
+    services,
+}: Props): ReactNode {
+    const bannerName = getBannerName(category)
+
+    if (loading) {
+        return (
+            <HeaderBar
+                className="LoadingResultsHeader"
+                primaryText="Searching..."
+                secondaryText={
+                    <div>
                             Loading results...
-                        </div>
-                    }
-                    bannerName={bannerName}
-                />
-            );
-        }
-        const primaryText = (category: Category) => (
-            category.key !== "search" ?
-                "Sorry, we weren't able to find any " +
+                    </div>
+                }
+                bannerName={bannerName}
+            />
+        );
+    }
+    const primaryText = (category: Category) => (
+        category.key !== "search" ?
+            "Sorry, we weren't able to find any " +
                     "services for this search."
-                : `Sorry, we weren't able to find any
+            : `Sorry, we weren't able to find any
                     services matching your search for ${title}.`
-        )
+    )
 
-        if (error) {
-            if (statusCode === 402) {
-                return (
-                    <HeaderBar
-                        className="LoadingResultsHeader"
-                        primaryText={primaryText(category)}
-                        bannerName={bannerName}
-                    />
-                );
-            }
-
+    if (error) {
+        if (statusCode === 402) {
             return (
                 <HeaderBar
                     className="LoadingResultsHeader"
@@ -93,21 +82,29 @@ class LoadingResultsHeader extends React.Component<Props, void> {
         }
 
         return (
-            <React.Fragment>
-                <HeaderBar
-                    className="LoadingResultsHeader"
-                    primaryText={
-                        services.length > 0 ?
-                            formatResultsPageHeading(
-                                title.toLocaleLowerCase()
-                            )
-                            : primaryText(category)
-                    }
-                    bannerName={bannerName}
-                />
-            </React.Fragment>
+            <HeaderBar
+                className="LoadingResultsHeader"
+                primaryText={primaryText(category)}
+                bannerName={bannerName}
+            />
         );
     }
+
+    return (
+        <React.Fragment>
+            <HeaderBar
+                className="LoadingResultsHeader"
+                primaryText={
+                    services.length > 0 ?
+                        formatResultsPageHeading(
+                            title.toLocaleLowerCase()
+                        )
+                        : primaryText(category)
+                }
+                bannerName={bannerName}
+            />
+        </React.Fragment>
+    )
 }
 
 export default LoadingResultsHeader;

@@ -12,6 +12,7 @@ import "@/src/utils/global-setup"
 import "../src/styles/bundle.scss"
 import {DebugModeProvider} from "@/contexts/debug-mode-context";
 import {MyListProvider} from "@/contexts/my-list-context";
+import {ServiceResultsProvider} from "@/contexts/service-results-context";
 import {ToastMessageProvider} from "@/contexts/toast-message-context";
 import ToastMessage from "@/src/components/ToastMessage"
 import { getFullPageTitle } from "@/src/utils";
@@ -80,16 +81,18 @@ function App(appProps: AppProps): ReactNode {
     return (
         <ApolloProvider client={apolloClient}>
             <DebugModeProvider>
-                <ToastMessageProvider>
-                    <MyListProvider>
-                        {renderHeadMetadata(pageInfo, router)}
-                        <DebugColours />
-                        <div className="BasePage">
-                            <Component {...pageProps} />
-                        </div>
-                        <ToastMessage/>
-                    </MyListProvider>
-                </ToastMessageProvider>
+                <ServiceResultsProvider>
+                    <ToastMessageProvider>
+                        <MyListProvider>
+                            {renderHeadMetadata(pageInfo, router)}
+                            <DebugColours />
+                            <div className="BasePage">
+                                <Component {...pageProps} />
+                            </div>
+                            <ToastMessage/>
+                        </MyListProvider>
+                    </ToastMessageProvider>
+                </ServiceResultsProvider>
             </DebugModeProvider>
         </ApolloProvider>
     )
