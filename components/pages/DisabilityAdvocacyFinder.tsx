@@ -1,6 +1,3 @@
-/* @flow */
-
-import type {Node as ReactNode} from "React";
 import React, {useState} from "react";
 import { useRouter } from "next/router"
 import escapeStringRegexp from "escape-string-regexp";
@@ -16,8 +13,7 @@ import {
 import isMounted from "@/hooks/useIsMounted"
 
 
-function DisabilityAdvocacyFinder(): ReactNode {
-
+function DisabilityAdvocacyFinder() {
     const router = useRouter()
 
     const advocacyProviders = getPersonalisationNextPath({
@@ -36,7 +32,7 @@ function DisabilityAdvocacyFinder(): ReactNode {
 
     function updateAutocomplete(event) {
         const inputValue = event.target.value
-        const newAutocompleteValues = []
+        const newAutocompleteValues: Array<string> = []
         /* Start looking for matches after at least 3 chars have been
          * entered. Then check to see if input matches a key in out
          * hardcoded autocomplete suggestions map. If so add any suggestions
@@ -47,15 +43,14 @@ function DisabilityAdvocacyFinder(): ReactNode {
             const trimmedInput = inputValue.trim()
             const matchRegEx = new RegExp(
                 `^${escapeStringRegexp(trimmedInput)}$`,
-                "i"
+                "i",
             );
 
             if (
                 key.slice(0, trimmedInput.length).match(matchRegEx) &&
                 trimmedInput.length >= 3
             ) {
-                const arrayOfSuggestions: Array<string> =
-                    ([suggestions].flat(): any)
+                const arrayOfSuggestions: Array<string> = [suggestions].flat()
                 for (const suggestion of arrayOfSuggestions) {
                     if (!suggestion.match(matchRegEx)) {
                         newAutocompleteValues.push(suggestion)
@@ -65,8 +60,8 @@ function DisabilityAdvocacyFinder(): ReactNode {
         }
         setAutocompleteValues(
             newAutocompleteValues.filter(
-                (value, index, self) => self.indexOf(value) === index
-            )
+                (value, index, self) => self.indexOf(value) === index,
+            ),
         )
     }
 
@@ -91,8 +86,8 @@ function DisabilityAdvocacyFinder(): ReactNode {
                     <strong>What kind of advocacy are you looking for?</strong>
                     <br />
                     <div className="de-emphasised">
-                        For example: 'NDIS Appeals' or 'Disability Royal
-                        Commission'
+                        For example: &apos;NDIS Appeals&apos; or &apos;Disability Royal
+                        Commission&apos;
                     </div>
                     <SearchBar
                         placeholder="Search advocate type"
