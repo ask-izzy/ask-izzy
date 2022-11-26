@@ -1,5 +1,5 @@
 /* @flow */
-import {request} from "./requests.js"
+import {request} from "./requests"
 
 export async function getToken<TokenBody = any>(
     endpointUrl: string,

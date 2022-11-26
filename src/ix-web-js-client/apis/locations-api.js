@@ -1,6 +1,6 @@
 /* @flow */
 import snakecaseKeys from "snakecase-keys"
-import {request, getRequestWithToken} from "../lib/requests.js"
+import {request, getRequestWithToken} from "../lib/requests"
 type Props = {
     baseUrl: string,
     username: string,

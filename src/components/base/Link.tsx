@@ -12,6 +12,7 @@ type Props = {
     analyticsEvent?: AnalyticsEvent,
     onClick?: (event: React.SyntheticEvent<HTMLAnchorElement>) => void,
     title?: string
+    target?: string
 }
 
 function Link({
