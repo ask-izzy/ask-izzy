@@ -1,5 +1,5 @@
 /* @flow */
-import {request, postRequestWithToken} from "../lib/requests.js"
+import {request, postRequestWithToken} from "../lib/requests"
 type ClientProps = {
     baseUrl: string;
 } & (

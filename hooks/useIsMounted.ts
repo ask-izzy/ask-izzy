@@ -1,9 +1,9 @@
-import React, {useState} from "react"
+import {useState, useEffect} from "react"
 
 export default (): boolean => {
     const [isMounted, setIsMounted] = useState(false)
 
-    React.useEffect(() => setIsMounted(true), [])
+    useEffect(() => setIsMounted(true), [])
 
     return isMounted
 }

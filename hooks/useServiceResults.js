@@ -36,8 +36,8 @@ import {
 } from "@/src/utils/routing"
 import Category from "@/src/constants/Category";
 import WhoIsLookingForHelpPage
-from "@/src/constants/personalisation-pages/WhoIsLookingForHelp.js"
-import { usersnapFireEvent } from "@/helpers/usersnap.helpers.js"
+from "@/src/constants/personalisation-pages/WhoIsLookingForHelp"
+import { usersnapFireEvent } from "@/helpers/usersnap.helpers"
 import WhoIsLookingForHelpBaseInfo from
 "@/src/constants/personalisation-pages/WhoIsLookingForHelp"
 import type { UserType } from "@/components/pages/personalisation/WhoIsLookingForHelp"

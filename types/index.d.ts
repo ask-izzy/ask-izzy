@@ -8,6 +8,10 @@ declare global {
     google_tag_manager: any
     IzzyStorage: any
     waitTillPageLoaded: () => Promise<void>
+    pi: any
+    localStorage: any
+    recaptchaOptions: any
+    Usersnap: any
     googleMocks: [{
         DistanceMatrixService: () => {
             getDistanceMatrix: (params: any, callback: any) => any;
