@@ -88,7 +88,7 @@ export async function guessSuburb(location: Position): Promise<string> {
     }
 
     const address = possibleLocations
-        .find(location => location.types.some(type => "locality"))
+        .find(location => location.types.some(type => type === "locality"))
         ?.address_components
 
     if (!address) {
