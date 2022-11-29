@@ -189,7 +189,7 @@ function ServicePane({service}: Props): ReactNode {
                     className="serviceDetailsHeader"
                     primaryText={service.name}
                     secondaryText={service.site.name}
-                    bannerName="housing"
+                    bannerName="hands-and-house"
                 />
                 <AlertBannerList
                     state={service.location?.state}

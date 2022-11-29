@@ -161,7 +161,7 @@
             colours.set-transparency('raw-colour-pure-black', 'HeaderBar', 0.4),
         );
 
-        &.#{$banner-image} {
+        &.banner-#{$banner-image} {
             background:
                 linear-gradient(
                     #{colours.get-static('colour-banner-bg-overlay', 'HeaderBar')},
