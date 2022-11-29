@@ -46,6 +46,7 @@ import WhoIsLookingForHelpSupportAndCounselling from "@/src/constants/personalis
 const categories = [
     (new Category({
         name: "Food",
+        key: "food",
         byline: "Something to eat",
         icon: icons.Food,
         searchQueryChanges: {
@@ -73,6 +74,7 @@ const categories = [
     }): Category),
     (new Category({
         name: "Housing",
+        key: "housing",
         byline: "A place to stay, housing issues",
         icon: icons.House,
         searchQueryChanges: {
@@ -103,6 +105,7 @@ const categories = [
     }): Category),
     (new Category({
         name: "Everyday needs",
+        key: "everyday-needs",
         byline: "Clothes, showers, support and more",
         icon: icons.Things,
         searchQueryChanges: {
@@ -124,6 +127,7 @@ const categories = [
     }): Category),
     (new Category({
         name: "Money help",
+        key: "money-help",
         byline: "Centrelink, emergency funds, loans and more",
         icon: icons.Money,
         searchQueryChanges: {
@@ -147,6 +151,7 @@ const categories = [
     }): Category),
     (new Category({
         name: "Health",
+        key: "health",
         byline: "Doctors, clinics, specialists",
         icon: icons.Health,
         searchQueryChanges: {
@@ -176,6 +181,7 @@ const categories = [
     }): Category),
     (new Category({
         name: "Domestic and family violence help",
+        key: "dfv-help",
         byline:
             "Feeling unsafe, experiencing violence or abuse from a partner " +
             "or family member",
@@ -204,6 +210,7 @@ const categories = [
     }): Category),
     (new Category({
         name: "Advice and advocacy",
+        key: "advice-and-advocacy",
         byline: "Legal issues, fines, representation",
         icon: icons.Advocacy,
         searchQueryChanges: {
@@ -229,6 +236,7 @@ const categories = [
     }): Category),
     (new Category({
         name: "Work and learning",
+        key: "work-and-learning",
         byline: "Jobs, education and skills",
         icon: icons.Job,
         searchQueryChanges: {
@@ -251,7 +259,8 @@ const categories = [
         ],
     }): Category),
     (new Category({
-        name: "Support & counselling",
+        name: "Support and counselling",
+        key: "support-and-counselling",
         byline: "Mental health, relationships, addiction",
         icon: icons.Support,
         searchQueryChanges: {
@@ -275,6 +284,7 @@ const categories = [
     }): Category),
     (new Category({
         name: "Search",
+        key: "search",
         byline: "Free text search",
         icon: () => <icons.Search viewBox="14 14 35 35" />,
         searchQueryChanges(router: NextRouter) {
