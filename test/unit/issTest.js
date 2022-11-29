@@ -49,7 +49,7 @@ describe("iss service", function() {
             return function() {
                 const service = getServiceFixture({description: input});
 
-                assert.deepEqual(
+                assert.deepStrictEqual(
                     service.descriptionSentences,
                     output
                 );

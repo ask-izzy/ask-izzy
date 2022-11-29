@@ -231,6 +231,6 @@ async function assertMarkers(table) {
         return first.Title.localeCompare(second.Title);
     }
 
-    assert.deepEqual(markers.sort(cmp),
+    assert.deepStrictEqual(markers.sort(cmp),
         table.sort(cmp));
 }
