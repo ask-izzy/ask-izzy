@@ -35,6 +35,7 @@ import DemographicsIndigenousPage from
 "../../src/constants/personalisation-pages/DemographicsIndigenous"
 import GenderPage from "../../src/constants/personalisation-pages/Gender"
 import AgePage from "../../src/constants/personalisation-pages/Age"
+import AreYouSafePage from "../../src/constants/personalisation-pages/AreYouSafe"
 
 module.exports = (Yadda.localisation.English.library(dictionary)
     .given("I have (somewhere|nowhere) to sleep tonight", setSleepTonight)
@@ -52,8 +53,10 @@ module.exports = (Yadda.localisation.English.library(dictionary)
     .given("I am part of the following demographics\n$lines",
         setDemographics
     )
-    .given("my gender is (female|male)", setGender)
-    .given("I am (17|27|77) years old", setAgeTo): YaddaLibraryEnglish);
+    .given("my gender is (female|male|omitted)", setGender)
+    .given("I am (17|27|77) years old", setAgeTo)
+    .given("I am (omitting my age)", setAgeTo)
+    .given("I am safe at the moment", setImSafeFromStep): YaddaLibraryEnglish);
 
 // TODO: Question answers should be validated against what the actually answers
 // for question pages are so to avoid ugly code duplication here but that's not
@@ -142,6 +145,21 @@ async function setDemographics(
     );
 }
 
+async function setAreYouSafe(
+    driver: typeof Webdriver.WebDriver,
+    answer: string
+): Promise<void> {
+    await setStorageValue(
+        driver,
+        AreYouSafePage.name,
+        answer
+    );
+}
+
+async function setImSafeFromStep(): Promise<void> {
+    setAreYouSafe(this.driver, "Yes")
+}
+
 async function setDemographicsIndigenous(
     answer: string,
 ): Promise<void> {
@@ -177,6 +195,8 @@ async function setAgeTo(age: string): Promise<void> {
             "17": "0 to 17",
             "27": "27 to 39",
             "77": "65 or older",
+            "omitting my age": "(skipped)",
+
         })[age]
     );
 }
@@ -188,6 +208,7 @@ async function setGender(gender: string): Promise<void> {
         ({
             "female": "Female",
             "male": "Male",
+            "omitted": "(skipped)",
         })[gender]
     );
 }

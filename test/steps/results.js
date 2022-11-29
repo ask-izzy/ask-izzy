@@ -26,6 +26,7 @@ module.exports = ((function(): YaddaLibraryEnglish {
             assertHotlineHeading
         )
         .then("my results should not contain\n$table", assertNoSuchResults)
+        .then("the iss search request should be:\n$lines", assertISSSearchRequestFromStep)
 })(): YaddaLibraryEnglish);
 
 async function waitForResultCount(
@@ -141,4 +142,10 @@ async function assertNoSuchResults(table: Array<Object>): Promise<void> {
     );
 
     assert.deepStrictEqual(elementsHtml, []);
+}
+
+async function assertISSSearchRequestFromStep(requestStringAsLines: Array<string>): Promise<void> {
+    const expectedRequest = JSON.parse(requestStringAsLines.join(""))
+    const actualRequest = await this.driver.executeScript(() => window.issQuery)
+    assert.deepStrictEqual(actualRequest, expectedRequest)
 }

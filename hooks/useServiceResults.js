@@ -124,6 +124,10 @@ export default (router: NextRouter): UseServiceResults => {
                 "able to generate a query but we can't."
             )
         }
+
+        // Save query global scope so we can access it when testing
+        window.issQuery = query
+
         // Create new PaginatedSearch if none yet exists or the query has changed
         if (!search || (objectHash(query) !== objectHash(search?.izzyQuery))) {
             const serviceSearch = createServiceSearch(query)
