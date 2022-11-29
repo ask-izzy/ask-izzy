@@ -1,5 +1,5 @@
 /* @flow */
-import cmsAllPagesQuery from "@/src/queries/content/allPages"
+import cmsAllPagesQuery from "@/queries/content/allPages"
 import {queryGraphQlWithErrorLogging} from "@/src/utils/apolloClient";
 
 // $FlowIgnore This would be fiddly to type correctly using flow.js

@@ -56,7 +56,7 @@ Feature: Category page
         Then I should not see "Invalid date"
 
     Scenario: Visit a category with more than 5 services
-        When I visit /everyday-things
+        When I visit /everyday-needs
         Then I should see "See more results"
 
         When I click the "See more results" button

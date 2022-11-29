@@ -3,9 +3,9 @@ import * as React from "react";
 import type { GetStaticPaths, GetStaticProps } from "next"
 import {promises as fs} from "fs"
 
-import cmsPageQuery from "@/src/queries/content/page"
-import cmsAllPagesQuery from "@/src/queries/content/allPages"
-import cmsCalloutQuery from "@/src/queries/content/callout";
+import cmsPageQuery from "@/queries/content/page"
+import cmsAllPagesQuery from "@/queries/content/allPages"
+import cmsCalloutQuery from "@/queries/content/callout";
 import categories, { getCategory } from "@/src/constants/categories"
 import ResultsListPage from "@/components/pages/ResultsListPage"
 import DynamicPage from "@/components/pages/DynamicPage.js"
@@ -29,22 +29,15 @@ export const getStaticPaths: GetStaticPaths = async() => {
         params: { categoryOrContentPageSlug: category.key},
     }))
 
-    let contentPages
-
-    try {
-        const { data } = await queryGraphQlWithErrorLogging({
-            query: cmsAllPagesQuery,
-            fetchPolicy: "no-cache",
-        })
-        contentPages = data.pages
-    } catch (error) {
-        throw error
-    }
+    const contentPages = await queryGraphQlWithErrorLogging({
+        query: cmsAllPagesQuery,
+        fetchPolicy: "no-cache",
+    }).then(res => res.data.pages)
 
     // Load static pages to make sure the paths don't clash the the paths of
     // pages in the CMS.
-    const topLevelPages = await fs.readdir("./pages")
-    const staticPaths = topLevelPages
+    const topLevelStaticPages = await fs.readdir("./pages")
+    const staticPaths = topLevelStaticPages
         .map(filename => filename.match(/([A-Za-z0-9_-]+).js/)?.[1])
         .filter(pathSegment => pathSegment)
 
@@ -89,48 +82,15 @@ export const getStaticProps: GetStaticProps<Props> = async({params}) => {
     }
 
     try {
-        const { data } = await queryGraphQlWithErrorLogging({
+        const contentPage = await queryGraphQlWithErrorLogging({
             query: cmsPageQuery,
             fetchPolicy: "no-cache",
             variables: {
                 path: `/${params.categoryOrContentPageSlug}`,
             },
-        })
+        }).then(res => res.data.pages[0])
 
-        const contentPage = data.pages[0]
-
-        if (contentPage) {
-            const embeddedCalloutSlugs = [
-                ...(contentPage.Body || "")
-                    .matchAll(/>\s+\[callout\(([^)]+)\)\]\s*(?:\n|$)/g),
-            ].map(matchResult => matchResult[1])
-
-            let embeddedCallouts = []
-            if (embeddedCalloutSlugs.length) {
-                const { data } = await queryGraphQlWithErrorLogging({
-                    query: cmsCalloutQuery,
-                    fetchPolicy: "no-cache",
-                    variables: {
-                        keys: embeddedCalloutSlugs,
-                    },
-                })
-
-                embeddedCallouts = data.callouts
-            }
-
-            return {
-                props: {
-                    contentPage,
-                    embeddedCallouts,
-                    pageTitle: contentPage.Title,
-                    pageType: [
-                        "Static Page",
-                        contentPage.Title,
-                    ],
-                },
-                revalidate: 10,
-            }
-        } else {
+        if (!contentPage) {
             console.error(
                 `"${params.categoryOrContentPageSlug}" is neither a category ` +
                     `or a content page`
@@ -140,6 +100,37 @@ export const getStaticProps: GetStaticProps<Props> = async({params}) => {
                 notFound: true,
                 revalidate: 10,
             }
+        }
+
+        const embeddedCalloutSlugs = [
+            ...(contentPage.Body || "")
+                .matchAll(/>\s+\[callout\(([^)]+)\)\]\s*(?:\n|$)/g),
+        ].map(matchResult => matchResult[1])
+
+        let embeddedCallouts = []
+        if (embeddedCalloutSlugs.length) {
+            const { data } = await queryGraphQlWithErrorLogging({
+                query: cmsCalloutQuery,
+                fetchPolicy: "no-cache",
+                variables: {
+                    keys: embeddedCalloutSlugs,
+                },
+            })
+
+            embeddedCallouts = data.callouts
+        }
+
+        return {
+            props: {
+                contentPage,
+                embeddedCallouts,
+                pageTitle: contentPage.Title,
+                pageType: [
+                    "Static Page",
+                    contentPage.Title,
+                ],
+            },
+            revalidate: 10,
         }
     } catch (error) {
         if (error.graphQLErrors?.length) {

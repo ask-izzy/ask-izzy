@@ -5,31 +5,59 @@ import type {
 
 export default ({
     type: "question",
-    name: "sub-money",
+    name: "money-help-subcategory",
     question: "What do you need?",
     possibleAnswers: {
-        "Emergency aid": {
-            $concat: {
-                term: ["emergency", "aid"],
-            },
+        "Centrelink": {
+            name: "centrelink",
+            term: ["centrelink"],
+            serviceTypes: ["Centrelink"],
         },
-        "Bond or rental assistance": {
+        "Financial aid": {
+            isBulkBilling: false,
             $concat: {
-                term: ["\"bond assistance\""],
+                term: [
+                    "\"Emergency Relief\"",
+                    "disadvantage",
+                ],
             },
-        },
-        "Financial assistance e.g. utility bills, petrol, food": {
-            $concat: {
-                serviceTypes: ["Financial Aid"],
+            $removeElms: {
+                term: ["aid"],
             },
+            $unset: ["serviceTypes"],
+            serviceTypesRaw: ["Financial Aid"],
         },
-        "No interest & low interest loans": {
+        "No or low interest loans": {
             $concat: {
                 term: ["nils", "low-interest"],
             },
             $removeElms: {
                 term: ["financial", "aid"],
             },
+            serviceTypes: [
+                "Low-interest loans",
+                "NILS",
+            ],
+        },
+        "Financial counselling": {
+            $concat: {
+                term: ["counselling"],
+            },
+            $removeElms: {
+                term: ["aid"],
+            },
+            serviceTypes: [
+                "Financial Counselling",
+            ],
+        },
+        "Bond or rental assistance": {
+            $concat: {
+                term: ["\"bond assistance\""],
+            },
+            serviceTypes: [
+                "Bond Scheme",
+                "Housing Establishment Fund",
+            ],
         },
         "Gambling counselling": {
             $concat: {
@@ -38,18 +66,19 @@ export default ({
             $removeElms: {
                 term: ["financial", "aid"],
             },
+            serviceTypes: [
+                "Gambling Counselling",
+            ],
         },
-        "Financial counselling": {
-            $concat: {
-                term: [
-                    "financial counselling",
-                    "name:\"financial counselling\"",
-                ],
-            },
-            $removeElms: {
-                term: ["financial", "aid"],
-            },
-        },
+    },
+    descriptionsForAnswers: {
+        "Centrelink": "Access to government support payments",
+        "Financial aid": "Assistance with paying for food, bills, transport",
+        "No or low interest loans":
+            "Loans for people and families on low incomes",
+        "Financial counselling": "Help managing money and debt",
+        "Bond or rental assistance": "Help with rental payments or bond money",
+        "Gambling counselling": "Someone to talk to about gambling",
     },
     showSupportSearchBar: true,
     title: "Money services",
@@ -57,12 +86,12 @@ export default ({
         switch (answer) {
         case "Financial assistance e.g. utility bills, petrol, food":
             return "Financial assistance";
-        case "No interest & low interest loans":
-            return "Money matters";
+        case "No or low interest loans":
+            return "No or low interest loans";
         case "Gambling counselling":
-            return "Gambling";
+            return "Gambling counselling";
         case "Financial counselling":
-            return "Online counselling";
+            return "Financial Counselling";
         default:
             return answer
         }

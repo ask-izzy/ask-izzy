@@ -53,7 +53,7 @@ export class ISS4Client {
 
     constructor({token, baseUrl}: ISS4ClientProps) {
         this.baseUrl = baseUrl
-        this.authString = `Token ${token}`
+        this.authString = `Bearer ${token}`
     }
 
     async search({
@@ -82,4 +82,48 @@ export class ISS4Client {
         ).href
         return getRequestWithToken(url, this.authString)
     }
+
+    async getServiceTypes(
+        options?: ISS4PageOfServiceOptionsType
+    ): Promise<ISS4PageOfServiceType> {
+        let searchParams = new URLSearchParams()
+        if (options) {
+            if (typeof options.nextPageUrl === "string") {
+                const nextUrlObj = new URL(options.nextPageUrl)
+                searchParams = nextUrlObj.searchParams
+            } else {
+                for (const key of ["limit", "offset"]) {
+                    if (options[key]) {
+                        searchParams.set(key, String(options[key]))
+                    }
+                }
+            }
+        }
+
+        let url = new URL(
+            `/api/directory/service-types/?${searchParams.toString()}`,
+            this.baseUrl
+        )
+
+        return getRequestWithToken(url.href, this.authString)
+    }
+}
+
+export type ISS4PageOfServiceOptionsType = {
+    limit?: number,
+    offset?: number,
+    nextPageUrl?: string
+}
+
+export type ISS4PageOfServiceType = {
+    count: number,
+    next: string | null,
+    previous: string | null,
+    results: Array<ISS4ServiceType>
+}
+
+export type ISS4ServiceType = {
+    id: number,
+    name: string,
+    children: Array<ISS4ServiceType>
 }

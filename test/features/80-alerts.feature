@@ -13,8 +13,8 @@ Feature: Alerts
     Scenario: Alerts with a body can be expanded
         Given the area to search is "Melbourne, VIC"
         And I need help for myself
-        And I need nothing for everyday-things
-        When I visit /everyday-things
+        And I am not interested in a subcategory for everyday-needs
+        When I visit /everyday-needs
         Then I should see "COVID19 affecting services"
         And I should not see "Services listed here may not be operating or limited. Contact services directly for up-to-date information."
 
@@ -24,8 +24,8 @@ Feature: Alerts
     Scenario: Alerts defaultToOpen are initially open
         Given the area to search is "Melbourne, VIC"
         And I need help for myself
-        And I need nothing for everyday-things
-        When I visit /everyday-things
+        And I am not interested in a subcategory for everyday-needs
+        When I visit /everyday-needs
         Then I should see "Title is always shown"
         And I should see "Body is open by default"
 

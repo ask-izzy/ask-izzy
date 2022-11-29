@@ -34,5 +34,12 @@ services:
     command: sh -c "sed -i -e 's/^LogLevel.*/LogLevel Warning/' /etc/tinyproxy/tinyproxy.conf && tinyproxy -d"
     restart: unless-stopped
 
+  set-volume-permissions:
+    build:
+      context: .
+      target: set-volume-permissions
+    volumes:
+      - storage:/storage
+
 volumes:
   storage:
