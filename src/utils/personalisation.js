@@ -27,13 +27,11 @@ export function getBannerName(
     questionPageName?: string
 ): string {
     if (questionPageName === "sub-indigenous") {
-        return "atsi"
-    } else if (category?.key === "search") {
-        return "homepage"
+        return "atsi-and-hand"
     } else if (category) {
-        return category.key
+        return category.bannerName
     }
-    return "homepage"
+    return "hand-and-person-with-heart"
 }
 
 export function setLocationFromUrl(

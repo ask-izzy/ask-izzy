@@ -154,7 +154,7 @@ function MyListPage(): ReactNode {
                     primaryText={"My List"}
                     secondaryText={"Add services to this page to create a list you can share"}
                     infoText={"Services on this page will only remain here temporarily"}
-                    bannerName="housing"
+                    bannerName="hands-and-house"
                 />
                 {myListServices.length !== 0 && renderTopButtonContainer()}
 
