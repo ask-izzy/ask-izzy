@@ -56,38 +56,8 @@ import WhoIsLookingForHelpTechnology from "@/src/constants/personalisation-pages
 
 const categories = [
     (new Category({
-        name: "Housing",
-        byline: "A place to stay.",
-        icon: icons.House,
-        searchQueryChanges: {
-            catchment: "prefer",
-            $concat: {
-                term: [
-                    "housing",
-                    "-\"coordinating bodies\"",
-                    "-\"respite care\"",
-                    "-\"housing information\"",
-                    "-hef",
-                    "-\"holiday accommodation\"",
-                ],
-                serviceTypes: ["Housing"],
-            },
-            minimumShouldMatch: "30%",
-        },
-        personalisation: [
-            SleepTonight,
-            WhoIsLookingForHelpHousing,
-            Location,
-            Gender,
-            Age,
-            Demographics,
-            HousingAreYouSafe,
-            OnlineSafetyScreen,
-        ],
-    }): Category),
-    (new Category({
         name: "Food",
-        byline: "Something to eat.",
+        byline: "Something to eat",
         icon: icons.Food,
         searchQueryChanges: {
             catchment: "prefer",
@@ -103,6 +73,7 @@ const categories = [
                     "-chsp",
                     "-\"meal preparation\"",
                 ],
+                serviceTypes: ["Food"],
             },
         },
         personalisation: [
@@ -112,8 +83,37 @@ const categories = [
         ],
     }): Category),
     (new Category({
-        name: "Everyday things",
-        byline: "Swags, clothes, food vouchers etc.",
+        name: "Housing",
+        byline: "A place to stay, housing issues",
+        icon: icons.House,
+        searchQueryChanges: {
+            catchment: "prefer",
+            $concat: {
+                term: [
+                    "housing",
+                    "-\"coordinating bodies\"",
+                    "-\"respite care\"",
+                    "-\"housing information\"",
+                    "-hef",
+                    "-\"holiday accommodation\"",
+                ],
+                serviceTypes: ["Housing"],
+            },
+        },
+        personalisation: [
+            SleepTonight,
+            WhoIsLookingForHelpHousing,
+            Location,
+            Gender,
+            Age,
+            Demographics,
+            HousingAreYouSafe,
+            OnlineSafetyScreen,
+        ],
+    }): Category),
+    (new Category({
+        name: "Everyday needs",
+        byline: "Clothes, showers, support and more",
         icon: icons.Things,
         searchQueryChanges: {
             catchment: "prefer",
@@ -133,8 +133,64 @@ const categories = [
         ],
     }): Category),
     (new Category({
-        name: "Domestic & family violence help",
-        byline: "Scared of partner or family member.",
+        name: "Money help",
+        byline: "Centrelink, emergency funds, loans and more",
+        icon: icons.Money,
+        searchQueryChanges: {
+            catchment: "prefer",
+            $concat: {
+                term: [
+                    "financial",
+                    "aid",
+                    "-\"coordinating bodies\"",
+                    "-grants",
+                    "-heritage",
+                ],
+                serviceTypes: ["Finance", "Financial Aid"],
+            },
+        },
+        personalisation: [
+            MoneySubcategories,
+            WhoIsLookingForHelpMoney,
+            Location,
+        ],
+    }): Category),
+    (new Category({
+        name: "Health",
+        byline: "Doctors, clinics, specialists",
+        icon: icons.Health,
+        searchQueryChanges: {
+            catchment: "prefer",
+            $concat: {
+                term: [
+                    "-\"coordinating bodies\"",
+                    "assistance pets",
+                    "-\"animal control\"",
+                    "-effectiveness",
+                ],
+                serviceTypes: [
+                    "Medical",
+                    "Health Care Services",
+                    "Health Professionals/ Practitioners",
+                ],
+            },
+            minimumShouldMatch: "30%",
+            showInAskIzzyHealth: true,
+        },
+        personalisation: [
+            HealthSubcategories,
+            HealthAreYouSafe,
+            OnlineSafetyScreen,
+            WhoIsLookingForHelpHealth,
+            Location,
+            DemographicsIndigenous,
+        ],
+    }): Category),
+    (new Category({
+        name: "Domestic and family violence help",
+        byline:
+            "Feeling unsafe, experiencing violence or abuse from a partner " +
+            "or family member",
         icon: icons.EscapeViolence,
         searchQueryChanges: {
             catchment: "prefer",
@@ -159,75 +215,64 @@ const categories = [
         ],
     }): Category),
     (new Category({
-        name: "Health",
-        byline: "Physical, mental, emotional.",
-        icon: icons.Health,
+        name: "Advice and advocacy",
+        byline: "Legal issues, fines, representation",
+        icon: icons.Advocacy,
         searchQueryChanges: {
             catchment: "prefer",
             $concat: {
                 term: [
-                    "\"community health\"",
+                    "advice",
+                    "advocacy",
+                    "-research",
                     "-\"coordinating bodies\"",
                 ],
+                serviceTypes: [
+                    "Advocacy",
+                    "Law",
+                ],
             },
-            minimumShouldMatch: "30%",
-            showInAskIzzyHealth: true,
         },
         personalisation: [
-            HealthSubcategories,
-            HealthAreYouSafe,
-            OnlineSafetyScreen,
-            WhoIsLookingForHelpHealth,
-            Location,
-            DemographicsIndigenous,
-        ],
-    }): Category),
-    (new Category({
-        name: "Centrelink",
-        byline: "Access to services.",
-        icon: icons.Centrelink,
-        searchQueryChanges: {
-            catchment: "prefer",
-            $concat: {
-                term: ["\"centrelink\""],
-            },
-            name: "\"centrelink\"",
-        },
-        personalisation: [
-            WhoIsLookingForHelpCentrelink,
+            AdvocacySubcategories,
+            WhoIsLookingForHelpAdvocacy,
             Location,
         ],
     }): Category),
     (new Category({
-        name: "Money help",
-        byline: "Emergency funds, bills etc.",
-        icon: icons.Money,
+        name: "Work and learning",
+        byline: "Jobs, education and skills",
+        icon: icons.Job,
         searchQueryChanges: {
             catchment: "prefer",
             $concat: {
                 term: [
-                    "financial",
-                    "aid",
+                    "employment",
+                    "education",
                     "-\"coordinating bodies\"",
-                    "-grants",
-                    "-heritage",
+                    "-chsp",
+                    "-hacc",
                 ],
+                serviceTypes: ["Employment", "Education"],
             },
         },
         personalisation: [
-            MoneySubcategories,
-            WhoIsLookingForHelpMoney,
+            JobSubcategories,
+            WhoIsLookingForHelpFindingWork,
             Location,
         ],
     }): Category),
     (new Category({
         name: "Support & counselling",
-        byline: "Relationships, gambling & LGBTIQA+.",
+        byline: "Mental health, relationships, addiction",
         icon: icons.Support,
         searchQueryChanges: {
             catchment: "prefer",
             $concat: {
                 term: ["counselling"],
+                serviceTypes: [
+                    "Counselling",
+                ],
             },
             minimumShouldMatch: "1",
         },
@@ -241,198 +286,8 @@ const categories = [
         ],
     }): Category),
     (new Category({
-        name: "Legal",
-        byline: "Police, law & fines.",
-        icon: icons.Legal,
-        searchQueryChanges: {
-            catchment: "prefer",
-            $concat: {
-                term: [
-                    "legal",
-                    "\"legal aid\"",
-                    "-\"coordinating bodies\"",
-                    "-permits",
-                    "-ceremonies",
-                    "-making",
-                    "-checks",
-                    "-electoral",
-                    "-taxation",
-                    "-centrelink",
-                    "-immigration",
-                    "-\"hire of facilities\"",
-                ],
-            },
-        },
-        personalisation: [
-            LegalSubcategories,
-            LegalAreYouSafe,
-            OnlineSafetyScreen,
-            WhoIsLookingForHelpLegal,
-            Location,
-            DemographicsIndigenous,
-        ],
-    }): Category),
-    (new Category({
-        name: "Drugs & alcohol",
-        byline: "Support & assistance.",
-        icon: icons.Addiction,
-        searchQueryChanges: {
-            catchment: "prefer",
-            $concat: {
-                term: [
-                    "substance",
-                    "abuse",
-                    "-\"coordinating bodies\"",
-                    "-\"registered training\"",
-                ],
-            },
-            minimumShouldMatch: "30%",
-        },
-        personalisation: [
-            AddictionSubcategories,
-            WhoIsLookingForHelpDrugsAndAlcohol,
-            Location,
-            DemographicsIndigenous,
-        ],
-    }): Category),
-    (new Category({
-        name: "Life skills & education",
-        byline: "Everyday skills & training.",
-        icon: icons.Skills,
-        searchQueryChanges: {
-            catchment: "prefer",
-            $concat: {
-                term: [
-                    "life",
-                    "skills",
-                    "education",
-                    "-\"coordinating bodies\"",
-                    "-chsp",
-                    "-hacc",
-                ],
-            },
-        },
-        personalisation: [
-            LifeSkillsSubcategories,
-            WhoIsLookingForHelpLifeSkills,
-            Location,
-            DemographicsIndigenous,
-        ],
-    }): Category),
-    (new Category({
-        name: "Finding work",
-        byline: "Earning & volunteering.",
-        icon: icons.Job,
-        searchQueryChanges: {
-            catchment: "prefer",
-            $concat: {
-                term: [
-                    "employment",
-                    "-\"coordinating bodies\"",
-                ],
-                serviceTypes: ["Employment"],
-            },
-        },
-        personalisation: [
-            JobSubcategories,
-            WhoIsLookingForHelpFindingWork,
-            Location,
-        ],
-    }): Category),
-    (new Category({
-        name: "Facilities",
-        byline: "Toilets.",
-        icon: icons.Facilities,
-        searchQueryChanges: {
-            catchment: "prefer",
-            $concat: {
-                term: [
-                    "public",
-                    "facilities",
-                    "-\"coordinating bodies\"",
-                    "-\"hire of facilities\"",
-                    "-maintenance",
-                ],
-            },
-        },
-        personalisation: [
-            WhoIsLookingForHelpFacilities,
-            Location,
-        ],
-    }): Category),
-    (new Category({
-        name: "Something to do",
-        byline: "Libraries, Community Hubs etc.",
-        icon: icons.Entertainment,
-        searchQueryChanges: {
-            catchment: "prefer",
-            $concat: {
-                term: [
-                    "recreation",
-                    "libraries",
-                    "pools",
-                    "-\"coordinating bodies\"",
-                    "-physiology",
-                    "-permit",
-                    "-hire",
-                    "-grants",
-                    "-\"sports medicine\"",
-                    "-\"sports physician\"",
-                    "-\"sports psychology\"",
-                ],
-            },
-        },
-        personalisation: [
-            WhoIsLookingForHelpSomethingToDo,
-            Location,
-        ],
-    }): Category),
-    (new Category({
-        name: "Technology",
-        byline: "Wifi, charging etc.",
-        icon: icons.Tech,
-        searchQueryChanges: {
-            catchment: "prefer",
-            $concat: {
-                term: [
-                    "wifi",
-                    "internet",
-                    "computer",
-                ],
-            },
-        },
-        personalisation: [
-            WhoIsLookingForHelpTechnology,
-            Location,
-        ],
-    }): Category),
-    (new Category({
-        name: "Advocacy",
-        byline: "Complaints and advice.",
-        icon: icons.Advocacy,
-        searchQueryChanges: {
-            catchment: "prefer",
-            $concat: {
-                term: [
-                    "consumer",
-                    "issues",
-                    "mediation",
-                    "discrimination",
-                    "disputes advocacy",
-                    "-research",
-                    "-\"coordinating bodies\"",
-                ],
-            },
-        },
-        personalisation: [
-            AdvocacySubcategories,
-            WhoIsLookingForHelpAdvocacy,
-            Location,
-        ],
-    }): Category),
-    (new Category({
         name: "Search",
-        byline: "Free text search.",
+        byline: "Free text search",
         icon: () => <icons.Search viewBox="14 14 35 35" />,
         searchQueryChanges(router: NextRouter) {
             const searchTerm = decodeURIComponent(router.query.search)

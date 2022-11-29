@@ -20,8 +20,8 @@ const formatResultsPageHeading = (title: string) => {
         return "Showing places to connect to the internet";
     case "centrelink":
         return "Showing Centrelink sites";
-    case "everyday things":
-        return "Showing services that provide everyday things";
+    case "everyday needs":
+        return "Showing services that provide everyday needs";
     default:
         return `Showing ${title} services`;
     }
