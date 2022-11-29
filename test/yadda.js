@@ -198,21 +198,33 @@ export default function runTests(directory: string) {
     new Yadda.FeatureFileSearch(directory).each(processFile);
 
     after(async function(): Promise<void> {
-        // I can't find a way to directly check if there has been any failed
-        // tests from inside a root afterAll hook. Replace "testFailed" with a
-        // cleaner solution if you come across anything.
-        if (process.env.PAUSE_AFTER_FAIL && testFailed) {
-            this.timeout(0)
-            const port = process.env.PORT;
-            console.info(
-                `Press any key to exit. (meanwhile Ask Izzy is accessible ` +
-                `at: http://localhost:${port})`
-            );
-            process.stdin.setRawMode(true);
-            process.stdin.resume();
-            await new Promise(resolve => process.stdin.on("data", resolve));
-        }
-        const driver = await driverPromise
-        driver.quit()
+        // Handle cleanup asynchronously so that in cases of test failures
+        // the server can remain up until the user chooses to exit it without
+        // blocking the after hook from exiting. We went to avoid blocking the
+        // after hook because mocha won't print the test results summary until
+        // after the after hook has exited.
+        handleExit(driverPromise)
     });
+}
+
+async function handleExit(driverPromise) {
+    // We need to wait a bit to make sure that mocha has printed the test
+    // results summary first
+    await new Promise(resolve => setTimeout(resolve, 300))
+    // I can't find a way to directly check if there has been any failed
+    // tests from inside a root afterAll hook. Replace "testFailed" with a
+    // cleaner solution if you come across anything.
+    if (process.env.PAUSE_AFTER_FAIL && testFailed) {
+        const port = process.env.PORT;
+        console.info(
+            `Press any key to exit. (meanwhile Ask Izzy is accessible ` +
+            `at: http://localhost:${port})`
+        );
+        process.stdin.setRawMode(true);
+        process.stdin.resume();
+        await new Promise(resolve => process.stdin.on("data", resolve));
+    }
+    const driver = await driverPromise
+    driver.quit()
+    process.exit(testFailed ? 1 : 0)
 }

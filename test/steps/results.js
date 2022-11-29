@@ -67,7 +67,7 @@ async function seeTheResultsIn(
         // an empty line)
         expected = expected.map(text => text === "(nada)" ? "" : text);
 
-        assert.deepEqual(actual, expected,
+        assert.deepStrictEqual(actual, expected,
             `${key} is not correct`);
     }
 }
@@ -109,7 +109,7 @@ async function assertHotlineHeading(text: string): Promise<void> {
         await elements[1].getAttribute("class"),
     ];
 
-    assert.deepEqual(classes, ["CrisisHeader", "CrisisLineItem"]);
+    assert.deepStrictEqual(classes, ["CrisisHeader", "CrisisLineItem"]);
     assert.equal(await elements[0].getText(), text);
 }
 
@@ -140,5 +140,5 @@ async function assertNoSuchResults(table: Array<Object>): Promise<void> {
         (element) => element.isDisplayed(),
     );
 
-    assert.deepEqual(elementsHtml, []);
+    assert.deepStrictEqual(elementsHtml, []);
 }
