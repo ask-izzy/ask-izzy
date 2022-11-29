@@ -30,7 +30,7 @@ function StaticPage({
                     className="prominentHeading"
                     primaryText={bannerPrimary || title}
                     secondaryText={bannerSecondary || null}
-                    bannerName={bannerName || "homepage"}
+                    bannerName={bannerName || "hand-and-person-with-heart"}
                 />
             </div>
             <main>

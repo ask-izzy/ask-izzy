@@ -11,7 +11,7 @@ function BushfireReliefStaticPage(): ReactNode {
     const isMobile = MobileDetect(799)
     return (
         <StaticPage
-            bannerName="money-help static"
+            bannerName="buildings-and-shapes static"
             className="BushfireReliefPage"
             title="Bushfire support 2020"
             bannerPrimary="Bushfire support 2020"

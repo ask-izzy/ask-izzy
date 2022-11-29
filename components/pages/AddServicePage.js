@@ -149,7 +149,7 @@ function AddServicePage(): ReactNode {
         <div className="AddServicePage">
             <HeaderBar
                 primaryText="Add a service"
-                bannerName="homepage"
+                bannerName="hand-and-person-with-heart"
             />
             <main>
                 <div className="body">

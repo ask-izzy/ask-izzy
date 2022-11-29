@@ -24,7 +24,7 @@ describe("Service Provisions", function() {
                 .filter((provision) => provision.match(test.description))
                 .map(({name}) => name)
 
-            assert.deepEqual(provides, test.provides);
+            assert.deepStrictEqual(provides, test.provides);
         })
     );
 });

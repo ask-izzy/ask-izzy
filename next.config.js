@@ -2,7 +2,6 @@
 const path = require("path")
 const globImporter = require("node-sass-glob-importer");
 const fs = require("fs");
-const _string = require("underscore.string");
 const { withSentryConfig } = require("@sentry/nextjs");
 
 require("./lib/env-var-check.js")
@@ -40,6 +39,10 @@ module.exports = {
                 {
                     source: "/VERSION",
                     destination: "/VERSION.txt",
+                },
+                {
+                    source: "/sitemap.xml",
+                    destination: "/api/sitemap",
                 },
                 ...getRewritesForCategories(),
             ],
@@ -167,10 +170,7 @@ function getRewritesForCategories() {
         {encoding: "utf8"}
     )
         .split("\n")
-        .map(line => line.match(/^\s+name: "([^"]+)",\s*/))
-        .map(match => match && match[1])
-        .filter(matchedName => matchedName)
-        .map(matchedName => _string.slugify(matchedName))
+        .map(line => line.match(/^\s+key: "([^"]+)",\s*/)?.[1])
 
     for (const categoryKey of categoryKeys) {
         rewrites.push({

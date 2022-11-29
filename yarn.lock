@@ -13854,7 +13854,7 @@ storybook-addon-designs@^6.0.0:
   dependencies:
     "@figspec/react" "^1.0.0"
 
-storybook-addon-next@^1.6.2:
+storybook-addon-next@^1.6.9:
   version "1.7.3"
   resolved "https://registry.yarnpkg.com/storybook-addon-next/-/storybook-addon-next-1.7.3.tgz#507567d4bd5f46fffee5e2aa558f45a19681a850"
   integrity sha512-CgtcuOI/uf9djH14wvGgaldfOeSopcEF249DssSHnF1ikrkpstSCXqHPx6CDKm2LWVUsY10nWgxSFIaH6zg7Zg==
