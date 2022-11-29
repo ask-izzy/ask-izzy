@@ -26,6 +26,7 @@ module.exports = ((function(): YaddaLibraryEnglish {
             assertHotlineHeading
         )
         .then("my results should not contain\n$table", assertNoSuchResults)
+        .then("the iss search request should be:\n$lines", assertISSSearchRequestFromStep)
 })(): YaddaLibraryEnglish);
 
 async function waitForResultCount(
@@ -67,7 +68,7 @@ async function seeTheResultsIn(
         // an empty line)
         expected = expected.map(text => text === "(nada)" ? "" : text);
 
-        assert.deepEqual(actual, expected,
+        assert.deepStrictEqual(actual, expected,
             `${key} is not correct`);
     }
 }
@@ -109,7 +110,7 @@ async function assertHotlineHeading(text: string): Promise<void> {
         await elements[1].getAttribute("class"),
     ];
 
-    assert.deepEqual(classes, ["CrisisHeader", "CrisisLineItem"]);
+    assert.deepStrictEqual(classes, ["CrisisHeader", "CrisisLineItem"]);
     assert.equal(await elements[0].getText(), text);
 }
 
@@ -140,5 +141,11 @@ async function assertNoSuchResults(table: Array<Object>): Promise<void> {
         (element) => element.isDisplayed(),
     );
 
-    assert.deepEqual(elementsHtml, []);
+    assert.deepStrictEqual(elementsHtml, []);
+}
+
+async function assertISSSearchRequestFromStep(requestStringAsLines: Array<string>): Promise<void> {
+    const expectedRequest = JSON.parse(requestStringAsLines.join(""))
+    const actualRequest = await this.driver.executeScript(() => window.issQuery)
+    assert.deepStrictEqual(actualRequest, expectedRequest)
 }

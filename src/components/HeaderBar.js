@@ -49,7 +49,7 @@ function HeaderBar({
     function getClassName(): string {
         let newHeaderName = "HeaderBar"
         if (bannerName) {
-            newHeaderName += ` ${bannerName}`;
+            newHeaderName += ` banner-${bannerName}`;
         }
 
         if (!getOlderSafari()) {

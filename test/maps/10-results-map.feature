@@ -7,7 +7,7 @@ Feature: See results on a map
     Background:
         Given the area to search is "Melbourne, VIC"
         And I have somewhere to sleep tonight
-        And I need nothing for housing
+        And I am not interested in a subcategory for housing
         And my gender is female
         And I need help for myself
         And I am 27 years old
@@ -16,7 +16,7 @@ Feature: See results on a map
     Scenario: View results on a map
        Given I am not interested in any subcategory
         And my location is 37.822S 144.99E in "Melbourne, VIC"
-        When I visit /everyday-things
+        When I visit /everyday-needs
         And I click the "See more results" button
         And I wait for 10 results to load
         Then I should see the results

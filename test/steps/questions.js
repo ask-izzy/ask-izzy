@@ -11,39 +11,37 @@ import Webdriver from "selenium-webdriver";
 declare var IzzyStorage: Object;
 
 import dictionary from "../support/dictionary";
-import { gotoUrl } from "../support/webdriver";
 /* eslint-disable max-len */
+import categories from "../../src/constants/categories";
 import WhoIsLookingForHelpDFVPage from "../../src/constants/personalisation-pages/WhoIsLookingForHelpDFV";
 import WhoIsLookingForHelpAdvocacyPage from "../../src/constants/personalisation-pages/WhoIsLookingForHelpAdvocacy";
-import WhoIsLookingForHelpDrugsAndAlcoholPage from "../../src/constants/personalisation-pages/WhoIsLookingForHelpDrugsAndAlcohol";
-import WhoIsLookingForHelpEverydayThingsPage from "../../src/constants/personalisation-pages/WhoIsLookingForHelpEverydayThings";
+import WhoIsLookingForHelpEverydayNeedsPage from "../../src/constants/personalisation-pages/WhoIsLookingForHelpEverydayNeeds";
 import WhoIsLookingForHelpFindingWorkPage from "../../src/constants/personalisation-pages/WhoIsLookingForHelpFindingWork";
 import WhoIsLookingForHelpFoodPage from "../../src/constants/personalisation-pages/WhoIsLookingForHelpFood";
 import WhoIsLookingForHelpHealthPage from "../../src/constants/personalisation-pages/WhoIsLookingForHelpHealth";
 import WhoIsLookingForHelpHousingPage from "../../src/constants/personalisation-pages/WhoIsLookingForHelpHousing";
 import WhoIsLookingForHelpPage from "../../src/constants/personalisation-pages/WhoIsLookingForHelp";
-import WhoIsLookingForHelpFacilitiesPage from "../../src/constants/personalisation-pages/WhoIsLookingForHelpFacilities";
-import WhoIsLookingForHelpCentrelinkPage from "../../src/constants/personalisation-pages/WhoIsLookingForHelpCentrelink";
-import WhoIsLookingForHelpLegalPage from "../../src/constants/personalisation-pages/WhoIsLookingForHelpLegal";
-import WhoIsLookingForHelpLifeSkillsPage from "../../src/constants/personalisation-pages/WhoIsLookingForHelpLifeSkills";
 import WhoIsLookingForHelpMoneyPage from "../../src/constants/personalisation-pages/WhoIsLookingForHelpMoney";
 import WhoIsLookingForHelpSearchPage from "../../src/constants/personalisation-pages/WhoIsLookingForHelpSearch";
-import WhoIsLookingForHelpSomethingToDoPage from "../../src/constants/personalisation-pages/WhoIsLookingForHelpSomethingToDo";
+import AreYouSafePage from "../../src/constants/personalisation-pages/AreYouSafe";
 import WhoIsLookingForHelpSupportAndCounsellingPage from "../../src/constants/personalisation-pages/WhoIsLookingForHelpSupportAndCounselling";
-import WhoIsLookingForHelpTechnologyPage from "../../src/constants/personalisation-pages/WhoIsLookingForHelpTechnology";
 /* eslint-enable max-len */
 import SleepTonightPage from
 "../../src/constants/personalisation-pages/SleepTonight"
 import DemographicsPage from
 "../../src/constants/personalisation-pages/Demographics"
+import DFVDemographicsPage from
+"../../src/constants/personalisation-pages/DfvDemographics"
+import DemographicsIndigenousPage from
+"../../src/constants/personalisation-pages/DemographicsIndigenous"
 import GenderPage from "../../src/constants/personalisation-pages/Gender"
 import AgePage from "../../src/constants/personalisation-pages/Age"
 
 module.exports = (Yadda.localisation.English.library(dictionary)
     .given("I have (somewhere|nowhere) to sleep tonight", setSleepTonight)
-    .given("I need nothing for $STRING", setSubcategoryItemsNone)
-    .given("I need the following for $STRING\n$lines", setSubcategoryItems)
-    .given("I need the following for $STRING: $STRING", setSubcategoryItems)
+    .given("I am interested in the \"$STRING\" subcategory for $STRING", setSubcategoryFromStep)
+    .given("I am not interested in a subcategory for $STRING", skipSubcategoryFromStep)
+    .given("I am not interested in any subcategory", skipAllSubcategoriesFromStep)
     .given(
         "I need help for (myself|a client or customer|a friend or family " +
             "member)",
@@ -52,12 +50,13 @@ module.exports = (Yadda.localisation.English.library(dictionary)
     .given("I am not part of any relevant demographics",
         setDemographicsNone
     )
-    .given("I am not interested in any subcategory", setSubcategoriesNone)
     .given("I am part of the following demographics\n$lines",
         setDemographics
     )
-    .given("my gender is (female|male)", setGender)
-    .given("I am (17|27|77) years old", setAgeTo): YaddaLibraryEnglish);
+    .given("my gender is (female|male|omitted)", setGender)
+    .given("I am (17|27|77) years old", setAgeTo)
+    .given("I am (omitting my age)", setAgeTo)
+    .given("I am safe at the moment", setImSafeFromStep): YaddaLibraryEnglish);
 
 // TODO: Question answers should be validated against what the actually answers
 // for question pages are so to avoid ugly code duplication here but that's not
@@ -79,22 +78,15 @@ async function setHelpForWhom(answer: string): Promise<void> {
     const whoIsLookingForHelpPages = [
         WhoIsLookingForHelpDFVPage,
         WhoIsLookingForHelpAdvocacyPage,
-        WhoIsLookingForHelpDrugsAndAlcoholPage,
-        WhoIsLookingForHelpEverydayThingsPage,
+        WhoIsLookingForHelpEverydayNeedsPage,
         WhoIsLookingForHelpFindingWorkPage,
         WhoIsLookingForHelpFoodPage,
         WhoIsLookingForHelpHealthPage,
         WhoIsLookingForHelpHousingPage,
         WhoIsLookingForHelpPage,
-        WhoIsLookingForHelpFacilitiesPage,
-        WhoIsLookingForHelpCentrelinkPage,
-        WhoIsLookingForHelpLegalPage,
-        WhoIsLookingForHelpLifeSkillsPage,
         WhoIsLookingForHelpMoneyPage,
         WhoIsLookingForHelpSearchPage,
-        WhoIsLookingForHelpSomethingToDoPage,
         WhoIsLookingForHelpSupportAndCounsellingPage,
-        WhoIsLookingForHelpTechnologyPage,
     ]
     for (const page of whoIsLookingForHelpPages) {
         await setStorageValue(
@@ -109,18 +101,37 @@ async function setHelpForWhom(answer: string): Promise<void> {
     }
 }
 
-async function setSubcategoryItems(
+async function setSubcategoryFromStep(
+    subcategory: string,
     category: string,
-    items: string | Array<string>,
 ): Promise<void> {
-    await setStorageValue(this.driver, `sub-${category}`, items);
+    await setSubcategory(category, subcategory, this.driver);
 }
 
-async function setSubcategoryItemsNone(category: string): Promise<void> {
-    await setSubcategoryItems.call(
-        this,
-        category,
-        "(skipped)"
+async function setSubcategory(
+    category: string,
+    subcategory: string,
+    driver: typeof Webdriver.WebDriver,
+): Promise<void> {
+    await setStorageValue(driver, `${category}-subcategory`, subcategory);
+}
+
+async function skipSubcategory(
+    driver: typeof Webdriver.WebDriver,
+    category: string
+): Promise<void> {
+    return setSubcategory(category, "(skipped)", driver)
+}
+
+async function skipSubcategoryFromStep(category: string): Promise<void> {
+    return skipSubcategory(this.driver, category)
+}
+
+async function skipAllSubcategoriesFromStep(): Promise<void> {
+    await Promise.all(
+        categories.map(
+            category => skipSubcategory(this.driver, category.key)
+        )
     )
 }
 
@@ -134,30 +145,47 @@ async function setDemographics(
     );
 }
 
-function setDemographicsNone(): Promise<void> {
-    return setDemographics.call(this, []);
+async function setAreYouSafe(
+    driver: typeof Webdriver.WebDriver,
+    answer: string
+): Promise<void> {
+    await setStorageValue(
+        driver,
+        AreYouSafePage.name,
+        answer
+    );
 }
 
-async function setSubcategoriesNone(
-    items: Array<string>,
-): Promise<void> {
-    await gotoUrl(this.driver, "/"); // go anywhere to start the session
-    await this.driver.executeScript(() => {
-        IzzyStorage.setItem("sub-addiction", "(skipped)");
-        IzzyStorage.setItem("sub-advocacy", "(skipped)");
-        IzzyStorage.setItem("sub-counselling", "(skipped)");
-        IzzyStorage.setItem("sub-everyday-things", "(skipped)");
-        IzzyStorage.setItem("sub-food", "(skipped)");
-        IzzyStorage.setItem("sub-health", "(skipped)");
-        IzzyStorage.setItem("sub-housing", "(skipped)");
-        IzzyStorage.setItem("sub-indigenous", "(skipped)");
-        IzzyStorage.setItem("sub-job", "(skipped)");
-        IzzyStorage.setItem("sub-legal", "(skipped)");
-        IzzyStorage.setItem("sub-life-skills", "(skipped)");
-        IzzyStorage.setItem("sub-money", "(skipped)");
-        IzzyStorage.setItem("sub-technology", "(skipped)");
-    });
+async function setImSafeFromStep(): Promise<void> {
+    setAreYouSafe(this.driver, "Yes")
 }
+
+async function setDemographicsIndigenous(
+    answer: string,
+): Promise<void> {
+    await setStorageValue(
+        this.driver,
+        DemographicsIndigenousPage.name,
+        answer
+    );
+}
+
+async function setDFVDemographics(
+    answers: Array<string>,
+): Promise<void> {
+    await setStorageValue(
+        this.driver,
+        DFVDemographicsPage.name,
+        JSON.stringify(answers)
+    );
+}
+
+async function setDemographicsNone(): Promise<void> {
+    await setDemographics.call(this, []);
+    await setDemographicsIndigenous.call(this, "(skipped)");
+    await setDFVDemographics.call(this, []);
+}
+
 
 async function setAgeTo(age: string): Promise<void> {
     await setStorageValue(
@@ -167,6 +195,8 @@ async function setAgeTo(age: string): Promise<void> {
             "17": "0 to 17",
             "27": "27 to 39",
             "77": "65 or older",
+            "omitting my age": "(skipped)",
+
         })[age]
     );
 }
@@ -178,6 +208,7 @@ async function setGender(gender: string): Promise<void> {
         ({
             "female": "Female",
             "male": "Male",
+            "omitted": "(skipped)",
         })[gender]
     );
 }

@@ -85,7 +85,7 @@ function DynamicPage({pageDetails, embeddedCallouts}: Props): ReactNode {
         <StaticPage
             title={pageDetails.Title}
             bannerName={pageDetails.Banner ? pageDetails.Banner.Key
-                : "homepage"}
+                : "hand-and-person-with-heart"}
             bannerPrimary={pageDetails.BannerTextPrimary}
             bannerSecondary={pageDetails.BannerTextSecondary}
         >

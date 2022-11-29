@@ -390,7 +390,9 @@ export function convertIzzySearchQueryToIss3(
     }
 
     if (query.serviceTypesRaw) {
-        issQuery.service_type_raw = query.serviceTypesRaw.join(" ")
+        issQuery.service_type_raw = query.serviceTypesRaw
+
+        console.log(query.serviceTypesRaw)
     }
 
     if (query.minimumShouldMatch) {
