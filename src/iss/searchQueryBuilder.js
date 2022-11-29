@@ -67,6 +67,7 @@ type SearchQueryOtherProps = {|
     maxPageSize?: number,
     apiVersion?: "3" | "4",
     name?: string,
+    isBulkBilling?: boolean,
 
     // to figure out
     minimumShouldMatch?: string,

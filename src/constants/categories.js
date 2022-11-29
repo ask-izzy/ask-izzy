@@ -7,7 +7,6 @@ import icons from "../icons";
 import Category from "./Category";
 
 /* eslint-disable max-len */
-import AddictionSubcategories from "@/src/constants/personalisation-pages/AddictionSubcategories";
 import AdvocacySubcategories from "@/src/constants/personalisation-pages/AdvocacySubcategories";
 import Age from "@/src/constants/personalisation-pages/Age";
 import AreYouSafe from "@/src/constants/personalisation-pages/AreYouSafe";
@@ -16,19 +15,16 @@ import CounsellingSubcategories from "@/src/constants/personalisation-pages/Coun
 import DemographicsIndigenous from "@/src/constants/personalisation-pages/DemographicsIndigenous";
 import Demographics from "@/src/constants/personalisation-pages/Demographics";
 import DfvDemographics from "@/src/constants/personalisation-pages/DfvDemographics";
-import DVFSubcategories from "@/src/constants/personalisation-pages/DVFSubcategories";
-import EverydayThingsSubcategories from "@/src/constants/personalisation-pages/EverydayThingsSubcategories";
+import DFVSubcategories from "@/src/constants/personalisation-pages/DFVSubcategories";
+import EverydayNeedsSubcategories from "@/src/constants/personalisation-pages/EverydayNeedsSubcategories";
 import FoodSubcategories from "@/src/constants/personalisation-pages/FoodSubcategories";
 import FreeTextAreYouSafe from "@/src/constants/personalisation-pages/FreeTextAreYouSafe";
 import Gender from "@/src/constants/personalisation-pages/Gender";
-import HealthAreYouSafe from "@/src/constants/personalisation-pages/HealthAreYouSafe";
 import HealthSubcategories from "@/src/constants/personalisation-pages/HealthSubcategories";
+import HousingSubcategories from "@/src/constants/personalisation-pages/HousingSubcategories";
 import HousingAreYouSafe from "@/src/constants/personalisation-pages/HousingAreYouSafe";
 import JobSubcategories from "@/src/constants/personalisation-pages/JobSubcategories";
-import LegalAreYouSafe from "@/src/constants/personalisation-pages/LegalAreYouSafe";
-import LegalSubcategories from "@/src/constants/personalisation-pages/LegalSubcategories";
 import LgbtiqaDomesticViolenceScreen from "@/src/constants/personalisation-pages/LgbtiqaDomesticViolenceScreen";
-import LifeSkillsSubcategories from "@/src/constants/personalisation-pages/LifeSkillsSubcategories";
 import Location from "@/src/constants/personalisation-pages/Location";
 import MoneySubcategories from "@/src/constants/personalisation-pages/MoneySubcategories";
 import OnlineSafetyScreen from "@/src/constants/personalisation-pages/OnlineSafetyScreen";
@@ -37,21 +33,14 @@ import Under18DomesticViolenceScreen from "@/src/constants/personalisation-pages
 import UsingViolenceScreen from "@/src/constants/personalisation-pages/UsingViolenceScreen";
 import WhoIsLookingForHelpDFV from "@/src/constants/personalisation-pages/WhoIsLookingForHelpDFV";
 import WhoIsLookingForHelpAdvocacy from "@/src/constants/personalisation-pages/WhoIsLookingForHelpAdvocacy";
-import WhoIsLookingForHelpDrugsAndAlcohol from "@/src/constants/personalisation-pages/WhoIsLookingForHelpDrugsAndAlcohol";
-import WhoIsLookingForHelpEverydayThings from "@/src/constants/personalisation-pages/WhoIsLookingForHelpEverydayThings";
+import WhoIsLookingForHelpEverydayNeeds from "@/src/constants/personalisation-pages/WhoIsLookingForHelpEverydayNeeds";
 import WhoIsLookingForHelpFindingWork from "@/src/constants/personalisation-pages/WhoIsLookingForHelpFindingWork";
 import WhoIsLookingForHelpFood from "@/src/constants/personalisation-pages/WhoIsLookingForHelpFood";
 import WhoIsLookingForHelpHealth from "@/src/constants/personalisation-pages/WhoIsLookingForHelpHealth";
 import WhoIsLookingForHelpHousing from "@/src/constants/personalisation-pages/WhoIsLookingForHelpHousing";
-import WhoIsLookingForHelpFacilities from "@/src/constants/personalisation-pages/WhoIsLookingForHelpFacilities";
-import WhoIsLookingForHelpCentrelink from "@/src/constants/personalisation-pages/WhoIsLookingForHelpCentrelink";
-import WhoIsLookingForHelpLegal from "@/src/constants/personalisation-pages/WhoIsLookingForHelpLegal";
-import WhoIsLookingForHelpLifeSkills from "@/src/constants/personalisation-pages/WhoIsLookingForHelpLifeSkills";
 import WhoIsLookingForHelpMoney from "@/src/constants/personalisation-pages/WhoIsLookingForHelpMoney";
 import WhoIsLookingForHelpSearch from "@/src/constants/personalisation-pages/WhoIsLookingForHelpSearch";
-import WhoIsLookingForHelpSomethingToDo from "@/src/constants/personalisation-pages/WhoIsLookingForHelpSomethingToDo";
 import WhoIsLookingForHelpSupportAndCounselling from "@/src/constants/personalisation-pages/WhoIsLookingForHelpSupportAndCounselling";
-import WhoIsLookingForHelpTechnology from "@/src/constants/personalisation-pages/WhoIsLookingForHelpTechnology";
 /* eslint-enable max-len */
 
 const categories = [
@@ -102,6 +91,7 @@ const categories = [
         },
         personalisation: [
             SleepTonight,
+            HousingSubcategories,
             WhoIsLookingForHelpHousing,
             Location,
             Gender,
@@ -127,8 +117,8 @@ const categories = [
             },
         },
         personalisation: [
-            EverydayThingsSubcategories,
-            WhoIsLookingForHelpEverydayThings,
+            EverydayNeedsSubcategories,
+            WhoIsLookingForHelpEverydayNeeds,
             Location,
         ],
     }): Category),
@@ -179,8 +169,6 @@ const categories = [
         },
         personalisation: [
             HealthSubcategories,
-            HealthAreYouSafe,
-            OnlineSafetyScreen,
             WhoIsLookingForHelpHealth,
             Location,
             DemographicsIndigenous,
@@ -205,7 +193,7 @@ const categories = [
         personalisation: [
             AreYouSafe,
             OnlineSafetyScreen,
-            DVFSubcategories,
+            DFVSubcategories,
             WhoIsLookingForHelpDFV,
             Location,
             DfvDemographics,

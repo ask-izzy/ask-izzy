@@ -14,6 +14,9 @@ import type Category from "../constants/Category";
 import Storage from "../storage";
 import ScreenReader from "./ScreenReader"
 import { getServicesPath } from "@/src/utils/routing"
+import AreYouSafePersonalisation from "@/src/constants/personalisation-pages/AreYouSafe";
+import DemographicsIndigenous from "@/src/constants/personalisation-pages/DemographicsIndigenous";
+import DfvDemographics from "@/src/constants/personalisation-pages/DfvDemographics";
 
 type Props = {
     category: Category,
@@ -21,9 +24,9 @@ type Props = {
 }
 
 const PERSONALISATIONS_TO_CLEAR = [
-    "are-you-safe",
-    "sub-indigenous",
-    "dfv-demographics",
+    AreYouSafePersonalisation.name,
+    DemographicsIndigenous.name,
+    DfvDemographics.name,
 ]
 
 function CategoryListItem({category, router}: Props): ReactNode {

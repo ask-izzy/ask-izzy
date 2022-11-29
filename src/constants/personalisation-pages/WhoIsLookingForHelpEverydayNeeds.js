@@ -6,5 +6,5 @@ import WhoIsLookingForHelp from "./WhoIsLookingForHelp"
 
 export default ({
     ...WhoIsLookingForHelp,
-    name: WhoIsLookingForHelp.name + "-drugs-and-alcohol",
+    name: WhoIsLookingForHelp.name + "-everyday-needs",
 }: PersonalisationLookingForHelpPage)
