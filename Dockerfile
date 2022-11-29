@@ -179,7 +179,7 @@ COPY --chown=$UID_GID ./public/images/ask-izzy-logo-single-line-purple.svg /app/
 COPY --chown=$UID_GID ./fixtures /app/fixtures
 COPY --chown=$UID_GID ./test/support/mock-cms /app/test/support/mock-cms/
 COPY --chown=$UID_GID ./test/support/mock-iss /app/test/support/mock-iss/
-COPY --chown=$UID_GID ./.env ./.env.test ./babel.config.json ./next.config.js /app/
+COPY --chown=$UID_GID ./.env ./.env.test ./babel.config.json ./jsconfig.json ./next.config.js /app/
 
 # Upgrading next.js has forced the need to upgrade storybook. And as usual trying to make storybook work with flow.js is always
 # a major PITA. Since the typescript migrations is (hopefully just around the corner) rather than waste time trying to make it work
