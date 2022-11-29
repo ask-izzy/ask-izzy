@@ -8,7 +8,7 @@ import {
     ixaService,
     youthSupportNetService,
 } from "../../fixtures/services";
-import alertsQuery from "../queries/content/alerts.js";
+import alertsQuery from "@/queries/content/alerts.js";
 import {
     vicServiceAlert,
 } from "../../test/support/mock-cms/resolvers/alerts.js"

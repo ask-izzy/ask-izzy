@@ -130,6 +130,7 @@ COPY --chown=$UID_GID ./hooks /app/hooks
 COPY --chown=$UID_GID ./contexts /app/contexts
 COPY --chown=$UID_GID ./helpers /app/helpers
 COPY --chown=$UID_GID ./lib /app/lib
+COPY --chown=$UID_GID ./queries /app/queries
 COPY --chown=$UID_GID ./pages /app/pages
 COPY --chown=$UID_GID ./public/images/banners /app/public/images/banners
 COPY --chown=$UID_GID ./fixtures /app/fixtures
@@ -171,6 +172,7 @@ COPY --chown=$UID_GID ./hooks /app/hooks
 COPY --chown=$UID_GID ./contexts /app/contexts
 COPY --chown=$UID_GID ./helpers /app/helpers
 COPY --chown=$UID_GID ./lib /app/lib
+COPY --chown=$UID_GID ./queries /app/queries
 COPY --chown=$UID_GID ./pages /app/pages
 COPY --chown=$UID_GID ./.storybook /app/.storybook
 RUN mkdir -p /app/public/images && chown -R $UID_GID /app/public
