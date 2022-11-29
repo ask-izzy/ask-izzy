@@ -134,6 +134,20 @@ test-mocha-personalisation:
     when: on_failure
     expire_in: 1 week
 
+test-mocha-category-queries:
+  stage: Test
+  needs: ['build-development']
+  script:
+    - CONTAINER_ID=$(docker create -t $TAG_DEVELOPMENT_STAGE with --test-env --built --mocks test-mocha-category-queries)
+    - docker start -a "$CONTAINER_ID" && exitCode=$? || exitCode=$?
+    - docker cp "$CONTAINER_ID:/app/testing-screenshots" testing-screenshots || true
+    - exit $exitCode
+  artifacts:
+    paths:
+      - testing-screenshots
+    when: on_failure
+    expire_in: 1 week
+
 test-mocha-features:
   stage: Test
   needs: ['build-development']

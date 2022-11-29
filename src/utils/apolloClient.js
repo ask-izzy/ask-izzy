@@ -4,7 +4,7 @@ import { ApolloClient, InMemoryCache } from "@apollo/client";
 // $FlowIgnore Let's not bother trying to type this with flow. I'll be easy to
 // do when we move to typescript.
 const client: any = new ApolloClient({
-    uri: `${process.env.NEXT_PUBLIC_STRAPI_URL}/graphql`,
+    uri: new URL("/graphql", process.env.NEXT_PUBLIC_STRAPI_URL),
     cache: new InMemoryCache(),
 });
 

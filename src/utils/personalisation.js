@@ -27,13 +27,11 @@ export function getBannerName(
     questionPageName?: string
 ): string {
     if (questionPageName === "sub-indigenous") {
-        return "atsi"
-    } else if (category?.key === "search") {
-        return "homepage"
+        return "atsi-and-hand"
     } else if (category) {
-        return category.key
+        return category.bannerName
     }
-    return "homepage"
+    return "hand-and-person-with-heart"
 }
 
 export function setLocationFromUrl(
@@ -100,30 +98,30 @@ export function getSearchQueryChanges(
     }
     const possibleAnswers = personalisationPage.possibleAnswers
     if (savedAnswer instanceof Array) {
+        const searchQueryChanges: Array<SearchQueryChanges> = []
         // If there are multiple answers, at most the first 2 as ordered
         // by the order they appear in the list displayed to the user
-        const searchQueryChanges: Array<SearchQueryChanges> = []
-        for (const [answer, queryChange] of (
-            // We know queryChange must be SearchQueryChanges but because
-            // flow is stupid it Object.entries() outputs [string, mixed]
-            // no matter the input.
-            (Object.entries(possibleAnswers): any): Array<
-                [string, SearchQueryChanges]
-            >
-        )) {
-            if (savedAnswer.includes(answer)) {
-                searchQueryChanges.push(queryChange)
+        for (const singleSavedAnswer of savedAnswer.slice(0, 2)) {
+            if (!(singleSavedAnswer in possibleAnswers)) {
+                console.error(
+                    `Saved answer "${singleSavedAnswer}" is not a valid answer for ${personalisationPage.name}`
+                )
+                continue
             }
-            if (searchQueryChanges.length >= 2) {
-                break;
-            }
+            searchQueryChanges.push(possibleAnswers[singleSavedAnswer])
+
         }
         return searchQueryChanges
     } else if (savedAnswer === "(skipped)") {
         // This question has been skipped.
         return {};
+    } else if (savedAnswer && savedAnswer in possibleAnswers) {
+        return possibleAnswers[savedAnswer]
     } else if (savedAnswer) {
-        return possibleAnswers[savedAnswer] || null
+        console.error(
+            `Saved answer "${savedAnswer}" is not a valid answer for ${personalisationPage.name}`
+        )
+        return null
     } else {
         // this question hasn't been answered
         return null;

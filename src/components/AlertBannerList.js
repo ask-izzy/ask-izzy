@@ -10,7 +10,7 @@ import StrapiMarkdown from "./StrapiMarkdown";
 import Link from "./base/Link";
 import Info from "./../icons/Info";
 import Button from "./base/Button";
-import alertsQuery from "../queries/content/alerts.js";
+import alertsQuery from "@/queries/content/alerts.js";
 import storage from "../storage";
 
 type Props = {
