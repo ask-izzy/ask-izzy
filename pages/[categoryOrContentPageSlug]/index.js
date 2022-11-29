@@ -3,9 +3,9 @@ import * as React from "react";
 import type { GetStaticPaths, GetStaticProps } from "next"
 import {promises as fs} from "fs"
 
-import cmsPageQuery from "@/src/queries/content/page"
-import cmsAllPagesQuery from "@/src/queries/content/allPages"
-import cmsCalloutQuery from "@/src/queries/content/callout";
+import cmsPageQuery from "@/queries/content/page"
+import cmsAllPagesQuery from "@/queries/content/allPages"
+import cmsCalloutQuery from "@/queries/content/callout";
 import categories, { getCategory } from "@/src/constants/categories"
 import ResultsListPage from "@/components/pages/ResultsListPage"
 import DynamicPage from "@/components/pages/DynamicPage.js"
