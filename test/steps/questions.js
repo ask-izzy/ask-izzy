@@ -11,7 +11,6 @@ import Webdriver from "selenium-webdriver";
 declare var IzzyStorage: Object;
 
 import dictionary from "../support/dictionary";
-import { gotoUrl } from "../support/webdriver";
 /* eslint-disable max-len */
 import categories from "../../src/constants/categories";
 import WhoIsLookingForHelpDFVPage from "../../src/constants/personalisation-pages/WhoIsLookingForHelpDFV";
@@ -30,17 +29,18 @@ import SleepTonightPage from
 "../../src/constants/personalisation-pages/SleepTonight"
 import DemographicsPage from
 "../../src/constants/personalisation-pages/Demographics"
+import DFVDemographicsPage from
+"../../src/constants/personalisation-pages/DfvDemographics"
 import DemographicsIndigenousPage from
 "../../src/constants/personalisation-pages/DemographicsIndigenous"
 import GenderPage from "../../src/constants/personalisation-pages/Gender"
 import AgePage from "../../src/constants/personalisation-pages/Age"
-import AreYouSafePage from "../../src/constants/personalisation-pages/AreYouSafe"
 
 module.exports = (Yadda.localisation.English.library(dictionary)
     .given("I have (somewhere|nowhere) to sleep tonight", setSleepTonight)
-    .given("I need nothing for $STRING", setSubcategoryItemsNone)
-    .given("I need the following for $STRING\n$lines", setSubcategoryItems)
-    .given("I need the following for $STRING: $STRING", setSubcategoryItems)
+    .given("I am interested in the \"$STRING\" subcategory for $STRING", setSubcategoryFromStep)
+    .given("I am not interested in a subcategory for $STRING", skipSubcategoryFromStep)
+    .given("I am not interested in any subcategory", skipAllSubcategoriesFromStep)
     .given(
         "I need help for (myself|a client or customer|a friend or family " +
             "member)",
@@ -49,7 +49,6 @@ module.exports = (Yadda.localisation.English.library(dictionary)
     .given("I am not part of any relevant demographics",
         setDemographicsNone
     )
-    .given("I am not interested in any subcategory", setSubcategoriesNone)
     .given("I am part of the following demographics\n$lines",
         setDemographics
     )
@@ -99,18 +98,37 @@ async function setHelpForWhom(answer: string): Promise<void> {
     }
 }
 
-async function setSubcategoryItems(
+async function setSubcategoryFromStep(
+    subcategory: string,
     category: string,
-    items: string | Array<string>,
 ): Promise<void> {
-    await setStorageValue(this.driver, `${category}-subcategory`, items);
+    await setSubcategory(category, subcategory, this.driver);
 }
 
-async function setSubcategoryItemsNone(category: string): Promise<void> {
-    await setSubcategoryItems.call(
-        this,
-        category,
-        "(skipped)"
+async function setSubcategory(
+    category: string,
+    subcategory: string,
+    driver: typeof Webdriver.WebDriver,
+): Promise<void> {
+    await setStorageValue(driver, `${category}-subcategory`, subcategory);
+}
+
+async function skipSubcategory(
+    driver: typeof Webdriver.WebDriver,
+    category: string
+): Promise<void> {
+    return setSubcategory(category, "(skipped)", driver)
+}
+
+async function skipSubcategoryFromStep(category: string): Promise<void> {
+    return skipSubcategory(this.driver, category)
+}
+
+async function skipAllSubcategoriesFromStep(): Promise<void> {
+    await Promise.all(
+        categories.map(
+            category => skipSubcategory(this.driver, category.key)
+        )
     )
 }
 
@@ -134,21 +152,22 @@ async function setDemographicsIndigenous(
     );
 }
 
+async function setDFVDemographics(
+    answers: Array<string>,
+): Promise<void> {
+    await setStorageValue(
+        this.driver,
+        DFVDemographicsPage.name,
+        JSON.stringify(answers)
+    );
+}
+
 async function setDemographicsNone(): Promise<void> {
     await setDemographics.call(this, []);
     await setDemographicsIndigenous.call(this, "(skipped)");
+    await setDFVDemographics.call(this, []);
 }
 
-async function setSubcategoriesNone(
-    items: Array<string>,
-): Promise<void> {
-    await gotoUrl(this.driver, "/"); // go anywhere to start the session
-    await Promise.all(
-        categories.map(
-            category => setSubcategoryItemsNone.call(this, category.key)
-        )
-    )
-}
 
 async function setAgeTo(age: string): Promise<void> {
     await setStorageValue(

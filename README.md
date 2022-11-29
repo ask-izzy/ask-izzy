@@ -31,7 +31,7 @@ For example if you want to run all the linters and automaticity fix any issue wh
 Testing can be run with `docker compose run --rm app test-dev` which will sequentially run all testing programs.
 
 - **Mocha**\
-  Currently used for e2e and unit tests. It's split up into 4 testing suites, which can be individually run with `docker-compose run -p 3000:3000 -p 5000:5000 -p 5001:5001 app test-dev-mocha-<test suite name>`
+  Currently used for e2e and unit tests. It's split up into 4 testing suites, which can be individually run with `docker-compose run --rm -p 3000:3000 -p 5000:5000 -p 5001:5001 app test-dev-mocha-<test suite name>`
     - **personalisation**\
       For e2e tests related to the personalisation flow in Ask Izzy.
     - **map**\
@@ -75,7 +75,7 @@ env FAKE_TASK_DEFINITION_REVISION=$(date +%s) docker compose -p ask-izzy-prod -f
 ```
 
 ## Alternative Dev Process (No Docker)
-Using docker is recommended to ensure a consistent environment. However if desired testing, linting and serving of  Ask Izzy can be directly on the host without running in a docker container. To do so a modern version of [Node](https://nodejs.org/en/) and [Yarn](https://yarnpkg.com/lang/en/) will need to be installed. Also be aware that [Node modules may need to be re-installed if running into issues](#node-modules-binary-compatibility).
+Using docker is recommended to ensure a consistent environment. However if desired testing, linting and serving of Ask Izzy can be directly on the host without running in a docker container. To do so a modern version of [Node](https://nodejs.org/en/) and [Yarn](https://yarnpkg.com/lang/en/) will need to be installed. Also be aware that [Node modules may need to be re-installed if running into issues](#node-modules-binary-compatibility).
 
 To load the necessary environment variables a .env file can be used. You can copy the sample one with `cp .env.sample .env`. Then any docker run commands like `docker compose run --rm app <remaining command>` can be instead called without using docker by instead using `yarn run <remaining command>`. To replace `docker compose up` use `yarn run dev`.
 

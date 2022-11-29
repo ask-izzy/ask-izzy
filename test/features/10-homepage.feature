@@ -1,4 +1,4 @@
-Feature: Landing page
+Feature: Homepage
 
     # As a user
     # When I come to Ask Izzy
@@ -11,20 +11,14 @@ Feature: Landing page
         And I should see the search bar
         And I should see the list of categories
         ---------------
-        Housing
         Food
-        Everyday things
-        Health
-        Centrelink
+        Housing
+        Everyday needs
         Money help
-        Support & counselling
-        Legal
-        Drugs & alcohol
-        Life skills & education
-        Finding work
-        Facilities
-        Something to do
-        Technology
-        Advocacy
+        Health
+        Domestic and family violence help
+        Advice and advocacy
+        Work and learning
+        Support and counselling
         ---------------
         And I should see the branding footer

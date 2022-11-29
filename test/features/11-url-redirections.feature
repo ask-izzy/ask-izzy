@@ -1,4 +1,4 @@
-Feature: Landing page
+Feature: URL redirections
 
     # As a user
     # When I come to Ask Izzy using old URLs
@@ -22,13 +22,13 @@ Feature: Landing page
         When I visit /category/housing/in/Sydney-NSW
         Then I should be at /housing/Sydney-NSW
 
-    Scenario: Visit Everyday things page
-        When I visit /category/everyday-things
-        Then I should be at /everyday-things/Melbourne-VIC
+    Scenario: Visit Everyday needs page
+        When I visit /category/everyday-needs
+        Then I should be at /everyday-needs/Melbourne-VIC
 
-    Scenario: Visit Everyday things page with location
-        When I visit /category/everyday-things/in/Sydney-NSW
-        Then I should be at /everyday-things/Sydney-NSW
+    Scenario: Visit Everyday needs page with location
+        When I visit /category/everyday-needs/in/Sydney-NSW
+        Then I should be at /everyday-needs/Sydney-NSW
 
     Scenario: Search for "room for the night" at Richmond, VIC
         When I visit /search/room for the night/in/Richmond-VIC/
