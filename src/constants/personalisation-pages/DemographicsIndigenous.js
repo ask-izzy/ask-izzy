@@ -1,6 +1,6 @@
 /* @flow */
 import type {
-    PersonalisationPage,
+    PersonalisationQuestionPage,
 } from "../../../flow/personalisation-page"
 import React from "react";
 import type {Node as ReactNode} from "react";
@@ -8,7 +8,7 @@ import icons from "../../icons";
 
 export default ({
     type: "question",
-    name: "sub-indigenous",
+    name: "demographics-indigenous",
     question:
         "Would you like Aboriginal & Torres Strait Islander " +
         "specific services?",
@@ -36,4 +36,4 @@ export default ({
             return answer
         }
     },
-}: PersonalisationPage)
+}: PersonalisationQuestionPage)

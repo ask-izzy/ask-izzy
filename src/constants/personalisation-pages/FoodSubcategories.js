@@ -5,31 +5,29 @@ import type {
 
 export default ({
     type: "question",
-    name: "sub-food",
+    name: "food-subcategory",
     question: "What type of food do you need?",
     possibleAnswers: {
-        "Community meals": {
-            $removeElms: {
-                term: ["-\"coordinating bodies\""],
-            },
+        "Meals": {
+            term: ["meals"],
+            $unset: ["serviceTypes"],
+            serviceTypesRaw: ["Meals"],
         },
-        "Food packages/parcels/vouchers": {
-            $concat: {
-                term: ["\"Food Parcels & Food Vouchers\""],
-                serviceTypes: ["Material Aid"],
-            },
-            $removeElms: {
-                term: ["meals"],
-            },
+        "Food parcels / groceries": {
+            term: ["\"food parcels\""],
+            $unset: ["serviceTypes"],
+            serviceTypesRaw: ["Food Parcels"],
         },
-        "Meals on Wheels": {
-            $concat: {
-                term: ["meals on wheels"],
-            },
-            $removeElms: {
-                term: ["meals", "-\"meals on wheels\"", "-chsp"],
-            },
+        "Food vouchers": {
+            term: ["\"food vouchers\""],
+            $unset: ["serviceTypes"],
+            serviceTypesRaw: ["Food Vouchers"],
         },
+    },
+    descriptionsForAnswers: {
+        "Meals": "Free or low-cost meals",
+        "Food parcels / groceries": "Fresh food and pantry items",
+        "Food vouchers": "To spend at the supermarket",
     },
     showSupportSearchBar: true,
     title: "Services",

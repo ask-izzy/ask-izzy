@@ -5,110 +5,144 @@ import type {
 
 export default ({
     type: "question",
-    name: "sub-health",
+    name: "health-subcategory",
     question: "What sort of help do you need?",
     possibleAnswers: {
-        "Doctor": {
+        "Doctor or general practitioner": {
+            serviceTypes: ["General Practitioners"],
             $concat: {
-                term: ["\"general medical practitioners\""],
+                term: [
+                    "\"general medical practitioners\"",
+                ],
             },
             $removeElms: {
-                term: ["\"community health\""],
+                term: [
+                    "assistance pets",
+                    "-\"animal control\"",
+                    "-effectiveness",
+                ],
             },
         },
-        "Nurse": {
+        "Mental and emotional health": {
+            serviceTypes: ["Mental Health"],
             $concat: {
-                term: ["nurse"],
-            },
-        },
-        "Social & emotional wellbeing": {
-            $concat: {
-                term: ["\"mental health\""],
+                term: [
+                    "\"mental health\"",
+                ],
             },
             $removeElms: {
-                term: ["\"community health\""],
-            },
-        },
-        "Domestic & family violence": {
-            $concat: {
-                term: ["health", "\"Family violence\""],
-            },
-            $removeElms: {
-                term: ["\"community health\""],
-            },
-        },
-        "Sexual assault": {
-            $concat: {
-                term: ["\"sexual assault\""],
-            },
-            $removeElms: {
-                term: ["\"community health\""],
-            },
-        },
-        "Sexual health": {
-            $concat: {
-                term: ["\"sexual health\""],
-            },
-            $removeElms: {
-                term: ["\"community health\""],
+                term: [
+                    "assistance pets",
+                    "-\"animal control\"",
+                    "-effectiveness",
+                ],
             },
         },
         "Dentist": {
+            serviceTypes: ["Dentists/Oral Health Professionals"],
             $concat: {
-                term: ["dentistry"],
+                term: [
+                    "dentistry",
+                ],
             },
             $removeElms: {
-                term: ["\"community health\""],
+                term: [
+                    "assistance pets",
+                    "-\"animal control\"",
+                    "-effectiveness",
+                ],
+            },
+        },
+        "Children's health": {
+            serviceTypes: [
+                "Children's health services",
+                "Paediatricians & Neonatologists",
+            ],
+            $concat: {
+                term: [
+                    "health",
+                    "children",
+                ],
+            },
+            $removeElms: {
+                term: [
+                    "assistance pets",
+                    "-\"animal control\"",
+                    "-effectiveness",
+                ],
             },
         },
         "Problems with feet": {
+            serviceTypes: [
+                "Podiatrists",
+            ],
             $concat: {
                 term: ["podiatry"],
             },
             $removeElms: {
-                term: ["\"community health\""],
+                term: [
+                    "assistance pets",
+                    "-\"animal control\"",
+                    "-effectiveness",
+                ],
             },
-        },
-        "Eye care": {
-            $concat: {
-                term: ["optometry"],
-            },
-            $removeElms: {
-                term: ["\"community health\""],
-            },
-        },
-        "Children": {
-            $concat: {
-                term: ["health", "children"],
-            },
-            $removeElms: {
-                term: ["\"community health\""],
-            },
-        },
-        "Maternal & child health": {
-            $concat: {
-                term: ["\"maternal child health\""],
-            },
-            $removeElms: {
-                term: ["\"community health\""],
-            },
-            $unset: ["showInAskIzzyHealth"],
         },
         "Hospital": {
+            serviceTypes: [
+                "Hospital",
+            ],
             $concat: {
-                term: ["\"public hospital services\"", "-pac", "-medicare"],
+                term: [
+                    "\"public hospital services\"",
+                    "-pac",
+                    "-medicare",
+                ],
             },
             $removeElms: {
-                term: ["\"community health\""],
+                term: [
+                    "assistance pets",
+                    "-\"animal control\"",
+                    "-effectiveness",
+                ],
             },
             $unset: ["showInAskIzzyHealth"],
         },
+        "Alcohol and other drugs": {
+            serviceTypes: ["Alcohol & Other Drugs"],
+            $concat: {
+                term: [
+                    "substance abuse",
+                    "-\"registered training\"",
+                    "rehabilitation",
+                ],
+            },
+            $removeElms: {
+                term: [
+                    "assistance pets",
+                    "-\"animal control\"",
+                    "-effectiveness",
+                ],
+            },
+            $unset: ["showInAskIzzyHealth"],
+        },
+    },
+    descriptionsForAnswers: {
+        "Doctor": "Someone to talk to about any health problem.",
+        "Mental and emotional health":
+            "Help with anxiety, depression and mental health.",
+        "Dentist": "Help with teeth and mouth health.",
+        "Children's health": "Paediatricians and help for kids.",
+        "Problems with feet": "Podiatrists for help with foot problems.",
+        "Hospital": "Emergency rooms for urgent problems.",
+        "Alcohol and other drugs": "Rehab, detox, managing withdrawals.",
     },
     showSupportSearchBar: true,
     title: "Health",
     resetDfvOptionsOnDisplay: true,
     prettyPrintAnswer(answer: string): string {
         switch (answer) {
+        case "Doctor or general practitioner":
+            return "Doctor/GP";
         case "Social & emotional wellbeing":
             return "Mental health";
         case "Problems with feet":

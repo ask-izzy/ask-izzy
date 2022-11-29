@@ -5,26 +5,97 @@ import type {
 
 export default ({
     type: "question",
-    name: "sub-job",
+    name: "work-and-learning-subcategory",
     question: "Where do you want to start?",
     possibleAnswers: {
-        "Employment": {
+        "Finding a job": {
+            serviceTypes: [
+                "Employment",
+            ],
             $concat: {
-                term: ["job", "searching"],
+                term: [
+                    "-\"support for business\"",
+                    "-\"vocation rehabilitation\"",
+                    "-\"workplace relations\"",
+                    "jobs",
+                ],
             },
             $removeElms: {
-                term: ["employment"],
+                term: [
+                    "education",
+                ],
+            },
+        },
+        "Supported employment": {
+            serviceTypes: [
+                "Employment",
+                "Supported Employment",
+            ],
+            $concat: {
+                term: [
+                    "job",
+                    "searching",
+                ],
+            },
+            $removeElms: {
+                term: [
+                    "employment",
+                    "education",
+                    "-chsp",
+                    "-hacc",
+                ],
+            },
+        },
+        "Education": {
+            serviceTypes: ["Education"],
+            $removeElms: {
+                term: [
+                    "employment",
+                ],
+            },
+        },
+        "Community skills training": {
+            serviceTypes: ["Adult and Community Education"],
+            $concat: {
+                term: [
+                    "training",
+                ],
+            },
+            $removeElms: {
+                term: [
+                    "employment",
+                ],
             },
         },
         "Volunteering": {
+            $unset: ["serviceTypes"],
             $concat: {
-                term: ["volunteering"],
+                term: [
+                    "-grant",
+                    "volunteer",
+                ],
             },
             $removeElms: {
-                term: ["employment"],
-                serviceTypes: ["Employment"],
+                term: [
+                    "employment",
+                    "education",
+                ],
             },
         },
+        "Libraries": {
+            serviceTypes: ["Libraries"],
+            term: ["library"],
+        },
+    },
+    descriptionsForAnswers: {
+        "Finding a job": "Employment programs and services.",
+        "Supported employment":
+            "Employment services for people with additional needs.",
+        "Education": "Schools and other centers for learning.",
+        "Community skills training":
+            "Local programs such as parenting, computer, or other skills.",
+        "Volunteering": "Places to help and gain experience.",
+        "Libraries": "Access to computers, books and information.",
     },
     showSupportSearchBar: true,
     title: "Jobs",
