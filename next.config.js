@@ -40,6 +40,10 @@ module.exports = {
                     source: "/VERSION",
                     destination: "/VERSION.txt",
                 },
+                {
+                    source: "/sitemap.xml",
+                    destination: "/api/sitemap",
+                },
                 ...getRewritesForCategories(),
             ],
         }
