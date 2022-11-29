@@ -71,6 +71,7 @@ const categories = [
             WhoIsLookingForHelpFood,
             Location,
         ],
+        bannerName: "hand-and-person-with-heart",
     }): Category),
     (new Category({
         name: "Housing",
@@ -102,6 +103,7 @@ const categories = [
             HousingAreYouSafe,
             OnlineSafetyScreen,
         ],
+        bannerName: "hands-and-house",
     }): Category),
     (new Category({
         name: "Everyday needs",
@@ -124,6 +126,7 @@ const categories = [
             WhoIsLookingForHelpEverydayNeeds,
             Location,
         ],
+        bannerName: "hands-and-person-and-square",
     }): Category),
     (new Category({
         name: "Money help",
@@ -148,6 +151,7 @@ const categories = [
             WhoIsLookingForHelpMoney,
             Location,
         ],
+        bannerName: "buildings-and-shapes",
     }): Category),
     (new Category({
         name: "Health",
@@ -178,6 +182,7 @@ const categories = [
             Location,
             DemographicsIndigenous,
         ],
+        bannerName: "hand-and-heart",
     }): Category),
     (new Category({
         name: "Domestic and family violence help",
@@ -207,6 +212,7 @@ const categories = [
             UsingViolenceScreen,
             LgbtiqaDomesticViolenceScreen,
         ],
+        bannerName: "hands-and-heart",
     }): Category),
     (new Category({
         name: "Advice and advocacy",
@@ -233,6 +239,7 @@ const categories = [
             WhoIsLookingForHelpAdvocacy,
             Location,
         ],
+        bannerName: "hand-and-building-and-person",
     }): Category),
     (new Category({
         name: "Work and learning",
@@ -257,6 +264,7 @@ const categories = [
             WhoIsLookingForHelpFindingWork,
             Location,
         ],
+        bannerName: "buildings-and-hand",
     }): Category),
     (new Category({
         name: "Support and counselling",
@@ -281,6 +289,7 @@ const categories = [
             Location,
             DemographicsIndigenous,
         ],
+        bannerName: "hands-and-person-with-heart",
     }): Category),
     (new Category({
         name: "Search",
@@ -316,6 +325,7 @@ const categories = [
             Location,
         ],
         dontShowInCategoryList: true,
+        bannerName: "hand-and-person-with-heart",
     }): Category),
 ];
 

@@ -75,7 +75,7 @@ function DisabilityAdvocacyFinder(): ReactNode {
             title="Disability Advocacy"
             bannerPrimary="Disability Advocacy"
             bannerSecondary="Find advocacy services near you"
-            bannerName="advocacy static"
+            bannerName="hand-and-building-and-person static"
         >
             <div className="DisabilityAdvocacyFinder">
                 <h2>Using Ask Izzy to find a Disability Advocate</h2>

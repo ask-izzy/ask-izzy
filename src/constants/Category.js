@@ -14,6 +14,7 @@ type Props = {|
         | (NextRouter) => SearchQueryChanges,
     personalisation: Array<PersonalisationPage>,
     dontShowInCategoryList?: boolean,
+    bannerName: string,
 |};
 
 export default class Category {
@@ -25,6 +26,7 @@ export default class Category {
         | (NextRouter) => SearchQueryChanges;
     personalisation: Array<PersonalisationPage>;
     dontShowInCategoryList: boolean;
+    bannerName: string;
 
     constructor(props: Props) {
         this.name = props.name;
@@ -34,5 +36,6 @@ export default class Category {
         this.searchQueryChanges = props.searchQueryChanges;
         this.personalisation = props.personalisation;
         this.dontShowInCategoryList = props.dontShowInCategoryList ?? false;
+        this.bannerName = props.bannerName
     }
 }
