@@ -142,7 +142,7 @@
     "start-server-and-test": "^1.14.0",
     "storybook-addon-apollo-client": "^4.0.8",
     "storybook-addon-designs": "^6.0.0",
-    "storybook-addon-next": "^1.6.2",
+    "storybook-addon-next": "^1.6.9",
     "style-loader": "^3.3.1",
     "styled-components": "^5.3.5",
     "stylelint": "^13.13.1",
