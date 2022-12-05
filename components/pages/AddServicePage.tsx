@@ -1,13 +1,11 @@
-/* @flow */
-import type {Element as ReactElement, Node as ReactNode} from "React";
-import React, {useState, useEffect } from "react";
+import React, {useState, useEffect, ReactElement} from "react";
 
 import Link from "@/src/components/base/Link";
 import HeaderBar from "@/src/components/HeaderBar";
 import BrandedFooter from "@/src/components/BrandedFooter";
 import * as gtm from "@/src/google-tag-manager";
 
-function AddServicePage(): ReactNode {
+function AddServicePage() {
     const [isFormDone, setIsFormDone] = useState<boolean>(false)
 
     useEffect(() => {
@@ -101,7 +99,7 @@ function AddServicePage(): ReactNode {
 
                                     Details of change:
 
-                                    `.replace(/^ +/gm, "")
+                                    `.replace(/^ +/gm, ""),
                                 )
                         }
                     >
