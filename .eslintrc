@@ -1,21 +1,27 @@
 {
     "root": true,
+    "parser": "@typescript-eslint/parser",
     "parserOptions": {
-        "ecmaVersion": 6,
+        "ecmaVersion": 2018,
         "sourceType": "module",
         "ecmaFeatures": {
             "jsx": true
         }
     },
+    
     "env": {
         "browser": true,
         "node": true
     },
-    "parser": "babel-eslint",
     "plugins": [
-        "react"
+        "react",
+        "@typescript-eslint"
     ],
-    "extends": "eslint:recommended",
+    "extends": [
+        "eslint:recommended",
+        "plugin:react/recommended",
+        "plugin:@typescript-eslint/recommended"
+    ],
     "rules": {
         "array-bracket-spacing": [2, "never"],
         "arrow-spacing": 2,
@@ -93,6 +99,7 @@
         "space-in-parens": [2, "never"],
         "space-infix-ops": 2,
         "space-unary-ops": [2, { "words": true, "nonwords": false }],
+        "@typescript-eslint/no-explicit-any": "off",
         // spaced-comment doesn't work with flow-escape comments like /*::`*/
         // "spaced-comment": [2, "always"],
         "strict": [2, "global"],

@@ -3,14 +3,14 @@
 import type {Node as ReactNode} from "React";
 import React from "react";
 
-import BrandedFooter from "./BrandedFooter";
+import BrandedFooter from "@/src/components/BrandedFooter";
 
 export default {
     title: "App Components/BrandedFooter",
     component: BrandedFooter,
 };
 
-const Template = (args: Object): ReactNode => {
+const Template = (args: Object): ReactNode => {       
     (Template.args: any); return <BrandedFooter {...args} />;
 };
 
