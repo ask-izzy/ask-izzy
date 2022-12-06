@@ -1,8 +1,6 @@
-/* @flow */
 /* eslint-disable max-len */
 
-import * as React from "react";
-import type {Node as ReactNode} from "React";
+import React, {ReactNode} from "react";
 import Link from "@/src/components/base/Link";
 import StaticPage from "@/components/pages/StaticPage";
 import {MobileDetect} from "@/src/effects/MobileDetect";
@@ -146,8 +144,8 @@ function BushfireReliefStaticPage(): ReactNode {
                 <strong>Updating service information</strong>
             </h3>
             <p>
-                Ask Izzy has over 360,000 services listed, and we'd love
-                your help at making sure they're up to date. If you have
+                Ask Izzy has over 360,000 services listed, and we&apos;d love
+                your help at making sure they&apos;re up to date. If you have
                 information about a service in our directory that is closed
                 or has altered information, please let us know by completing
                 {" "}

@@ -13,6 +13,7 @@ type Props = {
     onClick?: (event: React.SyntheticEvent<HTMLAnchorElement>) => void,
     title?: string
     target?: string
+    rel?: string
 }
 
 function Link({
