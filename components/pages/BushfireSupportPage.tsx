@@ -1,11 +1,11 @@
 /* eslint-disable max-len */
 
-import React, {ReactNode} from "react";
+import React from "react";
 import Link from "@/src/components/base/Link";
 import StaticPage from "@/components/pages/StaticPage";
 import {MobileDetect} from "@/src/effects/MobileDetect";
 
-function BushfireReliefStaticPage(): ReactNode {
+function BushfireReliefStaticPage() {
     const isMobile = MobileDetect(799)
     return (
         <StaticPage
