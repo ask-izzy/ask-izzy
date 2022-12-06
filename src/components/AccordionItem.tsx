@@ -1,17 +1,17 @@
-/* @flow */
-import * as React from "react";
+import React, {ReactNode} from "react";
 
-import icons from "../icons";
-import Summary from "./base/Summary";
+import Chevron from "@/src/icons/Chevron";
+import Summary from "@/src/components/base/Summary";
 
 type Props = {
     title: string,
-    children: React.Node,
+    children: ReactNode,
 }
 
-const AccordionItem: React.StatelessFunctionalComponent<Props> = (
-    {children, title}
-) => {
+const AccordionItem = ({
+    children,
+    title,
+}: Props) => {
     return (
         <details className="AccordionItem">
             <Summary
@@ -22,7 +22,7 @@ const AccordionItem: React.StatelessFunctionalComponent<Props> = (
                 }}
             >
                 <div> {/* wrapper needed for safari flex bug https://bugs.webkit.org/show_bug.cgi?id=190065 */}
-                    <h3 className="title">{title}</h3><icons.Chevron />
+                    <h3 className="title">{title}</h3><Chevron />
                 </div>
             </Summary>
             <div className="AccordionItemContent">
