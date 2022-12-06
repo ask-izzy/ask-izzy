@@ -8,7 +8,7 @@ import cmsAllPagesQuery from "@/src/queries/content/allPages"
 import cmsCalloutQuery from "@/src/queries/content/callout";
 import categories, { getCategory } from "@/src/constants/categories"
 import ResultsListPage from "@/components/pages/ResultsListPage"
-import DynamicPage from "@/components/pages/DynamicPage.js"
+import DynamicPage from "@/components/pages/DynamicPage"
 import type {RouteSharedProps} from "@/flow/routes"
 import {queryGraphQlWithErrorLogging} from "@/src/utils/apolloClient";
 import type {CalloutType} from "@/src/components/CalloutBox"

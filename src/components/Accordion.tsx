@@ -1,16 +1,16 @@
-/* @flow */
-import * as React from "react";
-import StrapiMarkdown from "../components/StrapiMarkdown";
+import React from "react";
+import StrapiMarkdown from "@/src/components/StrapiMarkdown";
 import AccordionItem from "./AccordionItem";
 
 type Props = {
     title: string,
-    items: Array<Object>,
+    items: Array<Record<string, any>>,
 }
 
-const Accordion: React.StatelessFunctionalComponent<Props> = (
-    {title, items}
-): React.Node => {
+const Accordion = ({
+    title,
+    items,
+}: Props) => {
 
     const renderItem = (item, index) => {
         return (

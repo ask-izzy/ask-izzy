@@ -1,7 +1,4 @@
-/* @flow */
-
-import * as React from "react";
-import type {Node as ReactNode} from "React";
+import React, {ReactNode} from "react";
 
 import StaticPage from "@/components/pages/StaticPage";
 import Accordion from "@/src/components/Accordion";
@@ -37,12 +34,12 @@ type PageDetails = {
     CalloutBoxes: Array<CalloutBoxType>
   }
 type ReactMarkdownQuoteProps = {
-    children: React.Node,
+    children: ReactNode,
 }
-type Props = {|
+type Props = {
     pageDetails: PageDetails,
     embeddedCallouts: Array<CalloutType>
-|}
+}
 
 function DynamicPage({pageDetails, embeddedCallouts}: Props): ReactNode {
     /**
@@ -51,14 +48,14 @@ function DynamicPage({pageDetails, embeddedCallouts}: Props): ReactNode {
      * @param props - Thr Markdown props of a blockquote
      * @returns {JSX.Element} - returns either a callout or blockqupte
      */
-    const renderEmbCallout: (props: ReactMarkdownQuoteProps) => ReactNode =
+    const renderEmbCallout: (props: ReactMarkdownQuoteProps) => any =
         (props: ReactMarkdownQuoteProps) => {
             // Get the text content of the children
-            const textContent = React.Children.map(props.children,
+            const textContent = (React.Children.map(props.children,
                 paragraphElm => (
-                    React.Children.map(paragraphElm.props.children,
+                    React.Children.map((paragraphElm as any).props.children,
                         textElm => textElm.type(textElm.props))
-                )).join("")
+                )) as any).join("")
 
             const [, calloutKey] = textContent.match(/\[callout\((.+)\)]/) || [];
             const callout = embeddedCallouts
