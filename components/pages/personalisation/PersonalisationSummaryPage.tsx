@@ -1,12 +1,6 @@
-/* @flow */
-
-import React, {useEffect} from "react"
-import type {
-    Node as ReactNode,
-    ElementConfig as ReactElementConfig,
-} from "react";
-import { withRouter } from "next/router"
-import type { NextRouter } from "next/router"
+import React, {useEffect, ReactNode} from "react"
+import {withRouter} from "next/router"
+import type {NextRouter} from "next/router"
 
 import WithStickyFooter from "@/src/components/WithStickyFooter";
 import Spacer from "@/src/components/Spacer";
@@ -30,13 +24,13 @@ import {
 } from "@/src/utils/routing"
 import type {
     PersonalisationPage,
-} from "@/flow/personalisation-page"
+} from "@/types/personalisation-page"
 
 type Props = {
     router: NextRouter
 }
 
-function PersonalisationSummaryPage({router}: Props): ReactNode {
+function PersonalisationSummaryPage({router}: Props) {
 
     useEffect(() => {
         if (router.isReady) {
@@ -72,7 +66,7 @@ function PersonalisationSummaryPage({router}: Props): ReactNode {
         const personalisationPages = getPersonalisationPages(router)
 
         return personalisationPages.filter(page =>
-            page.shouldShowInSummary ?? true
+            page.shouldShowInSummary ?? true,
         )
     }
 
@@ -87,10 +81,10 @@ function PersonalisationSummaryPage({router}: Props): ReactNode {
         </div>
 
     function getFormattedQuestion(
-        personalisationPage: PersonalisationPage
+        personalisationPage: PersonalisationPage,
     ): string | null {
         return personalisationPage.summaryLabel ||
-            personalisationPage.question || null
+            (personalisationPage as any).question || null
     }
 
     function getFormattedAnswers(personalisationPage: PersonalisationPage) {
@@ -98,7 +92,7 @@ function PersonalisationSummaryPage({router}: Props): ReactNode {
             return personalisationPage.summaryValue
         }
         const savedAnswer = getSavedPersonalisationAnswer(
-            personalisationPage
+            personalisationPage,
         )
         if (!savedAnswer) {
             return "None selected";
@@ -126,7 +120,7 @@ function PersonalisationSummaryPage({router}: Props): ReactNode {
                     </div>
                 }
                 bannerName={getBannerName(
-                    getCategoryFromRouter(router)
+                    getCategoryFromRouter(router),
                 )}
                 fixedAppBar={true}
                 backMessage={"Back to results"}
@@ -184,14 +178,4 @@ function PersonalisationSummaryPage({router}: Props): ReactNode {
     )
 }
 
-export default (
-    withRouter(PersonalisationSummaryPage):
-        Class<
-            React$Component<
-                $Diff<
-                    ReactElementConfig<typeof PersonalisationSummaryPage>,
-                    {router: *}
-                >
-            >
-        >
-)
+export default (withRouter(PersonalisationSummaryPage))
