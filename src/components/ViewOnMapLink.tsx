@@ -1,18 +1,16 @@
-/* @flow */
-
-import type {Node as ReactNode} from "React";
 import React, {useEffect, useState} from "react";
-import icons from "../icons";
-import maps, {MapsApi} from "../maps";
-import Link from "./base/Link";
+
+import Map from "@/src/icons/Map";
+import maps, {MapsApi} from "@/src/maps";
+import Link from "@/src/components/base/Link";
 
 type Props = {
     to: string
 }
 
-function ViewOnMapLink({to}: Props): ReactNode {
+function ViewOnMapLink({to}: Props) {
 
-    const [mapApi, setMapApi] = useState<?MapsApi>(null);
+    const [mapApi, setMapApi] = useState<MapsApi | null>(null);
 
     useEffect(() => {
         const getMaps = async() => {
@@ -37,7 +35,7 @@ function ViewOnMapLink({to}: Props): ReactNode {
             }}
         >
             <span className="label">
-                <icons.Map
+                <Map
                     className="big"
                     aria-hidden={true}
                 />

@@ -1,16 +1,14 @@
-/* @flow */
-
-import type {Node as ReactNode} from "react"
 import React, {useEffect, useState} from "react";
-import Button from "../base/Button";
-import icons from "../../icons"
-import {getScrollPosition} from "../../effects/scrollPosition";
+
+import Button from "@/src/components/base/Button";
+import Chevron from "@/src/icons/Chevron"
+import {getScrollPosition} from "@/src/effects/scrollPosition";
 
 type Props = {
     label: string,
 }
 
-function ScrollToTop({label}: Props): ReactNode {
+function ScrollToTop({label}: Props) {
 
     const [currentScrollPos, setCurrentScrollPos] = useState(0)
     const [showButton, setShowButton] = useState(false)
@@ -52,7 +50,7 @@ function ScrollToTop({label}: Props): ReactNode {
                     eventLabel: null,
                 }}
             >
-                <icons.Chevron/>
+                <Chevron/>
                 <span>{label}</span>
             </Button>
         </div>

@@ -1,20 +1,12 @@
-/* @flow */
-
-import type {
-    Node as ReactNode,
-    Element as ReactElement,
-    ElementConfig as ReactElementConfig,
-} from "React";
 import React from "react"
 import { withRouter } from "next/router"
 import type { NextRouter } from "next/router"
 
 import DebugPersonalisation from "@/src/components/DebugPersonalisation";
 import ResultsList from "@/src/components/ResultsList";
-import LoadingResultsHeader from
-"@/src/components/ResultsListPage/LoadingResultsHeader";
+import LoadingResultsHeader from "@/src/components/ResultsListPage/LoadingResultsHeader";
 import AlertBannerList from "@/src/components/AlertBannerList";
-import icons from "@/src/icons";
+import Loading from "@/src/icons/Loading";
 import NotFoundStaticPage from "@/pages/404"
 import FlatButton from "@/src/components/FlatButton";
 import SuggestionBox from "@/components/SuggestionBox";
@@ -23,14 +15,13 @@ import { stateFromLocation } from "@/src/utils";
 import ScrollToTop from "@/src/components/ResultsListPage/ScrollToTop";
 import Storage from "@/src/storage";
 import Controls from "@/src/components/ResultsListPage/Controls";
-
 import useServiceResults from "@/hooks/useServiceResults"
 
 type Props = {
     router: NextRouter
 }
 
-function ResultsListPage({router}: Props): ReactNode {
+function ResultsListPage({router}: Props) {
     const {
         searchResults,
         pageTitle,
@@ -50,11 +41,11 @@ function ResultsListPage({router}: Props): ReactNode {
     function hasSearchResults(): boolean {
         return Boolean(
             searchResults &&
-                searchResults.length > 0
+                searchResults.length > 0,
         )
     }
 
-    const renderPage = (): ReactNode => (
+    const renderPage = () => (
         <div className="ResultsListPage">
             <div>
                 <DebugPersonalisation
@@ -90,7 +81,7 @@ function ResultsListPage({router}: Props): ReactNode {
         </div>
     )
 
-    function renderResults(): ReactNode {
+    function renderResults() {
         return (
             <div className="List results">
                 <ResultsList
@@ -127,7 +118,7 @@ function ResultsListPage({router}: Props): ReactNode {
         )
     }
 
-    function renderSuggestionBox(): void | ReactNode {
+    function renderSuggestionBox() {
         if (
             !searchHasNextPage() &&
             !searchIsLoading()
@@ -146,7 +137,7 @@ function ResultsListPage({router}: Props): ReactNode {
         }
     }
 
-    function renderLoadMore(): void | ReactElement<"div"> | ReactNode {
+    function renderLoadMore() {
         if (searchHasNextPage() && !searchError) {
             return (
                 <div className="moreResultsContainer">
@@ -167,15 +158,15 @@ function ResultsListPage({router}: Props): ReactNode {
         if (searchIsLoading()) {
             return (
                 <div className="progress">
-                    <icons.Loading className="big" />
+                    <Loading className="big" />
                 </div>
             );
         }
     }
 
     function setIssParamsOverride(
-        issParamsOverride?: { [string]: any },
-        triggerNewSearch: boolean = true
+        issParamsOverride?: Record<string, any>,
+        triggerNewSearch = true,
     ): void {
         if (issParamsOverride) {
             Storage.setJSON("issParamsOverride", issParamsOverride)
@@ -198,14 +189,4 @@ function ResultsListPage({router}: Props): ReactNode {
     return <NotFoundStaticPage/>
 }
 
-export default (
-    withRouter(ResultsListPage):
-        Class<
-            React$Component<
-                $Diff<
-                    ReactElementConfig<typeof ResultsListPage>,
-                    {router: *}
-                >
-            >
-        >
-)
+export default (withRouter(ResultsListPage))

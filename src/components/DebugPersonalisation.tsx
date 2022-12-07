@@ -1,32 +1,26 @@
-/* @flow */
-
-import type {
-    Node as ReactNode,
-} from "React";
 import React, {useState} from "react";
 import {diffJson} from "diff";
 import { useRouter } from "next/router"
+
 import {
     getSearchQueryModifiers,
     buildSearchQueryFromModifiers,
-} from "../iss/searchQueryBuilder"
-import type {SearchQueryModifier, SearchQuery} from "../iss/searchQueryBuilder"
-import {convertIzzySearchQueryToIss3} from "../iss/serviceSearch"
-import Button from "./base/Button"
-import Diff from "./debug/Diff"
-import type { DiffType } from "./debug/Diff"
-import DebugContainer from "../components/DebugContainer";
-import IssParamsOverrideControls from
-"../components/debug/IssParamsOverrideControls";
-import Storage from "../storage";
+    SearchQuery,
+} from "@/src/iss/searchQueryBuilder"
+import {convertIzzySearchQueryToIss3} from "@/src/iss/serviceSearch"
+import Button from "@/src/components/base/Button"
+import Diff, {DiffType} from "@/src/components/debug/Diff"
+import DebugContainer from "@/src/components/DebugContainer";
+import IssParamsOverrideControls from "@/src/components/debug/IssParamsOverrideControls";
+import Storage from "@/src/storage";
 
-type Props = {|
+type Props = {
     issQuery: SearchQuery,
     setIssParamsOverride: (
-        issParamsOverride?: { [string]: any },
+        issParamsOverride?: Record<string, any>,
         triggerNewSearch?: boolean
     ) => void
-|}
+}
 
 type DiffedLayer = {
     name: string,
@@ -36,23 +30,18 @@ type DiffedLayer = {
 function DebugPersonalisation({
     issQuery,
     setIssParamsOverride,
-}: Props): ReactNode {
+}: Props) {
     if (typeof window === "undefined") {
         return null
     }
     const [convertToISSQuery, setConvertToISSQuery] = useState(true)
     const router = useRouter()
 
-    // Cast because flow is stupid and doesn't know we're filtering out null
-    // https://github.com/facebook/flow/issues/5955
-    const searchQueryModifiers: SearchQueryModifier[] = (
-        getSearchQueryModifiers(
-            router
-        ).filter(layer => layer): any
-    )
+    const searchQueryModifiers = getSearchQueryModifiers(router)
+        .filter(layer => layer)
 
     const originalIssQuery = convertIzzySearchQueryToIss3(
-        issQuery
+        issQuery,
     )
 
     const diffedLayers: DiffedLayer[] =
@@ -104,7 +93,7 @@ function DebugPersonalisation({
                         <Button
                             onClick={() => setIssParamsOverride(
                                 originalIssQuery,
-                                false
+                                false,
                             )}
                         >
                             Override ISS Query
@@ -118,7 +107,7 @@ function DebugPersonalisation({
 
 function getDiffedLayers(
     searchQueryModifiers,
-    convertToISSQuery
+    convertToISSQuery,
 ): DiffedLayer[] {
     const formattedLayers = convertToISSQuery ?
         searchQueryModifiers.map(layer => ({
@@ -129,20 +118,20 @@ function getDiffedLayers(
     const diffedLayers: DiffedLayer[] = []
     for (let i = 0; i < formattedLayers.length; i++) {
         let mergedUpToPreviousLayer = buildSearchQueryFromModifiers(
-            formattedLayers.slice(0, i || 1)
+            formattedLayers.slice(0, i || 1),
         )
         let mergedUpToIncludingLayer = buildSearchQueryFromModifiers(
-            formattedLayers.slice(0, i + 1)
+            formattedLayers.slice(0, i + 1),
         )
 
 
         if (convertToISSQuery) {
             mergedUpToPreviousLayer = convertIzzySearchQueryToIss3(
-                mergedUpToPreviousLayer
-            )
+                mergedUpToPreviousLayer,
+            ) as SearchQuery
             mergedUpToIncludingLayer = convertIzzySearchQueryToIss3(
-                mergedUpToIncludingLayer
-            )
+                mergedUpToIncludingLayer,
+            ) as SearchQuery
         }
 
         let diff = diffJson(mergedUpToPreviousLayer, mergedUpToIncludingLayer)

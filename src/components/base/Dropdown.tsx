@@ -1,4 +1,4 @@
-import React, {useEffect, useRef, useState, ReactNode} from "react";
+import React, {useEffect, useRef, useState} from "react";
 import SvgIconChevron from "@/src/icons/Chevron";
 import {OutsideComponentClick} from "@/src/effects/OutsideComponentClick";
 import {MobileDetect} from "@/src/effects/MobileDetect";
@@ -135,7 +135,7 @@ function Dropdown({
         }
     }
 
-    const Options = (): ReactNode => (
+    const Options = (
         <div
             ref={rootElmRef}
             className="optionsContainer"

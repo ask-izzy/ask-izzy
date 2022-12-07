@@ -1,7 +1,4 @@
-/* @flow */
-
 import React, {useState} from "react";
-import type {Node as ReactNode} from "react";
 import { useRouter } from "next/router"
 
 import HeaderBar from "@/src/components/HeaderBar"
@@ -17,7 +14,7 @@ import useMyList from "@/hooks/useMyList"
 import ClearMyListDialog from "@/src/components/ClearMyListDialog"
 import BrandedFooter from "@/src/components/BrandedFooter"
 
-function MyListPage(): ReactNode {
+function MyListPage() {
     const router = useRouter()
     const isMobile = MobileDetect(500)
     const {
@@ -79,7 +76,6 @@ function MyListPage(): ReactNode {
                     <MyListResults
                         results={myListServices}
                         resultsLoading={isLoading}
-                        travelTimesStatus={"loaded"}
                     >
                         {renderInformationText()}
                     </MyListResults>

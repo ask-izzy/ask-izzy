@@ -1,24 +1,19 @@
-/* @flow */
-
-
-import type {Node as ReactNode} from "react";
 import React, {useEffect, useRef, useState} from "react";
 import {useRouter} from "next/router";
 
-import ViewOnMapLink from "../ViewOnMapLink";
+import ViewOnMapLink from "@/src/components/ViewOnMapLink";
 import SortResult, {SORT_OPTIONS} from "./SortResult";
 import {getScrollPosition} from "../../effects/scrollPosition";
 import type {SortType} from "../base/Dropdown";
-import GeolocationButtonForTravelTimes from
-"../GeolocationButtonForTravelTimes";
-import {MobileDetect} from "../../effects/MobileDetect";
-import type {travelTimesStatus} from "../../hooks/useTravelTimesUpdater";
-import Service from "../../iss/Service"
+import GeolocationButtonForTravelTimes from "@/src/components/GeolocationButtonForTravelTimes";
+import {MobileDetect} from "@/src/effects/MobileDetect";
+import type {travelTimesStatus} from "@/src/hooks/useTravelTimesUpdater";
+import Service from "@/src/iss/Service"
 import {getPersonalisationNextPath} from "@/src/utils/routing"
 
 type Props = {
     onSortByChange: (SortType) => void,
-    onTravelTimesStatusChange: (travelTimesStatus) => void,
+    onTravelTimesStatusChange: (status: travelTimesStatus) => void,
     servicesToUpdateTravelTimes: Array<Service>,
 }
 
@@ -26,7 +21,7 @@ function Controls({
     onSortByChange,
     onTravelTimesStatusChange,
     servicesToUpdateTravelTimes,
-}: Props): ReactNode {
+}: Props) {
     const [sticky, setSticky] = useState(false);
     const [initialOffset, setInitialOffset] = useState(0);
     const [sortOption, setSortOption] = useState<SortType>(SORT_OPTIONS[0])
@@ -47,7 +42,7 @@ function Controls({
             // app bar
             if (isMobile) {
                 setInitialOffset(
-                    ref?.current?.getBoundingClientRect().bottom + 44
+                    ref?.current?.getBoundingClientRect().bottom + 44,
                 )
             } else {
                 setInitialOffset(ref?.current?.offsetTop)

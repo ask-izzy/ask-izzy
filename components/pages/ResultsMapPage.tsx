@@ -1,33 +1,23 @@
-/* @flow */
-
 import React, {useState} from "react"
-import type {
-    Node as ReactNode,
-    Element as ReactElement,
-    ElementConfig as ReactElementConfig,
-} from "React"
 import { withRouter } from "next/router"
 import type { NextRouter } from "next/router"
 
 import AppBar from "@/src/components/AppBar";
 import ResultsList from "@/src/components/ResultsList";
 import SitesMap from "@/src/components/SitesMap";
-import NotFoundStaticPage from "@/src/../pages/404";
-import icons from "@/src/icons";
-
+import NotFoundStaticPage from "@/pages/404";
+import Loading from "@/src/icons/Loading";
 import type { site } from "@/src/iss/site";
 import Service from "@/src/iss/Service"
-
-import GeolocationButtonForTravelTimes from
-"@/src/components/GeolocationButtonForTravelTimes";
-import { goToPersonalisationNextPath } from "@/src/utils/routing"
+import GeolocationButtonForTravelTimes from "@/src/components/GeolocationButtonForTravelTimes";
+import {goToPersonalisationNextPath} from "@/src/utils/routing"
 import useServiceResults from "@/hooks/useServiceResults"
 
 type Props = {
     router: NextRouter
 }
 
-function ResultsMapPage({router}: Props): ReactNode {
+function ResultsMapPage({router}: Props) {
     const {
         searchResults,
         searchIsLoading,
@@ -36,7 +26,7 @@ function ResultsMapPage({router}: Props): ReactNode {
         setTravelTimesStatus,
     } = useServiceResults(router)
 
-    const [selectedSite, setSelectedSite] = useState<?site>()
+    const [selectedSite, setSelectedSite] = useState<site | null>()
 
     function services(): Array<Service> {
         if (!searchResults) {
@@ -45,12 +35,12 @@ function ResultsMapPage({router}: Props): ReactNode {
 
         return searchResults.filter(
             service => !service.location?.isConfidential() &&
-                !service.crisis
+                !service.crisis,
         );
     }
 
     function getSites(): Array<site> {
-        const sites = []
+        const sites: site[] = []
         const siteIds = {}
         for (const {site} of services()) {
             const id = site.id.toString()
@@ -63,7 +53,7 @@ function ResultsMapPage({router}: Props): ReactNode {
         return sites
     }
 
-    function getSiteLocations(): Object {
+    function getSiteLocations(): Record<string, any> {
         const locations = {}
         for (const service of services()) {
             locations[service.site.id.toString()] = service.location
@@ -84,7 +74,7 @@ function ResultsMapPage({router}: Props): ReactNode {
         return []
     }
 
-    function calculateMapHeight(): ?string {
+    function calculateMapHeight(): string | undefined {
         if (typeof window === "undefined" || !selectedSite) {
             return undefined;
         }
@@ -93,7 +83,7 @@ function ResultsMapPage({router}: Props): ReactNode {
 
         let mapHeight =
             window.innerHeight -
-            (document.querySelector(".AppBarContainer")?.offsetHeight || 0)
+            ((document.querySelector(".AppBarContainer") as HTMLElement)?.offsetHeight || 0)
 
         /* resize the map to make room
             * for the selected results */
@@ -106,7 +96,7 @@ function ResultsMapPage({router}: Props): ReactNode {
         return `${mapHeight}px`
     }
 
-    const renderPage: (() => ReactElement<"div">) = () => (
+    const renderPage = () => (
         <div className="ResultsMapPage">
             <AppBar
                 transition={false}
@@ -123,10 +113,10 @@ function ResultsMapPage({router}: Props): ReactNode {
         </div>
     )
 
-    function renderPageBody(): ReactNode | ReactElement<"div"> {
+    function renderPageBody() {
         if (searchIsLoading()) {
             return <div className="progress">
-                <icons.Loading className="big" />
+                <Loading className="big" />
             </div>
         } else {
             return <>
@@ -184,14 +174,4 @@ function ResultsMapPage({router}: Props): ReactNode {
 
 }
 
-export default (
-    withRouter(ResultsMapPage):
-        Class<
-            React$Component<
-                $Diff<
-                    ReactElementConfig<typeof ResultsMapPage>,
-                    {router: *}
-                >
-            >
-        >
-)
+export default (withRouter(ResultsMapPage))

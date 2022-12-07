@@ -5,6 +5,7 @@ import React, {useState} from "react";
 import classnames from "classnames";
 
 import Button from "@/src/components/base/Button"
+import type {AnalyticsEvent} from "../google-tag-manager";
 
 type Props = {
     label?: string,
@@ -13,6 +14,7 @@ type Props = {
     onClick: ((event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void) | undefined,
     disabled?: boolean,
     children?: any,
+    analyticsEvent?: AnalyticsEvent,
 } & React.HTMLProps<HTMLButtonElement>
 
 function FlatButton(

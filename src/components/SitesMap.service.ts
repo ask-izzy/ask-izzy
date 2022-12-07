@@ -1,8 +1,6 @@
-/* @flow */
-
-import type {site} from "../iss/site";
-import {MapsApi} from "../maps";
-import type {geoPoint} from "../iss/general"
+import type {site} from "@/src/iss/site";
+import {MapsApi} from "@/src/maps";
+import type {geoPoint} from "@/src/iss/general"
 
 type SiteMarker = {
     site: site,
@@ -11,7 +9,7 @@ type SiteMarker = {
 }
 
 export const markersShownOnLoad = (
-    markers: Array<SiteMarker>
+    markers: Array<SiteMarker>,
 ): Array<SiteMarker> => {
     if (markers.length === 0) {
         return []
@@ -55,7 +53,7 @@ export const markersShownOnLoad = (
 export const setMapView = (
     markers: Array<SiteMarker>,
     map: any, // can't use googleMaps type because it doesn't have fitBoudns
-    mapsAPI: ?MapsApi,
+    mapsAPI: MapsApi | null,
 ): void => {
     if (!mapsAPI || markers.length === 0) {
         // We'll call this method after the api is ready.
@@ -68,22 +66,24 @@ export const setMapView = (
         return;
     }
     const maps = mapsAPI.api;
-    const bounds = new maps.LatLngBounds();
+    const bounds = new (maps.LatLngBounds as any)();
 
     const points = markers.map(marker => marker.point)
 
     const centerPoint = points[0]
 
     // Add two points to create a maximum possible level of zoom
-    let maxZoom = 0.002; // about 0.5km
+    const maxZoom = 0.002; // about 0.5km
 
-    bounds.extend(new maps.LatLng(
+    bounds.extend(new (maps.LatLng as any)(
         centerPoint.lat + (maxZoom / 2),
-        centerPoint.lon + (maxZoom / 2)
+        centerPoint.lon + (maxZoom / 2),
+        undefined,
     ));
-    bounds.extend(new maps.LatLng(
+    bounds.extend(new (maps.LatLng as any)(
         centerPoint.lat - (maxZoom / 2),
-        centerPoint.lon - (maxZoom / 2)
+        centerPoint.lon - (maxZoom / 2),
+        undefined,
     ));
 
     // Loop though points and add to bounding box used for setting initial
@@ -94,10 +94,11 @@ export const setMapView = (
         const latDiff = centerPoint.lat - point.lat;
         const lonDiff = centerPoint.lon - point.lon;
 
-        bounds.extend(new maps.LatLng(point.lat, point.lon));
-        bounds.extend(new maps.LatLng(
+        bounds.extend(new (maps.LatLng as any)(point.lat, point.lon, undefined));
+        bounds.extend(new (maps.LatLng as any)(
             centerPoint.lat + latDiff,
-            centerPoint.lon + lonDiff
+            centerPoint.lon + lonDiff,
+            undefined,
         ));
     }
 
