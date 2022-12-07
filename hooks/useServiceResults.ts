@@ -1,4 +1,3 @@
-/* @flow */
 import {useEffect, useState} from "react"
 import type { NextRouter } from "next/router"
 import objectHash from "object-hash"
@@ -15,8 +14,7 @@ import {
     getSearchQueryModifiers,
     buildSearchQueryFromModifiers,
 } from "@/src/iss/searchQueryBuilder"
-import type {SearchQuery, SearchQueryModifier}
-from "@/src/iss/searchQueryBuilder"
+import type {SearchQuery, SearchQueryModifier} from "@/src/iss/searchQueryBuilder"
 import * as gtm from "@/src/google-tag-manager";
 import {attachTransportTimes} from "@/src/iss/travelTimes"
 import {
@@ -35,12 +33,8 @@ import {
     getPersonalisationNextPath,
 } from "@/src/utils/routing"
 import Category from "@/src/constants/Category";
-import WhoIsLookingForHelpPage
-from "@/src/constants/personalisation-pages/WhoIsLookingForHelp"
+import WhoIsLookingForHelpPage from "@/src/constants/personalisation-pages/WhoIsLookingForHelp"
 import { usersnapFireEvent } from "@/helpers/usersnap.helpers"
-import WhoIsLookingForHelpBaseInfo from
-"@/src/constants/personalisation-pages/WhoIsLookingForHelp"
-import type { UserType } from "@/components/pages/personalisation/WhoIsLookingForHelp"
 
 type UseServiceResults = {
     searchResults: Array<Service> | null,
@@ -48,12 +42,12 @@ type UseServiceResults = {
     category: Category,
 
     searchError: {message: string, status: number} | null,
-    travelTimesStatus: ?travelTimesStatusType,
+    travelTimesStatus: travelTimesStatusType | null,
     sortBy: SortType | null,
     searchType: string | null,
     pageTitle: string,
 
-    setSortBy: (SortType | null) => void,
+    setSortBy: (sortBy: SortType | null) => void,
     setTravelTimesStatus: (travelTimesStatusType) => void,
 
     searchIsLoading: () => boolean,
@@ -134,7 +128,7 @@ export default (router: NextRouter): UseServiceResults => {
             throw Error(
                 "Something wack has happened here. It doesn't look like we " +
                 "have any unfilled out personalisation pages so we should be " +
-                "able to generate a query but we can't."
+                "able to generate a query but we can't.",
             )
         }
         const serviceSearch = createServiceSearch(query)
@@ -163,7 +157,7 @@ export default (router: NextRouter): UseServiceResults => {
         }
         addPageLoadDependencies(
             router.asPath,
-            `requestServices`
+            `requestServices`,
         )
 
         try {
@@ -173,14 +167,14 @@ export default (router: NextRouter): UseServiceResults => {
             setSearchError(error)
             setSearchStatus("some loaded")
             console.error(
-                "The following error occurred when trying to load next page"
+                "The following error occurred when trying to load next page",
             )
             console.error(error)
             return
         } finally {
             closePageLoadDependencies(
                 router.asPath,
-                `requestServices`
+                `requestServices`,
             )
         }
 
@@ -215,10 +209,10 @@ export default (router: NextRouter): UseServiceResults => {
         let queryChangedSinceLastFetch = true
 
         const previousSearchHash = storage.getItem(
-            previousSearchHashStorageKey
+            previousSearchHashStorageKey,
         );
         const previousSearchDateString = storage.getItem(
-            previousSearchDateStorageKey
+            previousSearchDateStorageKey,
         );
         const previousSearchDate = previousSearchDateString &&
             new Date(previousSearchDateString)
@@ -229,7 +223,7 @@ export default (router: NextRouter): UseServiceResults => {
         if (
             previousSearchHash === searchHash &&
             previousSearchDate &&
-            previousSearchDate > oneDayAgo
+            (previousSearchDate as any) > oneDayAgo
         ) {
             queryChangedSinceLastFetch = false
         }
@@ -249,16 +243,13 @@ export default (router: NextRouter): UseServiceResults => {
         // We have to do this once the component is mounted (instead of
         // in willTransitionTo because the personalisation components will
         // inspect the session).
-        let modifiers = getSearchQueryModifiers(router);
+        const modifiers = getSearchQueryModifiers(router);
 
         if (modifiers.includes(null)) {
             return null
         }
-        // Cast because flow is stupid and doesn't know that
-        // searchQueryModifiers won't contain null at this point.
-        modifiers = ((modifiers: any): SearchQueryModifier[])
 
-        return buildSearchQueryFromModifiers(modifiers)
+        return buildSearchQueryFromModifiers(modifiers as SearchQueryModifier[])
     }
 
     function searchIsLoading(): boolean {
@@ -290,7 +281,7 @@ export default (router: NextRouter): UseServiceResults => {
 }
 
 function usersnapFireEventPageView() {
-    const userType = ((storage.getItem(WhoIsLookingForHelpBaseInfo.name): any): UserType);
+    const userType = storage.getItem(WhoIsLookingForHelpPage.name)
     if (userType === "User Worker") {
         usersnapFireEvent("viewed-results-page")
     }

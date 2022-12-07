@@ -14,7 +14,7 @@ import MyListButton from "@/src/components/MyListButton"
 type Props = {
     transition?: boolean,
     hideLogoWhenNotABar?: boolean,
-    onBackTouchTap?: () => Promise<boolean> | null,
+    onBackTouchTap?: () => Promise<boolean> | null | void,
     backMessage?: string,
     containerClassName?: string | null,
     breakpoint? : number,

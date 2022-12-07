@@ -1,13 +1,12 @@
-/* @flow */
-
-import type {Element as ReactElement} from "react"
 import React, {useEffect} from "react";
-import storage from "../storage";
-import GeolocationButton from "./GeolocationButton";
-import icons from "../icons";
-import useTravelTimesUpdater from "../hooks/useTravelTimesUpdater"
-import type {travelTimesStatus} from "../hooks/useTravelTimesUpdater";
-import Service from "../iss/Service"
+
+import storage from "@/src/storage";
+import GeolocationButton from "@/src/components/GeolocationButton";
+import Walk from "@/src/icons/Walk"
+import Tram from "@/src/icons/Tram"
+import Car from "@/src/icons/Car"
+import useTravelTimesUpdater from "@/src/hooks/useTravelTimesUpdater"
+import Service from "@/src/iss/Service"
 
 type Props = {
     showMessage?: boolean,
@@ -24,7 +23,7 @@ function GeolocationButtonForTravelTimes({
     servicesToUpdateTravelTimes,
     showMessage = true,
     onTravelTimesStatusChange,
-}: Props): ReactElement<"div"> {
+}: Props) {
 
     const {
         travelTimesStatus,
@@ -43,9 +42,9 @@ function GeolocationButtonForTravelTimes({
                     className="explainerIcons"
                     aria-hidden={true}
                 >
-                    <icons.Walk/>
-                    <icons.Tram/>
-                    <icons.Car/>
+                    <Walk/>
+                    <Tram/>
+                    <Car/>
                 </span>
                 Want to see estimated travel times for the services below?
             </div>

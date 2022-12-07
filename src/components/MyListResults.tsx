@@ -1,26 +1,20 @@
-/* @flow */
+import React, {ReactNode} from "react";
 
-import * as React from "react";
-import type {Node as ReactNode} from "react";
-import MyListResultItem from "../components/MyListResultItem";
-
-import type {travelTimesStatus} from "../hooks/useTravelTimesUpdater";
-import ScreenReader from "../components/ScreenReader";
-import Service from "../iss/Service";
+import MyListResultItem from "@/src/components/MyListResultItem";
+import ScreenReader from "@/src/components/ScreenReader";
+import Service from "@/src/iss/Service";
 
 type Props = {
     results: Array<Service>,
     resultsLoading: boolean,
-    travelTimesStatus: travelTimesStatus,
     children?: ReactNode,
 }
 
 function MyListResults({
     results,
     resultsLoading,
-    travelTimesStatus,
     children,
-}: Props): ReactNode {
+}: Props) {
     return (
         <div className="MyListResults">
             {/*
@@ -40,14 +34,13 @@ function MyListResults({
                     </li>
                 }
                 {results.flatMap((myListService, index) => {
-                    const newList = []
+                    const newList: any = []
                     newList.push(
                         <MyListResultItem
                             key={index}
-                            travelTimesStatus={travelTimesStatus}
                             service={myListService}
                             resultNumber={index + 1}
-                        />
+                        />,
                     )
                     return newList
                 })}

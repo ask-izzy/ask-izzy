@@ -1,27 +1,25 @@
-/* @flow */
-
 import React from "react";
-import type {Node as ReactNode} from "react";
 import cnx from "classnames";
-import ResultListItem from "../components/ResultListItem";
-import CrisisLineItem from "../components/CrisisLineItem";
-import CrisisHeader from "../components/CrisisHeader";
+
+import ResultListItem from "@/src/components/ResultListItem";
+import CrisisLineItem from "@/src/components/CrisisLineItem";
+import CrisisHeader from "@/src/components/CrisisHeader";
 import {
     crisisResults as onlyCrisisResults,
     nonCrisisResults as onlyNonCrisisResults,
-} from "../iss/crisisService";
+} from "@/src/iss/crisisService";
 
-import Service, {sortServices} from "../iss/Service";
-import type {SortType} from "./base/Dropdown";
-import type {travelTimesStatus} from "../hooks/useTravelTimesUpdater";
-import ScreenReader from "../components/ScreenReader"
+import Service, {sortServices} from "@/src/iss/Service";
+import type {SortType} from "@/src/components/base/Dropdown";
+import type {travelTimesStatus} from "@/src/hooks/useTravelTimesUpdater";
+import ScreenReader from "@/src/components/ScreenReader"
 
 type Props = {
     results: Array<Service>,
     resultsLoading: boolean,
-    travelTimesStatus: ?travelTimesStatus,
+    travelTimesStatus: travelTimesStatus | null,
     crisisResults: boolean,
-    sortBy: ?SortType
+    sortBy: SortType | null | undefined
 }
 
 function ResultsList({
@@ -30,7 +28,7 @@ function ResultsList({
     travelTimesStatus,
     crisisResults,
     sortBy,
-}: Props): ReactNode {
+}: Props) {
 
     let filteredResults = crisisResults ?
         onlyCrisisResults(results)
@@ -40,7 +38,7 @@ function ResultsList({
         filteredResults = sortServices(filteredResults, sortBy)
     }
 
-    const ListItem: typeof CrisisLineItem | typeof ResultListItem =
+    const ListItem: any =
         crisisResults ?
             CrisisLineItem
             : ResultListItem
@@ -48,9 +46,7 @@ function ResultsList({
     return (
         <div className={cnx("ResultsList", {crisisResults})}>
             {crisisResults && filteredResults.length > 0 &&
-                <CrisisHeader
-                    plural={filteredResults.length > 1}
-                />
+                <CrisisHeader />
             }
             {/*
                 role="list" here is needed since VoiceOver won't treat

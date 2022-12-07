@@ -1,9 +1,8 @@
-/* @flow */
-import Service from "./Service"
+import Service from "@/src/iss/Service"
 
 export function countCrisisResults(results: Array<Service>): number {
     const firstRegularServiceIdx = results.findIndex(
-        ({crisis}) => !crisis
+        ({crisis}) => !crisis,
     )
 
     if (firstRegularServiceIdx === -1) {
@@ -18,13 +17,13 @@ export function countCrisisResults(results: Array<Service>): number {
 export function crisisResults(results: Array<Service>): Array<Service> {
     return results.slice(
         0,
-        countCrisisResults(results)
+        countCrisisResults(results),
     );
 }
 
 export function nonCrisisResults(results: Array<Service>): Array<Service> {
     return results.slice(
         countCrisisResults(results),
-        results.length
+        results.length,
     )
 }

@@ -1,7 +1,6 @@
-/* @flow */
 import type {
     PersonalisationLookingForHelpPage,
-} from "@/flow/personalisation-page"
+} from "@/types/personalisation-page"
 
 export default ({
     type: "who-is-looking-for-help",
@@ -9,4 +8,4 @@ export default ({
     title: "Who is looking for help?",
     noQuestionStepperBreadcrumb: true,
     shouldShowInSummary: false,
-}: PersonalisationLookingForHelpPage)
+} as PersonalisationLookingForHelpPage)

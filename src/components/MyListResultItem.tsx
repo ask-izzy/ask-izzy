@@ -1,20 +1,15 @@
-/* @flow */
-
-import type {Node as ReactNode, Element as ReactElement} from "React";
 import React from "react";
+import {titleize} from "underscore.string";
 
-import icons from "../icons";
-import Service from "../iss/Service";
-
-
-import AddToCompareButton from "./AddToCompareButton"
-import ServiceProvisions from "./service/ServiceProvisions"
-import OpeningTimes from "./OpeningTimes";
-import Ndis from "./Ndis";
-import { titleize } from "underscore.string";
-import ScreenReader from "./ScreenReader";
-import ListItem from "./ListItem";
-import Link from "./base/Link";
+import Map from "@/src/icons/Map";
+import Service from "@/src/iss/Service";
+import AddToCompareButton from "@/src/components/AddToCompareButton"
+import ServiceProvisions from "@/src/components/service/ServiceProvisions"
+import OpeningTimes from "@/src/components/OpeningTimes";
+import Ndis from "@/src/components/Ndis";
+import ScreenReader from "@/src/components/ScreenReader";
+import ListItem from "@/src/components/ListItem";
+import Link from "@/src/components/base/Link";
 
 
 type Props = {
@@ -25,8 +20,8 @@ type Props = {
 function ResultListItem({
     service,
     resultNumber,
-}: Props): ReactNode {
-    const renderLocation = (): ?ReactElement<"span"> => {
+}: Props) {
+    const renderLocation = () => {
         if (!service.location) {
             return null
         }
@@ -38,7 +33,7 @@ function ResultListItem({
 
         return (
             <span className="location">
-                <icons.Map aria-hidden={true} />
+                <Map aria-hidden={true} />
                 <ScreenReader>
                     Service located in
                 </ScreenReader>
@@ -75,14 +70,12 @@ function ResultListItem({
             <div className="site_name">
                 {service.site.name}
                 <Ndis
-                    className="ndis"
                     compact={true}
                     object={service}
                 />
             </div>
             {service.location && renderLocation()}
             <OpeningTimes
-                className="opening_hours"
                 object={service.open}
             />
             <ServiceProvisions
@@ -91,7 +84,7 @@ function ResultListItem({
             <div className="description">
                 {service.shortDescription?.map(
                     (sentence, i) =>
-                        <p key={i}>{sentence}</p>
+                        <p key={i}>{sentence}</p>,
                 )}
             </div>
         </ListItem>
