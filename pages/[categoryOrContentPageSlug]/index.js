@@ -128,6 +128,7 @@ export const getStaticProps: GetStaticProps<Props> = async({params}) => {
                         contentPage.Title,
                     ],
                 },
+                revalidate: 10,
             }
         } else {
             console.error(
@@ -137,6 +138,7 @@ export const getStaticProps: GetStaticProps<Props> = async({params}) => {
             return {
                 props: {},
                 notFound: true,
+                revalidate: 10,
             }
         }
     } catch (error) {
@@ -151,7 +153,10 @@ export const getStaticProps: GetStaticProps<Props> = async({params}) => {
         console.error(
             "Error when getting props for category/content page: " + error.message
         )
-        return { notFound: true };
+        return {
+            notFound: true,
+            revalidate: 10,
+        };
     }
 }
 
