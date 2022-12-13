@@ -1,12 +1,10 @@
-/* @flow */
 import React from "react";
-import type {Node as ReactNode} from "React";
 import {useRouter} from "next/router"
 
-import SearchBar from "./general/SearchBar";
-import ScreenReader from "./ScreenReader";
+import SearchBar from "@/src/components/general/SearchBar";
+import ScreenReader from "@/src/components/ScreenReader";
 
-function SupportSearchBar(): ReactNode {
+function SupportSearchBar() {
     const router = useRouter();
 
 
@@ -25,15 +23,14 @@ function SupportSearchBar(): ReactNode {
                 className="search-bar-container"
             >
                 <p>
-                    Don't see what you're looking for?
+                    Don&apos;t see what you&apos;re looking for?
                 </p>
                 <SearchBar
-                    type="search"
                     placeholder="Search Ask Izzy for a service"
                     onSubmit={(searchText) => {
                         if (searchText) {
                             router.push(
-                                `/search/${encodeURIComponent(searchText)}`
+                                `/search/${encodeURIComponent(searchText)}`,
                             )
                         }
                     }}

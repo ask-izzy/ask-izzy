@@ -1,11 +1,6 @@
-/* @flow */
 import React, {useState} from "react";
-import type {
-    Node as ReactNode,
-    ElementConfig as ReactElementConfig,
-} from "React";
-import { withRouter } from "next/router"
-import type { NextRouter } from "next/router"
+import {withRouter} from "next/router"
+import type {NextRouter} from "next/router"
 
 import storage from "@/src/storage";
 import QuestionStepper from "@/src/components/QuestionStepper";
@@ -18,13 +13,10 @@ import {
     goToPersonalisationNextPath,
     getPersonalisationBackPath,
 } from "@/src/utils/routing"
-import WhoIsLookingForHelpBaseInfo from
-"@/src/constants/personalisation-pages/WhoIsLookingForHelp"
-import {
-    getBannerName,
-} from "@/src/utils/personalisation"
-import type {PersonalisationLookingForHelpPage} from
-"@/flow/personalisation-page"
+import WhoIsLookingForHelpBaseInfo from "@/src/constants/personalisation-pages/WhoIsLookingForHelp"
+import {getBannerName} from "@/src/utils/personalisation"
+import type {PersonalisationLookingForHelpPage} from "@/types/personalisation-page"
+
 type Props = {
     router: NextRouter,
     details: PersonalisationLookingForHelpPage,
@@ -32,17 +24,17 @@ type Props = {
 
 export type UserType = "User Worker" | "User Myself"| "User Someone Else"
 
-function WhoIsLookingForHelp({router, details}: Props): ReactNode {
-    const [category] = useState<?Category>(
+function WhoIsLookingForHelp({router, details}: Props) {
+    const [category] = useState<Category | undefined>(
         getCategory(
-            router.query.categoryOrContentPageSlug
-        )
+            router.query.categoryOrContentPageSlug as string,
+        ),
     )
 
     const handleButtonClick: (
-        (userType: UserType) => (event: SyntheticEvent<HTMLButtonElement>) => void
+        (userType: UserType) => (event: React.SyntheticEvent<HTMLButtonElement>) => void
     ) = (userType: UserType) =>
-        (event: SyntheticEvent<HTMLButtonElement>): void => {
+        (): void => {
             storage.setItem(details.name, userType);
             storage.setItem(WhoIsLookingForHelpBaseInfo.name, userType);
 
@@ -51,7 +43,7 @@ function WhoIsLookingForHelp({router, details}: Props): ReactNode {
 
 
 
-    function renderDoneButton(): ReactNode {
+    function renderDoneButton() {
         return (
             <div>
                 <div className="done-button">
@@ -72,7 +64,7 @@ function WhoIsLookingForHelp({router, details}: Props): ReactNode {
         )
     }
 
-    function renderHeaderSection(): ReactNode {
+    function renderHeaderSection() {
         const goBackPath = getPersonalisationBackPath(router)
         const isSummaryRoute = goBackPath.includes("/summary")
 
@@ -89,7 +81,7 @@ function WhoIsLookingForHelp({router, details}: Props): ReactNode {
                     fixedAppBar={true}
                     bannerName={getBannerName(
                         category,
-                        details.name
+                        details.name,
                     )}
                     backUrl={isSummaryRoute ? goBackPath : undefined}
                     backMessage={isSummaryRoute ? "Back to answers" : undefined}
@@ -133,14 +125,4 @@ function WhoIsLookingForHelp({router, details}: Props): ReactNode {
     )
 }
 
-export default (
-    withRouter(WhoIsLookingForHelp):
-        Class<
-            React$Component<
-                $Diff<
-                    ReactElementConfig<typeof WhoIsLookingForHelp>,
-                    {router: *}
-                >
-            >
-        >
-)
+export default (withRouter(WhoIsLookingForHelp))

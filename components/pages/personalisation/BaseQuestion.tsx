@@ -1,18 +1,14 @@
-/* @flow */
-import React, {useState, useEffect } from "react";
-import type {
-    Node as ReactNode,
-    ElementConfig as ReactElementConfig,
-} from "react";
-import { withRouter } from "next/router"
-import type { NextRouter } from "next/router"
+import React, {useState, useEffect} from "react";
+import {withRouter} from "next/router"
+import type {NextRouter} from "next/router"
 import classnames from "classnames";
 
 import HeaderBar from "@/src/components/HeaderBar";
 import InputListItem from "@/src/components/InputListItem";
 import FlatButton from "@/src/components/FlatButton";
 import WithStickyFooter from "@/src/components/WithStickyFooter";
-import icons from "@/src/icons";
+import CheckboxSelected from "@/src/icons/CheckboxSelected";
+import CheckboxUnselected from "@/src/icons/CheckboxUnselected";
 import storage from "@/src/storage";
 import QuestionStepper from "@/src/components/QuestionStepper";
 import {getCategory} from "@/src/constants/categories";
@@ -28,32 +24,30 @@ import {
 import SupportSearchBar from "@/src/components/SupportSearchBar";
 import type {
     PersonalisationQuestionPage,
-} from "@/flow/personalisation-page"
+} from "@/types/personalisation-page"
 import Category from "@/src/constants/Category";
 
-type Props = {|
+type Props = {
     router: NextRouter,
-    backToAnswers?: boolean,
     details: PersonalisationQuestionPage,
     classNames?: Array<string>,
-|}
+}
 export type State = {
-    category: ?Category,
-    selectedAnswer: ?string | Set<string>, // The answer(s) that a user has
+    category: Category | null,
+    selectedAnswer: string | Set<string> | null, // The answer(s) that a user has
         // currently selected but not confirmed
 }
 
 function BaseQuestion({
     router,
-    backToAnswers,
     details,
     classNames,
-}: Props): ReactNode {
+}: Props) {
     const [selectedAnswer, setSelectedAnswer] =
-        useState<?string | Set<string>>(details.multipleChoice ? new Set() : null)
+        useState<string | Set<string> | null>(details.multipleChoice ? new Set() : null)
     const [category] =
-        useState<?Category>(getCategory(
-            router.query.categoryOrContentPageSlug
+        useState<Category | undefined>(getCategory(
+            router.query.categoryOrContentPageSlug as string,
         ))
 
     let listClassName = "List"
@@ -76,7 +70,7 @@ function BaseQuestion({
         setSelectedAnswer(
             details.multipleChoice ?
                 new Set(savedAnswer)
-                : null
+                : null,
         )
     }
 
@@ -95,18 +89,18 @@ function BaseQuestion({
         if (selected instanceof Set) {
             storage.setJSON(
                 details.name,
-                Array.from(selected)
+                Array.from(selected),
             );
         } else {
             storage.setItem(
                 details.name,
-                selected || "(skipped)"
+                selected || "(skipped)",
             )
         }
         goToPersonalisationNextPath({router})
     }
 
-    function iconFor(answer: string): ReactNode {
+    function iconFor(answer: string) {
         const Icon = details.icons?.[answer]
         if (Icon) {
             return (
@@ -120,7 +114,7 @@ function BaseQuestion({
 
     function onAnswerTouchTap(answer: string, selectingAnswer: boolean): void {
         if (selectedAnswer instanceof Set) {
-            let answers = new Set(selectedAnswer)
+            const answers = new Set(selectedAnswer)
             if (selectingAnswer) {
                 answers.add(answer)
             } else {
@@ -133,13 +127,13 @@ function BaseQuestion({
         }
     }
 
-    function getDescriptionForAnswer(answer: string): ?string {
+    function getDescriptionForAnswer(answer: string): string | null {
         return details.descriptionsForAnswers?.[answer] || null
     }
 
 
 
-    function renderAnswer(answer: string, index: number, array: Array<string>): ReactNode {
+    function renderAnswer(answer: string, index: number) {
         if (details.multipleChoice) {
             return renderMultiChoiceAnswer(answer, index)
         } else {
@@ -147,7 +141,7 @@ function BaseQuestion({
         }
     }
 
-    function renderSingleChoiceAnswer(answer: string, index: number): ReactNode {
+    function renderSingleChoiceAnswer(answer: string, index: number) {
         return (
             <InputListItem
                 key={index}
@@ -162,7 +156,7 @@ function BaseQuestion({
         )
     }
 
-    function renderMultiChoiceAnswer(answer: string, index: number): ReactNode {
+    function renderMultiChoiceAnswer(answer: string, index: number) {
         const currentlySelected = selectedAnswer instanceof Set ?
             selectedAnswer.has(answer)
             : false
@@ -177,24 +171,24 @@ function BaseQuestion({
                 type="checkbox"
                 checked={currentlySelected}
                 checkedIcon={
-                    <icons.CheckboxSelected
+                    <CheckboxSelected
                         className="big"
                     />
                 }
                 uncheckedIcon={
-                    <icons.CheckboxUnselected
+                    <CheckboxUnselected
                         className="big"
                     />
                 }
                 onClick={() => onAnswerTouchTap(
                     answer,
-                    !currentlySelected
+                    !currentlySelected,
                 )}
             />
         )
     }
 
-    function renderDoneButton(): ReactNode {
+    function renderDoneButton() {
         let label = "Skip"
         if (selectedAnswer instanceof Set) {
             if (selectedAnswer.size) {
@@ -216,7 +210,7 @@ function BaseQuestion({
         )
     }
 
-    function renderSearchBar(): ReactNode {
+    function renderSearchBar() {
         if (details.showSupportSearchBar) {
             return <SupportSearchBar />
         }
@@ -247,7 +241,7 @@ function BaseQuestion({
                         taperColour={"LighterGrey"}
                         bannerName={getBannerName(
                             category,
-                            details.name
+                            details.name,
                         )}
                         backUrl={isSummaryRoute ? goBackPath : undefined}
                         backMessage={
@@ -284,7 +278,7 @@ function BaseQuestion({
                         </legend>
                         <div className={listClassName}>
                             {arrayOfPossibleAnswers().map(
-                                renderAnswer
+                                renderAnswer,
                             )}
                         </div>
                         {details.baseTextBoxComponent ?? null}
@@ -296,14 +290,4 @@ function BaseQuestion({
     )
 }
 
-export default (
-    withRouter(BaseQuestion):
-        Class<
-            React$Component<
-                $Diff<
-                    ReactElementConfig<typeof BaseQuestion>,
-                    {router: *}
-                >
-            >
-        >
-)
+export default (withRouter(BaseQuestion))

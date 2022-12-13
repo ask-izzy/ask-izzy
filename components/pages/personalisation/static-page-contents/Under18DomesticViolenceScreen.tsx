@@ -1,10 +1,9 @@
-/* @flow */
-import * as React from "react";
+import React from "react";
 
-import icons from "@/src/icons";
+import PhoneTalk from "@/src/icons/PhoneTalk";
 import Link from "@/src/components/base/Link";
 
-function Under18DomesticViolenceScreen(): React.Node {
+function Under18DomesticViolenceScreen() {
     const linkService = "/service/120917-kids-helpline";
     const numberService = "1800 55 1800";
     const chatService =
@@ -16,10 +15,10 @@ function Under18DomesticViolenceScreen(): React.Node {
     return (
         <div className="AreYouSafe">
             <div className="safety-message">
-                <icons.PhoneTalk className="PhoneIcon" />
+                <PhoneTalk className="PhoneIcon" />
                 <h2>
                     Violence is never OK. It may be happening at home
-                    with family or with someone you're dating.
+                    with family or with someone you&apos;re dating.
                 </h2>
                 <p>
                     <Link to={linkService}>Kids Helpline</Link> can help.

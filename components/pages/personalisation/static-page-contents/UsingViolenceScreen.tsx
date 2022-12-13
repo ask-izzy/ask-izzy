@@ -1,11 +1,10 @@
-/* @flow */
-import * as React from "react";
+import React from "react";
 
-import icons from "@/src/icons";
+import PhoneTalk from "@/src/icons/PhoneTalk";
 import Link from "@/src/components/base/Link";
 
 
-function UsingViolenceScreen(): React.Node {
+function UsingViolenceScreen() {
     const referralServicePhone = "1800737732";
     const referralServiceChat = "https://ntv.org.au/get-help/";
     const link1800Respect = "/service/634190-1800respect";
@@ -14,7 +13,7 @@ function UsingViolenceScreen(): React.Node {
     return (
         <div className="AreYouSafe">
             <div className="safety-message">
-                <icons.PhoneTalk className="PhoneIcon" />
+                <PhoneTalk className="PhoneIcon" />
                 <h2>
                     Is your behaviour causing problems for your
                     relationships or family?
