@@ -1,12 +1,12 @@
 /* @flow */
 import * as React from "react";
 
-import icons from "@/src/icons";
+import PhoneTalk from "@/src/icons/PhoneTalk";
 import Link from "@/src/components/base/Link";
 import {MobileDetect as useMobileDetect} from "@/src/effects/MobileDetect";
 
 
-function OnlineSafetyScreen(): React.Node {
+function OnlineSafetyScreen() {
     const link1800Respect = "/service/634190-1800respect";
     const onlineChat = "https://chat.1800respect.org.au/";
     const number1800Respect = "1800 737 732";
@@ -16,7 +16,7 @@ function OnlineSafetyScreen(): React.Node {
     return (
         <div className="AreYouSafe">
             <div className="safety-message">
-                <icons.PhoneTalk className="PhoneIcon" />
+                <PhoneTalk className="PhoneIcon" />
                 <h2>
                     If you or someone else is in danger call{" "}
                     {

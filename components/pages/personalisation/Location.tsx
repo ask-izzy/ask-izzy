@@ -302,7 +302,6 @@ function Location({router, details}: Props) {
         if (gettingAutocompletionsInProgress) {
             return []
         }
-        console.log(selectedLocation)
         return initialSuggestions
     }
 

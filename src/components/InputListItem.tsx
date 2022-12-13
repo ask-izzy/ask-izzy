@@ -1,13 +1,9 @@
-/* @flow */
-
-import type {Node as ReactNode} from "React";
 import React from "react";
 
-import ListItem from "./ListItem";
-import Button from "./base/Button";
-import type { Props as ListItemProps } from "./ListItem";
-import type {AnalyticsEvent} from "../google-tag-manager";
-import icons from "../icons";
+import ListItem, {Props as ListItemProps} from "@/src/components/ListItem";
+import Button from "@/src/components/base/Button";
+import type {AnalyticsEvent} from "@/src/google-tag-manager";
+import Chevron from "@/src/icons/Chevron";
 
 type Props = {
     type?: "checkbox" | "radio",
@@ -17,7 +13,8 @@ type Props = {
     checkedIcon?: any,
     uncheckedIcon?: any,
     analyticsEvent?: AnalyticsEvent,
-} & ListItemProps<typeof Button>
+    readOnly?: boolean,
+} & ListItemProps
 
 function InputListItem({
     checkedIcon,
@@ -31,7 +28,7 @@ function InputListItem({
     checked,
     analyticsEvent,
     ...otherProps
-}: Props): ReactNode {
+}: Props) {
     const label = ariaLabel || `${typeof primaryText === "string" ?
         `${primaryText}.` : ""} ${typeof secondaryText === "string" ?
         `${secondaryText}` : ""}`
@@ -43,7 +40,7 @@ function InputListItem({
             rootElement={Button}
             role={type || "button"}
             aria-label={label}
-            rightIcon={!type ? rightIcon || <icons.Chevron />
+            rightIcon={!type ? rightIcon || <Chevron />
                 : checked ? checkedIcon : uncheckedIcon
             }
             primaryText={primaryText}

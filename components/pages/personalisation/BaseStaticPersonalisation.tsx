@@ -1,8 +1,6 @@
-/* @flow */
-import * as React from "react";
-import type {Node as ReactNode} from "react"
-import { withRouter } from "next/router"
-import type { NextRouter } from "next/router"
+import React from "react";
+import {withRouter} from "next/router"
+import type {NextRouter} from "next/router"
 
 import HeaderBar from "@/src/components/HeaderBar";
 import FlatButton from "@/src/components/FlatButton";
@@ -15,20 +13,20 @@ import {
 } from "@/src/utils/routing"
 import type {
     PersonalisationInfoPage,
-} from "@/flow/personalisation-page"
+} from "@/types/personalisation-page"
 import LgbtiqaDomesticViolenceScreen
-from "./static-page-contents/LgbtiqaDomesticViolenceScreen"
+    from "@/components/pages/personalisation/static-page-contents/LgbtiqaDomesticViolenceScreen"
 import Under18DomesticViolenceScreen
-from "./static-page-contents/Under18DomesticViolenceScreen"
-import UsingViolenceScreen from "./static-page-contents/UsingViolenceScreen"
-import OnlineSafetyScreen from "./static-page-contents/OnlineSafetyScreen"
+    from "@/components/pages/personalisation/static-page-contents/Under18DomesticViolenceScreen"
+import UsingViolenceScreen from "@/components/pages/personalisation/static-page-contents/UsingViolenceScreen"
+import OnlineSafetyScreen from "@/components/pages/personalisation/static-page-contents/OnlineSafetyScreen"
 
-type Props = {|
+type Props = {
     details: PersonalisationInfoPage,
     router: NextRouter
-|}
+}
 
-function BaseStaticPersonalisation({details, router}: Props): ReactNode {
+function BaseStaticPersonalisation({details, router}: Props) {
     const category = getCategoryFromRouter(router)
     const bannerName = getBannerName(category, details.name)
     const goBackPath = getPersonalisationBackPath(router)
@@ -39,7 +37,7 @@ function BaseStaticPersonalisation({details, router}: Props): ReactNode {
         goToPersonalisationNextPath({router})
     }
 
-    function renderDoneButton(): ReactNode {
+    function renderDoneButton() {
         return (
             <div>
                 <div className="done-button">
@@ -53,7 +51,7 @@ function BaseStaticPersonalisation({details, router}: Props): ReactNode {
         )
     }
 
-    function renderContent(): React.Node {
+    function renderContent() {
         const contentComponents = {
             "lgbtiqa-domestic-violence": LgbtiqaDomesticViolenceScreen,
             "under-18-dfv": Under18DomesticViolenceScreen,
@@ -95,15 +93,4 @@ function BaseStaticPersonalisation({details, router}: Props): ReactNode {
         </div>
     )
 }
-
-export default (
-    withRouter(BaseStaticPersonalisation):
-        Class<
-            React$Component<
-                $Diff<
-                    React.ElementConfig<typeof BaseStaticPersonalisation>,
-                    {router: *}
-                >
-            >
-        >
-)
+export default (withRouter(BaseStaticPersonalisation))
