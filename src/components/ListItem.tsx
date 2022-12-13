@@ -1,15 +1,19 @@
 import React, {ReactNode} from "react";
 import classnames from "classnames";
 
+import type {AnalyticsEvent} from "@/src/google-tag-manager";
+
 export type Props = {
     rootElement?: any
     className?: string
     primaryText?: any
     secondaryText?: any
+    role?: any,
     leftIcon?: any
     rightIcon?: any
     children?: ReactNode
     onClick?: (event?: Event) => any
+    analyticsEvent?: AnalyticsEvent
 }
 
 function ListItem({

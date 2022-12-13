@@ -1,17 +1,15 @@
-/* @flow */
 import React from "react"
-import type {Node as ReactNode} from "react"
-import { useRouter } from "next/router"
+import {useRouter} from "next/router"
 
-import BaseQuestion from "./BaseQuestion"
-import BaseStaticPersonalisation from "./BaseStaticPersonalisation"
-import WhoIsLookingForHelp from "./WhoIsLookingForHelp"
-import Location from "./Location"
+import BaseQuestion from "@/components/pages/personalisation/BaseQuestion"
+import BaseStaticPersonalisation from "@/components/pages/personalisation/BaseStaticPersonalisation"
+import WhoIsLookingForHelp from "@/components/pages/personalisation/WhoIsLookingForHelp"
+import Location from "@/components/pages/personalisation/Location"
 import {
     getCurrentPersonalisationPage,
 } from "@/src/utils/routing"
 
-function RenderPersonalisationPage(): ReactNode {
+function RenderPersonalisationPage() {
     const router = useRouter()
     const personalisationPage = getCurrentPersonalisationPage(router);
     if (!personalisationPage) {

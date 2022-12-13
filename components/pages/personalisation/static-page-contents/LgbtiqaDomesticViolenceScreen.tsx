@@ -1,12 +1,10 @@
-/* @flow */
-import * as React from "react";
-import type {Node as ReactNode} from "react"
+import React from "react";
 import icons from "@/src/icons";
 import Link from "@/src/components/base/Link";
 import Location from "@/src/constants/personalisation-pages/Location"
 import {getSavedPersonalisationAnswer} from "@/src/utils/personalisation"
 
-function LgbtiqaDomesticViolenceScreen(): ReactNode {
+function LgbtiqaDomesticViolenceScreen() {
     function shouldShowVicService(): boolean {
         const location = getSavedPersonalisationAnswer(Location)
         if (typeof location === "string" && location.match(/, VIC$/)) {
@@ -16,13 +14,13 @@ function LgbtiqaDomesticViolenceScreen(): ReactNode {
         }
     }
 
-    function renderVictoriaService(): React.Element<any> {
+    function renderVictoriaService() {
         const linkService = "/service/4000053-with-respect";
         const phoneService = "1800 542 847";
 
         return (
             <p>
-                If you're LGBTIQA+ and worried about any of your
+                If you&apos;re LGBTIQA+ and worried about any of your
                 relationships,
                 {" "}<Link to={linkService}>W|Respect</Link>{" "}
                 can help. Call W|Respect on
@@ -33,14 +31,14 @@ function LgbtiqaDomesticViolenceScreen(): ReactNode {
         );
     }
 
-    function renderAustraliaWideService(): React.Element<any> {
+    function renderAustraliaWideService() {
         const linkService = "/service/1740955-qlife";
         const phoneService = "1800 184 527";
         const qLifeChat = "https://www.qlife.org.au/resources/chat";
 
         return (
             <p>
-                If you're LGBTIQA+ and worried about any of your
+                If you&apos;re LGBTIQA+ and worried about any of your
                 relationships,
                 {" "}<Link to={linkService}>QLife</Link> can
                 help. Call QLife on
