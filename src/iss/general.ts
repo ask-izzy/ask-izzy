@@ -24,8 +24,8 @@ export type travelTime = {
 };
 
 export type nowOpen = {
-    local_time: isoDateAndTime,
-    notes: string,
+    local_time?: isoDateAndTime,
+    notes?: string,
     now_open: boolean | null
 }
 

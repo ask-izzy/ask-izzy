@@ -1,19 +1,15 @@
-/* @flow */
 /*
  * Step definitions for creating a mocked service
  */
 
 
 import Yadda from "yadda";
-import type { LibraryEnglish as YaddaLibraryEnglish } from "yadda";
-
-import dictionary from "../support/dictionary";
 import fetch from "node-fetch";
-import Service from "../../src/iss/Service";
 
-import { visitUrl } from "./browser";
+import { visitUrl } from "../steps/browser";
+import dictionary from "../support/dictionary";
 
-let mockedService: ?Service;
+let mockedService;
 
 async function searchMockedService() {
     if (!mockedService) {
@@ -29,7 +25,7 @@ async function visitMockedService() {
     await visitUrl(this.driver, `/service/${mockedService.id}`);
 }
 
-async function mockService(service: Service) {
+async function mockService(service) {
     mockedService = service;
     const res = await fetch(`${process.env.NEXT_PUBLIC_ISS_BASE_URL}/mock/service`, {
         method: "POST",
@@ -44,9 +40,9 @@ async function mockService(service: Service) {
 }
 
 async function mockSearchForServices(
-    search: string,
-    services: Array<Service>
-): Promise<void> {
+    search,
+    services
+) {
     const res = await fetch(`${process.env.NEXT_PUBLIC_ISS_BASE_URL}/mock/search`, {
         method: "POST",
         headers: {
@@ -59,7 +55,7 @@ async function mockSearchForServices(
     }
 }
 
-module.exports = ((function(): YaddaLibraryEnglish {
+module.exports = ((function() {
     return Yadda.localisation.English.library(dictionary)
         .given("A service with:\n$service", mockService)
         .when("I navigate to the service page", visitMockedService)
@@ -68,4 +64,4 @@ module.exports = ((function(): YaddaLibraryEnglish {
             mockSearchForServices
         )
     ;
-})(): YaddaLibraryEnglish);
+})());

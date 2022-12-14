@@ -1,5 +1,5 @@
-/* @flow */
 import React, {useContext, createContext, useState, useEffect, ReactNode} from "react";
+
 import Service from "@/src/iss/Service"
 import {getService} from "@/src/iss/load-services"
 import storage from "@/src/storage"
@@ -22,7 +22,7 @@ type ProviderProps = {
 
 export const MyListProvider = (
     {children}: ProviderProps,
-): ReactNode => {
+) => {
     const [myList, setMyList] = useState<Array<Service>>([])
     const [isLoading, setIsLoading] = useState<boolean>(true)
 

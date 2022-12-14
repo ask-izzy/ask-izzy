@@ -1,5 +1,4 @@
-/* @flow */
-import * as React from "react";
+import React from "react";
 
 import PhoneTalk from "@/src/icons/PhoneTalk";
 import Link from "@/src/components/base/Link";

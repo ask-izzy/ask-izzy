@@ -1,18 +1,14 @@
-/* @flow */
-
 import assert from "assert";
-import Webdriver, { By } from "selenium-webdriver";
+import { By } from "selenium-webdriver";
 import { getElementWithText } from "./elements";
 import { isElementPresent } from "./webdriver";
 
-// Flow complains about adding properties directly
-// to 'assert'; need a type specifier.
-let assertExtended: Object = assert;
+let assertExtended = assert;
 
 assertExtended.imageIsVisible = async function(
-    driver: typeof Webdriver.WebDriver,
-    altText: string
-): Promise<void> {
+    driver,
+    altText
+) {
     let visible = await driver.findElement(By.xpath(
         `//img[@alt = '${altText}']`
     ))
@@ -22,9 +18,9 @@ assertExtended.imageIsVisible = async function(
 }
 
 assertExtended.svgIsVisible = async function(
-    driver: typeof Webdriver.WebDriver,
-    altText: string
-): Promise<void> {
+    driver,
+    altText
+) {
     // svg has a namespace in firefox, which makes xpath queries
     // to pull them out tricky, so I've used css.
     let visible = await driver.findElement(By.css(
@@ -36,9 +32,9 @@ assertExtended.svgIsVisible = async function(
 }
 
 assertExtended.textIsVisible = async function(
-    driver: typeof Webdriver.WebDriver,
-    text: string
-): Promise<void> {
+    driver,
+    text
+) {
     const element = await getElementWithText(driver, text)
 
     let visible = element ? await element.isDisplayed() : false;
@@ -76,10 +72,10 @@ assertExtended.textIsVisible = async function(
 }
 
 assertExtended.linkIsVisible = async function(
-    driver: typeof Webdriver.WebDriver,
-    title: string,
-    expectedTarget: string
-): Promise<void> {
+    driver,
+    title,
+    expectedTarget
+) {
     let link = await driver.findElement(By.xpath(
         `//a[normalize-space(.) = normalize-space('${title}')]`
     ));
@@ -94,7 +90,7 @@ assertExtended.linkIsVisible = async function(
 
 // needs a way to retry up to a timeout.
 // Often getting stuff 'in the dom' but not visible yet.
-assertExtended.withRetries = function(other: Function): Function {
+assertExtended.withRetries = function(other) {
     let retries = 0;
     const retry = async function() {
         try {
@@ -113,8 +109,8 @@ assertExtended.withRetries = function(other: Function): Function {
 }
 
 assertExtended.isElementPresent = async function(
-    driver: typeof Webdriver.WebDriver, locator: typeof By | Function
-): Promise<void> {
+    driver, locator
+) {
     assert(
         await isElementPresent(driver, locator),
         `Element was not found on the page`

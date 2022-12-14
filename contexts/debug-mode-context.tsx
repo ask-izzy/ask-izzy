@@ -17,7 +17,7 @@ type ProviderProps = {
 
 export const DebugModeProvider = (
     {children, initialDebugMode}: ProviderProps,
-): ReactNode => {
+) => {
     const [debugMode, setDebugMode] = useState(initialDebugMode || false)
 
     function setDebugModePersistently(newDebugModeState: any): void {

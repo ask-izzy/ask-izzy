@@ -1,5 +1,3 @@
-/* @flow */
-
 /*
 It would be nice to be able to implement this as a simple redirect,
 something like:
@@ -37,7 +35,7 @@ we're stuck with using a middleware.
 
 import { NextResponse } from "next/server"
 
-export function middleware(req: any, event: any): any {
+export function middleware(req) {
     let unsupportedBrowser = false
 
     const [, unsupportedBrowserCookieVal] = req.headers.get("cookie")

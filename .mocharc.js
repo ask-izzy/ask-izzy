@@ -1,4 +1,3 @@
-/* $FlowIgnore */
 module.exports = {
 	require: [
 		'test/mocha.env.js',

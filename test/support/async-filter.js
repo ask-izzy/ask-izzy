@@ -1,9 +1,7 @@
-/* @flow */
-
-async function asyncFilter<U>(
-    arr: Array<U>,
-    check: (e: U) => Promise<Boolean>
-): Promise<Array<U>> {
+async function asyncFilter(
+    arr,
+    check
+) {
     let results = arr.map(check);
 
     results = await Promise.all(results);

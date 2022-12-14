@@ -1,14 +1,4 @@
-/* @flow */
-
-type Callout = {
-    ShowHeading: boolean,
-    Key: string,
-    Heading: string,
-}
-
-export default (
-    parent: Object, args: Object, context: Object, info: Object
-): Array<Callout> => {
+export default (parent, args, context, info) => {
     let keys = args?.where?.Key || info?.variableValues?.keys
     if (typeof keys === "string") {
         keys = [keys]

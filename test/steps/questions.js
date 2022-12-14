@@ -1,18 +1,14 @@
-/* @flow */
 /*
  * Definitions for Geolocation related steps
  */
 
 /* eslint-disable no-use-before-define */
-
+/* eslint-disable max-len */
 import Yadda from "yadda";
-import type { LibraryEnglish as YaddaLibraryEnglish } from "yadda"
-import Webdriver from "selenium-webdriver";
-declare var IzzyStorage: Object;
 
 import dictionary from "../support/dictionary";
 import { gotoUrl } from "../support/webdriver";
-/* eslint-disable max-len */
+
 import WhoIsLookingForHelpDFVPage from "../../src/constants/personalisation-pages/WhoIsLookingForHelpDFV";
 import WhoIsLookingForHelpAdvocacyPage from "../../src/constants/personalisation-pages/WhoIsLookingForHelpAdvocacy";
 import WhoIsLookingForHelpDrugsAndAlcoholPage from "../../src/constants/personalisation-pages/WhoIsLookingForHelpDrugsAndAlcohol";
@@ -31,11 +27,8 @@ import WhoIsLookingForHelpSearchPage from "../../src/constants/personalisation-p
 import WhoIsLookingForHelpSomethingToDoPage from "../../src/constants/personalisation-pages/WhoIsLookingForHelpSomethingToDo";
 import WhoIsLookingForHelpSupportAndCounsellingPage from "../../src/constants/personalisation-pages/WhoIsLookingForHelpSupportAndCounselling";
 import WhoIsLookingForHelpTechnologyPage from "../../src/constants/personalisation-pages/WhoIsLookingForHelpTechnology";
-/* eslint-enable max-len */
-import SleepTonightPage from
-"../../src/constants/personalisation-pages/SleepTonight"
-import DemographicsPage from
-"../../src/constants/personalisation-pages/Demographics"
+import SleepTonightPage from "../../src/constants/personalisation-pages/SleepTonight"
+import DemographicsPage from "../../src/constants/personalisation-pages/Demographics"
 import GenderPage from "../../src/constants/personalisation-pages/Gender"
 import AgePage from "../../src/constants/personalisation-pages/Age"
 
@@ -57,14 +50,14 @@ module.exports = (Yadda.localisation.English.library(dictionary)
         setDemographics
     )
     .given("my gender is (female|male)", setGender)
-    .given("I am (17|27|77) years old", setAgeTo): YaddaLibraryEnglish);
+    .given("I am (17|27|77) years old", setAgeTo));
 
 // TODO: Question answers should be validated against what the actually answers
 // for question pages are so to avoid ugly code duplication here but that's not
 // really feasible until we refactor question pages so we can more easily pull
 // valid question answers.
 
-async function setSleepTonight(answer: string): Promise<void> {
+async function setSleepTonight(answer) {
     await setStorageValue(
         this.driver,
         SleepTonightPage.name,
@@ -75,7 +68,7 @@ async function setSleepTonight(answer: string): Promise<void> {
     );
 }
 
-async function setHelpForWhom(answer: string): Promise<void> {
+async function setHelpForWhom(answer) {
     const whoIsLookingForHelpPages = [
         WhoIsLookingForHelpDFVPage,
         WhoIsLookingForHelpAdvocacyPage,
@@ -110,13 +103,13 @@ async function setHelpForWhom(answer: string): Promise<void> {
 }
 
 async function setSubcategoryItems(
-    category: string,
-    items: string | Array<string>,
-): Promise<void> {
+    category,
+    items,
+) {
     await setStorageValue(this.driver, `sub-${category}`, items);
 }
 
-async function setSubcategoryItemsNone(category: string): Promise<void> {
+async function setSubcategoryItemsNone(category) {
     await setSubcategoryItems.call(
         this,
         category,
@@ -125,8 +118,8 @@ async function setSubcategoryItemsNone(category: string): Promise<void> {
 }
 
 async function setDemographics(
-    items: Array<string>,
-): Promise<void> {
+    items,
+) {
     await setStorageValue(
         this.driver,
         DemographicsPage.name,
@@ -134,13 +127,11 @@ async function setDemographics(
     );
 }
 
-function setDemographicsNone(): Promise<void> {
+function setDemographicsNone() {
     return setDemographics.call(this, []);
 }
 
-async function setSubcategoriesNone(
-    items: Array<string>,
-): Promise<void> {
+async function setSubcategoriesNone() {
     await gotoUrl(this.driver, "/"); // go anywhere to start the session
     await this.driver.executeScript(() => {
         IzzyStorage.setItem("sub-addiction", "(skipped)");
@@ -159,7 +150,7 @@ async function setSubcategoriesNone(
     });
 }
 
-async function setAgeTo(age: string): Promise<void> {
+async function setAgeTo(age) {
     await setStorageValue(
         this.driver,
         AgePage.name,
@@ -171,7 +162,7 @@ async function setAgeTo(age: string): Promise<void> {
     );
 }
 
-async function setGender(gender: string): Promise<void> {
+async function setGender(gender) {
     await setStorageValue(
         this.driver,
         GenderPage.name,
@@ -183,10 +174,10 @@ async function setGender(gender: string): Promise<void> {
 }
 
 async function setStorageValue(
-    driver: typeof Webdriver.WebDriver,
-    key: string,
-    value: string | Array<string>,
-): Promise<void> {
+    driver,
+    key,
+    value,
+) {
     await driver.executeScript(
         (key, value) => {
             if (typeof value === "string") {

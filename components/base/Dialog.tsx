@@ -1,4 +1,3 @@
-/* @flow */
 import React, {useEffect, ReactNode} from "react"
 import cnx from "classnames"
 import { useA11yDialog } from "react-a11y-dialog"

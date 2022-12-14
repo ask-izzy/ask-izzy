@@ -1,5 +1,3 @@
-/* @flow */
-
 import { mapStackTrace } from "sourcemapped-stacktrace";
 
 console.log("Modifying env for test")
@@ -14,9 +12,7 @@ window.addEventListener("error", async(errorEvent) => {
 })
 
 // Selenium doesn't read in output sent to info or warn
-// $FlowIgnore
 console.info = console.log
-// $FlowIgnore
 console.warn = console.log
 
 // Selenium/Headless chrome doesn't yet support sourcemaps in error
@@ -24,7 +20,7 @@ console.warn = console.log
 // our prod source code is majorly transformed and minified. Until this
 // is done natively use a third party lib to help apply the source map
 // before showing the error.
-async function mapErrorStack(error: Error) {
+async function mapErrorStack(error) {
     return new Promise((resolve, reject) => {
         try {
             mapStackTrace(error.stack, (mappedStack) => {

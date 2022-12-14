@@ -1,4 +1,3 @@
-/* @flow */
 /**
  * Test service provisions
  */
@@ -19,7 +18,7 @@ const tests = yaml.safeLoad(
 
 describe("Service Provisions", function() {
     tests.tests.forEach(test =>
-        it(test.description, (): void => {
+        it(test.description, () => {
             let provides = serviceProvisions
                 .filter((provision) => provision.match(test.description))
                 .map(({name}) => name)

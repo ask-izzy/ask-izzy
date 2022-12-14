@@ -1,13 +1,10 @@
-/* @flow */
-
 import Yadda from "yadda";
 import _ from "underscore";
 import getServiceFixture from "../../fixtures/factories/Service";
 import yaml from "js-yaml";
 
-type callback = (err: ?Error, val: any) => void;
 
-function latitudeConverter(latitude: string, done: callback): void {
+function latitudeConverter(latitude, done) {
     latitude = latitude
         .replace(/N$/, "")
         .replace(/(.+)S$/, "-$1");
@@ -15,7 +12,7 @@ function latitudeConverter(latitude: string, done: callback): void {
     done(null, parseFloat(latitude));
 }
 
-function longitudeConverter(longitude: string, done: callback): void {
+function longitudeConverter(longitude, done) {
     longitude = longitude
         .replace(/E$/, "")
         .replace(/(.+)W$/, "-$1");
@@ -23,19 +20,19 @@ function longitudeConverter(longitude: string, done: callback): void {
     done(null, parseFloat(longitude));
 }
 
-function linesConverter(str: string, done: callback): void {
+function linesConverter(str, done) {
     done(null, str.split("\n"));
 }
 
 // Converts a key from the format used in features to an object key
-function sanitizeKey(key: string): string {
+function sanitizeKey(key) {
     return key
         .toLowerCase()
         .replace(" ", "_")
         .replace("/", "_");
 }
 
-function parseObject(lines: Array<string>): Object {
+function parseObject(lines) {
     /* Objects have format
      * Key | Value
      * Key | Value
@@ -50,7 +47,7 @@ function parseObject(lines: Array<string>): Object {
     );
 }
 
-function parseTable(lines: Array<string>): Array<Object> | Object {
+function parseTable(lines) {
     /* Tables have format
      * Header | Header | Header
      * ========================
@@ -80,7 +77,7 @@ function parseTable(lines: Array<string>): Array<Object> | Object {
     );
 }
 
-function tableConverter(str: string, done: callback): void {
+function tableConverter(str, done) {
     let lines = str.split("\n");
 
     done(null, parseTable(lines));
@@ -89,7 +86,7 @@ function tableConverter(str: string, done: callback): void {
 /*
  * Parses a service description out of a yadda step
  */
-function serviceConverter(str: string, done: callback): void {
+function serviceConverter(str, done) {
     try {
         done(null, getServiceFixture(yaml.safeLoad(str)));
     } catch (error) {
@@ -100,7 +97,7 @@ function serviceConverter(str: string, done: callback): void {
 /*
  * Parses a service description out of a yadda step
  */
-function servicesConverter(str: string, done: callback): void {
+function servicesConverter(str, done) {
     try {
         done(null, yaml.safeLoad(str).map(getServiceFixture));
     } catch (error) {
@@ -110,7 +107,7 @@ function servicesConverter(str: string, done: callback): void {
 /*
  * Parses arbitrary yaml out of a yadda step
  */
-function yamlConverter(str: string, done: callback): void {
+function yamlConverter(str, done) {
     try {
         done(null, yaml.safeLoad(str));
     } catch (error) {
@@ -121,7 +118,7 @@ function yamlConverter(str: string, done: callback): void {
 /*
  * Parses a number out of a yadda step
  */
-function numberConverter(str: string, done: callback): void {
+function numberConverter(str, done) {
     try {
         done(null, parseInt(str));
     } catch (error) {
@@ -130,7 +127,7 @@ function numberConverter(str: string, done: callback): void {
 }
 
 /* eslint-disable no-control-regex, newline-after-var */
-const dictionary: typeof Yadda.types.Dictionary = new Yadda.Dictionary()
+const dictionary = new Yadda.Dictionary()
     .define("LATITUDE", /(\d+.\d+[NS])/, latitudeConverter)
     .define("LONGITUDE", /(\d+.\d+[EW])/, longitudeConverter)
     .define("lines", /([^\u0000]*)/, linesConverter)

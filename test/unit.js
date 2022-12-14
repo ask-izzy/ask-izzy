@@ -1,4 +1,3 @@
-/* $FlowIgnore */
 /* eslint-env node, mocha */
 import { loadEnvConfig } from "@next/env"
 

@@ -1,11 +1,10 @@
 #!/usr/bin/env node
-/* @flow */
+/* eslint-disable @typescript-eslint/no-var-requires */
 
 require("@babel/register");
 const path = require("path");
 const loadEnvConfig = require("@next/env").loadEnvConfig
 
-// $FlowIgnore
 const startServer = require(path.join(__dirname, "./index.js")).initMockISSServer
 
 const projectDir = process.cwd()
