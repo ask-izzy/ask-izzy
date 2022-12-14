@@ -1,19 +1,17 @@
-/* @flow */
-
-import type {Node as ReactNode} from "React";
+/* eslint-disable no-unsafe-optional-chaining */
 import React, {useEffect} from "react";
 import {LoadScript} from "@react-google-maps/api";
 import { ApolloProvider } from "@apollo/client";
 
 import storage from "../storage";
 import { DebugModeProvider } from "@/contexts/debug-mode-context";
-import createApolloClient from "../utils/apolloClient";
-import {browserEventName as gtmBrowserEventName} from "../google-tag-manager"
+import createApolloClient from "@/src/utils/apolloClient";
+import {browserEventName as gtmBrowserEventName} from "@/src/google-tag-manager"
 
 export function addGoogleMapsScript(
-    Story: Object,
-    { loaded: { env } }: Object
-): ReactNode {
+    Story,
+    {loaded: {env}}
+) {
     if (!env?.NEXT_PUBLIC_GOOGLE_API_KEY) {
         throw new Error("Google API key must be loaded")
     }
@@ -29,9 +27,9 @@ export function addGoogleMapsScript(
 }
 
 export function setPersonalisationAnswers(
-    Story: Object,
-    {parameters}: Object
-): ReactNode {
+    Story,
+    {parameters}
+) {
     const answers = parameters?.context?.personalisationAnswers || {}
     setAnswers(answers)
     useEffect(() => () => clearAnswers(answers))
@@ -54,9 +52,9 @@ export function setPersonalisationAnswers(
 }
 
 export function setDebugModeContext(
-    Story: Object,
-    {parameters}: Object
-): ReactNode {
+    Story,
+    {parameters}
+) {
     const debugMode = parameters?.context?.debugMode
     return (
         <DebugModeProvider initialDebugMode={debugMode}>
@@ -65,8 +63,8 @@ export function setDebugModeContext(
     );
 }
 
-export function setApolloProvider(Story: Object,
-    { loaded: { env } }: Object): ReactNode {
+export function setApolloProvider(Story,
+    { loaded: { env } }) {
     window.NEXT_PUBLIC_STRAPI_URL = env.NEXT_PUBLIC_STRAPI_URL
     return (
         <ApolloProvider
@@ -79,19 +77,17 @@ export function setApolloProvider(Story: Object,
 
 // Ideally we'd log to actions but that doesn't seem to deal with CustomEvents
 // yet: https://github.com/storybookjs/storybook/issues/14205
-export function logGTMEvent(Story: Object): ReactNode {
+export function logGTMEvent(Story) {
     function gtmEventHandler(event) {
         console.log("GTM event emitted:", event.detail)
     }
     useEffect(() => {
-        // Typecast needed since flow doesn't deal with custom events yet
-        // https://github.com/facebook/flow/issues/7179
-        (document.querySelector(":root")?.addEventListener: Function)(
+        (document.querySelector(":root")?.addEventListener)(
             gtmBrowserEventName,
             gtmEventHandler
         )
         return () => {
-            (document.querySelector(":root")?.removeEventListener: Function)(
+            (document.querySelector(":root")?.removeEventListener)(
                 gtmBrowserEventName,
                 gtmEventHandler
             )

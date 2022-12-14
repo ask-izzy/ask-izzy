@@ -41,7 +41,7 @@ type Props = {
     embeddedCallouts: Array<CalloutType>
 }
 
-function DynamicPage({pageDetails, embeddedCallouts}: Props): ReactNode {
+function DynamicPage({pageDetails, embeddedCallouts}: Props) {
     /**
      * This is used to render any embedded callouts that are written as
      * > [callout(code)] - where it uses the blockquote tag

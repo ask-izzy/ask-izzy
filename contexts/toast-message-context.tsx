@@ -35,7 +35,7 @@ type ProviderProps = {
 
 export const ToastMessageProvider = (
     {children}: ProviderProps,
-): ReactNode => {
+) => {
     const [open, setOpen] = useState<boolean>(false)
     const [message, setMessage] = useState<string>("")
     const [actionDescriptor, setActionDescriptor] = useState<ReactNode | null>(null)

@@ -1,4 +1,3 @@
-/* @flow */
 /*
  * Step definitions for branding / design related steps
  */
@@ -6,29 +5,29 @@
 /* eslint-disable no-use-before-define */
 
 import Yadda from "yadda";
-import type { LibraryEnglish as YaddaLibraryEnglish } from "yadda"
+import { By } from "selenium-webdriver";
 
 import dictionary from "../support/dictionary";
 import assert from "../support/page-assertions";
 import { matchClass } from "../support/selectors";
-import { By } from "selenium-webdriver";
 
-module.exports = ((function(): YaddaLibraryEnglish {
+
+module.exports = ((function() {
     return Yadda.localisation.English.library(dictionary)
         .then("I should see the branding header", seeTheBrandingHeader)
         .then("I should see the search bar", seeTheSearchBar)
         .then("I should see the list of categories\n$lines", seeTheCategoryList)
         .then("I should see the branding footer", seeTheBrandingFooter)
-})(): YaddaLibraryEnglish);
+})());
 
-async function seeTheBrandingHeader(): Promise<void> {
+async function seeTheBrandingHeader() {
     await assert.textIsVisible(
         this.driver,
         "Find the help you need, now and nearby."
     );
 }
 
-async function seeTheSearchBar(): Promise<void> {
+async function seeTheSearchBar() {
     // XPath doesn't have a great way of checking for a single class, only a
     // full class string. So we have to do an ugly workaround.
     const searchBarXPath =
@@ -46,8 +45,8 @@ async function seeTheSearchBar(): Promise<void> {
 }
 
 async function seeTheCategoryList(
-    categories: Array<string>,
-): Promise<void> {
+    categories,
+) {
     for (let idx = 0; idx < categories.length; idx++) {
         await assert.textIsVisible(
             this.driver,
@@ -56,7 +55,7 @@ async function seeTheCategoryList(
     }
 }
 
-async function seeTheBrandingFooter(): Promise<void> {
+async function seeTheBrandingFooter() {
     await assert.textIsVisible(
         this.driver,
         "About Ask Izzy"

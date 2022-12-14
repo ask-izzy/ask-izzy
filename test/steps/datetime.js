@@ -1,4 +1,3 @@
-/* @flow */
 /*
  * Step definitions for date/time related steps
  */
@@ -6,23 +5,22 @@
 /* eslint-disable no-use-before-define, no-native-reassign */
 
 import Yadda from "yadda";
-import type { LibraryEnglish as YaddaLibraryEnglish } from "yadda"
 import fs from "fs";
 import moment from "moment-timezone";
 
-module.exports = ((function(): YaddaLibraryEnglish {
+module.exports = ((function() {
     return Yadda.localisation.English.library()
         .given("it is late morning on $STRING", changeToEarlyMorning)
         .given("it is late on $STRING", changeToLateDay);
-})(): YaddaLibraryEnglish);
+})());
 
-async function changeToEarlyMorning(day: string): Promise<void> {
+async function changeToEarlyMorning(day) {
     return changeDateAndTime.bind(this)(day, 10)
 }
-async function changeToLateDay(day: string): Promise<void> {
+async function changeToLateDay(day) {
     return changeDateAndTime.bind(this)(day, 18)
 }
-async function changeDateAndTime(day: string, hour: number): Promise<void> {
+async function changeDateAndTime(day, hour) {
     let time = moment()
         .tz("Australia/Melbourne")
         .day(day)

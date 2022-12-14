@@ -1,10 +1,10 @@
-/* @flow */
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { ApolloServer, gql } from "apollo-server";
 import fs from "fs";
 
 import mocks from "./resolvers"
 
-export function initMockCMSServer(): void {
+export function initMockCMSServer() {
     const typeDefs = gql(
         fs.readFileSync(__dirname.concat("/strapi-schema.graphql"), "utf8")
     )

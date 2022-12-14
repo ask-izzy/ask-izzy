@@ -1,4 +1,3 @@
-/* @flow */
 /* eslint-env node, mocha */
 /* eslint-disable no-use-before-define, prefer-arrow-callback */
 
@@ -45,7 +44,7 @@ describe("iss service", function() {
     });
 
     describe("splitting description into sentences", function() {
-        function test(input: string, output: Array<string>): Function {
+        function test(input, output) {
             return function() {
                 const service = getServiceFixture({description: input});
 
@@ -84,7 +83,7 @@ describe("iss service", function() {
     })
 
     describe("counting crisis results", function() {
-        const result = (crisis: boolean) => {
+        const result = (crisis) => {
             return getServiceFixture({crisis: crisis})
         };
 

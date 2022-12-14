@@ -1,5 +1,3 @@
-/* @flow */
-
 import * as Sentry from "@sentry/nextjs";
 import { CaptureConsole, ExtraErrorData } from "@sentry/integrations";
 

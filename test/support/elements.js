@@ -1,6 +1,4 @@
-/* @flow */
-
-import {WebDriver, WebElement, By} from "selenium-webdriver";
+import {By} from "selenium-webdriver";
 
 import {
     elementWithText,
@@ -8,10 +6,10 @@ import {
 } from "./selectors"
 
 export async function getElementWithText(
-    driver: typeof WebDriver,
-    elementText: string,
-    elementType?: string
-): ?typeof WebElement {
+    driver,
+    elementText,
+    elementType
+) {
     const locator = By.xpath(
         elementWithText(elementText, elementType)
     )
@@ -20,10 +18,10 @@ export async function getElementWithText(
 }
 
 export async function getElementWithTextSubstring(
-    driver: typeof WebDriver,
-    elementText: string,
-    elementType?: string
-): ?typeof WebElement {
+    driver,
+    elementText,
+    elementType
+) {
     const locator = By.xpath(
         elementWithTextSubstring(elementText, elementType)
     )

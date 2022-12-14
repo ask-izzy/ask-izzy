@@ -1,7 +1,7 @@
 export type site = {
     id: number,
     name: string,
-    organisation: {
+    organisation?: {
         id: number,
         name: string,
     },

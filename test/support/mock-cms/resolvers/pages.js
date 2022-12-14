@@ -1,24 +1,6 @@
-/* @flow */
-
-type Page = {
-    Title?: string,
-    Path: string,
-    Body?: string,
-    Banner?: {
-        Key: string,
-    },
-    BannerTextPrimary?: string,
-    BannerTextSecondary?: string,
-    Accordion?: Array<{
-        id: number,
-        Title: string,
-        Content: string
-    }>
-}
-
 export default (
-    parent: Object, args: Object, context: Object, info: Object
-): Array<Page> => {
+    parent, args, context, info
+) => {
     const pathToFilterBy = args?.where?.Path || info?.variableValues?.path
     return pages
         .filter(page => !pathToFilterBy || (page.Path === pathToFilterBy))
@@ -72,7 +54,7 @@ export const informationPage = {
     Path: "/information",
     BannerTextPrimary: "Information",
     Body: ("Try to live a good life\n\n> [callout(test)] " +
-        "[callout(nothing)]": string),
+        "[callout(nothing)]"),
     Accordion: [
         {
             id: 1,

@@ -1,4 +1,3 @@
-/* @flow */
 import { loadEnvConfig } from "@next/env"
 
 import runTests from "./yadda";

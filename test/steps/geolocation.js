@@ -1,5 +1,3 @@
-/* @flow */
-
 /*
  * Definitions for Geolocation related steps
  */
@@ -7,14 +5,12 @@
 /* eslint-disable no-use-before-define */
 
 import Yadda from "yadda";
-import type { LibraryEnglish as YaddaLibraryEnglish } from "yadda"
 
 import dictionary from "../support/dictionary";
 import { gotoUrl } from "../support/webdriver";
 
-declare var IzzyStorage: Object;
 
-module.exports = ((function(): YaddaLibraryEnglish {
+module.exports = ((function() {
     return Yadda.localisation.English.library(dictionary)
         .given("GPS will hang in the loading state", mockGeolocation)
         .given("the GPS returns $LATITUDE $LONGITUDE", sendCoords)
@@ -24,14 +20,14 @@ module.exports = ((function(): YaddaLibraryEnglish {
         .given("google api geocode will return location name $SUBURB, $STATE",
             mockGoogleApiGeocodeLocationName
         )
-})(): YaddaLibraryEnglish);
+})());
 
 /**
  * Install geolocation mock.
  *
  * @returns {Promise} a promise that resolves when the mock is installed.
  */
-async function mockGeolocation(): Promise<void> {
+async function mockGeolocation() {
     await this.driver.executeScript(() => {
         IzzyStorage.setGeolocationMock(true, {wait: true})
     });
@@ -47,9 +43,9 @@ async function mockGeolocation(): Promise<void> {
  * @returns {Promise} promise that resolves when the mock is installed.
  */
 async function sendCoords(
-    latitude: number,
-    longitude: number,
-): Promise<void> {
+    latitude,
+    longitude,
+) {
     await this.driver.executeScript((obj) => {
         IzzyStorage.setGeolocationMock(true, obj)
     }, {coords: {latitude, longitude}});
@@ -61,7 +57,7 @@ async function sendCoords(
  * @param {string} location - user's location (e.g. Richmond)
  * @returns {Promise} promise that resolves when the value is set.
  */
-async function setLocation(location: string): Promise<void> {
+async function setLocation(location) {
     if (!location.match(/, /)) {
         throw new Error(
             "Location must have suburb & state separated by ', '."
@@ -83,10 +79,10 @@ async function setLocation(location: string): Promise<void> {
  * @returns {Promise} promise that resolves when the value is set.
  */
 async function setCoords(
-    latitude: number,
-    longitude: number,
-    locationName: string
-): Promise<void> {
+    latitude,
+    longitude,
+    locationName
+) {
     const location = {
         name: locationName,
         latitude,
@@ -97,7 +93,7 @@ async function setCoords(
     }, location);
 }
 
-async function disableGeolocation(): Promise<void> {
+async function disableGeolocation() {
     await this.driver.executeScript(() => {
         IzzyStorage.setGeolocationMock(
             false,
@@ -115,7 +111,6 @@ async function disableGeolocation(): Promise<void> {
  * @returns {Promise} promise that resolves when the script executes.
  */
 async function mockGoogleApiGeocodeLocationName(mockedSuburb, mockedState) {
-    declare var google: Google;
     await this.driver.executeScriptBeforeLoad(createMocks, mockedSuburb, mockedState);
 
     const url = await this.driver.getCurrentUrl()

@@ -1,17 +1,17 @@
-/* $FlowIgnore */
 /* eslint-env node, mocha */
 /* eslint-disable prefer-arrow-callback */
 
 import assert from "assert";
 import moment from "moment-timezone";
 import _ from "underscore";
+
 import ServiceOpening from "../../../src/iss/ServiceOpening";
 
-function time(now: string): Moment {
+function time(now) {
     return moment(now, "YYYY-MM-DD ha");
 }
 
-function assertEqualTime(actual: ?Moment, expected: Moment): void {
+function assertEqualTime(actual, expected) {
     assert(
         expected.isSame(actual),
         `Expected
@@ -20,7 +20,7 @@ function assertEqualTime(actual: ?Moment, expected: Moment): void {
     );
 }
 
-function nextOpeningTimes(service: ServiceOpening): nextOpeningTimes {
+function nextOpeningTimes(service) {
     const times = service.nextOpeningTimes;
 
     if (!times) {
@@ -31,7 +31,7 @@ function nextOpeningTimes(service: ServiceOpening): nextOpeningTimes {
 }
 
 function serviceFactory(openingHours) {
-    return function(open: ?boolean, now: string) {
+    return function(open, now) {
         return new ServiceOpening(
             {
                 now_open: {

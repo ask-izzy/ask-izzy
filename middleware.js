@@ -1,5 +1,3 @@
-/* @flow */
-
 /*
 It would be nice to be able to implement this as a simple redirect,
 something like:

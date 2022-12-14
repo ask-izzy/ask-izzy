@@ -1,5 +1,3 @@
-/* $FlowIgnore */
-
 import fs from "fs-extra"
 import Path from "path"
 
@@ -27,7 +25,7 @@ function pauseToDebug() {
     });
 }
 
-export async function takeScreenshot(driver, filepath): String {
+export async function takeScreenshot(driver, filepath) {
     let data = await Promise.race([
         driver.takeScreenshot(),
         new Promise((resolve, reject) => setTimeout(() => reject("Timed out"), 1000 * 5)),

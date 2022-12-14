@@ -1,8 +1,7 @@
-/* @flow */
 import type { GetStaticProps } from "next"
 
 export { default } from "@/components/pages/MyListPage"
-import type {RouteSharedProps} from "@/flow/routes"
+import type {RouteSharedProps} from "@/types/routes"
 
 export const getStaticProps: GetStaticProps<RouteSharedProps> = () => {
     return {

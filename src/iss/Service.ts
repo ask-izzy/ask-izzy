@@ -45,6 +45,7 @@ export default class Service {
     capacity: {
         status: string;
         status_text: string;
+        frequency?: number
     };
     catchment: string;
     cost: string;

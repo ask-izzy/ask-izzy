@@ -1,27 +1,26 @@
-/* $FlowIgnore */
 /* eslint-disable prefer-arrow-callback */
 
 /*
  * Enable Yadda in Mocha
  */
 
-
-import Webdriver from "selenium-webdriver";
 import Yadda from "yadda";
+import chalk from "chalk";
+
 import webDriverInstance, { cleanDriverSession } from "./support/webdriver";
 import {
     takeScreenshot,
     deleteSceenshot,
     getSceenshotPath,
 } from "./support/debug";
-import chalk from "chalk";
+
 
 Yadda.plugins.mocha.StepLevelPlugin.init();
 
 import libraries from "./steps";
 
-let driverPromise: Promise<Webdriver.WebDriver>,
-    driver: Webdriver.WebDriver;
+let driverPromise,
+    driver;
 const testHarnessLog = [];
 const testBrowserLog = [];
 const indent = " ".repeat(10)
@@ -29,7 +28,7 @@ let testFailed = false;
 
 let processFile = (file) => {
     featureFile(file, feature => {
-        before(async function(): Promise<void> {
+        before(async function() {
             driver = await driverPromise;
             testBrowserLog.push({
                 hook: "Before feature",
@@ -38,7 +37,7 @@ let processFile = (file) => {
         });
 
         scenarios(feature.scenarios, scenario => {
-            before(async function(): Promise<void> {
+            before(async function() {
                 await cleanDriverSession(driver);
 
                 await driver.executeScriptBeforeLoad(() => {
@@ -67,7 +66,7 @@ let processFile = (file) => {
             });
         });
 
-        afterEach(async function(): Promise<void> {
+        afterEach(async function() {
             try {
                 const browserLog = await Promise.race([
                     driver.manage().logs().get("browser"),
@@ -189,7 +188,7 @@ let processFile = (file) => {
  * @param {string} directory -Directory pathname e.g. "./test/personalisation"
  * @returns {undefined}
  */
-export default function runTests(directory: string) {
+export default function runTests(directory) {
     if (!process.env.PORT) {
         throw Error("Env var PORT must be set")
     }
@@ -197,7 +196,7 @@ export default function runTests(directory: string) {
     driverPromise = webDriverInstance();
     new Yadda.FeatureFileSearch(directory).each(processFile);
 
-    after(async function(): Promise<void> {
+    after(async function() {
         // I can't find a way to directly check if there has been any failed
         // tests from inside a root afterAll hook. Replace "testFailed" with a
         // cleaner solution if you come across anything.

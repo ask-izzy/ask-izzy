@@ -1,12 +1,6 @@
-/* @flow */
-
-type State = {
-    Name: string
-}
-
 export default (
-    parent: Object, args: Object, context: Object, info: Object
-): typeof allAlerts => {
+    parent, args, context, info
+) => {
     const results = allAlerts.filter(alert => {
         if (
             info.variableValues?.screenLocation &&
@@ -51,11 +45,11 @@ export const covidServicesAffectedAlert = {
         "Services listed here may not be operating or limited. Contact " +
         "services directly for up-to-date information.\n\n[Get COVID19 " +
         "help and information near you.](/covid-19-support)"
-    : string),
+    ),
     created_at: "2021-05-25T12:19:33.039Z",
     updated_at: "2021-05-25T12:19:33.039Z",
     alertLevel: "warn",
-    states: ([]: Array<State>),
+    states: ([]),
     screenLocation: "resultsPage",
     defaultToOpen: false,
     __typename: "Alert",
@@ -67,7 +61,7 @@ export const covidInfoAlert = {
     created_at: "2021-05-25T12:19:33.039Z",
     updated_at: "2021-05-25T12:19:33.039Z",
     alertLevel: "warn",
-    states: ([]: Array<State>),
+    states: ([]),
     screenLocation: "homePage",
     defaultToOpen: false,
     __typename: "Alert",
@@ -79,7 +73,7 @@ export const nationalServiceAlert = {
     created_at: "2021-05-25T12:19:33.039Z",
     updated_at: "2021-05-25T12:19:33.039Z",
     alertLevel: "info",
-    states: ([]: Array<State>),
+    states: ([]),
     screenLocation: "servicePage",
     defaultToOpen: false,
     __typename: "Alert",
@@ -119,7 +113,7 @@ export const resultsPageNationalInfoAlert = {
     created_at: "2021-05-25T12:19:56.159Z",
     updated_at: "2021-05-25T12:19:56.159Z",
     alertLevel: "info",
-    states: ([]: Array<State>),
+    states: ([]),
     screenLocation: "resultsPage",
     defaultToOpen: false,
     __typename: "Alert",
@@ -145,7 +139,7 @@ export const bodyOpenByDefaultResultsPageAlert = {
     created_at: "2021-05-25T12:19:33.039Z",
     updated_at: "2021-05-25T12:19:33.039Z",
     alertLevel: "info",
-    states: ([]: Array<State>),
+    states: ([]),
     screenLocation: "resultsPage",
     defaultToOpen: true,
     __typename: "Alert",
