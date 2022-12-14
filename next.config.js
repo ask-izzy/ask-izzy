@@ -1,4 +1,5 @@
-/* $FlowIgnore */
+/* eslint-disable @typescript-eslint/no-var-requires */
+
 const path = require("path")
 const globImporter = require("node-sass-glob-importer");
 const fs = require("fs");

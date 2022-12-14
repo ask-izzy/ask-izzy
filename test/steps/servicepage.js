@@ -1,15 +1,13 @@
-/* @flow */
 /* eslint-disable no-use-before-define */
 
 import assert from "assert";
 import Yadda from "yadda";
-import type { LibraryEnglish as YaddaLibraryEnglish } from "yadda"
-import Webdriver, { By } from "selenium-webdriver";
+import { By } from "selenium-webdriver";
 
 import dictionary from "../support/dictionary";
 import asyncFilter from "../support/async-filter";
 
-module.exports = ((function(): YaddaLibraryEnglish {
+module.exports = ((function() {
     return Yadda.localisation.English.library(dictionary)
         .then("I should see the contacts\n$lines", checkPhoneNumbers)
         .then("I should see a transport time of \"$string\"",
@@ -21,9 +19,9 @@ module.exports = ((function(): YaddaLibraryEnglish {
         .then("I should not see transport times", checkTransportTimesDontExist)
         .then("I should see ATSI flags", seeAtsiFlags)
         .then("I should not see ATSI flags", notSeeAtsiFlags)
-})(): YaddaLibraryEnglish);
+})());
 
-async function seeAtsiFlags(): Promise<void> {
+async function seeAtsiFlags() {
     let exists = await this.driver.findElement(
         By.css(".IndigenousServiceIcon")
     ).isDisplayed();
@@ -31,7 +29,7 @@ async function seeAtsiFlags(): Promise<void> {
     assert.equal(exists, true);
 }
 
-async function notSeeAtsiFlags(): Promise<void> {
+async function notSeeAtsiFlags() {
     let exists = await this.driver.findElements(By.css(
         ".IndigenousServiceIcon"
     )).length > 0;
@@ -39,11 +37,11 @@ async function notSeeAtsiFlags(): Promise<void> {
     assert.equal(exists, false);
 }
 
-async function checkTransportTimeLines(time: Array<string>): Promise<void> {
+async function checkTransportTimeLines(time) {
     await checkTransportTime.apply(this, [time.join("\n")]);
 }
 
-async function checkTransportTime(time: string): Promise<void> {
+async function checkTransportTime(time) {
     const times = await await getTransportTimes(this.driver)
 
     assert(
@@ -52,7 +50,7 @@ async function checkTransportTime(time: string): Promise<void> {
     );
 }
 
-async function checkTransportTimesDontExist(): Promise<void> {
+async function checkTransportTimesDontExist() {
     const times = await await getTransportTimes(this.driver)
 
     assert(
@@ -61,9 +59,7 @@ async function checkTransportTimesDontExist(): Promise<void> {
     );
 }
 
-async function getTransportTimes(
-    driver: typeof Webdriver.WebDriver
-): Promise<Array<string>> {
+async function getTransportTimes(driver) {
     const allTransports = await driver.findElements(
         By.css(".TransportTime")
     )
@@ -85,7 +81,7 @@ async function getTransportTimes(
     return visibleTransportText.flat()
 }
 
-async function checkPhoneNumbers(lines: Array<string>): Promise<void> {
+async function checkPhoneNumbers(lines) {
     let phoneElems = await this.driver.findElements(By.css(".Contact"));
     let visiblePhoneElems = await asyncFilter(
         phoneElems,

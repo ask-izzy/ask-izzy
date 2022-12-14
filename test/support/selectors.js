@@ -1,5 +1,3 @@
-/* @flow */
-
 /**
  * Escape an XPath string.
  *
@@ -9,7 +7,7 @@
  * @param {string} stringToEscape - string literal
  * @returns {string} XPath string literal expression
  */
-export function escapeXPathString(stringToEscape: string): string {
+export function escapeXPathString(stringToEscape) {
     if (stringToEscape.match("'")) {
         return `concat('${stringToEscape.replace(`'`, `', "'", '`)}')`;
     }
@@ -19,9 +17,9 @@ export function escapeXPathString(stringToEscape: string): string {
 // Selects the predicate or if multiple nodes nested within each other match
 // then select the deepest one.
 export function deepestPossible(
-    predicate: string,
-    elementType: string = "*"
-): string {
+    predicate,
+    elementType = "*"
+) {
     return `//${elementType}[
         ${predicate}
         and
@@ -30,9 +28,9 @@ export function deepestPossible(
 }
 
 export function elementWithText(
-    textToMatch: string,
-    elementType: string = "*"
-): string {
+    textToMatch,
+    elementType = "*"
+) {
     const escapedTextToMatch = escapeXPathString(textToMatch);
 
     // Either match nodes where it's string value (the text of all of it's
@@ -80,9 +78,9 @@ export function elementWithText(
 }
 
 export function elementWithTextSubstring(
-    textToMatch: string,
-    elementType: string = "*"
-): string {
+    textToMatch,
+    elementType = "*"
+) {
     const escapedTextToMatch = escapeXPathString(textToMatch);
 
     return deepestPossible(
@@ -91,7 +89,7 @@ export function elementWithTextSubstring(
     )
 }
 
-export function matchClass(className: string): string {
+export function matchClass(className) {
     return `contains(concat(' ', normalize-space(@class), ' '), ` +
         `' ${className} ')`;
 }

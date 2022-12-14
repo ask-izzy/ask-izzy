@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-/* @flow */
+/* eslint-disable @typescript-eslint/no-var-requires */
 
 /*
  * A script to help ensure other services are started up before running a command.
@@ -101,7 +101,7 @@ if (nodeEnv) {
 }
 
 const servicesToRun = Object.entries(servicesToRunObj)
-    .filter(([,shouldRun]) => shouldRun)
+    .filter(([, shouldRun]) => shouldRun)
     .map(([name]) => getService(name, nodeEnv))
 
 if (!servicesToRun.length) {

@@ -1,5 +1,3 @@
-/* $FlowIgnore */
-
 /*
  * Definitions for Geolocation related steps
  */
@@ -31,7 +29,7 @@ module.exports = (function() {
         )
 })();
 
-async function assertTravelTimes(method) {
+async function assertTravelTimes() {
     const travelTimes = ["walking", "transit", "driving"]
 
     for (let index = 0; index < travelTimes.length; index++) {

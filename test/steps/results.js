@@ -1,18 +1,17 @@
-/* @flow */
 /* eslint-disable no-use-before-define */
 
 import assert from "assert";
 import Yadda from "yadda";
-import type { LibraryEnglish as YaddaLibraryEnglish } from "yadda"
+
 import _ from "underscore";
 import { By } from "selenium-webdriver";
 
 import dictionary from "../support/dictionary";
-import { documentReady } from "./browser";
+import { documentReady } from "../steps/browser";
 import { matchClass, escapeXPathString } from "../support/selectors";
 import asyncFilter from "../support/async-filter";
 
-module.exports = ((function(): YaddaLibraryEnglish {
+module.exports = ((function() {
     return Yadda.localisation.English.library(dictionary)
         .when("I wait for $NUMBER results to load", waitForResultCount)
         .then("I should see the results\n$table", seeTheResults)
@@ -26,15 +25,15 @@ module.exports = ((function(): YaddaLibraryEnglish {
             assertHotlineHeading
         )
         .then("my results should not contain\n$table", assertNoSuchResults)
-})(): YaddaLibraryEnglish);
+})());
 
 async function waitForResultCount(
-    expected: number,
-): Promise<void> {
+    expected,
+) {
     const selector = By.css(".ResultListItem, .CrisisLineItem");
     const driver = this.driver;
 
-    async function enoughResults(): Promise<boolean> {
+    async function enoughResults() {
         const actual = (await driver.findElements(selector)).length;
 
         return actual === expected;
@@ -44,9 +43,9 @@ async function waitForResultCount(
 }
 
 async function seeTheResultsIn(
-    label: string,
-    table: Array<Object>,
-): Promise<void> {
+    label,
+    table,
+) {
     const getText = element => element.getText();
     const keyToClass = (key) => key.match(/[(](.*)[)]/)[1];
     const selector = label && `.${label.replace(/ /g, "")}`;
@@ -72,14 +71,14 @@ async function seeTheResultsIn(
     }
 }
 
-async function seeTheResults(table: Array<Object>): Promise<void> {
+async function seeTheResults(table) {
     await seeTheResultsIn.bind(this)("", table);
 }
 
 async function hotlinePositionAndText(
-    expectedPos: number,
-    expectedText: string,
-): Promise<void> {
+    expectedPos,
+    expectedText,
+) {
     let elements = await this.driver.findElements(
         By.css(".CrisisLineItem, .ResultListItem")
     );
@@ -99,7 +98,7 @@ async function hotlinePositionAndText(
     assert.equal(await phone.getText(), expectedText);
 }
 
-async function assertHotlineHeading(text: string): Promise<void> {
+async function assertHotlineHeading(text) {
     let elements = await this.driver.findElements(
         By.css(".CrisisLineItem, .CrisisHeader")
     );
@@ -113,7 +112,7 @@ async function assertHotlineHeading(text: string): Promise<void> {
     assert.equal(await elements[0].getText(), text);
 }
 
-async function assertNoSuchResults(table: Array<Object>): Promise<void> {
+async function assertNoSuchResults(table) {
     // Determine the CSS class for each column
     const getCssClass = key => key.match(/[(](.*)[)]/)[1];
     let elements = [];

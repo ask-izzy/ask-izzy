@@ -1,4 +1,3 @@
-/* @flow */
 /**
  * ISS mock using Express */
 
@@ -6,7 +5,6 @@ import cors from "cors";
 import express from "express";
 import * as servicesProps from "../../../fixtures/servicesProps";
 import {getServiceFixtureProps} from "../../../fixtures/factories/Service";
-import type { serviceFixtureProps } from "../../../fixtures/factories/Service";
 
 export function initMockISSServer() {
     const app = express();
@@ -17,7 +15,7 @@ export function initMockISSServer() {
 
     let seq = 1000050;
 
-    function Seq(): number {
+    function Seq() {
         return seq++;
     }
 
@@ -359,7 +357,7 @@ export function initMockISSServer() {
     })
 
     for (const servicePropsKey in servicesProps) {
-        const serviceProps: serviceFixtureProps = servicesProps[servicePropsKey]
+        const serviceProps = servicesProps[servicePropsKey]
         app.get(`/api/v3/service/${serviceProps.id}/`, (req, res) => {
             res.json(getServiceFixtureProps(serviceProps));
         });

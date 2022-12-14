@@ -1,35 +1,35 @@
-/* $FlowIgnore */
 /*
  * Step definitions for Selenium/browser related steps
  */
 
 /* eslint-disable no-use-before-define */
 
-import assert from "../support/page-assertions";
+
 import Yadda from "yadda";
-import Webdriver, { By, Key } from "selenium-webdriver";
+import { By, Key } from "selenium-webdriver";
 import {
     TargetLocator,
     Navigation,
 } from "selenium-webdriver/lib/webdriver";
 import _ from "underscore";
 
+import assert from "../support/page-assertions";
 import dictionary from "../support/dictionary";
 import pauseToDebug, * as debug from "../support/debug";
 import {
     elementWithText,
     escapeXPathString,
-} from "../support/selectors";
+} from "@/test/support/selectors";
 import {
     getElementWithText,
     getElementWithTextSubstring,
-} from "../support/elements"
+} from "@/test/support/elements"
 import {
     gotoUrl,
     baseUrl,
     cleanDriverSession,
-} from "../support/webdriver";
-import { regexEscape } from "../../src/utils/strings"
+} from "@/test/support/webdriver";
+import { regexEscape } from "@/src/utils/strings"
 
 module.exports = (function() {
     return Yadda.localisation.English.library(dictionary)
@@ -91,8 +91,8 @@ module.exports = (function() {
  * @returns {Promise<boolean>} true if the document is readyState is complete.
  */
 module.exports.documentReady = async function documentReady(
-    driver: Webdriver.WebDriver
-): Promise<boolean> {
+    driver
+) {
     const result = await driver.executeAsyncScript((callback) => {
         const intervalId = setInterval(() => {
             // Internal page
@@ -123,28 +123,28 @@ module.exports.documentReady = async function documentReady(
     }
 };
 
-async function visitUrl(url: string): Promise<void> {
+async function visitUrl(url) {
     await module.exports.visitUrl(this.driver, url);
 }
 
 module.exports.visitUrl = async function visitUrl(
-    driver: Webdriver.WebDriver,
-    url: string
-): Promise<void> {
+    driver,
+    url
+) {
     await gotoUrl(driver, url);
     await new Promise(resolve => setTimeout(resolve, 2000));
     await module.exports.documentReady(driver);
 }
 
-async function clickLink(linkText: string) {
+async function clickLink(linkText) {
     await clickElementWithText(this.driver, linkText, "a")
 }
 
-async function clickLinkWithSubstring(linkText: string) {
+async function clickLinkWithSubstring(linkText) {
     await clickElementWithTextSubstring(this.driver, linkText, "a")
 }
 
-async function clickButton(buttonText: string) {
+async function clickButton(buttonText) {
     await clickElementWithText(this.driver, buttonText, "button")
 }
 
@@ -166,16 +166,18 @@ async function clickButtonWithClassName(className: string): Promise<void> {
     await module.exports.documentReady(this.driver);
 }
 
+async function clickAlertButton(buttonText) {
+    await clickElementWithText(this.driver, buttonText, "button")
+}
 
-
-async function clickDetails(summaryText: string): Promise<void> {
+async function clickDetails(summaryText) {
     await clickElementWithText(this.driver, summaryText, "details/summary")
 }
 
 async function clickElementWithText(
-    driver: Webdriver.WebDriver,
-    elementText: string,
-    elementType?: string
+    driver,
+    elementText,
+    elementType
 ) {
     const useFallbackClickMethod = (elementText === "Carlton, VIC") &&
         (elementType.includes("option"))
@@ -201,9 +203,9 @@ async function clickElementWithText(
 }
 
 async function clickElementWithTextSubstring(
-    driver: Webdriver.WebDriver,
-    elementText: string,
-    elementType?: string
+    driver,
+    elementText,
+    elementType
 ) {
     const element = await getElementWithTextSubstring(
         driver,
@@ -214,7 +216,7 @@ async function clickElementWithTextSubstring(
     await module.exports.documentReady(driver);
 }
 
-async function clickDropdown(optionText: string) {
+async function clickDropdown(optionText) {
     await clickElementWithText(
         this.driver,
         optionText,
@@ -222,7 +224,7 @@ async function clickDropdown(optionText: string) {
     )
 }
 
-async function clickDropdownOption(optionText: string) {
+async function clickDropdownOption(optionText) {
     await clickElementWithText(
         this.driver,
         optionText,
@@ -232,22 +234,22 @@ async function clickDropdownOption(optionText: string) {
 }
 
 function navigator(
-    driver: Webdriver.WebDriver
-): Navigation {
+    driver
+) {
     return new Navigation(driver);
 }
 
-async function reloadPage(): Promise<void> {
+async function reloadPage() {
     await navigator(this.driver).refresh();
     await module.exports.documentReady(this.driver);
 }
 
-async function clickBrowserBack(): Promise<void> {
+async function clickBrowserBack() {
     await navigator(this.driver).back();
     await module.exports.documentReady(this.driver);
 }
 
-async function clickHome(): Promise<void> {
+async function clickHome() {
     await this.driver.findElement(By.css(
         ".appBarLogo"
     ))
@@ -255,7 +257,7 @@ async function clickHome(): Promise<void> {
     await module.exports.documentReady(this.driver);
 }
 
-async function clickBack(): Promise<void> {
+async function clickBack() {
     await this.driver.findElement(By.css(
         "button.IconButton"
     ))
@@ -264,9 +266,9 @@ async function clickBack(): Promise<void> {
 }
 
 async function urlIs(
-    driver: Webdriver.WebDriver,
-    expected: string
-): Promise<boolean> {
+    driver,
+    expected
+) {
     let url = await driver.getCurrentUrl();
 
     if (url.endsWith("#")) {
@@ -280,7 +282,7 @@ async function urlIs(
     return decodeURI(url) === expected;
 }
 
-async function checkURL(expected: string): Promise<void> {
+async function checkURL(expected) {
     await new Promise(resolve => setTimeout(resolve, 2000));
     if (expected.startsWith(`"`)) {
         throw new Error("URL should not be quoted");
@@ -315,7 +317,7 @@ async function checkURL(expected: string): Promise<void> {
     );
 }
 
-async function thenISee(expected: string): Promise<void> {
+async function thenISee(expected) {
     // driver.findElement() seems to be very slow to return when
     // there is no matching element on the page.
     this.mochaState.timeout(45000)
@@ -323,7 +325,7 @@ async function thenISee(expected: string): Promise<void> {
     await assert.withRetries(assert.textIsVisible)(this.driver, expected);
 }
 
-async function thenISeeServicesInMyList(expected: string): Promise<void> {
+async function thenISeeServicesInMyList(expected) {
     await this.driver.findElement(By.css(
         ".my-list-count"
     ))
@@ -332,7 +334,7 @@ async function thenISeeServicesInMyList(expected: string): Promise<void> {
     await assert.withRetries(assert.textIsVisible)(this.driver, expected);
 }
 
-async function thenIDontSee(expected: string): Promise<void> {
+async function thenIDontSee(expected) {
     this.mochaState.slow(22000)
     try {
         await assert.textIsVisible(this.driver, expected);
@@ -350,8 +352,8 @@ async function thenIDontSee(expected: string): Promise<void> {
  * @returns {Promise<Webdriver.WebElement>} the search element.
  */
 function getSearchElement(
-    driver: Webdriver.WebDriver,
-): Promise<Webdriver.WebElement> {
+    driver,
+) {
     return getInputElement(driver, "search");
 }
 
@@ -363,15 +365,15 @@ function getSearchElement(
  * @returns {Promise<Webdriver.WebElement>} the input element.
  */
 function getInputElement(
-    driver: Webdriver.WebDriver,
+    driver,
     type = "text",
-): Promise<Webdriver.WebElement> {
+) {
     return driver.findElement(By.css(
         `input[type=${type}]`
     ));
 }
 
-async function doSearch(search: string): Promise<void> {
+async function doSearch(search) {
     let element = await getSearchElement(this.driver);
     await new Promise(resolve => setTimeout(resolve, 2000));
     await element.clear();
@@ -381,21 +383,21 @@ async function doSearch(search: string): Promise<void> {
 }
 
 
-async function clearFirstSearchBox(): Promise<void> {
+async function clearFirstSearchBox() {
     await module.exports.documentReady(this.driver);
     const element = await getSearchElement(this.driver);
     await element.clear();
     await element.click();
 }
 
-async function doSearchAndEnter(search: string): Promise<void> {
+async function doSearchAndEnter(search) {
     await (await getSearchElement(this.driver))
         .sendKeys(search + Key.ENTER);
     await new Promise(resolve => setTimeout(resolve, 2000));
     await module.exports.documentReady(this.driver);
 }
 
-async function searchContains(expected: string): Promise<void> {
+async function searchContains() {
     // Test fails 1 out of 10 times it is executed.
     // Until migration to cypress is done, this test
     // will be excluded.
@@ -407,30 +409,30 @@ async function searchContains(expected: string): Promise<void> {
 }
 
 async function getButtonState(
-    driver: Webdriver.WebDriver,
-    text: string,
-): Promise<boolean> {
+    driver,
+    text,
+) {
     return await driver
         .findElement(By.xpath(elementWithText(text, "button")))
         .isEnabled();
 }
 
-async function checkDisabled(text: string): Promise<void> {
+async function checkDisabled(text) {
     let enabled = await getButtonState(this.driver, text);
 
     assert.equal(enabled, false);
 }
 
-async function checkEnabled(text: string): Promise<void> {
+async function checkEnabled(text) {
     let enabled = await getButtonState(this.driver, text);
 
     assert.equal(enabled, true);
 }
 
 async function assertItemCheckedIs(
-    label: string,
-    status: any
-): Promise<void> {
+    label,
+    status
+) {
     let labelXPath = `//a[.//*[text()=${escapeXPathString(label)}]]`;
 
     let checked = await this.driver.findElement(By.xpath(
@@ -441,15 +443,15 @@ async function assertItemCheckedIs(
     assert.equal(checked, status);
 }
 
-async function assertItemChecked(label: string): Promise<void> {
+async function assertItemChecked(label) {
     await assertItemCheckedIs.bind(this)(label, "true");
 }
 
-async function assertItemNotChecked(label: string): Promise<void> {
+async function assertItemNotChecked(label) {
     await assertItemCheckedIs.bind(this)(label, null);
 }
 
-async function checkMetaCanonical(expected: string): Promise<void> {
+async function checkMetaCanonical(expected) {
 
     let content = await this.driver.findElement(By.css(
         "link[rel=canonical]"
@@ -472,7 +474,7 @@ async function checkMetaCanonical(expected: string): Promise<void> {
  * @returns {Promise<void>} resolves after we've switched to the new tab.
  *
  */
-async function newBrowser(): Promise<void> {
+async function newBrowser() {
     const currentHandle = await this.driver.getWindowHandle();
     await this.driver.executeScript(() => {
         document.body.innerHTML = `<a
@@ -501,11 +503,11 @@ async function newBrowser(): Promise<void> {
         .window(newHandles[0]);
 }
 
-async function cleanSession(): Promise<void> {
+async function cleanSession() {
     await cleanDriverSession(this.driver);
 }
 
-async function takeScreenshot(): Promise<void> {
+async function takeScreenshot() {
     const filepath = await debug.takeScreenshot(
         this.driver,
         debug.getSceenshotPath(
@@ -516,15 +518,15 @@ async function takeScreenshot(): Promise<void> {
     console.log(`${this.indent}  Screenshot saved to "${filepath}"`);
 }
 
-async function enableDebugMode(): Promise<void> {
+async function enableDebugMode() {
     await debug.enableDebugMode(this.driver)
 }
 
-async function showCursor(): Promise<void> {
+async function showCursor() {
     await debug.showCursorPosition(this.driver)
 }
 
-async function scrollToElement(elementText: string): Promise<void> {
+async function scrollToElement(elementText) {
     return this.driver.executeScript(
         (elementXPathSelector, elementText) => {
             const element = document
@@ -547,7 +549,7 @@ async function scrollToElement(elementText: string): Promise<void> {
     );
 }
 
-async function seeBrowserTitle(title: string): Promise<void> {
+async function seeBrowserTitle(title) {
     const browserTitle = await this.driver.getTitle()
 
     assert.strictEqual(
@@ -558,7 +560,7 @@ async function seeBrowserTitle(title: string): Promise<void> {
 }
 
 async function seeTheAlerts(
-    table: Array<Object>,
+    table,
 ): Promise<void> {
     const alerts = await this.driver.findElements(
         By.css(`.AlertBannerButton`)

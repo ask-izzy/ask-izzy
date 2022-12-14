@@ -1,5 +1,3 @@
-/* @flow */
-
 import * as Sentry from "@sentry/nextjs";
 import getConfig from 'next/config';
 
