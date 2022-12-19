@@ -1,5 +1,9 @@
 /* @flow */
-import * as React from "react";
+import React, {useState} from "react";
+import type {
+    Node as ReactNode,
+    ElementConfig as ReactElementConfig,
+} from "React";
 import { withRouter } from "next/router"
 import type { NextRouter } from "next/router"
 
@@ -26,78 +30,50 @@ type Props = {
     details: PersonalisationLookingForHelpPage,
 }
 
-type State = {
-    category: ?Category,
-}
-
 export type UserType = "User Worker" | "User Myself"| "User Someone Else"
 
-class WhoIsLookingForHelp extends React.Component<Props, State> {
-    constructor(props: Object) {
-        super(props);
-        this.state = {
-            category: getCategory(
-                props.router.query.categoryOrContentPageSlug
-            ),
-        }
-    }
+function WhoIsLookingForHelp({router, details}: Props): ReactNode {
+    const [category] = useState<?Category>(
+        getCategory(
+            router.query.categoryOrContentPageSlug
+        )
+    )
 
-    handleButtonClick: (
+    const handleButtonClick: (
         (userType: UserType) => (event: SyntheticEvent<HTMLButtonElement>) => void
     ) = (userType: UserType) =>
         (event: SyntheticEvent<HTMLButtonElement>): void => {
-            storage.setItem(this.props.details.name, userType);
+            storage.setItem(details.name, userType);
             storage.setItem(WhoIsLookingForHelpBaseInfo.name, userType);
 
-            goToPersonalisationNextPath({router: this.props.router})
+            goToPersonalisationNextPath({router})
         }
 
-    static prettyPrintAnswer: empty
 
-    render(): React.Element<"div"> {
-        return (
-            <div className="WhoIsLookingForHelpPage">
-                {this.renderHeaderSection()}
-                <main
-                    id="mainPageContent"
-                    aria-label="Questions"
-                >
-                    <div className="body">
-                        <fieldset>
-                            <legend>
-                                 I&#39;m looking for help for
-                            </legend>
-                            {this.renderDoneButton()}
-                        </fieldset>
-                    </div>
-                </main>
-            </div>
-        );
-    }
 
-    renderDoneButton(): React.Element<"div"> {
+    function renderDoneButton(): ReactNode {
         return (
             <div>
                 <div className="done-button">
                     <FlatButton
                         label="A client or consumer"
-                        onClick={this.handleButtonClick("User Worker")}
+                        onClick={handleButtonClick("User Worker")}
                     />
                     <FlatButton
                         label="Myself"
-                        onClick={this.handleButtonClick("User Myself")}
+                        onClick={handleButtonClick("User Myself")}
                     />
                     <FlatButton
                         label="A friend or family member"
-                        onClick={this.handleButtonClick("User Someone Else")}
+                        onClick={handleButtonClick("User Someone Else")}
                     />
                 </div>
             </div>
         )
     }
 
-    renderHeaderSection(): React.Element<any> {
-        const goBackPath = getPersonalisationBackPath(this.props.router)
+    function renderHeaderSection(): ReactNode {
+        const goBackPath = getPersonalisationBackPath(router)
         const isSummaryRoute = goBackPath.includes("/summary")
 
         return (
@@ -112,8 +88,8 @@ class WhoIsLookingForHelp extends React.Component<Props, State> {
                     taperColour={"LighterGrey"}
                     fixedAppBar={true}
                     bannerName={getBannerName(
-                        this.state.category,
-                        this.props.details.name
+                        category,
+                        details.name
                     )}
                     backUrl={isSummaryRoute ? goBackPath : undefined}
                     backMessage={isSummaryRoute ? "Back to answers" : undefined}
@@ -136,6 +112,25 @@ class WhoIsLookingForHelp extends React.Component<Props, State> {
             </section>
         )
     }
+
+    return (
+        <div className="WhoIsLookingForHelpPage">
+            {renderHeaderSection()}
+            <main
+                id="mainPageContent"
+                aria-label="Questions"
+            >
+                <div className="body">
+                    <fieldset>
+                        <legend>
+                                I&#39;m looking for help for
+                        </legend>
+                        {renderDoneButton()}
+                    </fieldset>
+                </div>
+            </main>
+        </div>
+    )
 }
 
 export default (
@@ -143,7 +138,7 @@ export default (
         Class<
             React$Component<
                 $Diff<
-                    React.ElementConfig<typeof WhoIsLookingForHelp>,
+                    ReactElementConfig<typeof WhoIsLookingForHelp>,
                     {router: *}
                 >
             >

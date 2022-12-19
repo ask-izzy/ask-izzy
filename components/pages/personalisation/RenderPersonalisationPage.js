@@ -11,7 +11,7 @@ import {
     getCurrentPersonalisationPage,
 } from "@/src/utils/routing"
 
-export default function RenderPersonalisationPage(): ReactNode {
+function RenderPersonalisationPage(): ReactNode {
     const router = useRouter()
     const personalisationPage = getCurrentPersonalisationPage(router);
     if (!personalisationPage) {
@@ -78,3 +78,5 @@ export default function RenderPersonalisationPage(): ReactNode {
         </div>
     }
 }
+
+export default RenderPersonalisationPage
