@@ -1,22 +1,17 @@
-/* @flow */
-
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import * as React from "react";
 import parse from "html-react-parser";
 import classnames from "classnames";
 
-type Props = {
-    iconClass?: string,
-    className?: string,
-    viewBox?: string,
-    containerClassName?: string,
-    fill?: string,
-    noSpanWrapper?: boolean,
-}
 
-class BaseIcon extends React.Component<Props, void> {
-    +svgContent: string;
+class BaseIcon extends React.Component {
+    svgContent = ""
+    constructor(props) {
+        super()
+        this.props = props
+    }
 
-    get classNames(): any {
+    get classNames() {
         return classnames(
             this.props.iconClass,
             "disallow-override-color",
@@ -27,7 +22,7 @@ class BaseIcon extends React.Component<Props, void> {
     }
 
 
-    render(): React.Node {
+    render() {
         let {
             className,
             iconClass,

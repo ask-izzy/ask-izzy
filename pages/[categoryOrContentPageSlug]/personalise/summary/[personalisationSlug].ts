@@ -1,6 +1,6 @@
 import type { GetStaticProps } from "next"
 
-export {default, getStaticPaths} from "@/pages/[categoryOrContentPageSlug]/personalise/page/[personalisationSlug].js"
+export {default, getStaticPaths} from "@/pages/[categoryOrContentPageSlug]/personalise/page/[personalisationSlug]"
 import type {RouteSharedProps} from "@/types/routes"
 
 

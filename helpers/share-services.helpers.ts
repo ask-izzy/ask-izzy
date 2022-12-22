@@ -77,7 +77,6 @@ export function getShareMessage(args: GetMessageProps): { subject: string, body:
     }
 
     if (messageType === "Email") {
-        // $FlowIgnore polyfill for replaceAll is imported in _app.js
         messageText = messageText.replaceAll("\n", "<br />")
     }
 
@@ -127,7 +126,6 @@ export function getShareReqSchema(messageType: MessageType): MessageRequestSchem
     }
 }
 
-// $FlowIgnore we can type this nicely when moving to typescript using Yup's InferType
 export async function getRequestType(request): Promise<MessageType | null> {
     if (await smsSchema.isValid(request)) {
         return "SMS";
@@ -143,7 +141,6 @@ export function normalisePhoneNumber(phoneNumber: string): string {
     // support.
     if (!lookbehindIsSupported()) {
         return phoneNumber
-            // $FlowIgnore flow is out of date and replaceAll exists
             .replaceAll(/[ ()-]/g, "")
             .replaceAll(
                 /[ ()-+]/g,
@@ -159,7 +156,6 @@ export function normalisePhoneNumber(phoneNumber: string): string {
         // RegEx must be created via a string rather than a literal otherwise
         // it will bork browsers that don't support lookbehinds even if those
         // browsers never execute this line.
-        // $FlowIgnore flow is out of date and replaceAll exists
         .replaceAll(new RegExp("(?:[ ()-]|(?<!^)\\+)", "g"), "")
         .replace(/^0/, "+61");
 }

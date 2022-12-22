@@ -1,10 +1,11 @@
+// @ts-nocheck
 /**
  * ISS mock using Express */
 
 import cors from "cors";
 import express from "express";
-import * as servicesProps from "../../../fixtures/servicesProps";
-import {getServiceFixtureProps} from "../../../fixtures/factories/Service";
+import * as servicesProps from "../../../fixtures/servicesProps.js";
+import {getServiceFixtureProps} from "../../../fixtures/factories/Service.js";
 
 export function initMockISSServer() {
     const app = express();

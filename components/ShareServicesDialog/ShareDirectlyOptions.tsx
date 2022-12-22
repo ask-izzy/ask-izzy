@@ -32,7 +32,6 @@ function ShareDirectlyOptions({
             ${service.location?.details ?? ""}
             More info: ${baseUrl}/service/${service.slug}
         `
-            // $FlowIgnore flow is out of date and replaceAll exists
             .replaceAll(/\n {12}/g, "\n").replaceAll(/\n(?=\n)/g, "").trim()).join("\n\n")
     } else {
         textToShare = services.map(service => `${baseUrl}/service/${service.slug}`).join("\n")
@@ -101,7 +100,6 @@ function ShareDirectlyOptions({
                             "Action Triggered - Services Shared Via Web Share API (individual)",
                             "Web Share API",
                         )
-                        // $FlowIgnore Flow.js currently out-of-date and doesn't know about the share API
                         navigator.share(shareData)
                     }}
                     analyticsEvent={{

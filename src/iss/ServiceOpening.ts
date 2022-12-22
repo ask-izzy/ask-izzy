@@ -1,3 +1,4 @@
+// @ts-nocheck
 import moment from "moment-timezone";
 import _ from "underscore";
 
@@ -168,7 +169,6 @@ export default class ServiceOpening {
             return value;
         });
 
-        // $FlowIgnore doesn't know about raw
         return String.raw({raw: strings}, ...timeValues);
     }
 

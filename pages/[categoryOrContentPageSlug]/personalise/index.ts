@@ -5,7 +5,7 @@ import type { GetStaticPaths, GetStaticProps } from "next"
 
 import categories from "@/src/constants/categories"
 import PersonalisationRedirect from "@/components/pages/personalisation/PersonalisationRedirect";
-import type {RouteSharedProps} from "@/flow/routes"
+import type {RouteSharedProps} from "@/types/routes"
 
 export const getStaticPaths: GetStaticPaths = async() => {
     const categoryPaths: {params: {categoryOrContentPageSlug: string}}[] = []
@@ -26,7 +26,7 @@ export const getStaticPaths: GetStaticPaths = async() => {
 export const getStaticProps: GetStaticProps<RouteSharedProps> = ({params}) => {
     return {
         props: {
-            pageTitle: params?.categoryOrContentPageSlug,
+            pageTitle: params?.categoryOrContentPageSlug as string,
             pageType: [
                 params?.categoryOrContentPageSlug === "search" ?
                     "Search"

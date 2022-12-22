@@ -33,8 +33,5 @@ class ObjectStorage {
 }
 
 export default function NewStorage(): Storage {
-    // flow wants `[key: string]: ?string`,
-    // but there's no way to implement that
-    // $FlowIgnore
     return new ObjectStorage();
 }

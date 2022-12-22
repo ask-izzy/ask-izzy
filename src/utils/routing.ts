@@ -133,7 +133,6 @@ export function convertRouteToPath(
     route: string,
     params: Record<string, string>,
 ): string {
-    // $FlowIgnore polyfill for replaceAll is imported in _app.js
     return route.replaceAll(
         /\[([^/\]]+?)\]/g,
         (fullMatch, param) => {

@@ -1,3 +1,4 @@
+// @ts-nocheck
 type Headers = Record<string, string>;
 
 export async function getRequest<Res = any>(

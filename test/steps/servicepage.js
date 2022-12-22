@@ -64,7 +64,6 @@ async function getTransportTimes(driver) {
         By.css(".TransportTime")
     )
 
-    // $FlowIgnore needed because WebDriver is not typed
     const visibleTransportElements = await asyncFilter(
         allTransports,
         elem => elem.isDisplayed()

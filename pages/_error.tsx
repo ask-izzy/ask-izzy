@@ -26,7 +26,6 @@ const MyError: NextPage<Props> = ({ statusCode, hasGetInitialPropsRun, err }) =>
     )
 };
 
-// $FlowIgnore Typescript will type this correctly
 MyError.getInitialProps = async(context: NextPageContext) => {
     const errorInitialProps = await NextErrorComponent.getInitialProps(context);
 

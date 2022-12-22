@@ -91,7 +91,7 @@ USER root
 RUN apt-get -y update && \
     apt-get -y --no-install-recommends install \
         curl \
-        # Used by scripts/check-flow-annotations.sh & scripts/check-storybook-components.sh
+        # Used by scripts/check-storybook-components.sh
         git \
         # Used by selenium
         chromium \

@@ -1,6 +1,7 @@
 /* eslint-disable camelcase */
 import _ from "underscore";
-import { titleize } from "underscore.string";
+import _string from "underscore.string";
+const { titleize } = _string;
 
 import type {geoPoint} from "@/src/iss/general"
 

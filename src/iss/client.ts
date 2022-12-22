@@ -1,11 +1,10 @@
-import createClient from "@/src/ix-web-js-client/apis/iss"
-import type {ISS3Client} from "@/src/ix-web-js-client/apis/iss/v3"
-import type {ISS4Client} from "@/src/ix-web-js-client/apis/iss/v4"
+import createClient from "@/src/ix-web-js-client/apis/iss/index.js"
+import type {ISS3Client} from "@/src/ix-web-js-client/apis/iss/v3.js"
+import type {ISS4Client} from "@/src/ix-web-js-client/apis/iss/v4.js"
 
 export function getIssVersion(): "3" | "4" {
     const issVersion = process.env.NEXT_PUBLIC_ISS_VERSION
     if (["3", "4"].includes(issVersion as string)) {
-        // It's necessary to restate the value to keep flow happy :/
         return issVersion === "3" ? "3" : "4"
     } else {
         throw Error(`Unknown ISS version: ${issVersion}`)

@@ -1,4 +1,8 @@
 {
+  "ts-node": {
+    "esm": true,
+    "require": ["tsconfig-paths/register"]
+  },
   "compilerOptions": {
     "target": "es6",
     "lib": [
@@ -26,7 +30,7 @@
     "noEmit": true,
     "incremental": true,
     "esModuleInterop": true,
-    "module": "esnext",
+    "module": "ESNext",
     "resolveJsonModule": true,
     "isolatedModules": true,
     "moduleResolution": "node",
