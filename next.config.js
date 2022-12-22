@@ -1,17 +1,21 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
+/* eslint-disable @typescript-eslint/no-unused-vars */
 
-const path = require("path")
-const globImporter = require("node-sass-glob-importer");
-const fs = require("fs");
-const _string = require("underscore.string");
-const { withSentryConfig } = require("@sentry/nextjs");
+import path, {dirname} from "path"
+import { fileURLToPath } from "url";
+import globImporter from "node-sass-glob-importer"
+import fs from "fs"
+import _string from "underscore.string"
+import { withSentryConfig } from "@sentry/nextjs"
+import "./lib/env-var-check.js"
 
-require("./lib/env-var-check.js")
 
+
+const __dirname = dirname(fileURLToPath(import.meta.url));
 const bannerImages = fs.readdirSync("./public/images/banners")
     .map(file => file.replace(/\.\w*$/, ""));
 
-module.exports = {
+let nextConfigWithTranspiledNodeModules = {
     sassOptions: {
         importer: globImporter(),
         includePaths: [
@@ -101,6 +105,10 @@ module.exports = {
             tls: false,
         };
 
+        config.resolve.extensionAlias = {
+            ".js": [".ts", ".tsx", ".js"],
+        };
+
         return config;
     },
     env: {
@@ -137,6 +145,7 @@ module.exports = {
         tunnelRoute: "/error-monitoring/sentry",
     },
 }
+
 
 function getRewriteForProxy() {
     if (process.env.NEXT_PUBLIC_PROXY_DOMAIN_SUFFIX) {
@@ -186,8 +195,8 @@ function getRewritesForCategories() {
 }
 
 if (process.env.NODE_ENV !== "test") {
-    module.exports = withSentryConfig(
-        module.exports,
+    nextConfigWithTranspiledNodeModules = withSentryConfig(
+        nextConfigWithTranspiledNodeModules,
         {
             silent: true,
         }
@@ -199,3 +208,5 @@ function getDomainsToProxy() {
         .split(",")
         .map(domain => domain.trim())
 }
+
+export default nextConfigWithTranspiledNodeModules

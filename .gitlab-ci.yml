@@ -84,12 +84,6 @@ lint-eslint:
   script:
     - docker run --rm -t $TAG_DEVELOPMENT_STAGE lint-eslint
 
-lint-flow:
-  stage: Lint
-  needs: ['build-development']
-  script:
-    - docker run --rm -t $TAG_DEVELOPMENT_STAGE lint-flow
-
 lint-stylelint:
   stage: Lint
   needs: ['build-development']

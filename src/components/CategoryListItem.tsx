@@ -3,7 +3,7 @@ import { withRouter } from "next/router"
 import type { NextRouter } from "next/router"
 
 import LinkListItem from "@/src/components/LinkListItem";
-import icons from "@/src/icons";
+import icons from "@/src/icons/index.js";
 import type Category from "@/src/constants/Category";
 import Storage from "@/src/storage";
 import ScreenReader from "@/src/components/ScreenReader"
@@ -11,7 +11,7 @@ import { getServicesPath } from "@/src/utils/routing"
 
 type Props = {
     category: Category,
-    router: NextRouter,
+    router?: NextRouter,
 }
 
 const PERSONALISATIONS_TO_CLEAR = [

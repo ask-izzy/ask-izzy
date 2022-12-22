@@ -1,5 +1,5 @@
 import React, {useEffect, ReactNode} from "react";
-import type { AppProps } from "next/app"
+import type { AppProps } from "next/app.js"
 import { ApolloProvider } from "@apollo/client";
 import Head from "next/head"
 import { useRouter } from "next/router"
@@ -14,7 +14,7 @@ import {MyListProvider} from "@/contexts/my-list-context";
 import {ServiceResultsProvider} from "@/contexts/service-results-context";
 import {ToastMessageProvider} from "@/contexts/toast-message-context";
 import ToastMessage from "@/src/components/ToastMessage"
-import { getFullPageTitle } from "@/src/utils";
+import { getFullPageTitle } from "@/src/utils/index.js";
 import "@/src/utils/page-loading"
 import apolloClient from "@/src/utils/apolloClient";
 import usePageViewAnalytics from "@/hooks/usePageViewAnalytics";
@@ -33,7 +33,7 @@ function App(appProps: AppProps): ReactNode {
     const router = useRouter()
 
     if (process.env.NODE_ENV === "test") {
-        import("@/test/support/environment-setup")
+        import("@/test/support/environment-setup.js")
     }
 
     useEffect(() => {
@@ -119,10 +119,12 @@ export type PageInfo = {
 // at some point we should find a cleaner way of doing this.
 function getPageInfo({ Component, pageProps }: AppProps): PageInfo {
     const router = useRouter()
-    const title = pageProps.pageTitle ?? (Component as any).pageTitle ??
-        (router.pathname === "/_error" ? "Server error" : undefined)
-    const type = pageProps.pageType ?? (Component as any).pageType ??
-        (router.pathname === "/_error" ? ["500"] : undefined)
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-ignore
+    const title = pageProps.pageTitle ?? Component.pageTitle
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-ignore
+    const type = pageProps.pageType ?? Component.pageType
     if (title === undefined || type === undefined) {
         Sentry.captureException(
             new Error(`Route ${router.pathname} is missing shared props.`),

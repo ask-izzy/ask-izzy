@@ -2,7 +2,7 @@ import {useEffect} from "react";
 import { useRouter } from "next/router";
 
 import * as gtm from "@/src/google-tag-manager";
-import type {PageInfo} from "@/pages/_app.js"
+import type {PageInfo} from "@/pages/_app"
 import {
     getCategory,
 } from "@/src/constants/categories"

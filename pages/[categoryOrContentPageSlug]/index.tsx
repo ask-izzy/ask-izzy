@@ -8,7 +8,7 @@ import cmsCalloutQuery from "@/src/queries/content/callout";
 import categories, { getCategory } from "@/src/constants/categories"
 import ResultsListPage from "@/components/pages/ResultsListPage"
 import DynamicPage from "@/components/pages/DynamicPage"
-import type {RouteSharedProps} from "@/flow/routes"
+import type {RouteSharedProps} from "@/types/routes"
 import {queryGraphQlWithErrorLogging} from "@/src/utils/apolloClient";
 import type {CalloutType} from "@/src/components/CalloutBox"
 import NotFoundStaticPage from "@/components/pages/NotFoundStaticPage"
@@ -170,7 +170,7 @@ export default function CategoryOrContentPage(props: Props) {
     if (props.contentPage) {
         return (
             <DynamicPage
-                pageDetails={props.contentPage}
+                pageDetails={props.contentPage as any}
                 embeddedCallouts={props.embeddedCallouts || []}
             />
         )

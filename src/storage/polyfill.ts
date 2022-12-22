@@ -39,7 +39,6 @@ try {
     console.log(error)
 }
 
-// $FlowIgnore
 if (persistentStore.privateMode) {
     privateModeStore = persistentStore;
     persistentStore = sessionStore;

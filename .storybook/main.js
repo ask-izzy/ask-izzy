@@ -1,14 +1,14 @@
-const fs = require("fs");
-const webpack = require("webpack");
+import fs from "fs"
+import webpack from "webpack"
 
 module.exports = {
     typescript: {
         check: false,
         checkOptions: {},
-        reactDocgen: 'react-docgen-typescript',
+        reactDocgen: "react-docgen-typescript",
         reactDocgenTypescriptOptions: {
-          shouldExtractLiteralValuesFromEnum: true,
-          propFilter: (prop) => (prop.parent ? !/node_modules/.test(prop.parent.fileName) : true),
+            shouldExtractLiteralValuesFromEnum: true,
+            propFilter: (prop) => (prop.parent ? !/node_modules/.test(prop.parent.fileName) : true),
         },
     },
     stories: [

@@ -6,12 +6,12 @@ export async function CopyToClipboard(text: string) {
         // the following uses the deprecated document.execCommand("copy")
         // that requires this hack
         // https://stackoverflow.com/questions/47879184/document-execcommandcopy-not-working-on-chrome
-        let textarea = document.createElement("textarea");
+        const textarea = document.createElement("textarea");
         textarea.textContent = text
         document.body?.appendChild(textarea);
 
-        let selection = document.getSelection();
-        let range = document.createRange();
+        const selection = document.getSelection();
+        const range = document.createRange();
         range.selectNode(textarea);
         selection?.removeAllRanges();
         selection?.addRange(range);

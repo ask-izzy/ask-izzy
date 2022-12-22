@@ -1,6 +1,7 @@
 /* eslint-disable prefer-arrow-callback */
 
-import { pad } from "underscore.string";
+import _string from "underscore.string";
+const { pad } = _string;
 
 export function SequenceCb<U>(callback: (x: number) => U): () => U {
     // No depending on sequences in tests

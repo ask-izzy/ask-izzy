@@ -4,7 +4,7 @@
 import { createProxyMiddleware } from "http-proxy-middleware";
 import { lsof } from "list-open-files"
 
-import { unflattenDomain } from "@/helpers/url.helpers"
+import { unflattenDomain } from "@/helpers/url.helpers.js"
 
 const allowedDomains = new Set(process.env.DOMAINS_TO_PROXY)
 

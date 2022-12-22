@@ -1,6 +1,6 @@
 import BadWordsFilter from "bad-words"
 
-import {createNotificationsAPIClient} from "@/src/ix-web-js-client"
+import {createNotificationsAPIClient} from "@/src/ix-web-js-client/index.js"
 import {getService} from "@/src/iss/load-services"
 import Service from "@/src/iss/Service"
 import { sendSMS } from "@/src/utils/sms"
@@ -10,7 +10,7 @@ import {
     getRequestType,
     getShareMessage,
     normalisePhoneNumber,
-} from "@/helpers/share-services.helpers"
+} from "@/helpers/share-services.helpers.js"
 
 const middlewares = getRateLimitMiddlewares({
     limit: 10,
@@ -87,7 +87,6 @@ export default async function handler(req: any, res: any) {
                 body.toEmail,
                 process.env.NEXT_PUBLIC_SITE_EMAIL,
                 messageText.subject,
-                // $FlowIgnore flow is out of date and replaceAll exists
                 messageText.body,
             )
         } else {

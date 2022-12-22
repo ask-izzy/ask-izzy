@@ -22,6 +22,8 @@ function AlertBannerList({
     screenLocation,
     format,
 }: Props) {
+    const alertStorageObj = {}
+    let containsWarnings = false
     const [isCollapsed, setIsCollapsed] = useState<boolean>(true)
 
     const { loading, error, data } = useQuery(alertsQuery, {
@@ -45,8 +47,6 @@ function AlertBannerList({
         info: 1,
         warn: 2,
     }
-    let containsWarnings = false
-    const alertStorageObj = {}
     const alerts = data.alerts.map(
         (alert) => {
             //check for warnings

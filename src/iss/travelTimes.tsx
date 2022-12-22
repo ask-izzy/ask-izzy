@@ -42,7 +42,6 @@ export async function attachTransportTimes(
         const travelTimesForServices: any = await Timeout(
             1000 * 10, // wait for 10 secs before giving up
             maps.travelTime(servicesToLoadTravelTimesFor
-                // $FlowIgnore isConfidential checks location.point
                 .map(({location}) => formatPoint(location.point)),
             ),
         );
