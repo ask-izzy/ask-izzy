@@ -89,9 +89,7 @@ export function getMaxNumberOfAnswersToShowInBreadcrumb(
 ): number {
     const maxBreadcrumbs = 6;
     const numOfSingleChoicePersonalisationPages = personalisationPages.filter(
-        // ternary statement required because flow is wack
-        // eslint-disable-next-line no-unneeded-ternary
-        page => page.multipleChoice ? false : true,
+        page => !page.multipleChoice,
     ).length
 
     return maxBreadcrumbs - numOfSingleChoicePersonalisationPages;
@@ -105,7 +103,6 @@ export function getBreadcrumbText(
         null
 
     let savedAnswers: Array<string> =
-        // $FlowIgnore Flow confused about flat()
         [getSavedPersonalisationAnswer(personalisationPage)].flat()
     /* If the personalisation question is one with set answers (not the location
        page for example) then make sure the saved answers are ordered in the

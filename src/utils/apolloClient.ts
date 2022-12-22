@@ -7,7 +7,7 @@ const client = new ApolloClient({
 
 export default client;
 
-export async function queryGraphQlWithErrorLogging(query: any) {
+export async function queryGraphQlWithErrorLogging<T>(query: T) {
     try {
         return await client.query(query)
     } catch (error) {

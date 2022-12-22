@@ -1,6 +1,14 @@
 {
+  "$schema": "https://json.schemastore.org/tsconfig",
+  "display": "Next.js",
+  "ts-node": {
+    "esm": true,
+    "require": ["tsconfig-paths/register"]
+  },
   "compilerOptions": {
     "target": "es6",
+    "rootDir": ".",
+    "outDir": "./dist",
     "lib": [
       "dom",
       "dom.iterable",
@@ -16,6 +24,11 @@
         "./*"
       ]
     },
+    "plugins": [
+      {
+        "name": "next"
+      }
+    ],
     "allowJs": false,
     "checkJs": false,
     "maxNodeModuleJsDepth": 0,
@@ -26,11 +39,11 @@
     "noEmit": true,
     "incremental": true,
     "esModuleInterop": true,
-    "module": "esnext",
+    "module": "ESNext",
     "resolveJsonModule": true,
     "isolatedModules": true,
-    "moduleResolution": "node",
-    "jsx": "preserve"
+    "moduleResolution": "nodenext",
+    "jsx": "react-jsx"
   },
   "include": [
     "next-env.d.ts",

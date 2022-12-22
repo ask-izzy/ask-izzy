@@ -29,11 +29,9 @@ function UrlsToLink({children}: Props) {
                 if (string.includes("<url>")) {
                     const url = string.replace("<url>", "")
                     return (
-                        <p key={index}>
-                            <Link to={url.indexOf("https://") < 0 ? "https://" + url : url}>
-                                {url}
-                            </Link>
-                        </p>
+                        <Link to={url.indexOf("https://") < 0 ? "https://" + url : url}>
+                            {url}
+                        </Link>
                     )
                 }
                 if (string.includes("<br />")) {
@@ -42,7 +40,7 @@ function UrlsToLink({children}: Props) {
                 if (string.includes("<a>")) {
                     return null
                 }
-                return (<p key={index}>{string}</p>)
+                return (string)
             })}
 
         </>

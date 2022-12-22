@@ -5,6 +5,7 @@
   "main": "src/client.js",
   "license": "GPL-3.0",
   "readme": "README.md",
+  "type": "module",
   "scripts": {
     "dev": "next dev -p 8000",
     "build": "next build",
@@ -21,14 +22,13 @@
     "test-dev-mocha-features": "yarn run with --test-env --dev --mocks test-mocha-features",
     "test-dev-mocha-maps": "yarn run with --test-env --dev --mocks test-mocha-maps",
     "test-dev-mocha-unit": "yarn test-mocha-unit",
-    "mock-iss": "test/support/mock-iss/start.js",
-    "mock-cms": "test/support/mock-cms/start.js",
+    "mock-iss": "yarn ts-run test/support/mock-iss/index.js",
+    "mock-cms": "yarn ts-run test/support/mock-cms/index.js",
     "lint": "yarn lint-eslint && yarn lint-tsc && yarn lint-stylelint && yarn lint-storybook-components && yarn lint-jsonlint && yarn lint-hadolint && yarn lint-shellcheck",
-    "lint-fix": "yarn lint-eslint-fix && yarn lint-flow && yarn lint-stylelint-fix && yarn lint-storybook-components && yarn lint-jsonlint && yarn lint-hadolint && yarn lint-shellcheck",
+    "lint-fix": "yarn lint-eslint-fix && yarn lint-tsc && yarn lint-stylelint-fix && yarn lint-storybook-components && yarn lint-jsonlint && yarn lint-hadolint && yarn lint-shellcheck",
     "lint-eslint": "eslint src --ext .ts,.tsx",
     "lint-tsc": "tsc --noEmit",
     "lint-eslint-fix": "eslint --fix src/ test/ fixtures/ .storybook/ pages/ components/ lib/ helpers/ hooks/ next.config.js",
-    "lint-flow": "scripts/check-flow-annotations.sh && flow --quiet",
     "lint-stylelint": "stylelint **/*.{css,scss,sass}",
     "lint-stylelint-fix": "stylelint --fix **/*.{css,scss,sass}",
     "lint-jsonlint": "find . -iname '*.json' -not -path './.next/*' -not -path './.git/*' -not -path './node_modules/*' | xargs -L 1 jsonlint -q -c",
@@ -40,7 +40,8 @@
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook -o public/storybook",
     "shell": "bash -c '\"$0\" \"$@\"'",
-    "with": "scripts/run-with.js"
+    "with": "yarn ts-run scripts/run-with.ts",
+    "ts-run": "node --loader ./scripts/ts-run-loader.js"
   },
   "dependencies": {
     "@apollo/client": "^3.3.19",
@@ -48,7 +49,6 @@
     "@babel/node": "^7.14.2",
     "@babel/polyfill": "^7.12.1",
     "@babel/preset-env": "^7.14.2",
-    "@babel/preset-flow": "^7.13.13",
     "@babel/preset-react": "^7.13.13",
     "@babel/register": "^7.13.16",
     "@clevercanyon/merge-change.fork": "1.8.14",
@@ -73,6 +73,7 @@
     "@types/google.maps": "^3.50.5",
     "@types/jest": "^29.2.0",
     "@types/moment": "^2.13.0",
+    "@types/next": "^9.0.0",
     "@types/node": "^18.11.4",
     "@types/react": "^18.0.24",
     "@types/react-dom": "^18.0.8",
@@ -113,7 +114,6 @@
     "express-rate-limit": "^6.4.0",
     "express-slow-down": "^1.4.0",
     "extract-text-webpack-plugin": "3.0.2",
-    "flow-bin": "0.133.0",
     "focus-within-polyfill": "^5.2.1",
     "fs-extra": "9.1.0",
     "global-agent": "^3.0.0",
@@ -143,6 +143,7 @@
     "react-markdown": "5.0.2",
     "react-mixin": "4.0.0",
     "remark-gfm": "1.0.0",
+    "resolve": "^1.22.1",
     "sass": "^1.35.0",
     "sass-loader": "^12.6.0",
     "selenium-webdriver": "4.0.0-alpha.1",
@@ -160,7 +161,9 @@
     "stylelint-config-standard": "^22.0.0",
     "stylelint-scss": "^3.19.0",
     "svg-inline-loader": "0.8.0",
-    "typescript": "^4.8.4",
+    "ts-node": "^10.9.1",
+    "tsconfig-paths": "^3.14.2",
+    "typescript": "^4.9.5",
     "underscore": "^1.13.1",
     "underscore.string": "3.3.5",
     "utility-types": "^3.10.0",
@@ -171,6 +174,6 @@
   "devDependencies": {
     "@storybook/builder-webpack5": "^6.4.22",
     "@storybook/manager-webpack5": "^6.4.22",
-    "webpack": "^5.72.1"
+    "webpack": "^5.75.0"
   }
 }

@@ -483,7 +483,6 @@ const categories: Array<Category> = [
 
 export default categories;
 
-// $FlowIgnore flowjs needs to be updated to include fromEntries
 const categoryMap = Object.fromEntries(
     categories.map(category => [category.key, category]),
 )

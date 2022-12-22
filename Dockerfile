@@ -38,7 +38,17 @@ ENTRYPOINT exec bash -c "\
 # development and serving states.                                             #
 ###############################################################################
 
-FROM contyard.office.infoxchange.net.au/bullseye-nodejs16:latest as base
+FROM contyard.office.infoxchange.net.au/bullseye:latest as base
+
+SHELL ["/bin/bash", "-o", "pipefail", "-c"]
+
+# Keys for custom repos, and custom repos
+RUN http_proxy=$HTTP_PROXY https_proxy=$HTTP_PROXY \
+    curl -sL https://deb.nodesource.com/gpgkey/nodesource.gpg.key | apt-key add -  && \
+    echo 'deb http://deb.nodesource.com/node_18.x bullseye main' > /etc/apt/sources.list.d/nodesource.list
+RUN DEBIAN_FRONTEND=noninteractive apt-get -y update && apt-get -y install nodejs && apt-get clean && rm -rf /var/lib/apt/lists/*
+
+
 
 ARG UID_GID
 ARG HOME
@@ -50,9 +60,9 @@ ENV DEBIAN_FRONTEND=noninteractive
 ENV HOME=$HOME
 ENV NODE_EXTRA_CA_CERTS=/etc/ssl/certs/ca-certificates.crt
 
+
 RUN mkdir /app && \
     ( [ -e "$HOME" ] || mkdir "$HOME" ) && \
-    chown -R $UID_GID /app "$HOME" && \
     # Install yarn
     npm install -g yarn && \
     yarn config set registry http://apt.office.infoxchange.net.au/npm && \
@@ -62,8 +72,8 @@ RUN mkdir /app && \
         # Used by start-server-and-test
         procps && \
     apt-get clean && \
-    rm -rf /var/lib/apt/lists/*
-
+    rm -rf /var/lib/apt/lists/* && \
+    chown -R $UID_GID /app "$HOME"
 USER $UID_GID
 
 WORKDIR /app
@@ -91,7 +101,7 @@ USER root
 RUN apt-get -y update && \
     apt-get -y --no-install-recommends install \
         curl \
-        # Used by scripts/check-flow-annotations.sh & scripts/check-storybook-components.sh
+        # Used by scripts/check-storybook-components.sh
         git \
         # Used by selenium
         chromium \
@@ -120,7 +130,7 @@ RUN yarn install --network-timeout 100000 --frozen-lockfile && yarn cache clean 
 # Copy in just the files need to build source to avoid cache invalidation from changes to unrelated files
 COPY --chown=$UID_GID ./components /app/components
 COPY --chown=$UID_GID ./src /app/src
-COPY --chown=$UID_GID ./scripts/run-with.js /app/scripts/
+COPY --chown=$UID_GID ./scripts/run-with.ts ./scripts/ts-run-loader.js /app/scripts/
 COPY --chown=$UID_GID ./hooks /app/hooks
 COPY --chown=$UID_GID ./contexts /app/contexts
 COPY --chown=$UID_GID ./helpers /app/helpers
@@ -128,9 +138,9 @@ COPY --chown=$UID_GID ./lib /app/lib
 COPY --chown=$UID_GID ./pages /app/pages
 COPY --chown=$UID_GID ./public/images/banners /app/public/images/banners
 COPY --chown=$UID_GID ./fixtures /app/fixtures
-COPY --chown=$UID_GID ./test/support/mock-cms /app/test/support/mock-cms/
-COPY --chown=$UID_GID ./test/support/mock-iss /app/test/support/mock-iss/
-COPY --chown=$UID_GID ./.env ./.env.test ./babel.config.json ./next.config.js /app/
+COPY --chown=$UID_GID ./test/support /app/test/support/
+COPY --chown=$UID_GID ./types /app/types
+COPY --chown=$UID_GID ./.env ./.env.test ./next.config.js ./tsconfig.json ./jsconfig.json /app/
 
 # Build Ask Izzy
 RUN yarn with --test-env --mocks build
@@ -163,7 +173,7 @@ RUN yarn install --network-timeout 100000 --frozen-lockfile && yarn cache clean 
 # Copy in just the files need to build source to avoid cache invalidation from changes to unrelated files
 COPY --chown=$UID_GID ./components /app/components
 COPY --chown=$UID_GID ./src /app/src
-COPY --chown=$UID_GID ./scripts/run-with.js /app/scripts/
+COPY --chown=$UID_GID ./scripts/run-with.ts ./scripts/ts-run-loader.js /app/scripts/
 COPY --chown=$UID_GID ./hooks /app/hooks
 COPY --chown=$UID_GID ./contexts /app/contexts
 COPY --chown=$UID_GID ./helpers /app/helpers
@@ -176,7 +186,8 @@ COPY --chown=$UID_GID ./public/images/ask-izzy-logo-single-line-purple.svg /app/
 COPY --chown=$UID_GID ./fixtures /app/fixtures
 COPY --chown=$UID_GID ./test/support/mock-cms /app/test/support/mock-cms/
 COPY --chown=$UID_GID ./test/support/mock-iss /app/test/support/mock-iss/
-COPY --chown=$UID_GID ./.env ./.env.test ./babel.config.json ./next.config.js /app/
+COPY --chown=$UID_GID ./.env ./.env.test ./next.config.js /app/
+COPY --chown=$UID_GID ./tsconfig.json /app/
 
 # Upgrading next.js has forced the need to upgrade storybook. And as usual trying to make storybook work with flow.js is always
 # a major PITA. Since the typescript migrations is (hopefully just around the corner) rather than waste time trying to make it work

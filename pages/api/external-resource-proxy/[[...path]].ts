@@ -1,10 +1,9 @@
-/* @flow */
 // We currently can't do with Next.js rewrites due to this bug
 // https://github.com/vercel/next.js/issues/37028 stopping us
 // proxying the google maps api
 import { createProxyMiddleware } from "http-proxy-middleware";
 
-import { unflattenDomain } from "@/helpers/url.helpers"
+import { unflattenDomain } from "@/helpers/url.helpers.js"
 
 const allowedDomains = new Set(process.env.DOMAINS_TO_PROXY)
 

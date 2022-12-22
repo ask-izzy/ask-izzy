@@ -91,8 +91,8 @@ function SendForm({
 
     }
 
-    if (typeof window !== "undefined" && !window.recaptchaOptions) {
-        window.recaptchaOptions = {
+    if (typeof window !== "undefined" && !(window as any).recaptchaOptions) {
+        (window as any).recaptchaOptions = {
             useRecaptchaNet: true,
         };
     }

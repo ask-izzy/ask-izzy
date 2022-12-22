@@ -99,7 +99,7 @@ function Link({
         return (
             <InternalLink
                 href={to}
-                {...(remainingProps)}
+                {...remainingProps}
                 onClick={onClickHandler.bind(this)}
                 className={classnames(
                     "Link",

@@ -4,7 +4,7 @@ import React, {useEffect, ReactNode} from "react";
 import WithStickyFooter from "@/src/components/WithStickyFooter";
 import FlatButton from "@/src/components/FlatButton";
 import ListItem from "@/src/components/ListItem";
-import icons from "@/src/icons";
+import icons from "@/src/icons/index.js";
 
 export default {
     title: "Basic UI Components/WithStickyFooter",

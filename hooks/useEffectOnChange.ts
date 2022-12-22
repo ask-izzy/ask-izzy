@@ -1,4 +1,3 @@
-/* @flow */
 import {useEffect, useRef} from "react"
 
 const useOnChange: typeof useEffect = (effect, deps) => {

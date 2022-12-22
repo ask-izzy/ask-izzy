@@ -10,7 +10,7 @@ import AppBar from "@/src/components/AppBar";
 import Link from "@/src/components/base/Link";
 import Loading from "@/src/icons/Loading";
 import ScreenReader from "@/src/components/ScreenReader";
-import {getFullPageTitle} from "@/src/utils";
+import {getFullPageTitle} from "@/src/utils/index.js";
 import {
     addPageLoadDependencies,
     closePageLoadDependencies,

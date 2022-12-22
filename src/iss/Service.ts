@@ -1,6 +1,7 @@
 /* eslint-disable camelcase */
 import _ from "underscore";
-import { slugify } from "underscore.string";
+import _string from "underscore.string";
+const { slugify } = _string;
 import lo_ from "lodash";
 
 import serviceProvisions from "@/src/constants/service-provisions";
@@ -14,10 +15,10 @@ import type {
     openingHours,
     phone,
 } from "@/src/iss/general.js"
-import ServiceOpening from "@/src/iss/ServiceOpening";
-import type {SortType} from "@/src/components/base/Dropdown"
-import {getIssClient, getIssVersion} from "@/src/iss/client"
-import {lookbehindIsSupported} from "@/helpers/regex.helpers"
+import ServiceOpening from "@/src/iss/ServiceOpening.js";
+import type {SortType} from "@/src/components/base/Dropdown.js"
+import {getIssClient, getIssVersion} from "@/src/iss/client.js"
+import {lookbehindIsSupported} from "@/helpers/regex.helpers.js"
 
 export type ServiceProps = {
     location: AddressLocationProps
@@ -304,7 +305,6 @@ export const sortServices = (
         const keys = orderBy.value ? Object.keys(orderBy.value) : [];
 
         // checks if they type is a boolean
-        /* $FlowIgnore */
         if (keys.map(item => typeof orderBy.value[item] === "boolean")
             ?.some(val => val)) {
 
@@ -312,12 +312,10 @@ export const sortServices = (
             // that's not then joins them together with matched list first
             for (let key = 0; key < keys.length; key++) {
                 const matchedResults = results.filter(item =>
-                    /* $FlowIgnore */
                     orderBy.key && item[orderBy.key][keys[key]],
                 )
                 const unMatchedResults = results.filter(item =>
                     orderBy.key &&
-                    /* $FlowIgnore */
                     !item[orderBy.key][keys[key]],
                 )
                 newResults = matchedResults.concat(unMatchedResults)
@@ -357,11 +355,9 @@ export const sortServices = (
     if (!isObject) {
         if (typeof orderBy.value === "boolean") {
             const matchedResults = results.filter(item =>
-                /* $FlowIgnore */
                 orderBy.key && item[orderBy.key],
             )
             const UnMatchedResults = results.filter(item =>
-                /* $FlowIgnore */
                 orderBy.key && !item[orderBy.key],
             )
             newResults = matchedResults.concat(UnMatchedResults)

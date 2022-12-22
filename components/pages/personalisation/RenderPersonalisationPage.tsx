@@ -16,11 +16,6 @@ function RenderPersonalisationPage() {
         throw new Error("Could not get personalisation page")
     }
     let PageComponent
-    // We should be able to just return the rendered PageComponent
-    // once after the if statements but unfortunately flow is dumb and forgets
-    // that after the if statements `personalisationPage` and `PageComponent`
-    // must have a relationship. Hopefully we can clean this up when we move
-    // to typescript.
     if (personalisationPage.type === "question") {
         PageComponent = BaseQuestion
         // key prop is needed to force the component to be full remounted when
