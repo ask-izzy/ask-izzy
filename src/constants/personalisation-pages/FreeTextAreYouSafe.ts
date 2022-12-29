@@ -1,10 +1,10 @@
 import type {
     PersonalisationQuestionPage,
-} from "@/types/personalisation-page"
+} from "@/types/personalisation-page.js"
 
-import AreYouSafe from "@/src/constants/personalisation-pages/AreYouSafe";
-import storage from "@/src/storage";
-import ViolenceKeywords from "@/src/constants/free-text-keywords";
+import AreYouSafe from "@/src/constants/personalisation-pages/AreYouSafe.js";
+import storage from "@/src/storage.js";
+import ViolenceKeywords from "@/src/constants/free-text-keywords.js";
 
 export default ({
     ...AreYouSafe,

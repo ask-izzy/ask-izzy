@@ -1,9 +1,9 @@
 import React, {ReactNode} from "react";
 
-import QuestionStepperBreadcrumb from "@/src/components/QuestionStepperBreadcrumb";
-import { setPersonalisationAnswers } from "@/src/storybook/decorators";
-import LocationPage from "@/src/constants/personalisation-pages/Location";
-import DemographicsPage from "@/src/constants/personalisation-pages/Demographics";
+import QuestionStepperBreadcrumb from "@/src/components/QuestionStepperBreadcrumb.js";
+import { setPersonalisationAnswers } from "@/src/storybook/decorators.js";
+import LocationPage from "@/src/constants/personalisation-pages/Location.js";
+import DemographicsPage from "@/src/constants/personalisation-pages/Demographics.js";
 
 export default {
     title: "App Components/QuestionStepperBreadcrumb",

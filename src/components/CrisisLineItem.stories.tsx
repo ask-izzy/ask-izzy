@@ -1,8 +1,8 @@
 import React, {ReactNode} from "react";
 
-import CrisisLineItem from "@/src/components/CrisisLineItem";
-import { ixaServiceProps } from "@/fixtures/servicesProps";
-import getServiceFixture from "@/fixtures/factories/Service";
+import CrisisLineItem from "@/src/components/CrisisLineItem.js";
+import { ixaServiceProps } from "@/fixtures/servicesProps.js";
+import getServiceFixture from "@/fixtures/factories/Service.js";
 
 export default {
     title: "App Components/Crisis Line/CrisisLineItem",

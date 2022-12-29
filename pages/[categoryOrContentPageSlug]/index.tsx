@@ -2,16 +2,16 @@ import React from "react";
 import type { GetStaticPaths, GetStaticProps } from "next"
 import {promises as fs} from "fs"
 
-import cmsPageQuery from "@/src/queries/content/page"
-import cmsAllPagesQuery from "@/src/queries/content/allPages"
-import cmsCalloutQuery from "@/src/queries/content/callout";
-import categories, { getCategory } from "@/src/constants/categories"
-import ResultsListPage from "@/components/pages/ResultsListPage"
-import DynamicPage from "@/components/pages/DynamicPage"
-import type {RouteSharedProps} from "@/types/routes"
-import {queryGraphQlWithErrorLogging} from "@/src/utils/apolloClient";
-import type {CalloutType} from "@/src/components/CalloutBox"
-import NotFoundStaticPage from "@/components/pages/NotFoundStaticPage"
+import cmsPageQuery from "@/src/queries/content/page.js"
+import cmsAllPagesQuery from "@/src/queries/content/allPages.js"
+import cmsCalloutQuery from "@/src/queries/content/callout.js";
+import categories, { getCategory } from "@/src/constants/categories.js"
+import ResultsListPage from "@/components/pages/ResultsListPage.js"
+import DynamicPage from "@/components/pages/DynamicPage.js"
+import type {RouteSharedProps} from "@/types/routes.js"
+import {queryGraphQlWithErrorLogging} from "@/src/utils/apolloClient.js";
+import type {CalloutType} from "@/src/components/CalloutBox.js"
+import NotFoundStaticPage from "@/components/pages/NotFoundStaticPage.js"
 
 type Props = {
     categoryKey?: string,

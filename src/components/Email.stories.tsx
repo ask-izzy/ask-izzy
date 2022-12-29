@@ -1,6 +1,6 @@
 import React, {ReactNode} from "react";
 
-import Email from "@/src/components/Email";
+import Email from "@/src/components/Email.js";
 
 export default {
     title: "Service Components/Email",

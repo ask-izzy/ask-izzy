@@ -1,7 +1,7 @@
 import React, {ReactNode} from "react";
 
-import Feedback from "@/src/components/Feedback";
-import { ixaService } from "@/fixtures/services";
+import Feedback from "@/src/components/Feedback.js";
+import { ixaService } from "@/fixtures/services.js";
 
 export default {
     title: "App Components/Feedback",

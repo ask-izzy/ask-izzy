@@ -1,7 +1,7 @@
 import React, {ReactNode} from "react";
 import LinkTo from "@storybook/addon-links/react";
 import { storiesOf } from "@storybook/react";
-import icons from "./index";
+import icons from "./index.js";
 
 for (const name of Object.keys(icons)) {
     const Component = icons[name];

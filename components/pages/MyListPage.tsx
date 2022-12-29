@@ -1,18 +1,18 @@
 import React, {useState} from "react";
 import { useRouter } from "next/router"
 
-import HeaderBar from "@/src/components/HeaderBar"
-import MyListResults from "@/src/components/MyListResults"
-import Button from "@/src/components/base/Button"
-import Loading from "@/src/icons/Loading"
-import ScrollToTop from "@/src/components/ResultsListPage/ScrollToTop"
-import ShareButton from "@/src/components/ShareButton"
+import HeaderBar from "@/src/components/HeaderBar.js"
+import MyListResults from "@/src/components/MyListResults.js"
+import Button from "@/src/components/base/Button.js"
+import Loading from "@/src/icons/Loading.js"
+import ScrollToTop from "@/src/components/ResultsListPage/ScrollToTop.js"
+import ShareButton from "@/src/components/ShareButton.js"
 import classnames from "classnames";
-import {MobileDetect} from "@/src/effects/MobileDetect";
-import Spacer from "@/src/components/Spacer";
-import useMyList from "@/hooks/useMyList"
-import ClearMyListDialog from "@/src/components/ClearMyListDialog"
-import BrandedFooter from "@/src/components/BrandedFooter"
+import {MobileDetect} from "@/src/effects/MobileDetect.js";
+import Spacer from "@/src/components/Spacer.js";
+import useMyList from "@/hooks/useMyList.js"
+import ClearMyListDialog from "@/src/components/ClearMyListDialog.js"
+import BrandedFooter from "@/src/components/BrandedFooter.js"
 
 function MyListPage() {
     const router = useRouter()

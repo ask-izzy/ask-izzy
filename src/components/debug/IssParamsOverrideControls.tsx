@@ -3,7 +3,7 @@ import {diffJson} from "diff";
 import {JsonForms} from "@jsonforms/react";
 import {vanillaCells, vanillaRenderers} from "@jsonforms/vanilla-renderers";
 
-import Diff from "@/src/components/debug/Diff"
+import Diff from "@/src/components/debug/Diff.js"
 
 type Props = {
     originalIssParams: Record<string, any>,

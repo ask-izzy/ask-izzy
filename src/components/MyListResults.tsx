@@ -1,8 +1,8 @@
 import React, {ReactNode} from "react";
 
-import MyListResultItem from "@/src/components/MyListResultItem";
-import ScreenReader from "@/src/components/ScreenReader";
-import Service from "@/src/iss/Service";
+import MyListResultItem from "@/src/components/MyListResultItem.js";
+import ScreenReader from "@/src/components/ScreenReader.js";
+import Service from "@/src/iss/Service.js";
 
 type Props = {
     results: Array<Service>,

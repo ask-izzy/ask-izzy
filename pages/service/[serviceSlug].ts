@@ -1,1 +1,1 @@
-export { default } from "@/components/pages/ServicePage"
+export { default } from "@/components/pages/ServicePage.js"

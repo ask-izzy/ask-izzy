@@ -1,4 +1,4 @@
-import {GTMEvent} from "@/src/google-tag-manager"
+import {GTMEvent} from "@/src/google-tag-manager.js"
 
 export {};
 

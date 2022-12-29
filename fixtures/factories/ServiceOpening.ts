@@ -1,7 +1,7 @@
 import moment from "moment-timezone";
 
-import ServiceOpening from "@/src/iss/ServiceOpening";
-import type {openingHours as openingHoursType} from "@/src/iss/general";
+import ServiceOpening from "@/src/iss/ServiceOpening.js";
+import type {openingHours as openingHoursType} from "@/src/iss/general.js";
 
 /*
  * Create ServiceOpening fixture

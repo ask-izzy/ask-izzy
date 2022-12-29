@@ -1,8 +1,8 @@
 import React, {ReactNode} from "react";
 import { action } from "@storybook/addon-actions";
 
-import GeolocationButton from "@/src/components/GeolocationButton";
-import {addGoogleMapsScript} from "@/src/storybook/decorators";
+import GeolocationButton from "@/src/components/GeolocationButton.js";
+import {addGoogleMapsScript} from "@/src/storybook/decorators.js";
 /**
  * TODO: Refactor geolocation mocking to include guessSuburb(). (I've been
  * wanting to refactor that crusty code for ages away.) Until then Google

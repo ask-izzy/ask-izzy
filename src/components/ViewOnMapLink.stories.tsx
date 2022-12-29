@@ -1,7 +1,7 @@
 import React, {ReactNode} from "react";
 
-import ViewOnMapLink from "@/src/components/ViewOnMapLink";
-import { addGoogleMapsScript } from "@/src/storybook/decorators";
+import ViewOnMapLink from "@/src/components/ViewOnMapLink.js";
+import { addGoogleMapsScript } from "@/src/storybook/decorators.js";
 
 export default {
     title: "App Components/ViewOnMapLink",

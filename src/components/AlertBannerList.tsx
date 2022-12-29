@@ -2,14 +2,14 @@ import React, { useState, useEffect } from "react"
 import { useQuery } from "@apollo/client"
 import classnames from "classnames"
 
-import AlertBanner from "@/src/components/AlertBanner"
-import Cross from "@/src/icons/Cross"
-import Info from "@/src/icons/Info"
-import StrapiMarkdown from "@/src/components/StrapiMarkdown"
-import Link from "@/src/components/base/Link"
-import Button from "@/src/components/base/Button"
-import alertsQuery from "@/src/queries/content/alerts"
-import storage from "@/src/storage"
+import AlertBanner from "@/src/components/AlertBanner.js"
+import Cross from "@/src/icons/Cross.js"
+import Info from "@/src/icons/Info.js"
+import StrapiMarkdown from "@/src/components/StrapiMarkdown.js"
+import Link from "@/src/components/base/Link.js"
+import Button from "@/src/components/base/Button.js"
+import alertsQuery from "@/src/queries/content/alerts.js"
+import storage from "@/src/storage.js"
 
 type Props = {
     screenLocation: string,

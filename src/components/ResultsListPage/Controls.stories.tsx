@@ -1,6 +1,6 @@
 import React, {ReactNode} from "react";
 
-import Controls from "@/src/components/ResultsListPage/Controls";
+import Controls from "@/src/components/ResultsListPage/Controls.js";
 
 export default {
     title: "Basic UI Components/Controls",

@@ -4,38 +4,38 @@ import debounce from "just-debounce-it";
 import { withRouter } from "next/router"
 import type { NextRouter } from "next/router"
 
-import {browserSupportsGeolocation} from "@/src/geolocation";
-import Walk from "@/src/icons/Walk"
-import Tram from "@/src/icons/Tram"
-import Car from "@/src/icons/Car"
-import Loading from "@/src/icons/Loading"
-import storage from "@/src/storage";
-import type {Geolocation} from "@/src/storage";
-import {getIssClient, getIssVersion} from "@/src/iss/client"
-import type {ISS3AreaLocation} from "@/src/ix-web-js-client/apis/iss/v3";
-import QuestionStepper from "@/src/components/QuestionStepper";
-import WithStickyFooter from "@/src/components/WithStickyFooter";
-import ScreenReader from "@/src/components/ScreenReader";
-import FlatButton from "@/src/components/FlatButton";
-import InputWithDropdown from "@/components/general/InputWithDropdown";
-import GeolocationButton, {GeolocationStatus} from "@/src/components/GeolocationButton";
-import HeaderBar from "@/src/components/HeaderBar";
+import {browserSupportsGeolocation} from "@/src/geolocation.js";
+import Walk from "@/src/icons/Walk.js"
+import Tram from "@/src/icons/Tram.js"
+import Car from "@/src/icons/Car.js"
+import Loading from "@/src/icons/Loading.js"
+import storage from "@/src/storage.js";
+import type {Geolocation} from "@/src/storage.js";
+import {getIssClient, getIssVersion} from "@/src/iss/client.js"
+import type {ISS3AreaLocation} from "@/src/ix-web-js-client/apis/iss/v3.js";
+import QuestionStepper from "@/src/components/QuestionStepper.js";
+import WithStickyFooter from "@/src/components/WithStickyFooter.js";
+import ScreenReader from "@/src/components/ScreenReader.js";
+import FlatButton from "@/src/components/FlatButton.js";
+import InputWithDropdown from "@/components/general/InputWithDropdown.js";
+import GeolocationButton, {GeolocationStatus} from "@/src/components/GeolocationButton.js";
+import HeaderBar from "@/src/components/HeaderBar.js";
 import {
     getCategoryFromRouter,
     goToPersonalisationNextPath,
     getPersonalisationBackPath,
-} from "@/src/utils/routing"
+} from "@/src/utils/routing.js"
 import type {
     PersonalisationLocationPage,
-} from "@/types/personalisation-page";
+} from "@/types/personalisation-page.js";
 import {
     getBannerName,
-} from "@/src/utils/personalisation";
+} from "@/src/utils/personalisation.js";
 import {
     addPageLoadDependencies,
     closePageLoadDependencies,
-} from "@/src/utils/page-loading"
-import Category from "@/src/constants/Category"
+} from "@/src/utils/page-loading.js"
+import Category from "@/src/constants/Category.js"
 
 type LocationType = Geolocation | {name: string}
 

@@ -1,7 +1,7 @@
 import React, {ReactNode} from "react";
 
-import MyListResults from "@/src/components/MyListResults";
-import { ixaService, susansHouseService } from "@/fixtures/services";
+import MyListResults from "@/src/components/MyListResults.js";
+import { ixaService, susansHouseService } from "@/fixtures/services.js";
 
 export default {
     title: "App Components/MyListResults",

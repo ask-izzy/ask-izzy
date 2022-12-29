@@ -10,10 +10,10 @@ import {
     sessionStore,
     switchToPrivateMode,
     clearPrivateMode,
-} from "@/src/storage/polyfill";
+} from "@/src/storage/polyfill.js";
 
-import * as gtm from "@/src/google-tag-manager";
-import type {AnalyticsEvent} from "@/src/google-tag-manager";
+import * as gtm from "@/src/google-tag-manager.js";
+import type {AnalyticsEvent} from "@/src/google-tag-manager.js";
 
 export type Geolocation = {
     name: string,

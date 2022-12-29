@@ -1,7 +1,7 @@
 import React, {ReactNode} from "react";
 
-import Ndis from "@/src/components/Ndis";
-import getServiceFixture from "@/fixtures/factories/Service";
+import Ndis from "@/src/components/Ndis.js";
+import getServiceFixture from "@/fixtures/factories/Service.js";
 
 export default {
     title: "Service Components/Ndis",

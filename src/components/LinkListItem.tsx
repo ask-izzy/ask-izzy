@@ -1,9 +1,9 @@
 import React from "react";
 import classnames from "classnames";
 
-import Link from "@/src/components/base/Link";
-import ListItem, {Props as ListItemProps} from "@/src/components/ListItem";
-import type {AnalyticsEvent} from "../google-tag-manager";
+import Link from "@/src/components/base/Link.js";
+import ListItem, {Props as ListItemProps} from "@/src/components/ListItem.js";
+import type {AnalyticsEvent} from "../google-tag-manager.js";
 
 type Props = {
     to?: string

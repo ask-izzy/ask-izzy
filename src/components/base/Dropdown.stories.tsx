@@ -1,6 +1,6 @@
 import React, {ReactNode} from "react";
 
-import Dropdown from "@/src/components/base/Dropdown";
+import Dropdown from "@/src/components/base/Dropdown.js";
 
 export default {
     title: "Basic UI Components/Dropdown",

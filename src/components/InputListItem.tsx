@@ -1,9 +1,9 @@
 import React from "react";
 
-import ListItem, {Props as ListItemProps} from "@/src/components/ListItem";
-import Button from "@/src/components/base/Button";
-import type {AnalyticsEvent} from "@/src/google-tag-manager";
-import Chevron from "@/src/icons/Chevron";
+import ListItem, {Props as ListItemProps} from "@/src/components/ListItem.js";
+import Button from "@/src/components/base/Button.js";
+import type {AnalyticsEvent} from "@/src/google-tag-manager.js";
+import Chevron from "@/src/icons/Chevron.js";
 
 type Props = {
     type?: "checkbox" | "radio",

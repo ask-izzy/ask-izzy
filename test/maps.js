@@ -1,6 +1,6 @@
 import { loadEnvConfig } from "@next/env"
 
-import runTests from "./yadda";
+import runTests from "./yadda.js";
 
 const projectDir = process.cwd()
 loadEnvConfig(projectDir)

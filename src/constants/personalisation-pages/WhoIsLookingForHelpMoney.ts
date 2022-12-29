@@ -1,7 +1,7 @@
 import type {
     PersonalisationLookingForHelpPage,
-} from "@/types/personalisation-page"
-import WhoIsLookingForHelp from "@/src/constants/personalisation-pages/WhoIsLookingForHelp"
+} from "@/types/personalisation-page.js"
+import WhoIsLookingForHelp from "@/src/constants/personalisation-pages/WhoIsLookingForHelp.js"
 
 export default ({
     ...WhoIsLookingForHelp,

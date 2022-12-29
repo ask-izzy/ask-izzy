@@ -13,23 +13,23 @@ import {
 } from "selenium-webdriver/lib/webdriver";
 import _ from "underscore";
 
-import assert from "../support/page-assertions";
-import dictionary from "../support/dictionary";
-import pauseToDebug, * as debug from "../support/debug";
+import assert from "../support/page-assertions.js";
+import dictionary from "../support/dictionary.js";
+import pauseToDebug, * as debug from "../support/debug.js";
 import {
     elementWithText,
     escapeXPathString,
-} from "@/test/support/selectors";
+} from "@/test/support/selectors.js";
 import {
     getElementWithText,
     getElementWithTextSubstring,
-} from "@/test/support/elements"
+} from "@/test/support/elements.js"
 import {
     gotoUrl,
     baseUrl,
     cleanDriverSession,
-} from "@/test/support/webdriver";
-import { regexEscape } from "@/src/utils/strings"
+} from "@/test/support/webdriver.js";
+import { regexEscape } from "@/src/utils/strings.js"
 
 module.exports = (function() {
     return Yadda.localisation.English.library(dictionary)

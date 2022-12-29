@@ -1,5 +1,5 @@
 import React, {useContext, createContext, useState, ReactNode} from "react";
-import useForceUpdate from "@/hooks/useForceUpdate";
+import useForceUpdate from "@/hooks/useForceUpdate.js";
 
 type Context = {
     open: boolean,

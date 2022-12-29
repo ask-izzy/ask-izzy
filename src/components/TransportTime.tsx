@@ -1,12 +1,12 @@
 import React, {ReactElement} from "react";
 import classnames from "classnames";
 
-import Tram from "@/src/icons/Tram";
-import Car from "@/src/icons/Car";
-import Walk from "@/src/icons/Walk";
-import Spacer from "@/src/components/Spacer";
-import AddressLocation from "@/src/iss/AddressLocation";
-import type {travelTime} from "@/src/iss/general"
+import Tram from "@/src/icons/Tram.js";
+import Car from "@/src/icons/Car.js";
+import Walk from "@/src/icons/Walk.js";
+import Spacer from "@/src/components/Spacer.js";
+import AddressLocation from "@/src/iss/AddressLocation.js";
+import type {travelTime} from "@/src/iss/general.js"
 
 type Props = {
     location: AddressLocation,

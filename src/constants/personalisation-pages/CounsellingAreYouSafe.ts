@@ -1,11 +1,11 @@
 import type {
     PersonalisationQuestionPage,
-} from "@/types/personalisation-page"
-import AreYouSafe from "./AreYouSafe";
-import CounsellingSubcategories from "@/src/constants/personalisation-pages/CounsellingSubcategories";
+} from "@/types/personalisation-page.js"
+import AreYouSafe from "./AreYouSafe.js";
+import CounsellingSubcategories from "@/src/constants/personalisation-pages/CounsellingSubcategories.js";
 import {
     getSavedPersonalisationAnswer,
-} from "@/src/utils/personalisation"
+} from "@/src/utils/personalisation.js"
 
 export default ({
     ...AreYouSafe,

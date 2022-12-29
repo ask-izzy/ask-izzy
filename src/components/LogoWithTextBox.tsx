@@ -1,7 +1,7 @@
 import React, {ReactNode} from "react"
 
-import Link from "@/src/components/base/Link"
-import type {AnalyticsEvent} from "@/src/google-tag-manager"
+import Link from "@/src/components/base/Link.js"
+import type {AnalyticsEvent} from "@/src/google-tag-manager.js"
 
 type Props = {
     icon: ReactNode,

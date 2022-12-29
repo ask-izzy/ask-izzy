@@ -2,7 +2,7 @@ import React, {ReactNode} from "react";
 import { useForm, useFormContext } from "react-hook-form";
 import { action } from "@storybook/addon-actions";
 
-import Form from "@/components/forms/Form";
+import Form from "@/components/forms/Form.js";
 
 export default {
     title: "App Components/Form",

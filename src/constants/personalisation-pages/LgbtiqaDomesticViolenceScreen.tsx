@@ -1,13 +1,13 @@
 import React from "react"
 import type {
     PersonalisationInfoPage,
-} from "@/types/personalisation-page"
+} from "@/types/personalisation-page.js"
 
-import DfvDemographics from "@/src/constants/personalisation-pages/DfvDemographics";
-import DomesticViolenceLink from "@/src/components/DomesticViolenceLink";
+import DfvDemographics from "@/src/constants/personalisation-pages/DfvDemographics.js";
+import DomesticViolenceLink from "@/src/components/DomesticViolenceLink.js";
 import {
     getSavedPersonalisationAnswer,
-} from "@/src/utils/personalisation"
+} from "@/src/utils/personalisation.js"
 
 export default ({
     type: "info",

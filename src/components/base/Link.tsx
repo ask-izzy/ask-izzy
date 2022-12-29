@@ -2,8 +2,8 @@ import React, {useState, useEffect, ReactNode} from "react";
 import InternalLink from "next/link";
 import classnames from "classnames";
 
-import * as gtm from "@/src/google-tag-manager"
-import type {AnalyticsEvent} from "@/src/google-tag-manager"
+import * as gtm from "@/src/google-tag-manager.js"
+import type {AnalyticsEvent} from "@/src/google-tag-manager.js"
 
 type Props = {
     to: string,

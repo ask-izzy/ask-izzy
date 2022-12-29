@@ -1,9 +1,9 @@
 import React from "react";
 import { useRouter } from "next/router"
 
-import useToastMessage from "@/hooks/useToastMessage";
-import MyListIcon from "@/src/icons/MyList"
-import UndoIcon from "@/src/icons/Undo"
+import useToastMessage from "@/hooks/useToastMessage.js";
+import MyListIcon from "@/src/icons/MyList.js"
+import UndoIcon from "@/src/icons/Undo.js"
 
 type UseMyListToastMessage = {
     serviceAddedToMyList: () => void,

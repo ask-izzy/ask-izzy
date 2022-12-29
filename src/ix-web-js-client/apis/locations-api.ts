@@ -1,6 +1,6 @@
 import snakecaseKeys from "snakecase-keys"
 
-import {request, getRequestWithToken} from "@/src/ix-web-js-client/lib/requests"
+import {request, getRequestWithToken} from "@/src/ix-web-js-client/lib/requests.js"
 type Props = {
     baseUrl: string,
     username: string,

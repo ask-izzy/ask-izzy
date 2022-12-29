@@ -1,11 +1,11 @@
 import React, { useState, ReactNode} from "react";
 import { action } from "@storybook/addon-actions";
 
-import SitesMap from "@/src/components/SitesMap";
-import { ixaService, housingService } from "@/fixtures/services";
-import getServiceFixture from "@/fixtures/factories/Service";
-import { addGoogleMapsScript } from "@/src/storybook/decorators";
-import Service from "@/src/iss/Service";
+import SitesMap from "@/src/components/SitesMap.js";
+import { ixaService, housingService } from "@/fixtures/services.js";
+import getServiceFixture from "@/fixtures/factories/Service.js";
+import { addGoogleMapsScript } from "@/src/storybook/decorators.js";
+import Service from "@/src/iss/Service.js";
 
 export default {
     title: "App Components/SitesMap",

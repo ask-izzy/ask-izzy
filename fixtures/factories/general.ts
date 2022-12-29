@@ -1,13 +1,13 @@
 import merge from "deepmerge";
 import {$Shape} from "utility-types";
 
-import { PhoneNumber } from "@/fixtures/factories/Value";
+import { PhoneNumber } from "@/fixtures/factories/Value.js";
 import type {
     phone,
     nowOpen,
     openingHours,
     travelTime,
-} from "@/src/iss/general"
+} from "@/src/iss/general.js"
 
 
 export function getNowOpenFixture(props?: $Shape<nowOpen> | null): nowOpen {

@@ -1,13 +1,13 @@
 import React from "react"
 import {useRouter} from "next/router"
 
-import BaseQuestion from "@/components/pages/personalisation/BaseQuestion"
-import BaseStaticPersonalisation from "@/components/pages/personalisation/BaseStaticPersonalisation"
-import WhoIsLookingForHelp from "@/components/pages/personalisation/WhoIsLookingForHelp"
-import Location from "@/components/pages/personalisation/Location"
+import BaseQuestion from "@/components/pages/personalisation/BaseQuestion.js"
+import BaseStaticPersonalisation from "@/components/pages/personalisation/BaseStaticPersonalisation.js"
+import WhoIsLookingForHelp from "@/components/pages/personalisation/WhoIsLookingForHelp.js"
+import Location from "@/components/pages/personalisation/Location.js"
 import {
     getCurrentPersonalisationPage,
-} from "@/src/utils/routing"
+} from "@/src/utils/routing.js"
 
 function RenderPersonalisationPage() {
     const router = useRouter()

@@ -1,10 +1,10 @@
 import React from "react"
 import classnames from "classnames"
 
-import Link from "@/src/components/base/Link"
-import AddressLocation from "@/src/iss/AddressLocation"
-import type {travelTime} from "@/src/iss/general"
-import Spacer from "@/src/components/Spacer"
+import Link from "@/src/components/base/Link.js"
+import AddressLocation from "@/src/iss/AddressLocation.js"
+import type {travelTime} from "@/src/iss/general.js"
+import Spacer from "@/src/components/Spacer.js"
 
 type Props = {
     to: AddressLocation,

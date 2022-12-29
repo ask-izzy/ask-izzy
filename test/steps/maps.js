@@ -8,7 +8,7 @@ import Yadda from "yadda";
 import assert from "assert";
 import { By } from "selenium-webdriver";
 
-import dictionary from "../support/dictionary";
+import dictionary from "../support/dictionary.js";
 
 module.exports = (function() {
     return Yadda.localisation.English.library(dictionary)

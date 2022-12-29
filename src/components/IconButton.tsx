@@ -1,7 +1,7 @@
 import React, {ReactNode} from "react";
 import classnames from "classnames";
 
-import Button, {Props as ButtonProps} from "@/src/components/base/Button"
+import Button, {Props as ButtonProps} from "@/src/components/base/Button.js"
 
 type Props ={
     className?: string,

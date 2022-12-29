@@ -1,4 +1,4 @@
-import type {SearchQueryChanges} from "@/src/iss/searchQueryBuilder"
+import type {SearchQueryChanges} from "@/src/iss/searchQueryBuilder.js"
 
 export const housingCrisisSearchQueryChanges: SearchQueryChanges = {
     $removeElms: {

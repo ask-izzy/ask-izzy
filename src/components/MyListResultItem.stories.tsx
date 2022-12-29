@@ -1,9 +1,9 @@
 import React, {ReactNode} from "react";
 
-import MyListResultItem from "@/src/components/MyListResultItem";
-import getServiceFixture from "@/fixtures/factories/Service";
-import { getAddressLocationPropsFixture } from "@/fixtures/factories/AddressLocation";
-import { ixaService, susansHouseService, housingService, domesticViolenceService } from "@/fixtures/services";
+import MyListResultItem from "@/src/components/MyListResultItem.js";
+import getServiceFixture from "@/fixtures/factories/Service.js";
+import { getAddressLocationPropsFixture } from "@/fixtures/factories/AddressLocation.js";
+import { ixaService, susansHouseService, housingService, domesticViolenceService } from "@/fixtures/services.js";
 
 export default {
     title: "App Components/MyListResults/MyListResultItem",

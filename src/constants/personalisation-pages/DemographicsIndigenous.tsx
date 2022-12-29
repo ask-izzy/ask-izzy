@@ -1,9 +1,9 @@
 import React, {ReactNode} from "react";
 
-import DemographicAtsi from "@/src/icons/DemographicAtsi";
-import Blank from "@/src/icons/Blank";
-import AboriginalFlag from "@/src/icons/AboriginalFlag";
-import TorresStraitIslandersFlag from "@/src/icons/TorresStraitIslandersFlag";
+import DemographicAtsi from "@/src/icons/DemographicAtsi.js";
+import Blank from "@/src/icons/Blank.js";
+import AboriginalFlag from "@/src/icons/AboriginalFlag.js";
+import TorresStraitIslandersFlag from "@/src/icons/TorresStraitIslandersFlag.js";
 
 export default ({
     type: "question",

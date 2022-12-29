@@ -3,7 +3,7 @@ import {By} from "selenium-webdriver";
 import {
     elementWithText,
     elementWithTextSubstring,
-} from "./selectors"
+} from "./selectors.js"
 
 export async function getElementWithText(
     driver,

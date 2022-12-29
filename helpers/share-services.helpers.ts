@@ -1,7 +1,7 @@
 import * as yup from "yup";
 import {htmlEscape} from "escape-goat"
 
-import Service from "@/src/iss/Service"
+import Service from "@/src/iss/Service.js"
 import {lookbehindIsSupported} from "@/helpers/regex.helpers"
 
 export type MessageType = "SMS" | "Email"

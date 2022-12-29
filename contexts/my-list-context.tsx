@@ -1,8 +1,8 @@
 import React, {useContext, createContext, useState, useEffect, ReactNode} from "react";
 
-import Service from "@/src/iss/Service"
-import {getService} from "@/src/iss/load-services"
-import storage from "@/src/storage"
+import Service from "@/src/iss/Service.js"
+import {getService} from "@/src/iss/load-services.js"
+import storage from "@/src/storage.js"
 
 type Context = {
     myList: Array<Service>,

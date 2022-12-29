@@ -1,17 +1,17 @@
 import React, {ReactNode} from "react";
 
-import DemographicFamilyViolence from "@/src/icons/DemographicFamilyViolence";
-import DemographicAtsi from "@/src/icons/DemographicAtsi";
-import DemographicChildren from "@/src/icons/DemographicChildren";
-import DemographicCouple from "@/src/icons/DemographicCouple";
-import Mental from "@/src/icons/Mental";
-import DemographicParole from "@/src/icons/DemographicParole";
-import DemographicDisability from "@/src/icons/DemographicDisability";
-import DemographicVeteran from "@/src/icons/DemographicVeteran";
-import DemographicRecentlyArrived from "@/src/icons/DemographicRecentlyArrived";
-import DemographicPets from "@/src/icons/DemographicPets";
-import AboriginalFlag from "@/src/icons/AboriginalFlag";
-import TorresStraitIslandersFlag from "@/src/icons/TorresStraitIslandersFlag";
+import DemographicFamilyViolence from "@/src/icons/DemographicFamilyViolence.js";
+import DemographicAtsi from "@/src/icons/DemographicAtsi.js";
+import DemographicChildren from "@/src/icons/DemographicChildren.js";
+import DemographicCouple from "@/src/icons/DemographicCouple.js";
+import Mental from "@/src/icons/Mental.js";
+import DemographicParole from "@/src/icons/DemographicParole.js";
+import DemographicDisability from "@/src/icons/DemographicDisability.js";
+import DemographicVeteran from "@/src/icons/DemographicVeteran.js";
+import DemographicRecentlyArrived from "@/src/icons/DemographicRecentlyArrived.js";
+import DemographicPets from "@/src/icons/DemographicPets.js";
+import AboriginalFlag from "@/src/icons/AboriginalFlag.js";
+import TorresStraitIslandersFlag from "@/src/icons/TorresStraitIslandersFlag.js";
 
 export default ({
     type: "question",

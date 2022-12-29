@@ -3,12 +3,12 @@ import type { NextRouter } from "next/router";
 
 import {
     getSearchQueryChanges,
-} from "@/src/utils/personalisation"
+} from "@/src/utils/personalisation.js"
 import {
     getCategoryFromRouter,
     getPersonalisationPages,
-} from "@/src/utils/routing"
-import storage, {Geolocation} from "@/src/storage";
+} from "@/src/utils/routing.js"
+import storage, {Geolocation} from "@/src/storage.js";
 
 export type SearchQuery = SearchQueryArrayProps & SearchQueryOtherProps;
 export type SearchQueryChanges =

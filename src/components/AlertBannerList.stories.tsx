@@ -1,7 +1,7 @@
 import React, {ReactNode} from "react";
-import AlertBannerList from "@/src/components/AlertBannerList";
-import alertsQuery from "@/src/queries/content/alerts";
-import { resultsPageAlerts } from "@/test/support/mock-cms/resolvers/alerts";
+import AlertBannerList from "@/src/components/AlertBannerList.js";
+import alertsQuery from "@/src/queries/content/alerts.js";
+import { resultsPageAlerts } from "@/test/support/mock-cms/resolvers/alerts.js";
 export default {
     title: "App Components/AlertBanner/AlertBannerList",
     component: AlertBannerList

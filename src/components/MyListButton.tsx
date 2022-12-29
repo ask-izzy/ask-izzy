@@ -1,7 +1,7 @@
 import React from "react"
-import Link from "@/src/components/base/Link";
-import MyList from "@/src/icons/MyList"
-import useMyList from "@/hooks/useMyList"
+import Link from "@/src/components/base/Link.js";
+import MyList from "@/src/icons/MyList.js"
+import useMyList from "@/hooks/useMyList.js"
 
 function MyListButton() {
     const {myListServices} = useMyList()

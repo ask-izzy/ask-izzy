@@ -1,7 +1,7 @@
 import React, {ReactNode} from "react";
 import { action } from "@storybook/addon-actions";
 
-import FlatButton from "@/src/components/FlatButton";
+import FlatButton from "@/src/components/FlatButton.js";
 
 export default {
     title: "Basic UI Components/FlatButton",

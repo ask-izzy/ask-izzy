@@ -1,5 +1,5 @@
 import React from "react";
-import DebugContainer from "@/src/components/DebugContainer";
+import DebugContainer from "@/src/components/DebugContainer.js";
 
 type Props = {
     object: any

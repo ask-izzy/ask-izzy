@@ -1,10 +1,10 @@
 /* eslint-disable react/display-name */
 import React, {useEffect, ReactNode} from "react";
 
-import WithStickyFooter from "@/src/components/WithStickyFooter";
-import FlatButton from "@/src/components/FlatButton";
-import ListItem from "@/src/components/ListItem";
-import icons from "@/src/icons";
+import WithStickyFooter from "@/src/components/WithStickyFooter.js";
+import FlatButton from "@/src/components/FlatButton.js";
+import ListItem from "@/src/components/ListItem.js";
+import icons from "@/src/icons.js";
 
 export default {
     title: "Basic UI Components/WithStickyFooter",

@@ -1,6 +1,6 @@
 import React, {ReactNode} from "react";
 
-import QuickExit from "@/src/components/QuickExit";
+import QuickExit from "@/src/components/QuickExit.js";
 
 export default {
     title: "App Components/QuickExit",

@@ -1,8 +1,8 @@
 import GraphQLJSON from "graphql-type-json";
 
-import pages from "./pages"
-import alerts from "./alerts"
-import callouts from "./callouts"
+import pages from "./pages.js"
+import alerts from "./alerts.js"
+import callouts from "./callouts.js"
 
 export default {
     Query: () => ({

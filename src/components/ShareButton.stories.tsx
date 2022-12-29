@@ -1,6 +1,6 @@
 import React, {ReactNode} from "react";
 
-import ShareButton from "@/src/components/ShareButton";
+import ShareButton from "@/src/components/ShareButton.js";
 
 export default {
     title: "App Components/ShareServicesDialog",

@@ -2,24 +2,24 @@ import React from "react";
 import {withRouter} from "next/router"
 import type {NextRouter} from "next/router"
 
-import HeaderBar from "@/src/components/HeaderBar";
-import FlatButton from "@/src/components/FlatButton";
-import storage from "@/src/storage";
-import {getBannerName} from "@/src/utils/personalisation"
+import HeaderBar from "@/src/components/HeaderBar.js";
+import FlatButton from "@/src/components/FlatButton.js";
+import storage from "@/src/storage.js";
+import {getBannerName} from "@/src/utils/personalisation.js"
 import {
     getCategoryFromRouter,
     goToPersonalisationNextPath,
     getPersonalisationBackPath,
-} from "@/src/utils/routing"
+} from "@/src/utils/routing.js"
 import type {
     PersonalisationInfoPage,
-} from "@/types/personalisation-page"
+} from "@/types/personalisation-page.js"
 import LgbtiqaDomesticViolenceScreen
-    from "@/components/pages/personalisation/static-page-contents/LgbtiqaDomesticViolenceScreen"
+    from "@/components/pages/personalisation/static-page-contents/LgbtiqaDomesticViolenceScreen.js"
 import Under18DomesticViolenceScreen
-    from "@/components/pages/personalisation/static-page-contents/Under18DomesticViolenceScreen"
-import UsingViolenceScreen from "@/components/pages/personalisation/static-page-contents/UsingViolenceScreen"
-import OnlineSafetyScreen from "@/components/pages/personalisation/static-page-contents/OnlineSafetyScreen"
+    from "@/components/pages/personalisation/static-page-contents/Under18DomesticViolenceScreen.js"
+import UsingViolenceScreen from "@/components/pages/personalisation/static-page-contents/UsingViolenceScreen.js"
+import OnlineSafetyScreen from "@/components/pages/personalisation/static-page-contents/OnlineSafetyScreen.js"
 
 type Props = {
     details: PersonalisationInfoPage,

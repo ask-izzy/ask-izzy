@@ -1,7 +1,7 @@
 import React, {ReactNode} from "react";
 
-import Chevron from "@/src/icons/Chevron";
-import Summary from "@/src/components/base/Summary";
+import Chevron from "@/src/icons/Chevron.js";
+import Summary from "@/src/components/base/Summary.js";
 
 type Props = {
     title: string,

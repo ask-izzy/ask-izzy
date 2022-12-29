@@ -1,16 +1,16 @@
 import React, {ReactNode} from "react";
 import {titleize} from "underscore.string";
 
-import Link from "@/src/components/base/Link";
-import * as gtm from "@/src/google-tag-manager";
-import type {AnalyticsEvent} from "@/src/google-tag-manager";
-import Phone from "@/src/icons/Phone";
-import PhoneSolid from "@/src/icons/PhoneSolid";
+import Link from "@/src/components/base/Link.js";
+import * as gtm from "@/src/google-tag-manager.js";
+import type {AnalyticsEvent} from "@/src/google-tag-manager.js";
+import Phone from "@/src/icons/Phone.js";
+import PhoneSolid from "@/src/icons/PhoneSolid.js";
 import classnames from "classnames"
-import type { phone } from "@/src/iss/general";
-import {toCamelCase} from "@/src/utils/strings";
-import ScreenReader from "@/src/components/ScreenReader";
-import UrlsToLinks from "@/src/components/UrlsToLink"
+import type { phone } from "@/src/iss/general.js";
+import {toCamelCase} from "@/src/utils/strings.js";
+import ScreenReader from "@/src/components/ScreenReader.js";
+import UrlsToLinks from "@/src/components/UrlsToLink.js"
 
 type Props = phone & {
     crisis?: boolean,

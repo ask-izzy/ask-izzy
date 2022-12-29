@@ -1,14 +1,14 @@
 import React, {ReactNode} from "react";
 
-import DemographicAtsi from "@/src/icons/DemographicAtsi";
-import ExperiencingViolence from "@/src/icons/ExperiencingViolence";
-import Under18 from "@/src/icons/Under18";
-import DemographicLgbtiq from "@/src/icons/DemographicLgbtiq";
-import DemographicNeedInterpreter from "@/src/icons/DemographicNeedInterpreter";
-import DemographicRecentlyArrived from "@/src/icons/DemographicRecentlyArrived";
-import UsingViolence from "@/src/icons/UsingViolence";
-import AboriginalFlag from "@/src/icons/AboriginalFlag";
-import TorresStraitIslandersFlag from "@/src/icons/TorresStraitIslandersFlag";
+import DemographicAtsi from "@/src/icons/DemographicAtsi.js";
+import ExperiencingViolence from "@/src/icons/ExperiencingViolence.js";
+import Under18 from "@/src/icons/Under18.js";
+import DemographicLgbtiq from "@/src/icons/DemographicLgbtiq.js";
+import DemographicNeedInterpreter from "@/src/icons/DemographicNeedInterpreter.js";
+import DemographicRecentlyArrived from "@/src/icons/DemographicRecentlyArrived.js";
+import UsingViolence from "@/src/icons/UsingViolence.js";
+import AboriginalFlag from "@/src/icons/AboriginalFlag.js";
+import TorresStraitIslandersFlag from "@/src/icons/TorresStraitIslandersFlag.js";
 
 export default ({
     type: "question",

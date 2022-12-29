@@ -1,6 +1,6 @@
 import React, {ReactNode} from "react";
 
-import Summary from "@/src/components/base/Summary";
+import Summary from "@/src/components/base/Summary.js";
 
 export default {
     title: "Base Components/Summary",

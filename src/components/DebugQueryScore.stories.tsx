@@ -1,7 +1,7 @@
 import React, {ReactNode} from "react";
 
-import DebugQueryScore from "@/src/components/DebugQueryScore";
-import searchExplanationFixtures from "@/fixtures/searchExplanations";
+import DebugQueryScore from "@/src/components/DebugQueryScore.js";
+import searchExplanationFixtures from "@/fixtures/searchExplanations.js";
 
 export default {
     title: "App Components/Debug/DebugQueryScore",

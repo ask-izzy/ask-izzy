@@ -1,6 +1,6 @@
 import React from "react";
-import StrapiMarkdown from "@/src/components/StrapiMarkdown";
-import AccordionItem from "./AccordionItem";
+import StrapiMarkdown from "@/src/components/StrapiMarkdown.js";
+import AccordionItem from "./AccordionItem.js";
 
 type Props = {
     title: string,

@@ -2,16 +2,16 @@ import React, {ReactNode} from "react"
 import {useEffect, useState} from "react";
 import { useRouter } from "next/router"
 
-import HeaderBar from "@/src/components/HeaderBar";
-import SearchBar from "@/src/components/general/SearchBar";
-import CategoriesList from "@/src/components/CategoriesList";
-import storage from "@/src/storage";
-import BrandedFooter from "@/src/components/BrandedFooter";
-import { resetDfvOptions } from "@/src/utils/domesticViolence";
-import QuestionStepper from "@/src/components/QuestionStepper";
-import AlertBannerList from "@/src/components/AlertBannerList";
-import ScreenReader from "@/src/components/ScreenReader";
-import {goToPersonalisationNextPath} from "@/src/utils/routing"
+import HeaderBar from "@/src/components/HeaderBar.js";
+import SearchBar from "@/src/components/general/SearchBar.js";
+import CategoriesList from "@/src/components/CategoriesList.js";
+import storage from "@/src/storage.js";
+import BrandedFooter from "@/src/components/BrandedFooter.js";
+import { resetDfvOptions } from "@/src/utils/domesticViolence.js";
+import QuestionStepper from "@/src/components/QuestionStepper.js";
+import AlertBannerList from "@/src/components/AlertBannerList.js";
+import ScreenReader from "@/src/components/ScreenReader.js";
+import {goToPersonalisationNextPath} from "@/src/utils/routing.js"
 
 
 const LOGO = "/images/ask-izzy-logo-single-line-yellow.svg";

@@ -4,8 +4,8 @@
 import React, {useState} from "react";
 import classnames from "classnames";
 
-import Button from "@/src/components/base/Button"
-import type {AnalyticsEvent} from "../google-tag-manager";
+import Button from "@/src/components/base/Button.js"
+import type {AnalyticsEvent} from "../google-tag-manager.js";
 
 type Props = {
     label?: string,

@@ -1,6 +1,6 @@
 import React, {useState, ReactNode} from "react";
 
-import ClearMyListDialogComponent from "@/src/components/ClearMyListDialog";
+import ClearMyListDialogComponent from "@/src/components/ClearMyListDialog.js";
 
 export default {
     title: "App Components/Dialog/ClearMyListDialog",

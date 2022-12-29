@@ -1,7 +1,7 @@
 import React, {ReactNode} from "react";
 import {action} from "@storybook/addon-actions";
 
-import LinkListItem from "@/src/components/LinkListItem";
+import LinkListItem from "@/src/components/LinkListItem.js";
 
 export default {
     title: "App Components/ListItem/LinkListItem",

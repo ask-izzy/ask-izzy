@@ -1,6 +1,6 @@
 import React, {ReactNode} from "react";
 
-import BoxedTextDivider from "@/src/components/BoxedTextDivider";
+import BoxedTextDivider from "@/src/components/BoxedTextDivider.js";
 
 export default {
     title: "Basic UI Components/BoxedText/BoxedTextDivider",

@@ -2,14 +2,14 @@ import React from "react";
 import { useRouter } from "next/router"
 import classnames from "classnames";
 
-import IconButton from "@/src/components/IconButton";
-import ChevronBack from "@/src/icons/ChevronBack"
-import QuickExit from "@/src/components/QuickExit";
-import {getScrollPosition} from "@/src/effects/scrollPosition";
-import Storage from "@/src/storage";
-import categories from "@/src/constants/categories";
-import Category from "@/src/constants/Category";
-import MyListButton from "@/src/components/MyListButton"
+import IconButton from "@/src/components/IconButton.js";
+import ChevronBack from "@/src/icons/ChevronBack.js"
+import QuickExit from "@/src/components/QuickExit.js";
+import {getScrollPosition} from "@/src/effects/scrollPosition.js";
+import Storage from "@/src/storage.js";
+import categories from "@/src/constants/categories.js";
+import Category from "@/src/constants/Category.js";
+import MyListButton from "@/src/components/MyListButton.js"
 
 type Props = {
     transition?: boolean,

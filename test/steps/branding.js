@@ -7,9 +7,9 @@
 import Yadda from "yadda";
 import { By } from "selenium-webdriver";
 
-import dictionary from "../support/dictionary";
-import assert from "../support/page-assertions";
-import { matchClass } from "../support/selectors";
+import dictionary from "../support/dictionary.js";
+import assert from "../support/page-assertions.js";
+import { matchClass } from "../support/selectors.js";
 
 
 module.exports = ((function() {

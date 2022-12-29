@@ -1,6 +1,6 @@
 import React, {ReactNode} from "react";
 
-import CollapsedOpeningTimes from "@/src/components/CollapsedOpeningTimes";
+import CollapsedOpeningTimes from "@/src/components/CollapsedOpeningTimes.js";
 import { mockedTimeDecorator, addTimesToStory } from "@/src/components/OpeningTimes.stories";
 
 export default {

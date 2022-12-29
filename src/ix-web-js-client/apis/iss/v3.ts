@@ -2,8 +2,8 @@ import {$PropertyType} from "utility-types"
 
 import {
     getRequestWithToken,
-} from "@/src/ix-web-js-client/lib/requests"
-import {addSearchParamsToUrl} from "@/src/ix-web-js-client/lib/urls"
+} from "@/src/ix-web-js-client/lib/requests.js"
+import {addSearchParamsToUrl} from "@/src/ix-web-js-client/lib/urls.js"
 
 export type ISS3ClientProps = {
     key: string,

@@ -1,5 +1,5 @@
 import React, {ReactNode} from "react";
-import CategoriesList from "@/src/components/CategoriesList";
+import CategoriesList from "@/src/components/CategoriesList.js";
 export default {
     title: "App Components/CategoriesList",
     component: CategoriesList

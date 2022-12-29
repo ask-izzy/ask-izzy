@@ -1,12 +1,12 @@
 import React, {useState, useEffect} from "react";
-import getPosition, {guessSuburb} from "@/src/geolocation";
-import Location from "@/src/icons/Location";
-import Loading from "@/src/icons/Loading"
-import Tick from "@/src/icons/Tick"
-import Cross from "@/src/icons/Cross"
-import * as gtm from "@/src/google-tag-manager";
-import type {Geolocation} from "@/src/storage";
-import Button from "@/src/components/base/Button";
+import getPosition, {guessSuburb} from "@/src/geolocation.js";
+import Location from "@/src/icons/Location.js";
+import Loading from "@/src/icons/Loading.js"
+import Tick from "@/src/icons/Tick.js"
+import Cross from "@/src/icons/Cross.js"
+import * as gtm from "@/src/google-tag-manager.js";
+import type {Geolocation} from "@/src/storage.js";
+import Button from "@/src/components/base/Button.js";
 
 export type GeolocationStatus = {
     type: "COMPLETE",

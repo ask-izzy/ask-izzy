@@ -1,15 +1,15 @@
 import React, {useEffect, useRef, useState} from "react";
 import {useRouter} from "next/router";
 
-import ViewOnMapLink from "@/src/components/ViewOnMapLink";
-import SortResult, {SORT_OPTIONS} from "./SortResult";
-import {getScrollPosition} from "../../effects/scrollPosition";
-import type {SortType} from "../base/Dropdown";
-import GeolocationButtonForTravelTimes from "@/src/components/GeolocationButtonForTravelTimes";
-import {MobileDetect} from "@/src/effects/MobileDetect";
-import type {travelTimesStatus} from "@/src/hooks/useTravelTimesUpdater";
-import Service from "@/src/iss/Service"
-import {getPersonalisationNextPath} from "@/src/utils/routing"
+import ViewOnMapLink from "@/src/components/ViewOnMapLink.js";
+import SortResult, {SORT_OPTIONS} from "./SortResult.js";
+import {getScrollPosition} from "../../effects/scrollPosition.js";
+import type {SortType} from "../base/Dropdown.js";
+import GeolocationButtonForTravelTimes from "@/src/components/GeolocationButtonForTravelTimes.js";
+import {MobileDetect} from "@/src/effects/MobileDetect.js";
+import type {travelTimesStatus} from "@/src/hooks/useTravelTimesUpdater.js";
+import Service from "@/src/iss/Service.js"
+import {getPersonalisationNextPath} from "@/src/utils/routing.js"
 
 type Props = {
     onSortByChange: (SortType) => void,

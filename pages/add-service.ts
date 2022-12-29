@@ -1,7 +1,7 @@
 import type {GetStaticProps} from "next"
 
-export { default } from "@/components/pages/AddServicePage"
-import type {RouteSharedProps} from "@/types/routes"
+export { default } from "@/components/pages/AddServicePage.js"
+import type {RouteSharedProps} from "@/types/routes.js"
 
 export const getStaticProps: GetStaticProps<RouteSharedProps> = () => {
     return {

@@ -1,7 +1,7 @@
 import React from "react"
 import { useFormContext } from "react-hook-form";
 
-import Input from "@/src/components/base/Input"
+import Input from "@/src/components/base/Input.js"
 
 type Props = {
     label: string,

@@ -4,7 +4,7 @@
 // Sometimes we want to do something after a page has finished fully loading
 // including any data fetching need when loading that page. This allows
 // components to registered load dep
-import {isDebugMode} from "@/contexts/debug-mode-context";
+import {isDebugMode} from "@/contexts/debug-mode-context.js";
 
 let currentPagePath = {}
 let currentDependencies: Array<string> = []

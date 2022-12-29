@@ -3,18 +3,18 @@ import React, {useState, useEffect} from "react";
 import { useRouter } from "next/router"
 import Head from "next/head"
 
-import ServicePane from "@/src/components/ServicePane";
-import Service from "@/src/iss/Service";
-import {getService} from "@/src/iss/load-services"
-import AppBar from "@/src/components/AppBar";
-import Link from "@/src/components/base/Link";
-import Loading from "@/src/icons/Loading";
-import ScreenReader from "@/src/components/ScreenReader";
-import {getFullPageTitle} from "@/src/utils";
+import ServicePane from "@/src/components/ServicePane.js";
+import Service from "@/src/iss/Service.js";
+import {getService} from "@/src/iss/load-services.js"
+import AppBar from "@/src/components/AppBar.js";
+import Link from "@/src/components/base/Link.js";
+import Loading from "@/src/icons/Loading.js";
+import ScreenReader from "@/src/components/ScreenReader.js";
+import {getFullPageTitle} from "@/src/utils.js";
 import {
     addPageLoadDependencies,
     closePageLoadDependencies,
-} from "@/src/utils/page-loading"
+} from "@/src/utils/page-loading.js"
 
 const ServicePage = function() {
     const [service, setService] = useState<Service | null>(null)

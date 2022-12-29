@@ -1,7 +1,7 @@
 import React, {ReactNode} from "react";
 import { action } from "@storybook/addon-actions";
 
-import SvgIcon from "@/src/components/SvgIcon";
+import SvgIcon from "@/src/components/SvgIcon.js";
 
 export default {
     title: "Icons/SvgIcon",

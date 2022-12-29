@@ -3,22 +3,22 @@ import {useForm} from "react-hook-form";
 import ReCAPTCHA from "react-google-recaptcha";
 import {yupResolver} from "@hookform/resolvers/yup";
 
-import Form from "@/components/forms/Form"
-import StandardButton from "@/components/general/StandardButton"
-import EmailIcon from "@/src/icons/Email"
-import PhoneIcon from "@/src/icons/Phone"
-import LoadingIcon from "@/src/icons/Loading";
-import Service from "@/src/iss/Service"
-import storage from "@/src/storage";
-import FormTextInput from "@/components/forms/FormTextInput"
-import FormSection from "@/components/forms/FormSection"
+import Form from "@/components/forms/Form.js"
+import StandardButton from "@/components/general/StandardButton.js"
+import EmailIcon from "@/src/icons/Email.js"
+import PhoneIcon from "@/src/icons/Phone.js"
+import LoadingIcon from "@/src/icons/Loading.js";
+import Service from "@/src/iss/Service.js"
+import storage from "@/src/storage.js";
+import FormTextInput from "@/components/forms/FormTextInput.js"
+import FormSection from "@/components/forms/FormSection.js"
 import {getShareMessage, getShareReqSchema} from "@/helpers/share-services.helpers"
 import type { MessageType } from "@/helpers/share-services.helpers"
 import useSubmitForm from "./use-submit-form.hook"
-import useIsMounted from "@/hooks/useIsMounted"
+import useIsMounted from "@/hooks/useIsMounted.js"
 import { usersnapFireEvent } from "@/helpers/usersnap.helpers"
-import useToastMessage from "@/hooks/useToastMessage"
-import * as gtm from "@/src/google-tag-manager";
+import useToastMessage from "@/hooks/useToastMessage.js"
+import * as gtm from "@/src/google-tag-manager.js";
 
 type Props = {
     services: Array<Service>,

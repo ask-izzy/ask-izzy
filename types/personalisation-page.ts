@@ -1,7 +1,7 @@
 import {ReactNode} from "react"
 
-import type { SearchQueryChanges } from "@/src/iss/searchQueryBuilder"
-import BaseIcon from "@/src/icons/BaseIcon"
+import type { SearchQueryChanges } from "@/src/iss/searchQueryBuilder.js"
+import BaseIcon from "@/src/icons/BaseIcon.js"
 
 type PersonalisationAnyPage = {
     name: string,

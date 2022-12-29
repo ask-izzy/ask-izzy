@@ -3,10 +3,10 @@ import React, {ReactElement} from "react";
 import ReactMarkdown from "react-markdown";
 import gfm from "remark-gfm";
 
-import Link from "@/src/components/base/Link"
-import BlockQuote from "@/src/components/base/BlockQuote"
-import Code from "@/src/components/base/Code"
-import Paragraph from "@/src/components/base/Paragraph";
+import Link from "@/src/components/base/Link.js"
+import BlockQuote from "@/src/components/base/BlockQuote.js"
+import Code from "@/src/components/base/Code.js"
+import Paragraph from "@/src/components/base/Paragraph.js";
 
 type Renderers = Record<string, (props: any) => ReactElement>;
 

@@ -1,35 +1,35 @@
 import React, {useEffect, useState, ReactNode} from "react";
 import _ from "underscore";
 
-import * as gtm from "@/src/google-tag-manager";
-import Address from "@/src/components/Address";
-import Accessibility from "@/src/components/Accessibility";
-import CollapsedOpeningTimes from "@/src/components/CollapsedOpeningTimes";
-import Collapser from "@/src/components/general/Collapser";
-import ContactMethods from "@/src/components/ContactMethods";
-import DebugServiceRecord from "@/src/components/DebugServiceRecord";
-import Eligibility from "@/src/components/Eligibility";
-import Feedback from "@/src/components/Feedback";
-import ImportantInformation from "@/src/components/ImportantInformation"
-import HeaderBar from "@/src/components/HeaderBar";
-import TransportTime from "@/src/components/TransportTime";
-import GoogleMapsLink from "@/src/components/GoogleMapsLink";
-import Ndis from "@/src/components/Ndis";
-import LinkListItem from "@/src/components/LinkListItem";
-import BoxedText from "@/src/components/BoxedText";
-import Chevron from "@/src/icons/Chevron";
-import ExternalLink from "@/src/icons/ExternalLink";
-import IndigenousServiceIcon from "@/src/components/IndigenousServiceIcon";
-import LgbtiqIcon from "@/src/components/LgbtiqIcon";
-import AlertBannerList from "@/src/components/AlertBannerList";
-import AddToCompareButton from "@/src/components/AddToCompareButton"
-import Service from "@/src/iss/Service";
-import ShareButton from "../components/ShareButton"
-import Storage from "@/src/storage";
-import ScreenReader from "@/src/components/ScreenReader";
-import UrlsToLinks from "@/src/components/UrlsToLink"
-import {MobileDetect} from "@/src/effects/MobileDetect";
-import {getSiblingServices} from "@/src/iss/load-services"
+import * as gtm from "@/src/google-tag-manager.js";
+import Address from "@/src/components/Address.js";
+import Accessibility from "@/src/components/Accessibility.js";
+import CollapsedOpeningTimes from "@/src/components/CollapsedOpeningTimes.js";
+import Collapser from "@/src/components/general/Collapser.js";
+import ContactMethods from "@/src/components/ContactMethods.js";
+import DebugServiceRecord from "@/src/components/DebugServiceRecord.js";
+import Eligibility from "@/src/components/Eligibility.js";
+import Feedback from "@/src/components/Feedback.js";
+import ImportantInformation from "@/src/components/ImportantInformation.js"
+import HeaderBar from "@/src/components/HeaderBar.js";
+import TransportTime from "@/src/components/TransportTime.js";
+import GoogleMapsLink from "@/src/components/GoogleMapsLink.js";
+import Ndis from "@/src/components/Ndis.js";
+import LinkListItem from "@/src/components/LinkListItem.js";
+import BoxedText from "@/src/components/BoxedText.js";
+import Chevron from "@/src/icons/Chevron.js";
+import ExternalLink from "@/src/icons/ExternalLink.js";
+import IndigenousServiceIcon from "@/src/components/IndigenousServiceIcon.js";
+import LgbtiqIcon from "@/src/components/LgbtiqIcon.js";
+import AlertBannerList from "@/src/components/AlertBannerList.js";
+import AddToCompareButton from "@/src/components/AddToCompareButton.js"
+import Service from "@/src/iss/Service.js";
+import ShareButton from "../components/ShareButton.js"
+import Storage from "@/src/storage.js";
+import ScreenReader from "@/src/components/ScreenReader.js";
+import UrlsToLinks from "@/src/components/UrlsToLink.js"
+import {MobileDetect} from "@/src/effects/MobileDetect.js";
+import {getSiblingServices} from "@/src/iss/load-services.js"
 
 type Props = {
     service: Service,

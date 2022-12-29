@@ -1,4 +1,4 @@
-import {request} from "@/src/ix-web-js-client/lib/requests"
+import {request} from "@/src/ix-web-js-client/lib/requests.js"
 
 export async function getToken<TokenBody = any>(
     endpointUrl: string,

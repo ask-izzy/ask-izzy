@@ -1,6 +1,6 @@
 import type {
     PersonalisationPage,
-} from "@/types/personalisation-page"
+} from "@/types/personalisation-page.js"
 
 export default ({
     name: "sub-advocacy",

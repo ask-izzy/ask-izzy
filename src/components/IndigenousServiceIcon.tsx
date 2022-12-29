@@ -1,8 +1,8 @@
 import React from "react"
 
-import DemographicAboriginal from "@/src/icons/DemographicAboriginal"
-import DemographicTorresStrait from "@/src/icons/DemographicTorresStrait"
-import Service from "@/src/iss/Service"
+import DemographicAboriginal from "@/src/icons/DemographicAboriginal.js"
+import DemographicTorresStrait from "@/src/icons/DemographicTorresStrait.js"
+import Service from "@/src/iss/Service.js"
 
 type Props = {
     object: Service

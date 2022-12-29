@@ -1,4 +1,4 @@
-import {request, postRequestWithToken} from "@/src/ix-web-js-client/lib/requests"
+import {request, postRequestWithToken} from "@/src/ix-web-js-client/lib/requests.js"
 
 type ClientProps = {
     baseUrl: string;

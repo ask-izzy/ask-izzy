@@ -2,7 +2,7 @@
 import { ApolloServer, gql } from "apollo-server";
 import fs from "fs";
 
-import mocks from "./resolvers"
+import mocks from "./resolvers.js"
 
 export function initMockCMSServer() {
     const typeDefs = gql(
