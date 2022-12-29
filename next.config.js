@@ -1,18 +1,19 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
+import path, {dirname} from "path"
+import { fileURLToPath } from 'url';
+import globImporter from "node-sass-glob-importer"
+import fs from "fs"
+import _string from "underscore.string"
+import { withSentryConfig } from "@sentry/nextjs"
+import "./lib/env-var-check.js"
 
-const path = require("path")
-const globImporter = require("node-sass-glob-importer");
-const fs = require("fs");
-const _string = require("underscore.string");
-const withTM = require("next-transpile-modules")
-const { withSentryConfig } = require("@sentry/nextjs");
 
-require("./lib/env-var-check.js")
 
+const __dirname = dirname(fileURLToPath(import.meta.url));
 const bannerImages = fs.readdirSync("./public/images/banners")
     .map(file => file.replace(/\.\w*$/, ""));
 
-const nextConfig = {
+let nextConfigWithTranspiledNodeModules = {
     sassOptions: {
         importer: globImporter(),
         includePaths: [
@@ -99,36 +100,57 @@ const nextConfig = {
             tls: false,
         };
 
+        config.resolve.extensionAlias = {
+            ".js": [".ts", ".tsx", ".js"],
+        };
+
         return config;
     },
     env: {
         ENVIRONMENT: process.env.ENVIRONMENT,
         DOMAINS_TO_PROXY: getDomainsToProxy(),
     },
+    transpilePackages: [
+        "is-plain-obj",
+        "@googlemaps/js-api-loader",
+        "@react-google-maps/api",
+        "@react-google-maps/api/node_modules/@googlemaps/js-api-loader",
+        "mdast-util-find-and-replace",
+        "color-convert",
+        "json-schema-ref-parser",
+        "ono",
+        "escape-string-regexp",
+        "readable-stream",
+        "bl/node_modules/readable-stream",
+        "browserify-sign/node_modules/readable-stream",
+        "hash-base/node_modules/readable-stream",
+        "tar-stream/node_modules/readable-stream",
+        "are-we-there-yet/node_modules/readable-stream",
+        "next/dist/compiled/crypto-browserify",
+        "next/dist/compiled/stream-browserify",
+        "next/dist/compiled/stream-http",
+        "postcss-html/node_modules/readable-stream",
+        "@clevercanyon/merge-change.fork",
+    ],
 }
 
-const nextConfigWithTranspiledNodeModules = withTM([
-    "is-plain-obj",
-    "@googlemaps/js-api-loader",
-    "@react-google-maps/api",
-    "@react-google-maps/api/node_modules/@googlemaps/js-api-loader",
-    "mdast-util-find-and-replace",
-    "color-convert",
-    "json-schema-ref-parser",
-    "ono",
-    "escape-string-regexp",
-    "readable-stream",
-    "bl/node_modules/readable-stream",
-    "browserify-sign/node_modules/readable-stream",
-    "hash-base/node_modules/readable-stream",
-    "tar-stream/node_modules/readable-stream",
-    "are-we-there-yet/node_modules/readable-stream",
-    "next/dist/compiled/crypto-browserify",
-    "next/dist/compiled/stream-browserify",
-    "next/dist/compiled/stream-http",
-    "postcss-html/node_modules/readable-stream",
-    "@clevercanyon/js-object-mc",
-])(nextConfig)
+function getRewriteForProxy() {
+    if (process.env.NEXT_PUBLIC_PROXY_DOMAIN_SUFFIX) {
+        return [
+            {
+                source: "/:path*",
+                has: [
+                    {
+                        type: "host",
+                        value: `.*.${process.env.NEXT_PUBLIC_PROXY_DOMAIN_SUFFIX}`,
+                    },
+                ],
+                destination: "/api/external-resource-proxy/:path*",
+            },
+        ]
+    }
+    return []
+}
 
 function getRewritesForCategories() {
     const rewrites = []
@@ -159,11 +181,9 @@ function getRewritesForCategories() {
     return rewrites
 }
 
-module.exports = nextConfigWithTranspiledNodeModules
-
 if (process.env.NODE_ENV !== "test") {
-    module.exports = withSentryConfig(
-        module.exports,
+    nextConfigWithTranspiledNodeModules = withSentryConfig(
+        nextConfigWithTranspiledNodeModules,
         {
             silent: true,
         }
@@ -182,3 +202,5 @@ function getDomainsToProxy() {
             ]))
     )
 }
+
+export default nextConfigWithTranspiledNodeModules

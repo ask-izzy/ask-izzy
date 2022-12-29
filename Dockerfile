@@ -120,7 +120,7 @@ RUN yarn install --network-timeout 100000 --frozen-lockfile && yarn cache clean 
 # Copy in just the files need to build source to avoid cache invalidation from changes to unrelated files
 COPY --chown=$UID_GID ./components /app/components
 COPY --chown=$UID_GID ./src /app/src
-COPY --chown=$UID_GID ./scripts/run-with.js /app/scripts/
+COPY --chown=$UID_GID ./scripts/run-with.ts ./scripts/ts-run-loader.js /app/scripts/ 
 COPY --chown=$UID_GID ./hooks /app/hooks
 COPY --chown=$UID_GID ./contexts /app/contexts
 COPY --chown=$UID_GID ./helpers /app/helpers
@@ -130,7 +130,7 @@ COPY --chown=$UID_GID ./public/images/banners /app/public/images/banners
 COPY --chown=$UID_GID ./fixtures /app/fixtures
 COPY --chown=$UID_GID ./test/support/mock-cms /app/test/support/mock-cms/
 COPY --chown=$UID_GID ./test/support/mock-iss /app/test/support/mock-iss/
-COPY --chown=$UID_GID ./.env ./.env.test ./babel.config.json ./next.config.js /app/
+COPY --chown=$UID_GID ./.env ./.env.test ./next.config.js /app/
 
 # Build Ask Izzy
 RUN yarn with --test-env --mocks build
@@ -163,7 +163,7 @@ RUN yarn install --network-timeout 100000 --frozen-lockfile && yarn cache clean 
 # Copy in just the files need to build source to avoid cache invalidation from changes to unrelated files
 COPY --chown=$UID_GID ./components /app/components
 COPY --chown=$UID_GID ./src /app/src
-COPY --chown=$UID_GID ./scripts/run-with.js /app/scripts/
+COPY --chown=$UID_GID ./scripts/run-with.ts ./scripts/ts-run-loader.js /app/scripts/
 COPY --chown=$UID_GID ./hooks /app/hooks
 COPY --chown=$UID_GID ./contexts /app/contexts
 COPY --chown=$UID_GID ./helpers /app/helpers
@@ -176,10 +176,12 @@ COPY --chown=$UID_GID ./public/images/ask-izzy-logo-single-line-purple.svg /app/
 COPY --chown=$UID_GID ./fixtures /app/fixtures
 COPY --chown=$UID_GID ./test/support/mock-cms /app/test/support/mock-cms/
 COPY --chown=$UID_GID ./test/support/mock-iss /app/test/support/mock-iss/
-COPY --chown=$UID_GID ./.env ./.env.test ./babel.config.json ./next.config.js /app/
+COPY --chown=$UID_GID ./.env ./.env.test ./next.config.js /app/
 
-
-RUN yarn with --test-env --mocks build-storybook
+# Upgrading next.js has forced the need to upgrade storybook. And as usual trying to make storybook work with flow.js is always
+# a major PITA. Since the typescript migrations is (hopefully just around the corner) rather than waste time trying to make it work
+# just disable storybook for now.
+# RUN yarn with --test-env --mocks build-storybook
 
 # Copy in all remaining files not excluded by .gitignore
 COPY --chown=$UID_GID . /app

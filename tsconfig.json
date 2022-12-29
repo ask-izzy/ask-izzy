@@ -1,4 +1,6 @@
 {
+  "$schema": "https://json.schemastore.org/tsconfig",
+  "display": "Next.js",
   "ts-node": {
     "esm": true,
     "require": ["tsconfig-paths/register"]
@@ -20,6 +22,11 @@
         "./*"
       ]
     },
+    "plugins": [
+      {
+        "name": "next"
+      }
+    ],
     "allowJs": false,
     "checkJs": false,
     "maxNodeModuleJsDepth": 0,
@@ -33,7 +40,7 @@
     "module": "ESNext",
     "resolveJsonModule": true,
     "isolatedModules": true,
-    "moduleResolution": "node",
+    "moduleResolution": "nodenext",
     "jsx": "preserve"
   },
   "include": [

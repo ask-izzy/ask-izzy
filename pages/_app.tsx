@@ -13,7 +13,7 @@ import {MyListProvider} from "@/contexts/my-list-context.js";
 import {ServiceResultsProvider} from "@/contexts/service-results-context.js";
 import {ToastMessageProvider} from "@/contexts/toast-message-context.js";
 import ToastMessage from "@/src/components/ToastMessage.js"
-import { getFullPageTitle } from "@/src/utils.js";
+import { getFullPageTitle } from "@/src/utils/index.js";
 import "@/src/utils/page-loading"
 import apolloClient from "@/src/utils/apolloClient.js";
 import usePageViewAnalytics from "@/hooks/usePageViewAnalytics.js";
@@ -99,18 +99,27 @@ export default App
 
 export type PageInfo = {
     type: Array<string>,
-    title: string
+    title: string | null
 }
 
+// This is a bit of a hack to allow us to continue defining
+// route info in the page files used by the file-based-routing system. But
+// at some point we should find a cleaner way of doing this.
 function getPageInfo({ Component, pageProps }: AppProps): PageInfo {
     const router = useRouter()
-    const title = pageProps.pageTitle ?? (Component as any).pageTitle ??
-        (router.pathname === "/_error" ? "Server error" : undefined)
-    const type = pageProps.pageType ?? (Component as any).pageType ??
-        (router.pathname === "/_error" ? ["500"] : undefined)
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-ignore
+    const title = pageProps.pageTitle ?? Component.pageTitle
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-ignore
+    const type = pageProps.pageType ?? Component.pageType
     if (title === undefined || type === undefined) {
-        console.error(Component, pageProps)
-        throw Error(`Route ${router.pathname} is missing shared props.`)
+        console.error(`Route ${router.pathname} is missing shared props.`)
+        console.info(Component, pageProps)
+        return {
+            title: null,
+            type: ["Unknown"],
+        }
     }
     return {title, type}
 }

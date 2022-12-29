@@ -99,18 +99,15 @@ function Link({
         return (
             <InternalLink
                 href={to}
+                {...remainingProps}
+                onClick={onClickHandler.bind(this)}
+                className={classnames(
+                    "Link",
+                    isInternal ? "internal" : "external",
+                    className,
+                )}
             >
-                <a
-                    onClick={onClickHandler.bind(this)}
-                    className={classnames(
-                        "Link",
-                        isInternal ? "internal" : "external",
-                        className,
-                    )}
-                    {...remainingProps}
-                >
-                    {children}
-                </a>
+                {children}
             </InternalLink>
         )
     }

@@ -5,7 +5,7 @@ import {promises as fs} from "fs"
 import cmsPageQuery from "@/src/queries/content/page.js"
 import cmsAllPagesQuery from "@/src/queries/content/allPages.js"
 import cmsCalloutQuery from "@/src/queries/content/callout.js";
-import categories, { getCategory } from "@/src/constants/categories.js"
+import categories, {getCategory} from "@/src/constants/categories.js"
 import ResultsListPage from "@/components/pages/ResultsListPage.js"
 import DynamicPage from "@/components/pages/DynamicPage.js"
 import type {RouteSharedProps} from "@/types/routes.js"

@@ -3,7 +3,7 @@ import { withRouter } from "next/router"
 import type { NextRouter } from "next/router"
 
 import LinkListItem from "@/src/components/LinkListItem.js";
-import icons from "@/src/icons.js";
+import icons from "@/src/icons/index.js";
 import type Category from "@/src/constants/Category.js";
 import Storage from "@/src/storage.js";
 import ScreenReader from "@/src/components/ScreenReader.js"

@@ -1,4 +1,4 @@
-import objectMerge, {utils} from "@clevercanyon/js-object-mc";
+import objectMerge, {utils} from "@clevercanyon/merge-change.fork";
 import type { NextRouter } from "next/router";
 
 import {

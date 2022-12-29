@@ -11,7 +11,7 @@ import NotFoundStaticPage from "@/pages/404.js"
 import FlatButton from "@/src/components/FlatButton.js";
 import SuggestionBox from "@/components/SuggestionBox.js";
 import QuestionStepper from "@/src/components/QuestionStepper.js";
-import { stateFromLocation } from "@/src/utils.js";
+import { stateFromLocation } from "@/src/utils/index.js";
 import ScrollToTop from "@/src/components/ResultsListPage/ScrollToTop.js";
 import Storage from "@/src/storage.js";
 import Controls from "@/src/components/ResultsListPage/Controls.js";

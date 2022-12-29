@@ -1,4 +1,5 @@
 #!/usr/bin/env node
+// @ts-nocheck
 /* eslint-disable @typescript-eslint/no-var-requires */
 
 /*
@@ -18,8 +19,9 @@
  *     --built: serves the pre-built copy of Ask Izzy with the Next.js start server
  */
 
-const {spawnSync} = require("child_process");
-const {loadEnvConfig} = require("@next/env")
+import {spawnSync} from "child_process"
+import nextEnv from "@next/env"
+const {loadEnvConfig} =  nextEnv
 
 /*::
 type Service = {

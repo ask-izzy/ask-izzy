@@ -44,7 +44,7 @@ export default async function handler(req: any, res: any): Promise<any> {
 async function regeneratePages(paths: Array<string>, res) {
     try {
         for (const path of paths) {
-            res.unstable_revalidate(path);
+            res.revalidate(path);
         }
         return res.json({ revalidated: true });
     } catch (error) {

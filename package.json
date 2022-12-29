@@ -22,10 +22,10 @@
     "test-dev-mocha-features": "yarn run with --test-env --dev --mocks test-mocha-features",
     "test-dev-mocha-maps": "yarn run with --test-env --dev --mocks test-mocha-maps",
     "test-dev-mocha-unit": "yarn test-mocha-unit",
-    "mock-iss": "test/support/mock-iss/start.js",
-    "mock-cms": "test/support/mock-cms/start.js",
+    "mock-iss": "yarn ts-run test/support/mock-iss/index.js",
+    "mock-cms": "yarn ts-run test/support/mock-cms/index.js",
     "lint": "yarn lint-eslint && yarn lint-tsc && yarn lint-stylelint && yarn lint-storybook-components && yarn lint-jsonlint && yarn lint-hadolint && yarn lint-shellcheck",
-    "lint-fix": "yarn lint-eslint-fix && yarn lint-stylelint-fix && yarn lint-storybook-components && yarn lint-jsonlint && yarn lint-hadolint && yarn lint-shellcheck",
+    "lint-fix": "yarn lint-eslint-fix && yarn lint-tsc && yarn lint-stylelint-fix && yarn lint-storybook-components && yarn lint-jsonlint && yarn lint-hadolint && yarn lint-shellcheck",
     "lint-eslint": "eslint src --ext .ts,.tsx",
     "lint-tsc": "tsc --noEmit",
     "lint-eslint-fix": "eslint --fix src/ test/ fixtures/ .storybook/ pages/ components/ lib/ helpers/ hooks/ next.config.js",
@@ -40,7 +40,8 @@
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook -o public/storybook",
     "shell": "bash -c '\"$0\" \"$@\"'",
-    "with": "scripts/run-with.js"
+    "with": "yarn ts-run scripts/run-with.ts",
+    "ts-run": "node --loader ./scripts/ts-run-loader.js"
   },
   "dependencies": {
     "@apollo/client": "^3.3.19",
@@ -50,12 +51,12 @@
     "@babel/preset-env": "^7.14.2",
     "@babel/preset-react": "^7.13.13",
     "@babel/register": "^7.13.16",
-    "@clevercanyon/js-object-mc": "^1.8.4",
+    "@clevercanyon/merge-change.fork": "1.8.14",
     "@emotion/core": "^11.0.0",
     "@emotion/react": "^11.9.3",
     "@emotion/server": "^11.4.0",
     "@emotion/styled": "^11.9.3",
-    "@googlemaps/js-api-loader": "^1.12.6",
+    "@googlemaps/js-api-loader": "1.12.6",
     "@hookform/resolvers": "^2.9.5",
     "@jsonforms/core": "^2.5.2",
     "@jsonforms/react": "^2.5.2",
@@ -127,16 +128,15 @@
     "mocha": "^6.0.0",
     "moment": "^2.29.4",
     "moment-timezone": "0.5.25",
-    "next": "^12.1.5",
-    "next-transpile-modules": "^9.0.0",
+    "next": "^13.1.2",
     "node-fetch": "^2.6.7",
     "node-sass-glob-importer": "^5.3.2",
     "nodemon": "2.0.7",
     "pa11y": "^6.2.3",
-    "react": "^17.0.0",
+    "react": "^18.2.0",
     "react-a11y-dialog": "^6.1.5",
     "react-copy-to-clipboard": "^5.1.0",
-    "react-dom": "^17.0.0",
+    "react-dom": "^18.2.0",
     "react-google-recaptcha": "^2.1.0",
     "react-hook-form": "^7.33.1",
     "react-markdown": "5.0.2",
@@ -172,6 +172,6 @@
   "devDependencies": {
     "@storybook/builder-webpack5": "^6.4.22",
     "@storybook/manager-webpack5": "^6.4.22",
-    "webpack": "^5.72.1"
+    "webpack": "^5.75.0"
   }
 }
