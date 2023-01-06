@@ -24,6 +24,9 @@ const nextConfig = {
     },
     async rewrites() {
         return {
+            beforeFiles: [
+                ...getRewriteForProxy(),
+            ],
             afterFiles: [
                 {
                     source: `/search/:search/:remainingPath*`,
@@ -129,6 +132,24 @@ const nextConfigWithTranspiledNodeModules = withTM([
     "@clevercanyon/merge-change.fork",
 ])(nextConfig)
 
+function getRewriteForProxy() {
+    if (process.env.NEXT_PUBLIC_PROXY_DOMAIN_SUFFIX) {
+        return [
+            {
+                source: "/:path*",
+                has: [
+                    {
+                        type: "host",
+                        value: `.*.${process.env.NEXT_PUBLIC_PROXY_DOMAIN_SUFFIX}`,
+                    },
+                ],
+                destination: "/api/external-resource-proxy/:path*",
+            },
+        ]
+    }
+    return []
+}
+
 function getRewritesForCategories() {
     const rewrites = []
 
@@ -170,14 +191,7 @@ if (process.env.NODE_ENV !== "test") {
 }
 
 function getDomainsToProxy() {
-    const proxyDomainEnvVarPrefix = "PROXY_DOMAIN_"
-    return Object.fromEntries(
-        Object.keys(process.env)
-            .filter(varName => varName.startsWith(proxyDomainEnvVarPrefix))
-            .map(varName => varName.replace(proxyDomainEnvVarPrefix, ""))
-            .map(domainToProxy => ([
-                domainToProxy.replaceAll("__", "-").replaceAll("_", "."),
-                process.env[`${proxyDomainEnvVarPrefix}${domainToProxy}`],
-            ]))
-    )
+    return (process.env.DOMAINS_TO_PROXY || "")
+        .split(",")
+        .map(domain => domain.trim())
 }
