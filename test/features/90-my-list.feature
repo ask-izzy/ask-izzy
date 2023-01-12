@@ -69,7 +69,7 @@ Feature: My List
         When I click the "Clear My List" button
         Then I should see "Your list is empty"
         And Then I should see "0" services in my list
-        And Then I should see "UNDO"
+        And Then I should see "Undo"
 
         ---------------
         And I should see the branding footer

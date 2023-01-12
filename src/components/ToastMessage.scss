@@ -7,11 +7,16 @@
         display: flex;
         align-items: center;
         font-weight: bolder;
+        column-gap: 7px;
+
+        .close-toast-message-button {
+            overflow: hidden;
+        }
 
         svg {
             width: 25px;
             height: 25px;
-            margin-bottom: -4px;
+            margin-bottom: -7px;
 
             path {
                 fill: #{colours.get-static('raw-colour-warm-white')};
@@ -38,6 +43,12 @@
                     stroke: var(--colour-text-very-light);
                 }
             }
+        }
+    }
+
+    @media (max-width: 400px) {
+        .action-description-button {
+            display: none;
         }
     }
 }

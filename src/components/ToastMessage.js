@@ -12,7 +12,7 @@ import useToastMessage from "@/hooks/useToastMessage";
 export default function ToastMessage(): ReactNode {
     const autoHideDuration = 8000
     const [focusTimer, setFocusTimer] = useState()
-    const ActionDescriptorRef = useRef()
+    const actionDescriptorRef = useRef()
     const closeButtonRef = useRef()
     const snackBarRef = useRef()
     const [setFocus, revertFocus] = useMoveFocus()
@@ -31,7 +31,9 @@ export default function ToastMessage(): ReactNode {
         // after losing focus, so manual timeout is necessary
         if (open) {
             clearTimeout(focusTimer)
-            const refToFocus = actionDescriptor ? ActionDescriptorRef : closeButtonRef
+            const hasActionDescriptor =
+                window.getComputedStyle(actionDescriptorRef.current).getPropertyValue("display") != "none"
+            const refToFocus = hasActionDescriptor ? actionDescriptorRef : closeButtonRef
             setFocus(refToFocus)
             setFocusTimer(setTimeout(
                 () => setOpen(false), autoHideDuration
@@ -74,13 +76,15 @@ export default function ToastMessage(): ReactNode {
             {
                 actionDescriptor &&
                 <Button
-                    ref={ActionDescriptorRef}
+                    className="action-description-button"
+                    ref={actionDescriptorRef}
                     onClick={onActionClick}
                 >
                     {actionDescriptor}
                 </Button>
             }
             <Button
+                className="close-toast-message-button"
                 ref={closeButtonRef}
                 aria-label="Dismiss toast message"
                 onClick={() => setOpen(false)}
@@ -104,10 +108,13 @@ export default function ToastMessage(): ReactNode {
                 key={"bottomcenter"}
                 sx={{
                     "& .MuiPaper-elevation": {
-                        minWidth: "auto",
+                        minWidth: {xs: "auto", sm: 350, md: 350, lg: 350, xl: 350},
                         backgroundColor: "var(--colour-brand-primary)",
                         color: "var(--raw-colour-warm-white)",
                         fontWeight: "lighter",
+                        "& .MuiSnackbarContent-action": {
+                            paddingLeft: "11px",
+                        },
                     },
                 }}
             />
