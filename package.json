@@ -50,7 +50,7 @@
     "@babel/preset-flow": "^7.13.13",
     "@babel/preset-react": "^7.13.13",
     "@babel/register": "^7.13.16",
-    "@clevercanyon/js-object-mc": "^1.8.4",
+    "@clevercanyon/merge-change.fork": "^1.8.4",
     "@emotion/core": "^11.0.0",
     "@emotion/react": "^11.9.3",
     "@emotion/server": "^11.4.0",
