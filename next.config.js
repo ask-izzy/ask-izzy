@@ -126,7 +126,7 @@ const nextConfigWithTranspiledNodeModules = withTM([
     "next/dist/compiled/stream-browserify",
     "next/dist/compiled/stream-http",
     "postcss-html/node_modules/readable-stream",
-    "@clevercanyon/js-object-mc",
+    "@clevercanyon/merge-change.fork",
 ])(nextConfig)
 
 function getRewritesForCategories() {

@@ -32,7 +32,7 @@ CREATE_STORAGE_BUILD_DIR_LOG=$(mkdir "$STORAGE_BUILD_DIR" 2>&1) \
     && CREATE_STORAGE_BUILD_DIR_EXIT_STATUS=$? \
     || CREATE_STORAGE_BUILD_DIR_EXIT_STATUS=$?
 
-if [ $CREATE_STORAGE_BUILD_DIR_EXIT_STATUS -eq 0 ]; then
+if [ "$CREATE_STORAGE_BUILD_DIR_EXIT_STATUS" -eq 0 ]; then
     echo "This container is in charge of building the app"
     yarn build
     cp -a "$APP_NEXT_DIR" "$STORAGE_COPY_OF_NEXT_DIR"
