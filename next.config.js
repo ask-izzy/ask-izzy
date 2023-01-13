@@ -3,7 +3,6 @@ const path = require("path")
 const globImporter = require("node-sass-glob-importer");
 const fs = require("fs");
 const _string = require("underscore.string");
-const withTM = require("next-transpile-modules")
 const { withSentryConfig } = require("@sentry/nextjs");
 
 require("./lib/env-var-check.js")
@@ -11,7 +10,7 @@ require("./lib/env-var-check.js")
 const bannerImages = fs.readdirSync("./public/images/banners")
     .map(file => file.replace(/\.\w*$/, ""));
 
-const nextConfig = {
+module.exports = {
     sassOptions: {
         importer: globImporter(),
         includePaths: [
@@ -107,30 +106,29 @@ const nextConfig = {
         ENVIRONMENT: process.env.ENVIRONMENT,
         DOMAINS_TO_PROXY: getDomainsToProxy(),
     },
+    transpilePackages: [
+        "is-plain-obj",
+        "@googlemaps/js-api-loader",
+        "@react-google-maps/api",
+        "@react-google-maps/api/node_modules/@googlemaps/js-api-loader",
+        "mdast-util-find-and-replace",
+        "color-convert",
+        "json-schema-ref-parser",
+        "ono",
+        "escape-string-regexp",
+        "readable-stream",
+        "bl/node_modules/readable-stream",
+        "browserify-sign/node_modules/readable-stream",
+        "hash-base/node_modules/readable-stream",
+        "tar-stream/node_modules/readable-stream",
+        "are-we-there-yet/node_modules/readable-stream",
+        "next/dist/compiled/crypto-browserify",
+        "next/dist/compiled/stream-browserify",
+        "next/dist/compiled/stream-http",
+        "postcss-html/node_modules/readable-stream",
+        "@clevercanyon/merge-change.fork",
+    ],
 }
-
-const nextConfigWithTranspiledNodeModules = withTM([
-    "is-plain-obj",
-    "@googlemaps/js-api-loader",
-    "@react-google-maps/api",
-    "@react-google-maps/api/node_modules/@googlemaps/js-api-loader",
-    "mdast-util-find-and-replace",
-    "color-convert",
-    "json-schema-ref-parser",
-    "ono",
-    "escape-string-regexp",
-    "readable-stream",
-    "bl/node_modules/readable-stream",
-    "browserify-sign/node_modules/readable-stream",
-    "hash-base/node_modules/readable-stream",
-    "tar-stream/node_modules/readable-stream",
-    "are-we-there-yet/node_modules/readable-stream",
-    "next/dist/compiled/crypto-browserify",
-    "next/dist/compiled/stream-browserify",
-    "next/dist/compiled/stream-http",
-    "postcss-html/node_modules/readable-stream",
-    "@clevercanyon/merge-change.fork",
-])(nextConfig)
 
 function getRewriteForProxy() {
     if (process.env.NEXT_PUBLIC_PROXY_DOMAIN_SUFFIX) {
@@ -178,8 +176,6 @@ function getRewritesForCategories() {
 
     return rewrites
 }
-
-module.exports = nextConfigWithTranspiledNodeModules
 
 if (process.env.NODE_ENV !== "test") {
     module.exports = withSentryConfig(
