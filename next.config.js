@@ -128,6 +128,9 @@ module.exports = {
         "postcss-html/node_modules/readable-stream",
         "@clevercanyon/merge-change.fork",
     ],
+    // We need to manually handle trailing slash redirection so as not to apply redirect to requests to our external
+    // resources proxy
+    skipTrailingSlashRedirect: true,
 }
 
 function getRewriteForProxy() {
