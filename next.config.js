@@ -131,6 +131,9 @@ module.exports = {
     // We need to manually handle trailing slash redirection so as not to apply redirect to requests to our external
     // resources proxy
     skipTrailingSlashRedirect: true,
+    sentry: {
+        hideSourceMaps: false,
+    },
 }
 
 function getRewriteForProxy() {
