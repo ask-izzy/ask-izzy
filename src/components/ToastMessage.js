@@ -31,8 +31,9 @@ export default function ToastMessage(): ReactNode {
         // after losing focus, so manual timeout is necessary
         if (open) {
             clearTimeout(focusTimer)
-            const hasActionDescriptor =
+            const hasActionDescriptor = actionDescriptorRef.current && (
                 window.getComputedStyle(actionDescriptorRef.current).getPropertyValue("display") != "none"
+            )
             const refToFocus = hasActionDescriptor ? actionDescriptorRef : closeButtonRef
             setFocus(refToFocus)
             setFocusTimer(setTimeout(
