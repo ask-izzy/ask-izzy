@@ -30,7 +30,7 @@ import * as gtm from "@/src/google-tag-manager";
 import storage from "@/src/storage";
 
 function App(appProps: AppProps): ReactNode {
-    const { Component, pageProps } = appProps
+    const { Component, pageProps, err } = appProps
     const router = useRouter()
 
     if (process.env.NODE_ENV === "test") {
@@ -87,7 +87,11 @@ function App(appProps: AppProps): ReactNode {
                             {renderHeadMetadata(pageInfo, router)}
                             <DebugColours />
                             <div className="BasePage">
-                                <Component {...pageProps} />
+                                {/* err prop recommended by https://github.com/vercel/next.js/blob/dba9e2a12adeb2066d0d5bb9a49bdb3e29689b92/examples/with-sentry/pages/_app.js */}
+                                <Component
+                                    {...pageProps}
+                                    err={err}
+                                />
                             </div>
                             <ToastMessage/>
                         </MyListProvider>

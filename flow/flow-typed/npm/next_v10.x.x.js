@@ -235,7 +235,8 @@ declare module "next/app" {
 
   declare export type AppProps = {
     Component: any,
-    pageProps: {[string]: any}
+    pageProps: {[string]: any},
+    err: any,
   }
 
   declare export default Class<React$Component<any, any>> & { getInitialProps: (appInitialProps: AppInitialProps) => Promise<any>, ... };
