@@ -109,6 +109,12 @@ $lightness-button-hover: 10%;
         colours.lighten('colour-bg-highlight', 'global', -50%)
     );
 
+    @include colours.define(
+        'tooltip-bg',
+        'global',
+        colours.lighten('raw-colour-rich-purple', 'global', 55%),
+    );
+
 
     /* Borders */
     @include colours.define('colour-border-list-item', 'global', 'raw-colour-warm-white');
@@ -124,6 +130,11 @@ $lightness-button-hover: 10%;
         'colour-border-alert',
         'global',
         colours.lighten('raw-colour-pure-white', 'global', -13%)
+    );
+    @include colours.define(
+        'colour-border-tooltip',
+        'global',
+        colours.lighten('colour-brand-primary', 'global', 13%)
     );
 
 

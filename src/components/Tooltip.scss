@@ -1,0 +1,8 @@
+@use '../styles/mixins/colours';
+
+.MuiTooltip-tooltip {
+    background-color: var(--tooltip-bg) !important;
+    border: 1px solid var(--colour-border-tooltip) !important;
+    color: var(--colour-text-dark) !important;
+    font-weight: bolder !important;
+}

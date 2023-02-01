@@ -55,9 +55,16 @@
                     }
                 }
             }
+            .why-cant-i-edit-tooltip {
+                width: fit-content;
+                margin: 15px 0px 30px 0px;
 
-            .recapture > div > div > div {
-                margin: 1em auto;
+                .SvgIcon {
+                    width: 17px;
+                    height: 17px;
+                    margin-bottom: -3px;
+                }
+                
             }
 
             .formControls {

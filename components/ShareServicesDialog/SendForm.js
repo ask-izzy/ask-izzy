@@ -6,10 +6,12 @@ import { useForm } from "react-hook-form";
 import ReCAPTCHA from "react-google-recaptcha";
 import { yupResolver } from "@hookform/resolvers/yup";
 
+import Tooltip from "@/src/components/Tooltip";
 import Form from "@/components/forms/Form"
 import StandardButton from "@/components/general/StandardButton"
 import EmailIcon from "@/src/icons/Email"
 import PhoneIcon from "@/src/icons/Phone"
+import HelpTooltipIcon from "@/src/icons/HelpTooltip"
 import Service from "@/src/iss/Service"
 import storage from "@/src/storage";
 import LoadingIcon from "@/src/icons/Loading";
@@ -239,6 +241,23 @@ function renderSubmitDetailsSection(
                     {...messagePreviewContentsProp}
                 />
             </div>
+
+            <Tooltip
+                content = {
+                    <React.Fragment>
+                        <em>{"And here's"}</em> <b>{"some"}</b> <u>{"amazing content"}</u>.{" "}
+                        {"It's very engaging. Right?"}
+                    </React.Fragment>
+                }
+            >
+                <div
+                    className="why-cant-i-edit-tooltip"
+                >
+                    <HelpTooltipIcon />
+                    Why can&apos;t I edit this message?
+                </div>
+            </Tooltip>
+
             <div className="recapture">
                 <ReCAPTCHA
                     ref={recaptchaRef}
