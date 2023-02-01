@@ -8,26 +8,28 @@
         color: var(--colour-crisis-white);
     }
 
-    .Collapser {
-        .Button {
-            &:hover {
-                color: #{colours.get-static('colour-crisis-white')};
-                color: var(--colour-crisis-white);
+    .details-container {
+        display: flex;
+        justify-content: space-between;
+        flex-direction: row;
+        color: var(--colour-crisis-white);
 
-                .title-container {
-                    .ChevronIcon {
-                        path {
-                            stroke: #{colours.get-static('colour-crisis-white')};
-                            stroke: var(--colour-crisis-white);
-                        }
-                    }
-                }
-            }
+        p {
+            margin: 0;
         }
 
-        li {
-            color: #{colours.get-static('colour-crisis-white')};
-            color: var(--colour-crisis-white);
+        .crisis-line-details {
+            display: flex;
+
+            svg {
+                width: 35px;
+                height: 35px;
+                margin: -12px -10px;
+
+                path {
+                    fill: var(--colour-crisis-white);
+                }
+            }
         }
     }
 

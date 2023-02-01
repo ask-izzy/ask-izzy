@@ -15,7 +15,6 @@ import AlertBannerList from "@/src/components/AlertBannerList";
 import ScreenReader from "@/src/components/ScreenReader";
 import {goToPersonalisationNextPath} from "@/src/utils/routing"
 
-
 const LOGO = "/images/ask-izzy-logo-single-line-yellow.svg";
 
 function HomePage(): ReactNode {

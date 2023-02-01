@@ -1,0 +1,9 @@
+@use '../styles/mixins/colours';
+
+.Tooltip {
+    .tooltip-children-container {
+        display: inline-block;
+        background-color: transparent;
+        border: 0;
+    }
+}

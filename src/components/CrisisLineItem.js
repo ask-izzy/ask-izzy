@@ -7,9 +7,10 @@ import Link from "./base/Link";
 import Service from "../iss/Service";
 import PhoneButton from "./PhoneButton";
 import DebugContainer from "./DebugContainer";
+import Info from "../icons/Info";
 import DebugQueryScore from "./DebugQueryScore";
 import DebugServiceRecord from "./DebugServiceRecord";
-import Collapser from "./general/Collapser";
+import TooltipInformation from "@/src/components/TooltipInformation";
 
 /* eslint-disable max-len */
 const crisisDescriptions = {
@@ -43,22 +44,8 @@ class CrisisLineItem extends React.Component<Props, void> {
     static displayName: ?string = "CrisisLineItem";
 
     PhoneButtonDetails: ReactNode =
-        <div className="detailsCollapser">
-            {
-                crisisDescriptions[this.props.service.id] &&
-            <Collapser
-                expandMessage="See details"
-                collapseMessage="Hide details"
-                analyticsEvent={{
-                    event: `Action Triggered - Crisis Line Info`,
-                    eventAction: "Show crisis line extra info",
-                    eventLabel: null,
-                }}
-                hasIcon={true}
-            >
-                {crisisDescriptions[this.props.service.id](this.props.service)}
-            </Collapser>
-            }
+        <div className="details-tooltip">
+            {crisisDescriptions[this.props.service.id](this.props.service)}
         </div>
 
     render(): ReactNode {
@@ -66,6 +53,7 @@ class CrisisLineItem extends React.Component<Props, void> {
             service,
         } = this.props;
         const phone = service.Phones()[0];
+        const hasDetails = crisisDescriptions[this.props.service.id]
 
         if (!phone) {
             return null
@@ -87,7 +75,20 @@ class CrisisLineItem extends React.Component<Props, void> {
                 <PhoneButton
                     {...phone}
                     crisis={true}
-                    hasDetails={this.PhoneButtonDetails}
+                    hasDetails={
+                        hasDetails ?
+                            <TooltipInformation
+                                content = {this.PhoneButtonDetails}
+                            >
+                                <div
+                                    className="info-icon-container"
+                                    aria-label="More information about this crisis line"
+                                >
+                                    <Info />
+                                </div>
+                            </TooltipInformation>
+                            : undefined
+                    }
                 />
                 <DebugServiceRecord object={service} />
                 {service._explanation &&

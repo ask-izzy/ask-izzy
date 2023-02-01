@@ -31,7 +31,7 @@ function PhoneButton({
     comment,
     analyticsEventDetails,
     className,
-    hasDetails = <></>,
+    hasDetails,
     styleType,
 }: Props): ReactNode {
     const icon = styleType === "hollow" ?
@@ -93,9 +93,15 @@ function PhoneButton({
                     </span>
                 </div>
             </Link>
-            <div className="detailsContainer">
+            <div className="details-container">
                 <UrlsToLinks>{displayComment()}</UrlsToLinks>
-                {hasDetails}
+                {
+                    hasDetails &&
+                    <div className="crisis-line-details">
+                        {hasDetails}
+                        call Info
+                    </div>
+                }
             </div>
 
         </div>

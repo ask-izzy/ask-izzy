@@ -34,6 +34,25 @@
             }
         }
 
+        .why-cant-i-edit-tooltip {
+            display: flex;
+            justify-content: left;
+            column-gap: 5px;
+            align-items: center;
+            margin: 5px 0;
+
+            .TooltipHover {
+                width: fit-content;
+                margin: 0;
+
+                .SvgIcon {
+                    width: 17px;
+                    height: 17px;
+                    margin-bottom: -3px;
+                }
+            }
+        }
+
         .submitDetails {
             .messagePreview {
                 .description {
@@ -54,10 +73,6 @@
                         color: inherit;
                     }
                 }
-            }
-
-            .recapture > div > div > div {
-                margin: 1em auto;
             }
 
             .formControls {
