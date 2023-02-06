@@ -9,6 +9,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import Form from "@/components/forms/Form"
 import StandardButton from "@/components/general/StandardButton"
 import EmailIcon from "@/src/icons/Email"
+import SendIcon from "@/src/icons/Send"
 import PhoneIcon from "@/src/icons/Phone"
 import Service from "@/src/iss/Service"
 import storage from "@/src/storage";
@@ -267,11 +268,8 @@ function renderSubmitDetailsSection(
                     {currentlySubmitting ?
                         <LoadingIcon className="inline-icon" />
                         : <>
-                            <PhoneIcon
-                                noSpanWrapper={true}
-                                viewBox="15 15 31 31"
-                            />
                             Send
+                            <SendIcon/>
                         </>
                     }
                 </StandardButton>

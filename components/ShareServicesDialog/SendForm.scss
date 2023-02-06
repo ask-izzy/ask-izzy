@@ -67,7 +67,16 @@
             }
 
             .submitButton {
-                min-width: 115px;
+                background-color: var(--colour-bg-standard);
+                color: var(--colour-text-brand);
+
+                .SvgIcon {
+                    margin: 0 -4px -2px 5px;
+
+                    path {
+                        fill: var(--colour-text-brand);
+                    }
+                }
             }
         }
 

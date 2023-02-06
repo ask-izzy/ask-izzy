@@ -43,6 +43,15 @@
             overflow: auto;
             padding: 0.3em 1.3em 1.3em;
             text-align: center;
+
+            .send-via-askizzy-container {
+                display: flex;
+                justify-content: center;
+
+                .SvgIcon {
+                    margin: 0 8px -2px 5px;
+                }
+            }
         }
 
         nav.messageType {
