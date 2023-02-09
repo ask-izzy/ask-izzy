@@ -117,7 +117,7 @@ function CalloutBox(
             </StrapiMarkdown>
             {callout.Phone &&
                 <PhoneButton
-                    number={`Call ${callout.Phone}`}
+                    number={callout.Phone}
                     comment=""
                     kind=""
                     crisis={true}
