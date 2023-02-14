@@ -1,11 +1,11 @@
 @use '../../src/styles/mixins/colours';
 
 .ShareServicesDialog {
-    border-radius: 0.5em;
+    border-radius: 8px 8px 10px 10px;
+    margin: 0 15px;
     background-color: #{colours.get-static('colour-bg-standard')};
     background-color: var(--colour-bg-standard);
     max-width: 700px;
-    overflow: auto;
 
     header {
         display: flex;
@@ -33,7 +33,7 @@
         background-color: var(--colour-bg-highlight);
         color: #{colours.get-static('colour-text-very-light')};
         color: var(--colour-text-very-light);
-        border-radius: 1.5em 1.5em 0 0;
+        border-radius: 24px 24px 8px 8px;
 
         .viaAskIzzyInfoBox {
             --button-border: var(--colour-text-very-light) solid 1px;
@@ -42,6 +42,7 @@
             flex-direction: column;
             overflow: auto;
             padding: 0.3em 1.3em 1.3em;
+            text-align: center;
         }
 
         nav.messageType {
