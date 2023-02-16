@@ -11,34 +11,58 @@ This file enables a workaround and we will thankfully be able to get rid of it
 once the issue referred to above is resolved. Until then this file can be used
 as a loader for node which relies on ts-node for compiling the typescript but
 it converts any import paths that use typescript alias first. It comes from
-https://github.com/TypeStrong/ts-node/discussions/1450?sort=new#discussioncomment-1806115
+https://github.com/TypeStrong/ts-node/discussions/1450?sort=new#discussioncomment-4916809
 */
 
-import { resolve as resolveTs } from "ts-node/esm"
-import * as tsConfigPaths from "tsconfig-paths"
-import { pathToFileURL } from "url"
+import { isBuiltin } from "node:module";
+import { dirname } from "node:path";
+import { promisify } from "node:util";
+import { fileURLToPath, pathToFileURL } from "node:url";
 
-const { absoluteBaseUrl, paths } = tsConfigPaths.loadConfig()
-const matchPath = tsConfigPaths.createMatchPath(absoluteBaseUrl, paths)
+import resolveCallback from "resolve";
+import { resolve as resolveTs, load } from "ts-node/esm";
+import { loadConfig, createMatchPath } from "tsconfig-paths";
 
-export function resolve(specifier, ctx, defaultResolve) {
-    const lastIndexOfIndex = specifier.lastIndexOf("/index.js")
-    if (lastIndexOfIndex !== -1) {
-        // Handle index.js
-        const trimmed = specifier.substring(0, lastIndexOfIndex)
-        const match = matchPath(trimmed)
-        if (match) {
-            return resolveTs(pathToFileURL(`${match}/index.js`).href, ctx, defaultResolve)
-        }
-    } else if (specifier.endsWith(".js")) {
-        // Handle *.js
-        const trimmed = specifier.substring(0, specifier.length - 3)
-        const match = matchPath(trimmed)
-        if (match) {
-            return resolveTs(pathToFileURL(`${match}.js`).href, ctx, defaultResolve)
-        }
+const resolveAsync = promisify(resolveCallback);
+const extensions = [".js", ".json", ".node", ".mjs", ".tsx", ".ts", ".mts", ".cts"];
+
+const { absoluteBaseUrl, paths } = loadConfig();
+const matchPath = createMatchPath(absoluteBaseUrl, paths);
+
+async function resolve(specifier, ctx, defaultResolve) {
+    const { parentURL = pathToFileURL(absoluteBaseUrl) } = ctx;
+
+    if (isBuiltin(specifier)) {
+        return defaultResolve(specifier, ctx);
     }
-    return resolveTs(specifier, ctx, defaultResolve)
+
+    if (specifier.startsWith("file://")) {
+        specifier = fileURLToPath(specifier);
+    }
+
+    let url;
+    try {
+        const modulePath =
+            matchPath(specifier.replace(/\.js$/, ".ts")) ||
+            matchPath(specifier.replace(/\.js$/, ".tsx")) ||
+            matchPath(specifier) ||
+            specifier.replace(/\.js$/, "");
+        const resolution = await resolveAsync(modulePath, {
+            basedir: dirname(fileURLToPath(parentURL)),
+            // For whatever reason, --experimental-specifier-resolution=node doesn't search for .mjs extensions
+            // but it does search for index.mjs files within directories
+            extensions,
+        });
+        url = pathToFileURL(resolution).href;
+    } catch (error) {
+        if (error.code === "MODULE_NOT_FOUND") {
+            // Match Node's error code
+            error.code = "ERR_MODULE_NOT_FOUND";
+        }
+        throw error;
+    }
+
+    return resolveTs(url, ctx, defaultResolve);
 }
 
-export { load, transformSource } from "ts-node/esm"
+export { resolve, load };
