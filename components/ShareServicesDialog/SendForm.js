@@ -160,6 +160,7 @@ function SendForm({
             <FormSection
                 className="toDetails"
                 title={`Send ${messageType} to`}
+                aria-label={`Send ${messageType} to`}
             >
                 <FormTextInput
                     label="Name"
