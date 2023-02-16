@@ -1,9 +1,8 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-// @ts-nocheck
 import { ApolloServer, gql } from "apollo-server";
 import fs from "fs";
 import path, {dirname} from "path"
-import { fileURLToPath } from 'url';
+import { fileURLToPath } from "url";
 
 
 
@@ -18,7 +17,7 @@ if (!port) {
     throw Error("PORT env var must be set to start mock CMS")
 }
 
-let options = {
+const options = {
     port,
 };
 

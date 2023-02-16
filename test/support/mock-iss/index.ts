@@ -1,4 +1,3 @@
-// @ts-nocheck
 /**
  * ISS mock using Express */
 
@@ -28,9 +27,9 @@ const legacyReservedSearches = [
     /domestic violence/,
     /elasticsearch unavailable/,
 ]
-let searchMocks = {};
+const searchMocks: Record<any, string> = {};
 
-let mocks = {};
+const mocks = {};
 
 app.get("/", (req, res) => res.send("Sever started"));
 
@@ -51,7 +50,7 @@ app.get("/api/v3/list-all-mocked/", (req, res) => {
 /* eslint-disable complexity */
 /* FIXME: refactor to use mocks instead of these */
 app.get("/api/v3/search/", (req, res) => {
-    let mockId = parseInt(req.query.q);
+    const mockId = parseInt((req.query.q) as string);
 
     if (mocks[mockId]) {
         res.json({
@@ -119,19 +118,19 @@ app.get("/api/v3/search/", (req, res) => {
             .json({
                 error_message: "Could not find a location matching \"carlt\"",
             });
-    } else if (searchMocks[req.query.q]) {
+    } else if (searchMocks[(req.query.q) as string]) {
         res.json({
             meta: {
-                total_count: searchMocks[req.query.q].length,
+                total_count: searchMocks[(req.query.q) as string].length,
                 location: {
                     name: "Richmond",
                     suburb: "Richmond",
                     state: "VIC",
                 },
             },
-            objects: searchMocks[req.query.q],
+            objects: searchMocks[(req.query.q) as string],
         });
-    } else if (req.query.q?.match(/food/) && !req.query.q?.match(/pet/)) {
+    } else if ((req.query.q as string)?.match(/food/) && !(req.query.q as string)?.match(/pet/)) {
         res.json({
             meta: {
                 total_count: 4,
@@ -215,9 +214,9 @@ app.get("/api/v3/search/", (req, res) => {
                         kind: "phone",
                     }],
                 },
-            ].map(getServiceFixtureProps),
+            ].map((getServiceFixtureProps as any)),
         });
-    } else if (req.query.q?.match(/material aid/)) {
+    } else if ((req.query.q as string)?.match(/material aid/)) {
         const object = {
             name: "Community Lunch",
             description: "A weekly lunch.",
@@ -255,27 +254,27 @@ app.get("/api/v3/search/", (req, res) => {
                 next: req.originalUrl + "&offset=5",
             },
             objects: [
-                getServiceFixtureProps({...object, id: Seq()}),
-                getServiceFixtureProps({...object, id: Seq()}),
-                getServiceFixtureProps({...object, id: Seq()}),
-                getServiceFixtureProps({...object, id: Seq()}),
-                getServiceFixtureProps({...object, id: Seq()}),
+                getServiceFixtureProps({...object, id: Seq()} as any),
+                getServiceFixtureProps({...object, id: Seq()} as any),
+                getServiceFixtureProps({...object, id: Seq()} as any),
+                getServiceFixtureProps({...object, id: Seq()} as any),
+                getServiceFixtureProps({...object, id: Seq()} as any),
             ],
         });
-    } else if (req.query.q?.match(/zero results/)) {
+    } else if ((req.query.q as string)?.match(/zero results/)) {
         res.json({
             meta: {
                 total_count: 0,
             },
             objects: [],
         });
-    } else if (req.query.q?.match(/cause error/)) {
+    } else if ((req.query.q as string)?.match(/cause error/)) {
         res
             .status(402)
             .json({
                 error_message: "You have specifically asked for an error.",
             });
-    } else if (req.query.q?.match(/domestic violence/)) {
+    } else if ((req.query.q as string)?.match(/domestic violence/)) {
         res.json({
             meta: {
                 total_count: 1,
@@ -291,7 +290,7 @@ app.get("/api/v3/search/", (req, res) => {
                 ),
             ],
         });
-    } else if (req.query.q?.match(/elasticsearch unavailable/)) {
+    } else if ((req.query.q as string)?.match(/elasticsearch unavailable/)) {
         res
             .status(503)
             .json({

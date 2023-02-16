@@ -1,6 +1,8 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
+/* eslint-disable @typescript-eslint/no-unused-vars */
+
 import path, {dirname} from "path"
-import { fileURLToPath } from 'url';
+import { fileURLToPath } from "url";
 import globImporter from "node-sass-glob-importer"
 import fs from "fs"
 import _string from "underscore.string"
@@ -133,6 +135,7 @@ let nextConfigWithTranspiledNodeModules = {
         "@clevercanyon/merge-change.fork",
     ],
 }
+
 
 function getRewriteForProxy() {
     if (process.env.NEXT_PUBLIC_PROXY_DOMAIN_SUFFIX) {
