@@ -9,6 +9,7 @@ import Service from "@/src/iss/Service"
 import useToastMessage from "@/hooks/useToastMessage"
 import * as gtm from "@/src/google-tag-manager";
 import {CopyToClipboard} from "@/helpers/copy-to-clipboard.helpers.js"
+import Copy from "@/src/icons/Copy"
 
 type Props = {
     services: Array<Service>,
@@ -91,6 +92,7 @@ function ShareDirectlyOptions({
                 }}
                 aria-label={`Copy link${isPlural ? "s" : ""}`}
             >
+                <Copy />
                 Copy link{isPlural ? "s" : ""}
             </StandardButton>
             {nativeShareSupported && (

@@ -10,6 +10,7 @@ import Button from "@/src/components/base/Button"
 import StandardButton from "@/components/general/StandardButton"
 import Service from "@/src/iss/Service"
 import storage from "@/src/storage";
+import Send from "@/src/icons/Send"
 
 type Props = {
     onCloseRequested: () => void,
@@ -87,6 +88,7 @@ function renderDirectlyScreen({services, onCloseRequested, setScreenName}) {
                     {viaIzzyDescription}
                 </p>
                 <StandardButton
+                    className="send-via-askizzy-container"
                     onClick={() => setScreenName("Via Ask Izzy")}
                     analyticsEvent={{
                         event: "Action Triggered - Opened Share Services Via Ask Izzy",
@@ -94,6 +96,7 @@ function renderDirectlyScreen({services, onCloseRequested, setScreenName}) {
                         eventLabel: null,
                     }}
                 >
+                    <Send/>
                     Send via Ask Izzy
                 </StandardButton>
             </div>
