@@ -116,7 +116,7 @@
     "jsonlint": "1.6.3",
     "just-debounce-it": "^2.0.0",
     "mocha": "^6.0.0",
-    "moment": "2.24.0",
+    "moment": "2.29.4",
     "moment-timezone": "0.5.25",
     "next": "^13.1.2",
     "node-fetch": "^2.6.7",
