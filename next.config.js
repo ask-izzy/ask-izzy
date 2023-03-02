@@ -3,7 +3,6 @@ const path = require("path")
 const globImporter = require("node-sass-glob-importer");
 const fs = require("fs");
 const _string = require("underscore.string");
-const withTM = require("next-transpile-modules")
 const { withSentryConfig } = require("@sentry/nextjs");
 
 require("./lib/env-var-check.js")
@@ -11,7 +10,7 @@ require("./lib/env-var-check.js")
 const bannerImages = fs.readdirSync("./public/images/banners")
     .map(file => file.replace(/\.\w*$/, ""));
 
-const nextConfig = {
+module.exports = {
     sassOptions: {
         importer: globImporter(),
         includePaths: [
@@ -24,6 +23,9 @@ const nextConfig = {
     },
     async rewrites() {
         return {
+            beforeFiles: [
+                ...getRewriteForProxy(),
+            ],
             afterFiles: [
                 {
                     source: `/search/:search/:remainingPath*`,
@@ -104,30 +106,53 @@ const nextConfig = {
         ENVIRONMENT: process.env.ENVIRONMENT,
         DOMAINS_TO_PROXY: getDomainsToProxy(),
     },
+    transpilePackages: [
+        "is-plain-obj",
+        "@googlemaps/js-api-loader",
+        "@react-google-maps/api",
+        "@react-google-maps/api/node_modules/@googlemaps/js-api-loader",
+        "mdast-util-find-and-replace",
+        "color-convert",
+        "json-schema-ref-parser",
+        "ono",
+        "escape-string-regexp",
+        "readable-stream",
+        "bl/node_modules/readable-stream",
+        "browserify-sign/node_modules/readable-stream",
+        "hash-base/node_modules/readable-stream",
+        "tar-stream/node_modules/readable-stream",
+        "are-we-there-yet/node_modules/readable-stream",
+        "next/dist/compiled/crypto-browserify",
+        "next/dist/compiled/stream-browserify",
+        "next/dist/compiled/stream-http",
+        "postcss-html/node_modules/readable-stream",
+        "@clevercanyon/merge-change.fork",
+    ],
+    // We need to manually handle trailing slash redirection so as not to apply redirect to requests to our external
+    // resources proxy
+    skipTrailingSlashRedirect: true,
+    sentry: {
+        hideSourceMaps: false,
+    },
 }
 
-const nextConfigWithTranspiledNodeModules = withTM([
-    "is-plain-obj",
-    "@googlemaps/js-api-loader",
-    "@react-google-maps/api",
-    "@react-google-maps/api/node_modules/@googlemaps/js-api-loader",
-    "mdast-util-find-and-replace",
-    "color-convert",
-    "json-schema-ref-parser",
-    "ono",
-    "escape-string-regexp",
-    "readable-stream",
-    "bl/node_modules/readable-stream",
-    "browserify-sign/node_modules/readable-stream",
-    "hash-base/node_modules/readable-stream",
-    "tar-stream/node_modules/readable-stream",
-    "are-we-there-yet/node_modules/readable-stream",
-    "next/dist/compiled/crypto-browserify",
-    "next/dist/compiled/stream-browserify",
-    "next/dist/compiled/stream-http",
-    "postcss-html/node_modules/readable-stream",
-    "@clevercanyon/merge-change.fork",
-])(nextConfig)
+function getRewriteForProxy() {
+    if (process.env.NEXT_PUBLIC_PROXY_DOMAIN_SUFFIX) {
+        return [
+            {
+                source: "/:path*",
+                has: [
+                    {
+                        type: "host",
+                        value: `.*.${process.env.NEXT_PUBLIC_PROXY_DOMAIN_SUFFIX}`,
+                    },
+                ],
+                destination: "/api/external-resource-proxy/:path*",
+            },
+        ]
+    }
+    return []
+}
 
 function getRewritesForCategories() {
     const rewrites = []
@@ -158,8 +183,6 @@ function getRewritesForCategories() {
     return rewrites
 }
 
-module.exports = nextConfigWithTranspiledNodeModules
-
 if (process.env.NODE_ENV !== "test") {
     module.exports = withSentryConfig(
         module.exports,
@@ -170,14 +193,7 @@ if (process.env.NODE_ENV !== "test") {
 }
 
 function getDomainsToProxy() {
-    const proxyDomainEnvVarPrefix = "PROXY_DOMAIN_"
-    return Object.fromEntries(
-        Object.keys(process.env)
-            .filter(varName => varName.startsWith(proxyDomainEnvVarPrefix))
-            .map(varName => varName.replace(proxyDomainEnvVarPrefix, ""))
-            .map(domainToProxy => ([
-                domainToProxy.replaceAll("__", "-").replaceAll("_", "."),
-                process.env[`${proxyDomainEnvVarPrefix}${domainToProxy}`],
-            ]))
-    )
+    return (process.env.DOMAINS_TO_PROXY || "")
+        .split(",")
+        .map(domain => domain.trim())
 }

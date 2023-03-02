@@ -178,8 +178,10 @@ COPY --chown=$UID_GID ./test/support/mock-cms /app/test/support/mock-cms/
 COPY --chown=$UID_GID ./test/support/mock-iss /app/test/support/mock-iss/
 COPY --chown=$UID_GID ./.env ./.env.test ./babel.config.json ./next.config.js /app/
 
-
-RUN yarn with --test-env --mocks build-storybook
+# Upgrading next.js has forced the need to upgrade storybook. And as usual trying to make storybook work with flow.js is always
+# a major PITA. Since the typescript migrations is (hopefully just around the corner) rather than waste time trying to make it work
+# just disable storybook for now.
+# RUN yarn with --test-env --mocks build-storybook
 
 # Copy in all remaining files not excluded by .gitignore
 COPY --chown=$UID_GID . /app

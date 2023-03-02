@@ -111,7 +111,12 @@ function SendForm({
     })
 
     const onVerifyCaptcha = (token) => setValue("captchaCode", token);
-    useEffect(() => register("captchaCode"), []);
+    useEffect(
+        () => {
+            register("captchaCode")
+        },
+        []
+    );
 
     if (sentStatus) {
         return (
