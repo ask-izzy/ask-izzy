@@ -59,9 +59,7 @@ function BrandedFooter(): ReactElement<"footer"> {
                     aria-labelledby="homelessnessServices"
                     className="homelessness-services"
                 >
-                    <h1 id="homelessnessServices">
-                        Homelessness services
-                    </h1>
+                    <h1 id="homelessnessServices">Homelessness services</h1>
                     <ul>
                         <li>
                             <Link to="/homeless-shelters">
@@ -85,8 +83,12 @@ function BrandedFooter(): ReactElement<"footer"> {
                         </li>
                     </ul>
                 </div>
-                <div className="about-links">
-                    <h1>Ask Izzy</h1>
+                <div
+                    role="region"
+                    aria-labelledby="aboutLinks"
+                    className="about-links"
+                >
+                    <h1 id="aboutLinks">Ask Izzy</h1>
                     <ul>
                         <li>
                             <Link to={aboutLink}>
@@ -138,8 +140,12 @@ function BrandedFooter(): ReactElement<"footer"> {
 
                     </ul>
                 </div>
-                <div className="service-providers">
-                    <h1>For service providers</h1>
+                <div
+                    role="region"
+                    aria-labelledby="serviceProviders"
+                    className="service-providers"
+                >
+                    <h1 id="serviceProviders">For service providers</h1>
                     <ul>
                         <li>
                             <Link to="/add-service">
@@ -179,8 +185,12 @@ function BrandedFooter(): ReactElement<"footer"> {
                         </li>
                     </ul>
                 </div>
-                <div className="supporters">
-                    <h1>Founding partners</h1>
+                <div
+                    role="region"
+                    aria-labelledby="supporterLinks"
+                    className="supporters"
+                >
+                    <h1 id="supporterLinks">Founding partners</h1>
                     <ul>
                         <li>
                             <Link to="https://www.google.org">Google</Link>
@@ -195,7 +205,18 @@ function BrandedFooter(): ReactElement<"footer"> {
                         </li>
                     </ul>
                 </div>
-                <div className="socials">
+                <div
+                    role="region"
+                    aria-labelledby="socialLinks"
+                    className="socials"
+                >
+                    {/* for accessibility purposes */}
+                    <h1
+                        id="socialLinks"
+                        style={{display: "None"}}
+                    >
+                        Socials
+                    </h1>
                     <ul>
                         <li>
                             <Link
