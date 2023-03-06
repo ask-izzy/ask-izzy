@@ -15,6 +15,10 @@ const proxyMiddleware = createProxyMiddleware({
         if (proxyReq.method === "OPTIONS") {
             const corsReqHeadersHeaderName = "access-control-request-headers"
             if (proxyReq.hasHeader(corsReqHeadersHeaderName)) {
+                console.log(
+                    `[send] OPTIONS request has ${corsReqHeadersHeaderName} header with:`,
+                    proxyReq.getHeader(corsReqHeadersHeaderName)
+                )
                 proxyReq.setHeader(
                     corsReqHeadersHeaderName,
                     proxyReq.getHeader(corsReqHeadersHeaderName)
@@ -24,6 +28,7 @@ const proxyMiddleware = createProxyMiddleware({
                         )
                         .join(",")
                 )
+                console.log(`[send] Changed to:`, proxyReq.getHeader(corsReqHeadersHeaderName))
             }
         } else {
             proxyReq.removeHeader("baggage")
@@ -32,18 +37,23 @@ const proxyMiddleware = createProxyMiddleware({
     },
     onProxyRes: (proxyRes, req, res) => {
         if (req.method === "OPTIONS") {
-            const corsReqHeadersHeaderName = "access-control-allow-headers"
-            if (proxyRes.headers[corsReqHeadersHeaderName]) {
+            const corsAllowHeadersHeaderName = "access-control-allow-headers"
+            if (proxyRes.headers[corsAllowHeadersHeaderName]) {
+                console.log(
+                    `[receive] OPTIONS response has ${corsAllowHeadersHeaderName} header with:`,
+                    proxyRes.headers[corsAllowHeadersHeaderName]
+                )
                 const ensureHeaderNameIncluded = (headerNameToInclude) => {
-                    const hasHeader = proxyRes.headers[corsReqHeadersHeaderName]
+                    const hasHeader = proxyRes.headers[corsAllowHeadersHeaderName]
                         .split(",")
                         .some(headerName => headerName.trim().toLowerCase() === headerNameToInclude)
                     if (!hasHeader) {
-                        proxyRes.headers[corsReqHeadersHeaderName] += `, ${headerNameToInclude}`
+                        proxyRes.headers[corsAllowHeadersHeaderName] += `, ${headerNameToInclude}`
                     }
                 }
                 ensureHeaderNameIncluded("Sentry-Trace")
                 ensureHeaderNameIncluded("Baggage")
+                console.log(`[receive] Changed to:`, proxyRes.headers[corsAllowHeadersHeaderName])
             }
         }
     },
