@@ -11,42 +11,6 @@ const allowedDomains = new Set(process.env.DOMAINS_TO_PROXY)
 const proxyMiddleware = createProxyMiddleware({
     router: req => getTargetBaseUrl(req).origin,
     changeOrigin: true,
-    onProxyReq: (proxyReq, req, res) => {
-        if (proxyReq.method === "OPTIONS") {
-            const corsReqHeadersHeaderName = "access-control-request-headers"
-            if (proxyReq.hasHeader(corsReqHeadersHeaderName)) {
-                proxyReq.setHeader(
-                    corsReqHeadersHeaderName,
-                    proxyReq.getHeader(corsReqHeadersHeaderName)
-                        .split(",")
-                        .filter(
-                            headerName => !["baggage", "sentry-trace"].includes(headerName.trim().toLowerCase())
-                        )
-                        .join(",")
-                )
-            }
-        } else {
-            proxyReq.removeHeader("baggage")
-            proxyReq.removeHeader("sentry-trace")
-        }
-    },
-    onProxyRes: (proxyRes, req, res) => {
-        if (req.method === "OPTIONS") {
-            const corsReqHeadersHeaderName = "access-control-allow-headers"
-            if (proxyRes.headers[corsReqHeadersHeaderName]) {
-                const ensureHeaderNameIncluded = (headerNameToInclude) => {
-                    const hasHeader = proxyRes.headers[corsReqHeadersHeaderName]
-                        .split(",")
-                        .some(headerName => headerName.trim().toLowerCase() === headerNameToInclude)
-                    if (!hasHeader) {
-                        proxyRes.headers[corsReqHeadersHeaderName] += `, ${headerNameToInclude}`
-                    }
-                }
-                ensureHeaderNameIncluded("Sentry-Trace")
-                ensureHeaderNameIncluded("Baggage")
-            }
-        }
-    },
 });
 
 export default function handler(req: any, res: any): void {

@@ -4,7 +4,6 @@ import * as Sentry from "@sentry/nextjs";
 import { CaptureConsole, ExtraErrorData } from "@sentry/integrations";
 
 const SENTRY_DSN = process.env.SENTRY_DSN || process.env.NEXT_PUBLIC_SENTRY_DSN;
-const proxyDomainSuffix = process.env.NEXT_PUBLIC_PROXY_DOMAIN_SUFFIX
 
 if (process.env.NODE_ENV !== "test") {
     Sentry.init({
@@ -16,13 +15,6 @@ if (process.env.NODE_ENV !== "test") {
                 levels: ["warn", "error"],
             }),
             new ExtraErrorData(),
-            new Sentry.BrowserTracing({
-                tracePropagationTargets: [
-                    "localhost",
-                    /^\//,
-                    ...(proxyDomainSuffix ? [proxyDomainSuffix] : []),
-                ],
-            }),
         ],
     });
 }

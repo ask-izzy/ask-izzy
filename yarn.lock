@@ -1963,7 +1963,7 @@
     "@sentry/utils" "7.40.0"
     tslib "^1.9.3"
 
-"@sentry/integrations@7.40.0", "@sentry/integrations@^7.38.0":
+"@sentry/integrations@7.40.0", "@sentry/integrations@^7.6.0":
   version "7.40.0"
   resolved "https://registry.yarnpkg.com/@sentry/integrations/-/integrations-7.40.0.tgz#953aa7144ea2c7bfec36284c9a4ed06d6d134dea"
   integrity sha512-8TLo7RKKpTXRDdeeBFNaA3YA4NG5hbAkl2o9wDHJW5NJouyr7IK6ia6qd2v94RXJAVB7nnjtQUdnkXGR59E4RA==
@@ -1973,7 +1973,7 @@
     localforage "^1.8.1"
     tslib "^1.9.3"
 
-"@sentry/nextjs@^7.38.0":
+"@sentry/nextjs@^7.6.0":
   version "7.40.0"
   resolved "https://registry.yarnpkg.com/@sentry/nextjs/-/nextjs-7.40.0.tgz#7674d94667a918efada1e37c2d880da7c39d9a07"
   integrity sha512-KKjj1twksH/VL1g0Y32VKJkejbvP/+TrhRlfGM+OS2i+oXU7e5UGfjgAZhzcjorhNPmKoUu3wbs4awVQXrphbg==
