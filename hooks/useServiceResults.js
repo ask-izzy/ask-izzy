@@ -41,6 +41,7 @@ import { usersnapFireEvent } from "@/helpers/usersnap.helpers.js"
 import WhoIsLookingForHelpBaseInfo from
 "@/src/constants/personalisation-pages/WhoIsLookingForHelp"
 import type { UserType } from "@/components/pages/personalisation/WhoIsLookingForHelp"
+import useEffectOnChange from "@/hooks/useEffectOnChange"
 
 type UseServiceResults = {
     searchResults: Array<Service> | null,
@@ -85,30 +86,16 @@ export default (router: NextRouter): UseServiceResults => {
 
     useEffect(() => {
         if (router.isReady) {
-            if (!search) {
-                initSearch()
-            }
-            // router ready here when loading the page for the first time
-            usersnapFireEventPageView()
-        }
-    }, [router.isReady, router.asPath])
-
-    useEffect(() => {
-        if (router.isReady) {
-            // router ready here when loading the page for the first time
-            // this event is independent from the loading results event
+            initNewSearch()
             usersnapFireEventPageView()
         }
     }, [router.isReady])
 
-
-    useEffect(() => {
+    useEffectOnChange(() => {
         if (search) {
             loadFirstPage()
         }
     }, [search])
-
-
 
     function getCategory(): Category {
         const categoryFromRouter = getCategoryFromRouter(router)
@@ -118,7 +105,7 @@ export default (router: NextRouter): UseServiceResults => {
         return categoryFromRouter
     }
 
-    function initSearch(): void {
+    function initNewSearch(): void {
         setLocationFromUrl(router)
 
         const pathWithPersonalisationIfNeeded =
@@ -137,9 +124,16 @@ export default (router: NextRouter): UseServiceResults => {
                 "able to generate a query but we can't."
             )
         }
-        const serviceSearch = createServiceSearch(query)
-        setSearch(serviceSearch)
-
+        // Create new PaginatedSearch if none yet exists or the query has changed
+        if (!search || (objectHash(query) !== objectHash(search?.izzyQuery))) {
+            const serviceSearch = createServiceSearch(query)
+            setSearch(serviceSearch)
+        } else {
+            // since search already exists we probably don't need to load the first page
+            // but try to anyway in case it hasn't been loaded and importantly to set
+            // the loading state to loaded if it has
+            loadFirstPage()
+        }
     }
 
     function loadFirstPage() {

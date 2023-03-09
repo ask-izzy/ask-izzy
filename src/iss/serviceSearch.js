@@ -43,10 +43,13 @@ export class PaginatedSearch {
     +loadedServices: Array<Service>;
     +numOfPagesLoaded: number;
     +issQuery: ISS4SearchQuery | ISS3SearchQuery
+    +izzyQuery: IzzySearchQuery
     +isNext: ?boolean
 }
 
 export class PaginatedSearchIss3 extends PaginatedSearch {
+    // When we move to typescript we can defined them in the parent using the protected
+    // keyword and inherit them here so we don't need to define in every child
     #pagesLoaded: number = 0;
     #maxPageSize: number;
     #loadedServices: Array<Service> = [];
@@ -107,12 +110,18 @@ export class PaginatedSearchIss3 extends PaginatedSearch {
         return this.#issQuery
     }
 
+    get izzyQuery(): IzzySearchQuery {
+        return this.#izzyQuery
+    }
+
     get isNext(): ?boolean {
         return Boolean(this._lastMeta?.next)
     }
 }
 
 export class PaginatedSearchIss4 extends PaginatedSearch {
+    // When we move to typescript we can defined them in the parent using the protected
+    // keyword and inherit them here so we don't need to define in every child
     #pagesLoaded: number = 0;
     #maxPageSize: number;
     #loadedServices: Array<Service> = [];
@@ -169,6 +178,10 @@ export class PaginatedSearchIss4 extends PaginatedSearch {
 
     get issQuery(): ISS4SearchQuery {
         return this.#issQuery
+    }
+
+    get izzyQuery(): IzzySearchQuery {
+        return this.#izzyQuery
     }
 
     get isNext(): ?boolean {
