@@ -120,7 +120,7 @@ lint-storybook-components:
   script:
     - docker run --rm -t $TAG_DEVELOPMENT_STAGE lint-storybook-components
 
-.test-mocha-personalisation:
+test-mocha-personalisation:
   stage: Test
   needs: ['build-development']
   script:
@@ -134,7 +134,7 @@ lint-storybook-components:
     when: on_failure
     expire_in: 1 week
 
-.test-mocha-features:
+test-mocha-features:
   stage: Test
   needs: ['build-development']
   script:
@@ -148,7 +148,7 @@ lint-storybook-components:
     when: on_failure
     expire_in: 1 week
 
-.test-mocha-maps:
+test-mocha-maps:
   stage: Test
   needs: ['build-development']
   script:
