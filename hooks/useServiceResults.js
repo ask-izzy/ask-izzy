@@ -89,7 +89,7 @@ export default (router: NextRouter): UseServiceResults => {
             initNewSearch()
             usersnapFireEventPageView()
         }
-    }, [router.isReady])
+    }, [router.isReady, router.asPath])
 
     useEffectOnChange(() => {
         if (search) {
