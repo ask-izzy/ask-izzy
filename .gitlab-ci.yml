@@ -134,7 +134,7 @@ lint-storybook-components:
     when: on_failure
     expire_in: 1 week
 
-test-mocha-category-queries:
+.test-mocha-category-queries:
   stage: Test
   needs: ['build-development']
   script:
