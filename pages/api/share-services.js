@@ -32,8 +32,6 @@ export default async function handler(req: any, res: any): any {
 
     const messageRequestType = await getRequestType(body)
 
-    console.log(messageRequestType)
-
     if (!messageRequestType) {
         return res.status(400).json({message: "Invalid request"})
     }
@@ -110,11 +108,11 @@ export default async function handler(req: any, res: any): any {
 }
 
 async function validateCaptchaCode(captchaCode) {
-    // Ping the google recaptcha verify API to verify the captcha code you received
+    // Ping the friendly captcha verify API to verify the captcha code you received
     const response = await fetch(
-        `https://www.google.com/recaptcha/api/siteverify` +
-            `?secret=${process.env.RECAPTCHA_SECRET_KEY}` +
-            `&response=${captchaCode}`,
+        `https://api.friendlycaptcha.com/api/v1/siteverify` +
+            `?secret=${"A1LVJNT3QGI8R894MBCUI2L8P6896BI23SQ5AOPHO3QV30RGQR4111OJ72"}` +
+            `&solution=${captchaCode}`,
         {
             headers: {
                 "Content-Type": "application/x-www-form-urlencoded; charset=utf-8",
