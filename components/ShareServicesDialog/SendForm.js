@@ -3,7 +3,8 @@
 import * as React from "react";
 import {useEffect} from "react";
 import { useForm } from "react-hook-form";
-import ReCAPTCHA from "react-google-recaptcha";
+import { WidgetInstance } from "friendly-challenge";
+
 import { yupResolver } from "@hookform/resolvers/yup";
 
 import Form from "@/components/forms/Form"
@@ -41,16 +42,40 @@ function SendForm({
     });
     const {watch, formState, register, setValue} = formProps
     const [sentStatus, setSentStatus] = React.useState("")
-    const recaptchaRef = React.useRef();
+    const captchaRef = React.useRef();
+    const widget = React.useRef();
+
     const {openToastMessage} = useToastMessage()
 
     const { submitForm, currentlySubmitting } = useSubmitForm(services)
 
     const isMounted = useIsMounted()
 
+    useEffect(() => {
+        if (!widget.current && captchaRef.current) {
+            widget.current = new WidgetInstance(captchaRef.current, {
+                startMode: "none",
+                doneCallback: onVerifyCaptcha,
+                errorCallback: errorCallback,
+            });
+        }
+        return () => {
+            if (widget.current != undefined) {
+                widget.current.reset();
+            }
+        }
+    }, [captchaRef]);
+
+    const errorCallback = (err) => {
+        console.log("There was an error when trying to solve the Captcha.");
+        console.log(err);
+    }
+
     async function onSubmit(data) {
         const status = await submitForm(data)
-        recaptchaRef.current?.reset();
+        if (widget.current != undefined) {
+            widget.current.reset();
+        }
         let displayToastMessage = () => {}
         if (status === "Message is sent") {
             displayToastMessage = () => {
@@ -94,12 +119,6 @@ function SendForm({
 
     }
 
-    if (typeof window !== "undefined" && !window.recaptchaOptions) {
-        window.recaptchaOptions = {
-            useRecaptchaNet: true,
-        };
-    }
-
     const messageText = getShareMessage({
         services,
         baseUrl: isMounted ? location.origin : "",
@@ -123,6 +142,68 @@ function SendForm({
             <div className="SendForm status">
                 <h2>{sentStatus}</h2>
             </div>
+        )
+    }
+
+    function renderSubmitDetailsSection(
+        onVerifyCaptcha,
+        currentlySubmitting: boolean,
+        messageText: any,
+        onCloseRequest,
+        formState: any,
+        messageType: string,
+    ) {
+        const messagePreviewContentsProp = messageType === "Email" ?
+            {dangerouslySetInnerHTML: {__html: messageText.body}}
+            : {children: messageText.body}
+        return (
+            <FormSection
+                className="submitDetails"
+                title="Your pre-filled message"
+            >
+                <div className="messagePreview">
+                    <div className="description">
+                        Review your pre-filled message
+                    </div>
+                    <div
+                        className="messageText"
+                        {...messagePreviewContentsProp}
+                    />
+                </div>
+                <div className="recapture">
+                    <div
+                        ref={captchaRef}
+                        // eslint-disable-next-line react/no-unknown-property
+                        class="frc-captcha"
+                        data-sitekey="FCMQRH8G44THON2H"
+                    />
+                    {formState.errors.captchaCode &&
+                        <span className="errorMessage">Please verify the CAPTCHA</span>
+                    }
+                </div>
+
+                <div className="formControls">
+                    <StandardButton
+                        className="tint-1"
+                        onClick={onCloseRequest}
+                    >
+                        Cancel
+                    </StandardButton>
+                    <StandardButton
+                        className="submitButton tint-2"
+                        disabled={currentlySubmitting}
+                        onClick={() => {}}
+                    >
+                        {currentlySubmitting ?
+                            <LoadingIcon className="inline-icon" />
+                            : <>
+                                Send
+                                <SendIcon/>
+                            </>
+                        }
+                    </StandardButton>
+                </div>
+            </FormSection>
         )
     }
 
@@ -206,7 +287,6 @@ function SendForm({
                 />
             </FormSection>
             {renderSubmitDetailsSection(
-                recaptchaRef,
                 onVerifyCaptcha,
                 currentlySubmitting,
                 messageText,
@@ -219,66 +299,3 @@ function SendForm({
 }
 
 export default SendForm
-
-function renderSubmitDetailsSection(
-    recaptchaRef,
-    onVerifyCaptcha,
-    currentlySubmitting,
-    messageText,
-    onCloseRequest,
-    formState,
-    messageType,
-) {
-    const messagePreviewContentsProp = messageType === "Email" ?
-        {dangerouslySetInnerHTML: {__html: messageText.body}}
-        : {children: messageText.body}
-    return (
-        <FormSection
-            className="submitDetails"
-            title="Your pre-filled message"
-        >
-            <div className="messagePreview">
-                <div className="description">
-                    Review your pre-filled message
-                </div>
-                <div
-                    className="messageText"
-                    {...messagePreviewContentsProp}
-                />
-            </div>
-            <div className="recapture">
-                <ReCAPTCHA
-                    ref={recaptchaRef}
-                    size="normal"
-                    onChange={onVerifyCaptcha}
-                    sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY}
-                />
-                {formState.errors.captchaCode &&
-                    <span className="errorMessage">Please verify the CAPTCHA</span>
-                }
-            </div>
-
-            <div className="formControls">
-                <StandardButton
-                    className="tint-1"
-                    onClick={onCloseRequest}
-                >
-                    Cancel
-                </StandardButton>
-                <StandardButton
-                    className="submitButton tint-2"
-                    disabled={currentlySubmitting}
-                    onClick={() => {}}
-                >
-                    {currentlySubmitting ?
-                        <LoadingIcon className="inline-icon" />
-                        : <>
-                            Send
-                            <SendIcon/>
-                        </>
-                    }
-                </StandardButton>
-            </div>
-        </FormSection>
-    )
-}
