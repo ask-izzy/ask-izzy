@@ -56,8 +56,16 @@
                 }
             }
 
-            .recapture > div > div > div {
+            .recapture {
                 margin: 1em auto;
+                    min-width: None;
+                    max-width: None;
+                .frc-captcha {
+                    border-radius: 3px;
+                }
+                .frc-banner {
+                    display: None;
+                }
             }
 
             .formControls {
