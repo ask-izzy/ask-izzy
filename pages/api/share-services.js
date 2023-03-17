@@ -111,7 +111,7 @@ async function validateCaptchaCode(captchaCode) {
     // Ping the friendly captcha verify API to verify the captcha code you received
     const response = await fetch(
         `https://api.friendlycaptcha.com/api/v1/siteverify` +
-            `?secret=${"A1LVJNT3QGI8R894MBCUI2L8P6896BI23SQ5AOPHO3QV30RGQR4111OJ72"}` +
+            `?secret=${process.env.FRIENDLY_CAPTCHA_SECRET_KEY}` +
             `&solution=${captchaCode}`,
         {
             headers: {

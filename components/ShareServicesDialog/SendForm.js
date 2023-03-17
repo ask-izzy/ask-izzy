@@ -175,7 +175,7 @@ function SendForm({
                         ref={captchaRef}
                         // eslint-disable-next-line react/no-unknown-property
                         class="frc-captcha"
-                        data-sitekey="FCMQRH8G44THON2H"
+                        data-sitekey={process.env.NEXT_PUBLIC_FRIENDLY_CAPTCHA_SITE_KEY}
                     />
                     {formState.errors.captchaCode &&
                         <span className="errorMessage">Please verify the CAPTCHA</span>
