@@ -62,14 +62,6 @@ export default ({
                 term: ["refugees"],
             },
         },
-        "Have pets": {
-            $concat: {
-                term: [
-                    "pets",
-                    "-effectiveness",
-                ],
-            },
-        },
     },
     icons: {
         "Escaping family violence": icons.DemographicFamilyViolence,
