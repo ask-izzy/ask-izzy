@@ -135,6 +135,7 @@ module.exports.visitUrl = async function visitUrl(
     url: string
 ): Promise<void> {
     await gotoUrl(driver, url);
+    await new Promise(resolve => setTimeout(resolve, 2000));
     await module.exports.documentReady(driver);
 }
 
@@ -275,6 +276,7 @@ async function urlIs(
 }
 
 async function checkURL(expected: string): Promise<void> {
+    await new Promise(resolve => setTimeout(resolve, 2000));
     if (expected.startsWith(`"`)) {
         throw new Error("URL should not be quoted");
     }
@@ -366,10 +368,10 @@ function getInputElement(
 
 async function doSearch(search: string): Promise<void> {
     let element = await getSearchElement(this.driver);
-
+    await new Promise(resolve => setTimeout(resolve, 2000));
     await element.clear();
     await element.sendKeys(search);
-
+    await new Promise(resolve => setTimeout(resolve, 2000));
     await module.exports.documentReady(this.driver);
 }
 
@@ -384,6 +386,7 @@ async function clearFirstSearchBox(): Promise<void> {
 async function doSearchAndEnter(search: string): Promise<void> {
     await (await getSearchElement(this.driver))
         .sendKeys(search + Key.ENTER);
+    await new Promise(resolve => setTimeout(resolve, 2000));
     await module.exports.documentReady(this.driver);
 }
 
@@ -466,7 +469,6 @@ async function checkMetaCanonical(expected: string): Promise<void> {
  */
 async function newBrowser(): Promise<void> {
     const currentHandle = await this.driver.getWindowHandle();
-
     await this.driver.executeScript(() => {
         document.body.innerHTML = `<a
             href="about:blank"
@@ -475,10 +477,10 @@ async function newBrowser(): Promise<void> {
             Click Here
         </a>`;
     });
+    await new Promise(resolve => setTimeout(resolve, 2000));
     await clickLink.apply(this, ["Click Here"]);
     const newHandles = _(await this.driver.getAllWindowHandles())
         .without(currentHandle);
-
     if (newHandles.length != 1) {
         throw new Error(
             `Expected opening a new tab to result in 1 window, got ${

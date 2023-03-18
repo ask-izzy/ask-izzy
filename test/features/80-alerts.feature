@@ -3,6 +3,7 @@ Feature: Alerts
     Scenario: National alerts are visible on the home page
         Given a fresh session
         When I visit /
+        When I click the alert button with "1" alerts
         Then I should see the alerts
         -------------------------------------------
         Title               | Body
