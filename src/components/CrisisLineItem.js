@@ -45,7 +45,7 @@ class CrisisLineItem extends React.Component<Props, void> {
 
     PhoneButtonDetails: ReactNode =
         <div className="details-tooltip">
-            {crisisDescriptions[this.props.service.id](this.props.service)}
+            {crisisDescriptions[this.props.service.id] && crisisDescriptions[this.props.service.id](this.props.service)}
         </div>
 
     render(): ReactNode {

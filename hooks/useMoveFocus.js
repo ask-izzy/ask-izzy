@@ -18,7 +18,6 @@ export default (): [(refType) => void, () => void, () => void] => {
     const focusElement = (ref: refType) => {
         setPrevFocus(document.activeElement)
         ref?.current?.focus()
-        console.log(ref?.current, document.activeElement)
     }
 
     const revertFocus = () => {

@@ -99,7 +99,7 @@ function PhoneButton({
                     hasDetails &&
                     <div className="crisis-line-details">
                         {hasDetails}
-                        call Info
+                        Call Info
                     </div>
                 }
             </div>
