@@ -42,9 +42,6 @@ module.exports = (function() {
         )
         .when("I click the \"$STRING\" button", clickButton)
         .when("I click the button with \"$STRING\" class name", clickButtonWithClassName)
-        .when("I click the alert button with \"$STRING\" alerts",
-            clickAlertButton
-        )
         .when("I click the \"$STRING\" dropdown", clickDropdown)
         .when("I click the \"$STRING\" dropdown option", clickDropdownOption)
         .when("I click the \"$STRING\" collapsible section", clickDetails)
@@ -135,6 +132,7 @@ module.exports.visitUrl = async function visitUrl(
     url: string
 ): Promise<void> {
     await gotoUrl(driver, url);
+    await new Promise(resolve => setTimeout(resolve, 2000));
     await module.exports.documentReady(driver);
 }
 
@@ -158,9 +156,7 @@ async function clickButtonWithClassName(className: string): Promise<void> {
     await module.exports.documentReady(this.driver);
 }
 
-async function clickAlertButton(buttonText: string) {
-    await clickElementWithText(this.driver, buttonText, "button")
-}
+
 
 async function clickDetails(summaryText: string): Promise<void> {
     await clickElementWithText(this.driver, summaryText, "details/summary")
@@ -275,6 +271,7 @@ async function urlIs(
 }
 
 async function checkURL(expected: string): Promise<void> {
+    await new Promise(resolve => setTimeout(resolve, 2000));
     if (expected.startsWith(`"`)) {
         throw new Error("URL should not be quoted");
     }
@@ -366,10 +363,10 @@ function getInputElement(
 
 async function doSearch(search: string): Promise<void> {
     let element = await getSearchElement(this.driver);
-
+    await new Promise(resolve => setTimeout(resolve, 2000));
     await element.clear();
     await element.sendKeys(search);
-
+    await new Promise(resolve => setTimeout(resolve, 2000));
     await module.exports.documentReady(this.driver);
 }
 
@@ -384,6 +381,7 @@ async function clearFirstSearchBox(): Promise<void> {
 async function doSearchAndEnter(search: string): Promise<void> {
     await (await getSearchElement(this.driver))
         .sendKeys(search + Key.ENTER);
+    await new Promise(resolve => setTimeout(resolve, 2000));
     await module.exports.documentReady(this.driver);
 }
 
@@ -466,7 +464,6 @@ async function checkMetaCanonical(expected: string): Promise<void> {
  */
 async function newBrowser(): Promise<void> {
     const currentHandle = await this.driver.getWindowHandle();
-
     await this.driver.executeScript(() => {
         document.body.innerHTML = `<a
             href="about:blank"
@@ -475,10 +472,10 @@ async function newBrowser(): Promise<void> {
             Click Here
         </a>`;
     });
+    await new Promise(resolve => setTimeout(resolve, 2000));
     await clickLink.apply(this, ["Click Here"]);
     const newHandles = _(await this.driver.getAllWindowHandles())
         .without(currentHandle);
-
     if (newHandles.length != 1) {
         throw new Error(
             `Expected opening a new tab to result in 1 window, got ${
@@ -553,6 +550,17 @@ async function seeBrowserTitle(title: string): Promise<void> {
 async function seeTheAlerts(
     table: Array<Object>,
 ): Promise<void> {
+    const alerts = await this.driver.findElements(
+        By.css(`.AlertBannerButton`)
+    )
+    console.log(alerts)
+    if (alerts.length > 0) {
+        await this.driver.findElement(By.css(
+            `.AlertBannerButton`
+        ))
+            .click();
+    }
+
     await this.driver.wait(module.exports.documentReady(this.driver), 10000);
 
     const alertElements = await this.driver.findElements(

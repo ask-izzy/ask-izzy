@@ -58,13 +58,15 @@
 
             .recapture {
                 margin: 1em auto;
-                    min-width: None;
-                    max-width: None;
+                min-width: none;
+                max-width: none;
+
                 .frc-captcha {
                     border-radius: 3px;
                 }
+
                 .frc-banner {
-                    display: None;
+                    display: none;
                 }
             }
 
