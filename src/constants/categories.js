@@ -106,29 +106,6 @@ const categories = [
         bannerName: "hands-and-house",
     }): Category),
     (new Category({
-        name: "Everyday needs",
-        key: "everyday-needs",
-        byline: "Clothes, showers, support and more",
-        icon: icons.Things,
-        searchQueryChanges: {
-            catchment: "prefer",
-            $concat: {
-                term: [
-                    "material",
-                    "aid",
-                    "-\"coordinating bodies\"",
-                ],
-                serviceTypes: ["Material Aid"],
-            },
-        },
-        personalisation: [
-            EverydayNeedsSubcategories,
-            WhoIsLookingForHelpEverydayNeeds,
-            Location,
-        ],
-        bannerName: "hands-and-person-and-square",
-    }): Category),
-    (new Category({
         name: "Money help",
         key: "money-help",
         byline: "Centrelink, emergency funds, loans and more",
@@ -152,6 +129,84 @@ const categories = [
             Location,
         ],
         bannerName: "buildings-and-shapes",
+    }): Category),
+    (new Category({
+        name: "Support and counselling",
+        key: "support-and-counselling",
+        byline: "Mental health, relationships, addiction",
+        icon: icons.Support,
+        searchQueryChanges: {
+            catchment: "prefer",
+            $concat: {
+                term: ["counselling"],
+                serviceTypes: [
+                    "Counselling",
+                ],
+            },
+            minimumShouldMatch: "1",
+        },
+        personalisation: [
+            CounsellingSubcategories,
+            CounsellingAreYouSafe,
+            OnlineSafetyScreen,
+            WhoIsLookingForHelpSupportAndCounselling,
+            Location,
+            DemographicsIndigenous,
+        ],
+        bannerName: "hands-and-person-with-heart",
+    }): Category),
+    (new Category({
+        name: "Domestic and family violence help",
+        key: "dfv-help",
+        byline:
+            "Feeling unsafe, experiencing violence or abuse from a partner " +
+            "or family member",
+        icon: icons.EscapeViolence,
+        searchQueryChanges: {
+            catchment: "prefer",
+            $concat: {
+                term: [
+                    "\"family violence\"",
+                    "-\"coordinating bodies\"",
+                    "-\"fire-fighting\"",
+                ],
+            },
+        },
+        personalisation: [
+            AreYouSafe,
+            OnlineSafetyScreen,
+            DFVSubcategories,
+            WhoIsLookingForHelpDFV,
+            Location,
+            DfvDemographics,
+            Under18DomesticViolenceScreen,
+            UsingViolenceScreen,
+            LgbtiqaDomesticViolenceScreen,
+        ],
+        bannerName: "hands-and-heart",
+    }): Category),
+    (new Category({
+        name: "Everyday needs",
+        key: "everyday-needs",
+        byline: "Clothes, showers, support and more",
+        icon: icons.Things,
+        searchQueryChanges: {
+            catchment: "prefer",
+            $concat: {
+                term: [
+                    "material",
+                    "aid",
+                    "-\"coordinating bodies\"",
+                ],
+                serviceTypes: ["Material Aid"],
+            },
+        },
+        personalisation: [
+            EverydayNeedsSubcategories,
+            WhoIsLookingForHelpEverydayNeeds,
+            Location,
+        ],
+        bannerName: "hands-and-person-and-square",
     }): Category),
     (new Category({
         name: "Health",
@@ -183,36 +238,6 @@ const categories = [
             DemographicsIndigenous,
         ],
         bannerName: "hand-and-heart",
-    }): Category),
-    (new Category({
-        name: "Domestic and family violence help",
-        key: "dfv-help",
-        byline:
-            "Feeling unsafe, experiencing violence or abuse from a partner " +
-            "or family member",
-        icon: icons.EscapeViolence,
-        searchQueryChanges: {
-            catchment: "prefer",
-            $concat: {
-                term: [
-                    "\"family violence\"",
-                    "-\"coordinating bodies\"",
-                    "-\"fire-fighting\"",
-                ],
-            },
-        },
-        personalisation: [
-            AreYouSafe,
-            OnlineSafetyScreen,
-            DFVSubcategories,
-            WhoIsLookingForHelpDFV,
-            Location,
-            DfvDemographics,
-            Under18DomesticViolenceScreen,
-            UsingViolenceScreen,
-            LgbtiqaDomesticViolenceScreen,
-        ],
-        bannerName: "hands-and-heart",
     }): Category),
     (new Category({
         name: "Advice and advocacy",
@@ -265,31 +290,6 @@ const categories = [
             Location,
         ],
         bannerName: "buildings-and-hand",
-    }): Category),
-    (new Category({
-        name: "Support and counselling",
-        key: "support-and-counselling",
-        byline: "Mental health, relationships, addiction",
-        icon: icons.Support,
-        searchQueryChanges: {
-            catchment: "prefer",
-            $concat: {
-                term: ["counselling"],
-                serviceTypes: [
-                    "Counselling",
-                ],
-            },
-            minimumShouldMatch: "1",
-        },
-        personalisation: [
-            CounsellingSubcategories,
-            CounsellingAreYouSafe,
-            OnlineSafetyScreen,
-            WhoIsLookingForHelpSupportAndCounselling,
-            Location,
-            DemographicsIndigenous,
-        ],
-        bannerName: "hands-and-person-with-heart",
     }): Category),
     (new Category({
         name: "Search",
