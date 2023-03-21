@@ -10,7 +10,7 @@ import {
     getRequestType,
     getShareMessage,
     normalisePhoneNumber,
-} from "@/helpers/share-services.helpers"
+} from "@/helpers/share-services.helpers.js"
 
 const middlewares = getRateLimitMiddlewares({
     limit: 10,

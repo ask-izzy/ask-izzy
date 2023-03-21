@@ -143,7 +143,7 @@ COPY --chown=$UID_GID ./fixtures /app/fixtures
 COPY --chown=$UID_GID ./test/support/mock-cms /app/test/support/mock-cms/
 COPY --chown=$UID_GID ./test/support/mock-iss /app/test/support/mock-iss/
 COPY --chown=$UID_GID ./.env ./.env.test ./next.config.js /app/
-COPY --chown=$UID_GID ./tsconfig.json /app/
+COPY --chown=$UID_GID ./tsconfig.json ./types /app/
 
 # Build Ask Izzy
 RUN yarn with --test-env --mocks build

@@ -12,11 +12,11 @@ import Service from "@/src/iss/Service.js"
 import storage from "@/src/storage.js";
 import FormTextInput from "@/components/forms/FormTextInput.js"
 import FormSection from "@/components/forms/FormSection.js"
-import {getShareMessage, getShareReqSchema} from "@/helpers/share-services.helpers"
-import type { MessageType } from "@/helpers/share-services.helpers"
-import useSubmitForm from "./use-submit-form.hook"
+import {getShareMessage, getShareReqSchema} from "@/helpers/share-services.helpers.js"
+import type { MessageType } from "@/helpers/share-services.helpers.js"
+import useSubmitForm from "./use-submit-form.hook.js"
 import useIsMounted from "@/hooks/useIsMounted.js"
-import { usersnapFireEvent } from "@/helpers/usersnap.helpers"
+import { usersnapFireEvent } from "@/helpers/usersnap.helpers.js"
 import useToastMessage from "@/hooks/useToastMessage.js"
 import * as gtm from "@/src/google-tag-manager.js";
 
@@ -90,8 +90,8 @@ function SendForm({
 
     }
 
-    if (typeof window !== "undefined" && !window.recaptchaOptions) {
-        window.recaptchaOptions = {
+    if (typeof window !== "undefined" && !(window as any).recaptchaOptions) {
+        (window as any).recaptchaOptions = {
             useRecaptchaNet: true,
         };
     }

@@ -9,7 +9,7 @@ import * as gtm from "@/src/google-tag-manager.js";
 import {
     setMapView,
     markersShownOnLoad,
-} from "@/src/components/SitesMap.service";
+} from "@/src/components/SitesMap.service.js";
 
 type Props = {
     sites: Array<site>,

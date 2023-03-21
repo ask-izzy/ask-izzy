@@ -11,7 +11,7 @@ import { getServicesPath } from "@/src/utils/routing.js"
 
 type Props = {
     category: Category,
-    router: NextRouter,
+    router?: NextRouter,
 }
 
 const PERSONALISATIONS_TO_CLEAR = [

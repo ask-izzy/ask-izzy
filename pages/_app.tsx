@@ -1,5 +1,5 @@
 import React, {useEffect, ReactNode} from "react";
-import type { AppProps } from "next/app"
+import type { AppProps } from "next/app.js"
 import { ApolloProvider } from "@apollo/client";
 import Head from "next/head"
 import { useRouter } from "next/router"
@@ -32,7 +32,7 @@ function App(appProps: AppProps): ReactNode {
     const router = useRouter()
 
     if (process.env.NODE_ENV === "test") {
-        import("@/test/support/environment-setup")
+        import("@/test/support/environment-setup.js")
     }
 
     useEffect(() => {

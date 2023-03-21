@@ -43,7 +43,7 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "moduleResolution": "nodenext",
-    "jsx": "preserve"
+    "jsx": "react-jsx"
   },
   "include": [
     "next-env.d.ts",

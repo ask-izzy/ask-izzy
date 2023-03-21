@@ -34,7 +34,7 @@ import {
 } from "@/src/utils/routing.js"
 import Category from "@/src/constants/Category.js";
 import WhoIsLookingForHelpPage from "@/src/constants/personalisation-pages/WhoIsLookingForHelp.js"
-import { usersnapFireEvent } from "@/helpers/usersnap.helpers"
+import { usersnapFireEvent } from "@/helpers/usersnap.helpers.js"
 
 type UseServiceResults = {
     searchResults: Array<Service> | null,
