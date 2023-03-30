@@ -13,7 +13,7 @@ default:
   before_script:
     - VERSION=$(git describe | sed 's/-g/-/') && echo $VERSION
     - TAG_DEVELOPMENT_STAGE=${DOCKER_REPO}:$VERSION-dev && echo $TAG_DEVELOPMENT_STAGE
-    - TAG_DISTRIBUTION_STAGE=${DOCKER_REPO}:$VERSION-dist && echo $TAG_DISTRIBUTION_STAGE
+    - TAG_DISTRIBUTION_STAGE=${DOCKER_REPO}:${CI_COMMIT_TAG:="$CI_COMMIT_REF_SLUG-$CI_COMMIT_SHORT_SHA"} && echo $TAG_DISTRIBUTION_STAGE
     - TAG_PRODUCTION=${DOCKER_REPO}:$VERSION && echo $TAG_PRODUCTION
     - TAG_CACHE_DEV_STAGE=${DOCKER_REPO}:cache-$CI_COMMIT_BRANCH-dev && echo $TAG_CACHE_DEV_STAGE
     - TAG_CACHE_DIST_STAGE=${DOCKER_REPO}:cache-$CI_COMMIT_BRANCH-dist && echo $TAG_CACHE_DIST_STAGE
@@ -167,14 +167,3 @@ test-mocha-unit:
   needs: ['build-development']
   script:
     - docker run --rm -t $TAG_DEVELOPMENT_STAGE test-mocha-unit
-
-# Deploy to test environment when tagged
-deploy:
-  stage: Deploy
-  script:
-    - docker pull $TAG_DISTRIBUTION_STAGE
-    - docker tag $TAG_DISTRIBUTION_STAGE $TAG_PRODUCTION
-    - docker push $TAG_PRODUCTION
-    - echo "The production image tag is $TAG_PRODUCTION"
-  only:
-    - tags
