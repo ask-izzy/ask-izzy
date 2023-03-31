@@ -125,8 +125,6 @@ RUN apt-get -y update && \
 USER $UID_GID
 
 COPY ./package.json ./yarn.lock /app/
-RUN ls -hal /tmp/home
-RUN ls -hal /tmp/home/.npm
 RUN yarn install --network-timeout 100000 --frozen-lockfile && yarn cache clean --force
 
 # Copy in just the files need to build source to avoid cache invalidation from changes to unrelated files
@@ -140,10 +138,9 @@ COPY --chown=$UID_GID ./lib /app/lib
 COPY --chown=$UID_GID ./pages /app/pages
 COPY --chown=$UID_GID ./public/images/banners /app/public/images/banners
 COPY --chown=$UID_GID ./fixtures /app/fixtures
-COPY --chown=$UID_GID ./test/support/mock-cms /app/test/support/mock-cms/
-COPY --chown=$UID_GID ./test/support/mock-iss /app/test/support/mock-iss/
-COPY --chown=$UID_GID ./.env ./.env.test ./next.config.js /app/
-COPY --chown=$UID_GID ./tsconfig.json ./types /app/
+COPY --chown=$UID_GID ./test/support /app/test/support/
+COPY --chown=$UID_GID ./types /app/types
+COPY --chown=$UID_GID ./.env ./.env.test ./next.config.js ./tsconfig.json ./jsconfig.json /app/
 
 # Build Ask Izzy
 RUN yarn with --test-env --mocks build
