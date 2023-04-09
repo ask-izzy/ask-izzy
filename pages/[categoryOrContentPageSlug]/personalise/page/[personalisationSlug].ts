@@ -1,8 +1,9 @@
 import type { GetStaticPaths, GetStaticProps } from "next"
 
-import categories from "@/src/constants/categories"
-import RenderPersonalisationPage from "@/components/pages/personalisation/RenderPersonalisationPage";
-import type {RouteSharedProps} from "@/types/routes"
+import categories from "@/src/constants/categories.js"
+import RenderPersonalisationPage from "@/components/pages/personalisation/RenderPersonalisationPage.js";
+import type {RouteSharedProps} from "@/types/routes.js"
+
 
 export const getStaticPaths: GetStaticPaths = async() => {
     const categoryPaths: Array<{ params: {

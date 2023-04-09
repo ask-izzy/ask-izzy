@@ -1,9 +1,10 @@
 import React, {ReactNode} from "react";
 
-import LoadingResultsHeader from "@/src/components/ResultsListPage/LoadingResultsHeader";
-import {getCategory} from "@/src/constants/categories";
-import Category from "@/src/constants/Category";
-import {setPersonalisationAnswers} from "@/src/storybook/decorators";
+import LoadingResultsHeader from "@/src/components/ResultsListPage/LoadingResultsHeader.js";
+import {getCategory} from "@/src/constants/categories.js";
+import Category from "@/src/constants/Category.js";
+import {setPersonalisationAnswers} from "@/src/storybook/decorators.js";
+
 
 export default {
     title: "App Components/HeaderBar/LoadingResultsHeader",

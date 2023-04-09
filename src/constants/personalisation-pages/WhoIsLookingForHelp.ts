@@ -1,6 +1,7 @@
 import type {
     PersonalisationLookingForHelpPage,
-} from "@/types/personalisation-page"
+} from "@/types/personalisation-page.js"
+
 
 export default ({
     type: "who-is-looking-for-help",

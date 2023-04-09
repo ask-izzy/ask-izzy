@@ -2,8 +2,9 @@ import React, {ReactNode} from "react";
 
 import type {
     PersonalisationPage,
-} from "@/types/personalisation-page"
-import DemographicLgbtiqIcon from "@/src/icons/DemographicLgbtiq";
+} from "@/types/personalisation-page.js"
+import DemographicLgbtiqIcon from "@/src/icons/DemographicLgbtiq.js";
+
 
 export default ({
     type: "question",

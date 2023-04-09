@@ -2,10 +2,11 @@ import {ReactNode} from "react"
 import _ from "underscore"
 import type { NextRouter } from "next/router"
 
-import Category from "@/src/constants/Category"
-import storage from "@/src/storage"
-import type {SearchQueryChanges} from "@/src/iss/searchQueryBuilder"
-import type {PersonalisationPage} from "@/types/personalisation-page"
+import Category from "@/src/constants/Category.js"
+import storage from "@/src/storage.js"
+import type {SearchQueryChanges} from "@/src/iss/searchQueryBuilder.js"
+import type {PersonalisationPage} from "@/types/personalisation-page.js"
+
 
 export function prettyPrintAnswer(
     personalisationPage: PersonalisationPage,

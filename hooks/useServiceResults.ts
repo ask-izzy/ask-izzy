@@ -2,40 +2,41 @@ import {useEffect, useState} from "react"
 import type { NextRouter } from "next/router"
 import objectHash from "object-hash"
 
-import {useServiceResultsContext} from "@/contexts/service-results-context"
-import Service from "@/src/iss/Service"
+import {useServiceResultsContext} from "@/contexts/service-results-context.js"
+import Service from "@/src/iss/Service.js"
 import {
     createServiceSearch,
-} from "@/src/iss/serviceSearch";
+} from "@/src/iss/serviceSearch.js";
 import {
     PaginatedSearch,
-} from "@/src/iss/serviceSearch";
+} from "@/src/iss/serviceSearch.js";
 import {
     getSearchQueryModifiers,
     buildSearchQueryFromModifiers,
-} from "@/src/iss/searchQueryBuilder"
-import type {SearchQuery, SearchQueryModifier} from "@/src/iss/searchQueryBuilder"
-import * as gtm from "@/src/google-tag-manager";
-import {attachTransportTimes} from "@/src/iss/travelTimes"
+} from "@/src/iss/searchQueryBuilder.js"
+import type {SearchQuery, SearchQueryModifier} from "@/src/iss/searchQueryBuilder.js"
+import * as gtm from "@/src/google-tag-manager.js";
+import {attachTransportTimes} from "@/src/iss/travelTimes.js"
 import {
     addPageLoadDependencies,
     closePageLoadDependencies,
-} from "@/src/utils/page-loading"
-import storage from "@/src/storage";
-import type {SortType} from "@/src/components/base/Dropdown"
-import type {travelTimesStatus as travelTimesStatusType} from "@/src/hooks/useTravelTimesUpdater";
+} from "@/src/utils/page-loading.js"
+import storage from "@/src/storage.js";
+import type {SortType} from "@/src/components/base/Dropdown.js"
+import type {travelTimesStatus as travelTimesStatusType} from "@/src/hooks/useTravelTimesUpdater.js";
 import {
     setLocationFromUrl,
-} from "@/src/utils/personalisation"
+} from "@/src/utils/personalisation.js"
 import {
     getCategoryFromRouter,
     getPageTitleFromRouter,
     getPersonalisationNextPath,
-} from "@/src/utils/routing"
-import Category from "@/src/constants/Category";
-import WhoIsLookingForHelpPage from "@/src/constants/personalisation-pages/WhoIsLookingForHelp"
-import { usersnapFireEvent } from "@/helpers/usersnap.helpers"
-import useEffectOnChange from "@/hooks/useEffectOnChange"
+} from "@/src/utils/routing.js"
+import Category from "@/src/constants/Category.js";
+import WhoIsLookingForHelpPage from "@/src/constants/personalisation-pages/WhoIsLookingForHelp.js"
+import { usersnapFireEvent } from "@/helpers/usersnap.helpers.js"
+import useEffectOnChange from "@/hooks/useEffectOnChange.js"
+
 
 type UseServiceResults = {
     searchResults: Array<Service> | null,

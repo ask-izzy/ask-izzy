@@ -1,7 +1,8 @@
 import React from "react";
 
-import Collapser from "@/src/components/general/Collapser";
-import Service from "@/src/iss/Service";
+import Collapser from "@/src/components/general/Collapser.js";
+import Service from "@/src/iss/Service.js";
+
 
 type Props = {
     service: Service

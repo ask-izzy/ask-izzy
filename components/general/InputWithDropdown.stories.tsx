@@ -1,8 +1,9 @@
 import React, { useState, useEffect, ReactNode} from "react";
 import escapeStringRegexp from "escape-string-regexp";
 
-import InputWithDropdown from "@/components/general/InputWithDropdown";
-import SearchIcon from "@/src/icons/Search";
+import InputWithDropdown from "@/components/general/InputWithDropdown.js";
+import SearchIcon from "@/src/icons/Search.js";
+
 
 export default {
     title: "General Components/InputWithDropdown",

@@ -1,11 +1,12 @@
 import type {
     PersonalisationQuestionPage,
-} from "@/types/personalisation-page"
-import AreYouSafe from "@/src/constants/personalisation-pages/AreYouSafe";
-import Demographics from "@/src/constants/personalisation-pages/Demographics";
+} from "@/types/personalisation-page.js"
+import AreYouSafe from "@/src/constants/personalisation-pages/AreYouSafe.js";
+import Demographics from "@/src/constants/personalisation-pages/Demographics.js";
 import {
     getSavedPersonalisationAnswer,
-} from "@/src/utils/personalisation"
+} from "@/src/utils/personalisation.js"
+
 
 export default ({
     ...AreYouSafe,

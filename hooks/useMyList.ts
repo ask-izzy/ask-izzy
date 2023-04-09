@@ -1,6 +1,7 @@
-import {useMyListContext} from "@/contexts/my-list-context";
-import useMyListToastMessage from "@/hooks/useMyListToastMessage"
-import Service from "@/src/iss/Service"
+import {useMyListContext} from "@/contexts/my-list-context.js";
+import useMyListToastMessage from "@/hooks/useMyListToastMessage.js"
+import Service from "@/src/iss/Service.js"
+
 
 type UseMyList = {
     myListServices: Array<Service>, // this array will be sorted from newest to oldest

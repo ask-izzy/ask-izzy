@@ -3,9 +3,10 @@
 import React from "react";
 import Head from "next/head"
 
-import HeaderBar from "@/src/components/HeaderBar";
-import BrandedFooter from "@/src/components/BrandedFooter";
-import Link from "@/src/components/base/Link";
+import HeaderBar from "@/src/components/HeaderBar.js";
+import BrandedFooter from "@/src/components/BrandedFooter.js";
+import Link from "@/src/components/base/Link.js";
+
 
 function NotFoundStaticPage() {
     return (

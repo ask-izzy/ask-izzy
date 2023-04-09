@@ -1,7 +1,8 @@
 import React, { useState, useRef, ReactNode} from "react";
 
-import Input from "@/src/components/base/Input";
-import SearchIcon from "@/src/icons/Search";
+import Input from "@/src/components/base/Input.js";
+import SearchIcon from "@/src/icons/Search.js";
+
 
 export default {
     title: "Base Components/Input",

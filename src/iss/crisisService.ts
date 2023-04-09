@@ -1,4 +1,5 @@
-import Service from "@/src/iss/Service"
+import Service from "@/src/iss/Service.js"
+
 
 export function countCrisisResults(results: Array<Service>): number {
     const firstRegularServiceIdx = results.findIndex(

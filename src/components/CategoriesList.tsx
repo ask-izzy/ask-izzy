@@ -1,7 +1,8 @@
 import React from "react";
 
-import categories from "@/src/constants/categories";
-import CategoryListItem from "@/src/components/CategoryListItem";
+import categories from "@/src/constants/categories.js";
+import CategoryListItem from "@/src/components/CategoryListItem.js";
+
 
 function CategoriesList() {
     return (

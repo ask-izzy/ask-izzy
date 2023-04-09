@@ -1,8 +1,9 @@
 import React, {ReactNode} from "react";
 import {action} from "@storybook/addon-actions";
 
-import getServiceFixture from "@/fixtures/factories/Service";
-import IndigenousServiceIcon from "@/src/components/IndigenousServiceIcon";
+import getServiceFixture from "@/fixtures/factories/Service.js";
+import IndigenousServiceIcon from "@/src/components/IndigenousServiceIcon.js";
+
 
 export default {
     title: "Service Components/IndigenousServiceIcon",

@@ -1,7 +1,8 @@
 import React, {ReactNode} from "react";
 
-import DebugContainer from "@/src/components/DebugContainer";
-import {setDebugModeContext } from "@/src/storybook/decorators";
+import DebugContainer from "@/src/components/DebugContainer.js";
+import {setDebugModeContext } from "@/src/storybook/decorators.js";
+
 
 export default {
     title: "App Components/Debug/DebugContainer",

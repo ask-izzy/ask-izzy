@@ -1,6 +1,7 @@
 import React, {ReactNode} from "react";
 
-import DomesticViolenceLink from "@/src/components/DomesticViolenceLink";
+import DomesticViolenceLink from "@/src/components/DomesticViolenceLink.js";
+
 
 export default {
     title: "App Components/LogoWithTextBox/DomesticViolenceLink",

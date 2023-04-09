@@ -1,7 +1,8 @@
 import React, {ReactNode} from "react";
 
-import ImportantInformation from "@/src/components/ImportantInformation";
-import { ixaService } from "@/fixtures/services";
+import ImportantInformation from "@/src/components/ImportantInformation.js";
+import { ixaService } from "@/fixtures/services.js";
+
 
 export default {
     title: "App Components/ImportantInformation",

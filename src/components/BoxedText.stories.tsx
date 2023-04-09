@@ -1,6 +1,6 @@
 import React, {ReactNode} from "react";
 
-import BoxedText from "@/src/components/BoxedText";
+import BoxedText from "@/src/components/BoxedText.js";
 export default {
     title: "Basic UI Components/BoxedText",
     component: BoxedText

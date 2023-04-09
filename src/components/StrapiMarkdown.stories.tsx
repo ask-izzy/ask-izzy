@@ -1,6 +1,7 @@
 import React, {ReactNode} from "react";
 
-import StrapiMarkdown from "@/src/components/StrapiMarkdown";
+import StrapiMarkdown from "@/src/components/StrapiMarkdown.js";
+
 
 export default {
     title: "App Components/StrapiMarkdown",

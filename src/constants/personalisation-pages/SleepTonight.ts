@@ -1,8 +1,10 @@
 import type {
     PersonalisationQuestionPage,
-} from "@/types/personalisation-page"
+} from "@/types/personalisation-page.js"
 
-import {housingCrisisSearchQueryChanges} from "@/src/utils/housing-crisis";
+
+import {housingCrisisSearchQueryChanges} from "@/src/utils/housing-crisis.js";
+
 
 export default ({
     type: "question",

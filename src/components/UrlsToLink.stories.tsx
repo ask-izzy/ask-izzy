@@ -1,6 +1,7 @@
 import React, {ReactNode} from "react";
 
-import UrlsToLink from "@/src/components/UrlsToLink";
+import UrlsToLink from "@/src/components/UrlsToLink.js";
+
 
 export default {
     title: "App Components/UrlsToLink",

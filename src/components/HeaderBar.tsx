@@ -2,7 +2,8 @@ import React, {ReactNode, ReactElement} from "react"
 import {useEffect, useState} from "react";
 import { useRouter } from "next/router"
 
-import AppBar from "@/src/components/AppBar";
+import AppBar from "@/src/components/AppBar.js";
+
 
 type Props = {
     primaryText: string | ReactNode,

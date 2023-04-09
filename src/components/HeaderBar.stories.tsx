@@ -1,6 +1,7 @@
 import React, {ReactNode} from "react";
 
-import HeaderBar from "@/src/components/HeaderBar";
+import HeaderBar from "@/src/components/HeaderBar.js";
+
 
 declare let storyBookControlValues: {
     HeaderBar: {

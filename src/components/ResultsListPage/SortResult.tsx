@@ -1,6 +1,7 @@
 import React, {useEffect} from "react"
 
-import Dropdown, {SortType} from "@/src/components/base/Dropdown";
+import Dropdown, {SortType} from "@/src/components/base/Dropdown.js";
+
 
 export const SORT_OPTIONS: Array<SortType> = [
     {

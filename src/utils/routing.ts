@@ -1,10 +1,11 @@
 import type { NextRouter } from "next/router"
 
-import {PersonalisationPage} from "@/types/personalisation-page"
-import {getCategory} from "@/src/constants/categories"
-import {getSavedPersonalisationAnswer} from "@/src/utils/personalisation"
-import Category from "@/src/constants/Category"
-import storage from "@/src/storage"
+import {PersonalisationPage} from "@/types/personalisation-page.js"
+import {getCategory} from "@/src/constants/categories.js"
+import {getSavedPersonalisationAnswer} from "@/src/utils/personalisation.js"
+import Category from "@/src/constants/Category.js"
+import storage from "@/src/storage.js"
+
 
 /*
 * An array of pages used in the process of personalising the current

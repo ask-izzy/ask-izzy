@@ -1,7 +1,8 @@
 import React, {ReactNode} from "react";
 
-import ContactMethods from "@/src/components/ContactMethods";
-import { ixaService, phoneableService } from "@/fixtures/services";
+import ContactMethods from "@/src/components/ContactMethods.js";
+import { ixaService, phoneableService } from "@/fixtures/services.js";
+
 
 export default {
     title: "Service Components/ContactMethods",

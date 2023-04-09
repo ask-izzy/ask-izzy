@@ -1,9 +1,10 @@
 import React, {ReactNode} from "react";
 
-import DebugPersonalisation from "@/src/components/DebugPersonalisation";
-import {getCategory} from "@/src/constants/categories";
+import DebugPersonalisation from "@/src/components/DebugPersonalisation.js";
+import {getCategory} from "@/src/constants/categories.js";
 
-import { setPersonalisationAnswers, setDebugModeContext } from "../storybook/decorators";
+
+import { setPersonalisationAnswers, setDebugModeContext } from "@/src/storybook/decorators.js";
 export default {
     title: "Debug Components/DebugPersonalisation",
     component: DebugPersonalisation,

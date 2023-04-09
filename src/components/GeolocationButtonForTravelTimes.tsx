@@ -1,12 +1,13 @@
 import React, {useEffect} from "react";
 
-import storage from "@/src/storage";
-import GeolocationButton from "@/src/components/GeolocationButton";
-import Walk from "@/src/icons/Walk"
-import Tram from "@/src/icons/Tram"
-import Car from "@/src/icons/Car"
-import useTravelTimesUpdater from "@/src/hooks/useTravelTimesUpdater"
-import Service from "@/src/iss/Service"
+import storage from "@/src/storage.js";
+import GeolocationButton from "@/src/components/GeolocationButton.js";
+import Walk from "@/src/icons/Walk.js"
+import Tram from "@/src/icons/Tram.js"
+import Car from "@/src/icons/Car.js"
+import useTravelTimesUpdater from "@/src/hooks/useTravelTimesUpdater.js"
+import Service from "@/src/iss/Service.js"
+
 
 type Props = {
     showMessage?: boolean,

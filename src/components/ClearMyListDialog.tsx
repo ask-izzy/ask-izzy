@@ -1,7 +1,8 @@
 import React from "react";
 
-import Dialog from "@/components/base/Dialog"
-import Button from "@/src/components/base/Button"
+import Dialog from "@/components/base/Dialog.js"
+import Button from "@/src/components/base/Button.js"
+
 
 type Props = {
     onCloseRequested: () => void,

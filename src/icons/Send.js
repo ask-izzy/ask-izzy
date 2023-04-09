@@ -3,7 +3,8 @@
 /* eslint-disable max-len */
 import type { ElementConfig as ReactElementConfig } from "react"
 
-import BaseIcon from "./BaseIcon";
+import BaseIcon from "./BaseIcon.js";
+
 
 export default class SvgIconSend extends BaseIcon {
     static defaultProps: ReactElementConfig<typeof BaseIcon> = {

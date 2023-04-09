@@ -2,7 +2,8 @@ import React, {useRef, useState, ReactNode, ForwardedRef} from "react"
 import cnx from "classnames"
 import { useCombobox, resetIdCounter } from "downshift"
 
-import Input from "@/src/components/base/Input"
+import Input from "@/src/components/base/Input.js"
+
 
 type autocompleteObjValue = {
     value: string,

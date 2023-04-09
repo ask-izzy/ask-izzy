@@ -1,8 +1,9 @@
 import React from "react";
 
-import PhoneTalk from "@/src/icons/PhoneTalk";
-import Link from "@/src/components/base/Link";
-import {MobileDetect as useMobileDetect} from "@/src/effects/MobileDetect";
+import PhoneTalk from "@/src/icons/PhoneTalk.js";
+import Link from "@/src/components/base/Link.js";
+import {MobileDetect as useMobileDetect} from "@/src/effects/MobileDetect.js";
+
 
 
 function OnlineSafetyScreen() {

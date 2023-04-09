@@ -1,5 +1,6 @@
-import {ISS3Client, ISS3ClientProps} from "@/src/ix-web-js-client/apis/iss/v3";
-import {ISS4Client, ISS4ClientProps} from "@/src/ix-web-js-client/apis/iss/v4";
+import {ISS3Client, ISS3ClientProps} from "@/src/ix-web-js-client/apis/iss/v3.js";
+import {ISS4Client, ISS4ClientProps} from "@/src/ix-web-js-client/apis/iss/v4.js";
+
 
 function createClient(props: ISS3ClientProps, version: "3"): ISS3Client
 function createClient(props: ISS4ClientProps, version?: "4"): ISS4Client

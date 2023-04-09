@@ -1,7 +1,8 @@
 import React from "react";
 
-import PhoneTalk from "@/src/icons/PhoneTalk";
-import Link from "@/src/components/base/Link";
+import PhoneTalk from "@/src/icons/PhoneTalk.js";
+import Link from "@/src/components/base/Link.js";
+
 
 function Under18DomesticViolenceScreen() {
     const linkService = "/service/120917-kids-helpline";

@@ -1,8 +1,9 @@
 import React from "react"
 
-import Service from "@/src/iss/Service"
-import Spacer from "@/src/components/Spacer"
-import UrlsToLinks from "@/src/components/UrlsToLink"
+import Service from "@/src/iss/Service.js"
+import Spacer from "@/src/components/Spacer.js"
+import UrlsToLinks from "@/src/components/UrlsToLink.js"
+
 
 type Props = {
     object: Service,

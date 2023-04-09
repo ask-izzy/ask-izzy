@@ -1,7 +1,8 @@
 import React, {ReactNode} from "react";
 
-import GoogleMapsLink from "@/src/components/GoogleMapsLink";
-import { ixaService } from "@/fixtures/services";
+import GoogleMapsLink from "@/src/components/GoogleMapsLink.js";
+import { ixaService } from "@/fixtures/services.js";
+
 
 export default {
     title: "Service Components/GoogleMapsLink",

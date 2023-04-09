@@ -1,7 +1,8 @@
 import React, {ReactNode} from "react";
 import {action} from "@storybook/addon-actions";
 
-import OnlineSafetyLink from "@/src/components/OnlineSafetyLink";
+import OnlineSafetyLink from "@/src/components/OnlineSafetyLink.js";
+
 
 export default {
     title: "App Components/LogoWithTextBox/OnlineSafetyLink",

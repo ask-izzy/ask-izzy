@@ -1,8 +1,9 @@
 import React, {ReactNode} from "react";
 
-import ServiceProvisions from "@/src/components/service/ServiceProvisions";
-import getServiceFixture from "@/fixtures/factories/Service";
-import { housingServiceSibling, susansHouseService, legalService } from "@/fixtures/services";
+import ServiceProvisions from "@/src/components/service/ServiceProvisions.js";
+import getServiceFixture from "@/fixtures/factories/Service.js";
+import { housingServiceSibling, susansHouseService, legalService } from "@/fixtures/services.js";
+
 
 export default {
     title: "Service Components/ServiceProvisions",

@@ -1,9 +1,10 @@
-import {getIssClient, getIssVersion} from "@/src/iss/client"
-import {attachTransportTimes} from "@/src/iss/travelTimes"
-import Service from "@/src/iss/Service"
+import {getIssClient, getIssVersion} from "@/src/iss/client.js"
+import {attachTransportTimes} from "@/src/iss/travelTimes.js"
+import Service from "@/src/iss/Service.js"
 import {
     createServiceSearch,
-} from "@/src/iss/serviceSearch"
+} from "@/src/iss/serviceSearch.js"
+
 
 export async function getService(
     serviceId: number,

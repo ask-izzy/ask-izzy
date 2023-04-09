@@ -1,12 +1,13 @@
 import type {NextRouter} from "next/router"
 import {titleize} from "underscore.string";
 
-import storage from "@/src/storage";
+import storage from "@/src/storage.js";
 import {
     getCurrentPersonalisationPage,
     currentRouteIsPersonalised,
     getCategoryFromRouter,
-} from "@/src/utils/routing"
+} from "@/src/utils/routing.js"
+
 
 export function stateFromLocation(): string {
     const states = [

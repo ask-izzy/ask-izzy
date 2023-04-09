@@ -1,11 +1,12 @@
 import {useEffect} from "react";
 import { useRouter } from "next/router";
 
-import * as gtm from "@/src/google-tag-manager";
-import type {PageInfo} from "@/pages/_app"
+import * as gtm from "@/src/google-tag-manager.js";
+import type {PageInfo} from "@/pages/_app.js"
 import {
     getCategory,
-} from "@/src/constants/categories"
+} from "@/src/constants/categories.js"
+
 
 export default (pageInfo: PageInfo): void => {
     const router = useRouter();

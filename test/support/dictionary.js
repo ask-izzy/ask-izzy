@@ -1,6 +1,6 @@
 import Yadda from "yadda";
 import _ from "underscore";
-import getServiceFixture from "../../fixtures/factories/Service";
+import getServiceFixture from "../../fixtures/factories/Service.js";
 import yaml from "js-yaml";
 
 

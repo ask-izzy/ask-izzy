@@ -2,18 +2,19 @@ import type {NextRouter} from "next/router"
 import objectHash from "object-hash"
 import {$Shape} from "utility-types"
 
-import Service from "@/src/iss/Service"
-import storage from "@/src/storage"
-import {getIssClient, getIssVersion} from "@/src/iss/client"
+import Service from "@/src/iss/Service.js"
+import storage from "@/src/storage.js"
+import {getIssClient, getIssVersion} from "@/src/iss/client.js"
 import type {
     ISS4SearchQuery,
     ISS4SearchResultsMeta,
-} from "@/src/ix-web-js-client/apis/iss/v4"
+} from "@/src/ix-web-js-client/apis/iss/v4.js"
 import type {
     ISS3SearchQuery,
     ISS3SearchResultsMeta,
-} from "@/src/ix-web-js-client/apis/iss/v3"
-import type {SearchQuery as IzzySearchQuery} from "@/src/iss/searchQueryBuilder"
+} from "@/src/ix-web-js-client/apis/iss/v3.js"
+import type {SearchQuery as IzzySearchQuery} from "@/src/iss/searchQueryBuilder.js"
+
 
 export const previousSearchQueryStorageKey = "previousSearchQuery"
 

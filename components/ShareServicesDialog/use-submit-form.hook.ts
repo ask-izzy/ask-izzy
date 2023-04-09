@@ -1,6 +1,7 @@
 import {useState} from "react";
 
-import Service from "@/src/iss/Service"
+import Service from "@/src/iss/Service.js"
+
 
 export default function(services: Array<Service>): {
     submitForm: (data: Record<string, any>) => Promise<string>,

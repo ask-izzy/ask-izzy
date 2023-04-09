@@ -6,8 +6,9 @@
 
 import Yadda from "yadda";
 
-import dictionary from "../support/dictionary";
-import { gotoUrl } from "../support/webdriver";
+import dictionary from "../support/dictionary.js";
+import { gotoUrl } from "../support/webdriver.js";
+
 
 
 module.exports = ((function() {

@@ -1,6 +1,7 @@
-import type {site} from "@/src/iss/site";
-import {MapsApi} from "@/src/maps";
-import type {geoPoint} from "@/src/iss/general"
+import type {site} from "@/src/iss/site.js";
+import {MapsApi} from "@/src/maps.js";
+import type {geoPoint} from "@/src/iss/general.js"
+
 
 type SiteMarker = {
     site: site,

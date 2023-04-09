@@ -1,10 +1,11 @@
 import React from "react";
 import {useRouter} from "next/router"
 
-import PhoneButton from "@/src/components/PhoneButton";
-import StrapiMarkdown from "@/src/components/StrapiMarkdown";
-import Link from "@/src/components/base/Link";
-import * as gtm from "@/src/google-tag-manager";
+import PhoneButton from "@/src/components/PhoneButton.js";
+import StrapiMarkdown from "@/src/components/StrapiMarkdown.js";
+import Link from "@/src/components/base/Link.js";
+import * as gtm from "@/src/google-tag-manager.js";
+
 
 export type CalloutType = {
     id: number,

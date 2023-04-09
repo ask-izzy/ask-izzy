@@ -1,11 +1,11 @@
 import React, {useEffect, useState} from "react";
 import {GoogleMap, Marker} from "@react-google-maps/api"
 
-import type {site} from "@/src/iss/site";
-import type {geoPoint} from "@/src/iss/general"
-import Maps from "@/src/maps";
-import storage from "@/src/storage";
-import * as gtm from "@/src/google-tag-manager";
+import type {site} from "@/src/iss/site.js";
+import type {geoPoint} from "@/src/iss/general.js"
+import Maps from "@/src/maps.js";
+import storage from "@/src/storage.js";
+import * as gtm from "@/src/google-tag-manager.js";
 import {
     setMapView,
     markersShownOnLoad,

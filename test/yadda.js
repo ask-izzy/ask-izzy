@@ -7,17 +7,19 @@
 import Yadda from "yadda";
 import chalk from "chalk";
 
-import webDriverInstance, { cleanDriverSession } from "./support/webdriver";
+import webDriverInstance, { cleanDriverSession } from "./support/webdriver.js";
 import {
     takeScreenshot,
     deleteSceenshot,
     getSceenshotPath,
-} from "./support/debug";
+} from "./support/debug.js";
+
 
 
 Yadda.plugins.mocha.StepLevelPlugin.init();
 
-import libraries from "./steps";
+import libraries from "./steps.js";
+
 
 let driverPromise,
     driver;

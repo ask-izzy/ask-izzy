@@ -2,7 +2,8 @@ import React, {ReactNode} from "react"
 import _ from "underscore"
 import _string from "underscore.string"
 
-import UrlsToLinks from "@/src/components/UrlsToLink"
+import UrlsToLinks from "@/src/components/UrlsToLink.js"
+
 
 type Props = {
     catchment: string,

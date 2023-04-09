@@ -6,13 +6,14 @@ import {
     getSearchQueryModifiers,
     buildSearchQueryFromModifiers,
     SearchQuery,
-} from "@/src/iss/searchQueryBuilder"
-import {convertIzzySearchQueryToIss3} from "@/src/iss/serviceSearch"
-import Button from "@/src/components/base/Button"
-import Diff, {DiffType} from "@/src/components/debug/Diff"
-import DebugContainer from "@/src/components/DebugContainer";
-import IssParamsOverrideControls from "@/src/components/debug/IssParamsOverrideControls";
-import Storage from "@/src/storage";
+} from "@/src/iss/searchQueryBuilder.js"
+import {convertIzzySearchQueryToIss3} from "@/src/iss/serviceSearch.js"
+import Button from "@/src/components/base/Button.js"
+import Diff, {DiffType} from "@/src/components/debug/Diff.js"
+import DebugContainer from "@/src/components/DebugContainer.js";
+import IssParamsOverrideControls from "@/src/components/debug/IssParamsOverrideControls.js";
+import Storage from "@/src/storage.js";
+
 
 type Props = {
     issQuery: SearchQuery,

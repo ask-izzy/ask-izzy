@@ -2,15 +2,16 @@ import React, {useState} from "react";
 import { useRouter } from "next/router"
 import escapeStringRegexp from "escape-string-regexp";
 
-import Link from "@/src/components/base/Link";
-import StaticPage from "@/components/pages/StaticPage";
-import SearchBar from "@/src/components/general/SearchBar";
-import Chevron from "@/src/icons/Chevron"
+import Link from "@/src/components/base/Link.js";
+import StaticPage from "@/components/pages/StaticPage.js";
+import SearchBar from "@/src/components/general/SearchBar.js";
+import Chevron from "@/src/icons/Chevron.js"
 import {
     goToPersonalisationNextPath,
     getPersonalisationNextPath,
-} from "@/src/utils/routing"
-import isMounted from "@/hooks/useIsMounted"
+} from "@/src/utils/routing.js"
+import isMounted from "@/hooks/useIsMounted.js"
+
 
 
 function DisabilityAdvocacyFinder() {

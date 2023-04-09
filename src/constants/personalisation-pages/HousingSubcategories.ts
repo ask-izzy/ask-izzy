@@ -1,12 +1,14 @@
 import type {
     PersonalisationPage,
-} from "@/types/personalisation-page"
+} from "@/types/personalisation-page.js"
 
-import SleepTonight from "@/src/constants/personalisation-pages/SleepTonight";
-import {housingCrisisSearchQueryChanges} from "@/src/utils/housing-crisis";
+
+import SleepTonight from "@/src/constants/personalisation-pages/SleepTonight.js";
+import {housingCrisisSearchQueryChanges} from "@/src/utils/housing-crisis.js";
 import {
     getSavedPersonalisationAnswer,
-} from "@/src/utils/personalisation"
+} from "@/src/utils/personalisation.js"
+
 
 export default ({
     type: "question",

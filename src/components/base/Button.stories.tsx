@@ -1,6 +1,7 @@
 import React, {ReactNode} from "react";
 
-import Button from "@/src/components/base/Button";
+import Button from "@/src/components/base/Button.js";
+
 
 export default {
     title: "Base Components/Button",

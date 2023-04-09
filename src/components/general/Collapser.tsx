@@ -1,9 +1,10 @@
 import React, {useState, ReactNode} from "react"
 
 import classnames from "classnames"
-import Chevron from "@/src/icons/Chevron"
-import Button from "@/src/components/base/Button"
-import type {AnalyticsEvent} from "@/src/google-tag-manager"
+import Chevron from "@/src/icons/Chevron.js"
+import Button from "@/src/components/base/Button.js"
+import type {AnalyticsEvent} from "@/src/google-tag-manager.js"
+
 
 type Props = {
     className?: string,

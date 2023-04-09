@@ -3,22 +3,23 @@ import cnx from "classnames"
 import { useRouter } from "next/router"
 import type { NextRouter } from "next/router"
 
-import QuestionStepperBreadcrumb from "@/src/components/QuestionStepperBreadcrumb";
-import Link from "@/src/components/base/Link";
-import {ensureURLHasTrailingSlash} from "@/src/utils/url"
-import Button from "@/src/components/base/Button"
-import storage from "@/src/storage"
-import LocationPage from "@/src/constants/personalisation-pages/Location"
-import {getSavedPersonalisationAnswer} from "@/src/utils/personalisation"
+import QuestionStepperBreadcrumb from "@/src/components/QuestionStepperBreadcrumb.js";
+import Link from "@/src/components/base/Link.js";
+import {ensureURLHasTrailingSlash} from "@/src/utils/url.js"
+import Button from "@/src/components/base/Button.js"
+import storage from "@/src/storage.js"
+import LocationPage from "@/src/constants/personalisation-pages/Location.js"
+import {getSavedPersonalisationAnswer} from "@/src/utils/personalisation.js"
 import {
     getPersonalisationPages,
     getPersonalisationPagesToShow,
     getCategoryFromRouter,
     currentRouteIsPersonalised,
-} from "@/src//utils/routing"
-import usePostInitialRender from "@/src/hooks/usePostInitialRender"
-import type {PersonalisationPage} from "@/types/personalisation-page"
-import ProgressBar from "@/src/components/general/ProgressBar"
+} from "@/src//utils/routing.js"
+import usePostInitialRender from "@/src/hooks/usePostInitialRender.js"
+import type {PersonalisationPage} from "@/types/personalisation-page.js"
+import ProgressBar from "@/src/components/general/ProgressBar.js"
+
 
 type Props = {
     showQuestionIcons?: boolean,

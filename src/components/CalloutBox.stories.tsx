@@ -1,6 +1,7 @@
 import React, {ReactNode} from "react";
 
-import CalloutBox from "@/src/components/CalloutBox";
+import CalloutBox from "@/src/components/CalloutBox.js";
+
 
 export default {
     title: "Basic UI Components/CalloutBox",

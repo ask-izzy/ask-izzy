@@ -1,8 +1,9 @@
 import React, {useEffect, useState} from "react";
 
-import Button from "@/src/components/base/Button";
-import Chevron from "@/src/icons/Chevron"
-import {getScrollPosition} from "@/src/effects/scrollPosition";
+import Button from "@/src/components/base/Button.js";
+import Chevron from "@/src/icons/Chevron.js"
+import {getScrollPosition} from "@/src/effects/scrollPosition.js";
+
 
 type Props = {
     label: string,

@@ -1,6 +1,7 @@
 import React from "react"
 
-import Link from "@/src/components/base/Link"
+import Link from "@/src/components/base/Link.js"
+
 
 type Props = {
     children: string

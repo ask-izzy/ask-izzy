@@ -1,7 +1,8 @@
 import * as React from "react";
 import classnames from "classnames";
 
-import Link from "@/src/components/base/Link";
+import Link from "@/src/components/base/Link.js";
+
 
 
 type Props = {

@@ -8,7 +8,8 @@ import type {
     hmsWithColonsTime,
     openingHours,
     dayOfWeek,
-} from "./general";
+} from "@/src/iss/general.js";
+
 
 type props = {
     now_open: nowOpen,

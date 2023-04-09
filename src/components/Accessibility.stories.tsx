@@ -1,8 +1,9 @@
 import React, {ReactNode} from "react";
 
-import Accessibility from "@/src/components/Accessibility";
-import getServiceFixture from "@/fixtures/factories/Service";
-import { susansHouseServiceProps } from "@/fixtures/servicesProps";
+import Accessibility from "@/src/components/Accessibility.js";
+import getServiceFixture from "@/fixtures/factories/Service.js";
+import { susansHouseServiceProps } from "@/fixtures/servicesProps.js";
+
 
 export default {
     title: "Service Components/Accessibility",

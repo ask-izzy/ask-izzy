@@ -1,8 +1,10 @@
 import type {
     PersonalisationLookingForHelpPage,
-} from "@/types/personalisation-page"
+} from "@/types/personalisation-page.js"
 
-import WhoIsLookingForHelp from "./WhoIsLookingForHelp"
+
+import WhoIsLookingForHelp from "@/src/constants/personalisation-pages/WhoIsLookingForHelp.js"
+
 
 export default ({
     ...WhoIsLookingForHelp,

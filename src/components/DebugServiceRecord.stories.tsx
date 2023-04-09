@@ -1,8 +1,9 @@
 import React, {ReactNode} from "react";
 
-import DebugServiceRecord from "@/src/components/DebugServiceRecord";
-import { ixaService } from "@/fixtures/services";
-import { setDebugModeContext } from "@/src/storybook/decorators";
+import DebugServiceRecord from "@/src/components/DebugServiceRecord.js";
+import { ixaService } from "@/fixtures/services.js";
+import { setDebugModeContext } from "@/src/storybook/decorators.js";
+
 
 export default {
     title: "App Components/Debug/DebugServiceRecord",

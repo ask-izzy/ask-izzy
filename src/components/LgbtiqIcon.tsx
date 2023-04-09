@@ -1,7 +1,8 @@
 import React from "react"
 
-import DemographicLgbtiq from "@/src/icons/DemographicLgbtiq"
-import Service from "@/src/iss/Service"
+import DemographicLgbtiq from "@/src/icons/DemographicLgbtiq.js"
+import Service from "@/src/iss/Service.js"
+
 
 type Props = {
     object: Service

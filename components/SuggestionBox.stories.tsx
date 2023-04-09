@@ -1,7 +1,8 @@
 import React, {ReactNode} from "react";
-import SuggestionBox from "@/components/SuggestionBox";
-import { getCategory } from "@/src/constants/categories";
-import Category from "@/src/constants/Category";
+import SuggestionBox from "@/components/SuggestionBox.js";
+import { getCategory } from "@/src/constants/categories.js";
+import Category from "@/src/constants/Category.js";
+
 
 export default {
     title: "App Components/SuggestionBox",

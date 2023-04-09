@@ -1,9 +1,10 @@
 import React from "react";
 
-import HeaderBar from "@/src/components/HeaderBar";
-import Category from "@/src/constants/Category";
-import {getBannerName} from "@/src/utils/personalisation"
-import type Service from "@/src/iss/Service"
+import HeaderBar from "@/src/components/HeaderBar.js";
+import Category from "@/src/constants/Category.js";
+import {getBannerName} from "@/src/utils/personalisation.js"
+import type Service from "@/src/iss/Service.js"
+
 
 const formatResultsPageHeading = (title: string) => {
     switch (title) {

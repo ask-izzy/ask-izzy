@@ -1,8 +1,9 @@
 import React, {ReactNode} from "react";
 import { action } from "@storybook/addon-actions";
 
-import ShareServicesDialog from "@/components/ShareServicesDialog/ShareServicesDialog";
-import { ixaService, domesticViolenceService } from "@/fixtures/services";
+import ShareServicesDialog from "@/components/ShareServicesDialog/ShareServicesDialog.js";
+import { ixaService, domesticViolenceService } from "@/fixtures/services.js";
+
 
 export default {
     title: "App Components/ShareServicesDialog",

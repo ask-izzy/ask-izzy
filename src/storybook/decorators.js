@@ -3,10 +3,11 @@ import React, {useEffect} from "react";
 import {LoadScript} from "@react-google-maps/api";
 import { ApolloProvider } from "@apollo/client";
 
-import storage from "../storage";
-import { DebugModeProvider } from "@/contexts/debug-mode-context";
-import createApolloClient from "@/src/utils/apolloClient";
-import {browserEventName as gtmBrowserEventName} from "@/src/google-tag-manager"
+import storage from "@/src/storage.js";
+import { DebugModeProvider } from "@/contexts/debug-mode-context.js";
+import createApolloClient from "@/src/utils/apolloClient.js";
+import {browserEventName as gtmBrowserEventName} from "@/src/google-tag-manager.js"
+
 
 export function addGoogleMapsScript(
     Story,

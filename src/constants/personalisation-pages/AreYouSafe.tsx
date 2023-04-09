@@ -1,10 +1,11 @@
 import React from "react"
 
-import {PersonalisationQuestionPage} from "@/types/personalisation-page"
-import DomesticViolenceLink from "@/src/components/DomesticViolenceLink"
-import CrossColor from "@/src/icons/CrossColor"
-import QuestionMarkColor from "@/src/icons/QuestionMarkColor"
-import TickColor from "@/src/icons/TickColor"
+import {PersonalisationQuestionPage} from "@/types/personalisation-page.js"
+import DomesticViolenceLink from "@/src/components/DomesticViolenceLink.js"
+import CrossColor from "@/src/icons/CrossColor.js"
+import QuestionMarkColor from "@/src/icons/QuestionMarkColor.js"
+import TickColor from "@/src/icons/TickColor.js"
+
 
 export default {
     type: "question",

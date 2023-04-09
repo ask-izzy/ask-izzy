@@ -3,7 +3,8 @@ import _ from "underscore";
 import _string from "underscore.string";
 const { titleize } = _string;
 
-import type {geoPoint} from "@/src/iss/general"
+import type {geoPoint} from "@/src/iss/general.js"
+
 
 export type AddressLocationProps = {
     building: string,

@@ -1,9 +1,10 @@
 import React, {useState} from "react";
 
-import Button from "@/src/components/base/Button";
-import Share from "@/src/icons/Share"
-import Service from "@/src/iss/Service"
-import ShareServicesDialog from "@/components/ShareServicesDialog/ShareServicesDialog"
+import Button from "@/src/components/base/Button.js";
+import Share from "@/src/icons/Share.js"
+import Service from "@/src/iss/Service.js"
+import ShareServicesDialog from "@/components/ShareServicesDialog/ShareServicesDialog.js"
+
 
 type Props = {
     services?: Array<Service>,

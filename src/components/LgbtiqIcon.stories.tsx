@@ -1,7 +1,8 @@
 import React, {ReactNode} from "react";
 
-import LgbtiqIcon from "@/src/components/LgbtiqIcon";
-import getServiceFixture from "@/fixtures/factories/Service";
+import LgbtiqIcon from "@/src/components/LgbtiqIcon.js";
+import getServiceFixture from "@/fixtures/factories/Service.js";
+
 
 export default {
     title: "Service Components/LgbtiqIcon",

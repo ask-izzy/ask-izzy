@@ -1,11 +1,12 @@
 import React, {ReactNode} from "react";
 import classnames from "classnames";
 
-import Chevron from "@/src/icons/Chevron";
-import Warning from "@/src/icons/Warning";
-import Info from "@/src/icons/Info";
-import Summary from "@/src/components/base/Summary";
-import type {AnalyticsEvent} from "@/src/google-tag-manager";
+import Chevron from "@/src/icons/Chevron.js";
+import Warning from "@/src/icons/Warning.js";
+import Info from "@/src/icons/Info.js";
+import Summary from "@/src/components/base/Summary.js";
+import type {AnalyticsEvent} from "@/src/google-tag-manager.js";
+
 
 type Props = {
     title: ReactNode,

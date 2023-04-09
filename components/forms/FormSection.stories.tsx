@@ -1,5 +1,6 @@
 import React, {ReactNode} from "react";
-import FormSection from "@/components/forms/FormSection";
+import FormSection from "@/components/forms/FormSection.js";
+
 
 export default {
     title: "App Components/FormSection",

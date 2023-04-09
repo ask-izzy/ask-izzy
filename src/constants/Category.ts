@@ -3,8 +3,9 @@ import { slugify } from "underscore.string";
 import type { NextRouter } from "next/router";
 
 
-import type {SearchQueryChanges} from "@/src/iss/searchQueryBuilder";
-import type {PersonalisationPage} from "@/types/personalisation-page"
+import type {SearchQueryChanges} from "@/src/iss/searchQueryBuilder.js";
+import type {PersonalisationPage} from "@/types/personalisation-page.js"
+
 
 type Props = {
     name: string;

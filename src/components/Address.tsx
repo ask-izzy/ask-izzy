@@ -1,11 +1,13 @@
 import React from "react";
 
-import Map from "@/src/icons/Map";
-import ScreenReader from "@/src/components/ScreenReader";
-import AddressLocation from "@/src/iss/AddressLocation";
-import Spacer from "@/src/components/Spacer";
+import Map from "@/src/icons/Map.js";
+import ScreenReader from "@/src/components/ScreenReader.js";
+import AddressLocation from "@/src/iss/AddressLocation.js";
+import Spacer from "@/src/components/Spacer.js";
 
-import UrlsToLinks from "@/src/components/UrlsToLink"
+
+import UrlsToLinks from "@/src/components/UrlsToLink.js"
+
 
 type Props = {
     location: AddressLocation,

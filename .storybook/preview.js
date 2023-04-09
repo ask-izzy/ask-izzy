@@ -1,7 +1,8 @@
 import { MockedProvider } from "@apollo/client/testing";
 
-import "@/src/styles/bundle.scss";
-import { logGTMEvent } from "@/src/storybook/decorators";
+import "@/src/styles/bundle.scss.js";
+import { logGTMEvent } from "@/src/storybook/decorators.js";
+
 
 export const parameters = {
     actions: { argTypesRegex: "^on[A-Z].*" },

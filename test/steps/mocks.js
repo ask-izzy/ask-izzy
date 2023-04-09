@@ -6,8 +6,9 @@
 import Yadda from "yadda";
 import fetch from "node-fetch";
 
-import { visitUrl } from "../steps/browser";
-import dictionary from "../support/dictionary";
+import { visitUrl } from "../steps/browser.js";
+import dictionary from "../support/dictionary.js";
+
 
 let mockedService;
 

@@ -1,6 +1,7 @@
 import React, {ReactNode} from "react";
 
-import Paragraph from "@/src/components/base/Paragraph";
+import Paragraph from "@/src/components/base/Paragraph.js";
+
 
 export default {
     title: "Base Components/Paragraph",

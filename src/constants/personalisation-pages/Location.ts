@@ -1,8 +1,9 @@
 import type {
     PersonalisationLocationPage,
-} from "@/types/personalisation-page"
-import type { SearchQueryChanges } from "@/src/iss/searchQueryBuilder"
-import storage from "@/src/storage"
+} from "@/types/personalisation-page.js"
+import type { SearchQueryChanges } from "@/src/iss/searchQueryBuilder.js"
+import storage from "@/src/storage.js"
+
 
 export default {
     type: "location",

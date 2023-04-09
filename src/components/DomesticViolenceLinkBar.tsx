@@ -1,8 +1,9 @@
 import React from "react";
 
-import Book from "@/src/icons/Book";
-import Chevron from "@/src/icons/Chevron";
-import Link from "@/src/components/base/Link"
+import Book from "@/src/icons/Book.js";
+import Chevron from "@/src/icons/Chevron.js";
+import Link from "@/src/components/base/Link.js"
+
 
 export default function DomesticViolenceLinkBar() {
     return (

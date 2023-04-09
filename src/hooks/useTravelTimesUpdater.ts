@@ -1,10 +1,11 @@
 import {useState} from "react"
-import storage from "@/src/storage";
-import Service from "@/src/iss/Service"
+import storage from "@/src/storage.js";
+import Service from "@/src/iss/Service.js"
 import {
     attachTransportTimes,
     removeAllTransitTimes,
-} from "@/src/iss/travelTimes"
+} from "@/src/iss/travelTimes.js"
+
 
 type returnVals = {
     travelTimesStatus: travelTimesStatus,

@@ -5,7 +5,8 @@ import assert from "assert";
 import moment from "moment-timezone";
 import _ from "underscore";
 
-import ServiceOpening from "../../../src/iss/ServiceOpening";
+import ServiceOpening from "../../../src/iss/ServiceOpening.js";
+
 
 function time(now) {
     return moment(now, "YYYY-MM-DD ha");

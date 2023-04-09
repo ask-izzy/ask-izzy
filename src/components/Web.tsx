@@ -1,11 +1,12 @@
 import React from "react"
 import URL from "url"
 
-import Link from "@/src/components/base/Link"
-import Website from "@/src/icons/Website"
-import * as gtm from "@/src/google-tag-manager"
-import type {AnalyticsEvent} from "@/src/google-tag-manager"
-import ScreenReader from "@/src/components/ScreenReader"
+import Link from "@/src/components/base/Link.js"
+import Website from "@/src/icons/Website.js"
+import * as gtm from "@/src/google-tag-manager.js"
+import type {AnalyticsEvent} from "@/src/google-tag-manager.js"
+import ScreenReader from "@/src/components/ScreenReader.js"
+
 
 type Props = {
     url: string,

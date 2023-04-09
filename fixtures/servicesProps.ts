@@ -1,4 +1,5 @@
-import type {serviceFixtureProps} from "@/fixtures/factories/Service"
+import type {serviceFixtureProps} from "@/fixtures/factories/Service.js"
+
 
 /* eslint-disable max-len */
 export const phoneableServiceProps: serviceFixtureProps = {

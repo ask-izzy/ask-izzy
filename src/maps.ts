@@ -2,9 +2,9 @@ import merge from "deepmerge";
 import _ from "underscore";
 import {Loader} from "@googlemaps/js-api-loader";
 
-import storage from "@/src/storage";
-import checkInactive from "@/src/inactiveTimeout";
-import type {travelTime} from "@/src/iss/general"
+import storage from "@/src/storage.js";
+import checkInactive from "@/src/inactiveTimeout.js";
+import type {travelTime} from "@/src/iss/general.js"
 import {
     GoogleMaps,
     TravelMode,
@@ -12,7 +12,8 @@ import {
     GeocoderResult,
     AutocompletionRequest,
     AutocompletePrediction,
-} from "@/types/interfaces/maps"
+} from "@/types/interfaces/maps.js"
+
 
 export class MapsApi {
     api: GoogleMaps;

@@ -1,9 +1,10 @@
 
 import type { GetStaticProps } from "next"
 
-import ResultsMapPage from "@/components/pages/ResultsMapPage";
+import ResultsMapPage from "@/components/pages/ResultsMapPage.js";
 export {getStaticPaths} from "@/pages/[categoryOrContentPageSlug]/personalise/index"
-import type {RouteSharedProps} from "@/types/routes"
+import type {RouteSharedProps} from "@/types/routes.js"
+
 
 export const getStaticProps: GetStaticProps<RouteSharedProps> = (context) => {
     return {

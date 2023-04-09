@@ -1,6 +1,7 @@
 import React, {ReactNode} from "react";
 
-import Code from "@/src/components/base/Code";
+import Code from "@/src/components/base/Code.js";
+
 
 export default {
     title: "Base Components/Code",

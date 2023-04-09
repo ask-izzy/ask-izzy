@@ -1,6 +1,7 @@
 import React, {ReactNode} from "react";
 
-import Link from "@/src/components/base/Link";
+import Link from "@/src/components/base/Link.js";
+
 
 export default {
     title: "Base Components/Link",

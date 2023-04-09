@@ -2,16 +2,17 @@ import React, {useState} from "react"
 import { withRouter } from "next/router"
 import type { NextRouter } from "next/router"
 
-import AppBar from "@/src/components/AppBar";
-import ResultsList from "@/src/components/ResultsList";
-import SitesMap from "@/src/components/SitesMap";
-import NotFoundStaticPage from "@/pages/404";
-import Loading from "@/src/icons/Loading";
-import type { site } from "@/src/iss/site";
-import Service from "@/src/iss/Service"
-import GeolocationButtonForTravelTimes from "@/src/components/GeolocationButtonForTravelTimes";
-import {goToPersonalisationNextPath} from "@/src/utils/routing"
-import useServiceResults from "@/hooks/useServiceResults"
+import AppBar from "@/src/components/AppBar.js";
+import ResultsList from "@/src/components/ResultsList.js";
+import SitesMap from "@/src/components/SitesMap.js";
+import NotFoundStaticPage from "@/pages/404.js";
+import Loading from "@/src/icons/Loading.js";
+import type { site } from "@/src/iss/site.js";
+import Service from "@/src/iss/Service.js"
+import GeolocationButtonForTravelTimes from "@/src/components/GeolocationButtonForTravelTimes.js";
+import {goToPersonalisationNextPath} from "@/src/utils/routing.js"
+import useServiceResults from "@/hooks/useServiceResults.js"
+
 
 type Props = {
     router: NextRouter

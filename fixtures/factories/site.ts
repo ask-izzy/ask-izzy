@@ -1,8 +1,9 @@
 import merge from "deepmerge";
 import {$Shape} from "utility-types";
 
-import type {site} from "@/src/iss/site";
-import { Sequence } from "@/fixtures/factories/Value";
+import type {site} from "@/src/iss/site.js";
+import { Sequence } from "@/fixtures/factories/Value.js";
+
 
 
 const idGenerator = Sequence();

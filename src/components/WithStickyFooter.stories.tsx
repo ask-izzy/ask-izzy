@@ -1,9 +1,9 @@
 /* eslint-disable react/display-name */
 import React, {useEffect, ReactNode} from "react";
 
-import WithStickyFooter from "@/src/components/WithStickyFooter";
-import FlatButton from "@/src/components/FlatButton";
-import ListItem from "@/src/components/ListItem";
+import WithStickyFooter from "@/src/components/WithStickyFooter.js";
+import FlatButton from "@/src/components/FlatButton.js";
+import ListItem from "@/src/components/ListItem.js";
 import icons from "@/src/icons/index.js";
 
 export default {

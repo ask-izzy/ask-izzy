@@ -3,29 +3,30 @@ import {withRouter} from "next/router"
 import type {NextRouter} from "next/router"
 import classnames from "classnames";
 
-import HeaderBar from "@/src/components/HeaderBar";
-import InputListItem from "@/src/components/InputListItem";
-import FlatButton from "@/src/components/FlatButton";
-import WithStickyFooter from "@/src/components/WithStickyFooter";
-import CheckboxSelected from "@/src/icons/CheckboxSelected";
-import CheckboxUnselected from "@/src/icons/CheckboxUnselected";
-import storage from "@/src/storage";
-import QuestionStepper from "@/src/components/QuestionStepper";
-import {getCategory} from "@/src/constants/categories";
-import ScreenReader from "@/src/components/ScreenReader";
+import HeaderBar from "@/src/components/HeaderBar.js";
+import InputListItem from "@/src/components/InputListItem.js";
+import FlatButton from "@/src/components/FlatButton.js";
+import WithStickyFooter from "@/src/components/WithStickyFooter.js";
+import CheckboxSelected from "@/src/icons/CheckboxSelected.js";
+import CheckboxUnselected from "@/src/icons/CheckboxUnselected.js";
+import storage from "@/src/storage.js";
+import QuestionStepper from "@/src/components/QuestionStepper.js";
+import {getCategory} from "@/src/constants/categories.js";
+import ScreenReader from "@/src/components/ScreenReader.js";
 import {
     getBannerName,
     getSavedPersonalisationAnswer,
-} from "@/src/utils/personalisation"
+} from "@/src/utils/personalisation.js"
 import {
     goToPersonalisationNextPath,
     getPersonalisationBackPath,
-} from "@/src/utils/routing"
-import SupportSearchBar from "@/src/components/SupportSearchBar";
+} from "@/src/utils/routing.js"
+import SupportSearchBar from "@/src/components/SupportSearchBar.js";
 import type {
     PersonalisationQuestionPage,
-} from "@/types/personalisation-page"
-import Category from "@/src/constants/Category";
+} from "@/types/personalisation-page.js"
+import Category from "@/src/constants/Category.js";
+
 
 type Props = {
     router: NextRouter,

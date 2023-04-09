@@ -2,8 +2,9 @@
 /* eslint-disable no-use-before-define, prefer-arrow-callback */
 
 import assert from "assert";
-import { countCrisisResults } from "../../src/iss/crisisService";
-import getServiceFixture from "../../fixtures/factories/Service";
+import { countCrisisResults } from "../../src/iss/crisisService.js";
+import getServiceFixture from "../../fixtures/factories/Service.js";
+
 
 describe("iss service", function() {
 

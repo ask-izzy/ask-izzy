@@ -1,9 +1,10 @@
 import React from "react";
 
-import AccessibilityIcon from "@/src/icons/Accessibility";
-import Service from "@/src/iss/Service";
-import Spacer from "@/src/components/Spacer";
-import ScreenReader from "@/src/components/ScreenReader";
+import AccessibilityIcon from "@/src/icons/Accessibility.js";
+import Service from "@/src/iss/Service.js";
+import Spacer from "@/src/components/Spacer.js";
+import ScreenReader from "@/src/components/ScreenReader.js";
+
 
 type Props = {
     service: Service,

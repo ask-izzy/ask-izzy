@@ -1,8 +1,9 @@
 import React, {ReactNode} from "react";
 import { withDesign } from "storybook-addon-designs";
 
-import AlertBanner from "@/src/components/AlertBanner";
-import Link from "@/src/components/base/Link";
+import AlertBanner from "@/src/components/AlertBanner.js";
+import Link from "@/src/components/base/Link.js";
+
 
 export default {
     title: "App Components/AlertBanner",

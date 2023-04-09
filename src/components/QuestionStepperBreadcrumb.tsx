@@ -2,16 +2,17 @@ import React, {ReactNode} from "react";
 import cnx from "classnames";
 import { useRouter } from "next/router"
 
-import MapIcon from "@/src/icons/Map";
-import Link from "@/src/components/base/Link";
+import MapIcon from "@/src/icons/Map.js";
+import Link from "@/src/components/base/Link.js";
 import {
     prettyPrintAnswer,
     getSavedPersonalisationAnswer,
-} from "@/src/utils/personalisation"
+} from "@/src/utils/personalisation.js"
 import {
     getServicesPath,
-} from "@/src/utils/routing"
-import type {PersonalisationPage} from "@/types/personalisation-page"
+} from "@/src/utils/routing.js"
+import type {PersonalisationPage} from "@/types/personalisation-page.js"
+
 
 type Props = {
     personalisationPage: PersonalisationPage,

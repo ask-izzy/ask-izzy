@@ -1,7 +1,8 @@
 import React, {ReactNode} from "react";
 import { action } from "@storybook/addon-actions";
 
-import ProgressBar from "@/src/components/general/ProgressBar";
+import ProgressBar from "@/src/components/general/ProgressBar.js";
+
 
 export default {
     title: "General Components/ProgressBar",

@@ -1,8 +1,9 @@
 import React from "react";
 import icons from "@/src/icons/index.js";
-import Link from "@/src/components/base/Link";
-import Location from "@/src/constants/personalisation-pages/Location"
-import {getSavedPersonalisationAnswer} from "@/src/utils/personalisation"
+import Link from "@/src/components/base/Link.js";
+import Location from "@/src/constants/personalisation-pages/Location.js"
+import {getSavedPersonalisationAnswer} from "@/src/utils/personalisation.js"
+
 
 function LgbtiqaDomesticViolenceScreen() {
     function shouldShowVicService(): boolean {

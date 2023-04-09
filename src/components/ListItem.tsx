@@ -1,7 +1,8 @@
 import React, {ReactNode} from "react";
 import classnames from "classnames";
 
-import type {AnalyticsEvent} from "@/src/google-tag-manager";
+import type {AnalyticsEvent} from "@/src/google-tag-manager.js";
+
 
 export type Props = {
     rootElement?: any

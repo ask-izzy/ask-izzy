@@ -3,9 +3,10 @@
 
 import type { GetStaticPaths, GetStaticProps } from "next"
 
-import categories from "@/src/constants/categories"
-import PersonalisationRedirect from "@/components/pages/personalisation/PersonalisationRedirect";
-import type {RouteSharedProps} from "@/types/routes"
+import categories from "@/src/constants/categories.js"
+import PersonalisationRedirect from "@/components/pages/personalisation/PersonalisationRedirect.js";
+import type {RouteSharedProps} from "@/types/routes.js"
+
 
 export const getStaticPaths: GetStaticPaths = async() => {
     const categoryPaths: {params: {categoryOrContentPageSlug: string}}[] = []

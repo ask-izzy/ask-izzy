@@ -1,7 +1,8 @@
 import React, {useRef, ForwardedRef, ReactNode, ReactElement} from "react"
 import cnx from "classnames"
 
-import Button from "@/src/components/base/Button"
+import Button from "@/src/components/base/Button.js"
+
 
 export type Props = {
     className?: string

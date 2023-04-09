@@ -1,6 +1,7 @@
 import {$Shape} from "utility-types";
 
-import "@/src/utils/polyfills/custom-events"
+import "@/src/utils/polyfills/custom-events.js"
+
 
 
 export function emit(event: GTMEvent): void {

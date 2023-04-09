@@ -1,9 +1,10 @@
 import React, {ReactNode} from "react";
 import {action} from "@storybook/addon-actions";
 
-import ListItem from "@/src/components/ListItem";
-import Chevron from "@/src/icons/Chevron";
-import DemographicPets from "@/src/icons/DemographicPets";
+import ListItem from "@/src/components/ListItem.js";
+import Chevron from "@/src/icons/Chevron.js";
+import DemographicPets from "@/src/icons/DemographicPets.js";
+
 
 export default {
     title: "App Components/ListItem",

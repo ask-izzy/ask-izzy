@@ -1,6 +1,7 @@
 import React, {ReactNode} from "react";
 
-import IssParamsOverrideControls from "@/src/components/debug/IssParamsOverrideControls";
+import IssParamsOverrideControls from "@/src/components/debug/IssParamsOverrideControls.js";
+
 
 export default {
     title: "Debug Components/IssParamsOverrideControls",

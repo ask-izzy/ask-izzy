@@ -1,7 +1,8 @@
 import React, {ReactNode} from "react";
 import { action } from "@storybook/addon-actions";
 
-import ServiceListIntro from "@/src/components/ServiceListIntro";
+import ServiceListIntro from "@/src/components/ServiceListIntro.js";
+
 
 export default {
     title: "App Components/LogoWithTextBox/ServiceListIntro",

@@ -1,6 +1,7 @@
 import type {
     PersonalisationQuestionPage,
-} from "@/types/personalisation-page"
+} from "@/types/personalisation-page.js"
+
 
 export default ({
     type: "question",

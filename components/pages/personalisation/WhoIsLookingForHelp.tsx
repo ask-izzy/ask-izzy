@@ -2,20 +2,21 @@ import React, {useState} from "react";
 import {withRouter} from "next/router"
 import type {NextRouter} from "next/router"
 
-import storage from "@/src/storage";
-import QuestionStepper from "@/src/components/QuestionStepper";
-import FlatButton from "@/src/components/FlatButton";
-import HeaderBar from "@/src/components/HeaderBar";
-import {getCategory} from "@/src/constants/categories";
-import ScreenReader from "@/src/components/ScreenReader";
-import Category from "@/src/constants/Category";
+import storage from "@/src/storage.js";
+import QuestionStepper from "@/src/components/QuestionStepper.js";
+import FlatButton from "@/src/components/FlatButton.js";
+import HeaderBar from "@/src/components/HeaderBar.js";
+import {getCategory} from "@/src/constants/categories.js";
+import ScreenReader from "@/src/components/ScreenReader.js";
+import Category from "@/src/constants/Category.js";
 import {
     goToPersonalisationNextPath,
     getPersonalisationBackPath,
-} from "@/src/utils/routing"
-import WhoIsLookingForHelpBaseInfo from "@/src/constants/personalisation-pages/WhoIsLookingForHelp"
-import {getBannerName} from "@/src/utils/personalisation"
-import type {PersonalisationLookingForHelpPage} from "@/types/personalisation-page"
+} from "@/src/utils/routing.js"
+import WhoIsLookingForHelpBaseInfo from "@/src/constants/personalisation-pages/WhoIsLookingForHelp.js"
+import {getBannerName} from "@/src/utils/personalisation.js"
+import type {PersonalisationLookingForHelpPage} from "@/types/personalisation-page.js"
+
 
 type Props = {
     router: NextRouter,

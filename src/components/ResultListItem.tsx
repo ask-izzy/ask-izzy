@@ -1,26 +1,27 @@
 import React from "react";
 import {titleize} from "underscore.string";
 
-import Map from "@/src/icons/Map";
-import Loading from "@/src/icons/Loading";
-import Service from "../iss/Service";
-import DebugContainer from "@/src/components/DebugContainer";
-import DebugQueryScore from "@/src/components/DebugQueryScore";
-import DebugServiceRecord from "@/src/components/DebugServiceRecord";
-import Eligibility from "@/src/components/Eligibility";
-import AddToCompareButton from "@/src/components/AddToCompareButton"
-import ShareButton from "@/src/components/ShareButton"
-import ServiceProvisions from "@/src/components/service/ServiceProvisions"
-import Accessibility from "@/src/components/Accessibility";
-import OpeningTimes from "@/src/components/OpeningTimes";
-import Ndis from "@/src/components/Ndis";
-import TransportTime from "@/src/components/TransportTime";
-import IndigenousServiceIcon from "@/src/components/IndigenousServiceIcon";
-import LgbtiqIcon from "@/src/components/LgbtiqIcon";
-import ScreenReader from "@/src/components/ScreenReader";
-import ListItem from "@/src/components/ListItem";
-import Link from "@/src/components/base/Link";
-import type {travelTimesStatus} from "@/src/hooks/useTravelTimesUpdater";
+import Map from "@/src/icons/Map.js";
+import Loading from "@/src/icons/Loading.js";
+import Service from "@/src/iss/Service.js";
+import DebugContainer from "@/src/components/DebugContainer.js";
+import DebugQueryScore from "@/src/components/DebugQueryScore.js";
+import DebugServiceRecord from "@/src/components/DebugServiceRecord.js";
+import Eligibility from "@/src/components/Eligibility.js";
+import AddToCompareButton from "@/src/components/AddToCompareButton.js"
+import ShareButton from "@/src/components/ShareButton.js"
+import ServiceProvisions from "@/src/components/service/ServiceProvisions.js"
+import Accessibility from "@/src/components/Accessibility.js";
+import OpeningTimes from "@/src/components/OpeningTimes.js";
+import Ndis from "@/src/components/Ndis.js";
+import TransportTime from "@/src/components/TransportTime.js";
+import IndigenousServiceIcon from "@/src/components/IndigenousServiceIcon.js";
+import LgbtiqIcon from "@/src/components/LgbtiqIcon.js";
+import ScreenReader from "@/src/components/ScreenReader.js";
+import ListItem from "@/src/components/ListItem.js";
+import Link from "@/src/components/base/Link.js";
+import type {travelTimesStatus} from "@/src/hooks/useTravelTimesUpdater.js";
+
 
 
 type Props = {

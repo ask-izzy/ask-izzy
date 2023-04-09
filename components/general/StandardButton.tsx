@@ -1,8 +1,9 @@
 import React from "react";
 import classnames from "classnames";
 
-import Button from "@/src/components/base/Button"
-import type {AnalyticsEvent} from "@/src/google-tag-manager";
+import Button from "@/src/components/base/Button.js"
+import type {AnalyticsEvent} from "@/src/google-tag-manager.js";
+
 
 type Props = {
     label?: string,

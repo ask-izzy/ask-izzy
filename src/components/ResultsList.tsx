@@ -1,18 +1,20 @@
 import React from "react";
 import cnx from "classnames";
 
-import ResultListItem from "@/src/components/ResultListItem";
-import CrisisLineItem from "@/src/components/CrisisLineItem";
-import CrisisHeader from "@/src/components/CrisisHeader";
+import ResultListItem from "@/src/components/ResultListItem.js";
+import CrisisLineItem from "@/src/components/CrisisLineItem.js";
+import CrisisHeader from "@/src/components/CrisisHeader.js";
 import {
     crisisResults as onlyCrisisResults,
     nonCrisisResults as onlyNonCrisisResults,
-} from "@/src/iss/crisisService";
+} from "@/src/iss/crisisService.js";
 
-import Service, {sortServices} from "@/src/iss/Service";
-import type {SortType} from "@/src/components/base/Dropdown";
-import type {travelTimesStatus} from "@/src/hooks/useTravelTimesUpdater";
-import ScreenReader from "@/src/components/ScreenReader"
+
+import Service, {sortServices} from "@/src/iss/Service.js";
+import type {SortType} from "@/src/components/base/Dropdown.js";
+import type {travelTimesStatus} from "@/src/hooks/useTravelTimesUpdater.js";
+import ScreenReader from "@/src/components/ScreenReader.js"
+
 
 type Props = {
     results: Array<Service>,

@@ -1,13 +1,13 @@
 import merge from "deepmerge";
 
-import Service, {ServiceProps} from "@/src/iss/Service";
-import type {AddressLocationProps} from "@/src/iss/AddressLocation";
-import type {site} from "@/src/iss/site";
-import type {nowOpen, phone} from "@/src/iss/general";
-import { Abn, Id } from "@/fixtures/factories/Value";
-import { getAddressLocationPropsFixture } from "@/fixtures/factories/AddressLocation";
-import getSiteFixture from "@/fixtures/factories/site";
-import {getNowOpenFixture, getPhoneFixture} from "./general";
+import Service, {ServiceProps} from "@/src/iss/Service.js";
+import type {AddressLocationProps} from "@/src/iss/AddressLocation.js";
+import type {site} from "@/src/iss/site.js";
+import type {nowOpen, phone} from "@/src/iss/general.js";
+import { Abn, Id } from "@/fixtures/factories/Value.js";
+import { getAddressLocationPropsFixture } from "@/fixtures/factories/AddressLocation.js";
+import getSiteFixture from "@/fixtures/factories/site.js";
+import {getNowOpenFixture, getPhoneFixture} from "@/fixtures/factories/general.js";
 import {$Shape} from "utility-types";
 
 export type serviceFixtureProps = $Shape<

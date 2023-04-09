@@ -1,5 +1,6 @@
 import React, {useState, ReactNode} from "react";
-import Dialog from "@/components/base/Dialog";
+import Dialog from "@/components/base/Dialog.js";
+
 
 export default {
     title: "App Components/Dialog",

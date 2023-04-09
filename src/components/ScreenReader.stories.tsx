@@ -1,6 +1,7 @@
 import React, {ReactNode} from "react";
 
-import ScreenReader from "@/src/components/ScreenReader";
+import ScreenReader from "@/src/components/ScreenReader.js";
+
 
 export default {
     title: "Basic UI Components/ScreenReader",

@@ -1,8 +1,9 @@
 import React, {ReactElement} from "react"
 
-import ServiceOpening from "@/src/iss/ServiceOpening"
-import ScreenReader from "@/src/components/ScreenReader"
-import Clock from "@/src/icons/Clock"
+import ServiceOpening from "@/src/iss/ServiceOpening.js"
+import ScreenReader from "@/src/components/ScreenReader.js"
+import Clock from "@/src/icons/Clock.js"
+
 
 type Props = {
     object: ServiceOpening,

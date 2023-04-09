@@ -1,6 +1,7 @@
 import React, {ReactNode} from "react";
 
-import Spacer from "@/src/components/Spacer";
+import Spacer from "@/src/components/Spacer.js";
+
 
 export default {
     title: "Basic UI Components/Spacer",

@@ -1,9 +1,10 @@
 import React, {useState, useEffect} from "react";
 import classnames from "classnames";
 
-import InputWithDropdown from "@/components/general/InputWithDropdown";
-import FlatButton from "@/src/components/FlatButton";
-import SearchIcon from "@/src/icons/Search"
+import InputWithDropdown from "@/components/general/InputWithDropdown.js";
+import FlatButton from "@/src/components/FlatButton.js";
+import SearchIcon from "@/src/icons/Search.js"
+
 
 type Props = {
     className?: string;

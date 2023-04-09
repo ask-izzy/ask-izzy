@@ -1,7 +1,8 @@
 import React, {ReactNode} from "react";
 import {diffJson} from "diff";
 
-import Diff from "./Diff";
+import Diff from "@/src/components/debug/Diff.js";
+
 
 
 export default {

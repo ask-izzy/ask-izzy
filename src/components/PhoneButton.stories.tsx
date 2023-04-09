@@ -1,6 +1,7 @@
 import React, {ReactNode} from "react";
 
-import PhoneButton from "@/src/components/PhoneButton";
+import PhoneButton from "@/src/components/PhoneButton.js";
+
 
 export default {
     title: "Service Components/PhoneButton",

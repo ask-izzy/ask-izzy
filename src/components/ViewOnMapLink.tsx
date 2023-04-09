@@ -1,8 +1,9 @@
 import React, {useEffect, useState} from "react";
 
-import Map from "@/src/icons/Map";
-import maps, {MapsApi} from "@/src/maps";
-import Link from "@/src/components/base/Link";
+import Map from "@/src/icons/Map.js";
+import maps, {MapsApi} from "@/src/maps.js";
+import Link from "@/src/components/base/Link.js";
+
 
 type Props = {
     to: string

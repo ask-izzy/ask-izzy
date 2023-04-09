@@ -1,10 +1,11 @@
 import React, {useEffect, useRef, useState} from "react";
-import SvgIconChevron from "@/src/icons/Chevron";
-import {OutsideComponentClick} from "@/src/effects/OutsideComponentClick";
-import {MobileDetect} from "@/src/effects/MobileDetect";
-import * as gtm from "@/src/google-tag-manager";
-import type {AnalyticsEvent} from "@/src/google-tag-manager"
-import {getScrollPosition} from "@/src/effects/scrollPosition";
+import SvgIconChevron from "@/src/icons/Chevron.js";
+import {OutsideComponentClick} from "@/src/effects/OutsideComponentClick.js";
+import {MobileDetect} from "@/src/effects/MobileDetect.js";
+import * as gtm from "@/src/google-tag-manager.js";
+import type {AnalyticsEvent} from "@/src/google-tag-manager.js"
+import {getScrollPosition} from "@/src/effects/scrollPosition.js";
+
 
 export type SortType = {
     key: string,

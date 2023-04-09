@@ -6,10 +6,11 @@ import Yadda from "yadda";
 import _ from "underscore";
 import { By } from "selenium-webdriver";
 
-import dictionary from "../support/dictionary";
-import { documentReady } from "../steps/browser";
-import { matchClass, escapeXPathString } from "../support/selectors";
-import asyncFilter from "../support/async-filter";
+import dictionary from "../support/dictionary.js";
+import { documentReady } from "../steps/browser.js";
+import { matchClass, escapeXPathString } from "../support/selectors.js";
+import asyncFilter from "../support/async-filter.js";
+
 
 module.exports = ((function() {
     return Yadda.localisation.English.library(dictionary)

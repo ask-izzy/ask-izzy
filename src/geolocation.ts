@@ -6,8 +6,9 @@
 
 import location from "browser-location"
 
-import storage from "@/src/storage"
-import Maps from "@/src/maps"
+import storage from "@/src/storage.js"
+import Maps from "@/src/maps.js"
+
 
 /**
  * Returns a promise to get the user's geolocation from the browser.

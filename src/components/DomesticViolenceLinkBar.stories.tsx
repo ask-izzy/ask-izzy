@@ -1,6 +1,7 @@
 import React, {ReactNode} from "react";
 
-import DomesticViolenceLinkBar from "@/src/components/DomesticViolenceLinkBar";
+import DomesticViolenceLinkBar from "@/src/components/DomesticViolenceLinkBar.js";
+
 
 export default {
     title: "App Components/DomesticViolenceLinkBar",

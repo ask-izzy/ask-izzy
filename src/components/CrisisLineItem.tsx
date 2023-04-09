@@ -1,13 +1,14 @@
 /* eslint-disable max-len */
 import React from "react";
 
-import Link from "@/src/components/base/Link";
-import Service from "@/src/iss/Service";
-import PhoneButton from "@/src/components/PhoneButton";
-import DebugContainer from "@/src/components/DebugContainer";
-import DebugQueryScore from "@/src/components/DebugQueryScore";
-import DebugServiceRecord from "@/src/components/DebugServiceRecord";
-import Collapser from "@/src/components/general/Collapser";
+import Link from "@/src/components/base/Link.js";
+import Service from "@/src/iss/Service.js";
+import PhoneButton from "@/src/components/PhoneButton.js";
+import DebugContainer from "@/src/components/DebugContainer.js";
+import DebugQueryScore from "@/src/components/DebugQueryScore.js";
+import DebugServiceRecord from "@/src/components/DebugServiceRecord.js";
+import Collapser from "@/src/components/general/Collapser.js";
+
 
 
 const crisisDescriptions = {

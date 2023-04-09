@@ -1,7 +1,8 @@
 import assert from "assert";
 import { By } from "selenium-webdriver";
-import { getElementWithText } from "./elements";
-import { isElementPresent } from "./webdriver";
+import { getElementWithText } from "./elements.js";
+import { isElementPresent } from "./webdriver.js";
+
 
 let assertExtended = assert;
 

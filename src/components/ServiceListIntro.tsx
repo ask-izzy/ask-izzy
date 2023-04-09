@@ -1,7 +1,8 @@
 import React from "react";
 
-import Book from "@/src/icons/Book";
-import LogoWithTextBox from "@/src/components/LogoWithTextBox";
+import Book from "@/src/icons/Book.js";
+import LogoWithTextBox from "@/src/components/LogoWithTextBox.js";
+
 
 export default function ServiceListIntro() {
     return (

@@ -1,6 +1,7 @@
 import React, {ReactNode} from "react";
 
-import ScrollToTop from "@/src/components/ResultsListPage/ScrollToTop";
+import ScrollToTop from "@/src/components/ResultsListPage/ScrollToTop.js";
+
 
 export default {
     title: "Basic UI Components/ScrollToTop",

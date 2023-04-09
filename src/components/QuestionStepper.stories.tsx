@@ -1,7 +1,8 @@
 import React, {ReactNode} from "react";
 
-import QuestionStepper from "@/src/components/QuestionStepper";
-import { setPersonalisationAnswers } from "@/src/storybook/decorators";
+import QuestionStepper from "@/src/components/QuestionStepper.js";
+import { setPersonalisationAnswers } from "@/src/storybook/decorators.js";
+
 
 export default {
     title: "App Components/QuestionStepper",

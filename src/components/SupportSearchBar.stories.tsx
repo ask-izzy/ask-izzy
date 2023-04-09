@@ -1,6 +1,7 @@
 import React, {ReactNode} from "react";
 
-import SupportSearchBar from "@/src/components/SupportSearchBar";
+import SupportSearchBar from "@/src/components/SupportSearchBar.js";
+
 
 export default {
     title: "App components/SupportSearchBar",

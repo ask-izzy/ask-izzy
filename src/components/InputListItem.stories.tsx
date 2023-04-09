@@ -1,9 +1,10 @@
 import React, {useState, ReactNode} from "react";
 import { action } from "@storybook/addon-actions";
 
-import InputListItem from "@/src/components/InputListItem";
-import DemographicPets from "@/src/icons/DemographicPets";
-import Car from "@/src/icons/Car";
+import InputListItem from "@/src/components/InputListItem.js";
+import DemographicPets from "@/src/icons/DemographicPets.js";
+import Car from "@/src/icons/Car.js";
+
 
 export default {
     title: "App Components/ListItem/InputListItem",

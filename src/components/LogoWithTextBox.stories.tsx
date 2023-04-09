@@ -1,7 +1,8 @@
 import React, {ReactNode} from "react";
 
-import LogoWithTextBox from "./LogoWithTextBox";
-import DemographicPets from "@/src/icons/DemographicPets";
+import LogoWithTextBox from "@/src/components/LogoWithTextBox.js";
+import DemographicPets from "@/src/icons/DemographicPets.js";
+
 
 export default {
     title: "App Components/LogoWithTextBox",

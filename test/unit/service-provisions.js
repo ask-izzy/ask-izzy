@@ -9,7 +9,8 @@ import assert from "assert";
 import fs from "fs";
 import yaml from "js-yaml";
 
-import serviceProvisions from "../../src/constants/service-provisions";
+import serviceProvisions from "../../src/constants/service-provisions.js";
+
 
 // import the test cases
 const tests = yaml.safeLoad(
