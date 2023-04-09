@@ -3,7 +3,9 @@
   "display": "Next.js",
   "ts-node": {
     "esm": true,
-    "require": ["tsconfig-paths/register"]
+    "require": [
+      "tsconfig-paths/register"
+    ]
   },
   "compilerOptions": {
     "target": "es6",
@@ -29,7 +31,7 @@
         "name": "next"
       }
     ],
-    "allowJs": false,
+    "allowJs": true,
     "checkJs": false,
     "maxNodeModuleJsDepth": 0,
     "skipLibCheck": true,
@@ -43,7 +45,7 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "moduleResolution": "nodenext",
-    "jsx": "react-jsx"
+    "jsx": "preserve"
   },
   "include": [
     "next-env.d.ts",

@@ -11,4 +11,4 @@ export const getStaticProps: GetStaticProps<RouteSharedProps> = () => {
     }
 }
 
-export { default } from "@/components/pages/HomePage"
+export { default } from "@/components/pages/HomePage.js"

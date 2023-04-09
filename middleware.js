@@ -35,7 +35,7 @@ we're stuck with using a middleware.
 
 import { NextResponse } from "next/server"
 
-export function middleware(req: any, event: any): any {
+export function middleware(req, event) {
     let response
 
     response = unsupportedBrowserRedirect(req, event)
@@ -49,7 +49,7 @@ export function middleware(req: any, event: any): any {
     }
 }
 
-function unsupportedBrowserRedirect(req: any, event: any): any {
+function unsupportedBrowserRedirect(req, event) {
     let unsupportedBrowser = false
 
     const [, unsupportedBrowserCookieVal] = req.headers.get("cookie")
@@ -79,7 +79,7 @@ function unsupportedBrowserRedirect(req: any, event: any): any {
 // that are proxied using our external resources proxy that can produce unexpected behaviour. So we've
 // disabled Next.js's automatic trailing slash redirection and we manually apply it here to all requests
 // expect those to the proxy.
-function trailingSlashRedirect(req: any, event: any): any {
+function trailingSlashRedirect(req, event) {
     const { pathname, href } = req.nextUrl
 
     if (

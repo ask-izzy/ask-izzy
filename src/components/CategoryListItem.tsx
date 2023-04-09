@@ -9,7 +9,6 @@ import Storage from "@/src/storage.js";
 import ScreenReader from "@/src/components/ScreenReader.js"
 import { getServicesPath } from "@/src/utils/routing.js"
 
-
 type Props = {
     category: Category,
     router?: NextRouter,
@@ -45,7 +44,7 @@ function CategoryListItem({category, router}: Props) {
         event?.preventDefault()
     }
 
-    const Icon = category.icon || icons.House;
+    const Icon: any = category.icon || icons.House;
 
     return (
         <LinkListItem

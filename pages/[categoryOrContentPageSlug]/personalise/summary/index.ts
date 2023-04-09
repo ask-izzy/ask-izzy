@@ -4,7 +4,7 @@ import PersonalisationSummaryPage from "@/components/pages/personalisation/Perso
 import type {RouteSharedProps} from "@/types/routes.js"
 
 
-export {getStaticPaths} from "@/pages/[categoryOrContentPageSlug]/personalise/index"
+export {getStaticPaths} from "@/pages/[categoryOrContentPageSlug]/personalise/index.js"
 
 export const getStaticProps: GetStaticProps<RouteSharedProps> = (context) => {
     return {

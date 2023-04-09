@@ -1,4 +1,4 @@
-import {ReactNode} from "react";
+import {ReactNode, ComponentType} from "react";
 import { slugify } from "underscore.string";
 import type { NextRouter } from "next/router";
 
@@ -10,7 +10,7 @@ import type {PersonalisationPage} from "@/types/personalisation-page.js"
 type Props = {
     name: string;
     byline: string;
-    icon: ReactNode;
+    icon: ComponentType | ReactNode;
     searchQueryChanges: SearchQueryChanges
         | ((arg0: NextRouter) => SearchQueryChanges);
     personalisation: Array<PersonalisationPage>;
@@ -21,7 +21,7 @@ export default class Category {
     key: string;
     name: string;
     byline: string;
-    icon: ReactNode;
+    icon: ComponentType | ReactNode;
     searchQueryChanges: SearchQueryChanges
         | ((arg0: NextRouter) => SearchQueryChanges);
     personalisation: Array<PersonalisationPage>;
