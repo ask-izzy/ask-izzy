@@ -30,6 +30,7 @@ function Web({
                     event: "Link Followed - Website Contact",
                     eventAction: "Contact detail - website",
                     eventLabel: `${displayedAddress}`,
+                    ...analyticsEventDetails,
                 }}
             >
                 <Website />

@@ -31,7 +31,8 @@ export default function Tooltip({
             disableFocusListener={disableFocusListener}
             disableHoverListener={disableHoverListener}
             disableTouchListener={disableTouchListener}
-            children={children}
-        />
+        >
+            {children}
+        </TooltipComponent>
     );
 }

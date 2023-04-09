@@ -1,3 +1,5 @@
+/* eslint-disable react/display-name */
+/* eslint-disable max-len */
 import React, {ReactNode} from "react";
 
 
@@ -8,13 +10,13 @@ import PhoneButton from "@/src/components/PhoneButton.js";
 import DebugContainer from "@/src/components/DebugContainer.js";
 import DebugQueryScore from "@/src/components/DebugQueryScore.js";
 import DebugServiceRecord from "@/src/components/DebugServiceRecord.js";
-import Collapser from "@/src/components/general/Collapser.js";
 import TooltipInformation from "@/src/components/TooltipInformation.js";
 import Info from "@/src/icons/Info.js";
 
 
 const crisisDescriptions = {
     // housing VIC
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     2721562: (service) => (
         <ul className="bonusCopy">
             <li>If you are homeless or at risk of homelessness, 1800 825 955 will connect you with an Initial Assessment and Planning worker</li>
@@ -23,6 +25,7 @@ const crisisDescriptions = {
         </ul>
     ),
     // NSW Link2home
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     1838208: (service) => (
         <ul className="bonusCopy">
             <li>If you are homeless or at risk of being homeless, call Link2home from anywhere in NSW</li>
@@ -38,7 +41,7 @@ type Props = {
     resultNumber: number
 }
 
-function CrisisLineItem ({
+function CrisisLineItem({
     service,
     resultNumber,
 }: Props) {
@@ -46,7 +49,7 @@ function CrisisLineItem ({
         <div className="details-tooltip">
             {crisisDescriptions[service.id] && crisisDescriptions[service.id](service)}
         </div>
-    
+
     const phone = service.Phones()[0];
     const hasDetails = crisisDescriptions[service.id]
 

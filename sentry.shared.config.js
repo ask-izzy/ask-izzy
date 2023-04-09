@@ -1,6 +1,5 @@
-/* @flow */
 import { CaptureConsole, ExtraErrorData } from "@sentry/integrations";
-import getConfig from 'next/config';
+import getConfig from "next/config";
 
 getConfig();
 
@@ -23,4 +22,4 @@ export default ({
         }
         return event;
     },
-}: any)
+})

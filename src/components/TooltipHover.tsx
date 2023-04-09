@@ -4,6 +4,7 @@ import Tooltip from "@/src/components/Tooltip.js";
 type TooltipProps = {
     content: string,
     children: ReactNode,
+    disableFocusListener?: boolean,
 }
 export default function TooltipHover({
     content,

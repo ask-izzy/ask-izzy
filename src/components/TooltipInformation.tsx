@@ -1,4 +1,3 @@
-/* @flow */
 import React, {useState, useRef, useEffect, ReactNode} from "react";
 import ClickAwayListener from "@mui/material/ClickAwayListener";
 
@@ -14,8 +13,7 @@ type TooltipProps = {
 export default function TooltipInformation({
     content,
     children,
-    ...otherProps
-}: TooltipProps): ReactNode {
+}: TooltipProps) {
     const [tooltipOpen, setTooltipOpen] = useState<boolean>(false)
     const closeButtonRef = useRef<any>(null)
     const [setFocus, revertFocus, skipLastTab] = useMoveFocus();

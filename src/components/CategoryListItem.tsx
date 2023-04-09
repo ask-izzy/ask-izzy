@@ -44,7 +44,7 @@ function CategoryListItem({category, router}: Props) {
         event?.preventDefault()
     }
 
-    const Icon = category.icon || icons.House;
+    const Icon: any = category.icon || icons.House;
 
     return (
         <LinkListItem

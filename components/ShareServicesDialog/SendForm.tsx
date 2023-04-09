@@ -191,7 +191,7 @@ function SendForm({
                     <StandardButton
                         className="submitButton tint-2"
                         disabled={currentlySubmitting}
-                        onClick={() => {}}
+                        onClick={() => undefined}
                     >
                         {currentlySubmitting ?
                             <LoadingIcon className="inline-icon" />
@@ -232,7 +232,8 @@ function SendForm({
                 >
                     <EmailIcon noSpanWrapper={true}
                         viewBox="15 22 34 24"
-                    />Email
+                    />
+                    Email
                 </StandardButton>
             </nav>
         </div>

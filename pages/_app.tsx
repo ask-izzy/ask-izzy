@@ -8,7 +8,7 @@ import "core-js/actual/string/replace-all";
 import * as Sentry from "@sentry/nextjs";
 
 import "@/src/utils/global-setup.js"
-import "../src/styles/bundle.scss.js"
+import "@/src/styles/bundle.scss"
 import {DebugModeProvider} from "@/contexts/debug-mode-context.js";
 import {MyListProvider} from "@/contexts/my-list-context.js";
 import {ServiceResultsProvider} from "@/contexts/service-results-context.js";
@@ -29,7 +29,7 @@ import * as gtm from "@/src/google-tag-manager.js";
 import storage from "@/src/storage.js";
 
 function App(appProps: AppProps): ReactNode {
-    const { Component, pageProps, err } = appProps
+    const { Component, pageProps } = appProps
     const router = useRouter()
 
     if (process.env.NODE_ENV === "test") {
@@ -96,7 +96,6 @@ function App(appProps: AppProps): ReactNode {
                                 {/* err prop recommended by https://github.com/vercel/next.js/blob/dba9e2a12adeb2066d0d5bb9a49bdb3e29689b92/examples/with-sentry/pages/_app.js */}
                                 <Component
                                     {...pageProps}
-                                    err={err}
                                 />
                             </div>
                             <ToastMessage/>

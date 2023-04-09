@@ -166,10 +166,6 @@ async function clickButtonWithClassName(className: string): Promise<void> {
     await module.exports.documentReady(this.driver);
 }
 
-async function clickAlertButton(buttonText) {
-    await clickElementWithText(this.driver, buttonText, "button")
-}
-
 async function clickDetails(summaryText) {
     await clickElementWithText(this.driver, summaryText, "details/summary")
 }

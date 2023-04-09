@@ -34,3 +34,21 @@ declare module "react" {
 		content?: string
 	}
 }
+
+declare module "@mui/material/Tooltip" {
+	import { ReactNode, ReactElement } from "react";
+
+	export type TooltipProps = {
+		content: ReactNode,
+		disableHoverListener?: boolean,
+		disableTouchListener?: boolean,
+		disableFocusListener?: boolean,
+		children: ReactElement,
+		componentsProps?: Record<any, any>,
+		open?: boolean,
+	}
+
+	const Tooltip: React.FC<TooltipProps>;
+
+	export default Tooltip;
+  }

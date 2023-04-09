@@ -8,7 +8,7 @@ export default {
     component: TooltipComponent,
 };
 
-export const Tooltip = (args: Object): ReactNode => {
+export const Tooltip = (): ReactNode => {
     return <>
         <TooltipComponent
             content = {

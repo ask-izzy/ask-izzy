@@ -1,4 +1,4 @@
-import React, {ReactNode} from "react";
+import React from "react";
 import cnx from "classnames"
 import { useRouter } from "next/router"
 import type { NextRouter } from "next/router"
@@ -74,7 +74,7 @@ function QuestionStepper({
         )
     }
     const category = getCategoryFromRouter(router)
-    const CategoryIcon: ReactNode = category?.icon || <></>
+    const CategoryIcon: any = category?.icon || <></>
     const title = category?.key !== "search" ?
         category?.name
         : `Search for “${decodeURIComponent(router.query.search as string)}”`
