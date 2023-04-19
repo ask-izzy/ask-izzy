@@ -38,6 +38,7 @@ we're stuck with using a middleware.
 import { NextResponse } from "next/server"
 
 export function middleware(req: any, event: any): any {
+    console.log("---", req.nextUrl.pathname)
     let response
 
     response = unsupportedBrowserRedirect(req, event)
@@ -46,6 +47,11 @@ export function middleware(req: any, event: any): any {
     }
 
     response = trailingSlashRedirect(req, event)
+    if (response) {
+        return response
+    }
+
+    response = betaRedirect(req, event)
     if (response) {
         return response
     }
@@ -100,3 +106,47 @@ function trailingSlashRedirect(req: any, event: any): any {
         )
     }
 }
+
+
+
+
+
+
+const COOKIE_NAME = 'bucket-marketing'
+
+// Choose a random bucket
+// Optional: contact a 3rd party service to get the user's bucket
+const MARKETING_BUCKETS = ['production', 'beta']
+const getBucket = () => MARKETING_BUCKETS[Math.floor(Math.random() * MARKETING_BUCKETS.length)]
+
+export function betaRedirect(req: NextRequest) {
+  const { pathname, href } = req.nextUrl
+
+  // Get the bucket cookie
+  const bucket = req.cookies.get(COOKIE_NAME)?.value || getBucket()
+  // Proxy to the appropriate variant
+
+  let res
+
+  if (bucket === "beta") {
+    const url = new URL(pathname, "https://ask-izzy.uat.ixapps.org")
+    res = NextResponse.rewrite(url)
+    console.log("rewrite to", url)
+  } else {
+    console.log("----", href)
+    res = NextResponse.next()
+  }
+
+  // Add the bucket to cookies if it's not there
+  if (!req.cookies.has(COOKIE_NAME)) {
+    console.log("set cookie")
+    res.cookies.set(COOKIE_NAME, bucket)
+  }
+
+  return res
+}
+
+
+// export const config = {
+//   matcher: '/',
+// }

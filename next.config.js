@@ -10,6 +10,12 @@ require("./lib/env-var-check.js")
 const bannerImages = fs.readdirSync("./public/images/banners")
     .map(file => file.replace(/\.\w*$/, ""));
 
+const prodTest = {
+  type: 'cookie',
+  key: 'bucket-marketing',
+  value: 'production',
+}
+
 module.exports = {
     sassOptions: {
         importer: globImporter(),
@@ -22,6 +28,7 @@ module.exports = {
         return process.env.VERSION
     },
     async rewrites() {
+        return {}
         return {
             beforeFiles: [
                 ...getRewriteForProxy(),
@@ -30,67 +37,80 @@ module.exports = {
                 {
                     source: `/search/:search/:remainingPath*`,
                     destination: `/search/:remainingPath*?search=:search`,
+                    has: [prodTest],
                 },
                 {
                     source: `/search/:search/:suburb-:state/:remainingPath*`,
                     destination:
                         `/search/:remainingPath*?suburb=:suburb&state=:state` +
                             `&search=:search`,
+                    has: [prodTest],
                 },
                 {
                     source: "/VERSION",
                     destination: "/VERSION.txt",
+                    has: [prodTest],
                 },
                 ...getRewritesForCategories(),
             ],
         }
     },
     async redirects() {
+        return []
         return [
             {
                 source: "/about",
                 destination: "https://about.askizzy.org.au/about/",
                 permanent: false,
+                has: [prodTest],
             },
             {
                 source: "/donate",
                 destination: "https://infoxchange.giveeasy.org/ask-izzy",
                 permanent: false,
+                has: [prodTest],
             },
             {
                 source: "/have-your-say/:remainingPath*",
                 destination: "/advocacy/:remainingPath*",
                 permanent: true,
+                has: [prodTest],
             },
             {
                 source: "/category/:page",
                 destination: "/:page",
                 permanent: true,
+                has: [prodTest],
             },
             {
                 source: "/category/:page/in/:suburb-:state",
                 destination: "/:page/:suburb-:state",
                 permanent: true,
+                has: [prodTest],
             },
             {
                 source: "/search/:search/in/:suburb-:state",
                 destination: "/search/:search/:suburb-:state",
                 permanent: true,
+                has: [prodTest],
             },
             {
                 source: "/have-your-say/:page*",
                 destination: "/advocacy/:page*",
                 permanent: true,
+                has: [prodTest],
             },
             {
                 source: "/components-catalog/:remainingPath*",
                 destination: "/storybook/:remainingPath*",
                 permanent: true,
+                has: [prodTest],
             },
             {
                 source: "/storybook",
                 destination: "/storybook/index.html",
                 permanent: false,
+                has: [prodTest],
             },
         ]
     },
@@ -148,6 +168,7 @@ function getRewriteForProxy() {
                     },
                 ],
                 destination: "/api/external-resource-proxy/:path*",
+                has: [prodTest],
             },
         ]
     }
@@ -177,6 +198,7 @@ function getRewritesForCategories() {
             source: `/${categoryKey}/:suburb-:state/:remainingPath*`,
             destination:
                 `/${categoryKey}/:remainingPath*?suburb=:suburb&state=:state`,
+            has: [prodTest],
         })
     }
 
