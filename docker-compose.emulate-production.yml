@@ -8,13 +8,11 @@ services:
         - VERSION=emulated-production
     command: "shell bash -c 'yarn run deploy && yarn run serve'"
     environment:
-      SITE_PROTOCOL: "http"
-      SITE_DOMAIN: "localhost"
+      SITE_PROTOCOL: "https"
+      SITE_DOMAIN: "askizzy.org.au"
       STATIC_PAGE_REGENERATION_SECRET: "hunter2"
       STATIC_PAGE_PREVIEW_SECRET: "hunter2"
       ENVIRONMENT: "emulated production"
-      SITE_PROTOCOL: "https"
-      SITE_DOMAIN: "askizzy.org.au"
       HTTP_PROXY: "http://http-proxy:8888"
     volumes:
       - ./.env.production.local:/app/.env.production.local
@@ -33,6 +31,13 @@ services:
     image: vimagick/tinyproxy
     command: sh -c "sed -i -e 's/^LogLevel.*/LogLevel Warning/' /etc/tinyproxy/tinyproxy.conf && tinyproxy -d"
     restart: unless-stopped
+
+  set-volume-permissions:
+    build:
+      context: .
+      target: set-volume-permissions
+    volumes:
+      - storage:/storage
 
 volumes:
   storage:
