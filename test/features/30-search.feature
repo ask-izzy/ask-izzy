@@ -32,19 +32,23 @@ Feature: Search
         Then I should be at /search/pet food/Melbourne-VIC
 
     Scenario: Search on blank does not search
+        When I visit /
         When I click the "Search" button
         Then I should be at /
 
     Scenario: Search with zero results displays a different sentence
+        When I visit /
         When I search for ""zero results"" and press enter
         Then I should see "Sorry, we weren't able to find any services matching your search for “zero results”."
         And I should not see "View on a map"
 
     Scenario: Search returning an error returns a nice sentence
+        When I visit /
         When I search for "cause error" and press enter
         Then I should see "Sorry, we weren't able to find any services matching your search for “cause error”."
 
     Scenario: Searching for domestic violence performs the safety check
+        When I visit /
         When I search for "domestic violence" and press enter
         Then I should see "Are you safe right now?"
         And I click the "Yes" button

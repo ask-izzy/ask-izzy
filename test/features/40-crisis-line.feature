@@ -46,20 +46,11 @@ Feature: Crisis Line
         And I search for "domestic violence"
         And I click the "Search" button
         And I click the "Skip" button
-        And I click the "See details" button
+        When I click the button with "Button tooltip-children-container" class name
         Then I should see "This call may not be free from mobiles. If you are ringing from a mobile you can ask to be called back"
-
-    Scenario: Hide extra call information
-        When I visit /
-        And I search for "domestic violence"
-        And I click the "Search" button
-        And I click the "Skip" button
-        And I click the "See details" button
-        And I click the "Hide details" button
-        Then I should not see "This call may not be free from mobiles. If you are ringing from a mobile you can ask to be called back"
 
     Scenario: Not see extra call information
         When I visit /
         And I search for "get helpline phone number"
         And I click the "Search" button
-        Then I should not see "See details"
+        Then I should not see "Call Info"
