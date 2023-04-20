@@ -184,6 +184,8 @@ export async function cleanDriverSession(
     }
     await waitForStorage(driver);
     await driver.removeAllScriptsBeforeLoad()
+
+    await new Promise(resolve => setTimeout(resolve, 2000));
     await driver.executeScript(() => {
         IzzyStorage.clear();
         window.dataLayer = [];

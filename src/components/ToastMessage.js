@@ -15,7 +15,7 @@ export default function ToastMessage(): ReactNode {
     const actionDescriptorRef = useRef(null)
     const closeButtonRef = useRef(null)
     const snackBarRef = useRef()
-    const [setFocus, revertFocus] = useMoveFocus()
+    const [setFocus, revertFocus, skipLastTab] = useMoveFocus()
 
     const {
         open,
@@ -46,20 +46,6 @@ export default function ToastMessage(): ReactNode {
 
     useEffect(() => {
         // accessibility work around if toast bar is the last element in the document
-        function skipLastTab(event) {
-            const focusableELements = document.querySelectorAll(
-                "button, [href], input, select, textarea, [tabindex]:not([tabindex=\"-1\"])"
-            )
-            const lastFocusableElement = focusableELements[focusableELements.length - 1]
-            if (
-                event.code === "Tab" &&
-                document.activeElement === lastFocusableElement
-            ) {
-                revertFocus()
-                event.preventDefault()
-                event.stopPropagation()
-            }
-        }
         if (open) {
             snackBarRef.current?.addEventListener("keydown", skipLastTab)
         } else {

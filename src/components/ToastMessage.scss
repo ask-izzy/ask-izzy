@@ -19,8 +19,7 @@
             margin-bottom: -7px;
 
             path {
-                fill: #{colours.get-static('raw-colour-warm-white')};
-                fill: var(--raw-colour-warm-white);
+                fill: var(--colour-text-dark);
             }
         }
     }

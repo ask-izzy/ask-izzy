@@ -6,11 +6,13 @@ import { useForm } from "react-hook-form";
 import ReCAPTCHA from "react-google-recaptcha";
 import { yupResolver } from "@hookform/resolvers/yup";
 
+import TooltipHover from "@/src/components/TooltipHover";
 import Form from "@/components/forms/Form"
 import StandardButton from "@/components/general/StandardButton"
 import EmailIcon from "@/src/icons/Email"
 import SendIcon from "@/src/icons/Send"
 import PhoneIcon from "@/src/icons/Phone"
+import HelpTooltipIcon from "@/src/icons/HelpTooltip"
 import Service from "@/src/iss/Service"
 import storage from "@/src/storage";
 import LoadingIcon from "@/src/icons/Loading";
@@ -126,6 +128,87 @@ function SendForm({
         )
     }
 
+    function renderSubmitDetailsSection(
+        recaptchaRef,
+        onVerifyCaptcha,
+        currentlySubmitting,
+        messageText,
+        onCloseRequest,
+        formState,
+        messageType,
+    ) {
+        const messagePreviewContentsProp = messageType === "Email" ?
+            {dangerouslySetInnerHTML: {__html: messageText.body}}
+            : {children: messageText.body}
+        const whyCantEditTooltipContent = `This message cannot be edited to stop users with malicious intentions.
+        Please personalise your message using the text boxes on the right.`
+        return (
+            <FormSection
+                className="submitDetails"
+                title="Your pre-filled message"
+            >
+                <div className="messagePreview">
+                    <div className="description">
+                        Review your pre-filled message
+                    </div>
+                    <div
+                        className="messageText"
+                        {...messagePreviewContentsProp}
+                    />
+                </div>
+                <div className="why-cant-i-edit-tooltip">
+                    <TooltipHover
+                        content = {whyCantEditTooltipContent}
+
+                        disableFocusListener={false}
+                    >
+                        <div
+                            className="why-cant-i-edit-tooltip"
+                            tabIndex="0"
+                            aria-label={whyCantEditTooltipContent}
+                        >
+                            <HelpTooltipIcon />
+                        </div>
+                    </TooltipHover>
+                    Why can&apos;t I edit this message?
+                </div>
+                <div className="recapture">
+                    <ReCAPTCHA
+                        ref={recaptchaRef}
+                        size="normal"
+                        onChange={onVerifyCaptcha}
+                        sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY}
+                    />
+                    {formState.errors.captchaCode &&
+                        <span className="errorMessage">Please verify the CAPTCHA</span>
+                    }
+                </div>
+
+                <div className="formControls">
+                    <StandardButton
+                        className="tint-1"
+                        onClick={onCloseRequest}
+                    >
+                        Cancel
+                    </StandardButton>
+                    <StandardButton
+                        className="submitButton tint-2"
+                        disabled={currentlySubmitting}
+                        onClick={() => {}}
+                    >
+                        {currentlySubmitting ?
+                            <LoadingIcon className="inline-icon" />
+                            : <>
+                                Send
+                                <SendIcon/>
+                            </>
+                        }
+                    </StandardButton>
+                </div>
+            </FormSection>
+        )
+    }
+
     return <div className="SendForm">
         <div>
             <h2>Use Ask Izzy to send</h2>
@@ -220,65 +303,3 @@ function SendForm({
 
 export default SendForm
 
-function renderSubmitDetailsSection(
-    recaptchaRef,
-    onVerifyCaptcha,
-    currentlySubmitting,
-    messageText,
-    onCloseRequest,
-    formState,
-    messageType,
-) {
-    const messagePreviewContentsProp = messageType === "Email" ?
-        {dangerouslySetInnerHTML: {__html: messageText.body}}
-        : {children: messageText.body}
-    return (
-        <FormSection
-            className="submitDetails"
-            title="Your pre-filled message"
-        >
-            <div className="messagePreview">
-                <div className="description">
-                    Review your pre-filled message
-                </div>
-                <div
-                    className="messageText"
-                    {...messagePreviewContentsProp}
-                />
-            </div>
-            <div className="recapture">
-                <ReCAPTCHA
-                    ref={recaptchaRef}
-                    size="normal"
-                    onChange={onVerifyCaptcha}
-                    sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY}
-                />
-                {formState.errors.captchaCode &&
-                    <span className="errorMessage">Please verify the CAPTCHA</span>
-                }
-            </div>
-
-            <div className="formControls">
-                <StandardButton
-                    className="tint-1"
-                    onClick={onCloseRequest}
-                >
-                    Cancel
-                </StandardButton>
-                <StandardButton
-                    className="submitButton tint-2"
-                    disabled={currentlySubmitting}
-                    onClick={() => {}}
-                >
-                    {currentlySubmitting ?
-                        <LoadingIcon className="inline-icon" />
-                        : <>
-                            Send
-                            <SendIcon/>
-                        </>
-                    }
-                </StandardButton>
-            </div>
-        </FormSection>
-    )
-}
