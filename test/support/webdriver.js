@@ -1,14 +1,14 @@
-
+/* @flow */
 
 import Webdriver from "selenium-webdriver";
 import ChromeWebDriver from "selenium-webdriver/chrome";
 import command from "selenium-webdriver/lib/command";
 
-
+declare var IzzyStorage: Object;
 
 export async function seleniumBrowser(
-    driver,
-) {
+    driver: typeof Webdriver.WebDriver,
+): Promise<Object> {
     const wnd = new Webdriver.WebDriver.Window(driver);
     const capabilities = await driver.getCapabilities();
     const res = capabilities.caps_;
@@ -34,7 +34,7 @@ export async function seleniumBrowser(
  *
  * @return {string} - Root url for the application under test.
  */
-export function baseUrl() {
+export function baseUrl(): string {
     const port = process.env.PORT;
 
     if (!port) {
@@ -53,9 +53,9 @@ export function baseUrl() {
  * @return {Promise} - return value from Selenium Webdriver.get.
  */
 export async function gotoUrl(
-    driver,
-    url
-) {
+    driver: typeof Webdriver.WebDriver,
+    url: string
+): Promise<void> {
     await driver.get(baseUrl() + url);
 }
 
@@ -64,7 +64,7 @@ export async function gotoUrl(
  *
  * @return {Promise<Webdriver.Webdriver>} requested webdriver.
  */
-export default async function webDriverInstance() {
+export default async function webDriverInstance(): Promise<typeof Webdriver.WebDriver> {
     // Remove version from browserName (not supported)
     const browserName = (process.env.SELENIUM_BROWSER || "").split(/:/)[0];
     const preferences = new Webdriver.logging.Preferences();
@@ -151,8 +151,8 @@ export default async function webDriverInstance() {
 }
 
 async function waitForStorage(
-    driver,
-) {
+    driver: typeof Webdriver.WebDriver,
+): Promise<void> {
     await gotoUrl(driver, "/");
     await driver.wait(
         () => {
@@ -165,9 +165,9 @@ async function waitForStorage(
 }
 
 export async function setStorage(
-    driver,
-    value,
-) {
+    driver: typeof Webdriver.WebDriver,
+    value: string,
+): Promise<void> {
     await waitForStorage(driver);
     await driver.executeScript((value) =>
         IzzyStorage.setItem(value), value
@@ -175,8 +175,8 @@ export async function setStorage(
 }
 
 export async function cleanDriverSession(
-    driver
-) {
+    driver: typeof Webdriver.WebDriver
+): Promise<void> {
     await driver.executeScript(() => console.log("Clearing browsing session"))
     const url = await driver.getCurrentUrl()
     if (!url.includes("localhost")) {
@@ -184,6 +184,8 @@ export async function cleanDriverSession(
     }
     await waitForStorage(driver);
     await driver.removeAllScriptsBeforeLoad()
+
+    await new Promise(resolve => setTimeout(resolve, 2000));
     await driver.executeScript(() => {
         IzzyStorage.clear();
         window.dataLayer = [];
@@ -192,9 +194,9 @@ export async function cleanDriverSession(
 }
 
 export async function isElementPresent(
-    driver,
-    locator
-) {
+    driver: typeof Webdriver.WebDriver,
+    locator: typeof Webdriver.By
+): Promise<boolean> {
     const elements = await driver.findElements(locator);
 
     return elements.length > 0;

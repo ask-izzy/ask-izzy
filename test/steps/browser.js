@@ -1,36 +1,35 @@
+/* $FlowIgnore */
 /*
  * Step definitions for Selenium/browser related steps
  */
 
 /* eslint-disable no-use-before-define */
 
-
+import assert from "../support/page-assertions";
 import Yadda from "yadda";
-import { By, Key } from "selenium-webdriver";
+import Webdriver, { By, Key } from "selenium-webdriver";
 import {
     TargetLocator,
     Navigation,
 } from "selenium-webdriver/lib/webdriver";
 import _ from "underscore";
 
-import assert from "../support/page-assertions.js";
-import dictionary from "../support/dictionary.js";
-import pauseToDebug, * as debug from "../support/debug.js";
+import dictionary from "../support/dictionary";
+import pauseToDebug, * as debug from "../support/debug";
 import {
     elementWithText,
     escapeXPathString,
-} from "@/test/support/selectors.js";
+} from "../support/selectors";
 import {
     getElementWithText,
     getElementWithTextSubstring,
-} from "@/test/support/elements.js"
+} from "../support/elements"
 import {
     gotoUrl,
     baseUrl,
     cleanDriverSession,
-} from "@/test/support/webdriver.js";
-import { regexEscape } from "@/src/utils/strings.js"
-
+} from "../support/webdriver";
+import { regexEscape } from "../../src/utils/strings"
 
 module.exports = (function() {
     return Yadda.localisation.English.library(dictionary)
@@ -43,9 +42,6 @@ module.exports = (function() {
         )
         .when("I click the \"$STRING\" button", clickButton)
         .when("I click the button with \"$STRING\" class name", clickButtonWithClassName)
-        .when("I click the alert button with \"$STRING\" alerts",
-            clickAlertButton
-        )
         .when("I click the \"$STRING\" dropdown", clickDropdown)
         .when("I click the \"$STRING\" dropdown option", clickDropdownOption)
         .when("I click the \"$STRING\" collapsible section", clickDetails)
@@ -95,8 +91,8 @@ module.exports = (function() {
  * @returns {Promise<boolean>} true if the document is readyState is complete.
  */
 module.exports.documentReady = async function documentReady(
-    driver
-) {
+    driver: Webdriver.WebDriver
+): Promise<boolean> {
     const result = await driver.executeAsyncScript((callback) => {
         const intervalId = setInterval(() => {
             // Internal page
@@ -127,50 +123,59 @@ module.exports.documentReady = async function documentReady(
     }
 };
 
-async function visitUrl(url) {
+async function visitUrl(url: string): Promise<void> {
     await module.exports.visitUrl(this.driver, url);
 }
 
 module.exports.visitUrl = async function visitUrl(
-    driver,
-    url
-) {
+    driver: Webdriver.WebDriver,
+    url: string
+): Promise<void> {
     await gotoUrl(driver, url);
+    await new Promise(resolve => setTimeout(resolve, 2000));
     await module.exports.documentReady(driver);
 }
 
-async function clickLink(linkText) {
+async function clickLink(linkText: string) {
     await clickElementWithText(this.driver, linkText, "a")
 }
 
-async function clickLinkWithSubstring(linkText) {
+async function clickLinkWithSubstring(linkText: string) {
     await clickElementWithTextSubstring(this.driver, linkText, "a")
 }
 
-async function clickButton(buttonText) {
+async function clickButton(buttonText: string) {
     await clickElementWithText(this.driver, buttonText, "button")
 }
 
-async function clickButtonWithClassName(className) {
-    await this.driver.findElement(By.css(
-        className
-    ))
-        .click();
+async function clickButtonWithClassName(className: string): Promise<void> {
+    try {
+        await this.driver.findElement(By.css(
+            className
+        ))
+            .click();
+    } catch {
+        // Fallback for buttons with class names that cannot be found with the by css function
+        console.log("in")
+        await this.driver.findElement(By.xpath(
+            `//button[@class="${className}"]`
+        ))
+            .click();
+    }
+
     await module.exports.documentReady(this.driver);
 }
 
-async function clickAlertButton(buttonText) {
-    await clickElementWithText(this.driver, buttonText, "button")
-}
 
-async function clickDetails(summaryText) {
+
+async function clickDetails(summaryText: string): Promise<void> {
     await clickElementWithText(this.driver, summaryText, "details/summary")
 }
 
 async function clickElementWithText(
-    driver,
-    elementText,
-    elementType
+    driver: Webdriver.WebDriver,
+    elementText: string,
+    elementType?: string
 ) {
     const useFallbackClickMethod = (elementText === "Carlton, VIC") &&
         (elementType.includes("option"))
@@ -196,9 +201,9 @@ async function clickElementWithText(
 }
 
 async function clickElementWithTextSubstring(
-    driver,
-    elementText,
-    elementType
+    driver: Webdriver.WebDriver,
+    elementText: string,
+    elementType?: string
 ) {
     const element = await getElementWithTextSubstring(
         driver,
@@ -209,7 +214,7 @@ async function clickElementWithTextSubstring(
     await module.exports.documentReady(driver);
 }
 
-async function clickDropdown(optionText) {
+async function clickDropdown(optionText: string) {
     await clickElementWithText(
         this.driver,
         optionText,
@@ -217,7 +222,7 @@ async function clickDropdown(optionText) {
     )
 }
 
-async function clickDropdownOption(optionText) {
+async function clickDropdownOption(optionText: string) {
     await clickElementWithText(
         this.driver,
         optionText,
@@ -227,22 +232,22 @@ async function clickDropdownOption(optionText) {
 }
 
 function navigator(
-    driver
-) {
+    driver: Webdriver.WebDriver
+): Navigation {
     return new Navigation(driver);
 }
 
-async function reloadPage() {
+async function reloadPage(): Promise<void> {
     await navigator(this.driver).refresh();
     await module.exports.documentReady(this.driver);
 }
 
-async function clickBrowserBack() {
+async function clickBrowserBack(): Promise<void> {
     await navigator(this.driver).back();
     await module.exports.documentReady(this.driver);
 }
 
-async function clickHome() {
+async function clickHome(): Promise<void> {
     await this.driver.findElement(By.css(
         ".appBarLogo"
     ))
@@ -250,7 +255,7 @@ async function clickHome() {
     await module.exports.documentReady(this.driver);
 }
 
-async function clickBack() {
+async function clickBack(): Promise<void> {
     await this.driver.findElement(By.css(
         "button.IconButton"
     ))
@@ -259,9 +264,9 @@ async function clickBack() {
 }
 
 async function urlIs(
-    driver,
-    expected
-) {
+    driver: Webdriver.WebDriver,
+    expected: string
+): Promise<boolean> {
     let url = await driver.getCurrentUrl();
 
     if (url.endsWith("#")) {
@@ -275,7 +280,8 @@ async function urlIs(
     return decodeURI(url) === expected;
 }
 
-async function checkURL(expected) {
+async function checkURL(expected: string): Promise<void> {
+    await new Promise(resolve => setTimeout(resolve, 2000));
     if (expected.startsWith(`"`)) {
         throw new Error("URL should not be quoted");
     }
@@ -309,7 +315,7 @@ async function checkURL(expected) {
     );
 }
 
-async function thenISee(expected) {
+async function thenISee(expected: string): Promise<void> {
     // driver.findElement() seems to be very slow to return when
     // there is no matching element on the page.
     this.mochaState.timeout(45000)
@@ -317,7 +323,7 @@ async function thenISee(expected) {
     await assert.withRetries(assert.textIsVisible)(this.driver, expected);
 }
 
-async function thenISeeServicesInMyList(expected) {
+async function thenISeeServicesInMyList(expected: string): Promise<void> {
     await this.driver.findElement(By.css(
         ".my-list-count"
     ))
@@ -326,7 +332,7 @@ async function thenISeeServicesInMyList(expected) {
     await assert.withRetries(assert.textIsVisible)(this.driver, expected);
 }
 
-async function thenIDontSee(expected) {
+async function thenIDontSee(expected: string): Promise<void> {
     this.mochaState.slow(22000)
     try {
         await assert.textIsVisible(this.driver, expected);
@@ -344,8 +350,8 @@ async function thenIDontSee(expected) {
  * @returns {Promise<Webdriver.WebElement>} the search element.
  */
 function getSearchElement(
-    driver,
-) {
+    driver: Webdriver.WebDriver,
+): Promise<Webdriver.WebElement> {
     return getInputElement(driver, "search");
 }
 
@@ -357,38 +363,39 @@ function getSearchElement(
  * @returns {Promise<Webdriver.WebElement>} the input element.
  */
 function getInputElement(
-    driver,
+    driver: Webdriver.WebDriver,
     type = "text",
-) {
+): Promise<Webdriver.WebElement> {
     return driver.findElement(By.css(
         `input[type=${type}]`
     ));
 }
 
-async function doSearch(search) {
+async function doSearch(search: string): Promise<void> {
     let element = await getSearchElement(this.driver);
-
+    await new Promise(resolve => setTimeout(resolve, 2000));
     await element.clear();
     await element.sendKeys(search);
-
+    await new Promise(resolve => setTimeout(resolve, 2000));
     await module.exports.documentReady(this.driver);
 }
 
 
-async function clearFirstSearchBox() {
+async function clearFirstSearchBox(): Promise<void> {
     await module.exports.documentReady(this.driver);
     const element = await getSearchElement(this.driver);
     await element.clear();
     await element.click();
 }
 
-async function doSearchAndEnter(search) {
+async function doSearchAndEnter(search: string): Promise<void> {
     await (await getSearchElement(this.driver))
         .sendKeys(search + Key.ENTER);
+    await new Promise(resolve => setTimeout(resolve, 2000));
     await module.exports.documentReady(this.driver);
 }
 
-async function searchContains() {
+async function searchContains(expected: string): Promise<void> {
     // Test fails 1 out of 10 times it is executed.
     // Until migration to cypress is done, this test
     // will be excluded.
@@ -400,30 +407,30 @@ async function searchContains() {
 }
 
 async function getButtonState(
-    driver,
-    text,
-) {
+    driver: Webdriver.WebDriver,
+    text: string,
+): Promise<boolean> {
     return await driver
         .findElement(By.xpath(elementWithText(text, "button")))
         .isEnabled();
 }
 
-async function checkDisabled(text) {
+async function checkDisabled(text: string): Promise<void> {
     let enabled = await getButtonState(this.driver, text);
 
     assert.equal(enabled, false);
 }
 
-async function checkEnabled(text) {
+async function checkEnabled(text: string): Promise<void> {
     let enabled = await getButtonState(this.driver, text);
 
     assert.equal(enabled, true);
 }
 
 async function assertItemCheckedIs(
-    label,
-    status
-) {
+    label: string,
+    status: any
+): Promise<void> {
     let labelXPath = `//a[.//*[text()=${escapeXPathString(label)}]]`;
 
     let checked = await this.driver.findElement(By.xpath(
@@ -434,15 +441,15 @@ async function assertItemCheckedIs(
     assert.equal(checked, status);
 }
 
-async function assertItemChecked(label) {
+async function assertItemChecked(label: string): Promise<void> {
     await assertItemCheckedIs.bind(this)(label, "true");
 }
 
-async function assertItemNotChecked(label) {
+async function assertItemNotChecked(label: string): Promise<void> {
     await assertItemCheckedIs.bind(this)(label, null);
 }
 
-async function checkMetaCanonical(expected) {
+async function checkMetaCanonical(expected: string): Promise<void> {
 
     let content = await this.driver.findElement(By.css(
         "link[rel=canonical]"
@@ -465,9 +472,8 @@ async function checkMetaCanonical(expected) {
  * @returns {Promise<void>} resolves after we've switched to the new tab.
  *
  */
-async function newBrowser() {
+async function newBrowser(): Promise<void> {
     const currentHandle = await this.driver.getWindowHandle();
-
     await this.driver.executeScript(() => {
         document.body.innerHTML = `<a
             href="about:blank"
@@ -476,10 +482,10 @@ async function newBrowser() {
             Click Here
         </a>`;
     });
+    await new Promise(resolve => setTimeout(resolve, 2000));
     await clickLink.apply(this, ["Click Here"]);
     const newHandles = _(await this.driver.getAllWindowHandles())
         .without(currentHandle);
-
     if (newHandles.length != 1) {
         throw new Error(
             `Expected opening a new tab to result in 1 window, got ${
@@ -495,11 +501,11 @@ async function newBrowser() {
         .window(newHandles[0]);
 }
 
-async function cleanSession() {
+async function cleanSession(): Promise<void> {
     await cleanDriverSession(this.driver);
 }
 
-async function takeScreenshot() {
+async function takeScreenshot(): Promise<void> {
     const filepath = await debug.takeScreenshot(
         this.driver,
         debug.getSceenshotPath(
@@ -510,15 +516,15 @@ async function takeScreenshot() {
     console.log(`${this.indent}  Screenshot saved to "${filepath}"`);
 }
 
-async function enableDebugMode() {
+async function enableDebugMode(): Promise<void> {
     await debug.enableDebugMode(this.driver)
 }
 
-async function showCursor() {
+async function showCursor(): Promise<void> {
     await debug.showCursorPosition(this.driver)
 }
 
-async function scrollToElement(elementText) {
+async function scrollToElement(elementText: string): Promise<void> {
     return this.driver.executeScript(
         (elementXPathSelector, elementText) => {
             const element = document
@@ -541,7 +547,7 @@ async function scrollToElement(elementText) {
     );
 }
 
-async function seeBrowserTitle(title) {
+async function seeBrowserTitle(title: string): Promise<void> {
     const browserTitle = await this.driver.getTitle()
 
     assert.strictEqual(
@@ -552,8 +558,19 @@ async function seeBrowserTitle(title) {
 }
 
 async function seeTheAlerts(
-    table,
-) {
+    table: Array<Object>,
+): Promise<void> {
+    const alerts = await this.driver.findElements(
+        By.css(`.AlertBannerButton`)
+    )
+    console.log(alerts)
+    if (alerts.length > 0) {
+        await this.driver.findElement(By.css(
+            `.AlertBannerButton`
+        ))
+            .click();
+    }
+
     await this.driver.wait(module.exports.documentReady(this.driver), 10000);
 
     const alertElements = await this.driver.findElements(
