@@ -33,10 +33,6 @@ export default ({
             },
         },
         "Legal support": {
-            serviceTypes: [
-                "Legal Advice",
-                "Legal Aid",
-            ],
             $concat: {
                 term: [
                     "legal",
@@ -54,13 +50,14 @@ export default ({
             },
         },
         "Children's support and protection": {
-            serviceTypesRaw: [
-                "Child Protection/ Placement",
-                "Child support advice",
-            ],
             $concat: {
                 term: [
-                    "-adoption",
+                    "Child Protection/ Placement",
+                ],
+            },
+            $removeElms: {
+                term: [
+                    "\"family violence\"",
                 ],
             },
         },
