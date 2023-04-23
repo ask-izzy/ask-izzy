@@ -45,10 +45,9 @@ export default ({
                 ],
             },
             $applyIfShouldInjectAccessPoints: {
-                catchment: "true",
+                catchment: "prefer",
                 $push: {
                     serviceTypes: "Homelessness Access Point",
-                    term: "\"Homelessness Access Point\"",
                 },
             },
         },
@@ -93,6 +92,7 @@ export default ({
             $removeElms: {
                 term: [
                     "housing",
+                    "-\"housing information\"",
                 ],
             },
         },
