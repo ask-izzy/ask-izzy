@@ -218,9 +218,7 @@ const categories = [
             $concat: {
                 term: [
                     "-\"coordinating bodies\"",
-                    "assistance pets",
-                    "-\"animal control\"",
-                    "-effectiveness",
+                    "health",
                 ],
                 serviceTypes: [
                     "Medical",
