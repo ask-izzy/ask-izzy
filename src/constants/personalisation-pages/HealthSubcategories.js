@@ -17,9 +17,7 @@ export default ({
             },
             $removeElms: {
                 term: [
-                    "assistance pets",
-                    "-\"animal control\"",
-                    "-effectiveness",
+                    "health",
                 ],
             },
         },
@@ -32,9 +30,7 @@ export default ({
             },
             $removeElms: {
                 term: [
-                    "assistance pets",
-                    "-\"animal control\"",
-                    "-effectiveness",
+                    "health",
                 ],
             },
         },
@@ -47,9 +43,7 @@ export default ({
             },
             $removeElms: {
                 term: [
-                    "assistance pets",
-                    "-\"animal control\"",
-                    "-effectiveness",
+                    "health",
                 ],
             },
         },
@@ -60,15 +54,7 @@ export default ({
             ],
             $concat: {
                 term: [
-                    "health",
                     "children",
-                ],
-            },
-            $removeElms: {
-                term: [
-                    "assistance pets",
-                    "-\"animal control\"",
-                    "-effectiveness",
                 ],
             },
         },
@@ -81,9 +67,7 @@ export default ({
             },
             $removeElms: {
                 term: [
-                    "assistance pets",
-                    "-\"animal control\"",
-                    "-effectiveness",
+                    "health",
                 ],
             },
         },
@@ -100,9 +84,7 @@ export default ({
             },
             $removeElms: {
                 term: [
-                    "assistance pets",
-                    "-\"animal control\"",
-                    "-effectiveness",
+                    "health",
                 ],
             },
             $unset: ["showInAskIzzyHealth"],
@@ -118,9 +100,7 @@ export default ({
             },
             $removeElms: {
                 term: [
-                    "assistance pets",
-                    "-\"animal control\"",
-                    "-effectiveness",
+                    "health",
                 ],
             },
             $unset: ["showInAskIzzyHealth"],
