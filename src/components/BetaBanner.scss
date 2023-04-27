@@ -1,0 +1,49 @@
+@use '../styles/mixins/colours';
+
+.BetaBanner {
+    display: flex;
+    flex-direction: row;
+    color: var(--colour-text-light);
+    background-color: var(--colour-bg-highlight-tint-1);
+    justify-content: center;
+    align-items: center;
+    min-height: 50px;
+    font-size: 14px;
+    
+
+    .beta-information-container {
+        display: flex;
+        flex-direction: row;
+        padding-right: 8px;
+        .beta-relevant-links {
+            padding: 0px 10px;
+        }
+        .beta-duration-message {
+            padding-left: 3px;
+        }
+    }
+    
+    .beta-relevant-links {
+        padding-right: 4px;
+
+    }
+    @media (max-width: 768px) {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 20px 20px;
+        .beta-information-container {
+            padding-bottom: 15px
+        }
+        @media (max-width: 455px) {
+            .beta-information-container {
+                flex-direction: column;
+                .beta-duration-message {
+                    padding-left: 0px;
+                    padding-top: 5px;
+                }
+            }
+        }
+    }
+    
+
+}
