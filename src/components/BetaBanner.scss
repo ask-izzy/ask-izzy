@@ -15,9 +15,6 @@
         display: flex;
         flex-direction: row;
         padding-right: 8px;
-        .beta-relevant-links {
-            padding: 0px 10px;
-        }
         .beta-duration-message {
             padding-left: 3px;
         }
@@ -25,7 +22,12 @@
     
     .beta-relevant-links {
         padding-right: 4px;
-
+        .Button {
+            background-color: transparent;
+            border: 0px;
+            text-decoration: underline;
+            
+        }
     }
     @media (max-width: 768px) {
         flex-direction: column;
