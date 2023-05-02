@@ -24,7 +24,6 @@ export default function BetaBanner(): ReactNode {
             <div className="beta-relevant-links">
                 <Button
                     className="about-beta"
-                    
                 >
                     About beta
                 </Button>
