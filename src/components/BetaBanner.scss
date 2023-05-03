@@ -9,43 +9,46 @@
     align-items: center;
     min-height: 50px;
     font-size: 14px;
-    
+
 
     .beta-information-container {
         display: flex;
         flex-direction: row;
         padding-right: 8px;
+
         .beta-duration-message {
             padding-left: 3px;
         }
     }
-    
+
     .beta-relevant-links {
         padding-right: 4px;
+
         .Button {
             background-color: transparent;
-            border: 0px;
+            border: 0;
             text-decoration: underline;
-            
         }
     }
+
     @media (max-width: 768px) {
         flex-direction: column;
         align-items: flex-start;
-        padding: 20px 20px;
+        padding: 20px;
+
         .beta-information-container {
-            padding-bottom: 15px
+            padding-bottom: 15px;
         }
+
         @media (max-width: 455px) {
             .beta-information-container {
                 flex-direction: column;
+
                 .beta-duration-message {
-                    padding-left: 0px;
+                    padding-left: 0;
                     padding-top: 5px;
                 }
             }
         }
     }
-    
-
 }
