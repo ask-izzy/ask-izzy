@@ -5,7 +5,7 @@ import type {
     Element as ReactElement,
     ElementConfig as ReactElementConfig,
 } from "React";
-import React from "react"
+import React, {useEffect} from "react"
 import { withRouter } from "next/router"
 import type { NextRouter } from "next/router"
 
@@ -25,6 +25,7 @@ import Storage from "@/src/storage";
 import Controls from "@/src/components/ResultsListPage/Controls";
 
 import useServiceResults from "@/hooks/useServiceResults"
+import { usersnapFireEvent } from "@/helpers/usersnap.helpers.js"
 
 type Props = {
     router: NextRouter
@@ -46,6 +47,12 @@ function ResultsListPage({router}: Props): ReactNode {
         searchHasNextPage,
         loadNextSearchPage,
     } = useServiceResults(router)
+
+    useEffect(() => {
+        setTimeout(() => {
+            usersnapFireEvent("beta-effort")
+        }, 3000)
+    }, [])
 
     function hasSearchResults(): boolean {
         return Boolean(
