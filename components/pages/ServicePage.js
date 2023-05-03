@@ -18,6 +18,7 @@ import {
     addPageLoadDependencies,
     closePageLoadDependencies,
 } from "@/src/utils/page-loading"
+import { usersnapFireEvent } from "@/helpers/usersnap.helpers.js"
 
 const ServicePage = function(): React.Node {
     const [service, setService] = useState<Service | null>(null)
@@ -31,6 +32,8 @@ const ServicePage = function(): React.Node {
         if (serviceId) {
             loadService(serviceId)
         }
+        usersnapFireEvent("beta-confidence")
+
     }, [router.query.serviceSlug])
 
     function extractId(slug: string): number {

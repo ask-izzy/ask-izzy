@@ -37,7 +37,7 @@ export default function BetaBanner(): ReactNode {
                         eventAction: "Beta Opt Out",
                         eventLabel: null,
                     }}
-                    onClick={() => usersnapFireEvent("")}
+                    onClick={() => usersnapFireEvent("beta-opt-out")}
                 >
                     Go back to original site
                 </Button>
