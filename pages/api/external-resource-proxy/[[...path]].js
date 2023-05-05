@@ -3,6 +3,7 @@
 // https://github.com/vercel/next.js/issues/37028 stopping us
 // proxying the google maps api
 import { createProxyMiddleware } from "http-proxy-middleware";
+import { lsof } from "list-open-files"
 
 import { unflattenDomain } from "@/helpers/url.helpers"
 
@@ -17,6 +18,23 @@ export default function handler(req: any, res: any): void {
     if (!process.env.DOMAINS_TO_PROXY) {
         return res.status(400).send("Route not available");
     }
+
+    setTimeout(async() => {
+        const processInfos = await lsof()
+
+        const files = processInfos[0]?.files
+        if (!files) {
+            return
+        }
+        const sockets = files.filter(file => (file.type === "IP") && file.from)
+        const incomingSockets = sockets.filter(socket => socket.from.port === 8000)
+        const outgoingSockets = sockets.filter(socket => socket.from.port !== 8000)
+
+        console.log(
+            `${files.length} open fd, ${incomingSockets.length} incoming sockets, ${outgoingSockets.length} outgoing`
+        )
+    }, 1000)
+
     const targetBaseUrl = getTargetBaseUrl(req)
 
     if (!allowedDomains.has(targetBaseUrl.host)) {

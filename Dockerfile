@@ -60,7 +60,9 @@ RUN mkdir /app && \
     apt-get -y update && \
     apt-get -y --no-install-recommends install \
         # Used by start-server-and-test
-        procps && \
+        procps \
+        # Used for open fd debugging
+        lsof && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
 
