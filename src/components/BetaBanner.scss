@@ -26,12 +26,14 @@
         .Button {
             background-color: transparent;
             border: 0;
-            padding:0px;
+            padding: 0;
             text-decoration: underline;
+
             &:hover {
                 text-decoration: none;
             }
         }
+
         .Link {
             color: inherit;
         }
