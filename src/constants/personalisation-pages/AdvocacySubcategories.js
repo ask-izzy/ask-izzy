@@ -64,10 +64,19 @@ export default ({
             },
         },
         "Disability advocacy": {
-            serviceTypes: ["Disability advocacy"],
+            $unset: ["serviceTypes"],
+            serviceTypesRaw: ["Disability advocacy"],
+            $concat: {
+                term: [
+                    "disability",
+                ],
+            },
             $removeElms: {
                 term: [
+                    "-\"coordinating bodies\"",
                     "advice",
+                    "advocacy",
+                    "-research",
                 ],
             },
         },

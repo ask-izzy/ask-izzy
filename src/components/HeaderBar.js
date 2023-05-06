@@ -4,6 +4,7 @@ import * as React from "react";
 import {useEffect, useState} from "react";
 import { useRouter } from "next/router"
 import AppBar from "./AppBar";
+import BetaBanner from "@/src/components/BetaBanner"
 
 type Props = {|
     primaryText: string | React.Node,
@@ -124,6 +125,7 @@ function HeaderBar({
         <div
             className={`${headerBarClassName}`}
         >
+            <BetaBanner />
             <AppBar
                 transition={!fixedAppBar}
                 hideLogoWhenNotABar={hideLogoWhenNotABar}
