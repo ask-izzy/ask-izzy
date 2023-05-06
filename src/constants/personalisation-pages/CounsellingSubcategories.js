@@ -35,7 +35,7 @@ export default ({
         },
         "Drugs and alcohol counselling": {
             term: ["drugs", "alcohol"],
-            serviceTypes: ["Alcohol & Other Drug Counselling"],
+            serviceTypesRaw: ["Alcohol & Other Drug Counselling"],
             minimumShouldMatch: "30%",
         },
         "Gender or sexual identity": {
@@ -51,11 +51,16 @@ export default ({
             },
         },
         "Sexual assault or family violence": {
+            $unset: ["serviceTypes"],
             $concat: {
-                term: ["family", "violence"],
+                term: ["violence"],
             },
-            serviceTypes: [
-                "Sexual Assault Services",
+            $removeElms: {
+                term: [
+                    "counselling",
+                ],
+            },
+            serviceTypesRaw: [
                 "Incest/sexual abuse counselling",
                 "Domestic violence counselling",
             ],
