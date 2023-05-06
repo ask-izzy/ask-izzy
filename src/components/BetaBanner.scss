@@ -7,7 +7,7 @@
     background-color: var(--colour-bg-highlight-tint-1);
     justify-content: center;
     align-items: center;
-    min-height: 50px;
+    height: 40px;
     font-size: 14px;
 
     .beta-information-container {
@@ -26,7 +26,14 @@
         .Button {
             background-color: transparent;
             border: 0;
+            padding:0px;
             text-decoration: underline;
+            &:hover {
+                text-decoration: none;
+            }
+        }
+        .Link {
+            color: inherit;
         }
     }
 
