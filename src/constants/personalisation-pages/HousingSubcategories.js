@@ -13,24 +13,37 @@ export default ({
     question: "Which situation is most like yours?",
     possibleAnswers: {
         "Emergency accommodation": {
-            serviceTypes: [
+            $unset: ["serviceTypes"],
+            serviceTypesRaw: [
                 "Refuge/ Crisis accommodation",
             ],
+            $concat: {
+                term: ["\"crisis accommodation\""],
+            },
             $removeElms: {
                 term: [
                     "housing",
+                    "-\"coordinating bodies\"",
                     "-\"respite care\"",
                     "-\"housing information\"",
                     "-hef",
+                    "-\"holiday accommodation\"",
                 ],
             },
             minimumShouldMatch: "30%",
             $applyIfShouldInjectAccessPoints: {
                 catchment: "true",
                 $push: {
-                    serviceTypes: "Homelessness Access Point",
                     term: "\"Homelessness Access Point\"",
                 },
+                $removeElms: {
+                    term: [
+                        "\"crisis accommodation\"",
+                    ],
+                },
+                serviceTypesRaw: [
+                    "Homelessness Access Point",
+                ],
             },
         },
         "Homelessness support": {
