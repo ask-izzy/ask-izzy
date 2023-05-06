@@ -4,6 +4,7 @@ import type {Node as ReactNode} from "React";
 import React from "react";
 
 import Button from "@/src/components/base/Button";
+import Link from "@/src/components/base/Link";
 import { usersnapFireEvent } from "@/helpers/usersnap.helpers.js"
 
 
@@ -22,11 +23,12 @@ export default function BetaBanner(): ReactNode {
                 </div>
             </div>
             <div className="beta-relevant-links">
-                <Button
+                <Link
                     className="about-beta"
+                    to="/beta-info"
                 >
                     About beta
-                </Button>
+                </Link>
                 {" "}|{" "}
                 <Button
                     className="exit-beta"
