@@ -9,7 +9,7 @@ import { usersnapFireEvent } from "@/helpers/usersnap.helpers.js"
 
 
 export default function BetaBanner(): ReactNode {
-    const endOfLifeBeta = "XX/XX/2023"
+    const endOfLifeBeta = "25 May 2023"
     return (
         <div className="BetaBanner">
             <div className="beta-information-container">
