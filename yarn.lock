@@ -8718,10 +8718,9 @@ http-proxy-middleware@^2.0.6:
     is-plain-obj "^3.0.0"
     micromatch "^4.0.2"
 
-http-proxy@^1.18.1:
+http-proxy@^1.18.1, "http-proxy@github:Jimbly/node-http-proxy":
   version "1.18.1"
-  resolved "https://registry.yarnpkg.com/http-proxy/-/http-proxy-1.18.1.tgz#401541f0534884bbf95260334e72f88ee3976549"
-  integrity sha512-7mz/721AbnJwIVbnaSv1Cz3Am0ZLT/UBwkC92VlxhXv/k/BBQfM2fXElQNC27BVGr0uwUpplYPQM9LnaBMR5NQ==
+  resolved "https://codeload.github.com/Jimbly/node-http-proxy/tar.gz/ba0c414cd03799e357c5d867c11dea06a9c34ec8"
   dependencies:
     eventemitter3 "^4.0.0"
     follow-redirects "^1.0.0"
