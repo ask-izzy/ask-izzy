@@ -14,7 +14,6 @@ import QuestionStepper from "@/src/components/QuestionStepper";
 import AlertBannerList from "@/src/components/AlertBannerList";
 import ScreenReader from "@/src/components/ScreenReader";
 import {goToPersonalisationNextPath} from "@/src/utils/routing"
-import { usersnapFireEvent } from "@/helpers/usersnap.helpers.js"
 
 const LOGO = "/images/ask-izzy-logo-single-line-yellow.svg";
 
@@ -32,7 +31,6 @@ function HomePage(): ReactNode {
         const savedSearchText = storage.getSearch();
         savedSearchText && setInitialSearchText(savedSearchText)
         resetDfvOptions();
-        usersnapFireEvent("try-beta")
     }, [])
 
     const onSearchSubmit = (searchText): void => {
