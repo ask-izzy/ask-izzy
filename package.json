@@ -160,5 +160,8 @@
     "@storybook/builder-webpack5": "^6.4.22",
     "@storybook/manager-webpack5": "^6.4.22",
     "webpack": "^5.72.1"
+  },
+  "resolutions": {
+    "http-proxy-middleware/http-proxy": "github:Jimbly/node-http-proxy"
   }
 }
