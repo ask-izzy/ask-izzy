@@ -133,6 +133,7 @@ module.exports = {
     skipTrailingSlashRedirect: true,
     sentry: {
         hideSourceMaps: false,
+        tunnelRoute: "/error-monitoring/sentry",
     },
 }
 

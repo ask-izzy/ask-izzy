@@ -7,6 +7,7 @@ import Head from "next/head"
 import { useRouter } from "next/router"
 import type { NextRouter } from "next/router"
 import "core-js/actual/string/replace-all";
+import * as Sentry from "@sentry/nextjs";
 
 import "@/src/utils/global-setup"
 import "../src/styles/bundle.scss"
@@ -46,8 +47,15 @@ function App(appProps: AppProps): ReactNode {
             closePageLoadDependencies(url, "render")
         })
 
-        router.events.on("routeChangeError", url => {
-            console.error("An error occurred when routing")
+        router.events.on("routeChangeError", (error, url) => {
+            if (!error.cancelled) {
+                Sentry.captureException(
+                    error,
+                    {
+                        extra: {url},
+                    }
+                )
+            }
             closePageLoadDependencies(url, "render")
         })
 
@@ -116,8 +124,12 @@ function getPageInfo({ Component, pageProps }: AppProps): PageInfo {
     const title = pageProps.pageTitle ?? Component.pageTitle
     const type = pageProps.pageType ?? Component.pageType
     if (title === undefined || type === undefined) {
-        console.error(`Route ${router.pathname} is missing shared props.`)
-        console.info(Component, pageProps)
+        Sentry.captureException(
+            new Error(`Route ${router.pathname} is missing shared props.`),
+            {
+                extra: {Component, pageProps},
+            }
+        )
         return {
             title: null,
             type: ["Unknown"],

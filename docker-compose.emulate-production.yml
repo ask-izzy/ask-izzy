@@ -16,6 +16,7 @@ services:
       HTTP_PROXY: "http://http-proxy:8888"
     volumes:
       - ./.env.production.local:/app/.env.production.local
+      - ./.env.local:/app/.env.local
       - storage:/storage
 
   load-balancer:

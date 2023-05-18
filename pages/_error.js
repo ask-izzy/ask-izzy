@@ -4,7 +4,6 @@
 // This page is heavily based off: https://github.com/vercel/next.js/blob/dba9e2a12adeb2066d0d5bb9a49bdb3e29689b92/examples/with-sentry/pages/_error.js
 
 import React from "react"
-
 import * as Sentry from "@sentry/nextjs"
 import NextErrorComponent from "next/error"
 
@@ -20,5 +19,8 @@ CustomErrorComponent.getInitialProps = async(contextData) => {
     // This will contain the status code of the response
     return NextErrorComponent.getInitialProps(contextData)
 }
+
+CustomErrorComponent.pageTitle = "Unknown Error Page"
+CustomErrorComponent.pageType = ["Error Page", "Unknown Error"]
 
 export default CustomErrorComponent
