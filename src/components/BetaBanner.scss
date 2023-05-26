@@ -14,10 +14,6 @@
         display: flex;
         flex-direction: row;
         padding-right: 8px;
-
-        .beta-duration-message {
-            padding-left: 3px;
-        }
     }
 
     .beta-relevant-links {
@@ -51,11 +47,6 @@
         @media (max-width: 455px) {
             .beta-information-container {
                 flex-direction: column;
-
-                .beta-duration-message {
-                    padding-left: 0;
-                    padding-top: 5px;
-                }
             }
         }
     }
