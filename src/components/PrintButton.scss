@@ -1,0 +1,15 @@
+@use '../styles/mixins/colours';
+
+.PrintButton {
+    .print-component-button{
+        background-color: Green;
+        padding: 0;
+        border: 0;
+    }
+    .printable-area {
+        position: absolute;
+        left: -10000px;
+        visibility: hidden;
+
+    }
+}
