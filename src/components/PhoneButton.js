@@ -4,7 +4,6 @@ import React from "react";
 import { titleize } from "underscore.string";
 
 import Link from "./base/Link";
-import * as gtm from "../google-tag-manager";
 import type {AnalyticsEvent} from "../google-tag-manager";
 import icons from "../icons";
 import classnames from "classnames"
@@ -46,20 +45,6 @@ function PhoneButton({
         return comment ? comment : titleize(kind)
     }
 
-    function recordClick(): void {
-        gtm.emit({
-            event: "Phone Number Clicked",
-            eventCat: "Phone Number Clicked",
-            eventAction: "",
-            eventLabel: `${location.pathname} - ${number}` +
-                `${crisis ? " (Crisis Number)" : ""}`,
-            sendDirectlyToGA: true,
-            ...analyticsEventDetails,
-        });
-    }
-
-
-
     return (
         <div className={
             classnames(
@@ -77,12 +62,12 @@ function PhoneButton({
             <Link
                 to={href()}
                 className="ContactButton"
-                onClick={recordClick}
                 analyticsEvent={{
                     event: "Link Followed - Phone Contact",
                     eventAction: `Contact detail - phone` +
                             `${crisis ? " - crisis line" : ""}`,
                     eventLabel: `${number}`,
+                    ...analyticsEventDetails,
                 }}
             >
                 <div className="Contact-text">

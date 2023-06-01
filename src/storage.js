@@ -106,16 +106,6 @@ const Storage = {
 
         if (emitAnalyticsEvent) {
             gtm.emit({
-                event: "Personalisation Response Given",
-                eventCat: this.getItem(key) ?
-                    "Change Personalisation Response"
-                    : "Set Personalisation Response",
-                eventAction: key,
-                eventLabel: String(obj),
-                sendDirectlyToGA: true,
-            })
-
-            gtm.emit({
                 event: "Input Submitted - Personalisation",
                 eventCat: "Input submitted",
                 eventAction: `Personalisation - ${key}`,
@@ -173,16 +163,6 @@ const Storage = {
                 emitGTMEvent("<none>")
             }
             for (const val of obj) {
-                gtm.emit({
-                    event: "Personalisation Response",
-                    eventCat: this.getItem(key) ?
-                        "Change Personalisation Response"
-                        : "Set Personalisation Response",
-                    eventAction: `${key} (single value)`,
-                    eventLabel: val,
-                    sendDirectlyToGA: true,
-                })
-
                 emitGTMEvent(val)
             }
             obj.sort()

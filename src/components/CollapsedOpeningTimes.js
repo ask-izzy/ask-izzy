@@ -9,7 +9,6 @@ import _ from "underscore";
 import ServiceOpening from "../iss/ServiceOpening";
 import Collapser from "./general/Collapser";
 import OpeningTimes from "./OpeningTimes";
-import * as gtm from "../google-tag-manager";
 import type {openingHours as openingHoursType} from "../iss/general";
 
 function formatTime(str: string): string {
@@ -76,23 +75,12 @@ function CollapsedOpeningTimes({
             (parseInt(record.open))
         )
 
-    function recordExpandOpeningTimes(): void {
-        gtm.emit({
-            event: "Opening Times Expanded",
-            eventCat: "Content Expanded",
-            eventAction: "Opening Times",
-            eventLabel: location.pathname,
-            sendDirectlyToGA: true,
-        })
-    }
-
     return (
         <div className="CollapsedOpeningTimes">
             <OpeningTimes object={object} />
             {openingHours.length > 0 && (
                 <Collapser
                     expandMessage="Show open hours"
-                    onClick={recordExpandOpeningTimes}
                     analyticsEvent={{
                         event: `Action Triggered - Opening Times`,
                         eventAction: "Show opening times",

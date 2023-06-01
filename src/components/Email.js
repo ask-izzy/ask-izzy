@@ -4,7 +4,6 @@ import React from "react";
 
 import icons from "../icons";
 import Link from "./base/Link";
-import * as gtm from "../google-tag-manager";
 import type {AnalyticsEvent} from "../google-tag-manager";
 import ScreenReader from "./ScreenReader";
 
@@ -15,17 +14,6 @@ type Props = {
 }
 
 function Email({email, comment, analyticsEventDetails}: Props): ReactNode {
-    function recordClick(): void {
-        gtm.emit({
-            event: "Email Clicked",
-            eventCat: "Email Clicked",
-            eventAction: "",
-            eventLabel: `${location.pathname} - ${email}`,
-            sendDirectlyToGA: true,
-            ...analyticsEventDetails,
-        })
-    }
-
     return (
         <div className="Contact Email">
             <ScreenReader>
@@ -33,11 +21,11 @@ function Email({email, comment, analyticsEventDetails}: Props): ReactNode {
             </ScreenReader>
             <Link
                 to={`mailto:${email}`}
-                onClick={recordClick}
                 analyticsEvent={{
                     event: "Link Followed - Email Contact",
                     eventAction: "Contact detail - email",
                     eventLabel: `${email}`,
+                    ...analyticsEventDetails,
                 }}
             >
                 <icons.Email aria-hidden={true}/>

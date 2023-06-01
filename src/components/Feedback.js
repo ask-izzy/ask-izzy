@@ -4,7 +4,6 @@ import type {Node as ReactNode} from "React"
 import React from "react"
 
 import Link from "./base/Link"
-import * as gtm from "../google-tag-manager"
 import Service from "../iss/Service"
 import Spacer from "./Spacer"
 
@@ -13,17 +12,6 @@ type Props = {
 }
 
 function Feedback({object}: Props): ReactNode {
-    function recordSuggestChange(): void {
-        gtm.emit({
-            event: "Service Change Requested",
-            eventCat: "Feedback Given",
-            eventAction: "Service Change Suggestion",
-            eventLabel: location.pathname,
-            eventValue: object.id,
-            sendDirectlyToGA: true,
-        })
-    }
-
     return (
         <div className="Feedback">
             <Spacer />
@@ -31,7 +19,12 @@ function Feedback({object}: Props): ReactNode {
                 Email us at{" "}
                 <Link
                     className="suggestChange"
-                    onClick={recordSuggestChange}
+                    analyticsEvent={{
+                        event: `Input submitted - Feedback`,
+                        eventCat: "Input submitted",
+                        eventAction: `Feedback`,
+                        eventLabel: "ServicePane feedback link",
+                    }}
                     to={
                         `mailto:${process.env.NEXT_PUBLIC_SITE_EMAIL}` +
                             "?subject=" +
