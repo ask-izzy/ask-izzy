@@ -17,7 +17,8 @@ import Spacer from "@/src/components/Spacer";
 import useMyList from "@/hooks/useMyList"
 import ClearMyListDialog from "@/src/components/ClearMyListDialog"
 import BrandedFooter from "@/src/components/BrandedFooter"
-import BushfireSupportPage from "@/components/pages/BushfireSupportPage"
+import MyListPrintPage from "@/src/components/PrintComponents/MyListPrintPage"
+
 
 function MyListPage(): ReactNode {
     const router = useRouter()
@@ -122,7 +123,11 @@ function MyListPage(): ReactNode {
                     }
                     {!isMobile &&
                         <PrintButton
-                            ComponentToPrint={BushfireSupportPage()}
+                            ComponentToPrint={
+                                <MyListPrintPage
+                                    services={myListServices}
+                                />
+                            }
                         />
                     }
                 </div>

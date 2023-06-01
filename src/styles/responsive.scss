@@ -6,7 +6,13 @@ body {
     max-width: $max-width;
     margin: auto;
     background-color: $desktop-side-column-color;
+    
 }
+@media print {
+    body {
+      background-color: white;
+    }
+  }
 
 img {
     max-width: 100%;

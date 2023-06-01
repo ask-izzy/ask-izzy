@@ -1,0 +1,112 @@
+// colors in this file are not used in the app, but are used in the
+// print page so they should be as standard as possible
+.MyListPrintPage {
+    background-color: white;
+    color: black;
+    padding: 40px;
+    font-size: 14px;
+
+    .my-list-print-header {
+        display: flex;
+        justify-content: space-between;
+        .AskIzzyGreyScaleIcon {
+            width: 200px;
+            height: 100px;
+        }
+        .date-container {
+            font-size: 10px;;
+        }
+
+    }
+    .Spacer {
+        height: 3px;
+        background-color: black;
+    }
+    .my-list-print-footer {
+        display: flex;
+        justify-content: space-between;
+        column-gap: 10px;
+        .my-list-print-about-title {
+            font-size: 16px;
+        }
+        .my-list-print-about-description {
+            margin-top: 10px;
+        }
+        .my-list-print-qr {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            .my-list-print-qr-description {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                font-weight: bolder;
+
+            }
+        }
+        .AskIzzyGreyScaleIcon {
+            width: 200px;
+            height: 100px;
+        }
+    }
+
+    .need-an-interpreter {
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+    }
+
+    .my-list-print-list {
+        list-style-type: none;
+        padding: 0px;
+
+        .my-list-print-list-item {
+            border: 1px solid grey;
+            margin-top: 5px;
+            padding: 20px;
+
+            .my-list-print-service-name {
+                font-size: 16px;
+                font-weight: bold;
+            }
+            .my-list-print-service-site {
+                margin-top: 5px;
+            }
+            .my-list-print-service-ndis {
+                margin-top: 10px;
+                font-size: 12px;
+            }
+            .my-list-print-service-description {
+                margin-top: 10px;
+                font-size: 12px;
+            }
+
+            .Address {
+                margin-top: 16px;
+                font-size: 12px;
+                .Address-wrapper {
+                    color: black;
+                }
+            }
+
+            .my-list-print-service-phone {
+                margin-top: 0px;
+                display: flex;
+                column-gap: 20px;
+                .my-list-print-phone-container {
+                    display: flex;
+                    flex-direction: row;
+                    align-items: flex-start;
+                    max-width: 230px;
+                    .PhoneSolidIcon {
+                        width: 25px;
+                        height: 25px;
+                        margin-right: 4px;
+                        margin-top: -3px;
+                    }
+                }
+        
+            }
+        }
+    }
+}

@@ -1,10 +1,11 @@
 /* @flow */
 
 import type {Node as ReactNode} from "react"
-import React, {useState} from "react";
+import React from "react";
 import ReactToPrint from "react-to-print";
 
 import Button from "./base/Button";
+import Print from "@/src/icons/Print";
 
 type Props = {
     ComponentToPrint?: ReactNode,
@@ -27,17 +28,22 @@ function PrintButton({
 
     return <div className="PrintButton">
         <ReactToPrint
-            trigger={() =>
-                <Button
-                    className="print-component-button"
-                    analyticsEvent={{
-                        event: "Action Triggered - Share Services Opened",
-                        eventAction: "Share services opened",
-                        eventLabel: null,
-                    }}
-                >
-                Print
-                </Button>}
+            trigger={
+                () =>
+                    <Button
+                        className="print-component-button"
+                        analyticsEvent={{
+                            event: "Action Triggered - Share Services Opened",
+                            eventAction: "Share services opened",
+                            eventLabel: null,
+                        }}
+                    >
+                        <div className="main-container">
+                            <Print />
+                            <span>Print Friendly</span>
+                        </div>
+                    </Button>
+            }
             content={() => printableComponentRef.current}
         />
         <PrintableComponent ref={printableComponentRef} />

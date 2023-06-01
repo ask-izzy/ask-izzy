@@ -28,4 +28,11 @@
         display: block;
         padding-top: 1em;
     }
+    .Address-wrapper {
+        &.single-line {
+            display: flex;
+            align-items: center;
+        }
+        
+    }
 }
