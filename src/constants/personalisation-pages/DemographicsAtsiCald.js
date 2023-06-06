@@ -1,16 +1,23 @@
 /* @flow */
+
+import icons from "../../icons";
+import * as React from "react";
+import type {Node as ReactNode} from "react";
+
+import {
+    getSavedPersonalisationAnswer,
+} from "../../utils/personalisation"
+import HealthSubcategories from "./HealthSubcategories";
+import CounsellingSubcategories from "./CounsellingSubcategories";
 import type {
     PersonalisationPage,
 } from "../../../flow/personalisation-page"
-import React from "react";
-import type {Node as ReactNode} from "react";
-import icons from "../../icons";
 
 export default ({
     type: "question",
-    name: "dfv-demographics",
-    question: "Do any of these apply to you?",
-    byline: "Select all that apply",
+    name: "demographics-atsi-cald",
+    question: "Do you want to see services specific to any of the below?",
+    byline: "Identifying these characteristics helps us to find services that can better meet your needs.",
     info: "All of your answers are private and anonymous.",
     multipleChoice: true,
     possibleAnswers: {
@@ -19,41 +26,27 @@ export default ({
                 term: ["\"Aboriginals & Torres Strait Islanders\""],
             },
         },
-        "Experiencing violence": {},
-        "Under 18": {},
-        "LGBTIQA+": {},
         "Have cultural needs and don't speak English": {
             $concat: {
                 term: ["ethnic"],
             },
         },
-        "Person seeking asylum": {
-            $concat: {
-                term: ["refugees"],
-            },
-        },
-        "Using violence": {},
     },
     icons: {
         "Aboriginal and/or Torres Strait Islander": icons.DemographicAtsi,
-        "Experiencing violence": icons.ExperiencingViolence,
-        "Under 18": icons.Under18,
-        "LGBTIQA+": icons.DemographicLgbtiq,
         "Have cultural needs and don't speak English":
             icons.DemographicNeedInterpreter,
-        "Person seeking asylum": icons.DemographicRecentlyArrived,
-        "Using violence": icons.UsingViolence,
     },
     descriptionsForAnswers: {
         "Have cultural needs and don't speak English": "CALD communities, interpreter or translation support.",
     },
-    oldAnswers: {},
+    oldAnswers: {
+        "Indigenous": "Aboriginal and/or Torres Strait Islander",
+        "Aboriginal": "Aboriginal and/or Torres Strait Islander",
+    },
     title: "Personal",
-    resetOptionsOnDisplay: [
-        "under-18-dfv",
-        "lgbtiqa-domestic-violence",
-        "using-violence",
-    ],
+    resetDfvOptionsOnDisplay: true,
+    summaryLabel: "Do you want to see services specific to the following?",
     prettyPrintAnswer(answer: string): ReactNode {
         switch (answer) {
         case "Aboriginal and/or Torres Strait Islander":
@@ -61,16 +54,23 @@ export default ({
                 <icons.AboriginalFlag/>
                 <icons.TorresStraitIslandersFlag />
             </span>;
-        case "LGBTIQA+":
-            return <span>
-                <icons.DemographicLgbtiq viewBox="2 9 59 44" />
-            </span>;
         case "Have cultural needs and don't speak English":
             return "Cultural needs/non-English speaking"
-        case "Person seeking asylum":
-            return "Seeking asylum";
         default:
             return answer;
         }
+    },
+    get shouldShowInSummary() {
+        return this.getShouldIncludePage()
+    },
+    getShouldIncludePage: () => {
+        return Boolean(
+            ["Children's health"].includes(
+                getSavedPersonalisationAnswer(HealthSubcategories)
+            ) ||
+                [
+                    "Gambling counselling",
+                ].includes(getSavedPersonalisationAnswer(CounsellingSubcategories))
+        );
     },
 }: PersonalisationPage)

@@ -33,6 +33,10 @@ import DFVDemographicsPage from
 "../../src/constants/personalisation-pages/DfvDemographics"
 import DemographicsIndigenousPage from
 "../../src/constants/personalisation-pages/DemographicsIndigenous"
+import DemographicsAtsiCaldLgbtiqaPage from
+"../../src/constants/personalisation-pages/DemographicsAtsiCaldLgbtiqa"
+import DemographicsAtsiCaldPage from
+"../../src/constants/personalisation-pages/DemographicsAtsiCald"
 import GenderPage from "../../src/constants/personalisation-pages/Gender"
 import AgePage from "../../src/constants/personalisation-pages/Age"
 import AreYouSafePage from "../../src/constants/personalisation-pages/AreYouSafe"
@@ -180,10 +184,32 @@ async function setDFVDemographics(
     );
 }
 
+async function setDemographicsAtsiCald(
+    answers: Array<string>,
+): Promise<void> {
+    await setStorageValue(
+        this.driver,
+        DemographicsAtsiCaldPage.name,
+        JSON.stringify(answers)
+    );
+}
+
+async function setDemographicsAtsiCaldLgbtiqa(
+    answers: Array<string>,
+): Promise<void> {
+    await setStorageValue(
+        this.driver,
+        DemographicsAtsiCaldLgbtiqaPage.name,
+        JSON.stringify(answers)
+    );
+}
+
 async function setDemographicsNone(): Promise<void> {
     await setDemographics.call(this, []);
     await setDemographicsIndigenous.call(this, "(skipped)");
     await setDFVDemographics.call(this, []);
+    await setDemographicsAtsiCald.call(this, []);
+    await setDemographicsAtsiCaldLgbtiqa.call(this, []);
 }
 
 

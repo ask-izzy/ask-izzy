@@ -65,13 +65,6 @@ const Storage = {
         this.removeItem("location")
     },
 
-    getUserIsIndigenous(): boolean {
-        return this.getItem("demographics-indigenous") ==
-            "Yes - show these first where possible" ||
-        this.getArray("demographics")
-            .includes("Aboriginal and/or Torres Strait Islander");
-    },
-
     getUserGeolocation(): ?Geolocation {
         const coords = JSON.parse(
             sessionStore.getItem("coordinates") || "null"
