@@ -15,6 +15,7 @@ import { titleize } from "underscore.string";
 import ScreenReader from "./ScreenReader";
 import ListItem from "./ListItem";
 import Link from "./base/Link";
+import ResultListItemContact from "@/src/components/ResultListItemContact";
 
 
 type Props = {
@@ -52,7 +53,7 @@ function ResultListItem({
             rootElement="li"
             className="plain-text MyListResultItem"
         >
-            <div className="title-container">
+            <div className="my-list-result-title-container">
                 <div className="name">
                     <Link
                         to={`/service/${service.slug}`}
@@ -71,28 +72,34 @@ function ResultListItem({
             </div>
 
 
-
-            <div className="site_name">
-                {service.site.name}
-                <Ndis
-                    className="ndis"
-                    compact={true}
-                    object={service}
+            <div className="my-list-result-content-container">
+                <div className="my-list-result-information">
+                    <div className="site_name">
+                        {service.site.name}
+                        <Ndis
+                            className="ndis"
+                            compact={true}
+                            object={service}
+                        />
+                    </div>
+                    {service.location && renderLocation()}
+                    <OpeningTimes
+                        className="opening_hours"
+                        object={service.open}
+                    />
+                    <ServiceProvisions
+                        service={service}
+                    />
+                    <div className="description">
+                        {service.shortDescription?.map(
+                            (sentence, i) =>
+                                <p key={i}>{sentence}</p>
+                        )}
+                    </div>
+                </div>
+                <ResultListItemContact
+                    service={service}
                 />
-            </div>
-            {service.location && renderLocation()}
-            <OpeningTimes
-                className="opening_hours"
-                object={service.open}
-            />
-            <ServiceProvisions
-                service={service}
-            />
-            <div className="description">
-                {service.shortDescription?.map(
-                    (sentence, i) =>
-                        <p key={i}>{sentence}</p>
-                )}
             </div>
         </ListItem>
     );

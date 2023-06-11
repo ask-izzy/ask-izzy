@@ -15,6 +15,7 @@ type Props = {
     className: ?string,
     onClick?: (event: SyntheticEvent<HTMLAnchorElement>) => void,
     hideSpacer?: ?boolean,
+    hideConfidential?: ?boolean,
 }
 
 function GoogleMapsLink({
@@ -24,6 +25,7 @@ function GoogleMapsLink({
     className,
     onClick,
     hideSpacer = false,
+    hideConfidential = false,
 }: Props): ReactNode {
 
     function googleMapsUrl(): string {
@@ -61,12 +63,11 @@ function GoogleMapsLink({
 
     if (to.isConfidential()) {
         return (
-            <span
-                className={classnames("GoogleMapsLink", className)}
-            >
-                <Spacer />
-                {children}
-            </span>
+            hideConfidential ? <></>
+                : <span className={classnames("GoogleMapsLink", className)}>
+                    <Spacer />
+                    {children}
+                </span>
         )
     }
 
