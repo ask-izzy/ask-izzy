@@ -29,11 +29,13 @@
         display: flex;
         justify-content: space-between;
     }
-    .my-list-result-content-container {  
+
+    .my-list-result-content-container {
         display: flex;
         flex-direction: row;
         justify-content: space-between;
         column-gap: 20px;
+
         .my-list-result-information {
             .location {
                 position: relative;
@@ -43,17 +45,17 @@
                 color: var(--colour-text-dark);
                 font-weight: 500;
             }
-        
+
             p {
                 color: #{colours.get-static('colour-text-dark')};
                 color: var(--colour-text-dark);
             }
-        
+
             li {
                 color: #{colours.get-static('colour-text-dark')};
                 color: var(--colour-text-dark);
             }
-        
+
             .MapIcon {
                 position: relative;
                 top: 7px;
@@ -62,22 +64,22 @@
                 height: 25px;
                 margin: 0;
             }
-        
+
             .site_name {
                 margin-bottom: 15px;
                 color: #{colours.get-static('colour-text-mid')};
                 color: var(--colour-text-mid);
             }
-        
+
             .OpeningTimes {
                 margin-bottom: 15px;
-        
+
                 .until,
                 .open {
                     color: #{colours.get-static('colour-text-mid')};
                     color: var(--colour-text-mid);
                 }
-        
+
                 .ColoredIcon {
                     top: 0;
                     left: -2px;
@@ -91,20 +93,25 @@
     @media (max-width: 700px) {
         .my-list-result-content-container {
             flex-direction: column;
+
             .ResultListItemContact {
                 flex-direction: row;
                 justify-content: flex-start;
                 align-items: center;
                 margin-bottom: 5px;
+
                 .contact-text {
                     padding: 5px;
+
                     .number.value {
-                        display: None;
+                        display: none;
                     }
                 }
+
                 .contact-other {
                     align-items: flex-start;
-                    margin-top: 0px;
+                    margin-top: 0;
+
                     .GoogleMapsLink {
                         padding: 8px;
                     }
@@ -112,6 +119,4 @@
             }
         }
     }
-
-    
 }

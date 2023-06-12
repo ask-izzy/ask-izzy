@@ -6,12 +6,14 @@
     column-gap: 5px;
     justify-content: flex-end;
     margin-bottom: 30px;
+
     .ContactButton {
         background-color: var(--colour-brand-primary);
         color: var(--colour-text-very-light);
         border-radius: 5px;
         padding: 10px;
         text-decoration: none;
+
         .PhoneSolidIcon {
             fill: var(--colour-text-very-light);
             width: 25px;
@@ -20,29 +22,37 @@
             margin-top: -15px;
         }
     }
+
     .contact-text {
         display: flex;
         flex-direction: row;
         column-gap: 3px;
+
         .number.value {
             white-space: nowrap;
         }
-        
     }
+
     .contact-other {
         display: flex;
         flex-direction: column;
         align-items: flex-end;
         row-gap: 10px;
         margin-top: 5px;
+
         .contact-comment {
             color: var(--colour-text-mid);
         }
+
         .Link {
             font-weight: bolder;
             color: var(--colour-text-dark);
             width: fit-content;
         }
+        .DirectionsIcon {
+            fill: var(--colour-brand-primary);
+        }
+
         .GoogleMapsLink {
             display: flex;
             align-items: center;
@@ -52,7 +62,7 @@
             color: var(--colour-text-highlight);
             width: fit-content;
             white-space: nowrap;
-            padding: 5px;
+            padding: 6px;
             text-decoration: none;
         }
     }

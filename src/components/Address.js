@@ -2,7 +2,8 @@
 import type {Node as ReactNode} from "React";
 import React from "react";
 import classNames from "classnames";
-import icons from "../icons";
+import Map from "@/src/icons/Map";
+import MapSolid from "@/src/icons/MapSolid";
 import ScreenReader from "./ScreenReader";
 import AddressLocation from "../iss/AddressLocation";
 import Spacer from "./Spacer";
@@ -13,12 +14,14 @@ type Props = {
     location: AddressLocation,
     withSpacer?: boolean,
     singleLineAddress?: boolean,
+    hasSolidIcon?: boolean,
 }
 
 class Address extends React.Component<Props, void> {
     static defaultProps: any = {
         withSpacer: false,
         singleLineAddress: false,
+        hasSolidIcon: false,
     };
     renderSingleLineAddress(location: any): ReactNode {
         return <>
@@ -54,7 +57,10 @@ class Address extends React.Component<Props, void> {
                 <ScreenReader>
                     Address of the service is
                 </ScreenReader>
-                <icons.Map aria-hidden={true} />
+                {this.props.hasSolidIcon ?
+                    <MapSolid aria-hidden={true} />
+                    : <Map aria-hidden={true} />
+                }
                 <div className={classNames("Address-wrapper", {"single-line": this.props.singleLineAddress})}>
                     {" "}
                     {

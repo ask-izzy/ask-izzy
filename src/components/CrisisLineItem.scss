@@ -27,11 +27,13 @@
 
     .Contact.Phone {
         padding-top: 2px;
+
         p {
             display: inline;
             color: #{colours.get-static('colour-crisis-white')};
             color: var(--colour-crisis-white);
         }
+
         .details-container {
             color: var(--colour-crisis-white);
         }

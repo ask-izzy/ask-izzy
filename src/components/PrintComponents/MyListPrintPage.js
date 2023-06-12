@@ -26,7 +26,6 @@ function BrandedFooter({
     return (
         <div
             className="MyListPrintPage"
-            aria-label="Page footer"
         >
             <div className="my-list-print-header">
                 <AskIzzyGreyScale />
@@ -62,6 +61,7 @@ function BrandedFooter({
                             <Address
                                 location={service.location}
                                 singleLineAddress={true}
+                                hasSolidIcon={true}
                             />
                             <div className="my-list-print-service-phone">
                                 {service.Phones().map((phone, index) => {

@@ -14,6 +14,11 @@
     .Address-wrapper {
         color: #{colours.get-static('colour-text-dark')};
         color: var(--colour-text-dark);
+
+        &.single-line {
+            display: flex;
+            align-items: center;
+        }
     }
 
     .MapIcon {
@@ -23,16 +28,16 @@
         margin-right: 2px;
         vertical-align: text-bottom;
     }
+    .MapSolidIcon {
+        width: 25px;
+        height: 25px;
+        margin-left: -2px;
+        margin-right: 6px;
+        margin-top: 3px;
+    }
 
     .details {
         display: block;
         padding-top: 1em;
-    }
-    .Address-wrapper {
-        &.single-line {
-            display: flex;
-            align-items: center;
-        }
-        
     }
 }

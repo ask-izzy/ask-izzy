@@ -7,9 +7,9 @@ import Service from "../iss/Service";
 
 
 import PhoneSolid from "@/src/icons/PhoneSolid";
+import Directions from "@/src/icons/Directions";
 import Link from "@/src/components/base/Link";
 import GoogleMapsLink from "@/src/components/GoogleMapsLink";
-import ExternalLink from "@/src/icons/ExternalLink";
 import {PhoneHref} from "@/helpers/regex.helpers";
 
 
@@ -20,6 +20,9 @@ type Props = {
 function ResultListItemContact({
     service,
 }: Props): ReactNode {
+    if (service.Phones().length === 0) {
+        return <></>;
+    }
     const firstPhoneNumber = service.Phones()[0].number;
 
     return (
@@ -60,7 +63,7 @@ function ResultListItemContact({
                             hideSpacer={true}
                             hideConfidential={true}
                         >
-                            <ExternalLink
+                            <Directions
                                 className="ExternalLinkIcon"
                             />
                             <span>
