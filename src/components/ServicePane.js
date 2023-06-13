@@ -4,7 +4,6 @@ import type {Element as ReactElement, Node as ReactNode} from "React";
 import React, {useEffect, useState} from "react";
 import _ from "underscore";
 
-import * as gtm from "../google-tag-manager";
 import Address from "./Address";
 import Accessibility from "./Accessibility";
 import CollapsedOpeningTimes from "./CollapsedOpeningTimes";
@@ -48,17 +47,6 @@ function ServicePane({service}: Props): ReactNode {
         loadSiblings();
     }, [service])
 
-    const recordAlsoAtThisLocation = (service: Service) => {
-        gtm.emit({
-            event: "Other Services At Location Clicked",
-            eventCat: "Other Services At Location Clicked",
-            eventAction: null,
-            eventLabel: `${location.pathname} - ${service.slug}`,
-            sendDirectlyToGA: true,
-        });
-    }
-
-
     const renderServiceProvisions = (): ReactElement<"div"> => {
         if (_.isEmpty(service.serviceProvisions)) {
             return <div />;
@@ -77,16 +65,6 @@ function ServicePane({service}: Props): ReactNode {
                 </ul>
             </div>
         );
-    }
-
-    const recordClick = (): void => {
-        gtm.emit({
-            event: "Google Maps Link Clicked",
-            eventCat: "External Link Clicked",
-            eventAction: "Google Maps Directions",
-            eventLabel: window.location.pathname,
-            sendDirectlyToGA: true,
-        });
     }
 
     const renderSiblings = (): ReactElement<"div"> | ReactElement<"span"> => {
@@ -113,9 +91,12 @@ function ServicePane({service}: Props): ReactNode {
                             className="plain-text"
                             to={`/service/${service.slug}`}
                             key={index}
-                            onClick={
-                                () => recordAlsoAtThisLocation(service)
-                            }
+                            analyticsEvent={{
+                                event: "Link followed - Other services at location",
+                                eventAction: "Other services at location",
+                                eventLabel: `${service.slug}`,
+                                sendDirectlyToGA: true,
+                            }}
                             aria-label={`${service.name}. ${
                                 service.shortDescription[0]
                             }.`}
@@ -270,7 +251,6 @@ function ServicePane({service}: Props): ReactNode {
                                 to={service.location}
                                 className={Storage.getUserGeolocation() ?
                                     "withTimes" : "withoutTimes"}
-                                onClick={recordClick}
                                 hideSpacer={true}
                             >
                                 <span className="googleMapsLink">

@@ -62,18 +62,10 @@ function CalloutBox(
     }
 
     const onClickBox = (callout: CalloutType): void => {
-        const {Link: path, Heading} = callout
+        const {Link: path} = callout
         if (!path) {
             return;
         }
-
-        gtm.emit({
-            event: "Callout Clicked",
-            eventCat: "Callout Clicked",
-            eventAction: null,
-            eventLabel: Heading,
-            sendDirectlyToGA: true,
-        });
 
         gtm.emit(getAnalyticsEvent(callout))
 

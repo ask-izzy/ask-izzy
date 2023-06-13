@@ -8,7 +8,6 @@ import Spacer from "./Spacer"
 import Email from "./Email"
 import PhoneButton from "./PhoneButton"
 import Web from "./Web"
-import * as gtm from "../google-tag-manager"
 
 import Service from "../iss/Service"
 
@@ -68,25 +67,11 @@ function ContactMethods({object}: Props): ReactNode {
         }] || []
     }
 
-    function foldExpandHandler(): void {
-        gtm.emit({
-            event: "Service Contact Details Expanded",
-            eventCat: "Content Expanded",
-            eventAction: "Service Contact Details",
-            eventLabel: location.pathname,
-            sendDirectlyToGA: true,
-        })
-    }
-
     function renderContactMethod(record: Object, idx: number): ReactNode {
-        const props = Object.assign({
+        const props = {
             key: idx,
-            analyticsEventDetails: {
-                event: "Service Contact Detail Clicked",
-                eventCat: "Service Contact Detail Clicked",
-                eventAction: `${record.type}`,
-            },
-        }, record.details)
+            ...record.details,
+        }
 
         return React.createElement(record.component, props)
     }
@@ -102,7 +87,6 @@ function ContactMethods({object}: Props): ReactNode {
                 {contactsAfterFold().length > 0 &&
                     <Collapser
                         expandMessage="Show other contact options"
-                        onClick={foldExpandHandler}
                         analyticsEvent={{
                             event: "Action Triggered - " +
                                 "Other Contact Details",

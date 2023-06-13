@@ -5,7 +5,6 @@ import URL from "url"
 
 import Link from "./base/Link"
 import icons from "../icons"
-import * as gtm from "../google-tag-manager"
 import type {AnalyticsEvent} from "../google-tag-manager"
 import ScreenReader from "./ScreenReader"
 
@@ -22,17 +21,6 @@ function Web({
     const displayedAddress = (parsedUrl.hostname || "") +
             (!parsedUrl.path || (parsedUrl.path === "/") ? "" : parsedUrl.path)
 
-    function recordClick(): void {
-        gtm.emit({
-            event: "Website Address Clicked",
-            eventCat: "Website Address Clicked",
-            eventAction: "",
-            eventLabel: `${location.pathname} - ${url}`,
-            sendDirectlyToGA: true,
-            ...analyticsEventDetails,
-        })
-    }
-
     return (
         <div className="Contact Web">
             <ScreenReader>
@@ -40,7 +28,6 @@ function Web({
             </ScreenReader>
             <Link
                 to={parsedUrl.href}
-                onClick={recordClick}
                 analyticsEvent={{
                     event: "Link Followed - Website Contact",
                     eventAction: "Contact detail - website",
