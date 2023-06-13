@@ -16,6 +16,7 @@ Feature: Browser tab titles
     Scenario: Results page - browser tab title
         Given a fresh session
         And the area to search is "Melbourne, VIC"
+        When I visit /
         And I have somewhere to sleep tonight
         And my gender is female
         And I need help for myself
@@ -32,6 +33,7 @@ Feature: Browser tab titles
     Scenario: Answer summary - browser tab title
         Given a fresh session
         And the area to search is "Melbourne, VIC"
+        When I visit /
         And I have somewhere to sleep tonight
         And my gender is female
         And I need help for myself
@@ -49,6 +51,7 @@ Feature: Browser tab titles
     Scenario: Answer summary - browser tab title
         Given a fresh session
         And the area to search is "Melbourne, VIC"
+        When I visit /
         And I have somewhere to sleep tonight
         And my gender is female
         And I need help for myself
