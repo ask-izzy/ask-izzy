@@ -1,6 +1,6 @@
 import React, {ReactNode} from "react";
 
-import TooltipHover from "@/src/components/TooltipHover";
+import TooltipHover from "@/src/components/TooltipHover.js";
 
 
 export default {

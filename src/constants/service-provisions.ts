@@ -12,7 +12,7 @@ import {
     not,
     provides,
     referralsRegexp,
-} from "@/src/iss/ServiceProvisions";
+} from "@/src/iss/ServiceProvisions.js";
 
 /* Please keep this grouped and the groups sorted */
 const serviceProvisions: Array<ServiceProvision> = [

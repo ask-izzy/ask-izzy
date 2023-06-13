@@ -1,9 +1,9 @@
 import React, {ReactNode} from "react";
 import moment from "moment-timezone";
 
-import OpeningTimes from "@/src/components/OpeningTimes";
-import getServiceOpeningFixture from "@/fixtures/factories/ServiceOpening";
-import type { openingHours } from "@/src/iss/general";
+import OpeningTimes from "@/src/components/OpeningTimes.js";
+import getServiceOpeningFixture from "@/fixtures/factories/ServiceOpening.js";
+import type { openingHours } from "@/src/iss/general.js";
 export default {
     title: "Service Components/OpeningTimes",
     component: OpeningTimes,

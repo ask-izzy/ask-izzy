@@ -2,8 +2,8 @@ import React, {useContext, createContext, useState, ReactNode} from "react";
 
 import {
     PaginatedSearch,
-} from "@/src/iss/serviceSearch";
-import type {travelTimesStatus as travelTimesStatusType} from "@/src/hooks/useTravelTimesUpdater"
+} from "@/src/iss/serviceSearch.js";
+import type {travelTimesStatus as travelTimesStatusType} from "@/src/hooks/useTravelTimesUpdater.js"
 
 
 type Context = {

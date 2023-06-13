@@ -1,5 +1,5 @@
 import React, {useContext, createContext, useState, useEffect, ReactNode} from "react";
-import storage from "@/src/storage"
+import storage from "@/src/storage.js"
 
 type Context = [
     boolean,

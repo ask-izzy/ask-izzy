@@ -1,8 +1,8 @@
 import React, {ReactNode} from "react";
 import { useForm } from "react-hook-form";
 import { action } from "@storybook/addon-actions";
-import FormTextInput from "@/components/forms/FormTextInput";
-import Form from "@/components/forms/Form";
+import FormTextInput from "@/components/forms/FormTextInput.js";
+import Form from "@/components/forms/Form.js";
 
 export default {
     title: "App Components/FormTextInput",

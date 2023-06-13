@@ -1,6 +1,6 @@
 import React, {ReactNode} from "react";
 
-import GeolocationButtonForTravelTimes from "@/src/components/GeolocationButtonForTravelTimes";
+import GeolocationButtonForTravelTimes from "@/src/components/GeolocationButtonForTravelTimes.js";
 
 export default {
     title: "Basic UI Components/Geolocation Button For Travel Times",

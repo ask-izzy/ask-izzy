@@ -1,7 +1,7 @@
 import React from "react"
 
-import OnlineSecurity from "@/src/icons/OnlineSecurity"
-import LogoWithTextBox from "@/src/components/LogoWithTextBox"
+import OnlineSecurity from "@/src/icons/OnlineSecurity.js"
+import LogoWithTextBox from "@/src/components/LogoWithTextBox.js"
 
 export default function OnlineSafetyLink() {
     const path = "/online-safety"

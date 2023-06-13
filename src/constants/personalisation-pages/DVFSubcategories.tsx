@@ -1,12 +1,12 @@
-import ExperiencingViolence from "@/src/icons/ExperiencingViolence";
-import Support from "@/src/icons/Support";
-import Police from "@/src/icons/Police";
-import Legal from "@/src/icons/Legal";
-import DemographicChildren from "@/src/icons/DemographicChildren";
-import SexualViolence from "@/src/icons/SexualViolence";
-import Money from "@/src/icons/Money";
-import UsingViolence from "@/src/icons/UsingViolence";
-import DemographicPets from "@/src/icons/DemographicPets";
+import ExperiencingViolence from "@/src/icons/ExperiencingViolence.js";
+import Support from "@/src/icons/Support.js";
+import Police from "@/src/icons/Police.js";
+import Legal from "@/src/icons/Legal.js";
+import DemographicChildren from "@/src/icons/DemographicChildren.js";
+import SexualViolence from "@/src/icons/SexualViolence.js";
+import Money from "@/src/icons/Money.js";
+import UsingViolence from "@/src/icons/UsingViolence.js";
+import DemographicPets from "@/src/icons/DemographicPets.js";
 
 export default ({
     type: "question",

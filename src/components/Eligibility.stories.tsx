@@ -1,7 +1,7 @@
 /* eslint-disable max-len */
 import React, {ReactNode} from "react";
 
-import Eligibility from "@/src/components/Eligibility";
+import Eligibility from "@/src/components/Eligibility.js";
 
 export default {
     title: "Service Components/Eligibility",

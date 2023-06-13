@@ -1,11 +1,11 @@
 import BadWordsFilter from "bad-words"
 
 import {createNotificationsAPIClient} from "@/src/ix-web-js-client/index.js"
-import {getService} from "@/src/iss/load-services"
-import Service from "@/src/iss/Service"
-import { sendSMS } from "@/src/utils/sms"
-import { getRateLimitMiddlewares } from "@/src/utils/rate-limiting"
-import { callMiddlewares } from "@/src/utils/middleware"
+import {getService} from "@/src/iss/load-services.js"
+import Service from "@/src/iss/Service.js"
+import { sendSMS } from "@/src/utils/sms.js"
+import { getRateLimitMiddlewares } from "@/src/utils/rate-limiting.js"
+import { callMiddlewares } from "@/src/utils/middleware.js"
 import {
     getRequestType,
     getShareMessage,

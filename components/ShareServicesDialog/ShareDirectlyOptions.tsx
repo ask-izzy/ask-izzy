@@ -1,12 +1,12 @@
 import React, {useState, useEffect} from "react";
 
-import isMounted from "@/hooks/useIsMounted"
-import StandardButton from "@/components/general/StandardButton"
-import Service from "@/src/iss/Service"
-import useToastMessage from "@/hooks/useToastMessage"
-import * as gtm from "@/src/google-tag-manager";
+import isMounted from "@/hooks/useIsMounted.js"
+import StandardButton from "@/components/general/StandardButton.js"
+import Service from "@/src/iss/Service.js"
+import useToastMessage from "@/hooks/useToastMessage.js"
+import * as gtm from "@/src/google-tag-manager.js";
 import {CopyToClipboard} from "@/helpers/copy-to-clipboard.helpers.js"
-import Copy from "@/src/icons/Copy"
+import Copy from "@/src/icons/Copy.js"
 
 type Props = {
     services: Array<Service>,

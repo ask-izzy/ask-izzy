@@ -2,8 +2,8 @@ import React, {ReactNode} from "react"
 import cnx from "classnames"
 import "element-closest-polyfill" // Polyfill for IE11
 
-import * as gtm from "@/src/google-tag-manager"
-import type {AnalyticsEvent} from "@/src/google-tag-manager"
+import * as gtm from "@/src/google-tag-manager.js"
+import type {AnalyticsEvent} from "@/src/google-tag-manager.js"
 
 type Props = {
     children: ReactNode,

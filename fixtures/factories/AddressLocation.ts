@@ -2,9 +2,9 @@ import merge from "deepmerge";
 import {$Shape} from "utility-types";
 
 
-import {Sequence} from "@/fixtures/factories/Value";
-import AddressLocation from "@/src/iss/AddressLocation";
-import type {AddressLocationProps} from "@/src/iss/AddressLocation";
+import {Sequence} from "@/fixtures/factories/Value.js";
+import AddressLocation from "@/src/iss/AddressLocation.js";
+import type {AddressLocationProps} from "@/src/iss/AddressLocation.js";
 
 
 const streetNo = Sequence();

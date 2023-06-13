@@ -1,9 +1,9 @@
 import React, {ReactNode} from "react";
 
-import ServicePane from "@/src/components/ServicePane";
-import { ixaService, youthSupportNetService } from "@/fixtures/services";
-import alertsQuery from "@/src/queries/content/alerts";
-import { vicServiceAlert } from "@/test/support/mock-cms/resolvers/alerts";
+import ServicePane from "@/src/components/ServicePane.js";
+import { ixaService, youthSupportNetService } from "@/fixtures/services.js";
+import alertsQuery from "@/src/queries/content/alerts.js";
+import { vicServiceAlert } from "@/test/support/mock-cms/resolvers/alerts.js";
 
 export default {
     title: "Service Components/ServicePane",

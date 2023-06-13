@@ -2,12 +2,12 @@ import React from "react";
 import { withRouter } from "next/router"
 import type { NextRouter } from "next/router"
 
-import LinkListItem from "@/src/components/LinkListItem";
+import LinkListItem from "@/src/components/LinkListItem.js";
 import icons from "@/src/icons/index.js";
-import type Category from "@/src/constants/Category";
-import Storage from "@/src/storage";
-import ScreenReader from "@/src/components/ScreenReader"
-import { getServicesPath } from "@/src/utils/routing"
+import type Category from "@/src/constants/Category.js";
+import Storage from "@/src/storage.js";
+import ScreenReader from "@/src/components/ScreenReader.js"
+import { getServicesPath } from "@/src/utils/routing.js"
 
 type Props = {
     category: Category,

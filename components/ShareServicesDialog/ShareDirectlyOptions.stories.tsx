@@ -1,7 +1,7 @@
 import React, {ReactNode} from "react";
 
-import ShareDirectlyOptions from "@/components/ShareServicesDialog/ShareDirectlyOptions";
-import { ixaService, domesticViolenceService } from "@/fixtures/services";
+import ShareDirectlyOptions from "@/components/ShareServicesDialog/ShareDirectlyOptions.js";
+import { ixaService, domesticViolenceService } from "@/fixtures/services.js";
 
 export default {
     title: "App Components/ShareDirectlyOptions",

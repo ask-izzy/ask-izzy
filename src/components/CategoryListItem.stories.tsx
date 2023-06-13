@@ -1,7 +1,7 @@
 import React, {ReactNode} from "react";
 
-import { getCategory } from "@/src/constants/categories";
-import CategoryListItem from "@/src/components/CategoryListItem";
+import { getCategory } from "@/src/constants/categories.js";
+import CategoryListItem from "@/src/components/CategoryListItem.js";
 
 export default {
     title: "App Components/ListItem/CategoryListItem",

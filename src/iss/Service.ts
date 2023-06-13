@@ -4,9 +4,9 @@ import _string from "underscore.string";
 const { slugify } = _string;
 import lo_ from "lodash";
 
-import serviceProvisions from "@/src/constants/service-provisions";
-import type {site} from "@/src/iss/site"
-import AddressLocation, {AddressLocationProps} from "@/src/iss/AddressLocation"
+import serviceProvisions from "@/src/constants/service-provisions.js";
+import type {site} from "@/src/iss/site.js"
+import AddressLocation, {AddressLocationProps} from "@/src/iss/AddressLocation.js"
 import type {
     ymdWithDashesDate,
     travelTime,

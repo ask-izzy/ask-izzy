@@ -1,10 +1,10 @@
 import React, {useEffect, useState, useRef} from "react";
 import Snackbar from "@mui/material/Snackbar";
 
-import Button from "@/src/components/base/Button";
-import Cross from "@/src/icons/Cross"
-import useMoveFocus from "@/hooks/useMoveFocus";
-import useToastMessage from "@/hooks/useToastMessage";
+import Button from "@/src/components/base/Button.js";
+import Cross from "@/src/icons/Cross.js"
+import useMoveFocus from "@/hooks/useMoveFocus.js";
+import useToastMessage from "@/hooks/useToastMessage.js";
 
 
 export default function ToastMessage() {

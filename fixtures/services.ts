@@ -1,6 +1,6 @@
-import getServiceFixture from "@/fixtures/factories/Service"
-import Service from "@/src/iss/Service"
-import * as serviceProps from "@/fixtures/servicesProps"
+import getServiceFixture from "@/fixtures/factories/Service.js"
+import Service from "@/src/iss/Service.js"
+import * as serviceProps from "@/fixtures/servicesProps.js"
 
 export const phoneableService: Service = getServiceFixture(
     serviceProps.phoneableServiceProps,

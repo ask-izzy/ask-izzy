@@ -1,7 +1,7 @@
 import React, {ReactNode} from "react";
 
-import AddToCompareButton from "@/src/components/AddToCompareButton";
-import { ixaService } from "@/fixtures/services";
+import AddToCompareButton from "@/src/components/AddToCompareButton.js";
+import { ixaService } from "@/fixtures/services.js";
 
 export default {
     title: "App Components/AddToCompareButton",

@@ -2,10 +2,10 @@ import React from "react";
 import moment from "moment-timezone";
 import _ from "underscore";
 
-import ServiceOpening from "@/src/iss/ServiceOpening";
-import Collapser from "@/src/components/general/Collapser";
-import OpeningTimes from "@/src/components/OpeningTimes";
-import type {openingHours as openingHoursType} from "../iss/general";
+import ServiceOpening from "@/src/iss/ServiceOpening.js";
+import Collapser from "@/src/components/general/Collapser.js";
+import OpeningTimes from "@/src/components/OpeningTimes.js";
+import type {openingHours as openingHoursType} from "../iss/general.js";
 
 function formatTime(str: string): string {
     return moment(str, "HH:mm:ss").format("h:mm A");

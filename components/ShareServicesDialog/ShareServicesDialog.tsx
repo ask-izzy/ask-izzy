@@ -1,13 +1,13 @@
 import React, {ReactNode} from "react";
 
-import ShareDirectlyOptions from "@/components/ShareServicesDialog/ShareDirectlyOptions"
-import SendForm from "@/components/ShareServicesDialog/SendForm"
-import Dialog from "@/components/base/Dialog"
-import Button from "@/src/components/base/Button"
-import StandardButton from "@/components/general/StandardButton"
-import Service from "@/src/iss/Service"
-import storage from "@/src/storage";
-import Send from "@/src/icons/Send"
+import ShareDirectlyOptions from "@/components/ShareServicesDialog/ShareDirectlyOptions.js"
+import SendForm from "@/components/ShareServicesDialog/SendForm.js"
+import Dialog from "@/components/base/Dialog.js"
+import Button from "@/src/components/base/Button.js"
+import StandardButton from "@/components/general/StandardButton.js"
+import Service from "@/src/iss/Service.js"
+import storage from "@/src/storage.js";
+import Send from "@/src/icons/Send.js"
 
 type Props = {
     onCloseRequested: () => void,

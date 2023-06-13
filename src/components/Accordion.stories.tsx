@@ -1,5 +1,5 @@
 import React, {ReactNode} from "react";
-import Accordion from "./Accordion";
+import Accordion from "./Accordion.js";
 export default {
     title: "Basic UI Components/Accordion",
     component: Accordion,

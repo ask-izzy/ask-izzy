@@ -1,6 +1,6 @@
 import React, {ReactNode} from "react";
-import HeaderBar from "@/src/components/HeaderBar";
-import BrandedFooter from "@/src/components/BrandedFooter";
+import HeaderBar from "@/src/components/HeaderBar.js";
+import BrandedFooter from "@/src/components/BrandedFooter.js";
 
 type Props = {
   title: string,

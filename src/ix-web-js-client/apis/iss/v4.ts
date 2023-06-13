@@ -1,7 +1,7 @@
 import {
     postRequestWithToken,
     getRequestWithToken,
-} from "@/src/ix-web-js-client/lib/requests"
+} from "@/src/ix-web-js-client/lib/requests.js"
 
 export type ISS4ClientProps = {
     baseUrl: string,

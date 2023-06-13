@@ -1,6 +1,6 @@
 import React, {ReactNode} from "react";
 
-import TooltipComponent from "@/src/components/Tooltip";
+import TooltipComponent from "@/src/components/Tooltip.js";
 
 
 export default {

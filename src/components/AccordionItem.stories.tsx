@@ -1,6 +1,6 @@
 import React, {ReactNode} from "react";
 
-import AccordionItem from "@/src/components/AccordionItem";
+import AccordionItem from "@/src/components/AccordionItem.js";
 
 export default {
     title: "Basic UI Components/Accordion/AccordionItem",

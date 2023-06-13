@@ -1,7 +1,7 @@
 import React, {ReactNode} from "react";
 import { action } from "@storybook/addon-actions";
 
-import AppBar from "@/src/components/AppBar";
+import AppBar from "@/src/components/AppBar.js";
 
 export default {
     title: "App Components/AppBar",

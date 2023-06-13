@@ -1,5 +1,5 @@
-import cmsAllPagesQuery from "@/src/queries/content/allPages"
-import {queryGraphQlWithErrorLogging} from "@/src/utils/apolloClient";
+import cmsAllPagesQuery from "@/src/queries/content/allPages.js"
+import {queryGraphQlWithErrorLogging} from "@/src/utils/apolloClient.js";
 
 export default async function handler(req: any, res: any): Promise<any> {
     if (req.query.secret !== process.env.STATIC_PAGE_REGENERATION_SECRET) {

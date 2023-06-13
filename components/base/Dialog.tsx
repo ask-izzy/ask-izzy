@@ -3,8 +3,8 @@ import cnx from "classnames"
 import { useA11yDialog } from "react-a11y-dialog"
 import ReactDOM from "react-dom"
 
-import isMounted from "@/hooks/useIsMounted"
-import useUniqueId from "@/hooks/useUniqueId"
+import isMounted from "@/hooks/useIsMounted.js"
+import useUniqueId from "@/hooks/useUniqueId.js"
 
 type Props = {
     children: (props: {titleProps: Record<string, any>}) => ReactNode,

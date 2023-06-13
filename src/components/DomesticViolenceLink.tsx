@@ -1,7 +1,7 @@
 import React from "react";
 
-import Book from "@/src/icons/Book"
-import LogoWithTextBox from "./LogoWithTextBox";
+import Book from "@/src/icons/Book.js"
+import LogoWithTextBox from "./LogoWithTextBox.js";
 
 
 export default function DomesticViolenceLink() {

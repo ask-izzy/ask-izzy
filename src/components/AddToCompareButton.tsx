@@ -1,12 +1,12 @@
 import React from "react";
 import classnames from "classnames";
 
-import Button from "@/src/components/base/Button";
-import AddToCompare from "@/src/icons/AddToCompare"
-import RemoveFromCompare from "@/src/icons/RemoveFromCompare"
-import useMyList from "@/hooks/useMyList"
-import Service from "@/src/iss/Service"
-import * as gtm from "@/src/google-tag-manager";
+import Button from "@/src/components/base/Button.js";
+import AddToCompare from "@/src/icons/AddToCompare.js"
+import RemoveFromCompare from "@/src/icons/RemoveFromCompare.js"
+import useMyList from "@/hooks/useMyList.js"
+import Service from "@/src/iss/Service.js"
+import * as gtm from "@/src/google-tag-manager.js";
 
 type Props = {
     hasTextDescription?: boolean,

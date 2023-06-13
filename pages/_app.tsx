@@ -7,26 +7,26 @@ import type { NextRouter } from "next/router"
 import "core-js/actual/string/replace-all";
 import * as Sentry from "@sentry/nextjs";
 
-import "@/src/utils/global-setup"
-import "../src/styles/bundle.scss"
-import {DebugModeProvider} from "@/contexts/debug-mode-context";
-import {MyListProvider} from "@/contexts/my-list-context";
-import {ServiceResultsProvider} from "@/contexts/service-results-context";
-import {ToastMessageProvider} from "@/contexts/toast-message-context";
-import ToastMessage from "@/src/components/ToastMessage"
+import "@/src/utils/global-setup.js"
+import "../src/styles/bundle.scss.js"
+import {DebugModeProvider} from "@/contexts/debug-mode-context.js";
+import {MyListProvider} from "@/contexts/my-list-context.js";
+import {ServiceResultsProvider} from "@/contexts/service-results-context.js";
+import {ToastMessageProvider} from "@/contexts/toast-message-context.js";
+import ToastMessage from "@/src/components/ToastMessage.js"
 import { getFullPageTitle } from "@/src/utils/index.js";
-import "@/src/utils/page-loading"
-import apolloClient from "@/src/utils/apolloClient";
-import usePageViewAnalytics from "@/hooks/usePageViewAnalytics";
-import useFocusOnHeader from "@/hooks/useFocusOnHeader";
-import DebugColours from "@/src/components/DebugColours"
+import "@/src/utils/page-loading.js"
+import apolloClient from "@/src/utils/apolloClient.js";
+import usePageViewAnalytics from "@/hooks/usePageViewAnalytics.js";
+import useFocusOnHeader from "@/hooks/useFocusOnHeader.js";
+import DebugColours from "@/src/components/DebugColours.js"
 import {
     addPageLoadDependencies,
     closePageLoadDependencies,
-} from "@/src/utils/page-loading"
-import "@/src/analytics"
-import * as gtm from "@/src/google-tag-manager";
-import storage from "@/src/storage";
+} from "@/src/utils/page-loading.js"
+import "@/src/analytics.js"
+import * as gtm from "@/src/google-tag-manager.js";
+import storage from "@/src/storage.js";
 
 function App(appProps: AppProps): ReactNode {
     const { Component, pageProps, err } = appProps

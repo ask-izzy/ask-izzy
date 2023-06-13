@@ -1,14 +1,14 @@
 import {$ReadOnly} from "utility-types";
 
-import Service from "@/src/iss/Service"
+import Service from "@/src/iss/Service.js"
 import {
     Timeout,
     TryWithDefault,
-} from "@/src/timeout";
+} from "@/src/timeout.js";
 import type {
     geoPoint,
-} from "@/src/iss/general"
-import Maps from "@/src/maps";
+} from "@/src/iss/general.js"
+import Maps from "@/src/maps.js";
 
 
 const servicesWithTravelTimes: Service[] = []

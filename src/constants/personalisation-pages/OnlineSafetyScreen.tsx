@@ -1,11 +1,11 @@
 import React from "react"
 
-import AreYouSafe from "@/src/constants/personalisation-pages/AreYouSafe"
-import OnlineSafetyLink from "@/src/components/OnlineSafetyLink"
+import AreYouSafe from "@/src/constants/personalisation-pages/AreYouSafe.js"
+import OnlineSafetyLink from "@/src/components/OnlineSafetyLink.js"
 import {
     getSavedPersonalisationAnswer,
-} from "@/src/utils/personalisation"
-import {PersonalisationInfoPage} from "@/types/personalisation-page"
+} from "@/src/utils/personalisation.js"
+import {PersonalisationInfoPage} from "@/types/personalisation-page.js"
 
 export default {
     type: "info",

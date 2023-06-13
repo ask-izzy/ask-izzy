@@ -1,7 +1,7 @@
 import {useEffect} from "react";
 import { useRouter } from "next/router";
 
-import { waitTillPageLoaded } from "@/src/utils/page-loading"
+import { waitTillPageLoaded } from "@/src/utils/page-loading.js"
 
 let firstLoadHasOccurred = false
 let lastVisitedPage

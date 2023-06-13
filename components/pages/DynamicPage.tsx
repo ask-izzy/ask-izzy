@@ -1,14 +1,14 @@
 import React, {ReactNode} from "react";
 
-import StaticPage from "@/components/pages/StaticPage";
-import Accordion from "@/src/components/Accordion";
-import StrapiMarkdown from "@/src/components/StrapiMarkdown";
-import CalloutBox from "@/src/components/CalloutBox";
+import StaticPage from "@/components/pages/StaticPage.js";
+import Accordion from "@/src/components/Accordion.js";
+import StrapiMarkdown from "@/src/components/StrapiMarkdown.js";
+import CalloutBox from "@/src/components/CalloutBox.js";
 import type {
     CalloutBoxType,
     CalloutType,
-} from "@/src/components/CalloutBox";
-import BlockQuote from "@/src/components/base/BlockQuote";
+} from "@/src/components/CalloutBox.js";
+import BlockQuote from "@/src/components/base/BlockQuote.js";
 
 type PageDetails = {
     id: number,

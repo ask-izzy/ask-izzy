@@ -1,11 +1,11 @@
 import React from "react";
 
-import DomesticViolenceLink from "@/src/components/DomesticViolenceLink";
-import DfvDemographics from "./DfvDemographics";
+import DomesticViolenceLink from "@/src/components/DomesticViolenceLink.js";
+import DfvDemographics from "./DfvDemographics.js";
 
 import {
     getSavedPersonalisationAnswer,
-} from "@/src/utils/personalisation"
+} from "@/src/utils/personalisation.js"
 
 
 export default ({

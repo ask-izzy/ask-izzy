@@ -1,4 +1,4 @@
-import ObjectStorage from "@/src/storage/memory";
+import ObjectStorage from "@/src/storage/memory.js";
 
 // Adapted from https://github.com/unshiftio/sessionstorage/blob/master/index.js
 function canUseStorageImpl(storageImpl: Storage): boolean {

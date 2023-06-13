@@ -1,8 +1,8 @@
 import React, {ForwardedRef, ReactNode} from "react"
 import cnx from "classnames"
 
-import * as gtm from "@/src/google-tag-manager"
-import type {AnalyticsEvent} from "@/src/google-tag-manager"
+import * as gtm from "@/src/google-tag-manager.js"
+import type {AnalyticsEvent} from "@/src/google-tag-manager.js"
 
 export type Props = {
     children: ReactNode,

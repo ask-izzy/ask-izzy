@@ -1,7 +1,7 @@
 import React, {ReactNode} from "react";
 import { action } from "@storybook/addon-actions";
 
-import IconButton from "@/src/components/IconButton";
+import IconButton from "@/src/components/IconButton.js";
 
 export default {
     title: "Basic UI Components/IconButton",

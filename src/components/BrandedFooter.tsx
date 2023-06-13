@@ -1,11 +1,11 @@
 import React from "react"
 
-import Link from "@/src/components/base/Link"
-import Facebook from "@/src/icons/Facebook"
-import Instagram from "@/src/icons/Instagram"
-import AboriginalFlag from "@/src/icons/AboriginalFlag"
-import TorresStraitIslandersFlag from "@/src/icons/TorresStraitIslandersFlag"
-import { donateLink, aboutLink } from "@/src/constants/urls"
+import Link from "@/src/components/base/Link.js"
+import Facebook from "@/src/icons/Facebook.js"
+import Instagram from "@/src/icons/Instagram.js"
+import AboriginalFlag from "@/src/icons/AboriginalFlag.js"
+import TorresStraitIslandersFlag from "@/src/icons/TorresStraitIslandersFlag.js"
+import { donateLink, aboutLink } from "@/src/constants/urls.js"
 
 function BrandedFooter() {
     const LOGO = "/images/ask-izzy-logo-single-line-yellow.svg";

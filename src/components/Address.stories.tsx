@@ -1,6 +1,6 @@
 import React, {ReactNode} from "react";
-import Address from "@/src/components/Address";
-import AddressLocation from "@/fixtures/factories/AddressLocation";
+import Address from "@/src/components/Address.js";
+import AddressLocation from "@/fixtures/factories/AddressLocation.js";
 export default {
     title: "Service Components/Address",
     component: Address,

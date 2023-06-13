@@ -1,6 +1,6 @@
 import React, {ReactNode} from "react";
 
-import Web from "@/src/components/Web";
+import Web from "@/src/components/Web.js";
 
 export default {
     title: "Service Components/Web",

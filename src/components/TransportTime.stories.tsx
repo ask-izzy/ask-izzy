@@ -1,7 +1,7 @@
 import React, {ReactNode} from "react";
 
-import TransportTime from "@/src/components/TransportTime";
-import { ixaService } from "@/fixtures/services";
+import TransportTime from "@/src/components/TransportTime.js";
+import { ixaService } from "@/fixtures/services.js";
 
 export default {
     title: "Service Components/TransportTime",

@@ -8,7 +8,7 @@ import type {
     hmsWithColonsTime,
     openingHours,
     dayOfWeek,
-} from "./general";
+} from "./general.js";
 
 type props = {
     now_open: nowOpen,

@@ -1,9 +1,9 @@
 import React, {useState, useEffect, ReactElement} from "react";
 
-import Link from "@/src/components/base/Link";
-import HeaderBar from "@/src/components/HeaderBar";
-import BrandedFooter from "@/src/components/BrandedFooter";
-import * as gtm from "@/src/google-tag-manager";
+import Link from "@/src/components/base/Link.js";
+import HeaderBar from "@/src/components/HeaderBar.js";
+import BrandedFooter from "@/src/components/BrandedFooter.js";
+import * as gtm from "@/src/google-tag-manager.js";
 
 function AddServicePage() {
     const [isFormDone, setIsFormDone] = useState<boolean>(false)

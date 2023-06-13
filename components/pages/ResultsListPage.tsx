@@ -2,20 +2,20 @@ import React from "react"
 import { withRouter } from "next/router"
 import type { NextRouter } from "next/router"
 
-import DebugPersonalisation from "@/src/components/DebugPersonalisation";
-import ResultsList from "@/src/components/ResultsList";
-import LoadingResultsHeader from "@/src/components/ResultsListPage/LoadingResultsHeader";
-import AlertBannerList from "@/src/components/AlertBannerList";
-import Loading from "@/src/icons/Loading";
-import NotFoundStaticPage from "@/pages/404"
-import FlatButton from "@/src/components/FlatButton";
-import SuggestionBox from "@/components/SuggestionBox";
-import QuestionStepper from "@/src/components/QuestionStepper";
+import DebugPersonalisation from "@/src/components/DebugPersonalisation.js";
+import ResultsList from "@/src/components/ResultsList.js";
+import LoadingResultsHeader from "@/src/components/ResultsListPage/LoadingResultsHeader.js";
+import AlertBannerList from "@/src/components/AlertBannerList.js";
+import Loading from "@/src/icons/Loading.js";
+import NotFoundStaticPage from "@/pages/404.js"
+import FlatButton from "@/src/components/FlatButton.js";
+import SuggestionBox from "@/components/SuggestionBox.js";
+import QuestionStepper from "@/src/components/QuestionStepper.js";
 import { stateFromLocation } from "@/src/utils/index.js";
-import ScrollToTop from "@/src/components/ResultsListPage/ScrollToTop";
-import Storage from "@/src/storage";
-import Controls from "@/src/components/ResultsListPage/Controls";
-import useServiceResults from "@/hooks/useServiceResults"
+import ScrollToTop from "@/src/components/ResultsListPage/ScrollToTop.js";
+import Storage from "@/src/storage.js";
+import Controls from "@/src/components/ResultsListPage/Controls.js";
+import useServiceResults from "@/hooks/useServiceResults.js"
 
 type Props = {
     router: NextRouter

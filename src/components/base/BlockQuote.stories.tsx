@@ -1,6 +1,6 @@
 import React, {ReactNode} from "react";
 
-import BlockQuote from "@/src/components/base/BlockQuote";
+import BlockQuote from "@/src/components/base/BlockQuote.js";
 
 export default {
     title: "Base Components/BlockQuote",

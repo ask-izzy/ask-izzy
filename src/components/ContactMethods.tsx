@@ -1,11 +1,11 @@
 import React from "react"
 
-import Collapser from "@/src/components/general/Collapser"
-import Spacer from "@/src/components/Spacer"
-import Email from "@/src/components/Email"
-import PhoneButton from "@/src/components/PhoneButton"
-import Web from "@/src/components/Web"
-import Service from "@/src/iss/Service"
+import Collapser from "@/src/components/general/Collapser.js"
+import Spacer from "@/src/components/Spacer.js"
+import Email from "@/src/components/Email.js"
+import PhoneButton from "@/src/components/PhoneButton.js"
+import Web from "@/src/components/Web.js"
+import Service from "@/src/iss/Service.js"
 
 type Props = {
     object: Service,

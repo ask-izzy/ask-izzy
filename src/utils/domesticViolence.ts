@@ -1,7 +1,7 @@
-import storage from "@/src/storage";
-import AreYouSafe from "@/src/constants/personalisation-pages/AreYouSafe";
-import OnlineSafetyScreen from "@/src/constants/personalisation-pages/OnlineSafetyScreen";
-import {getSavedPersonalisationAnswer} from "@/src/utils/personalisation"
+import storage from "@/src/storage.js";
+import AreYouSafe from "@/src/constants/personalisation-pages/AreYouSafe.js";
+import OnlineSafetyScreen from "@/src/constants/personalisation-pages/OnlineSafetyScreen.js";
+import {getSavedPersonalisationAnswer} from "@/src/utils/personalisation.js"
 
 export const resetDfvOptions = (): void => {
     if (

@@ -1,5 +1,5 @@
 import React, {ReactNode} from "react";
-import BrandedFooter from "@/src/components/BrandedFooter";
+import BrandedFooter from "@/src/components/BrandedFooter.js";
 export default {
     title: "App Components/BrandedFooter",
     component: BrandedFooter

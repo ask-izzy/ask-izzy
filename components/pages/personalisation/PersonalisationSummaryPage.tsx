@@ -2,29 +2,29 @@ import React, {useEffect, ReactNode} from "react"
 import {withRouter} from "next/router"
 import type {NextRouter} from "next/router"
 
-import WithStickyFooter from "@/src/components/WithStickyFooter";
-import Spacer from "@/src/components/Spacer";
-import FlatButton from "@/src/components/FlatButton"
-import HeaderBar from "@/src/components/HeaderBar"
-import LinkListItem from "@/src/components/LinkListItem"
-import Link from "@/src/components/base/Link"
-import storage from "@/src/storage";
-import {isDisabilityAdvocacySearch} from "@/src/iss/serviceSearch"
+import WithStickyFooter from "@/src/components/WithStickyFooter.js";
+import Spacer from "@/src/components/Spacer.js";
+import FlatButton from "@/src/components/FlatButton.js"
+import HeaderBar from "@/src/components/HeaderBar.js"
+import LinkListItem from "@/src/components/LinkListItem.js"
+import Link from "@/src/components/base/Link.js"
+import storage from "@/src/storage.js";
+import {isDisabilityAdvocacySearch} from "@/src/iss/serviceSearch.js"
 import {
     getBannerName,
     setLocationFromUrl,
     getSavedPersonalisationAnswer,
-} from "@/src/utils/personalisation"
+} from "@/src/utils/personalisation.js"
 import {
     getPersonalisationPages,
     getPersonalisationNextPath,
     getServicesPath,
     getCategoryFromRouter,
     getPathOfSSRPage,
-} from "@/src/utils/routing"
+} from "@/src/utils/routing.js"
 import type {
     PersonalisationPage,
-} from "@/types/personalisation-page"
+} from "@/types/personalisation-page.js"
 
 type Props = {
     router: NextRouter

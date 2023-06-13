@@ -56,7 +56,7 @@ files.forEach((path) => {
 
     writeFileSync(outFile, `${fileHeader}
 
-import BaseIcon from "./BaseIcon";
+import BaseIcon from "./BaseIcon.js";
 
 export default class SvgIcon${className} extends BaseIcon {
     static defaultProps = {

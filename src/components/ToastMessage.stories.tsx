@@ -1,8 +1,8 @@
 import React, {useState, ReactNode} from "react";
 
-import ToastMessageComponent from "./ToastMessage";
-import useToastMessage from "@/hooks/useToastMessage";
-import useMyListToastMessage from "@/hooks/useMyListToastMessage";
+import ToastMessageComponent from "./ToastMessage.js";
+import useToastMessage from "@/hooks/useToastMessage.js";
+import useMyListToastMessage from "@/hooks/useMyListToastMessage.js";
 
 export default {
     title: "App Components/ToastMessage",

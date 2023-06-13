@@ -1,8 +1,8 @@
 import React from "react";
 import {useRouter} from "next/router"
 
-import SearchBar from "@/src/components/general/SearchBar";
-import ScreenReader from "@/src/components/ScreenReader";
+import SearchBar from "@/src/components/general/SearchBar.js";
+import ScreenReader from "@/src/components/ScreenReader.js";
 
 function SupportSearchBar() {
     const router = useRouter();

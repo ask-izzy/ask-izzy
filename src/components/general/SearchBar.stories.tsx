@@ -2,8 +2,8 @@ import React, {ReactNode} from "react";
 import {$Diff} from "utility-types";
 import {action} from "@storybook/addon-actions";
 
-import SearchBar from "@/src/components/general/SearchBar";
-import {autocompleteDecorator} from "@/components/general/InputWithDropdown.stories";
+import SearchBar from "@/src/components/general/SearchBar.js";
+import {autocompleteDecorator} from "@/components/general/InputWithDropdown.stories.js";
 
 export default {
     title: "General Components/SearchBar",

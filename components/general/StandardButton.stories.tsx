@@ -1,6 +1,6 @@
 import React, {ReactNode} from "react";
 import { action } from "@storybook/addon-actions";
-import StandardButton from "@/components/general/StandardButton";
+import StandardButton from "@/components/general/StandardButton.js";
 
 export default {
     title: "Basic UI Components/StandardButton",

@@ -1,10 +1,10 @@
 import * as React from "react";
 
-import Link from "@/src/components/base/Link";
-import Storage from "@/src/storage";
-import Category from "@/src/constants/Category";
-import Service from "@/src/iss/Service";
-import {ensureURLHasTrailingSlash} from "@/src/utils/url"
+import Link from "@/src/components/base/Link.js";
+import Storage from "@/src/storage.js";
+import Category from "@/src/constants/Category.js";
+import Service from "@/src/iss/Service.js";
+import {ensureURLHasTrailingSlash} from "@/src/utils/url.js"
 
 type Props = {
     category: Category | null,

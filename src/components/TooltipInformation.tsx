@@ -2,10 +2,10 @@
 import React, {useState, useRef, useEffect, ReactNode} from "react";
 import ClickAwayListener from "@mui/material/ClickAwayListener";
 
-import Tooltip from "@/src/components/Tooltip";
-import Button from "@/src/components/base/Button";
-import Cross from "@/src/icons/Cross"
-import useMoveFocus from "@/hooks/useMoveFocus";
+import Tooltip from "@/src/components/Tooltip.js";
+import Button from "@/src/components/base/Button.js";
+import Cross from "@/src/icons/Cross.js"
+import useMoveFocus from "@/hooks/useMoveFocus.js";
 
 type TooltipProps = {
     content?: ReactNode,

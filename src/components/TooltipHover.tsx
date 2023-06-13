@@ -1,5 +1,5 @@
 import React, {ReactNode} from "react";
-import Tooltip from "@/src/components/Tooltip";
+import Tooltip from "@/src/components/Tooltip.js";
 
 type TooltipProps = {
     content: string,

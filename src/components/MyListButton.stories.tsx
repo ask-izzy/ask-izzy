@@ -1,6 +1,6 @@
 import React, {ReactNode} from "react";
 
-import MyListButton from "@/src/components/MyListButton";
+import MyListButton from "@/src/components/MyListButton.js";
 
 export default {
     title: "App Components/MyListButton",
