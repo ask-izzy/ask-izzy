@@ -1,5 +1,3 @@
-/* @flow */
-
 import * as React from "react";
 
 import Link from "@/src/components/base/Link";
@@ -9,7 +7,7 @@ import Service from "@/src/iss/Service";
 import {ensureURLHasTrailingSlash} from "@/src/utils/url"
 
 type Props = {
-    category: ?Category,
+    category: Category | null,
     searchTerm: string,
     pathname: string,
     results: Array<Service>
@@ -21,7 +19,7 @@ function SuggestionBox(
         pathname,
         results,
         searchTerm,
-    }: Props): React.Node {
+    }: Props) {
     const editingPath = () =>
         `${ensureURLHasTrailingSlash(pathname)}personalise/summary`
 

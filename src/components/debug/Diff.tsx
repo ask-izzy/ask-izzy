@@ -1,6 +1,4 @@
-/* @flow */
 import React from "react"
-import type {Node as ReactNode} from "react"
 import cnx from "classnames"
 
 export type DiffType = Array<{
@@ -17,8 +15,7 @@ type Props = {
 export default function Diff({
     className,
     diff,
-    ...rest
-}: Props): ReactNode {
+}: Props) {
     return (
         <pre className={cnx(className, "Diff")}>
             {diff.map((sentence, i) => (
@@ -33,7 +30,7 @@ export default function Diff({
                             <div
                                 className="line"
                                 key={i + line}
-                            >{line}</div>
+                            >{line}</div>,
                         )
                     }</div>
             ))}

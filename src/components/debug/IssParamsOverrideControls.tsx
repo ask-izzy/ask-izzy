@@ -1,24 +1,22 @@
-/* @flow */
-
 import React, {useState} from "react";
-import type {Node as ReactNode} from "react";
 import {diffJson} from "diff";
-import { JsonForms } from "@jsonforms/react";
-import { vanillaCells, vanillaRenderers } from "@jsonforms/vanilla-renderers";
-import Diff from "./Diff"
+import {JsonForms} from "@jsonforms/react";
+import {vanillaCells, vanillaRenderers} from "@jsonforms/vanilla-renderers";
+
+import Diff from "@/src/components/debug/Diff"
 
 type Props = {
-    originalIssParams: { [string]: any },
-    issParamsOverride: { [string]: any },
-    setIssParamsOverride: ({ [string]: any }) => void
+    originalIssParams: Record<string, any>,
+    issParamsOverride: Record<string, any>,
+    setIssParamsOverride: (issParams?: Record<string, any>) => void
 }
 export default function IssParamsOverrideControls({
     originalIssParams,
     issParamsOverride,
     setIssParamsOverride,
-}: Props): ReactNode {
+}: Props) {
     const [issParams, setIssParams] = useState(
-        issParamsOverride
+        issParamsOverride,
     )
 
     const diff = diffJson(originalIssParams, issParams)
@@ -91,7 +89,7 @@ export default function IssParamsOverrideControls({
             renderers={vanillaRenderers}
             cells={vanillaCells}
             validationMode={"NoValidation"}
-            onChange={({ data, _errors }) => setIssParams(data)}
+            onChange={({data}) => setIssParams(data)}
         />
         <Diff diff={diff} />
         <div>

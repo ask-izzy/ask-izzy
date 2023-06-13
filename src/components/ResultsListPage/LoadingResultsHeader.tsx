@@ -1,12 +1,9 @@
-/* @flow */
-
 import React from "react";
-import type {Node as ReactNode} from "React"
 
-import HeaderBar from "../HeaderBar";
+import HeaderBar from "@/src/components/HeaderBar";
 import Category from "@/src/constants/Category";
-import {getBannerName} from "../../utils/personalisation"
-import type Service from "../../iss/Service"
+import {getBannerName} from "@/src/utils/personalisation"
+import type Service from "@/src/iss/Service"
 
 const formatResultsPageHeading = (title: string) => {
     switch (title) {
@@ -45,7 +42,7 @@ function LoadingResultsHeader({
     category,
     title,
     services,
-}: Props): ReactNode {
+}: Props) {
     const bannerName = getBannerName(category)
 
     if (loading) {
@@ -97,7 +94,7 @@ function LoadingResultsHeader({
                 primaryText={
                     services.length > 0 ?
                         formatResultsPageHeading(
-                            title.toLocaleLowerCase()
+                            title.toLocaleLowerCase(),
                         )
                         : primaryText(category)
                 }

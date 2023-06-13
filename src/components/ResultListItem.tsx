@@ -1,44 +1,40 @@
-/* @flow */
-
-import type {Node as ReactNode, Element as ReactElement} from "React";
 import React from "react";
+import {titleize} from "underscore.string";
 
-import icons from "../icons";
+import Map from "@/src/icons/Map";
+import Loading from "@/src/icons/Loading";
 import Service from "../iss/Service";
-
-import DebugContainer from "./DebugContainer";
-import DebugQueryScore from "./DebugQueryScore";
-import DebugServiceRecord from "./DebugServiceRecord";
-
-import Eligibility from "./Eligibility";
-import AddToCompareButton from "./AddToCompareButton"
-import ShareButton from "./ShareButton"
-import ServiceProvisions from "./service/ServiceProvisions"
-import Accessibility from "./Accessibility";
-import OpeningTimes from "./OpeningTimes";
-import Ndis from "./Ndis";
-import TransportTime from "./TransportTime";
-import IndigenousServiceIcon from "./IndigenousServiceIcon";
-import LgbtiqIcon from "./LgbtiqIcon";
-import { titleize } from "underscore.string";
-import ScreenReader from "./ScreenReader";
-import ListItem from "./ListItem";
-import Link from "./base/Link";
-import type {travelTimesStatus} from "../hooks/useTravelTimesUpdater";
+import DebugContainer from "@/src/components/DebugContainer";
+import DebugQueryScore from "@/src/components/DebugQueryScore";
+import DebugServiceRecord from "@/src/components/DebugServiceRecord";
+import Eligibility from "@/src/components/Eligibility";
+import AddToCompareButton from "@/src/components/AddToCompareButton"
+import ShareButton from "@/src/components/ShareButton"
+import ServiceProvisions from "@/src/components/service/ServiceProvisions"
+import Accessibility from "@/src/components/Accessibility";
+import OpeningTimes from "@/src/components/OpeningTimes";
+import Ndis from "@/src/components/Ndis";
+import TransportTime from "@/src/components/TransportTime";
+import IndigenousServiceIcon from "@/src/components/IndigenousServiceIcon";
+import LgbtiqIcon from "@/src/components/LgbtiqIcon";
+import ScreenReader from "@/src/components/ScreenReader";
+import ListItem from "@/src/components/ListItem";
+import Link from "@/src/components/base/Link";
+import type {travelTimesStatus} from "@/src/hooks/useTravelTimesUpdater";
 
 
 type Props = {
     service: Service,
     resultNumber: number,
-    travelTimesStatus: ?travelTimesStatus,
+    travelTimesStatus: travelTimesStatus | null,
 }
 
 function ResultListItem({
     service,
     resultNumber,
     travelTimesStatus,
-}: Props): ReactNode {
-    const renderLocation = (): ?ReactElement<"span"> => {
+}: Props) {
+    const renderLocation = () => {
         if (!service.location) {
             return null
         }
@@ -50,7 +46,7 @@ function ResultListItem({
 
         return (
             <span className="location">
-                <icons.Map aria-hidden={true} />
+                <Map aria-hidden={true} />
                 <ScreenReader>
                     Service located in
                 </ScreenReader>
@@ -59,7 +55,7 @@ function ResultListItem({
         );
     }
 
-    const renderTravelTimes = (): ReactNode => {
+    const renderTravelTimes = () => {
         if (service.location && service.travelTimes) {
             return <>
                 <ScreenReader>
@@ -67,7 +63,6 @@ function ResultListItem({
                 </ScreenReader>
                 <TransportTime
                     location={service.location}
-                    compact={true}
                     travelTimes={service.travelTimes}
                 />
             </>
@@ -109,14 +104,12 @@ function ResultListItem({
             <div className="site_name">
                 {service.site.name}
                 <Ndis
-                    className="ndis"
                     compact={true}
                     object={service}
                 />
             </div>
             {service.location && renderLocation()}
             <OpeningTimes
-                className="opening_hours"
                 object={service.open}
             />
             <ServiceProvisions
@@ -125,13 +118,13 @@ function ResultListItem({
             <div className="description">
                 {service.shortDescription?.map(
                     (sentence, i) =>
-                        <p key={i}>{sentence}</p>
+                        <p key={i}>{sentence}</p>,
                 )}
             </div>
             <Eligibility {...service} />
             <Accessibility service={service} />
             {!service.travelTimes && travelTimesStatus === "loading" &&
-                <icons.Loading className="small"/>
+                <Loading className="small"/>
             }
             {service.travelTimes && renderTravelTimes()}
             <DebugServiceRecord object={service} />

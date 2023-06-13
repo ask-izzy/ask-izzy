@@ -1,25 +1,21 @@
-/* @flow */
-
-import type {Node as ReactNode} from "React";
-import * as React from "react";
+import React, {useEffect, useState} from "react";
 import {GoogleMap, Marker} from "@react-google-maps/api"
 
-import type {site} from "../iss/site";
-import type {geoPoint} from "../iss/general"
-import Maps from "../maps";
-import storage from "../storage";
-import * as gtm from "../google-tag-manager";
+import type {site} from "@/src/iss/site";
+import type {geoPoint} from "@/src/iss/general"
+import Maps from "@/src/maps";
+import storage from "@/src/storage";
+import * as gtm from "@/src/google-tag-manager";
 import {
     setMapView,
     markersShownOnLoad,
-} from "./SitesMap.service";
-import {useEffect, useState} from "react";
+} from "@/src/components/SitesMap.service";
 
 type Props = {
     sites: Array<site>,
-    siteLocations: Object,
-    onSiteSelect?: Function,
-    selectedSite?: ?site
+    siteLocations: Record<string, any>,
+    onSiteSelect?: (site: site | null) => void,
+    selectedSite?: site | null,
 }
 
 
@@ -29,16 +25,15 @@ type SiteMarker = {
     selected: boolean
 }
 
-function SitesMap(
-    {
-        sites,
-        siteLocations,
-        onSiteSelect,
-        selectedSite,
-    }: Props): ReactNode {
+function SitesMap({
+    sites,
+    siteLocations,
+    onSiteSelect,
+    selectedSite,
+}: Props) {
 
-    const [mapsApi, setMapsApi] = useState(null)
-    const [map, setMap] = useState(null)
+    const [mapsApi, setMapsApi] = useState<any>(null)
+    const [map, setMap] = useState<any>(null)
 
     useEffect(() => {
         Maps().then(mapsApi => setMapsApi(mapsApi))
@@ -75,7 +70,7 @@ function SitesMap(
                         "SitesMap given a site without an" +
                         " associated location " +
                         "or lat/lon in the siteLocations prop:",
-                        site
+                        site,
                     )
                     return false
                 })
@@ -126,11 +121,11 @@ function SitesMap(
                             icon={{
                                 url: "/images/you-are-here.png",
                                 scaledSize: {width: 32, height: 32},
-                            }}
+                            } as any}
                             position={{
                                 lat: storage.getUserGeolocation()?.latitude,
                                 lng: storage.getUserGeolocation()?.longitude,
-                            }}
+                            } as any}
                         />
                         : null}
                     {markers().map(marker =>
@@ -146,16 +141,16 @@ function SitesMap(
                                     "/images/map-marker-with-dot.png"
                                     : "/images/map-marker.png",
                                 scaledSize: {width: 27, height: 43},
-                            }}
+                            } as any}
                             onClick={() => markerOnClickHandler(marker)}
-                        />
+                        />,
                     )}
                 </GoogleMap>
                 : <div style={{
                     textAlign: "center",
                 }}>
                     <h3>
-                        The map couldn't be loaded, please refresh the page
+                        The map couldn&apos;t be loaded, please refresh the page
                     </h3>
                 </div>}
         </div>

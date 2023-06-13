@@ -1,11 +1,10 @@
-/* @flow */
 import {useState} from "react"
-import storage from "../storage";
-import Service from "../iss/Service"
+import storage from "@/src/storage";
+import Service from "@/src/iss/Service"
 import {
     attachTransportTimes,
     removeAllTransitTimes,
-} from "../iss/travelTimes"
+} from "@/src/iss/travelTimes"
 
 type returnVals = {
     travelTimesStatus: travelTimesStatus,
@@ -16,13 +15,13 @@ type returnVals = {
 export type travelTimesStatus = "not set" | "loading" | "loaded"
 
 export default function useTravelTimesUpdater(
-    services: Array<Service>
+    services: Array<Service>,
 ): returnVals {
     const [travelTimesStatus, setTravelTimesStatus] =
         useState<travelTimesStatus>(
             storage.getUserGeolocation() ?
                 "loaded"
-                : "not set"
+                : "not set",
         )
     async function loadTravelTimes() {
         setTravelTimesStatus("loading")

@@ -29,7 +29,7 @@ function PhoneButton({
     analyticsEventDetails,
     hasDetails = <></>,
     styleType,
-}: Props): ReactNode {
+}: Props) {
     const icon = styleType === "hollow" ?
         <Phone />
         : <PhoneSolid />
