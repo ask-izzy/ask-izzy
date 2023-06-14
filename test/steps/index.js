@@ -2,17 +2,17 @@
  * Step definitions for BDD tests
  */
 
-module.exports = ((function() {
+export default ((function() {
     // include libraries here
     return [
-        require("./browser"),
-        require("./branding"),
-        require("./datetime"),
-        require("./geolocation"),
-        require("./maps"),
-        require("./results"),
-        require("./servicepage"),
-        require("./questions"),
-        require("./mocks"),
+        import("./browser"),
+        import("./branding"),
+        import("./datetime"),
+        import("./geolocation"),
+        import("./maps"),
+        import("./results"),
+        import("./servicepage"),
+        import("./questions"),
+        import("./mocks"),
     ];
 })());
