@@ -2,6 +2,7 @@
 
 import type {Element as ReactElement} from "React";
 import React from "react";
+import moment from "moment"
 
 import Address from "@/src/components/Address";
 import PhoneSolid from "@/src/icons/PhoneSolid";
@@ -12,16 +13,11 @@ import Spacer from "@/src/components/Spacer";
 type Props = {
     services: Array<any>,
 }
-function BrandedFooter({
+export default function MyListPrintPage({
     services,
 }: Props): ReactElement<"div"> {
-    function formatDate() {
-        const date = new Date()
-        const day = ("0" + date.getDate()).slice(-2)
-        const month = ("0" + (date.getMonth() + 1)).slice(-2)
-        const year = date.getFullYear()
-        return day + "/" + month + "/" + year
-    }
+    const date = moment();
+    const formattedDate = date.format("DD/MM/YYYY");
 
     return (
         <div
@@ -30,7 +26,7 @@ function BrandedFooter({
             <div className="my-list-print-header">
                 <AskIzzyGreyScale />
                 <div className="date-container">
-                    {formatDate()}
+                    {formattedDate}
                 </div>
             </div>
             <div>
@@ -118,5 +114,3 @@ function BrandedFooter({
         </div>
     )
 }
-
-export default BrandedFooter

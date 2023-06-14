@@ -21,7 +21,7 @@ function ResultListItemContact({
     service,
 }: Props): ReactNode {
     if (service.Phones().length === 0) {
-        return <></>;
+        return null;
     }
     const firstPhoneNumber = service.Phones()[0].number;
 

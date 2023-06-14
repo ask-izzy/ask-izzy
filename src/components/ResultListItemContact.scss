@@ -42,13 +42,16 @@
 
         .contact-comment {
             color: var(--colour-text-mid);
+            text-align: right;
         }
 
         .Link {
             font-weight: bolder;
             color: var(--colour-text-dark);
             width: fit-content;
+            white-space: nowrap;
         }
+
         .DirectionsIcon {
             fill: var(--colour-brand-primary);
         }
