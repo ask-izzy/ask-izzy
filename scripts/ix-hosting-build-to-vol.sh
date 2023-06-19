@@ -50,7 +50,7 @@ if [ "$CREATE_STORAGE_BUILD_DIR_EXIT_STATUS" -eq 0 ]; then
     touch "$BUILD_COMPLETE_FILE"
 
     for STORAGE_DIR_ITEM in /storage/*; do
-        if [ "$(basename $STORAGE_DIR_ITEM)" -lt $((TASK_DEFINITION_REVISION-NUM_OF_PREVIOUS_REVISIONS_TO_KEEP)) ]; then
+        if [ "$(basename "$STORAGE_DIR_ITEM")" -lt $((TASK_DEFINITION_REVISION-NUM_OF_PREVIOUS_REVISIONS_TO_KEEP)) ]; then
             echo Deleting previous build: "$STORAGE_DIR_ITEM"
             rm -r "$STORAGE_DIR_ITEM"
         else
