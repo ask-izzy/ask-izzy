@@ -46,7 +46,7 @@ build-development:
 
 build-distribution:
   stage: Build
-  needs: ['build-development']
+  # needs: ['build-development']
   script:
     - docker --version
     - 'echo Cache: $([ -n "$DISABLE_CACHE" ] && echo disabled || echo enabled)'
@@ -178,3 +178,6 @@ deploy:
     - echo "The production image tag is $TAG_PRODUCTION"
   only:
     - tags
+
+aws-ecr-push:
+  needs: ['build-distribution']
