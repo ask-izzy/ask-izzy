@@ -9,7 +9,7 @@ IFS=$'\n\t'
 if [ -n "${ECS_AGENT_URI-}" ]; then
     env
     curl "${ECS_CONTAINER_METADATA_URI_V4}/task"
-    TASK_DEFINITION_REVISION=node -e "fetch('${ECS_CONTAINER_METADATA_URI_V4}/task').then(res => res.json()).then(res => console.log(res['Revision'] ?? ''))"
+    TASK_DEFINITION_REVISION=$(node -e "fetch('${ECS_CONTAINER_METADATA_URI_V4}/task').then(res => res.json()).then(res => console.log(res['Revision'] ?? ''))")
     echo --${TASK_DEFINITION_REVISION}--
     exit 0;
 fi
