@@ -4,7 +4,6 @@ variables:
   AWS_APP_NAME: ask_izzy
 
 stages:
-  - .post
   - Build
   - Lint
   - Test
@@ -181,6 +180,7 @@ deploy:
     - tags
 
 aws-ecr-push:
+  stage: Build
   script:
     - docker --version
     - 'echo Cache: $([ -n "$DISABLE_CACHE" ] && echo disabled || echo enabled)'
