@@ -7,6 +7,9 @@ services:
       args:
         - VERSION=emulated-production
     command: "shell bash -c 'yarn run deploy && yarn run serve'"
+    depends_on:
+      aws-ecs-api-mock:
+        condition: service_healthy
     environment:
       SITE_PROTOCOL: "https"
       SITE_DOMAIN: "askizzy.org.au"
@@ -14,6 +17,7 @@ services:
       STATIC_PAGE_PREVIEW_SECRET: "hunter2"
       ENVIRONMENT: "emulated production"
       HTTP_PROXY: "http://http-proxy:8888"
+      ECS_CONTAINER_METADATA_URI_V4: "http://aws-ecs-api-mock"
     volumes:
       - ./.env.production.local:/app/.env.production.local
       - ./.env.local:/app/.env.local
@@ -39,6 +43,15 @@ services:
       target: set-volume-permissions
     volumes:
       - storage:/storage
+
+  aws-ecs-api-mock:
+    image: codfish/json-server:0.17.3
+    command: ["bash", "-c", "echo '{\"task\": {\"Revision\": \"${FAKE_TASK_DEFINITION_REVISION}\"}}' > /app/db.json && npm run dev"]
+    healthcheck:
+      test: ["CMD", "node", "-e", "fetch('http://localhost')"]
+      interval: 1s
+      timeout: 3s
+      retries: 30
 
 volumes:
   storage:
