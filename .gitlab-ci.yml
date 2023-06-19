@@ -4,10 +4,11 @@ variables:
   AWS_APP_NAME: ask_izzy
 
 stages:
-  - Deploy
+  - .post
   - Build
   - Lint
   - Test
+  - Deploy
 
 default:
   before_script:
