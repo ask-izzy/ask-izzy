@@ -188,6 +188,8 @@ COPY --chown=$UID_GID ./.env ./.env.test ./babel.config.json ./next.config.js /a
 # Copy in all remaining files not excluded by .gitignore
 COPY --chown=$UID_GID . /app
 
+RUN yarn with --test-env --mocks build
+
 ARG VERSION
 RUN echo $VERSION > ./public/VERSION.txt
 
