@@ -36,15 +36,15 @@ CREATE_STORAGE_BUILD_DIR_LOG=$(mkdir "$STORAGE_BUILD_DIR" 2>&1) \
     || CREATE_STORAGE_BUILD_DIR_EXIT_STATUS=$?
 
 if [ "$CREATE_STORAGE_BUILD_DIR_EXIT_STATUS" -eq 0 ]; then
-    echo "This container is in charge of building the app"
+    echo "--- This container is in charge of building the app"
     yarn build
 
-    echo Done building, now about to copy files
+    echo "Done building, now about to copy files"
 
     # Once we've finished building copy all files into the /storage subdirectory
     time cp -a "./." "$STORAGE_BUILD_DIR"
 
-    echo Done copying files
+    echo "Done copying files"
 
     # Create build complete file to let other containers know we've finished building
     touch "$BUILD_COMPLETE_FILE"
