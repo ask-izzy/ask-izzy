@@ -8,24 +8,20 @@
 set -euo pipefail
 IFS=$'\n\t'
 
-env | awk 'ORS="*SPLIT*"'
-
 # Deployment process relies on knowing which task definition revision is currently being deployed
 if [ -z "$ECS_CONTAINER_METADATA_URI_V4" ]; then
     echo "Error: AWS ECS container agent endpoint not found. Aborting deployment" 1>&2
     exit 1
 fi 
 
-curl "${ECS_CONTAINER_METADATA_URI_V4}/task"
 TASK_DEFINITION_REVISION=$(node -e "import('node-fetch').then( fetch => fetch.default('${ECS_CONTAINER_METADATA_URI_V4}/task').then(res => res.json()).then(res => console.log(res['Revision'] ?? '')) )")
-echo --${TASK_DEFINITION_REVISION}--
 
 if [ -z "$TASK_DEFINITION_REVISION" ]; then
     echo "Error: Failed to fetch task definition revision from AWS ECS container agent endpoint. Aborting deployment" 1>&2
     exit 1
 fi 
 
-echo ------------ Deploy Stage - Task Definition Revision: "$TASK_DEFINITION_REVISION" -----------
+echo ------------ Task Definition Revision: "$TASK_DEFINITION_REVISION" -----------
 
 STORAGE_BUILD_DIR="/storage/$TASK_DEFINITION_REVISION"
 BUILD_COMPLETE_FILE="$STORAGE_BUILD_DIR/.build-complete"
@@ -71,3 +67,5 @@ else
     done
     echo "The container responsible for building has signalled it is finished."
 fi
+
+ln -s "$STORAGE_BUILD_DIR" "$SHARED_APP_DIR"
