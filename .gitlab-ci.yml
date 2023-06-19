@@ -182,6 +182,10 @@ deploy:
 aws-ecr-push:
   stage: Build
   script:
+    - amazon-linux-extras install docker
+    - aws --version
+    - docker --version
+
     - docker --version
     - 'echo Cache: $([ -n "$DISABLE_CACHE" ] && echo disabled || echo enabled)'
     - TAG_CACHE_MAIN_BRANCH_DIST_STAGE=${DOCKER_REPO}:cache-$CI_DEFAULT_BRANCH-dist
@@ -197,10 +201,6 @@ aws-ecr-push:
       --target distribution
       --pull
       .
-    
-    - amazon-linux-extras install docker
-    - aws --version
-    - docker --version
 
     # If defined use $IMAGE_TAG for the image tag, else use $CI_COMMIT_TAG if defined, else use 
     # $CI_COMMIT_REF_SLUG-$CI_COMMIT_SHORT_SHA.
