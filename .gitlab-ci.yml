@@ -189,6 +189,7 @@ aws-ecr-push:
     - docker --version
     - 'echo Cache: $([ -n "$DISABLE_CACHE" ] && echo disabled || echo enabled)'
     - TAG_CACHE_MAIN_BRANCH_DIST_STAGE=${DOCKER_REPO}:cache-$CI_DEFAULT_BRANCH-dist
+    - docker build --help
     - time docker build
       $([ -n "$DISABLE_CACHE" ] && echo --no-cache)
       --cache-from $TAG_CACHE_DIST_STAGE
@@ -196,8 +197,8 @@ aws-ecr-push:
       --cache-from $TAG_CACHE_MAIN_BRANCH_DIST_STAGE
       --build-arg BUILDKIT_INLINE_CACHE=1
       --build-arg VERSION=$VERSION
-      -t $TAG_DISTRIBUTION_STAGE
-      -t $TAG_CACHE_DIST_STAGE
+      --tag $TAG_DISTRIBUTION_STAGE
+      --tag $TAG_CACHE_DIST_STAGE
       --target distribution
       --pull
       .
