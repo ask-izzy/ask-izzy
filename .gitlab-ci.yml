@@ -182,7 +182,7 @@ deploy:
 aws-ecr-push:
   stage: Build
   before_script:
-    - VERSION=$(git describe | sed 's/-g/-/') && echo $VERSION
+    - VERSION=VERSION && echo $VERSION
     - TAG_DEVELOPMENT_STAGE=${DOCKER_REPO}:$VERSION-dev && echo $TAG_DEVELOPMENT_STAGE
     - TAG_DISTRIBUTION_STAGE=${DOCKER_REPO}:${CI_COMMIT_TAG:="$CI_COMMIT_REF_SLUG-$CI_COMMIT_SHORT_SHA"} && echo $TAG_DISTRIBUTION_STAGE
     - TAG_PRODUCTION=${DOCKER_REPO}:$VERSION && echo $TAG_PRODUCTION
