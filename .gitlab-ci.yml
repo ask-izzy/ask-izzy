@@ -44,28 +44,28 @@ build-development:
     - docker push $TAG_DEVELOPMENT_STAGE || true
     - docker push $TAG_CACHE_DEV_STAGE || true
 
-build-distribution:
-  stage: Build
-  # needs: ['build-development']
-  script:
-    - docker --version
-    - 'echo Cache: $([ -n "$DISABLE_CACHE" ] && echo disabled || echo enabled)'
-    - TAG_CACHE_MAIN_BRANCH_DIST_STAGE=${DOCKER_REPO}:cache-$CI_DEFAULT_BRANCH-dist
-    - time docker build
-      $([ -n "$DISABLE_CACHE" ] && echo --no-cache)
-      --cache-from $TAG_CACHE_DIST_STAGE
-      --cache-from $TAG_CACHE_DEV_STAGE
-      --cache-from $TAG_CACHE_MAIN_BRANCH_DIST_STAGE
-      --build-arg BUILDKIT_INLINE_CACHE=1
-      --build-arg VERSION=$VERSION
-      -t $TAG_DISTRIBUTION_STAGE
-      -t $TAG_CACHE_DIST_STAGE
-      --target distribution
-      --pull
-      .
-    - docker push $TAG_DISTRIBUTION_STAGE || true
-    - docker push $TAG_CACHE_DIST_STAGE || true
-    - echo "The distributable image tag is ${TAG_DISTRIBUTION_STAGE#*:}"
+# build-distribution:
+#   stage: Build
+#   needs: ['build-development']
+#   script:
+#     - docker --version
+#     - 'echo Cache: $([ -n "$DISABLE_CACHE" ] && echo disabled || echo enabled)'
+#     - TAG_CACHE_MAIN_BRANCH_DIST_STAGE=${DOCKER_REPO}:cache-$CI_DEFAULT_BRANCH-dist
+#     - time docker build
+#       $([ -n "$DISABLE_CACHE" ] && echo --no-cache)
+#       --cache-from $TAG_CACHE_DIST_STAGE
+#       --cache-from $TAG_CACHE_DEV_STAGE
+#       --cache-from $TAG_CACHE_MAIN_BRANCH_DIST_STAGE
+#       --build-arg BUILDKIT_INLINE_CACHE=1
+#       --build-arg VERSION=$VERSION
+#       -t $TAG_DISTRIBUTION_STAGE
+#       -t $TAG_CACHE_DIST_STAGE
+#       --target distribution
+#       --pull
+#       .
+#     - docker push $TAG_DISTRIBUTION_STAGE || true
+#     - docker push $TAG_CACHE_DIST_STAGE || true
+#     - echo "The distributable image tag is ${TAG_DISTRIBUTION_STAGE#*:}"
 
 build-set-volume-permissions:
   stage: Build
@@ -181,3 +181,40 @@ deploy:
 
 aws-ecr-push:
   needs: ['build-distribution']
+  script:
+    - docker --version
+    - 'echo Cache: $([ -n "$DISABLE_CACHE" ] && echo disabled || echo enabled)'
+    - TAG_CACHE_MAIN_BRANCH_DIST_STAGE=${DOCKER_REPO}:cache-$CI_DEFAULT_BRANCH-dist
+    - time docker build
+      $([ -n "$DISABLE_CACHE" ] && echo --no-cache)
+      --cache-from $TAG_CACHE_DIST_STAGE
+      --cache-from $TAG_CACHE_DEV_STAGE
+      --cache-from $TAG_CACHE_MAIN_BRANCH_DIST_STAGE
+      --build-arg BUILDKIT_INLINE_CACHE=1
+      --build-arg VERSION=$VERSION
+      -t $TAG_DISTRIBUTION_STAGE
+      -t $TAG_CACHE_DIST_STAGE
+      --target distribution
+      --pull
+      .
+    
+    - amazon-linux-extras install docker
+    - aws --version
+    - docker --version
+
+    # If defined use $IMAGE_TAG for the image tag, else use $CI_COMMIT_TAG if defined, else use 
+    # $CI_COMMIT_REF_SLUG-$CI_COMMIT_SHORT_SHA.
+    - IMAGE_TAG="${IMAGE_TAG:=${CI_COMMIT_TAG:="$CI_COMMIT_REF_SLUG-$CI_COMMIT_SHORT_SHA"}}"
+
+    # Default the AWS_APP_NAME and IX_APP_NAME to the GitLab predefined variable CI_PROJECT_NAME if not defined
+    - AWS_APP_NAME="${AWS_APP_NAME:=$CI_PROJECT_NAME}"
+    - IX_APP_NAME="${IX_APP_NAME:=$CI_PROJECT_NAME}"
+
+    - docker tag $IX_DOCKER_REGISTRY/$IX_APP_NAME:$IMAGE_TAG $AWS_DOCKER_REGISTRY/$AWS_APP_NAME:$IMAGE_TAG
+    - aws ecr get-login-password --region $AWS_DEFAULT_REGION | docker login --username AWS --password-stdin $AWS_DOCKER_REGISTRY
+    - docker push $AWS_DOCKER_REGISTRY/$AWS_APP_NAME:$IMAGE_TAG
+    - echo "The distributable image tag is ${IMAGE_TAG#*:}"
+
+    - docker push $TAG_DISTRIBUTION_STAGE || true
+    - docker push $TAG_CACHE_DIST_STAGE || true
+    - echo "The distributable image tag is ${TAG_DISTRIBUTION_STAGE#*:}"
