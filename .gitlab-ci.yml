@@ -181,6 +181,14 @@ deploy:
 
 aws-ecr-push:
   stage: Build
+  before_script:
+    - VERSION=$(git describe | sed 's/-g/-/') && echo $VERSION
+    - TAG_DEVELOPMENT_STAGE=${DOCKER_REPO}:$VERSION-dev && echo $TAG_DEVELOPMENT_STAGE
+    - TAG_DISTRIBUTION_STAGE=${DOCKER_REPO}:${CI_COMMIT_TAG:="$CI_COMMIT_REF_SLUG-$CI_COMMIT_SHORT_SHA"} && echo $TAG_DISTRIBUTION_STAGE
+    - TAG_PRODUCTION=${DOCKER_REPO}:$VERSION && echo $TAG_PRODUCTION
+    - TAG_CACHE_DEV_STAGE=${DOCKER_REPO}:cache-$CI_COMMIT_BRANCH-dev && echo $TAG_CACHE_DEV_STAGE
+    - TAG_CACHE_DIST_STAGE=${DOCKER_REPO}:cache-$CI_COMMIT_BRANCH-dist && echo $TAG_CACHE_DIST_STAGE
+    - export DOCKER_BUILDKIT=1
   script:
     - amazon-linux-extras install docker
     - aws --version
@@ -189,7 +197,6 @@ aws-ecr-push:
     - docker --version
     - 'echo Cache: $([ -n "$DISABLE_CACHE" ] && echo disabled || echo enabled)'
     - TAG_CACHE_MAIN_BRANCH_DIST_STAGE=${DOCKER_REPO}:cache-$CI_DEFAULT_BRANCH-dist
-    - docker build --help
     - time docker build
       $([ -n "$DISABLE_CACHE" ] && echo --no-cache)
       --cache-from $TAG_CACHE_DIST_STAGE
