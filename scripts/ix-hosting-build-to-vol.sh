@@ -28,8 +28,8 @@ BUILD_COMPLETE_FILE="$STORAGE_BUILD_DIR/.build-complete"
 NUM_OF_PREVIOUS_REVISIONS_TO_KEEP=30 # Keep build files for the last 5 task definition revisions
 
 function builder_cleanup() {
-    echo Deleting $STORAGE_BUILD_DIR
-    rm -rf $STORAGE_BUILD_DIR
+    echo Deleting "$STORAGE_BUILD_DIR"
+    rm -rf "$STORAGE_BUILD_DIR"
 }
 
 # The first container that attempts to create the build dir is responsible for building.
