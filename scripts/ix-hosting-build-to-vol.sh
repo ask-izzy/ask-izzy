@@ -26,6 +26,7 @@ echo ------------ Task Definition Revision: "$TASK_DEFINITION_REVISION" --------
 STORAGE_BUILD_DIR="/storage/$TASK_DEFINITION_REVISION"
 BUILD_COMPLETE_FILE="$STORAGE_BUILD_DIR/.build-complete"
 NUM_OF_PREVIOUS_REVISIONS_TO_KEEP=5 # Keep build files for the last 5 task definition revisions
+SHARED_APP_DIR="/tmp/shared-app"
 
 # The first container that attempts to create the build dir is responsible for building.
 # If the build dir creation fails it means another container has already claimed that job
@@ -42,7 +43,9 @@ if [ "$CREATE_STORAGE_BUILD_DIR_EXIT_STATUS" -eq 0 ]; then
     echo "Done building, now about to copy files"
 
     # Once we've finished building copy all files into the /storage subdirectory
-    time cp -a "./." "$STORAGE_BUILD_DIR"
+    # time cp -a "./." "$STORAGE_BUILD_DIR"
+    rsync -a --progress --info=progress2 "." "$STORAGE_BUILD_DIR"
+    ls -hal "$STORAGE_BUILD_DIR"
 
     echo "Done copying files"
 

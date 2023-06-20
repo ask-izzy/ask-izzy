@@ -195,4 +195,12 @@ RUN echo $VERSION > ./public/VERSION.txt
 
 ENV VERSION=$VERSION
 
+
+USER root
+RUN apt-get -y update && \
+    apt-get -y --no-install-recommends install rsync && \
+    apt-get clean && \
+    rm -rf /var/lib/apt/lists/*
+USER $UID_GID
+
 CMD ["serve"]
