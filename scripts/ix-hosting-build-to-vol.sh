@@ -19,14 +19,18 @@ TASK_DEFINITION_REVISION=$(node -e "import('node-fetch').then( fetch => fetch.de
 if [ -z "$TASK_DEFINITION_REVISION" ]; then
     echo "Error: Failed to fetch task definition revision from AWS ECS container agent endpoint. Aborting deployment" 1>&2
     exit 1
-fi 
+fi
 
 echo ------------ Task Definition Revision: "$TASK_DEFINITION_REVISION" -----------
 
 STORAGE_BUILD_DIR="/storage/$TASK_DEFINITION_REVISION"
 BUILD_COMPLETE_FILE="$STORAGE_BUILD_DIR/.build-complete"
-NUM_OF_PREVIOUS_REVISIONS_TO_KEEP=5 # Keep build files for the last 5 task definition revisions
-SHARED_APP_DIR="/tmp/shared-app"
+NUM_OF_PREVIOUS_REVISIONS_TO_KEEP=30 # Keep build files for the last 5 task definition revisions
+
+function builder_cleanup() {
+    echo Deleting $STORAGE_BUILD_DIR
+    rm -rf $STORAGE_BUILD_DIR
+}
 
 # The first container that attempts to create the build dir is responsible for building.
 # If the build dir creation fails it means another container has already claimed that job
@@ -37,15 +41,15 @@ CREATE_STORAGE_BUILD_DIR_LOG=$(mkdir "$STORAGE_BUILD_DIR" 2>&1) \
     || CREATE_STORAGE_BUILD_DIR_EXIT_STATUS=$?
 
 if [ "$CREATE_STORAGE_BUILD_DIR_EXIT_STATUS" -eq 0 ]; then
-    echo "--- This container is in charge of building the app"
+    trap 'builder_cleanup' 15
+
+    echo "This container is in charge of building the app"
     yarn build
 
-    echo "Done building, now about to copy files"
-
     # Once we've finished building copy all files into the /storage subdirectory
-    # time cp -a "./." "$STORAGE_BUILD_DIR"
-    rsync -a --progress --info=progress2 --stats "." "$STORAGE_BUILD_DIR"
-    ls -hal "$STORAGE_BUILD_DIR"
+    echo "Done building, now about to copy files"
+    time cp -a ".next" "$STORAGE_BUILD_DIR"
+    ls -hal "$STORAGE_BUILD_DIR" "$STORAGE_BUILD_DIR/.next"
 
     echo "Done copying files"
 
@@ -72,7 +76,8 @@ else
     while [ ! -f "$BUILD_COMPLETE_FILE" ]; do
         sleep 1
     done
-    echo "The container responsible for building has signalled it is finished."
+    echo "The container responsible for building has signalled it is finished. Copying in build files."
+    rm -rf ".next"
+    time cp -a "$STORAGE_BUILD_DIR/.next" .
+    echo "Finished copying."
 fi
-
-ln -s "$STORAGE_BUILD_DIR" "$SHARED_APP_DIR"
