@@ -1,15 +1,17 @@
 version: "3.4"
 
 services:
-  app:
+  app-deploy: &app
     build:
       context: .
       args:
         - VERSION=emulated-production
-    command: "shell bash -c 'yarn run deploy && yarn run serve'"
+    command: "deploy"
     depends_on:
       aws-ecs-api-mock:
         condition: service_healthy
+      set-volume-permissions:
+        condition: service_completed_successfully
     environment:
       SITE_PROTOCOL: "https"
       SITE_DOMAIN: "askizzy.org.au"
@@ -23,12 +25,19 @@ services:
       - ./.env.local:/app/.env.local
       - storage:/storage
 
+  app-serve:
+    <<: *app
+    command: "serve"
+    depends_on:
+      app-deploy:
+        condition: service_completed_successfully
+
   load-balancer:
     image: nginx
     volumes:
       - ./config/nginx-emulate-production.conf:/etc/nginx/conf.d/default.conf:ro
     depends_on:
-      - app
+      - app-serve
     ports:
       - "8000:8000"
 

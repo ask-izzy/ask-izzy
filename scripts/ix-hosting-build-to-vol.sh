@@ -44,7 +44,7 @@ if [ "$CREATE_STORAGE_BUILD_DIR_EXIT_STATUS" -eq 0 ]; then
 
     # Once we've finished building copy all files into the /storage subdirectory
     # time cp -a "./." "$STORAGE_BUILD_DIR"
-    rsync -a --progress --info=progress2 "." "$STORAGE_BUILD_DIR"
+    rsync -a --progress --info=progress2 --stats "." "$STORAGE_BUILD_DIR"
     ls -hal "$STORAGE_BUILD_DIR"
 
     echo "Done copying files"
