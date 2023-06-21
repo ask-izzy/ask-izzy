@@ -1,0 +1,39 @@
+@use '../styles/mixins/colours';
+
+.PrintButton {
+    .print-component-button {
+        border: 0;
+        background-color: var(--colour-brand-primary);
+        color: var(--colour-bg-standard);
+        width: 100%;
+        height: 100%;
+        border-radius: 4px;
+        font-weight: bolder;
+
+        .main-container {
+            display: flex;
+            align-items: center;
+            column-gap: 5px;
+
+            .PrintIcon {
+                margin-bottom: -6px;
+
+                path {
+                    fill: var(--colour-button-secondary);
+                }
+            }
+        }
+    }
+
+    .printable-area {
+        position: absolute;
+        left: -10000px;
+        visibility: hidden;
+    }
+
+    @media print {
+        .printable-area {
+            background-color: var(--colour-bg-standard) !important;
+        }
+    }
+}

@@ -14,6 +14,7 @@ Feature: Question Flow Breadcrumb
     Scenario: Visit Housing and have your answers follow you to the last question
         Given a fresh session
         And the area to search is "Melbourne, VIC"
+        When I visit /
         And I have somewhere to sleep tonight
         And my gender is female
         And I am 17 years old
@@ -26,6 +27,7 @@ Feature: Question Flow Breadcrumb
     Scenario: Visit Housing and go back to edit your age
         Given a fresh session
         And the area to search is "Melbourne, VIC"
+        When I visit /
         And I have somewhere to sleep tonight
         And my gender is female
         And I am 17 years old
@@ -39,6 +41,7 @@ Feature: Question Flow Breadcrumb
     Scenario: Visit housing and select more than one demographic
         Given a fresh session
         And the area to search is "Melbourne, VIC"
+        When I visit /
         And I have somewhere to sleep tonight
         And my gender is female
         And I am 17 years old
@@ -53,6 +56,7 @@ Feature: Question Flow Breadcrumb
     Scenario: Visit housing and select more than two demographic and edit
         Given a fresh session
         And the area to search is "Melbourne, VIC"
+        When I visit /
         And I have somewhere to sleep tonight
         And I need help for myself
         And my gender is female

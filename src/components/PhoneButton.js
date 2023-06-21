@@ -11,6 +11,7 @@ import type { phone } from "../iss/general";
 import {toCamelCase} from "../utils/strings";
 import ScreenReader from "./ScreenReader";
 import UrlsToLinks from "./UrlsToLink"
+import {PhoneHref} from "@/helpers/regex.helpers"
 
 type Props = phone & {
     crisis?: boolean,
@@ -37,10 +38,6 @@ function PhoneButton({
         <icons.Phone />
         : <icons.PhoneSolid />
 
-    function href(): string {
-        return "tel:" + number.replace(/[^0-9+]/g, "")
-    }
-
     function displayComment(): string {
         return comment ? comment : titleize(kind)
     }
@@ -60,7 +57,7 @@ function PhoneButton({
                     Phone contact:
             </ScreenReader>
             <Link
-                to={href()}
+                to={PhoneHref(number)}
                 className="ContactButton"
                 analyticsEvent={{
                     event: "Link Followed - Phone Contact",

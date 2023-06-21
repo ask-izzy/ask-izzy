@@ -10,12 +10,15 @@ import Button from "@/src/components/base/Button"
 import Loading from "@/src/icons/Loading"
 import ScrollToTop from "@/src/components/ResultsListPage/ScrollToTop"
 import ShareButton from "@/src/components/ShareButton"
+import PrintButton from "@/src/components/PrintButton"
 import classnames from "classnames";
 import {MobileDetect} from "@/src/effects/MobileDetect";
 import Spacer from "@/src/components/Spacer";
 import useMyList from "@/hooks/useMyList"
 import ClearMyListDialog from "@/src/components/ClearMyListDialog"
 import BrandedFooter from "@/src/components/BrandedFooter"
+import MyListPrintPage from "@/src/components/PrintComponents/MyListPrintPage"
+
 
 function MyListPage(): ReactNode {
     const router = useRouter()
@@ -99,7 +102,8 @@ function MyListPage(): ReactNode {
                         <ShareButton
                             hasTextDescription={true}
                             services={myListServices}
-                        />}
+                        />
+                    }
                 </div>
 
                 {isMobile && <Spacer />}
@@ -115,6 +119,15 @@ function MyListPage(): ReactNode {
                         <ShareButton
                             hasTextDescription={true}
                             services={myListServices}
+                        />
+                    }
+                    {!isMobile &&
+                        <PrintButton
+                            ComponentToPrint={
+                                <MyListPrintPage
+                                    services={myListServices}
+                                />
+                            }
                         />
                     }
                 </div>

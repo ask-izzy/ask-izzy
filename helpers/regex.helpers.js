@@ -22,3 +22,7 @@ export function lookbehindIsSupported(): boolean {
         return false;
     }
 }
+
+export function PhoneHref(number: string): string {
+    return "tel:" + number.replace(/[^0-9+]/g, "")
+}

@@ -132,6 +132,7 @@
     "react-hook-form": "^7.33.1",
     "react-markdown": "5.0.2",
     "react-mixin": "4.0.0",
+    "react-to-print": "^2.14.12",
     "remark-gfm": "1.0.0",
     "sass": "^1.35.0",
     "sass-loader": "^12.6.0",
