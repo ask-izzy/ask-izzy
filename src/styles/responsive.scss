@@ -8,6 +8,12 @@ body {
     background-color: $desktop-side-column-color;
 }
 
+@media print {
+    body {
+        background-color: #fff;
+    }
+}
+
 img {
     max-width: 100%;
     height: auto;

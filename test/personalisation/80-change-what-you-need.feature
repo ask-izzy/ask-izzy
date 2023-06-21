@@ -6,7 +6,8 @@ Feature: Change your personalisation settings
     # So that I can refine my search
 
     Background:
-        Given the area to search is "Melbourne, VIC"
+        Given a fresh session
+        And the area to search is "Melbourne, VIC"
         And I have somewhere to sleep tonight
         And my gender is female
         And I need help for myself
@@ -14,6 +15,7 @@ Feature: Change your personalisation settings
         And I am not part of any relevant demographics
 
     Scenario: View personalisation settings and return to search
+        When I visit /
         When I click the link with "Housing" substring
         And I click the "See all and edit" link
         Then I should see "Change your answers here"

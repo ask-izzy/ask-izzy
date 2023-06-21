@@ -25,59 +25,98 @@
         }
     }
 
-    .title-container {
+    .my-list-result-title-container {
         display: flex;
         justify-content: space-between;
     }
 
-    .location {
-        position: relative;
-        right: 6px;
-        bottom: 2px;
-        color: #{colours.get-static('colour-text-dark')};
-        color: var(--colour-text-dark);
-        font-weight: 500;
-    }
+    .my-list-result-content-container {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        column-gap: 20px;
 
-    p {
-        color: #{colours.get-static('colour-text-dark')};
-        color: var(--colour-text-dark);
-    }
+        .my-list-result-information {
+            .location {
+                position: relative;
+                right: 6px;
+                bottom: 2px;
+                color: #{colours.get-static('colour-text-dark')};
+                color: var(--colour-text-dark);
+                font-weight: 500;
+            }
 
-    li {
-        color: #{colours.get-static('colour-text-dark')};
-        color: var(--colour-text-dark);
-    }
+            p {
+                color: #{colours.get-static('colour-text-dark')};
+                color: var(--colour-text-dark);
+            }
 
-    .MapIcon {
-        position: relative;
-        top: 7px;
-        left: 0;
-        width: 25px;
-        height: 25px;
-        margin: 0;
-    }
+            li {
+                color: #{colours.get-static('colour-text-dark')};
+                color: var(--colour-text-dark);
+            }
 
-    .site_name {
-        margin-bottom: 15px;
-        color: #{colours.get-static('colour-text-mid')};
-        color: var(--colour-text-mid);
-    }
+            .MapIcon {
+                position: relative;
+                top: 7px;
+                left: 0;
+                width: 25px;
+                height: 25px;
+                margin: 0;
+            }
 
-    .OpeningTimes {
-        margin-bottom: 15px;
+            .site_name {
+                margin-bottom: 15px;
+                color: #{colours.get-static('colour-text-mid')};
+                color: var(--colour-text-mid);
+            }
 
-        .until,
-        .open {
-            color: #{colours.get-static('colour-text-mid')};
-            color: var(--colour-text-mid);
+            .OpeningTimes {
+                margin-bottom: 15px;
+
+                .until,
+                .open {
+                    color: #{colours.get-static('colour-text-mid')};
+                    color: var(--colour-text-mid);
+                }
+
+                .ColoredIcon {
+                    top: 0;
+                    left: -2px;
+                    width: 20px;
+                    height: 20px;
+                }
+            }
         }
+    }
 
-        .ColoredIcon {
-            top: 0;
-            left: -2px;
-            width: 20px;
-            height: 20px;
+    @media (max-width: 700px) {
+        .my-list-result-content-container {
+            flex-direction: column;
+
+            .ResultListItemContact {
+                flex-direction: row;
+                justify-content: flex-start;
+                align-items: center;
+                margin-bottom: 5px;
+
+                .contact-text {
+                    padding: 5px;
+
+                    .number.value {
+                        display: none;
+                    }
+                }
+
+                .contact-other {
+                    align-items: flex-start;
+                    margin-top: 0;
+
+                    .GoogleMapsLink {
+                        padding: 8px;
+                    }
+                }
+            }
         }
     }
 }

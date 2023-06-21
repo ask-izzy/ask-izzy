@@ -128,6 +128,7 @@ function ShareDirectlyOptions({
                     type="checkbox"
                     id="includeOtherDetails"
                     value={includeOtherDetails}
+                    checked={true}
                     onChange={({target}) => setIncludeOtherDetails(target.checked)}
                 />
                 <label htmlFor="includeOtherDetails">
