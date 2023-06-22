@@ -19,7 +19,7 @@ module.exports = {
         prependData: `$banner-images: ${bannerImages.join(" ")};`,
     },
     async generateBuildId() {
-        return process.env.VERSION
+        return process.env.TASK_DEFINITION_REVISION || `${Math.floor(Date.now() / 1000)}`
     },
     async rewrites() {
         return {

@@ -55,6 +55,7 @@ if [ "$CREATE_STORAGE_BUILD_DIR_EXIT_STATUS" -eq 0 ]; then
     ) &
 
     echo "This container is in charge of building the app"
+    export TASK_DEFINITION_REVISION
     yarn build
 
     # Once we've finished building copy all files into the /storage subdirectory
@@ -123,3 +124,5 @@ else
     time cp -a "$STORAGE_BUILD_DIR/.next" .
     echo "Finished copying."
 fi
+
+echo "Build ID: $TASK_DEFINITION_REVISION" >> ./public/VERSION.txt

@@ -146,9 +146,7 @@ COPY --chown=$UID_GID . /app
 # Note this essentially guarantees cache invalidation from this point for builds
 # of different versions.
 ARG VERSION
-RUN echo $VERSION > ./public/VERSION.txt
-
-ENV VERSION=$VERSION
+RUN echo "Tag: $VERSION" > ./public/VERSION.txt
 
 CMD ["dev"]
 
@@ -194,8 +192,6 @@ COPY --chown=$UID_GID . /app
 RUN yarn with --test-env --mocks build
 
 ARG VERSION
-RUN echo $VERSION > ./public/VERSION.txt
-
-ENV VERSION=$VERSION
+RUN echo "Tag: $VERSION" > ./public/VERSION.txt
 
 CMD ["serve"]
