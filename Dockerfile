@@ -23,12 +23,15 @@ ARG UID_GID
 # hadolint ignore=DL3002
 USER root
 ENV UID_GID=$UID_GID
+
+ENV DIRS_TO_SET_PERMISSIONS_ON="/storage"
+
 # hadolint ignore=DL3025
-ENTRYPOINT exec bash -c "\
-    chown -R $UID_GID /storage /static && \
-    echo Set volume file permissions && \
-    ls -hal /storage /static \
-"
+ENTRYPOINT exec bash -c 'for DIR_TO_SET_PERMISSIONS_ON in ${DIRS_TO_SET_PERMISSIONS_ON//,/$IFS}; do \
+        echo Setting volume file permissions on "$DIR_TO_SET_PERMISSIONS_ON"; \
+        chown -R $UID_GID "$DIR_TO_SET_PERMISSIONS_ON"; \
+        ls -hal "$DIR_TO_SET_PERMISSIONS_ON"; \
+    done'
 
 
 ###############################################################################
@@ -185,8 +188,10 @@ COPY --chown=$UID_GID ./.env ./.env.test ./babel.config.json ./next.config.js /a
 # just disable storybook for now.
 # RUN yarn with --test-env --mocks build-storybook
 
-# Copy in all remaining files not excluded by .gitignore
+# Copy in all remaining files not excluded by .dockerignore
 COPY --chown=$UID_GID . /app
+
+RUN yarn with --test-env --mocks build
 
 ARG VERSION
 RUN echo $VERSION > ./public/VERSION.txt
