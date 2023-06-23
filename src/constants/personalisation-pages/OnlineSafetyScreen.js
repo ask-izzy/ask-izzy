@@ -15,7 +15,7 @@ export default ({
     baseTextBoxComponent: (<OnlineSafetyLink/>: React.Node),
     noQuestionStepperStep: true,
     noQuestionStepperBreadcrumb: true,
-    shouldShowInSummary: false,
+    getShouldShowInSummary: (): boolean => false,
     getDoneButtonLabel: (): string => "OK - keep searching",
     getShouldIncludePage(): boolean {
         return !["", "Yes", "(skipped)"]

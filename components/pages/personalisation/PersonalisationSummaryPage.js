@@ -70,9 +70,10 @@ function PersonalisationSummaryPage({router}: Props): ReactNode {
 
     function personalisationPages(): Array<PersonalisationPage> {
         const personalisationPages = getPersonalisationPages(router)
+        const category = getCategoryFromRouter(router)
 
         return personalisationPages.filter(page =>
-            page.shouldShowInSummary ?? true
+            page.getShouldShowInSummary?.(category) ?? true
         )
     }
 

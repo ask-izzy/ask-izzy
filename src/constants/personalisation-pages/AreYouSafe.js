@@ -25,5 +25,5 @@ export default ({
     },
     baseTextBoxComponent: <DomesticViolenceLink />,
     noQuestionStepperBreadcrumb: true,
-    shouldShowInSummary: false,
+    getShouldShowInSummary: () => false,
 }: PersonalisationQuestionPage)

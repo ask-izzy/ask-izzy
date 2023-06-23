@@ -60,17 +60,17 @@ export default ({
             return answer;
         }
     },
-    get shouldShowInSummary() {
-        return this.getShouldIncludePage()
+    getShouldShowInSummary(category) {
+        return this.getShouldIncludePage(category)
     },
-    getShouldIncludePage: () => {
-        return Boolean(
-            ["Children's health"].includes(
-                getSavedPersonalisationAnswer(HealthSubcategories)
-            ) ||
-                [
-                    "Gambling counselling",
-                ].includes(getSavedPersonalisationAnswer(CounsellingSubcategories))
-        );
+    getShouldIncludePage: (category) => {
+        if (category?.key === "health") {
+            return ["Children's health"]
+                .includes(getSavedPersonalisationAnswer(HealthSubcategories))
+        } else if (category?.key === "support-and-counselling") {
+            return ["Gambling counselling"]
+                .includes(getSavedPersonalisationAnswer(CounsellingSubcategories))
+        }
+        return false
     },
 }: PersonalisationPage)

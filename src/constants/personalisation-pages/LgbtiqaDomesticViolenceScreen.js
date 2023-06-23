@@ -19,7 +19,7 @@ export default ({
     baseTextBoxComponent: <DomesticViolenceLink />,
     noQuestionStepperStep: true,
     noQuestionStepperBreadcrumb: true,
-    shouldShowInSummary: false,
+    getShouldShowInSummary: () => false,
     getShouldIncludePage(): boolean {
         return Boolean(
             getSavedPersonalisationAnswer(DfvDemographics)?.includes("LGBTIQA+") ||

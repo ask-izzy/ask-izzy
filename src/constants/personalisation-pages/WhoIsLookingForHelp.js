@@ -8,5 +8,5 @@ export default ({
     name: "who-is-looking-for-help",
     title: "Who is looking for help?",
     noQuestionStepperBreadcrumb: true,
-    shouldShowInSummary: false,
+    getShouldShowInSummary: () => false,
 }: PersonalisationLookingForHelpPage)

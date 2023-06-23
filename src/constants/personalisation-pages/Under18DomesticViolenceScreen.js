@@ -15,7 +15,7 @@ export default ({
     heading: "Under 18",
     title: "Under 18 help",
     baseTextBoxComponent: (<DomesticViolenceLink/>: React.Node),
-    shouldShowInSummary: false,
+    getShouldShowInSummary: (): boolean => false,
     noQuestionStepperStep: true,
     noQuestionStepperBreadcrumb: true,
     getDoneButtonLabel(): string {

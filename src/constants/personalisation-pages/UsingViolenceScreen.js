@@ -15,7 +15,7 @@ export default ({
     title: "Using violence",
     baseTextBoxComponent: (<DomesticViolenceLink/>: React.Node),
 
-    shouldShowInSummary: false,
+    getShouldShowInSummary: (): boolean => false,
     noQuestionStepperStep: true,
     noQuestionStepperBreadcrumb: true,
 

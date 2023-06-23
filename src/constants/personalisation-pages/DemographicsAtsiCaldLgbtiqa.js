@@ -66,20 +66,22 @@ export default ({
             return answer;
         }
     },
-    get shouldShowInSummary() {
-        return this.getShouldIncludePage()
+    getShouldShowInSummary(category) {
+        return this.getShouldIncludePage(category)
     },
-    getShouldIncludePage: () => {
-        return Boolean(
-            ["Doctor or general practitioner", "Mental and emotional health"].includes(
+    getShouldIncludePage: (category) => {
+        if (category?.key === "health") {
+            return ["Doctor or general practitioner", "Mental and emotional health"].includes(
                 getSavedPersonalisationAnswer(HealthSubcategories)
-            ) ||
-                [
-                    "Mental and emotional health",
-                    "Family or relationships",
-                    "Drugs and alcohol counselling",
-                    "Sexual assault or family violence",
-                ].includes(getSavedPersonalisationAnswer(CounsellingSubcategories))
-        );
+            )
+        } else if (category?.key === "support-and-counselling") {
+            return [
+                "Mental and emotional health",
+                "Family or relationships",
+                "Drugs and alcohol counselling",
+                "Sexual assault or family violence",
+            ].includes(getSavedPersonalisationAnswer(CounsellingSubcategories))
+        }
+        return false
     },
 }: PersonalisationPage)
