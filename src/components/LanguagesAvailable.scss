@@ -1,0 +1,13 @@
+@use '../styles/mixins/colours';
+
+.LanguagesAvailable {
+    .languages-spoken-container {
+        display: flex;
+        flex-direction: row;
+        column-gap: 10px;
+
+        .collapser-message {
+            display: block;
+        }
+    }
+}
