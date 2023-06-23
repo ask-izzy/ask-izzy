@@ -27,7 +27,8 @@ STORAGE_BUILD_DIR="/storage/$TASK_DEFINITION_REVISION"
 BUILD_COMPLETE_FILE="$STORAGE_BUILD_DIR/.build-complete"
 BUILDER_HEARTBEAT_FILENAME=".builder-heartbeat"
 SERVER_HEARTBEAT_FILENAME=".server-heartbeat"
-FLATLINE_DURATION_BEFORE_DECLARED_DEAD=$((60 * 5)) # 5 minutes
+FLATLINE_DURATION_BEFORE_BUILDER_DECLARED_DEAD=$((60 * 5)) # 5 minutes
+FLATLINE_DURATION_BEFORE_SERVER_DECLARED_DEAD=$((60 * 60 * 24 * 7)) # 1 week
 
 # The first container that attempts to create the build dir is responsible for building.
 # If the build dir creation fails it means another container has already claimed that job
@@ -79,8 +80,8 @@ if [ "$CREATE_STORAGE_BUILD_DIR_EXIT_STATUS" -eq 0 ]; then
         if [ -f "$STORAGE_DIR_ITEM/$SERVER_HEARTBEAT_FILENAME" ]; then
             LAST_HEARTBEAT=$(cat "$STORAGE_DIR_ITEM/$SERVER_HEARTBEAT_FILENAME")
         fi 
-        # Remove build if last heartbeat was longer than $FLATLINE_DURATION_BEFORE_DECLARED_DEAD seconds ago 
-        if [ "$LAST_HEARTBEAT" -lt $(($(date +%s)-FLATLINE_DURATION_BEFORE_DECLARED_DEAD)) ]; then
+        # Remove build if last heartbeat was longer than $FLATLINE_DURATION_BEFORE_SERVER_DECLARED_DEAD seconds ago 
+        if [ "$LAST_HEARTBEAT" -lt $(($(date +%s)-FLATLINE_DURATION_BEFORE_SERVER_DECLARED_DEAD)) ]; then
             echo Deleting previous build: "$STORAGE_DIR_ITEM"
             rm -r "$STORAGE_DIR_ITEM"
         else
@@ -105,7 +106,7 @@ else
     # Wait if build is still in progress
     if [ ! -f "$BUILD_COMPLETE_FILE" ]; then
         BUILDER_HEARTBEAT_PATH="$STORAGE_BUILD_DIR/$BUILDER_HEARTBEAT_FILENAME"
-        if [ ! -f "$BUILDER_HEARTBEAT_PATH" ] || [ "$(cat "$BUILDER_HEARTBEAT_PATH")" -lt $(($(date +%s)-FLATLINE_DURATION_BEFORE_DECLARED_DEAD)) ]; then
+        if [ ! -f "$BUILDER_HEARTBEAT_PATH" ] || [ "$(cat "$BUILDER_HEARTBEAT_PATH")" -lt $(($(date +%s)-FLATLINE_DURATION_BEFORE_BUILDER_DECLARED_DEAD)) ]; then
             echo "Unfinished build exists but builder appears to have died" 1>&2
             rm -rf "$STORAGE_BUILD_DIR"
             exit 1
