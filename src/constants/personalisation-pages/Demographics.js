@@ -27,11 +27,6 @@ export default ({
                 term: ["\"Aboriginals & Torres Strait Islanders\""],
             },
         },
-        "Have cultural needs and don't speak English": {
-            $concat: {
-                term: ["ethnic"],
-            },
-        },
         "Family with children": {
             $concat: {
                 term: ["families", "-srs"],
@@ -71,8 +66,6 @@ export default ({
     icons: {
         "Escaping family violence": icons.DemographicFamilyViolence,
         "Aboriginal and/or Torres Strait Islander": icons.DemographicAtsi,
-        "Have cultural needs and don't speak English":
-            icons.DemographicNeedInterpreter,
         "Family with children": icons.DemographicChildren,
         "Couples": icons.DemographicCouple,
         "Mental or emotional difficulties": icons.Mental,
@@ -81,9 +74,6 @@ export default ({
         "Veteran": icons.DemographicVeteran,
         "Person seeking asylum": icons.DemographicRecentlyArrived,
         "Have pets": icons.DemographicPets,
-    },
-    descriptionsForAnswers: {
-        "Have cultural needs and don't speak English": "CALD communities, interpreter or translation support.",
     },
     oldAnswers: {
         "Indigenous": "Aboriginal and/or Torres Strait Islander",
@@ -98,8 +88,6 @@ export default ({
                 <icons.AboriginalFlag/>
                 <icons.TorresStraitIslandersFlag />
             </span>;
-        case "Have cultural needs and don't speak English":
-            return "Cultural needs/non-English speaking"
         case "Person seeking asylum":
             return "Seeking asylum"
         case "Parole / recently released":
