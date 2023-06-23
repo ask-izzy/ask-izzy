@@ -16,7 +16,6 @@ declare class ProcessWithEnvVars extends Process {
         NEXT_PUBLIC_SHARE_SERVICES_EMAIL_ENVIRONMENT: string,
         NEXT_PUBLIC_SHARE_SERVICES_EMAIL_PROVIDER: string,
         NEXT_PUBLIC_SHARE_SERVICES_EMAIL_TEMPLATE: string,
-        VERSION: string,
         NEXT_PUBLIC_PROXY_DOMAIN_SUFFIX?: string,
         [key: string] : string | void,
     },
