@@ -26,11 +26,11 @@ import {
     getPersonalisationNextPath,
     getServicesPath,
     getCategoryFromRouter,
-    getPathOfSSRPage,
 } from "@/src/utils/routing"
 import type {
     PersonalisationPage,
 } from "@/flow/personalisation-page"
+import Loading from "@/src/icons/Loading"
 
 type Props = {
     router: NextRouter
@@ -118,7 +118,7 @@ function PersonalisationSummaryPage({router}: Props): ReactNode {
     }
 
     return (
-        <div className="PersonalisationPage">
+        <div className="PersonalisationPage PersonalisationSummaryPage">
             <HeaderBar
                 primaryText={
                     <div>
@@ -139,18 +139,15 @@ function PersonalisationSummaryPage({router}: Props): ReactNode {
             >
                 <div className="List">
                     <ul>
-                        {personalisationPages().map((page, index) => {
-                            const toUrl = router.isReady ?
-                                getServicesPath({
-                                    router,
-                                    personalisationPage: page,
-                                })
-                                : getPathOfSSRPage(router);
-                            return (
+                        {router.isReady ?
+                            personalisationPages().map((page, index) => (
                                 <li key={index}>
                                     <LinkListItem
                                         className="SummaryItem"
-                                        to={toUrl}
+                                        to={getServicesPath({
+                                            router,
+                                            personalisationPage: page,
+                                        })}
                                         primaryText={
                                             getFormattedQuestion(page)
                                         }
@@ -161,8 +158,9 @@ function PersonalisationSummaryPage({router}: Props): ReactNode {
                                         }
                                     />
                                 </li>
-                            )
-                        })}
+                            ))
+                            : <div className="loadingStatus"><Loading className="big" /></div>
+                        }
                     </ul>
                 </div>
                 <div className="ClearResults">
