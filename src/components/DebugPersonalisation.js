@@ -104,7 +104,7 @@ function DebugPersonalisation({
                         <Button
                             onClick={() => setIssParamsOverride(
                                 originalIssQuery,
-                                false
+                                true
                             )}
                         >
                             Override ISS Query
