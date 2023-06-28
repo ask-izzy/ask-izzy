@@ -71,7 +71,7 @@ export default ({
     },
     getShouldIncludePage: (category) => {
         if (category?.key === "health") {
-            return ["Doctor or general practitioner", "Mental and emotional health"].includes(
+            return ["Mental and emotional health"].includes(
                 getSavedPersonalisationAnswer(HealthSubcategories)
             )
         } else if (category?.key === "support-and-counselling") {

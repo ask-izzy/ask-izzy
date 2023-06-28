@@ -65,7 +65,7 @@ export default ({
     },
     getShouldIncludePage: (category) => {
         if (category?.key === "health") {
-            return ["Children's health"]
+            return ["Children's health", "Doctor or general practitioner"]
                 .includes(getSavedPersonalisationAnswer(HealthSubcategories))
         } else if (category?.key === "support-and-counselling") {
             return ["Gambling counselling"]
