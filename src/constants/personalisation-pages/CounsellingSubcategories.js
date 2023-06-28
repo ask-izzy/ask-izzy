@@ -49,14 +49,6 @@ export default ({
         },
         "Sexual assault or family violence": {
             $unset: ["serviceTypes"],
-            $concat: {
-                term: ["violence"],
-            },
-            $removeElms: {
-                term: [
-                    "counselling",
-                ],
-            },
             serviceTypesRaw: [
                 "Incest/sexual abuse counselling",
                 "Domestic violence counselling",
