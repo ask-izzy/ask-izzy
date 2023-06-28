@@ -16,9 +16,9 @@ import type {
 export default ({
     type: "question",
     name: "demographics-atsi-cald-lgbtiqa",
-    question: "Do you want to see services specific to any of the below?",
-    byline: "Identifying these characteristics helps us to find services that can better meet your needs.",
-    info: "All of your answers are private and anonymous.",
+    question: "Do any of these apply to you?",
+    byline: "Pick the ones that are most important to you",
+    info: "This helps show services that might be a better match. Your answers are private and anonymous.",
     multipleChoice: true,
     possibleAnswers: {
         "Aboriginal and/or Torres Strait Islander": {
