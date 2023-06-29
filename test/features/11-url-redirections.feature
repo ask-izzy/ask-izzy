@@ -36,4 +36,4 @@ Feature: URL redirections
 
     Scenario: Visit legacy Have your say page
         When I visit /have-your-say
-        Then I should be at /advocacy/Melbourne-VIC
+        Then I should be at /advice-and-advocacy/Melbourne-VIC

@@ -3,9 +3,10 @@ Feature: Food personalisation flow generates the expected query
     Background:
         Given the area to search is "Melbourne, VIC"
         And I need help for myself
+        And I am not interested in a subcategory for food
 
     Scenario: No subcategory
-        Given I am not interested in a subcategory for food
+        When I visit /
         When I click the link with "Food" substring
         Then I should see "See all and edit"
         And the iss search request should be:
@@ -33,7 +34,8 @@ Feature: Food personalisation flow generates the expected query
         --------------------------------------
 
     Scenario: Meals subcategory
-        Given I am interested in the "Meals" subcategory for food
+        When I visit /
+        And I am interested in the "Meals" subcategory for food
         When I click the link with "Food" substring
         Then I should see "See all and edit"
         And the iss search request should be:
@@ -53,7 +55,8 @@ Feature: Food personalisation flow generates the expected query
         --------------------------------------
 
     Scenario: Food parcels subcategory
-        Given I am interested in the "Food parcels / groceries" subcategory for food
+        When I visit /
+        And I am interested in the "Food parcels / groceries" subcategory for food
         When I click the link with "Food" substring
         Then I should see "See all and edit"
         And the iss search request should be:
@@ -73,7 +76,8 @@ Feature: Food personalisation flow generates the expected query
         --------------------------------------
 
     Scenario: Food vouchers subcategory
-        Given I am interested in the "Food vouchers" subcategory for food
+        When I visit /
+        And I am interested in the "Food vouchers" subcategory for food
         When I click the link with "Food" substring
         Then I should see "See all and edit"
         And the iss search request should be:

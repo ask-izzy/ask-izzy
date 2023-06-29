@@ -5,8 +5,13 @@ Feature: Work and learning personalisation flow generates the expected query
         And I need help for myself
 
     Scenario: No subcategory
-        Given I am not interested in a subcategory for work-and-learning
+    When I visit /
+        And I am not interested in a subcategory for work-and-learning
         When I click the link with "Work and learning" substring
+        # On the Work and learning category page, the demographics personalisation question
+        # is always asked regardless of whether the user has already answered it
+        Then I should see "Would you like Aboriginal & Torres Strait Islander specific services?"
+        When I click the "Skip" button
         Then I should see "See all and edit"
         And the iss search request should be:
         --------------------------------------
@@ -30,8 +35,13 @@ Feature: Work and learning personalisation flow generates the expected query
         --------------------------------------
 
     Scenario: Finding a job subcategory
-        Given I am interested in the "Finding a job" subcategory for work-and-learning
+        When I visit /
+        And I am interested in the "Finding a job" subcategory for work-and-learning
         When I click the link with "Work and learning" substring
+        # On the Work and learning category page, the demographics personalisation question
+        # is always asked regardless of whether the user has already answered it
+        Then I should see "Would you like Aboriginal & Torres Strait Islander specific services?"
+        When I click the "Skip" button
         Then I should see "See all and edit"
         And the iss search request should be:
         --------------------------------------
@@ -57,8 +67,13 @@ Feature: Work and learning personalisation flow generates the expected query
         --------------------------------------
 
     Scenario: Supported employment subcategory
-        Given I am interested in the "Supported employment" subcategory for work-and-learning
+        When I visit /
+        And I am interested in the "Supported employment" subcategory for work-and-learning
         When I click the link with "Work and learning" substring
+        # On the Work and learning category page, the demographics personalisation question
+        # is always asked regardless of whether the user has already answered it
+        Then I should see "Would you like Aboriginal & Torres Strait Islander specific services?"
+        When I click the "Skip" button
         Then I should see "See all and edit"
         And the iss search request should be:
         --------------------------------------
@@ -80,8 +95,13 @@ Feature: Work and learning personalisation flow generates the expected query
         --------------------------------------
 
     Scenario: Education subcategory
-        Given I am interested in the "Education" subcategory for work-and-learning
+        When I visit /
+        And I am interested in the "Education" subcategory for work-and-learning
         When I click the link with "Work and learning" substring
+        # On the Work and learning category page, the demographics personalisation question
+        # is always asked regardless of whether the user has already answered it
+        Then I should see "Would you like Aboriginal & Torres Strait Islander specific services?"
+        When I click the "Skip" button
         Then I should see "See all and edit"
         And the iss search request should be:
         --------------------------------------
@@ -103,8 +123,13 @@ Feature: Work and learning personalisation flow generates the expected query
         --------------------------------------
 
     Scenario: Community skills training subcategory
-        Given I am interested in the "Community skills training" subcategory for work-and-learning
+        When I visit /
+        And I am interested in the "Community skills training" subcategory for work-and-learning
         When I click the link with "Work and learning" substring
+        # On the Work and learning category page, the demographics personalisation question
+        # is always asked regardless of whether the user has already answered it
+        Then I should see "Would you like Aboriginal & Torres Strait Islander specific services?"
+        When I click the "Skip" button
         Then I should see "See all and edit"
         And the iss search request should be:
         --------------------------------------
@@ -127,8 +152,13 @@ Feature: Work and learning personalisation flow generates the expected query
         --------------------------------------
 
     Scenario: Volunteering subcategory
-        Given I am interested in the "Volunteering" subcategory for work-and-learning
+        When I visit /
+        And I am interested in the "Volunteering" subcategory for work-and-learning
         When I click the link with "Work and learning" substring
+        # On the Work and learning category page, the demographics personalisation question
+        # is always asked regardless of whether the user has already answered it
+        Then I should see "Would you like Aboriginal & Torres Strait Islander specific services?"
+        When I click the "Skip" button
         Then I should see "See all and edit"
         And the iss search request should be:
         --------------------------------------
@@ -148,8 +178,13 @@ Feature: Work and learning personalisation flow generates the expected query
         --------------------------------------
 
     Scenario: Libraries subcategory
-        Given I am interested in the "Libraries" subcategory for work-and-learning
+        When I visit /
+        And I am interested in the "Libraries" subcategory for work-and-learning
         When I click the link with "Work and learning" substring
+        # On the Work and learning category page, the demographics personalisation question
+        # is always asked regardless of whether the user has already answered it
+        Then I should see "Would you like Aboriginal & Torres Strait Islander specific services?"
+        When I click the "Skip" button
         Then I should see "See all and edit"
         And the iss search request should be:
         --------------------------------------

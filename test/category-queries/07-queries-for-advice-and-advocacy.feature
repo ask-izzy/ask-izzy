@@ -2,11 +2,18 @@ Feature: Advice and advocacy personalisation flow generates the expected query
 
     Background:
         Given the area to search is "Melbourne, VIC"
+        And I am not part of any relevant demographics
         And I need help for myself
+        
 
     Scenario: No subcategory
-        Given I am not interested in a subcategory for advice-and-advocacy
+        When I visit /
+        And I am not interested in any subcategory
         When I click the link with "Advice and advocacy" substring
+        # On the advice and advocacy category page, the demographics personalisation question
+        # is always asked regardless of whether the user has already answered it
+        Then I should see "Would you like Aboriginal & Torres Strait Islander specific services?"
+        When I click the "Skip" button
         Then I should see "See all and edit"
         And the iss search request should be:
         --------------------------------------
@@ -29,8 +36,13 @@ Feature: Advice and advocacy personalisation flow generates the expected query
         --------------------------------------
 
     Scenario: Legal aid and advice subcategory
-        Given I am interested in the "Legal aid and advice" subcategory for advice-and-advocacy
+        When I visit /
+        And I am interested in the "Legal aid and advice" subcategory for advice-and-advocacy
         When I click the link with "Advice and advocacy" substring
+        # On the advice and advocacy category page, the demographics personalisation question
+        # is always asked regardless of whether the user has already answered it
+        Then I should see "Would you like Aboriginal & Torres Strait Islander specific services?"
+        When I click the "Skip" button
         Then I should see "See all and edit"
         And the iss search request should be:
         --------------------------------------
@@ -56,8 +68,13 @@ Feature: Advice and advocacy personalisation flow generates the expected query
         --------------------------------------
 
     Scenario: Help with fines subcategory
-        Given I am interested in the "Help with fines" subcategory for advice-and-advocacy
+        When I visit /
+        And I am interested in the "Help with fines" subcategory for advice-and-advocacy
         When I click the link with "Advice and advocacy" substring
+        # On the advice and advocacy category page, the demographics personalisation question
+        # is always asked regardless of whether the user has already answered it
+        Then I should see "Would you like Aboriginal & Torres Strait Islander specific services?"
+        When I click the "Skip" button
         Then I should see "See all and edit"
         And the iss search request should be:
         --------------------------------------
@@ -82,8 +99,13 @@ Feature: Advice and advocacy personalisation flow generates the expected query
         --------------------------------------
 
     Scenario: Advocacy subcategory
-        Given I am interested in the "Advocacy" subcategory for advice-and-advocacy
+        When I visit /
+        And I am interested in the "Advocacy" subcategory for advice-and-advocacy
         When I click the link with "Advice and advocacy" substring
+        # On the advice and advocacy category page, the demographics personalisation question
+        # is always asked regardless of whether the user has already answered it
+        Then I should see "Would you like Aboriginal & Torres Strait Islander specific services?"
+        When I click the "Skip" button
         Then I should see "See all and edit"
         And the iss search request should be:
         --------------------------------------
@@ -105,8 +127,13 @@ Feature: Advice and advocacy personalisation flow generates the expected query
         --------------------------------------
 
     Scenario: Disability advocacy subcategory
-        Given I am interested in the "Disability advocacy" subcategory for advice-and-advocacy
+        When I visit /
+        And I am interested in the "Disability advocacy" subcategory for advice-and-advocacy
         When I click the link with "Advice and advocacy" substring
+        # On the advice and advocacy category page, the demographics personalisation question
+        # is always asked regardless of whether the user has already answered it
+        Then I should see "Would you like Aboriginal & Torres Strait Islander specific services?"
+        When I click the "Skip" button
         Then I should see "See all and edit"
         And the iss search request should be:
         --------------------------------------
@@ -116,19 +143,22 @@ Feature: Advice and advocacy personalisation flow generates the expected query
             },
             "catchment": "prefer",
             "term": [
-                "advocacy",
-                "-research",
-                "-\"coordinating bodies\""
+                "disability"
             ],
-            "serviceTypes": [
+            "serviceTypesRaw": [
                 "Disability advocacy"
             ]
         }
         --------------------------------------
 
     Scenario: Homelessness support subcategory
-        Given I am interested in the "Homelessness support" subcategory for advice-and-advocacy
+        When I visit /
+        And I am interested in the "Homelessness support" subcategory for advice-and-advocacy
         When I click the link with "Advice and advocacy" substring
+        # On the advice and advocacy category page, the demographics personalisation question
+        # is always asked regardless of whether the user has already answered it
+        Then I should see "Would you like Aboriginal & Torres Strait Islander specific services?"
+        When I click the "Skip" button
         Then I should see "See all and edit"
         And the iss search request should be:
         --------------------------------------
@@ -150,8 +180,13 @@ Feature: Advice and advocacy personalisation flow generates the expected query
         --------------------------------------
 
     Scenario: Rental disputes subcategory
-        Given I am interested in the "Rental disputes" subcategory for advice-and-advocacy
+        When I visit /
+        And I am interested in the "Rental disputes" subcategory for advice-and-advocacy
         When I click the link with "Advice and advocacy" substring
+        # On the advice and advocacy category page, the demographics personalisation question
+        # is always asked regardless of whether the user has already answered it
+        Then I should see "Would you like Aboriginal & Torres Strait Islander specific services?"
+        When I click the "Skip" button
         Then I should see "See all and edit"
         And the iss search request should be:
         --------------------------------------

@@ -9,7 +9,8 @@ Feature: Housing personalisation flow generates the expected query
         And I am not part of any relevant demographics
 
     Scenario: No subcategory
-        Given I am not interested in a subcategory for housing
+        When I visit /
+        And I am not interested in a subcategory for housing
         When I click the link with "Housing" substring
         Then I should see "See all and edit"
         And the iss search request should be:
@@ -34,7 +35,8 @@ Feature: Housing personalisation flow generates the expected query
         --------------------------------------
 
     Scenario: Emergency accommodation subcategory in Victoria
-        Given I am interested in the "Emergency accommodation" subcategory for housing
+        When I visit /
+        And I am interested in the "Emergency accommodation" subcategory for housing
         When I click the link with "Housing" substring
         Then I should see "See all and edit"
         And the iss search request should be:
@@ -46,20 +48,18 @@ Feature: Housing personalisation flow generates the expected query
             "catchment": "true",
             "minimumShouldMatch": "30%",
             "term": [
-                "-\"coordinating bodies\"",
-                "-\"holiday accommodation\"",
                 "\"Homelessness Access Point\""
             ],
-            "serviceTypes": [
-                "Refuge/ Crisis accommodation",
+            "serviceTypesRaw": [
                 "Homelessness Access Point"
             ]
         }
         --------------------------------------
 
     Scenario: Emergency accommodation subcategory outside of Victoria
-        Given I am interested in the "Emergency accommodation" subcategory for housing
         Given the area to search is "Adelaide, SA"
+        When I visit /
+        And I am interested in the "Emergency accommodation" subcategory for housing
         When I click the link with "Housing" substring
         Then I should see "See all and edit"
         And the iss search request should be:
@@ -71,17 +71,17 @@ Feature: Housing personalisation flow generates the expected query
             "catchment": "prefer",
             "minimumShouldMatch": "30%",
             "term": [
-                "-\"coordinating bodies\"",
-                "-\"holiday accommodation\""
+                "\"crisis accommodation\""
             ],
-            "serviceTypes": [
+            "serviceTypesRaw": [
                 "Refuge/ Crisis accommodation"
             ]
         }
         --------------------------------------
 
     Scenario: Homelessness support subcategory in Victoria
-        Given I am interested in the "Homelessness support" subcategory for housing
+        When I visit /
+        And I am interested in the "Homelessness support" subcategory for housing
         When I click the link with "Housing" substring
         Then I should see "See all and edit"
         And the iss search request should be:
@@ -90,7 +90,7 @@ Feature: Housing personalisation flow generates the expected query
             "location": {
                 "name": "Melbourne, VIC"
             },
-            "catchment": "true",
+            "catchment": "prefer",
             "minimumShouldMatch": "30%",
             "term": [
                 "-\"coordinating bodies\"",
@@ -98,8 +98,7 @@ Feature: Housing personalisation flow generates the expected query
                 "-\"housing information\"",
                 "-hef",
                 "-\"holiday accommodation\"",
-                "\"homelessness support\"",
-                "\"Homelessness Access Point\""
+                "\"homelessness support\""
             ],
             "serviceTypes": [
                 "Homelessness Access Point"
@@ -108,8 +107,10 @@ Feature: Housing personalisation flow generates the expected query
         --------------------------------------
 
     Scenario: Homelessness support subcategory outside of Victoria
-        Given I am interested in the "Homelessness support" subcategory for housing
         Given the area to search is "Adelaide, SA"
+        When I visit /
+        And I am interested in the "Homelessness support" subcategory for housing
+        
         When I click the link with "Housing" substring
         Then I should see "See all and edit"
         And the iss search request should be:
@@ -133,7 +134,8 @@ Feature: Housing personalisation flow generates the expected query
         --------------------------------------
 
     Scenario: Affordable housing subcategory
-        Given I am interested in the "Affordable housing" subcategory for housing
+        When I visit /
+        And I am interested in the "Affordable housing" subcategory for housing
         When I click the link with "Housing" substring
         Then I should see "See all and edit"
         And the iss search request should be:
@@ -160,7 +162,8 @@ Feature: Housing personalisation flow generates the expected query
         --------------------------------------
 
     Scenario: Bond or rent help subcategory
-        Given I am interested in the "Bond or rent help" subcategory for housing
+        When I visit /
+        And I am interested in the "Bond or rent help" subcategory for housing
         When I click the link with "Housing" substring
         Then I should see "See all and edit"
         And the iss search request should be:
@@ -185,7 +188,8 @@ Feature: Housing personalisation flow generates the expected query
         --------------------------------------
 
     Scenario: Rental disputes subcategory
-        Given I am interested in the "Rental disputes" subcategory for housing
+        When I visit /
+        And I am interested in the "Rental disputes" subcategory for housing
         When I click the link with "Housing" substring
         Then I should see "See all and edit"
         And the iss search request should be:
@@ -199,7 +203,6 @@ Feature: Housing personalisation flow generates the expected query
             "term": [
                 "-\"coordinating bodies\"",
                 "-\"respite care\"",
-                "-\"housing information\"",
                 "-hef",
                 "-\"holiday accommodation\"",
                 "rent",
@@ -212,7 +215,8 @@ Feature: Housing personalisation flow generates the expected query
         --------------------------------------
 
     Scenario: Support with everyday tasks subcategory
-        Given I am interested in the "Support with everyday tasks" subcategory for housing
+        When I visit /
+        And I am interested in the "Support with everyday tasks" subcategory for housing
         When I click the link with "Housing" substring
         Then I should see "See all and edit"
         And the iss search request should be:
@@ -237,7 +241,8 @@ Feature: Housing personalisation flow generates the expected query
         --------------------------------------
 
     Scenario: Supported accommodation subcategory
-        Given I am interested in the "Supported accommodation and residential care" subcategory for housing
+        When I visit /
+        And I am interested in the "Supported accommodation and residential care" subcategory for housing
         When I click the link with "Housing" substring
         Then I should see "See all and edit"
         And the iss search request should be:

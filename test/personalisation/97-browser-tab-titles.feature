@@ -17,6 +17,7 @@ Feature: Browser tab titles
         Given a fresh session
         And the area to search is "Melbourne, VIC"
         When I visit /
+        And I am not interested in any subcategory
         And I have somewhere to sleep tonight
         And my gender is female
         And I need help for myself
@@ -35,6 +36,7 @@ Feature: Browser tab titles
         And the area to search is "Melbourne, VIC"
         When I visit /
         And I have somewhere to sleep tonight
+        And I am not interested in any subcategory
         And my gender is female
         And I need help for myself
         And I am 17 years old
@@ -54,6 +56,7 @@ Feature: Browser tab titles
         When I visit /
         And I have somewhere to sleep tonight
         And my gender is female
+        And I am not interested in any subcategory
         And I need help for myself
         And I am 17 years old
         And I am part of the following demographics
