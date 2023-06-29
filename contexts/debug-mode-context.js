@@ -1,6 +1,8 @@
 /* @flow */
 import React, {useContext, createContext, useState, useEffect} from "react";
 import type {Node as ReactNode} from "react";
+import { useRouter } from "next/router"
+
 import storage from "@/src/storage"
 
 type Context = [
@@ -24,6 +26,8 @@ export const DebugModeProvider = (
 ): ReactNode => {
     const [debugMode, setDebugMode] = useState(initialDebugMode || false)
 
+    const router = useRouter()
+
     function setDebugModePersistently(newDebugModeState) {
         setDebugMode(newDebugModeState)
         storage.setDebug(
@@ -38,11 +42,36 @@ export const DebugModeProvider = (
     // might not match the server-side rendered html structure and cause an when
     // hydrating.
     useEffect(() => {
-        if (initialDebugMode === undefined) {
-            setDebugMode(storage.getDebug())
+        const localStorageDebugModeValue = storage.getDebug()
+        if (initialDebugMode === undefined && debugMode !== localStorageDebugModeValue) {
+            setDebugMode(localStorageDebugModeValue)
         }
     }, [])
 
+    // Enable debug mode if the user appends a particular hash to the current URL
+    const onHashChanged = () => {
+        if (window.location.hash === "#enable-debug-mode") {
+            setDebugModePersistently(true);
+            window.location.hash = "";
+        }
+    };
+    useEffect(() => {
+        window.addEventListener("hashchange", onHashChanged);
+    
+        return () => {
+            window.removeEventListener("hashchange", onHashChanged);
+        };
+    }, []);
+    useEffect(() => {
+        // Check hash on initial page load
+        if (router.isReady) {
+            onHashChanged()
+        }
+
+    }, [router.isReady])
+
+
+    // Toggle debug mode if the user calls a globally defined function using the browser's web console 
     if (typeof window !== "undefined" && !window.pi) {
         window.pi = function() {
             setDebugModePersistently(!debugMode)
