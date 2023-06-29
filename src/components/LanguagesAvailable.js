@@ -15,24 +15,32 @@ type Props = {
 
 export default function LanguagesAvailable({service}: Props): ReactNode {
     const languagesSpoken = `Languages spoken at this service are ${service.languages.join(", ")}`
+    const maxCharLength = 60
     return (
         <div className="LanguagesAvailable">
             <Spacer />
             <div className="languages-spoken-container">
                 <Language />
-                <Collapser
-                    contentPreview={shortenText(60, languagesSpoken)}
-                    expandMessage="Show all languages"
-                    collapseMessage="Hide all languages"
-                    analyticsEvent={{
-                        event: `Action Triggered - Languages Spoken`,
-                        eventAction: "Show full languages spoken",
-                        eventLabel: null,
-                    }}
-                >
-                    {languagesSpoken}
-                </Collapser>
-
+                {
+                    languagesSpoken.length < maxCharLength ?
+                        <span className="languages-spoken">
+                            {languagesSpoken}
+                        </span>
+                        : <>
+                            <Collapser
+                                contentPreview={shortenText(60, languagesSpoken)}
+                                expandMessage="Show all languages"
+                                collapseMessage="Hide all languages"
+                                analyticsEvent={{
+                                    event: `Action Triggered - Languages Spoken`,
+                                    eventAction: "Show full languages spoken",
+                                    eventLabel: null,
+                                }}
+                            >
+                                {languagesSpoken}
+                            </Collapser>
+                        </>
+                }
             </div>
         </div>
     )

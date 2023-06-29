@@ -13,6 +13,6 @@ export function shortenText(maxCharacters: number, text: string): string {
     if (shortened[shortened.length - 1] === ".") {
         return shortened;
     } else {
-        return shortened + "...";
+        return shortened + " ...";
     }
 }

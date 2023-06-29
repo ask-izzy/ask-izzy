@@ -152,6 +152,7 @@ function ServicePane({service}: Props): ReactNode {
             service={service}
         />
     )
+    console.log(service.languages)
 
     function renderCompareShare(typeOfDevice) {
         // required due to different positioning
