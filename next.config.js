@@ -62,7 +62,7 @@ module.exports = {
             },
             {
                 source: "/have-your-say/:remainingPath*",
-                destination: "/advocacy/:remainingPath*",
+                destination: "/advice-and-advocacy/:remainingPath*",
                 permanent: true,
             },
             {
@@ -82,7 +82,7 @@ module.exports = {
             },
             {
                 source: "/have-your-say/:page*",
-                destination: "/advocacy/:page*",
+                destination: "/advice-and-advocacy/:page*",
                 permanent: true,
             },
             {

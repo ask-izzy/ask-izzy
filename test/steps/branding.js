@@ -48,6 +48,7 @@ async function seeTheSearchBar(): Promise<void> {
 async function seeTheCategoryList(
     categories: Array<string>,
 ): Promise<void> {
+    console.log(categories, typeof categories)
     for (let idx = 0; idx < categories.length; idx++) {
         await assert.textIsVisible(
             this.driver,

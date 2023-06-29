@@ -22,9 +22,7 @@ Feature: Health personalisation flow generates the expected query
             "showInAskIzzyHealth": true,
             "term": [
                 "-\"coordinating bodies\"",
-                "assistance pets",
-                "-\"animal control\"",
-                "-effectiveness"
+                "health"
             ],
             "serviceTypes": [
                 "Medical",

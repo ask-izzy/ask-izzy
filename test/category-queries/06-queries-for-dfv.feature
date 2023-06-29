@@ -99,10 +99,6 @@ Feature: Domestic and family violence help personalisation flow generates the ex
                 "-immigration",
                 "-\"hire of facilities\"",
                 "-police"
-            ],
-            "serviceTypes": [
-                "Legal Advice",
-                "Legal Aid"
             ]
         }
         --------------------------------------
@@ -119,14 +115,9 @@ Feature: Domestic and family violence help personalisation flow generates the ex
             },
             "catchment": "prefer",
             "term": [
-                "\"family violence\"",
                 "-\"coordinating bodies\"",
                 "-\"fire-fighting\"",
-                "-adoption"
-            ],
-            "serviceTypesRaw": [
-                "Child Protection/ Placement",
-                "Child support advice"
+                "Child Protection/ Placement"
             ]
         }
         --------------------------------------

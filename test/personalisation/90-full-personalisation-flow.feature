@@ -17,6 +17,9 @@ Feature: Personalisation
         Then I should see "Do you have somewhere safe to sleep tonight?"
 
         When I click the "Yes" button
+        Then I should see "Which situation is most like yours?"
+        
+        When I click the "Skip" button
         Then I should see "I'm looking for help for"
 
         When I click the "Myself" button
@@ -48,11 +51,12 @@ Feature: Personalisation
         And google api geocode will return location name Richmond, VIC
         When I click the link with "Housing" substring
         Then I should see "Do you have somewhere safe to sleep tonight?"
-
+    
         When I click the "No" button
         Then I should see "I'm looking for help for"
 
         When I click the "Myself" button
+
         Then I should see "Where are you looking for help?"
 
         When I clear the first search box
@@ -94,7 +98,7 @@ Feature: Personalisation
         Then I should see "Richmond, VIC"
 
     Scenario: Searching for domestic violence checks that I'm safe
-        When I click the link with "Domestic & family violence help" substring
+        When I click the link with "Domestic and family violence help" substring
         Then I should see "Are you safe right now?"
 
         When I click the "No" button

@@ -12,6 +12,7 @@ Feature: Personalisation header
     Scenario: Search for housing
         When I visit /
         And I click the link with "Housing" substring
+        And I am not interested in any subcategory
         And I click the "Skip" button # Somewhere safe to sleep
 
         Then I should see "I'm looking for help for"

@@ -3,6 +3,7 @@ Feature: Sorting drop down on the results page
 
     Background:
         Given the area to search is "Melbourne, VIC"
+        And I am not interested in any subcategory
         And I have somewhere to sleep tonight
         And my gender is female
         And I need help for myself

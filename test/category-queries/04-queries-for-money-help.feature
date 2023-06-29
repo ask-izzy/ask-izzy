@@ -5,7 +5,8 @@ Feature: Money help personalisation flow generates the expected query
         And I need help for myself
 
     Scenario: No subcategory
-        Given I am not interested in a subcategory for money-help
+        When I visit /
+        And I am not interested in a subcategory for money-help
         When I click the link with "Money help" substring
         Then I should see "See all and edit"
         And the iss search request should be:
@@ -30,7 +31,8 @@ Feature: Money help personalisation flow generates the expected query
         --------------------------------------
 
     Scenario: Centrelink subcategory
-        Given I am interested in the "Centrelink" subcategory for money-help
+        When I visit /
+        And I am interested in the "Centrelink" subcategory for money-help
         When I click the link with "Money help" substring
         Then I should see "See all and edit"
         And the iss search request should be:
@@ -51,7 +53,8 @@ Feature: Money help personalisation flow generates the expected query
         --------------------------------------
 
     Scenario: Financial aid subcategory
-        Given I am interested in the "Financial aid" subcategory for money-help
+        When I visit /
+        And I am interested in the "Financial aid" subcategory for money-help
         When I click the link with "Money help" substring
         Then I should see "See all and edit"
         And the iss search request should be:
@@ -77,7 +80,8 @@ Feature: Money help personalisation flow generates the expected query
         --------------------------------------
 
     Scenario: No or low interest loans subcategory
-        Given I am interested in the "No or low interest loans" subcategory for money-help
+        When I visit /
+        And I am interested in the "No or low interest loans" subcategory for money-help
         When I click the link with "Money help" substring
         Then I should see "See all and edit"
         And the iss search request should be:
@@ -102,7 +106,8 @@ Feature: Money help personalisation flow generates the expected query
         --------------------------------------
 
     Scenario: Financial counselling subcategory
-        Given I am interested in the "Financial counselling" subcategory for money-help
+        When I visit /
+        And I am interested in the "Financial counselling" subcategory for money-help
         When I click the link with "Money help" substring
         Then I should see "See all and edit"
         And the iss search request should be:
@@ -126,7 +131,8 @@ Feature: Money help personalisation flow generates the expected query
         --------------------------------------
 
     Scenario: Bond or rental assistance subcategory
-        Given I am interested in the "Bond or rental assistance" subcategory for money-help
+        When I visit /
+        And I am interested in the "Bond or rental assistance" subcategory for money-help
         When I click the link with "Money help" substring
         Then I should see "See all and edit"
         And the iss search request should be:
@@ -152,7 +158,8 @@ Feature: Money help personalisation flow generates the expected query
         --------------------------------------
 
     Scenario: Gambling counselling subcategory
-        Given I am interested in the "Gambling counselling" subcategory for money-help
+        When I visit /
+        And I am interested in the "Gambling counselling" subcategory for money-help
         When I click the link with "Money help" substring
         Then I should see "See all and edit"
         And the iss search request should be:
