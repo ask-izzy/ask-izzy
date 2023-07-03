@@ -1,0 +1,11 @@
+@use '../../styles/mixins/colours';
+
+.DebugModeOffSwitch {
+    position: fixed;
+    bottom: 1rem;
+    left: 1rem;
+    width: 8rem;
+    background-color: #{colours.get-static('raw-colour-teal')};
+    background-color: var(--raw-colour-teal);
+    z-index: 10;
+}

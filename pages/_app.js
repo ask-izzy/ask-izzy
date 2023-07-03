@@ -22,6 +22,7 @@ import apolloClient from "@/src/utils/apolloClient";
 import usePageViewAnalytics from "@/hooks/usePageViewAnalytics";
 import useFocusOnHeader from "@/hooks/useFocusOnHeader";
 import DebugColours from "@/src/components/DebugColours"
+import DebugModeOffSwitch from "@/src/components/debug/DebugModeOffSwitch"
 import {
     addPageLoadDependencies,
     closePageLoadDependencies,
@@ -94,6 +95,7 @@ function App(appProps: AppProps): ReactNode {
                         <MyListProvider>
                             {renderHeadMetadata(pageInfo, router)}
                             <DebugColours />
+                            <DebugModeOffSwitch />
                             <div className="BasePage">
                                 {/* err prop recommended by https://github.com/vercel/next.js/blob/dba9e2a12adeb2066d0d5bb9a49bdb3e29689b92/examples/with-sentry/pages/_app.js */}
                                 <Component

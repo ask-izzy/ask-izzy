@@ -21,7 +21,18 @@ export default function IssParamsOverrideControls({
         issParamsOverride
     )
 
-    const diff = diffJson(originalIssParams, issParams)
+    const cleanIssParams = (issParams) => ({
+        ...issParams,
+        service_type_raw: issParams.service_type_raw?.length ? issParams.service_type_raw : undefined,
+        location: issParams.location ? issParams.location : undefined,
+        minimum_should_match: issParams.minimum_should_match ? issParams.minimum_should_match : undefined,
+        type: issParams.type ? issParams.type : undefined,
+        service_type: issParams.service_type?.length ? issParams.service_type : undefined,
+        age_group: issParams.age_group?.length ? issParams.age_group : undefined,
+        catchment: issParams.catchment ? issParams.catchment : undefined,
+    })
+
+    const diff = diffJson(originalIssParams, cleanIssParams(issParams))
 
     const schema = {
         type: "object",
@@ -105,7 +116,7 @@ export default function IssParamsOverrideControls({
     </div>
 
     function saveIssParamsOverride() {
-        setIssParamsOverride(issParams)
+        setIssParamsOverride(cleanIssParams(issParams))
     }
 
     function clearIssParamsOverride() {
