@@ -10,10 +10,6 @@ Feature: Support and counselling personalisation flow generates the expected que
         When I visit /
         And I am not interested in a subcategory for support-and-counselling
         When I click the link with "Support and counselling" substring
-        # On the Support and counselling category page, the demographics personalisation question
-        # is always asked regardless of whether the user has already answered it
-        Then I should see "Would you like Aboriginal & Torres Strait Islander specific services?"
-        When I click the "Skip" button
         Then I should see "See all and edit"
         And the iss search request should be:
         --------------------------------------
@@ -38,7 +34,7 @@ Feature: Support and counselling personalisation flow generates the expected que
         When I click the link with "Support and counselling" substring
         # On the Support and counselling category page, the demographics personalisation question
         # is always asked regardless of whether the user has already answered it
-        Then I should see "Would you like Aboriginal & Torres Strait Islander specific services?"
+        Then I should see "Do any of these apply to you?"
         When I click the "Skip" button
         Then I should see "See all and edit"
         And the iss search request should be:
@@ -101,7 +97,7 @@ Feature: Support and counselling personalisation flow generates the expected que
         When I click the "Skip" button
         # On the Support and counselling category page, the demographics personalisation question
         # is always asked regardless of whether the user has already answered it
-        Then I should see "Would you like Aboriginal & Torres Strait Islander specific services?"
+        Then I should see "Do any of these apply to you?"
         When I click the "Skip" button
         Then I should see "See all and edit"
         And the iss search request should be:
@@ -129,7 +125,7 @@ Feature: Support and counselling personalisation flow generates the expected que
         When I click the link with "Support and counselling" substring
         # On the Support and counselling category page, the demographics personalisation question
         # is always asked regardless of whether the user has already answered it
-        Then I should see "Would you like Aboriginal & Torres Strait Islander specific services?"
+        Then I should see "Do any of these apply to you?"
         When I click the "Skip" button
         Then I should see "See all and edit"
         And the iss search request should be:
@@ -238,7 +234,7 @@ Feature: Support and counselling personalisation flow generates the expected que
         When I click the link with "Support and counselling" substring
         # On the Support and counselling category page, the demographics personalisation question
         # is always asked regardless of whether the user has already answered it
-        Then I should see "Would you like Aboriginal & Torres Strait Islander specific services?"
+        Then I should see "Do any of these apply to you?"
         When I click the "Skip" button
         Then I should see "See all and edit"
         And the iss search request should be:

@@ -79,7 +79,6 @@ export default ({
                 "Mental and emotional health",
                 "Family or relationships",
                 "Drugs and alcohol counselling",
-                "Sexual assault or family violence",
             ].includes(getSavedPersonalisationAnswer(CounsellingSubcategories))
         }
         return false
