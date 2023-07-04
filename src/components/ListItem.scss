@@ -71,8 +71,6 @@
                 color: var(--colour-text-mid);
                 font-size: 14px;
                 line-height: 150%;
-                text-overflow: ellipsis;
-                white-space: nowrap;
                 overflow: hidden;
             }
         }
@@ -119,6 +117,17 @@
                 font-size: 18px;
                 font-weight: 500;
                 line-height: 18px;
+            }
+        }
+    }
+
+    &.Link {
+        > div {
+            > .label {
+                > .secondaryText {
+                    text-overflow: ellipsis;
+                    white-space: nowrap;
+                }
             }
         }
     }
