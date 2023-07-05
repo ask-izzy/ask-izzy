@@ -72,13 +72,13 @@ export default ({
         },
     },
     descriptionsForAnswers: {
-        "Centrelink": "Access to government support payments.",
-        "Financial aid": "Assistance with paying for food, bills, transport.",
+        "Centrelink": "Access to government support payments",
+        "Financial aid": "Assistance with paying for food, bills, transport",
         "No or low interest loans":
-            "Loans for people and families on low incomes.",
-        "Financial counselling": "Help managing money and debt.",
-        "Bond or rental assistance": "Help with rental payments or bond money.",
-        "Gambling counselling": "Someone to talk to about gambling.",
+            "Loans for people and families on low incomes",
+        "Financial counselling": "Help managing money and debt",
+        "Bond or rental assistance": "Help with rental payments or bond money",
+        "Gambling counselling": "Someone to talk to about gambling",
     },
     showSupportSearchBar: true,
     title: "Money services",
@@ -86,12 +86,6 @@ export default ({
         switch (answer) {
         case "Financial assistance e.g. utility bills, petrol, food":
             return "Financial assistance";
-        case "No or low interest loans":
-            return "Money matters";
-        case "Gambling counselling":
-            return "Gambling";
-        case "Financial counselling":
-            return "Online counselling";
         default:
             return answer
         }
