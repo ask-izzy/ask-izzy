@@ -141,10 +141,10 @@ export default ({
     },
     descriptionsForAnswers: {
         "Clothes and household goods": "Free or affordable material items",
-        "Transport": "Help and assistance for travelling.",
-        "Keeping warm": "Blankets, swags, sleeping bags.",
-        "Technology": "Free wifi, charging stations or computer access.",
-        "Showers and laundry": "Somewhere to shower and wash clothes.",
+        "Transport": "Help and assistance for travelling",
+        "Keeping warm": "Blankets, swags, sleeping bags",
+        "Technology": "Free wifi, charging stations or computer access",
+        "Showers and laundry": "Somewhere to shower and wash clothes",
         "Personal products": "Hygiene and sanitary products",
         "Toilets": "Free to access toilets",
         "Support with everyday tasks":
