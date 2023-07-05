@@ -121,23 +121,21 @@ export default ({
         "Help with pets": icons.DemographicPets,
     },
     descriptionsForAnswers: {
-        "Counselling and support": "Someone to talk to.",
-        "Police": "Stations and liason officers.",
-        "Legal support": "Intervention orders, court and separation.",
+        "Counselling and support": "Someone to talk to",
+        "Police": "Stations and liason officers",
+        "Legal support": "Intervention orders, court and separation",
         "Children's support and protection":
-            "Support services and child protection.",
-        "Sexual assault support": "Counselling, medical care and support.",
+            "Support services and child protection",
+        "Sexual assault support": "Counselling, medical care and support",
         "Help for people using violence":
-            "Counselling & behaviour change programs.",
-        "Emergency accommodation": "Need a place to stay.",
-        "Help with pets": "Shelter or assistance for pets.",
+            "Counselling & behaviour change programs",
+        "Emergency accommodation": "Need a place to stay",
+        "Help with pets": "Shelter or assistance for pets",
     },
     showSupportSearchBar: true,
     title: "Services",
     prettyPrintAnswer(answer: string): string {
         switch (answer) {
-        case "Help for people using violence":
-            return "Behavioural support";
         case "Help for pets":
             return "Help with pets";
         default:

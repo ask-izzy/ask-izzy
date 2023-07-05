@@ -2,9 +2,6 @@
 import type {
     PersonalisationPage,
 } from "../../../flow/personalisation-page"
-import React from "react";
-import type {Node as ReactNode} from "react";
-import DemographicLgbtiqIcon from "../../icons/DemographicLgbtiq";
 
 export default ({
     type: "question",
@@ -73,14 +70,16 @@ export default ({
         },
     },
     showSupportSearchBar: true,
+    descriptionsForAnswers: {
+        "Mental and emotional health": "Help with anxiety, depression and mental health",
+        "Emergency support": "Urgent help in a mental health crisis",
+        "Family or relationships": "Counselling for healthy and safe relationships",
+        "Drugs and alcohol counselling": "Support with addiction and substance use",
+        "Gender or sexual identity": "Support, mental health and safety",
+        "Homelessness support": "Help for people experiencing homelessness",
+        "Sexual assault or family violence": "Support for current or past experiences of violence",
+        "Gambling counselling": "Someone to talk to about gambling",
+    },
     title: "Counselling services",
     resetDfvOptionsOnDisplay: true,
-    prettyPrintAnswer(answer: string): string | ReactNode {
-        switch (answer) {
-        case "Gender or sexual identity":
-            return <DemographicLgbtiqIcon />;
-        default:
-            return answer
-        }
-    },
 }: PersonalisationPage)

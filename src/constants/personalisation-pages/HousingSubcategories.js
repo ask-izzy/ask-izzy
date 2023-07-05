@@ -144,16 +144,17 @@ export default ({
         },
     },
     descriptionsForAnswers: {
-        "Emergency accommodation": "Need a place to stay.",
-        "Homelessness support": "Help for people experiencing homelessness.",
-        "Affordable housing": "Rental in government owned houses.",
-        "Bond or rent help": "Help with rental payments.",
-        "Rental disputes": "Deal with issues while renting.",
+        "Emergency accommodation": "Need a place to stay",
+        "Homelessness support": "Help for people experiencing homelessness",
+        "Affordable housing": "Rental in government owned houses",
+        "Bond or rent help": "Help with rental payments",
+        "Rental disputes": "Deal with issues while renting",
         "Support with everyday tasks":
-            "Home help with cleaning, food, personal care.",
+            "Home help with cleaning, food, personal care",
         "Supported accommodation and residential care":
-            "Places to live with people who can help.",
+            "Places to live with people who can help",
     },
+    showSupportSearchBar: true,
     title: "Situation",
     getShouldIncludePage(): boolean {
         /* only show this question if the user has someone to sleep tonight */

@@ -88,14 +88,14 @@ export default ({
         },
     },
     descriptionsForAnswers: {
-        "Finding a job": "Employment programs and services.",
+        "Finding a job": "Employment programs and services",
         "Supported employment":
-            "Employment services for people with additional needs.",
-        "Education": "Schools and other centers for learning.",
+            "Employment services for people with additional needs",
+        "Education": "Schools and other centers for learning",
         "Community skills training":
-            "Local programs such as parenting, computer, or other skills.",
-        "Volunteering": "Places to help and gain experience.",
-        "Libraries": "Access to computers, books and information.",
+            "Local programs such as parenting, computer, or other skills",
+        "Volunteering": "Places to help and gain experience",
+        "Libraries": "Access to computers, books and information",
     },
     showSupportSearchBar: true,
     title: "Jobs",
