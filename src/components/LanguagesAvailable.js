@@ -14,7 +14,7 @@ type Props = {
 }
 
 export default function LanguagesAvailable({service}: Props): ReactNode {
-    const languagesSpoken = `Languages spoken at this service are ${service.languages.join(", ")}`
+    const languagesSpoken = `Languages spoken at this service are English, ${service.languages.join(", ")}`
     const maxCharLength = 60
     return (
         <div className="LanguagesAvailable">
