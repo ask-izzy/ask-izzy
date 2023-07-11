@@ -102,6 +102,8 @@ module.exports.documentReady = async function documentReady(
                     window.waitTillPageLoaded()
                         .then(() => callback())
                 }
+                console.log("Wait function:", window.waitTillPageLoaded)
+                
 
             // External page
             } else {
@@ -132,7 +134,7 @@ module.exports.visitUrl = async function visitUrl(
     url
 ) {
     await gotoUrl(driver, url);
-    await new Promise(resolve => setTimeout(resolve, 2000));
+    // await new Promise(resolve => setTimeout(resolve, 2000));
     await module.exports.documentReady(driver);
 }
 
@@ -515,7 +517,10 @@ async function takeScreenshot() {
 }
 
 async function enableDebugMode() {
+
+    console.log("step 1")
     await debug.enableDebugMode(this.driver)
+    console.log("step 2")
 }
 
 async function showCursor() {

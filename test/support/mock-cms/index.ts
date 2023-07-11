@@ -9,7 +9,7 @@ import { fileURLToPath } from "url";
 import mocks from "./resolvers/index.js"
 
 const typeDefs = gql(
-    fs.readFileSync(dirname(fileURLToPath(import.meta.url)).concat("/strapi-schema.graphql"), "utf8")
+    fs.readFileSync(path.join(__dirname, "/strapi-schema.graphql"), "utf8")
 )
 
 const port = process.env.PORT

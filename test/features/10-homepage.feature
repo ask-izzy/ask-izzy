@@ -6,6 +6,7 @@ Feature: Landing page
     # So that I can understand what Ask Izzy provides
 
     Scenario: Visit home page
+        When I enable debug mode
         When I visit /
         Then I should see the branding header
         And I should see the search bar

@@ -20,8 +20,7 @@
  */
 
 import {spawnSync} from "child_process"
-import nextEnv from "@next/env"
-const {loadEnvConfig} =  nextEnv
+import {loadEnvConfig}  from "@next/env"
 
 /*::
 type Service = {

@@ -5,7 +5,6 @@
   "main": "src/client.js",
   "license": "GPL-3.0",
   "readme": "README.md",
-  "type": "module",
   "scripts": {
     "dev": "next dev -p 8000",
     "build": "next build",
@@ -22,8 +21,8 @@
     "test-dev-mocha-features": "yarn run with --test-env --dev --mocks test-mocha-features",
     "test-dev-mocha-maps": "yarn run with --test-env --dev --mocks test-mocha-maps",
     "test-dev-mocha-unit": "yarn test-mocha-unit",
-    "mock-iss": "yarn ts-run test/support/mock-iss/index.js",
-    "mock-cms": "yarn ts-run test/support/mock-cms/index.js",
+    "mock-iss": "yarn ts-run test/support/mock-iss/index.ts",
+    "mock-cms": "yarn ts-run test/support/mock-cms/index.ts",
     "lint": "yarn lint-eslint && yarn lint-tsc && yarn lint-stylelint && yarn lint-storybook-components && yarn lint-jsonlint && yarn lint-hadolint && yarn lint-shellcheck",
     "lint-fix": "yarn lint-eslint-fix && yarn lint-tsc && yarn lint-stylelint-fix && yarn lint-storybook-components && yarn lint-jsonlint && yarn lint-hadolint && yarn lint-shellcheck",
     "lint-eslint": "eslint src --ext .ts,.tsx",
@@ -41,7 +40,7 @@
     "build-storybook": "build-storybook -o public/storybook",
     "shell": "bash -c '\"$0\" \"$@\"'",
     "with": "yarn ts-run scripts/run-with.ts",
-    "ts-run": "node --loader ./scripts/ts-run-loader.js"
+    "ts-run": "node --loader ./scripts/ts-run-loader.mjs"
   },
   "dependencies": {
     "@apollo/client": "^3.3.19",

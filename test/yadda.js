@@ -29,6 +29,7 @@ let testFailed = false;
 let processFile = (file) => {
     featureFile(file, feature => {
         before(async function() {
+            console.log("before 1")
             driver = await driverPromise;
             testBrowserLog.push({
                 hook: "Before feature",
@@ -38,31 +39,40 @@ let processFile = (file) => {
 
         scenarios(feature.scenarios, scenario => {
             before(async function() {
+                console.log("before 2")
                 await cleanDriverSession(driver);
+                console.log("before 2.1")
 
                 await driver.executeScriptBeforeLoad(() => {
                     console.log("------------- Loading Page -------------")
                     console.log("URL: " + location.href)
                 });
+                console.log("before 2.2")
 
                 // Flush any logs from previous tests
                 testHarnessLog.length = 0
                 testBrowserLog.length = 0
 
+                console.log("before 2.3")
                 testBrowserLog.push({
                     hook: "Before scenario",
                     browserLog: await driver.manage().logs().get("browser"),
                 })
+                console.log("before 3")
             });
 
             steps(scenario.steps, async function(step, done) {
+                console.log("steps 1")
                 this.slow(6000)
+                console.log("steps 2")
                 Yadda.createInstance(libraries, {
                     driver: driver,
                     mochaState: this,
                     log: testHarnessLog,
                     indent,
                 }).run(step, done);
+
+                console.log("steps 3")
             });
         });
 

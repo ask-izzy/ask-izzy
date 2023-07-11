@@ -2,10 +2,10 @@
   "$schema": "https://json.schemastore.org/tsconfig",
   "display": "Next.js",
   "ts-node": {
-    "esm": true,
     "require": [
       "tsconfig-paths/register"
-    ]
+    ],
+    "experimentalResolver": true,
   },
   "compilerOptions": {
     "target": "es6",
@@ -41,7 +41,7 @@
     "noEmit": true,
     "incremental": true,
     "esModuleInterop": true,
-    "module": "ESNext",
+    "module": "CommonJS",
     "resolveJsonModule": true,
     "isolatedModules": true,
     "moduleResolution": "nodenext",
