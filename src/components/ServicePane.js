@@ -13,6 +13,7 @@ import DebugServiceRecord from "./DebugServiceRecord";
 import Eligibility from "./Eligibility";
 import Feedback from "./Feedback";
 import ImportantInformation from "./ImportantInformation"
+import LanguagesAvailable from "@/src/components/LanguagesAvailable";
 import HeaderBar from "./HeaderBar";
 import TransportTime from "./TransportTime";
 import GoogleMapsLink from "./GoogleMapsLink";
@@ -260,6 +261,13 @@ function ServicePane({service}: Props): ReactNode {
                                     />
                                 </span>
                             </GoogleMapsLink>
+                            }
+                            {service.languages.length > 0 &&
+                                <LanguagesAvailable
+                                    service={service}
+                                >
+                                    {service.languages}
+                                </LanguagesAvailable>
                             }
                             <ContactMethods object={service} />
                             <ImportantInformation object={service}/>
