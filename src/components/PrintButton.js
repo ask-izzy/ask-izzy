@@ -9,10 +9,12 @@ import Print from "@/src/icons/Print";
 
 type Props = {
     ComponentToPrint?: ReactNode,
+    hasTextDescription?: boolean,
 }
 
 function PrintButton({
     ComponentToPrint = <></>,
+    hasTextDescription = true,
 }: Props): ReactNode {
 
     let printableComponentRef = React.useRef();
@@ -40,7 +42,10 @@ function PrintButton({
                     >
                         <div className="main-container">
                             <Print />
-                            <span>Print Friendly</span>
+                            {
+                                hasTextDescription &&
+                                    <span>Print Friendly</span>
+                            }
                         </div>
                     </Button>
             }
