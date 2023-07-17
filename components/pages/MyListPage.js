@@ -22,7 +22,7 @@ import MyListPrintPage from "@/src/components/PrintComponents/MyListPrintPage"
 
 function MyListPage(): ReactNode {
     const router = useRouter()
-    const isMobile = MobileDetect(500)
+    const isMobile = MobileDetect(590)
     const {
         myListServices,
         clearAllMyListServices,
@@ -99,10 +99,21 @@ function MyListPage(): ReactNode {
                         `${myListServices.length} service${myListServices.length > 1 ? "s" : ""} in your list`
                     }
                     {isMobile &&
-                        <ShareButton
-                            hasTextDescription={true}
-                            services={myListServices}
-                        />
+                        <div className="other-mobile-features-container">
+                            <ShareButton
+                                hasTextDescription={false}
+                                services={myListServices}
+                            />
+                            <PrintButton
+                                hasTextDescription={false}
+                                ComponentToPrint={
+                                    <MyListPrintPage
+                                        services={myListServices}
+                                    />
+                                }
+                            />
+                        </div>
+
                     }
                 </div>
 

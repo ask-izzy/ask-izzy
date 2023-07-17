@@ -48,6 +48,42 @@
         }
     }
 
+    .other-mobile-features-container {
+        display: flex;
+        flex-direction: row;
+        column-gap: 8px;
+
+        .ShareButton {
+            background-color: transparent;
+
+            .SvgIcon {
+                width: 28px;
+                height: 28px;
+
+                path {
+                    fill: #{colours.get-static('colour-text-brand')};
+                    fill: var(--colour-text-brand);
+                }
+            }
+        }
+
+        .PrintButton {
+            .print-component-button {
+                background-color: transparent;
+
+                .SvgIcon {
+                    width: 32px;
+                    height: 32px;
+
+                    path {
+                        fill: #{colours.get-static('colour-text-brand')};
+                        fill: var(--colour-text-brand);
+                    }
+                }
+            }
+        }
+    }
+
     .top-button-container {
         &.web {
             margin: 15px;
