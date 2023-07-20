@@ -222,7 +222,7 @@ Feature: Support and counselling personalisation flow generates the expected que
             },
             "catchment": "prefer",
             "term": [
-                "violence"
+                "counselling"
             ],
             "minimumShouldMatch": "1",
             "serviceTypesRaw": [
