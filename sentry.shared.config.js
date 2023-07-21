@@ -5,9 +5,6 @@ import getConfig from 'next/config';
 getConfig();
 
 export default ({
-    tracesSampleRate: isNaN(process.env.SENTRY_TRACES_SAMPLE_RATE) 
-        ? 1.0
-        : parseFloat(process.env.SENTRY_TRACES_SAMPLE_RATE),
     environment: process.env.ENVIRONMENT || process.env.NODE_ENV,
     integrations: [
         new CaptureConsole({
