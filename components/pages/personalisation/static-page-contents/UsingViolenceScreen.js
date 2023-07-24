@@ -9,7 +9,7 @@ function UsingViolenceScreen(): React.Node {
     const referralServicePhone = "1800737732";
     const referralServiceChat = "https://ntv.org.au/get-help/";
     const link1800Respect = "/service/634190-1800respect";
-    const onlineChat = "https://chat.1800respect.org.au/"
+    const onlineChat = "https://1800respect.org.au/help-and-support"
 
     return (
         <div className="AreYouSafe">
