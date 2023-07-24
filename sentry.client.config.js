@@ -1,15 +1,14 @@
 /* @flow */
 
-import * as Sentry from "@sentry/nextjs";
-import getConfig from 'next/config';
+import { CaptureConsole, ExtraErrorData } from "@sentry/integrations";
 
-import sharedConfig from "./sentry.shared.config"
+import initSentry from "./sentry.shared.config"
 
-getConfig();
-
-if (process.env.NODE_ENV !== "test") {
-    Sentry.init({
-        ...sharedConfig,
-        dsn: process.env.NEXT_PUBLIC_SENTRY_DSN || "null",
-    });
-}
+initSentry({
+    integrations: [
+        new CaptureConsole({
+            levels: ["warn", "error"],
+        }),
+        new ExtraErrorData(),
+    ],
+});
