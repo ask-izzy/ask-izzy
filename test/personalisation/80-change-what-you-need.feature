@@ -8,6 +8,7 @@ Feature: Change your personalisation settings
     Background:
         Given a fresh session
         And the area to search is "Melbourne, VIC"
+        And I am interested in the "Emergency accommodation" subcategory for housing
         And I have somewhere to sleep tonight
         And my gender is female
         And I need help for myself
@@ -24,6 +25,7 @@ Feature: Change your personalisation settings
         Question (primaryText)                       | Answer (secondaryText)
         ================================================================
         Do you have somewhere safe to sleep tonight? | Yes
+        Which situation is most like yours?          | Emergency accommodation
         Where are you looking for help?              | Melbourne, VIC
         How do you identify?                         | Female
         How old are you?                             | 27 to 39
@@ -48,6 +50,7 @@ Feature: Change your personalisation settings
         Question (primaryText)                       | Answer (secondaryText)
         ================================================================
         Do you have somewhere safe to sleep tonight? | Yes
+        Which situation is most like yours?          | Emergency accommodation
         Where are you looking for help?              | Carlton, VIC
         How do you identify?                         | Female
         How old are you?                             | 27 to 39
@@ -83,6 +86,7 @@ Feature: Change your personalisation settings
         Question (primaryText)                       | Answer (secondaryText)
         ================================================================
         Do you have somewhere safe to sleep tonight? | Yes
+        Which situation is most like yours?          | Emergency accommodation
         Where are you looking for help?              | Melbourne, VIC
         How do you identify?                         | Female
         How old are you?                             | 27 to 39
@@ -98,6 +102,7 @@ Feature: Change your personalisation settings
         Question (primaryText)                       | Answer (secondaryText)
         ================================================================
         Do you have somewhere safe to sleep tonight? | Yes
+        Which situation is most like yours?          | Emergency accommodation
         Where are you looking for help?              | Melbourne, VIC
         How do you identify?                         | Female
         How old are you?                             | 27 to 39
@@ -114,6 +119,7 @@ Feature: Change your personalisation settings
         Question (primaryText)                       | Answer (secondaryText)
         ================================================================
         Do you have somewhere safe to sleep tonight? | Yes
+        Which situation is most like yours?          | Emergency accommodation
         Where are you looking for help?              | Melbourne, VIC
         How do you identify?                         | Male
         How old are you?                             | 27 to 39
@@ -126,7 +132,7 @@ Feature: Change your personalisation settings
         Then I should see the branding header
         And I should be at /
         When I click the link with "Housing" substring
-
+        And I am not interested in any subcategory
         Then I should see "Do you have somewhere safe to sleep tonight?"
         When I click the "Yes" button
 

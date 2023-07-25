@@ -130,6 +130,7 @@ COPY --chown=$UID_GID ./hooks /app/hooks
 COPY --chown=$UID_GID ./contexts /app/contexts
 COPY --chown=$UID_GID ./helpers /app/helpers
 COPY --chown=$UID_GID ./lib /app/lib
+COPY --chown=$UID_GID ./queries /app/queries
 COPY --chown=$UID_GID ./pages /app/pages
 COPY --chown=$UID_GID ./public/images/banners /app/public/images/banners
 COPY --chown=$UID_GID ./fixtures /app/fixtures
@@ -171,6 +172,7 @@ COPY --chown=$UID_GID ./hooks /app/hooks
 COPY --chown=$UID_GID ./contexts /app/contexts
 COPY --chown=$UID_GID ./helpers /app/helpers
 COPY --chown=$UID_GID ./lib /app/lib
+COPY --chown=$UID_GID ./queries /app/queries
 COPY --chown=$UID_GID ./pages /app/pages
 COPY --chown=$UID_GID ./.storybook /app/.storybook
 RUN mkdir -p /app/public/images && chown -R $UID_GID /app/public
@@ -179,7 +181,7 @@ COPY --chown=$UID_GID ./public/images/ask-izzy-logo-single-line-purple.svg /app/
 COPY --chown=$UID_GID ./fixtures /app/fixtures
 COPY --chown=$UID_GID ./test/support/mock-cms /app/test/support/mock-cms/
 COPY --chown=$UID_GID ./test/support/mock-iss /app/test/support/mock-iss/
-COPY --chown=$UID_GID ./.env ./.env.test ./babel.config.json ./next.config.js /app/
+COPY --chown=$UID_GID ./.env ./.env.test ./babel.config.json ./jsconfig.json ./next.config.js /app/
 
 # Upgrading next.js has forced the need to upgrade storybook. And as usual trying to make storybook work with flow.js is always
 # a major PITA. Since the typescript migrations is (hopefully just around the corner) rather than waste time trying to make it work

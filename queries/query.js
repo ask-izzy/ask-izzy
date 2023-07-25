@@ -10,7 +10,7 @@ import {useRouter} from "next/router"
 import {
     addPageLoadDependencies,
     closePageLoadDependencies,
-} from "../utils/page-loading"
+} from "@/src/utils/page-loading"
 
 const Query = ({ children, query, args, loadingComponent, errorComponent }: {
   children: any,

@@ -5,6 +5,7 @@ Feature: Question Flow Breadcrumb
     Scenario: Visit a category page for the first time and have my location visible
         Given a fresh session
         And the area to search is "Melbourne, VIC"
+        And I am not interested in any subcategory
         When I visit /
         And I click the link with "Housing" substring
         Then I should see "Do you have somewhere safe to sleep tonight?"
@@ -18,6 +19,7 @@ Feature: Question Flow Breadcrumb
         And I have somewhere to sleep tonight
         And my gender is female
         And I am 17 years old
+        And I am not interested in any subcategory
         And I click the link with "Housing" substring
         Then I should see "I'm looking for help for"
         And I should be at /housing/Melbourne-VIC/personalise/page/who-is-looking-for-help-housing
@@ -31,6 +33,7 @@ Feature: Question Flow Breadcrumb
         And I have somewhere to sleep tonight
         And my gender is female
         And I am 17 years old
+        And I am not interested in any subcategory
         And I click the link with "Housing" substring
         Then I should see "I'm looking for help for"
         And I should be at /housing/Melbourne-VIC/personalise/page/who-is-looking-for-help-housing
@@ -44,6 +47,7 @@ Feature: Question Flow Breadcrumb
         When I visit /
         And I have somewhere to sleep tonight
         And my gender is female
+        And I am not interested in any subcategory
         And I am 17 years old
         And I am part of the following demographics
         --------------------------------------
@@ -59,6 +63,7 @@ Feature: Question Flow Breadcrumb
         When I visit /
         And I have somewhere to sleep tonight
         And I need help for myself
+        And I am not interested in any subcategory
         And my gender is female
         And I am 17 years old
         And I am part of the following demographics
@@ -81,6 +86,7 @@ Feature: Question Flow Breadcrumb
     Scenario: See saved location on the home page
         Given a fresh session
         And the area to search is "Melbourne, VIC"
+        And I am not interested in any subcategory
         When I visit /
         Then I should see "Melbourne, VIC"
         And I should see "Clear saved location"

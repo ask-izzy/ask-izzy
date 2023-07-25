@@ -8,7 +8,7 @@ import {MobileDetect as useMobileDetect} from "@/src/effects/MobileDetect";
 
 function OnlineSafetyScreen(): React.Node {
     const link1800Respect = "/service/634190-1800respect";
-    const onlineChat = "https://chat.1800respect.org.au/";
+    const onlineChat = "https://1800respect.org.au/help-and-support";
     const number1800Respect = "1800 737 732";
 
     const isMobileView = useMobileDetect()

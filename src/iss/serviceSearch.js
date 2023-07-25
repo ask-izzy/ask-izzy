@@ -296,85 +296,8 @@ export function convertIzzySearchQueryToIss3(
 ): ISS3SearchQuery {
     const issQuery: $Shape<ISS3SearchQuery> = {}
 
-    let q = query.term?.join(" ") || ""
-
-    // These tweaks don't change behaviour of any of the queries, purely the
-    // formatting. They are used replicate some of the legacy formatting
-    // behaviour of the old query system so the output of the queries before
-    // and after the change can be diffed to detect any actual behaviour
-    // changes.
-    if (
-        q === "-\"coordinating bodies\" -\"fire-fighting\" " +
-            "service_type:Child Protection/ Placement"
-    ) {
-        q = " -\"coordinating bodies\" -\"fire-fighting\" " +
-            "service_type:Child Protection/ Placement"
-    } else if (
-        q.startsWith(
-            "-\"coordinating bodies\" -\"holiday accommodation\" " +
-                "\"Homelessness Access Point\""
-        )
-    ) {
-        q = q.replace(
-            "-\"coordinating bodies\" -\"holiday accommodation\" " +
-                "\"Homelessness Access Point\"",
-            " -\"coordinating bodies\"    -\"holiday accommodation\"  " +
-                "\"Homelessness Access Point\""
-        )
-    } else if (q.startsWith("meals -\"home care\"")) {
-        q = q.replace(
-            "meals -\"home care\"",
-            "meals  -\"home care\""
-        )
-    } else if (
-        q.startsWith(
-            "-\"coordinating bodies\" -\"fire-fighting\" " +
-                "\"men's behaviour change\""
-        )
-    ) {
-        q = q.replace(
-            "-\"coordinating bodies\" -\"fire-fighting\" " +
-                "\"men's behaviour change\"",
-            " -\"coordinating bodies\" -\"fire-fighting\"  " +
-                "\"men's behaviour change\""
-        )
-    } else if (q.startsWith("legal -\"coordinating bodies\"")) {
-        q = q.replace(
-            "legal -\"coordinating bodies\"",
-            "legal  -\"coordinating bodies\""
-        )
-    } else if (
-        q.match(
-            "-\"assistance with meals\" -\"hire of facilities\" " +
-                "-\"meal preparation\""
-        )
-    ) {
-        q = " " + q
-        q = q.replace(
-            "-\"assistance with meals\" -\"hire of facilities\" " +
-                "-\"meal preparation\"",
-            " -\"assistance with meals\" -\"hire of facilities\"  " +
-                "-\"meal preparation\""
-        )
-    } else if (q.startsWith("-\"coordinating bodies\"")) {
-        q = " " + q
-    } else if (q.startsWith("-research")) {
-        q = "  " + q
-    }
-
-    q = q.replace(/"(.*?)"/g, "($1)")
-
-    if (q === "(centrelink)") {
-        q = "\"centrelink\""
-    } else if (q.match(/name:\(financial counselling\)/)) {
-        q = q.replace(
-            /name:\(financial counselling\)/,
-            "name:\"financial counselling\""
-        )
-    }
-
-    if (q) {
-        issQuery.q = q
+    if (query.term) {
+        issQuery.q = query.term.join(" ").replace(/"(.*?)"/g, "($1)")
     }
 
     if (query.siteId) {
@@ -383,14 +306,12 @@ export function convertIzzySearchQueryToIss3(
 
     if (query.serviceTypes) {
         issQuery.service_type = query.serviceTypes.map(
-            serviceType => serviceType !== "Homelessness Access Point" ?
-                serviceType.toLowerCase()
-                : serviceType
+            serviceType => serviceType.toLowerCase()
         )
     }
 
     if (query.serviceTypesRaw) {
-        issQuery.service_type_raw = query.serviceTypesRaw.join(" ")
+        issQuery.service_type_raw = query.serviceTypesRaw
     }
 
     if (query.minimumShouldMatch) {

@@ -66,7 +66,7 @@ const Storage = {
     },
 
     getUserIsIndigenous(): boolean {
-        return this.getItem("sub-indigenous") ==
+        return this.getItem("demographics-indigenous") ==
             "Yes - show these first where possible" ||
         this.getArray("demographics")
             .includes("Aboriginal and/or Torres Strait Islander");

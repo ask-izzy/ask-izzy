@@ -8,10 +8,17 @@ import {
     getSavedPersonalisationAnswer,
 } from "../../utils/personalisation"
 
+const triggerSubcategories = [
+    "Emergency support",
+    "Family or relationships",
+    "Sexual assault or family violence",
+]
+
 export default ({
     ...AreYouSafe,
     getShouldIncludePage(): boolean {
-        return getSavedPersonalisationAnswer(CounsellingSubcategories) ===
-                "Scared in my relationship";
+        return triggerSubcategories.includes(
+            getSavedPersonalisationAnswer(CounsellingSubcategories)
+        )
     },
 }: PersonalisationQuestionPage)

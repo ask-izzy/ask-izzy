@@ -13,6 +13,8 @@ Feature: Skip personalisation settings
 
     Scenario: Skip personalisation settings which were already answered
         When I click the link with "Housing" substring
+        Then I should see "Which situation is most like yours?"
+        When I click the "Skip" button
         Then I should see "I'm looking for help for"
         When I click the "Myself" button # Intro
         Then I should see "Do you identify as…"
@@ -27,6 +29,7 @@ Feature: Skip personalisation settings
         Question (primaryText)                       | Answer (secondaryText)
         ================================================================
         Do you have somewhere safe to sleep tonight? | Yes
+        Which situation is most like yours?          | (skipped)
         Where are you looking for help?              | Melbourne, VIC
         How do you identify?                         | (skipped)
         How old are you?                             | (skipped)

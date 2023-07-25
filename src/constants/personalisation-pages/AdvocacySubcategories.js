@@ -4,52 +4,123 @@ import type {
 } from "../../../flow/personalisation-page"
 
 export default ({
-    name: "sub-advocacy",
+    name: "advice-and-advocacy-subcategory",
     type: "question",
     question: "What do you want help with or advice about?",
     possibleAnswers: {
-        "Making a complaint": {
+        "Legal aid and advice": {
+            serviceTypes: [
+                "Legal Advice",
+                "Legal Aid",
+                "Legal Information",
+                "Legal Representation",
+            ],
             $concat: {
-                term: ["ombudsman", "complaint"],
+                term: [
+                    "legal",
+                    "-permits",
+                    "-ceremonies",
+                ],
             },
             $removeElms: {
                 term: [
-                    "consumer",
-                    "issues",
-                    "mediation",
-                    "discrimination",
-                    "disputes advocacy",
+                    "advocacy",
+                    "-research",
                 ],
             },
         },
-        "Get advice on your rights": {
+        "Help with fines": {
+            $unset: ["serviceTypes"],
             $concat: {
-                term: ["rights", "advice"],
+                term: [
+                    "fines",
+                    "-CAYPINS",
+                    "-\"court fund\"",
+                    "-training",
+                    "-\"allied health\"",
+                    "-art",
+                    "-dentist",
+                    "-alcohol",
+                ],
             },
             $removeElms: {
                 term: [
-                    "consumer",
-                    "issues",
-                    "mediation",
-                    "discrimination",
-                    "disputes advocacy",
+                    "advice",
+                    "advocacy",
                 ],
             },
         },
-        "Someone to speak for you": {
+        "Advocacy": {
+            serviceTypes: ["Advocacy"],
             $concat: {
-                term: ["advocacy"],
+                term: [
+                    "-\"disability advocacy\"",
+                ],
             },
             $removeElms: {
                 term: [
-                    "consumer",
-                    "issues",
-                    "mediation",
-                    "discrimination",
-                    "disputes advocacy",
+                    "advice",
                 ],
             },
         },
+        "Disability advocacy": {
+            $unset: ["serviceTypes"],
+            serviceTypesRaw: ["Disability advocacy"],
+            $concat: {
+                term: [
+                    "disability",
+                ],
+            },
+            $removeElms: {
+                term: [
+                    "-\"coordinating bodies\"",
+                    "advice",
+                    "advocacy",
+                    "-research",
+                ],
+            },
+        },
+        "Homelessness support": {
+            serviceTypes: ["Advocacy"],
+            $concat: {
+                term: [
+                    "homelessness",
+                ],
+            },
+            $removeElms: {
+                term: [
+                    "advice",
+                ],
+            },
+        },
+        "Rental disputes": {
+            serviceTypes: ["Housing/Tenancy Information & Referral"],
+            $concat: {
+                term: [
+                    "rent",
+                    "tenant",
+                    "-\"respite care\"",
+                    "-hef",
+                    "-\"holiday accommodation\"",
+                ],
+            },
+            $removeElms: {
+                term: [
+                    "advice",
+                    "advocacy",
+                    "-research",
+                ],
+            },
+        },
+    },
+    descriptionsForAnswers: {
+        "Legal aid and advice": "Free or affordable support for legal issues",
+        "Help with fines": "Resolve or contest fines",
+        "Advocacy": "Someone to speak for you and fight for your rights",
+        "Disability advocacy":
+            "Someone to assist with finding and accessing services",
+        "Homelessness support": "Help for people experiencing homelessness",
+        "Rental disputes": "Deal with issues while renting",
     },
     showSupportSearchBar: true,
     title: "Services",

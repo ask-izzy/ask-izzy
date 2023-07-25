@@ -60,7 +60,7 @@ function HomePage(): ReactNode {
                     secondaryText={<div className="secondary">
                         Search over 400,000 support services.
                     </div>}
-                    bannerName="homepage"
+                    bannerName="hand-and-person-with-heart"
                     hideLogoWhenNotABar={true}
                     taperColour="LighterGrey"
                 />
