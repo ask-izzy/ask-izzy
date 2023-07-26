@@ -13,8 +13,8 @@ export default ({
     type: "question",
     name: "demographics",
     question: "Do any of these apply to you?",
-    byline: "Select all that apply",
-    info: "All of your answers are private and anonymous.",
+    byline: "Pick the ones that are most important to you",
+    info: "This helps show services that might be a better match. Your answers are private and anonymous.",
     multipleChoice: true,
     possibleAnswers: {
         "Escaping family violence": {

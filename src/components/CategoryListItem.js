@@ -17,6 +17,8 @@ import { getServicesPath } from "@/src/utils/routing"
 import AreYouSafePersonalisation from "@/src/constants/personalisation-pages/AreYouSafe";
 import DemographicsIndigenous from "@/src/constants/personalisation-pages/DemographicsIndigenous";
 import DfvDemographics from "@/src/constants/personalisation-pages/DfvDemographics";
+import DemographicsAtsiCald from "@/src/constants/personalisation-pages/DemographicsAtsiCald";
+import DemographicsAtsiCaldLgbtiqa from "@/src/constants/personalisation-pages/DemographicsAtsiCaldLgbtiqa";
 
 type Props = {
     category: Category,
@@ -27,6 +29,8 @@ const PERSONALISATIONS_TO_CLEAR = [
     AreYouSafePersonalisation.name,
     DemographicsIndigenous.name,
     DfvDemographics.name,
+    DemographicsAtsiCald.name,
+    DemographicsAtsiCaldLgbtiqa.name,
 ]
 
 function CategoryListItem({category, router}: Props): ReactNode {

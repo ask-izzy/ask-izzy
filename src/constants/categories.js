@@ -15,6 +15,8 @@ import CounsellingSubcategories from "@/src/constants/personalisation-pages/Coun
 import DemographicsIndigenous from "@/src/constants/personalisation-pages/DemographicsIndigenous";
 import Demographics from "@/src/constants/personalisation-pages/Demographics";
 import DfvDemographics from "@/src/constants/personalisation-pages/DfvDemographics";
+import DemographicsAtsiCald from "@/src/constants/personalisation-pages/DemographicsAtsiCald";
+import DemographicsAtsiCaldLgbtiqa from "@/src/constants/personalisation-pages/DemographicsAtsiCaldLgbtiqa";
 import DFVSubcategories from "@/src/constants/personalisation-pages/DFVSubcategories";
 import EverydayNeedsSubcategories from "@/src/constants/personalisation-pages/EverydayNeedsSubcategories";
 import FoodSubcategories from "@/src/constants/personalisation-pages/FoodSubcategories";
@@ -152,6 +154,8 @@ const categories = [
             WhoIsLookingForHelpSupportAndCounselling,
             Location,
             DemographicsIndigenous,
+            DemographicsAtsiCald,
+            DemographicsAtsiCaldLgbtiqa,
         ],
         bannerName: "hands-and-person-with-heart",
     }): Category),
@@ -234,6 +238,8 @@ const categories = [
             WhoIsLookingForHelpHealth,
             Location,
             DemographicsIndigenous,
+            DemographicsAtsiCald,
+            DemographicsAtsiCaldLgbtiqa,
         ],
         bannerName: "hand-and-heart",
     }): Category),

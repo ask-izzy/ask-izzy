@@ -29,7 +29,7 @@ export function getPersonalisationPagesFromCategory(
 ): Array<PersonalisationPage> {
     return category.personalisation.filter(page => {
         if (typeof window !== "undefined") {
-            return !page.getShouldIncludePage || page.getShouldIncludePage()
+            return !page.getShouldIncludePage || page.getShouldIncludePage(category)
         }
         return true
     });

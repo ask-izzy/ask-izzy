@@ -1,0 +1,19 @@
+@use '../../../src/styles/mixins/colours';
+
+.PersonalisationSummaryPage {
+    .List {
+        @include colours.define(
+            'colour-primary',
+            'PersonalisationPage',
+            'colour-bg-standard-tint-2'
+        );
+
+        background-color: #{colours.get-static('colour-primary', 'PersonalisationPage')};
+        background-color: var(--colour-primary);
+    }
+
+    .loadingStatus {
+        padding: 100px;
+        text-align: center;
+    }
+}

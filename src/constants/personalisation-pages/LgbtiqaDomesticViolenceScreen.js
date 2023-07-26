@@ -5,6 +5,7 @@ import type {
     PersonalisationPage,
 } from "../../../flow/personalisation-page"
 import DfvDemographics from "./DfvDemographics";
+import DemographicsAtsiCaldLgbtiqa from "./DemographicsAtsiCaldLgbtiqa";
 import DomesticViolenceLink from "../../components/DomesticViolenceLink";
 import {
     getSavedPersonalisationAnswer,
@@ -18,10 +19,11 @@ export default ({
     baseTextBoxComponent: <DomesticViolenceLink />,
     noQuestionStepperStep: true,
     noQuestionStepperBreadcrumb: true,
-    shouldShowInSummary: false,
+    getShouldShowInSummary: () => false,
     getShouldIncludePage(): boolean {
         return Boolean(
-            getSavedPersonalisationAnswer(DfvDemographics)?.includes("LGBTIQA+")
+            getSavedPersonalisationAnswer(DfvDemographics)?.includes("LGBTIQA+") ||
+                getSavedPersonalisationAnswer(DemographicsAtsiCaldLgbtiqa)?.includes("LGBTIQA+")
         );
     },
     getDoneButtonLabel: () => "Continue to all services",

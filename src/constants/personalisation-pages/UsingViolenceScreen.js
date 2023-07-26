@@ -3,6 +3,7 @@ import * as React from "react";
 
 import DomesticViolenceLink from "../../components/DomesticViolenceLink";
 import DfvDemographics from "./DfvDemographics";
+import DemographicsAtsiCaldLgbtiqa from "./DemographicsAtsiCaldLgbtiqa";
 import {
     getSavedPersonalisationAnswer,
 } from "../../utils/personalisation"
@@ -14,14 +15,14 @@ export default ({
     title: "Using violence",
     baseTextBoxComponent: (<DomesticViolenceLink/>: React.Node),
 
-    shouldShowInSummary: false,
+    getShouldShowInSummary: (): boolean => false,
     noQuestionStepperStep: true,
     noQuestionStepperBreadcrumb: true,
 
     getDoneButtonLabel(): string {
         if (
-            getSavedPersonalisationAnswer(DfvDemographics)
-                ?.includes("LGBTIQA+")
+            getSavedPersonalisationAnswer(DfvDemographics)?.includes("LGBTIQA+") ||
+                getSavedPersonalisationAnswer(DemographicsAtsiCaldLgbtiqa)?.includes("LGBTIQA+")
         ) {
             return "Continue";
         }

@@ -2,18 +2,20 @@
 import type {
     Node as ReactNode,
 } from "react"
+
 import type { SearchQueryChanges } from "../src/iss/searchQueryBuilder";
 import BaseIcon from "../src/icons/BaseIcon"
+import Category from "@/src/constants/Category";
 
 type PersonalisationAnyPage = {|
     name: string,
     title: string,
     byline?: string,
     info?: string,
-    shouldShowInSummary?: boolean,
+    getShouldShowInSummary?: (category: ?Category) => boolean,
     noQuestionStepperBreadcrumb?: boolean,
     noQuestionStepperStep?: boolean,
-    getShouldIncludePage?: () => boolean,
+    getShouldIncludePage?: (category: ?Category) => boolean,
     summaryLabel?: string,
     summaryValue?: string,
     searchQueryChanges?: SearchQueryChanges | null,
