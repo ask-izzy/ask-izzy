@@ -9,7 +9,8 @@ export default ({
     question: "What issues are you dealing with?",
     possibleAnswers: {
         "Mental and emotional health": {
-            serviceTypes: ["Mental Health"],
+            serviceTypesRaw: ["Mental Health"],
+            $unset: ["serviceTypes"],
             term: [
                 "-\"coordinating bodies\"",
                 "\"mental health\"",
