@@ -50,7 +50,7 @@ Feature: Support and counselling personalisation flow generates the expected que
             ],
             "minimumShouldMatch": "30%",
             "showInAskIzzyHealth": true,
-            "serviceTypes": [
+            "serviceTypesRaw": [
                 "Mental Health"
             ]
         }
