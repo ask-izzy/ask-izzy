@@ -17,7 +17,7 @@ ARG HOME="/tmp/home"
 # Distribution image as normal.                                               #
 ###############################################################################
 
-FROM contyard.office.infoxchange.net.au/bullseye-nodejs16:latest as set-volume-permissions
+FROM node:16 as set-volume-permissions
 ARG UID_GID
 
 # hadolint ignore=DL3002
@@ -41,7 +41,7 @@ ENTRYPOINT exec bash -c 'for DIR_TO_SET_PERMISSIONS_ON in ${DIRS_TO_SET_PERMISSI
 # development and serving states.                                             #
 ###############################################################################
 
-FROM contyard.office.infoxchange.net.au/bullseye-nodejs16:latest as base
+FROM node:16 as base
 
 ARG UID_GID
 ARG HOME
@@ -56,9 +56,6 @@ ENV NODE_EXTRA_CA_CERTS=/etc/ssl/certs/ca-certificates.crt
 RUN mkdir /app && \
     ( [ -e "$HOME" ] || mkdir "$HOME" ) && \
     chown -R $UID_GID /app "$HOME" && \
-    # Install yarn
-    npm install -g yarn && \
-    yarn config set registry http://apt.office.infoxchange.net.au/npm && \
     # Install system dependences
     apt-get -y update && \
     apt-get -y --no-install-recommends install \

@@ -1,0 +1,45 @@
+name: 'Setup Docker Image'
+description: 'Build or reassemble from cache (if previously built) a docker image'
+inputs:
+  command:
+    description: 'The command to run using the built docker image'
+    required: true
+  additional-run-args:
+    description: 'Any additional args to pass to the docker run subcommand'
+  docker-path-to-copy-from:
+    description: 'If this is given the contents of the path will be copied to the host'
+    default: ''
+  host-path-to-copy-to:
+    description: 'The host path to copy the contents of the docker location specified in the docker-path-to-copy-from arg to'
+  build-args:
+    description: "Build args for docker build"
+runs:
+  using: "composite"
+  steps:
+    - id: setup-docker-image
+      name: Setup docker image
+      uses: ./.github/actions/setup-docker-image
+      with:
+        build-args: ${{ inputs.build-args }}
+
+    - name: Run docker
+      shell: bash
+      if: ${{ ! inputs.docker-path-to-copy-from }}
+      run: |
+        docker run --rm -t ${{ steps.setup-docker-image.outputs.image-name }} \
+          ${{ inputs.additional-run-args }} \
+          ${{ inputs.command }}
+
+    - name: Run docker with file extraction
+      shell: bash
+      if: ${{ inputs.docker-path-to-copy-from }}
+      run: |
+        CONTAINER_ID=$( \
+          docker create -t ${{ steps.setup-docker-image.outputs.image-name }} \
+            ${{ inputs.additional-run-args }} \
+            ${{ inputs.command }} \
+        )
+        docker start -a "$CONTAINER_ID" && exitCode=$? || exitCode=$?
+        docker cp "$CONTAINER_ID:${{ inputs.docker-path-to-copy-from }}" \
+          ${{ inputs.host-path-to-copy-to }} || true
+        exit $exitCode

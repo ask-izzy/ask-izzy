@@ -3,6 +3,7 @@ Feature: Alerts
     Scenario: National alerts are visible on the home page
         Given a fresh session
         When I visit /
+        And I click the "COVID19" collapsible section
         Then I should see the alerts
         -------------------------------------------
         Title               | Body
@@ -50,7 +51,7 @@ Feature: Alerts
         Title               | Body
         ===========================================
         A vic and qld*      |
-        COVID19 affecting*  | Services listed*
+        COVID19 affecting*  |
         The fox*            |
         Title is*           | Body is*
         -------------------------------------------
@@ -63,6 +64,7 @@ Feature: Alerts
         Given a fresh session
         And the area to search is "Perth, WA"
         When I visit /service/866464
+        And I click the button with ".AlertBannerButton" class name
         Then I should see the alerts
         -------------------------------------------
         Title               | Body
