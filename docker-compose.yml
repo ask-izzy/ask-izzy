@@ -5,6 +5,7 @@ services:
     build:
       context: .
       target: development
+    platform: linux/amd64
     environment:
       SITE_PROTOCOL: "http"
       SITE_DOMAIN: "localhost"
@@ -16,7 +17,4 @@ services:
       - "8000:8000"
     volumes:
       - .:/app
-      - yarn-cache:/tmp/home/.cache/yarn
-
-volumes:
-  yarn-cache:
+      - .cache:/tmp/home/.cache

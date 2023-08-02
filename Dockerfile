@@ -1,38 +1,6 @@
-ARG UID_GID=1000:1000
+ARG UID=1000
+ARG GID=1000
 ARG HOME="/tmp/home"
-
-###############################################################################
-# Set volume permissions                                                      #
-#                                                                             #
-# Since we run the image for Ask Izzy is designed not as root (for security   #
-# reasons), if we want to mount shared volumes into this container to write   #
-# to then those volumes will need to have file permissions that allow our     #
-# user write to them. However since the point of not running this container   #
-# as root is to not allow things like changing file permissions for files we  #
-# don't already have permission to modify then we can't simply set the        #
-# permissions of files in the volumes when the container is started if        #
-# needed. To get around this we create a separate image that runs as root     #
-# who's only purposes is to set the file permissions of mounted volumes.      #
-# This image should only have to be run once after which we can deploy the    #
-# Distribution image as normal.                                               #
-###############################################################################
-
-FROM node:16 as set-volume-permissions
-ARG UID_GID
-
-# hadolint ignore=DL3002
-USER root
-ENV UID_GID=$UID_GID
-
-ENV DIRS_TO_SET_PERMISSIONS_ON="/storage"
-
-# hadolint ignore=DL3025
-ENTRYPOINT exec bash -c 'for DIR_TO_SET_PERMISSIONS_ON in ${DIRS_TO_SET_PERMISSIONS_ON//,/$IFS}; do \
-        echo Setting volume file permissions on "$DIR_TO_SET_PERMISSIONS_ON"; \
-        chown -R $UID_GID "$DIR_TO_SET_PERMISSIONS_ON"; \
-        ls -hal "$DIR_TO_SET_PERMISSIONS_ON"; \
-    done'
-
 
 ###############################################################################
 # Prepare environment                                                         #
@@ -41,21 +9,21 @@ ENTRYPOINT exec bash -c 'for DIR_TO_SET_PERMISSIONS_ON in ${DIRS_TO_SET_PERMISSI
 # development and serving states.                                             #
 ###############################################################################
 
-FROM node:16 as base
+FROM --platform=linux/amd64 node:16 as base
 
-ARG UID_GID
+ARG UID
+ARG GID
 ARG HOME
-
-LABEL maintainer="developers@infoxchange.org"
-LABEL vendor="infoxchange.org"
 
 ENV DEBIAN_FRONTEND=noninteractive
 ENV HOME=$HOME
-ENV NODE_EXTRA_CA_CERTS=/etc/ssl/certs/ca-certificates.crt
 
-RUN mkdir /app && \
+RUN rm -f /etc/apt/apt.conf.d/docker-clean; echo 'Binary::apt::APT::Keep-Downloaded-Packages "true";' > /etc/apt/apt.conf.d/keep-cache
+RUN --mount=type=cache,target=/var/cache/apt,sharing=locked \
+  --mount=type=cache,target=/var/lib/apt,sharing=locked \
+    mkdir /app && \
     ( [ -e "$HOME" ] || mkdir "$HOME" ) && \
-    chown -R $UID_GID /app "$HOME" && \
+    chown -R $UID:$GID /app "$HOME" && \
     # Install system dependences
     apt-get -y update && \
     apt-get -y --no-install-recommends install \
@@ -63,15 +31,15 @@ RUN mkdir /app && \
         procps \
         # Used for open fd debugging
         lsof && \
-    apt-get clean && \
-    rm -rf /var/lib/apt/lists/*
+    mkdir /storage && \
+    chown $UID:$GID /storage
 
-USER $UID_GID
+USER $UID:$GID
 
 WORKDIR /app
 
 ENTRYPOINT ["yarn", "run"]
-VOLUME ["/static", "/storage"]
+VOLUME ["/storage"]
 EXPOSE 8000
 
 
@@ -82,15 +50,19 @@ EXPOSE 8000
 # development version of the app.                                             #
 ###############################################################################
 
-FROM base as development
-ARG UID_GID
+FROM --platform=linux/amd64 base as development
+ARG UID
+ARG GID
 
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 
 USER root
 
 # Install any packages needed for building/testing the app.
-RUN apt-get -y update && \
+RUN rm -f /etc/apt/apt.conf.d/docker-clean; echo 'Binary::apt::APT::Keep-Downloaded-Packages "true";' > /etc/apt/apt.conf.d/keep-cache
+RUN --mount=type=cache,target=/var/cache/apt,sharing=locked \
+    --mount=type=cache,target=/var/lib/apt,sharing=locked \
+    apt-get -y update && \
     apt-get -y --no-install-recommends install \
         curl \
         # Used by scripts/check-flow-annotations.sh & scripts/check-storybook-components.sh
@@ -102,8 +74,6 @@ RUN apt-get -y update && \
         libgtk-3-0 \
         # Used below for unpacking shellcheck program
         xz-utils && \
-    apt-get clean && \
-    rm -rf /var/lib/apt/lists/* && \
     # Install Hadolint
     curl -sSL -o /usr/bin/hadolint https://github.com/hadolint/hadolint/releases/latest/download/hadolint-Linux-x86_64 && \
     chmod +x /usr/bin/hadolint && \
@@ -112,34 +82,27 @@ RUN apt-get -y update && \
     curl -sSL "https://github.com/koalaman/shellcheck/releases/download/${SHELLCHECK_VERSION?}/shellcheck-${SHELLCHECK_VERSION?}.linux.x86_64.tar.xz" | \
         tar -xJv -C /tmp && \
     cp "/tmp/shellcheck-${SHELLCHECK_VERSION}/shellcheck" /usr/bin/ && \
-    rm -rf "/tmp/shellcheck-${SHELLCHECK_VERSION}"
+    rm -rf "/tmp/shellcheck-${SHELLCHECK_VERSION}" && \
+    mkdir -p /tmp/home/.cache/yarn && \
+    chown $UID:$GID /tmp/home /tmp/home/.cache /tmp/home/.cache/yarn
 
-USER $UID_GID
+USER $UID:$GID
 
-COPY ./package.json ./yarn.lock /app/
-RUN yarn install --network-timeout 100000 --frozen-lockfile && yarn cache clean --force
+COPY ./package.json ./yarn.lock ./
+RUN --mount=type=cache,target=/tmp/home/.cache/yarn,uid=$UID,gid=$GID,sharing=locked \
+    --mount=type=cache,target=/tmp/chromedriver,uid=$UID,gid=$GID,sharing=locked \
+    yarn install --network-timeout 100000 --frozen-lockfile
 
-# Copy in just the files need to build source to avoid cache invalidation from changes to unrelated files
-COPY --chown=$UID_GID ./components /app/components
-COPY --chown=$UID_GID ./src /app/src
-COPY --chown=$UID_GID ./scripts/run-with.js /app/scripts/
-COPY --chown=$UID_GID ./hooks /app/hooks
-COPY --chown=$UID_GID ./contexts /app/contexts
-COPY --chown=$UID_GID ./helpers /app/helpers
-COPY --chown=$UID_GID ./lib /app/lib
-COPY --chown=$UID_GID ./queries /app/queries
-COPY --chown=$UID_GID ./pages /app/pages
-COPY --chown=$UID_GID ./public/images/banners /app/public/images/banners
-COPY --chown=$UID_GID ./fixtures /app/fixtures
-COPY --chown=$UID_GID ./test/support/mock-cms /app/test/support/mock-cms/
-COPY --chown=$UID_GID ./test/support/mock-iss /app/test/support/mock-iss/
-COPY --chown=$UID_GID ./.env ./.env.test ./babel.config.json ./next.config.js /app/
+COPY --chown=$UID:$GID . .
+RUN mkdir /app/.next
 
 # Build Ask Izzy
-RUN yarn with --test-env --mocks build
+RUN --mount=type=cache,target=/app/.next/cache,uid=$UID,gid=$GID \
+    yarn with --test-env --mocks build && \
+    cp -r .next/cache /tmp/.next-cache
 
-# Copy in all remaining files not excluded by .gitignore
-COPY --chown=$UID_GID . /app
+# Save cache in image since we re-build at runtime to update any changed env vars
+RUN cp -r /tmp/.next-cache .next/cache && rm -rf /tmp/.next-cache
 
 # Note this essentially guarantees cache invalidation from this point for builds
 # of different versions.
@@ -156,39 +119,21 @@ CMD ["dev"]
 ###############################################################################
 
 FROM base as distribution
-ARG UID_GID
+ARG UID
+ARG GID
 
-COPY ./package.json ./yarn.lock /app/
-RUN yarn install --network-timeout 100000 --frozen-lockfile && yarn cache clean --force
+COPY ./package.json ./yarn.lock ./
+RUN --mount=type=cache,target=/tmp/home/.cache/yarn,uid=$UID,gid=$GID,sharing=locked \
+    --mount=type=cache,target=/tmp/chromedriver,uid=$UID,gid=$GID,sharing=locked \
+    yarn install --network-timeout 100000 --frozen-lockfile
 
-# Copy in just the files need to build source to avoid cache invalidation from changes to unrelated files
-COPY --chown=$UID_GID ./components /app/components
-COPY --chown=$UID_GID ./src /app/src
-COPY --chown=$UID_GID ./scripts/run-with.js /app/scripts/
-COPY --chown=$UID_GID ./hooks /app/hooks
-COPY --chown=$UID_GID ./contexts /app/contexts
-COPY --chown=$UID_GID ./helpers /app/helpers
-COPY --chown=$UID_GID ./lib /app/lib
-COPY --chown=$UID_GID ./queries /app/queries
-COPY --chown=$UID_GID ./pages /app/pages
-COPY --chown=$UID_GID ./.storybook /app/.storybook
-RUN mkdir -p /app/public/images && chown -R $UID_GID /app/public
-COPY --chown=$UID_GID ./public/images/banners /app/public/images/banners
-COPY --chown=$UID_GID ./public/images/ask-izzy-logo-single-line-purple.svg /app/public/images/ask-izzy-logo-single-line-purple.svg
-COPY --chown=$UID_GID ./fixtures /app/fixtures
-COPY --chown=$UID_GID ./test/support/mock-cms /app/test/support/mock-cms/
-COPY --chown=$UID_GID ./test/support/mock-iss /app/test/support/mock-iss/
-COPY --chown=$UID_GID ./.env ./.env.test ./babel.config.json ./jsconfig.json ./next.config.js /app/
+COPY --chown=$UID:$GID . .
+COPY --chown=$UID:$GID --from=development /app/.next .next
 
 # Upgrading next.js has forced the need to upgrade storybook. And as usual trying to make storybook work with flow.js is always
 # a major PITA. Since the typescript migrations is (hopefully just around the corner) rather than waste time trying to make it work
 # just disable storybook for now.
 # RUN yarn with --test-env --mocks build-storybook
-
-# Copy in all remaining files not excluded by .dockerignore
-COPY --chown=$UID_GID . /app
-
-RUN yarn with --test-env --mocks build
 
 ARG VERSION
 RUN echo "Tag: $VERSION" > ./public/VERSION.txt

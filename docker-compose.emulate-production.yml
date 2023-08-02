@@ -6,12 +6,11 @@ services:
       context: .
       args:
         - VERSION=emulated-production
+    platform: linux/amd64
     command: "deploy"
     depends_on:
       aws-ecs-api-mock:
         condition: service_healthy
-      set-volume-permissions:
-        condition: service_completed_successfully
     environment:
       SITE_PROTOCOL: "https"
       SITE_DOMAIN: "askizzy.org.au"
@@ -43,18 +42,13 @@ services:
 
   http-proxy:
     image: vimagick/tinyproxy
+    platform: linux/amd64
     command: sh -c "sed -i -e 's/^LogLevel.*/LogLevel Warning/' /etc/tinyproxy/tinyproxy.conf && tinyproxy -d"
     restart: unless-stopped
 
-  set-volume-permissions:
-    build:
-      context: .
-      target: set-volume-permissions
-    volumes:
-      - storage:/storage
-
   aws-ecs-api-mock:
     image: codfish/json-server:0.17.3
+    platform: linux/amd64
     command: ["bash", "-c", "echo '{\"task\": {\"Revision\": \"${FAKE_TASK_DEFINITION_REVISION}\"}}' > /app/db.json && npm run dev"]
     healthcheck:
       test: ["CMD", "node", "-e", "fetch('http://localhost')"]
