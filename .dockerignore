@@ -19,3 +19,6 @@ README.md
 docker-compose.yml
 docker-compose.*.yml
 docker-compose.*.yml.sample
+Dockerfile
+.cache
+.github
