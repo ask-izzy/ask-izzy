@@ -114,7 +114,7 @@ const serviceCommandsConcurrently = servicesToRun.length > 1 ?
     `concurrently ${servicesToRun.map(service => `'${service.command}'`).join(" ")}`
     : servicesToRun[0].command
 
-const exitInfo = spawnSync("/usr/bin/npx", [
+const exitInfo = spawnSync("/usr/local/bin/npx", [
     "start-server-and-test",
     serviceCommandsConcurrently,
     serviceStartupChecks.join("|"),

@@ -153,7 +153,7 @@ export default async function webDriverInstance(): Promise<typeof Webdriver.WebD
 async function waitForStorage(
     driver: typeof Webdriver.WebDriver,
 ): Promise<void> {
-    await gotoUrl(driver, "/");
+    await gotoUrl(driver, "/404");
     await driver.wait(
         () => {
             return driver.executeScript(() =>
@@ -180,7 +180,7 @@ export async function cleanDriverSession(
     await driver.executeScript(() => console.log("Clearing browsing session"))
     const url = await driver.getCurrentUrl()
     if (!url.includes("localhost")) {
-        await gotoUrl(driver, "/")
+        await gotoUrl(driver, "/404")
     }
     await waitForStorage(driver);
     await driver.removeAllScriptsBeforeLoad()
