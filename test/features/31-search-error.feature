@@ -13,5 +13,6 @@ Feature: Error information
         And I am not part of any relevant demographics
 
     Scenario: Search error
-        When I search for "elasticsearch unavailable" and press enter
+        When I visit /
+        And I search for "elasticsearch unavailable" and press enter
         Then I should see "Sorry, we weren't able to find any services matching your search for “elasticsearch unavailable”."

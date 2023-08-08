@@ -68,7 +68,7 @@ async function setLocation(location: string): Promise<void> {
         )
     }
 
-    await gotoUrl(this.driver, "/"); // go anywhere to start the session
+    await gotoUrl(this.driver, "/404", this.mochaState); // go anywhere to start the session
     await this.driver.executeScript((location) => {
         IzzyStorage.setSearchArea(location);
     }, location);

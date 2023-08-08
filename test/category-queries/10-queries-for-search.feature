@@ -5,7 +5,8 @@ Feature: Search personalisation flow generates the expected query
         And I need help for myself
 
     Scenario: Standard search
-        When I search for "housing help"
+        When I visit /
+        And I search for "housing help"
         And I click the "Search" button
         Then I should see "See all and edit"
         And the iss search request should be:

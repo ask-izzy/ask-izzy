@@ -46,7 +46,7 @@ Feature: Crisis Line
         And I search for "domestic violence"
         And I click the "Search" button
         And I click the "Skip" button
-        When I click the button with "Button tooltip-children-container" class name
+        When I click the button with ".tooltip-children-container" class name
         Then I should see "This call may not be free from mobiles. If you are ringing from a mobile you can ask to be called back"
 
     Scenario: Not see extra call information
