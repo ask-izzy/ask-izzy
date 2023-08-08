@@ -35,10 +35,6 @@ function App(appProps: AppProps): ReactNode {
     const { Component, pageProps, err } = appProps
     const router = useRouter()
 
-    if (process.env.NODE_ENV === "test") {
-        import("@/test/support/environment-setup")
-    }
-
     useEffect(() => {
         router.events.on("routeChangeStart", url => {
             addPageLoadDependencies(url, "render")
