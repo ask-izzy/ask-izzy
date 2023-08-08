@@ -3,7 +3,7 @@
 import * as React from "react";
 import {useState, useEffect} from "react";
 
-import isMounted from "@/hooks/useIsMounted"
+import useIsMounted from "@/hooks/useIsMounted"
 import StandardButton from "@/components/general/StandardButton"
 import Service from "@/src/iss/Service"
 import useToastMessage from "@/hooks/useToastMessage"
@@ -23,6 +23,7 @@ function ShareDirectlyOptions({
     const [nativeShareSupported, setNativeShareSupported] = useState(false)
     const [includeOtherDetails, setIncludeOtherDetails] = useState<boolean>(false)
     const {openToastMessage} = useToastMessage()
+    const isMounted = useIsMounted({rerenderAfterMount: true})
 
     const isPlural = services.length > 1
 
