@@ -32,6 +32,8 @@ async function seeAtsiFlags(): Promise<void> {
 }
 
 async function notSeeAtsiFlags(): Promise<void> {
+    this.mochaState.slow(this.driver.manage().getTimeouts().implicit + 1000)
+
     let exists = await this.driver.findElements(By.css(
         ".IndigenousServiceIcon"
     )).length > 0;
@@ -53,6 +55,8 @@ async function checkTransportTime(time: string): Promise<void> {
 }
 
 async function checkTransportTimesDontExist(): Promise<void> {
+    this.mochaState.slow(this.driver.manage().getTimeouts().implicit + 1000)
+
     const times = await await getTransportTimes(this.driver)
 
     assert(

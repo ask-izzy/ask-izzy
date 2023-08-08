@@ -39,7 +39,11 @@ let processFile = (file) => {
 
         scenarios(feature.scenarios, scenario => {
             before(async function(): Promise<void> {
-                await cleanDriverSession(driver);
+                // Since we now build pages on request when running the tests the first load of a page
+                // maybe very slow
+                this.slow(2 * 1000)
+                this.timeout(40 * 1000)
+                await cleanDriverSession(driver, this);
 
                 await driver.executeScriptBeforeLoad(() => {
                     console.log("------------- Loading Page -------------")
@@ -57,7 +61,8 @@ let processFile = (file) => {
             });
 
             steps(scenario.steps, async function(step, done) {
-                this.slow(6000)
+                this.slow(4 * 1000)
+                this.timeout(12 * 1000)
                 Yadda.createInstance(libraries, {
                     driver: driver,
                     mochaState: this,
@@ -166,7 +171,7 @@ let processFile = (file) => {
                 // Properly indent lines that are wider than the current
                 // terminal width
                 let remainingLine =
-                    `${indent}  ${format(entry.level.name)}: ${message}`
+                    `${indent}  ${format(entry.level.name)}: ${message.replace(/webpack-internal:\/\/\/\./, ".")}`
 
                 while (remainingLine.length > 0) {
                     console.log(
