@@ -6,4 +6,4 @@ import runTests from "./yadda";
 const projectDir = process.cwd()
 loadEnvConfig(projectDir)
 
-runTests("./test/features");
+runTests("./test/features-2");
