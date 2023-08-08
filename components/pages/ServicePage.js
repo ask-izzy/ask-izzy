@@ -9,15 +9,10 @@ import Head from "next/head"
 import ServicePane from "@/src/components/ServicePane";
 import Service from "@/src/iss/Service";
 import {getService} from "@/src/iss/load-services"
-import AppBar from "@/src/components/AppBar";
 import Link from "@/src/components/base/Link";
 import Loading from "@/src/icons/Loading";
-import ScreenReader from "@/src/components/ScreenReader";
 import {getFullPageTitle} from "@/src/utils";
-import {
-    addPageLoadDependencies,
-    closePageLoadDependencies,
-} from "@/src/utils/page-loading"
+import HeaderBar from "@/src/components/HeaderBar";
 
 const ServicePage = function(): React.Node {
     const [service, setService] = useState<Service | null>(null)
@@ -48,31 +43,31 @@ const ServicePage = function(): React.Node {
         setService(null);
 
         try {
-            addPageLoadDependencies(
-                router.asPath,
-                `requestService-${serviceId}`
-            )
             setService(
                 await getService(serviceId)
             );
         } catch (error) {
             setErrorGettingService(error)
         }
-
-        closePageLoadDependencies(
-            router.asPath,
-            `requestService-${serviceId}`
-        )
     }
 
-    if (!service) {
-        return (
-            <div className="ServicePage">
-                <AppBar
-                    transition={false}
-                />
-                <div className="ServicePane">
-                    <main aria-label="Loading service details">
+    return (
+        <div className="ServicePage">
+            <Head>
+                <title>
+                    { getFullPageTitle(service?.name || "", router) }
+                </title>
+            </Head>
+            <HeaderBar
+                className="serviceDetailsHeader"
+                primaryText={service ? service.name : ""}
+                secondaryText={service ? service.site.name : undefined}
+                bannerName="hands-and-house"
+            />
+            <div className="ServicePane">
+                {service ?
+                    <ServicePane service={service}/>
+                    : <main aria-label="Loading service details">
                         {
                             errorGettingService ?
                                 <div className="error">
@@ -94,28 +89,8 @@ const ServicePage = function(): React.Node {
                                 </div>
                         }
                     </main>
-                </div>
+                }
             </div>
-        );
-    }
-    return (
-        <div className="ServicePage">
-            <ScreenReader>
-                <p aria-live="polite">
-                    {service.name}
-                </p>
-            </ScreenReader>
-            <Head>
-                <title>
-                    {
-                        getFullPageTitle(
-                            service?.name || "",
-                            router
-                        )
-                    }
-                </title>
-            </Head>
-            <ServicePane service={service}/>
         </div>
     );
 }

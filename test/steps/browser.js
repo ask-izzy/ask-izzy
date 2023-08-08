@@ -94,22 +94,23 @@ module.exports.documentReady = async function documentReady(
     driver: Webdriver.WebDriver
 ): Promise<boolean> {
     const result = await driver.executeAsyncScript((callback) => {
+        console.info("Waiting for document to be ready")
         const intervalId = setInterval(() => {
-            // Internal page
             if (window.location.hostname === "localhost") {
-                if (window.waitTillPageLoaded) {
-                    clearInterval(intervalId)
-                    window.waitTillPageLoaded()
-                        .then(() => callback())
+                // Is internal page
+                if (!window.pageFinishedInitialRender) {
+                    return
                 }
-
-            // External page
             } else {
-                if (document.readyState === "complete") {
-                    clearInterval(intervalId)
-                    callback()
+                // Is external page
+                if (document.readyState !== "complete") {
+                    return
                 }
             }
+
+            clearInterval(intervalId)
+            console.info("Document ready")
+            callback()
         }, 10);
 
         setTimeout(
@@ -138,10 +139,18 @@ module.exports.visitUrl = async function visitUrl(
 
 async function clickLink(linkText: string) {
     await clickElementWithText(this.driver, linkText, "a")
+    // Wait just long enough that useTrackInitialRenderStatus() will have had a chance to
+    // update window.pageFinishedInitialRender
+    await new Promise(resolve => setTimeout(resolve, 10))
+    await module.exports.documentReady(this.driver)
 }
 
 async function clickLinkWithSubstring(linkText: string) {
     await clickElementWithTextSubstring(this.driver, linkText, "a")
+    // Wait just long enough that useTrackInitialRenderStatus() will have had a chance to
+    // update window.pageFinishedInitialRender
+    await new Promise(resolve => setTimeout(resolve, 10))
+    await module.exports.documentReady(this.driver)
 }
 
 async function clickButton(buttonText: string) {

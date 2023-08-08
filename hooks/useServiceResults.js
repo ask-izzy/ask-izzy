@@ -19,10 +19,6 @@ import type {SearchQuery, SearchQueryModifier}
 from "@/src/iss/searchQueryBuilder"
 import * as gtm from "@/src/google-tag-manager";
 import {attachTransportTimes} from "@/src/iss/travelTimes"
-import {
-    addPageLoadDependencies,
-    closePageLoadDependencies,
-} from "@/src/utils/page-loading"
 import storage from "@/src/storage";
 import type {SortType} from "@/src/components/base/Dropdown"
 import type {travelTimesStatus as travelTimesStatusType} from "@/src/hooks/useTravelTimesUpdater";
@@ -105,7 +101,7 @@ export default (router: NextRouter): UseServiceResults => {
         return categoryFromRouter
     }
 
-    function initNewSearch(): void {
+    async function initNewSearch(): Promise<void> {
         setLocationFromUrl(router)
 
         const pathWithPersonalisationIfNeeded =
@@ -136,11 +132,11 @@ export default (router: NextRouter): UseServiceResults => {
             // since search already exists we probably don't need to load the first page
             // but try to anyway in case it hasn't been loaded and importantly to set
             // the loading state to loaded if it has
-            loadFirstPage()
+            await loadFirstPage()
         }
     }
 
-    function loadFirstPage() {
+    async function loadFirstPage() {
         if (!search) {
             throw Error("loadFirstPage() called before search query is created")
         }
@@ -151,7 +147,7 @@ export default (router: NextRouter): UseServiceResults => {
             setSearchResults(search.loadedServices)
             setSearchError(null)
         } else {
-            loadNextSearchPage()
+            await loadNextSearchPage()
         }
     }
 
@@ -159,10 +155,6 @@ export default (router: NextRouter): UseServiceResults => {
         if (searchStatus === "all loaded" || !search) {
             return
         }
-        addPageLoadDependencies(
-            router.asPath,
-            `requestServices`
-        )
 
         try {
             setSearchStatus("loading")
@@ -175,11 +167,6 @@ export default (router: NextRouter): UseServiceResults => {
             )
             console.error(error)
             return
-        } finally {
-            closePageLoadDependencies(
-                router.asPath,
-                `requestServices`
-            )
         }
 
         if (queryChangedSinceLastFetch(search)) {

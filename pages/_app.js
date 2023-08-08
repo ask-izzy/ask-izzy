@@ -17,33 +17,23 @@ import {ServiceResultsProvider} from "@/contexts/service-results-context";
 import {ToastMessageProvider} from "@/contexts/toast-message-context";
 import ToastMessage from "@/src/components/ToastMessage"
 import { getFullPageTitle } from "@/src/utils";
-import "@/src/utils/page-loading"
 import apolloClient from "@/src/utils/apolloClient";
 import usePageViewAnalytics from "@/hooks/usePageViewAnalytics";
 import useFocusOnHeader from "@/hooks/useFocusOnHeader";
 import DebugColours from "@/src/components/DebugColours"
 import DebugModeOffSwitch from "@/src/components/debug/DebugModeOffSwitch"
-import {
-    addPageLoadDependencies,
-    closePageLoadDependencies,
-} from "@/src/utils/page-loading"
 import "@/src/analytics"
 import * as gtm from "@/src/google-tag-manager";
 import storage from "@/src/storage";
+import useTrackInitialRenderStatus from "@/hooks/useTrackInitialRenderStatus";
 
 function App(appProps: AppProps): ReactNode {
     const { Component, pageProps, err } = appProps
     const router = useRouter()
 
+    useTrackInitialRenderStatus()
+
     useEffect(() => {
-        router.events.on("routeChangeStart", url => {
-            addPageLoadDependencies(url, "render")
-        })
-
-        router.events.on("routeChangeComplete", url => {
-            closePageLoadDependencies(url, "render")
-        })
-
         router.events.on("routeChangeError", (error, url) => {
             if (!error.cancelled) {
                 Sentry.captureException(
@@ -53,7 +43,6 @@ function App(appProps: AppProps): ReactNode {
                     }
                 )
             }
-            closePageLoadDependencies(url, "render")
         })
 
         // Allow typography.com to record the hit for licencing

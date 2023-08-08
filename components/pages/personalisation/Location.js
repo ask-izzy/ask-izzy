@@ -35,10 +35,6 @@ import type {
 import {
     getBannerName,
 } from "@/src/utils/personalisation";
-import {
-    addPageLoadDependencies,
-    closePageLoadDependencies,
-} from "@/src/utils/page-loading"
 import Category from "@/src/constants/Category"
 
 type LocationType = {|name: string|} | Geolocation
@@ -141,22 +137,12 @@ function Location({router, details}: Props): ReactNode {
 
     function triggerAutocomplete(newLocationNameInput: string): void {
         if (newLocationNameInput.length < 1) {
-            if (gettingAutocompletionsInProgress) {
-                closePageLoadDependencies(
-                    router.asPath,
-                    "autocompleteSuggestionsLoad"
-                )
-            }
             setAutocompletions([])
             setGettingAutocompletionsInProgress(false)
             return
         }
         setGettingAutocompletionsInProgress(true)
 
-        addPageLoadDependencies(
-            router.asPath,
-            "autocompleteSuggestionsLoad"
-        )
         getAutocompletionSuggestions(newLocationNameInput)
     }
 
@@ -196,10 +182,6 @@ function Location({router, details}: Props): ReactNode {
             }
 
             setGettingAutocompletionsInProgress(false)
-            closePageLoadDependencies(
-                router.asPath,
-                "autocompleteSuggestionsLoad"
-            )
         },
         500,
         true
