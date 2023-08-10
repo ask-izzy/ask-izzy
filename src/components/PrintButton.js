@@ -35,8 +35,8 @@ function PrintButton({
                     <Button
                         className="print-component-button"
                         analyticsEvent={{
-                            event: "Action Triggered - Share Services Opened",
-                            eventAction: "Share services opened",
+                            event: "Action Triggered - Page Printed",
+                            eventAction: "Page printed",
                             eventLabel: null,
                         }}
                     >
