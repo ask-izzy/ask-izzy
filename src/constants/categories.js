@@ -312,6 +312,7 @@ const categories = [
             if (isDAFSearch) {
                 return {
                     term: [DAFSearchTerm || "disability"],
+                    catchment: "true",
                     $push: {
                         serviceTypesRaw: "disability advocacy",
                     },
