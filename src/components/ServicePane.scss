@@ -21,8 +21,11 @@
     .row {
         width: 100%;
         display: grid;
+        grid-template-columns: minmax(0, 1fr);
 
         @media ($viewport-is-wide) {
+            grid-template-columns: minmax(0, 1fr) minmax(0, 27em);
+            grid-template-rows: min-content min-content 1fr;
             grid-template-areas:
                 'left-column right-column'
                 'left-column right-column'

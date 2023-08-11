@@ -5,8 +5,7 @@
     padding: 15px;
     padding-top: 0;
     padding-bottom: 7px;
-    background-color: #{colours.get-static('raw-colour-pure-white')};
-    background-color: var(--raw-colour-pure-white);
+    overflow-wrap: break-word;
 
     @media ($viewport-is-wide) {
         margin-top: 15px;
