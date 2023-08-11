@@ -8,7 +8,7 @@
     background-color: #{colours.get-static('raw-colour-pure-white')};
     background-color: var(--raw-colour-pure-white);
 
-    @media ($tablet) {
+    @media ($viewport-is-wide) {
         margin-top: 15px;
 
         .BoxedText-container {

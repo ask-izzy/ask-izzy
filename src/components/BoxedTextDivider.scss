@@ -12,7 +12,7 @@
     }
 }
 
-@media ($tablet) {
+@media ($viewport-is-wide) {
     .BoxedTextDivider {
         display: none;
     }

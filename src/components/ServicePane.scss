@@ -22,8 +22,7 @@
         width: 100%;
         display: grid;
 
-        @media ($tablet) {
-            grid-template-columns: 1fr 1fr;
+        @media ($viewport-is-wide) {
             grid-template-areas:
                 'left-column right-column'
                 'left-column right-column'
