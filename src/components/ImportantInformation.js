@@ -18,7 +18,7 @@ function ImportantInformation({
         <div>
             {
                 object.intake_info || object.intake_point ?
-                    <div className="Feedback">
+                    <div className="ImportantInformation">
                         <Spacer />
                         <b>Important Information</b>
                         <FormatText>
