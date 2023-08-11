@@ -5,11 +5,11 @@ import React from "react"
 import Service from "../iss/Service"
 import Spacer from "./Spacer"
 
-type Props = {
+type Props = {|
     object: Service,
     compact?: boolean,
     withSpacer?: boolean,
-}
+|}
 
 function Ndis({
     object,

@@ -222,10 +222,9 @@ function ServicePane({service}: Props): ReactNode {
                                 withSpacer={true}
                             />
                             <Ndis
-                                className="ndis"
                                 compact={false}
                                 object={service}
-                                spacer={true}
+                                withSpacer={true}
                             />
                             <Address
                                 location={service.location}

@@ -77,7 +77,6 @@ function ResultListItem({
                     <div className="site_name">
                         {service.site.name}
                         <Ndis
-                            className="ndis"
                             compact={true}
                             object={service}
                         />
