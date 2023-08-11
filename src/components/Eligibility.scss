@@ -18,5 +18,9 @@
         // all of the default styling that the browsers supply for lists.
         list-style: initial;
         margin: 1em 0;
+
+        li {
+            margin: 1rem 0;
+        }
     }
 }

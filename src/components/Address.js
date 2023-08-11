@@ -8,7 +8,7 @@ import ScreenReader from "./ScreenReader";
 import AddressLocation from "../iss/AddressLocation";
 import Spacer from "./Spacer";
 
-import UrlsToLinks from "./UrlsToLink"
+import FormatText from "./FormatText"
 
 type Props = {
     location: AddressLocation,
@@ -71,9 +71,9 @@ class Address extends React.Component<Props, void> {
                     {" "}
                     {location.details && !this.props.singleLineAddress &&
                         <div className="details">
-                            <UrlsToLinks>
+                            <FormatText>
                                 {location.details}
-                            </UrlsToLinks>
+                            </FormatText>
                         </div>
                     }
                 </div>

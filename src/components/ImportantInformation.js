@@ -5,7 +5,7 @@ import type {Node as ReactNode} from "react"
 
 import Service from "../iss/Service"
 import Spacer from "./Spacer"
-import UrlsToLinks from "./UrlsToLink"
+import FormatText from "./FormatText"
 
 type Props = {
     object: Service,
@@ -21,12 +21,10 @@ function ImportantInformation({
                     <div className="Feedback">
                         <Spacer />
                         <b>Important Information</b>
-                        <UrlsToLinks>
+                        <FormatText>
                             {object.intake_info}
-                        </UrlsToLinks>
-                        <UrlsToLinks>
                             {object.intake_point}
-                        </UrlsToLinks>
+                        </FormatText>
                     </div>
                     : <div />
             }

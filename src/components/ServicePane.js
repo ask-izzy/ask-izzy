@@ -29,7 +29,7 @@ import icons from "../icons";
 import ShareButton from "../components/ShareButton"
 import Storage from "../storage";
 import ScreenReader from "./ScreenReader";
-import UrlsToLinks from "./UrlsToLink"
+import FormatText from "./FormatText"
 import {getSiblingServices} from "../iss/load-services"
 import {MobileDetect} from "../effects/MobileDetect";
 type Props = {
@@ -117,7 +117,7 @@ function ServicePane({service}: Props): ReactNode {
         let description = service
             .descriptionSentences.map(
                 (sentence, idx) =>
-                    <UrlsToLinks key={idx}>{sentence}</UrlsToLinks>
+                    <FormatText key={idx}>{sentence}</FormatText>
             )
 
         if (service.descriptionRemainder.length > 0) {
