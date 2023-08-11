@@ -13,19 +13,25 @@ type Props = {
 function MyListButton({
     hasTextDescription = false,
 }: Props): ReactElement<typeof Link> {
-    const {myListServices} = useMyList()
+    const {myListCount} = useMyList()
+
+    const displayCount = typeof myListCount === "undefined" ?
+        ""
+        : myListCount < 100 ?
+            myListCount
+            : "99+"
 
     return (
         <Link className="MyListButton"
             to="/my-list"
-            aria-label={`MyList, ${myListServices.length} items saved`}
+            aria-label={`MyList, ${displayCount} items saved`}
         >
             <div className="list-button">
                 <MyList />
             </div>
             <span className="title">My List</span>
             <div className="my-list-count">
-                {myListServices.length < 100 ? myListServices.length : "99+"}
+                {displayCount}
             </div>
         </Link>
     )

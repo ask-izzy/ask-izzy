@@ -9,6 +9,7 @@ type Context = {
     myList: Array<Service>,
     setMyList: (Array<Service>) => void,
     isLoading: boolean,
+    myListCount: number | void,
 }
 
 const MyListContext: React$Context<Context> = createContext<Context>(
@@ -16,6 +17,7 @@ const MyListContext: React$Context<Context> = createContext<Context>(
         myList: [],
         setMyList: () => {},
         isLoading: true,
+        myListCount: undefined,
     }
 )
 
@@ -29,6 +31,9 @@ export const MyListProvider = (
 ): ReactNode => {
     const [myList, setMyList] = useState<Array<Service>>([])
     const [isLoading, setIsLoading] = useState<boolean>(true)
+    const [myListCount, setMyListCount] = useState<number | void>(undefined)
+
+    useEffect(() => setMyListCount(myList.length), [myList])
     
     const previousJsonStorageObj = "my-list-services"
     const arrayStorage = "my-list-services-array"
@@ -41,6 +46,7 @@ export const MyListProvider = (
 
         var servicesIdArray = storage.getArray(arrayStorage)
         var servicesArray = []
+        setMyListCount(servicesIdArray.length)
 
         // transform previous My List storage system(object) into new My List storage system(array)
         const previousServicesObject = storage.getJSON(previousJsonStorageObj)
@@ -89,6 +95,7 @@ export const MyListProvider = (
         myList,
         setMyList: setMyListWrapper,
         isLoading,
+        myListCount,
     }
     return (
         <MyListContext.Provider value={context}>
