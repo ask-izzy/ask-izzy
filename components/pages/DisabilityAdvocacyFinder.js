@@ -91,8 +91,7 @@ function DisabilityAdvocacyFinder(): ReactNode {
                     <strong>What kind of advocacy are you looking for?</strong>
                     <br />
                     <div className="de-emphasised">
-                        For example: 'NDIS Appeals' or 'Disability Royal
-                        Commission'
+                        For example: 'NDIS Appeals'
                     </div>
                     <SearchBar
                         placeholder="Search advocate type"
