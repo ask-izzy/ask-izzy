@@ -10,6 +10,8 @@ inputs:
     description: 'Whether or not to load the image after creation'
     required: true
     default: true
+  target:
+    description: 'The build step target of the docker image'
   build-args:
     description: "Build args for docker build"
 
@@ -28,7 +30,7 @@ runs:
       uses: docker/build-push-action@v4
       with:
         context: .
-        target: development
+        target: ${{ inputs.target }}
         tags: ${{ inputs.image-name }}:latest
         load: ${{ inputs.load-image }}
         cache-from: type=gha

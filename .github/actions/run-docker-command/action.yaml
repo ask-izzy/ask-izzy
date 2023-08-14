@@ -4,6 +4,8 @@ inputs:
   command:
     description: 'The command to run using the built docker image'
     required: true
+  target:
+    description: 'The build step target of the docker image'
   additional-run-args:
     description: 'Any additional args to pass to the docker run subcommand'
   docker-path-to-copy-from:
@@ -20,6 +22,7 @@ runs:
       name: Setup docker image
       uses: ./.github/actions/setup-docker-image
       with:
+        target: ${{ inputs.target }}
         build-args: ${{ inputs.build-args }}
 
     - name: Run docker
