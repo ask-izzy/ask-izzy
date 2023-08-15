@@ -123,7 +123,7 @@ jobs:
       command: test-mocha-unit
 
   deploy:
-    name: Deploy
+    name: Deploy - Push image to ECR
     uses: infoxchange/github-ci/.github/workflows/push-docker-image-to-ecr.yaml@main
     needs:
       - build-distribution
