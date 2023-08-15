@@ -30,7 +30,7 @@ jobs:
         with:
           target: ${{ inputs.image-target }}
           build-args: |
-            APP_VERSION=${{ inputs.app-version }}
+            APP_VERSION=${{ steps.get-app-version.outputs.app-version }}
 
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v2
@@ -47,8 +47,8 @@ jobs:
         env:
           ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
         run: |
-          docker tag ${{ steps.load-docker-image.outputs.image-name }}:latest $ECR_REGISTRY/${{ inputs.ecr-image-name }}:${{ steps.load-docker-image.outputs.app-version }}
-          docker push $ECR_REGISTRY/${{ inputs.ecr-image-name }}:${{ steps.load-docker-image.outputs.app-version }}
+          docker tag ${{ steps.load-docker-image.outputs.image-name }}:latest $ECR_REGISTRY/${{ inputs.ecr-image-name }}:${{ steps.get-app-version.outputs.app-version }}
+          docker push $ECR_REGISTRY/${{ inputs.ecr-image-name }}:${{ steps.get-app-version.outputs.app-version }}
 
       - name: Create image pushed notice
-        run: 'echo "::notice title=Image has been pushed to ECR::Image tag: ${{ steps.load-docker-image.outputs.app-version }}"'
+        run: 'echo "::notice title=Image has been pushed to ECR::Image tag: ${{ steps.get-app-version.outputs.app-version }}"'
