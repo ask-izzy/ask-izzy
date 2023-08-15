@@ -6,20 +6,20 @@ on:
 jobs:
   build-development:
     name: Build - Development
-    uses: infoxchange/github-ci/workflows/build-docker-image.yaml@main
+    uses: infoxchange/github-ci/.github/workflows/build-docker-image.yaml@main
     with:
       image-target: development
 
   build-distribution:
     name: Build - Distribution
-    uses: infoxchange/github-ci/workflows/build-docker-image.yaml@main
+    uses: infoxchange/github-ci/.github/workflows/build-docker-image.yaml@main
     needs: build-development
     with:
       image-target: distribution
 
   lint-eslint:
     name: Lint - ESLint
-    uses: infoxchange/github-ci/workflows/run-in-docker.yaml@main
+    uses: infoxchange/github-ci/.github/workflows/run-in-docker.yaml@main
     needs: build-development
     with:
       image-target: development
@@ -27,7 +27,7 @@ jobs:
 
   lint-flow:
     name: Lint - Flow
-    uses: infoxchange/github-ci/workflows/run-in-docker.yaml@main
+    uses: infoxchange/github-ci/.github/workflows/run-in-docker.yaml@main
     needs: build-development
     with:
       image-target: development
@@ -35,7 +35,7 @@ jobs:
 
   lint-stylelint:
     name: Lint - Stylelint
-    uses: infoxchange/github-ci/workflows/run-in-docker.yaml@main
+    uses: infoxchange/github-ci/.github/workflows/run-in-docker.yaml@main
     needs: build-development
     with:
       image-target: development
@@ -43,7 +43,7 @@ jobs:
 
   lint-jsonlint:
     name: Lint - JSON Lint
-    uses: infoxchange/github-ci/workflows/run-in-docker.yaml@main
+    uses: infoxchange/github-ci/.github/workflows/run-in-docker.yaml@main
     needs: build-development
     with:
       image-target: development
@@ -51,7 +51,7 @@ jobs:
 
   lint-hadolint:
     name: Lint - Hadolint
-    uses: infoxchange/github-ci/workflows/run-in-docker.yaml@main
+    uses: infoxchange/github-ci/.github/workflows/run-in-docker.yaml@main
     needs: build-development
     with:
       image-target: development
@@ -60,7 +60,7 @@ jobs:
 
   lint-shellcheck:
     name: Lint - Shellcheck
-    uses: infoxchange/github-ci/workflows/run-in-docker.yaml@main
+    uses: infoxchange/github-ci/.github/workflows/run-in-docker.yaml@main
     needs: build-development
     with:
       image-target: development
@@ -68,7 +68,7 @@ jobs:
 
   lint-storybook-components:
     name: Lint - Storybook components check
-    uses: infoxchange/github-ci/workflows/run-in-docker.yaml@main
+    uses: infoxchange/github-ci/.github/workflows/run-in-docker.yaml@main
     needs: build-development
     with:
       image-target: development
@@ -76,7 +76,7 @@ jobs:
 
   test-mocha-personalisation:
     name: Test - Mocha personalisation
-    uses: infoxchange/github-ci/workflows/run-in-docker-with-possible-artifact.yaml@main
+    uses: infoxchange/github-ci/.github/workflows/run-in-docker-with-possible-artifact.yaml@main
     needs: build-development
     with:
       image-target: development
@@ -86,7 +86,7 @@ jobs:
 
   test-mocha-category-queries:
     name: Test - Mocha category queries
-    uses: infoxchange/github-ci/workflows/run-in-docker-with-possible-artifact.yaml@main
+    uses: infoxchange/github-ci/.github/workflows/run-in-docker-with-possible-artifact.yaml@main
     needs: build-development
     with:
       image-target: development
@@ -96,7 +96,7 @@ jobs:
 
   test-mocha-features:
     name: Test - Mocha features
-    uses: infoxchange/github-ci/workflows/run-in-docker-with-possible-artifact.yaml@main
+    uses: infoxchange/github-ci/.github/workflows/run-in-docker-with-possible-artifact.yaml@main
     needs: build-development
     with:
       image-target: development
@@ -106,7 +106,7 @@ jobs:
 
   test-mocha-maps:
     name: Test - Mocha maps
-    uses: infoxchange/github-ci/workflows/run-in-docker-with-possible-artifact.yaml@main
+    uses: infoxchange/github-ci/.github/workflows/run-in-docker-with-possible-artifact.yaml@main
     needs: build-development
     with:
       image-target: development
@@ -116,7 +116,7 @@ jobs:
 
   test-mocha-unit:
     name: Test - Mocha unit
-    uses: infoxchange/github-ci/workflows/run-in-docker.yaml@main
+    uses: infoxchange/github-ci/.github/workflows/run-in-docker.yaml@main
     needs: build-development
     with:
       image-target: development
@@ -124,7 +124,7 @@ jobs:
 
   deploy:
     name: Deploy
-    uses: infoxchange/github-ci/workflows/push-docker-image-to-ecr.yaml@main
+    uses: infoxchange/github-ci/.github/workflows/push-docker-image-to-ecr.yaml@main
     needs:
       - build-distribution
       - lint-eslint
