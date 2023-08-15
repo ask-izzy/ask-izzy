@@ -1,0 +1,15 @@
+name: 'Setup Docker Image'
+description: 'Build or reassemble from cache (if previously built) a docker image'
+
+outputs:
+  image-name:
+    description: "The name of the created image"
+    value: ${{ steps.get-app-version.outputs.image-name }}
+
+runs:
+  using: "composite"
+  steps:
+    - name: Get app version
+      id: get-app-version
+      shell: bash
+      run: echo "app-version=${{ github.ref_name }}-$(git rev-parse --short HEAD)" >> $GITHUB_OUTPUT

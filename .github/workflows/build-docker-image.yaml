@@ -1,0 +1,41 @@
+name: Build docker image to ensure all steps exist in the cache
+
+on:
+  workflow_call:
+    inputs:
+      image-target:
+        type: string
+    outputs:
+      image-name:
+        description: 'The name of the created image'
+        value: ${{ steps.build-docker-image.outputs.image-name }}
+      app-version:
+        value: ${{ jobs.get-app-version.outputs.app-version }}
+
+jobs:
+  build-docker-image:
+    name: Build - docker image
+    runs-on: ubuntu-latest
+    outputs:
+      app-version: ${{ steps.get-app-version.outputs.app-version }}
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Get app version
+        id: get-app-version
+        uses: ./.github/actions/get-app-version
+
+      - name: Build docker image
+        id: build-docker-image
+        uses: ./.github/actions/setup-docker-image
+        with:
+          load-image: false
+          target: ${{ inputs.image-target }}
+          build-args: |
+            APP_VERSION=${{ steps.get-app-version.outputs.app-version }}
+
+      # - id: get-app-version
+      #   name: Get image name
+      #   shell: bash
+      #   run: echo "image-name=${{ steps.build-docker-image.outputs.image-name }}" >> $GITHUB_OUTPUT

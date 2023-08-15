@@ -3,289 +3,128 @@ name: CI
 on:
   push:
 
-env:
-  ECR_IMAGE_NAME: ask_izzy
-  CI_IMAGE_NAME_DEVELOPMENT: development
-  CI_IMAGE_NAME_DISTRIBUTION: distribution
-
 jobs:
   build-development:
-    name: Build - development image
-    runs-on: ubuntu-latest
-    outputs:
-      version: ${{ steps.get-version.outputs.version }}
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v3
-
-      - id: get-version
-        name: Get version
-        shell: bash
-        run: echo "version=${{ github.ref_name }}-$(git rev-parse --short HEAD)" >> $GITHUB_OUTPUT
-
-      - name: Build docker image
-        uses: ./.github/actions/setup-docker-image
-        with:
-          load-image: false
-          target: ${{ env.CI_IMAGE_NAME_DEVELOPMENT }}
-          build-args: |
-            VERSION=${{ steps.get-version.outputs.version }}
+    name: Build - development docker image
+    uses: ./.github/workflows/build-docker-image.yaml
+    with:
+      image-target: development
 
   build-distribution:
-    name: Build - distribution image
-    runs-on: ubuntu-latest
-    needs:
-      - build-development
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v3
-
-      - name: Build docker image
-        uses: ./.github/actions/setup-docker-image
-        with:
-          load-image: false
-          target: ${{ env.CI_IMAGE_NAME_DISTRIBUTION }}
-          build-args: |
-            VERSION=${{ needs.build-development.outputs.version }}
+    name: Build - distribution docker image
+    uses: ./.github/workflows/build-docker-image.yaml
+    needs: build-development
+    with:
+      target: distribution
 
   lint-eslint:
     name: Lint - ESLint
-    runs-on: ubuntu-latest
+    uses: ./.github/workflows/run-in-docker.yaml
     needs: build-development
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v3
-
-      - name: Run ESLint
-        uses: ./.github/actions/run-docker-command
-        with:
-          command: lint-eslint
-          target: ${{ env.CI_IMAGE_NAME_DEVELOPMENT }}
-          build-args: |
-            VERSION=${{ needs.build-development.outputs.version }}
+    with:
+      image-target: development
+      command: lint-eslint
 
   lint-flow:
     name: Lint - Flow
-    runs-on: ubuntu-latest
+    uses: ./.github/workflows/run-in-docker.yaml
     needs: build-development
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v3
-
-      - name: Run Flow
-        uses: ./.github/actions/run-docker-command
-        with:
-          command: lint-flow
-          target: ${{ env.CI_IMAGE_NAME_DEVELOPMENT }}
-          build-args: |
-            VERSION=${{ needs.build-development.outputs.version }}
+    with:
+      image-target: development
+      command: lint-flow
 
   lint-stylelint:
     name: Lint - Stylelint
-    runs-on: ubuntu-latest
+    uses: ./.github/workflows/run-in-docker.yaml
     needs: build-development
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v3
-
-      - name: Run Stylelint
-        uses: ./.github/actions/run-docker-command
-        with:
-          command: lint-stylelint
-          target: ${{ env.CI_IMAGE_NAME_DEVELOPMENT }}
-          build-args: |
-            VERSION=${{ needs.build-development.outputs.version }}
+    with:
+      image-target: development
+      command: lint-stylelint
 
   lint-jsonlint:
     name: Lint - JSON Lint
-    runs-on: ubuntu-latest
+    uses: ./.github/workflows/run-in-docker.yaml
     needs: build-development
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v3
-
-      - name: Run JSON Lint
-        uses: ./.github/actions/run-docker-command
-        with:
-          command: lint-jsonlint
-          target: ${{ env.CI_IMAGE_NAME_DEVELOPMENT }}
-          build-args: |
-            VERSION=${{ needs.build-development.outputs.version }}
+    with:
+      image-target: development
+      command: lint-jsonlint
 
   lint-hadolint:
     name: Lint - Hadolint
-    runs-on: ubuntu-latest
+    uses: ./.github/workflows/run-in-docker.yaml
     needs: build-development
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v3
-
-      - name: Run Hadolint
-        uses: ./.github/actions/run-docker-command
-        with:
-          command: lint-hadolint
-          target: ${{ env.CI_IMAGE_NAME_DEVELOPMENT }}
-          additional-run-args: -v $(pwd)/Dockerfile:/app/Dockerfile
-          build-args: |
-            VERSION=${{ needs.build-development.outputs.version }}
+    with:
+      image-target: development
+      command: lint-hadolint
 
   lint-shellcheck:
     name: Lint - Shellcheck
-    runs-on: ubuntu-latest
+    uses: ./.github/workflows/run-in-docker.yaml
     needs: build-development
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v3
-
-      - name: Run Shellcheck
-        uses: ./.github/actions/run-docker-command
-        with:
-          command: lint-shellcheck
-          target: ${{ env.CI_IMAGE_NAME_DEVELOPMENT }}
-          build-args: |
-            VERSION=${{ needs.build-development.outputs.version }}
+    with:
+      image-target: development
+      command: lint-shellcheck
 
   lint-storybook-components:
     name: Lint - storybook components check
-    runs-on: ubuntu-latest
+    uses: ./.github/workflows/run-in-docker.yaml
     needs: build-development
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v3
-
-      - name: Run storybook components check
-        uses: ./.github/actions/run-docker-command
-        with:
-          command: lint-storybook-components
-          target: ${{ env.CI_IMAGE_NAME_DEVELOPMENT }}
-          build-args: |
-            VERSION=${{ needs.build-development.outputs.version }}
+    with:
+      image-target: development
+      command: lint-storybook-components
 
   test-mocha-personalisation:
     name: Test - Mocha - personalisation
-    runs-on: ubuntu-latest
+    uses: ./.github/workflows/run-in-docker-with-possible-artifact.yaml
     needs: build-development
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v3
-
-      - name: Run mocha personalisation
-        uses: ./.github/actions/run-docker-command
-        with:
-          command: with --test-env --built --mocks test-mocha-personalisation
-          target: ${{ env.CI_IMAGE_NAME_DEVELOPMENT }}
-          docker-path-to-copy-from: /app/testing-screenshots
-          host-path-to-copy-to: testing-screenshots
-          build-args: |
-            VERSION=${{ needs.build-development.outputs.version }}
-
-      - name: Upload artifact
-        if: ${{ always() }}
-        uses: actions/upload-artifact@v3
-        with:
-          name: Mocha personalisation - screenshots
-          path: testing-screenshots
-          if-no-files-found: ignore
+    with:
+      image-target: development
+      command: with --test-env --built --mocks test-mocha-personalisation
+      docker-path-to-copy-from: /app/testing-screenshots
+      host-path-to-copy-to: testing-screenshots
 
   test-mocha-category-queries:
     name: Test - Mocha - category queries
-    runs-on: ubuntu-latest
+    uses: ./.github/workflows/run-in-docker-with-possible-artifact.yaml
     needs: build-development
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v3
-
-      - name: Run mocha category queries
-        uses: ./.github/actions/run-docker-command
-        with:
-          command: with --test-env --built --mocks test-mocha-category-queries
-          target: ${{ env.CI_IMAGE_NAME_DEVELOPMENT }}
-          docker-path-to-copy-from: /app/testing-screenshots
-          host-path-to-copy-to: testing-screenshots
-          build-args: |
-            VERSION=${{ needs.build-development.outputs.version }}
-
-      - name: Upload artifact
-        if: ${{ always() }}
-        uses: actions/upload-artifact@v3
-        with:
-          name: Mocha category queries - screenshots
-          path: testing-screenshots
-          if-no-files-found: ignore
+    with:
+      image-target: development
+      command: with --test-env --built --mocks test-mocha-category-queries
+      docker-path-to-copy-from: /app/testing-screenshots
+      host-path-to-copy-to: testing-screenshots
 
   test-mocha-features:
     name: Test - Mocha - features
-    runs-on: ubuntu-latest
+    uses: ./.github/workflows/run-in-docker-with-possible-artifact.yaml
     needs: build-development
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v3
-
-      - name: Run mocha features
-        uses: ./.github/actions/run-docker-command
-        with:
-          command: with --test-env --built --mocks test-mocha-features
-          target: ${{ env.CI_IMAGE_NAME_DEVELOPMENT }}
-          docker-path-to-copy-from: /app/testing-screenshots
-          host-path-to-copy-to: testing-screenshots
-          build-args: |
-            VERSION=${{ needs.build-development.outputs.version }}
-
-      - name: Upload artifact
-        if: ${{ always() }}
-        uses: actions/upload-artifact@v3
-        with:
-          name: Mocha features - screenshots
-          path: testing-screenshots
-          if-no-files-found: ignore
+    with:
+      image-target: development
+      command: with --test-env --built --mocks test-mocha-features
+      docker-path-to-copy-from: /app/testing-screenshots
+      host-path-to-copy-to: testing-screenshots
 
   test-mocha-maps:
     name: Test - Mocha - maps
-    runs-on: ubuntu-latest
+    uses: ./.github/workflows/run-in-docker-with-possible-artifact.yaml
     needs: build-development
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v3
-
-      - name: Run mocha maps
-        uses: ./.github/actions/run-docker-command
-        with:
-          command: with --test-env --built --mocks test-mocha-maps
-          target: ${{ env.CI_IMAGE_NAME_DEVELOPMENT }}
-          docker-path-to-copy-from: /app/testing-screenshots
-          host-path-to-copy-to: testing-screenshots
-          build-args: |
-            VERSION=${{ needs.build-development.outputs.version }}
-
-      - name: Upload artifact
-        if: ${{ always() }}
-        uses: actions/upload-artifact@v3
-        with:
-          name: Mocha maps - screenshots
-          path: testing-screenshots
-          if-no-files-found: ignore
+    with:
+      image-target: development
+      command: with --test-env --built --mocks test-mocha-maps
+      docker-path-to-copy-from: /app/testing-screenshots
+      host-path-to-copy-to: testing-screenshots
 
   test-mocha-unit:
     name: Test - Mocha - unit
-    runs-on: ubuntu-latest
+    uses: ./.github/workflows/run-in-docker.yaml
     needs: build-development
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v3
-
-      - name: Run mocha unit
-        uses: ./.github/actions/run-docker-command
-        with:
-          command: test-mocha-unit
-          target: ${{ env.CI_IMAGE_NAME_DEVELOPMENT }}
-          build-args: |
-            VERSION=${{ needs.build-development.outputs.version }}
+    with:
+      image-target: development
+      command: test-mocha-unit
 
   deploy:
     name: Deploy - push image to ECR
-    runs-on: ubuntu-latest
+    uses: ./.github/workflows/push-docker-image-to-ecr.yaml
     needs:
-      - build-development
       - build-distribution
       - lint-eslint
       - lint-flow
@@ -299,37 +138,6 @@ jobs:
       - test-mocha-features
       - test-mocha-maps
       - test-mocha-unit
-    permissions:
-      id-token: write
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v3
-
-      - id: load-docker-image
-        name: Load docker image
-        uses: ./.github/actions/setup-docker-image
-        with:
-          target: ${{ env.CI_IMAGE_NAME_DISTRIBUTION }}
-          build-args: |
-            VERSION=${{ needs.build-development.outputs.version }}
-
-      - name: Configure AWS credentials
-        uses: aws-actions/configure-aws-credentials@v2
-        with:
-          aws-region: ap-southeast-2
-          role-to-assume: arn:aws:iam::${{ secrets.AWS_ACCOUNT_ID }}:role/GithubActionsOIDC
-          role-session-name: github-push-session
-
-      - name: Login to Amazon ECR
-        id: login-ecr
-        uses: aws-actions/amazon-ecr-login@v1
-
-      - name: Push image to ECR
-        env:
-          ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
-        run: |
-          docker tag ${{ steps.load-docker-image.outputs.image-name }}:latest $ECR_REGISTRY/${{ env.ECR_IMAGE_NAME }}:${{ needs.build-development.outputs.version }}
-          docker push $ECR_REGISTRY/${{ env.ECR_IMAGE_NAME }}:${{ needs.build-development.outputs.version }}
-
-      - name: Create image pushed notice
-        run: 'echo "::notice title=Image has been pushed to ECR::Image tag: ${{ needs.build-development.outputs.version }}"'
+    with:
+      image-target: distribution
+      ecr-image-name: ask_izzy

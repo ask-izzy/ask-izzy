@@ -106,8 +106,8 @@ RUN cp -r /tmp/.next-cache .next/cache && rm -rf /tmp/.next-cache
 
 # Note this essentially guarantees cache invalidation from this point for builds
 # of different versions.
-ARG VERSION
-RUN echo "Tag: $VERSION" > ./public/VERSION.txt
+ARG APP_VERSION
+RUN echo "App Version: $APP_VERSION" > ./public/VERSION.txt
 
 CMD ["dev"]
 
@@ -135,7 +135,7 @@ COPY --chown=$UID:$GID --from=development /app/.next .next
 # just disable storybook for now.
 # RUN yarn with --test-env --mocks build-storybook
 
-ARG VERSION
-RUN echo "Tag: $VERSION" > ./public/VERSION.txt
+ARG APP_VERSION
+RUN echo "App Version: $APP_VERSION" > ./public/VERSION.txt
 
 CMD ["serve"]
