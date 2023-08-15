@@ -142,3 +142,5 @@ jobs:
     with:
       image-target: distribution
       ecr-image-name: ask_izzy
+    secrets:
+      AWS_ACCOUNT_ID: ${{ secrets.AWS_ACCOUNT_ID }}
