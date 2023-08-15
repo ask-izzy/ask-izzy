@@ -12,15 +12,19 @@ on:
       command:
         description: 'The command to run using the built docker image'
         required: true
+        type: string
       additional-run-args:
         description: 'Any additional args to pass to the docker run subcommand'
+        type: string
       docker-path-to-copy-from:
         description: 'If this is given the contents of the path will be copied to the host'
         required: true
         default: ''
+        type: string
       host-path-to-copy-to:
         description: 'The host path to copy the contents of the docker location specified in the docker-path-to-copy-from arg to'
         required: true
+        type: string
 
 jobs:
   build-docker-image:

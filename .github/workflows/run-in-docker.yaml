@@ -9,8 +9,10 @@ on:
       command:
         description: 'The command to run using the built docker image'
         required: true
+        type: string
       additional-run-args:
         description: 'Any additional args to pass to the docker run subcommand'
+        type: string
 
 jobs:
   build-docker-image:
