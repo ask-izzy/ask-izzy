@@ -13,7 +13,7 @@ on:
 
 jobs:
   push-to-ecr:
-    name: Deploy - push docker image to ECR
+    name: Push docker image to ECR
     runs-on: ubuntu-latest
     permissions:
       id-token: write

@@ -24,8 +24,8 @@ on:
         type: string
 
 jobs:
-  build-docker-image:
-    name: Build - docker image
+  run-in-docker:
+    name: Run cmd
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
