@@ -10,6 +10,9 @@ on:
         description: 'The build step target of the docker image'
         default: ${{ github.event.repository.name }}
         type: string
+    secrets:
+      AWS_ACCOUNT_ID:
+        required: true
 
 jobs:
   push-to-ecr:
