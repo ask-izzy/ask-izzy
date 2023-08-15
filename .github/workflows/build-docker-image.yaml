@@ -8,15 +8,16 @@ on:
     outputs:
       image-name:
         description: 'The name of the created image'
-        value: ${{ steps.build-docker-image.outputs.image-name }}
+        value: ${{ jobs.build-docker-image.outputs.image-name }}
       app-version:
-        value: ${{ jobs.get-app-version.outputs.app-version }}
+        value: ${{ jobs.build-docker-image.outputs.app-version }}
 
 jobs:
   build-docker-image:
     name: Build - docker image
     runs-on: ubuntu-latest
     outputs:
+      image-name: ${{ steps.build-docker-image.outputs.app-version }}
       app-version: ${{ steps.get-app-version.outputs.app-version }}
     steps:
       - name: Checkout repository
