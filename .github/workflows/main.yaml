@@ -5,20 +5,20 @@ on:
 
 jobs:
   build-development:
-    name: Build / Development
+    name: Build - Development
     uses: ./.github/workflows/build-docker-image.yaml
     with:
       image-target: development
 
   build-distribution:
-    name: Build / Distribution
+    name: Build - Distribution
     uses: ./.github/workflows/build-docker-image.yaml
     needs: build-development
     with:
       image-target: distribution
 
   lint-eslint:
-    name: Lint / ESLint
+    name: Lint - ESLint
     uses: ./.github/workflows/run-in-docker.yaml
     needs: build-development
     with:
@@ -26,7 +26,7 @@ jobs:
       command: lint-eslint
 
   lint-flow:
-    name: Lint / Flow
+    name: Lint - Flow
     uses: ./.github/workflows/run-in-docker.yaml
     needs: build-development
     with:
@@ -34,7 +34,7 @@ jobs:
       command: lint-flow
 
   lint-stylelint:
-    name: Lint / Stylelint
+    name: Lint - Stylelint
     uses: ./.github/workflows/run-in-docker.yaml
     needs: build-development
     with:
@@ -42,7 +42,7 @@ jobs:
       command: lint-stylelint
 
   lint-jsonlint:
-    name: Lint / JSON Lint
+    name: Lint - JSON Lint
     uses: ./.github/workflows/run-in-docker.yaml
     needs: build-development
     with:
@@ -50,7 +50,7 @@ jobs:
       command: lint-jsonlint
 
   lint-hadolint:
-    name: Lint / Hadolint
+    name: Lint - Hadolint
     uses: ./.github/workflows/run-in-docker.yaml
     needs: build-development
     with:
@@ -59,7 +59,7 @@ jobs:
       additional-run-args: -v $(pwd)/Dockerfile:/app/Dockerfile
 
   lint-shellcheck:
-    name: Lint / Shellcheck
+    name: Lint - Shellcheck
     uses: ./.github/workflows/run-in-docker.yaml
     needs: build-development
     with:
@@ -67,7 +67,7 @@ jobs:
       command: lint-shellcheck
 
   lint-storybook-components:
-    name: Lint / Storybook components check
+    name: Lint - Storybook components check
     uses: ./.github/workflows/run-in-docker.yaml
     needs: build-development
     with:
@@ -75,7 +75,7 @@ jobs:
       command: lint-storybook-components
 
   test-mocha-personalisation:
-    name: Test / Mocha personalisation
+    name: Test - Mocha personalisation
     uses: ./.github/workflows/run-in-docker-with-possible-artifact.yaml
     needs: build-development
     with:
@@ -85,7 +85,7 @@ jobs:
       host-path-to-copy-to: testing-screenshots
 
   test-mocha-category-queries:
-    name: Test / Mocha category queries
+    name: Test - Mocha category queries
     uses: ./.github/workflows/run-in-docker-with-possible-artifact.yaml
     needs: build-development
     with:
@@ -95,7 +95,7 @@ jobs:
       host-path-to-copy-to: testing-screenshots
 
   test-mocha-features:
-    name: Test / Mocha features
+    name: Test - Mocha features
     uses: ./.github/workflows/run-in-docker-with-possible-artifact.yaml
     needs: build-development
     with:
@@ -105,7 +105,7 @@ jobs:
       host-path-to-copy-to: testing-screenshots
 
   test-mocha-maps:
-    name: Test / Mocha maps
+    name: Test - Mocha maps
     uses: ./.github/workflows/run-in-docker-with-possible-artifact.yaml
     needs: build-development
     with:
@@ -115,7 +115,7 @@ jobs:
       host-path-to-copy-to: testing-screenshots
 
   test-mocha-unit:
-    name: Test / Mocha unit
+    name: Test - Mocha unit
     uses: ./.github/workflows/run-in-docker.yaml
     needs: build-development
     with:
