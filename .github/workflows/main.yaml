@@ -144,3 +144,5 @@ jobs:
       ecr-image-name: ask_izzy
     secrets:
       AWS_ACCOUNT_ID: ${{ secrets.AWS_ACCOUNT_ID }}
+    permissions:
+      id-token: write
