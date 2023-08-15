@@ -56,6 +56,7 @@ jobs:
     with:
       image-target: development
       command: lint-hadolint
+      additional-run-args: -v $(pwd)/Dockerfile:/app/Dockerfile
 
   lint-shellcheck:
     name: Lint - Shellcheck
