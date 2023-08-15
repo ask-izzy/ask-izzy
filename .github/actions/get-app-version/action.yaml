@@ -15,6 +15,5 @@ runs:
       run: echo "app-version=${{ github.ref_name }}-$(git rev-parse --short HEAD)" >> $GITHUB_OUTPUT
 
     - name: Print app version
-      id: get-app-version
       shell: bash
       run: 'echo "App version is: ${{ steps.get-app-version.outputs.app-version }}"'
