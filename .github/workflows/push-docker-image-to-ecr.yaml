@@ -47,8 +47,8 @@ jobs:
         env:
           ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
         run: |
-          docker tag ${{ steps.load-docker-image.outputs.image-name }}:latest $ECR_REGISTRY/${{ inputs.ecr-image-name }}:${{ needs.build-development.outputs.version }}
-          docker push $ECR_REGISTRY/${{ inputs.ecr-image-name }}:${{ needs.build-development.outputs.version }}
+          docker tag ${{ steps.load-docker-image.outputs.image-name }}:latest $ECR_REGISTRY/${{ inputs.ecr-image-name }}:${{ steps.load-docker-image.outputs.app-version }}
+          docker push $ECR_REGISTRY/${{ inputs.ecr-image-name }}:${{ steps.load-docker-image.outputs.app-version }}
 
       - name: Create image pushed notice
-        run: 'echo "::notice title=Image has been pushed to ECR::Image tag: ${{ needs.build-development.outputs.version }}"'
+        run: 'echo "::notice title=Image has been pushed to ECR::Image tag: ${{ steps.load-docker-image.outputs.app-version }}"'
