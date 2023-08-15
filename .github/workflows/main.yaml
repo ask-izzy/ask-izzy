@@ -15,7 +15,7 @@ jobs:
     uses: ./.github/workflows/build-docker-image.yaml
     needs: build-development
     with:
-      target: distribution
+      image-target: distribution
 
   lint-eslint:
     name: Lint - ESLint
