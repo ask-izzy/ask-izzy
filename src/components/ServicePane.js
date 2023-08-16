@@ -14,7 +14,6 @@ import Eligibility from "./Eligibility";
 import Feedback from "./Feedback";
 import ImportantInformation from "./ImportantInformation"
 import LanguagesAvailable from "@/src/components/LanguagesAvailable";
-import HeaderBar from "./HeaderBar";
 import TransportTime from "./TransportTime";
 import GoogleMapsLink from "./GoogleMapsLink";
 import Ndis from "./Ndis";
@@ -186,18 +185,11 @@ function ServicePane({service}: Props): ReactNode {
     return (
         <div className="ServicePane">
             <div>
-                <HeaderBar
-                    className="serviceDetailsHeader"
-                    primaryText={service.name}
-                    secondaryText={service.site.name}
-                    bannerName="hands-and-house"
-                />
                 <AlertBannerList
                     state={service.location?.state}
                     screenLocation="servicePage"
                     format="inline"
                 />
-
                 <DebugServiceRecord object={service} />
             </div>
             <main

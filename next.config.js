@@ -134,10 +134,6 @@ module.exports = {
     // We need to manually handle trailing slash redirection so as not to apply redirect to requests to our external
     // resources proxy
     skipTrailingSlashRedirect: true,
-    sentry: {
-        hideSourceMaps: false,
-        tunnelRoute: "/error-monitoring/sentry",
-    },
 }
 
 function getRewriteForProxy() {
@@ -184,9 +180,15 @@ function getRewritesForCategories() {
     return rewrites
 }
 
-if (process.env.NODE_ENV !== "test") {
+if (!process.env.NEXT_PUBLIC_IS_TEST_ENV) {
     module.exports = withSentryConfig(
-        module.exports,
+        {
+            ...module.exports,
+            sentry: {
+                hideSourceMaps: false,
+                tunnelRoute: "/error-monitoring/sentry",
+            },
+        },
         {
             silent: true,
         }

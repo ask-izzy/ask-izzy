@@ -49,13 +49,19 @@ export function baseUrl(): string {
  *
  * @param {Webdriver.Webdriver} driver - Selenium webdriver.
  * @param {string} url - URL to visit.
+ * @param {any} mochaState - The state object provided by mocha.
  *
  * @return {Promise} - return value from Selenium Webdriver.get.
  */
 export async function gotoUrl(
     driver: typeof Webdriver.WebDriver,
-    url: string
+    url: string,
+    mochaState: any
 ): Promise<void> {
+    // Since we now build pages on request when running the tests the first load of a page
+    // maybe very slow
+    mochaState.slow(2 * 1000)
+    mochaState.timeout(40 * 1000)
     await driver.get(baseUrl() + url);
 }
 
@@ -101,7 +107,14 @@ export default async function webDriverInstance(): Promise<typeof Webdriver.WebD
 
     await driver
         .manage()
-        .setTimeouts({ implicit: 10000 });
+        .setTimeouts({
+            // Since we now build pages on request when running the tests the first load of a page
+            // maybe very slow
+            script: 40 * 1000,
+            // When doing anything that requires an element to be in the dom if it's not found wait
+            // up to 5 seconds before bailing
+            implicit: 5 * 1000,
+        });
 
     await driver
 
@@ -150,42 +163,22 @@ export default async function webDriverInstance(): Promise<typeof Webdriver.WebD
     return driver;
 }
 
-async function waitForStorage(
-    driver: typeof Webdriver.WebDriver,
-): Promise<void> {
-    await gotoUrl(driver, "/404");
-    await driver.wait(
-        () => {
-            return driver.executeScript(() =>
-                typeof IzzyStorage != "undefined"
-            )
-        },
-        10000
-    );
-}
-
-export async function setStorage(
-    driver: typeof Webdriver.WebDriver,
-    value: string,
-): Promise<void> {
-    await waitForStorage(driver);
-    await driver.executeScript((value) =>
-        IzzyStorage.setItem(value), value
-    )
-}
-
 export async function cleanDriverSession(
-    driver: typeof Webdriver.WebDriver
+    driver: typeof Webdriver.WebDriver,
+    mochaState: any
 ): Promise<void> {
     await driver.executeScript(() => console.log("Clearing browsing session"))
     const url = await driver.getCurrentUrl()
     if (!url.includes("localhost")) {
-        await gotoUrl(driver, "/404")
+        await gotoUrl(driver, "/404", mochaState)
     }
-    await waitForStorage(driver);
+    // Wait for page to load and global storage object to be accessible
+    await driver.wait(
+        () => driver.executeScript(() => typeof IzzyStorage !== "undefined"),
+        10000
+    );
     await driver.removeAllScriptsBeforeLoad()
 
-    await new Promise(resolve => setTimeout(resolve, 2000));
     await driver.executeScript(() => {
         IzzyStorage.clear();
         window.dataLayer = [];

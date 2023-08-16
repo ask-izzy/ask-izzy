@@ -8,10 +8,6 @@ import Service from "@/src/iss/Service"
 import {
     PaginatedSearch,
 } from "@/src/iss/serviceSearch";
-import {
-    addPageLoadDependencies,
-    closePageLoadDependencies,
-} from "@/src/utils/page-loading"
 import type {SortType} from "@/src/components/base/Dropdown"
 import type {travelTimesStatus as travelTimesStatusType} from "@/src/hooks/useTravelTimesUpdater"
 import storage from "@/src/storage"

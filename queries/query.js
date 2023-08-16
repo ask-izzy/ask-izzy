@@ -7,11 +7,6 @@ import { useQuery } from "@apollo/client";
 import type { DocumentNode } from "graphql";
 import {useRouter} from "next/router"
 
-import {
-    addPageLoadDependencies,
-    closePageLoadDependencies,
-} from "@/src/utils/page-loading"
-
 const Query = ({ children, query, args, loadingComponent, errorComponent }: {
   children: any,
   query: DocumentNode,
@@ -59,17 +54,8 @@ const Query = ({ children, query, args, loadingComponent, errorComponent }: {
     });
 
     const router = useRouter();
-    const pageLoadDependencyKey = "graphql-query"
-
-    useEffect(() => {
-        if (!loading) {
-            closePageLoadDependencies(router.asPath, pageLoadDependencyKey)
-        }
-    }, [loading, error, data])
 
     if (loading) {
-        addPageLoadDependencies(router.asPath, pageLoadDependencyKey)
-
         if (loadingComponent) {
             return loadingComponent;
         }

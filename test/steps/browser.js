@@ -94,27 +94,30 @@ module.exports.documentReady = async function documentReady(
     driver: Webdriver.WebDriver
 ): Promise<boolean> {
     const result = await driver.executeAsyncScript((callback) => {
+        console.info("Waiting for document to be ready")
         const intervalId = setInterval(() => {
-            // Internal page
             if (window.location.hostname === "localhost") {
-                if (window.waitTillPageLoaded) {
-                    clearInterval(intervalId)
-                    window.waitTillPageLoaded()
-                        .then(() => callback())
+                // Is internal page
+                if (!window.pageFinishedInitialRender) {
+                    return
                 }
-
-            // External page
             } else {
-                if (document.readyState === "complete") {
-                    clearInterval(intervalId)
-                    callback()
+                // Is external page
+                if (document.readyState !== "complete") {
+                    return
                 }
             }
+
+            clearInterval(intervalId)
+            console.info("Document ready")
+            callback()
         }, 10);
 
         setTimeout(
             () => callback("Timed out"),
-            1000 * 10
+            // Since we now build pages on request when running the tests the first load of a page
+            // maybe very slow.
+            1000 * 35
         )
     })
 
@@ -124,31 +127,55 @@ module.exports.documentReady = async function documentReady(
 };
 
 async function visitUrl(url: string): Promise<void> {
-    await module.exports.visitUrl(this.driver, url);
+    await module.exports.visitUrl(this.driver, url, this.mochaState);
 }
 
 module.exports.visitUrl = async function visitUrl(
     driver: Webdriver.WebDriver,
-    url: string
+    url: string,
+    mochaState: Record<string, any>
 ): Promise<void> {
-    await gotoUrl(driver, url);
-    await new Promise(resolve => setTimeout(resolve, 2000));
+    await gotoUrl(driver, url, mochaState);
     await module.exports.documentReady(driver);
 }
 
 async function clickLink(linkText: string) {
+    // Since we now build pages on request when running the tests the first load of a page
+    // maybe very slow
+    this.mochaState.slow(2 * 1000)
+    this.mochaState.timeout(40 * 1000)
     await clickElementWithText(this.driver, linkText, "a")
+    // Wait just long enough that useTrackInitialRenderStatus() will have had a chance to
+    // update window.pageFinishedInitialRender
+    await new Promise(resolve => setTimeout(resolve, 10))
+    await module.exports.documentReady(this.driver)
 }
 
 async function clickLinkWithSubstring(linkText: string) {
+    // Since we now build pages on request when running the tests the first load of a page
+    // maybe very slow
+    this.mochaState.slow(2 * 1000)
+    this.mochaState.timeout(40 * 1000)
     await clickElementWithTextSubstring(this.driver, linkText, "a")
+    // Wait just long enough that useTrackInitialRenderStatus() will have had a chance to
+    // update window.pageFinishedInitialRender
+    await new Promise(resolve => setTimeout(resolve, 10))
+    await module.exports.documentReady(this.driver)
 }
 
 async function clickButton(buttonText: string) {
+    // Since we now build pages on request when running the tests the first load of a page
+    // maybe very slow
+    this.mochaState.slow(2 * 1000)
+    this.mochaState.timeout(40 * 1000)
     await clickElementWithText(this.driver, buttonText, "button")
 }
 
 async function clickButtonWithClassName(className: string): Promise<void> {
+    // Since we now build pages on request when running the tests the first load of a page
+    // maybe very slow
+    this.mochaState.slow(2 * 1000)
+    this.mochaState.timeout(40 * 1000)
     try {
         await this.driver.findElement(By.css(
             className
@@ -281,7 +308,6 @@ async function urlIs(
 }
 
 async function checkURL(expected: string): Promise<void> {
-    await new Promise(resolve => setTimeout(resolve, 2000));
     if (expected.startsWith(`"`)) {
         throw new Error("URL should not be quoted");
     }
@@ -293,7 +319,7 @@ async function checkURL(expected: string): Promise<void> {
     try {
         await this.driver.wait(
             () => urlIs(this.driver, expected),
-            1000
+            5 * 1000
         );
     } catch (error) {
         console.error(error)
@@ -316,10 +342,6 @@ async function checkURL(expected: string): Promise<void> {
 }
 
 async function thenISee(expected: string): Promise<void> {
-    // driver.findElement() seems to be very slow to return when
-    // there is no matching element on the page.
-    this.mochaState.timeout(45000)
-    this.mochaState.slow(5000)
     await assert.withRetries(assert.textIsVisible)(this.driver, expected);
 }
 
@@ -327,13 +349,11 @@ async function thenISeeServicesInMyList(expected: string): Promise<void> {
     await this.driver.findElement(By.css(
         ".my-list-count"
     ))
-    this.mochaState.timeout(45000)
-    this.mochaState.slow(5000)
     await assert.withRetries(assert.textIsVisible)(this.driver, expected);
 }
 
 async function thenIDontSee(expected: string): Promise<void> {
-    this.mochaState.slow(22000)
+    this.mochaState.slow(this.driver.manage().getTimeouts().implicit + 1000)
     try {
         await assert.textIsVisible(this.driver, expected);
     } catch (error) {
@@ -372,11 +392,13 @@ function getInputElement(
 }
 
 async function doSearch(search: string): Promise<void> {
+    // Since we now build pages on request when running the tests the first load of a page
+    // maybe very slow
+    this.mochaState.slow(2 * 1000)
+    this.mochaState.timeout(40 * 1000)
     let element = await getSearchElement(this.driver);
-    await new Promise(resolve => setTimeout(resolve, 2000));
     await element.clear();
     await element.sendKeys(search);
-    await new Promise(resolve => setTimeout(resolve, 2000));
     await module.exports.documentReady(this.driver);
 }
 
@@ -389,9 +411,12 @@ async function clearFirstSearchBox(): Promise<void> {
 }
 
 async function doSearchAndEnter(search: string): Promise<void> {
+    // Since we now build pages on request when running the tests the first load of a page
+    // maybe very slow
+    this.mochaState.slow(2 * 1000)
+    this.mochaState.timeout(40 * 1000)
     await (await getSearchElement(this.driver))
         .sendKeys(search + Key.ENTER);
-    await new Promise(resolve => setTimeout(resolve, 2000));
     await module.exports.documentReady(this.driver);
 }
 
@@ -482,7 +507,6 @@ async function newBrowser(): Promise<void> {
             Click Here
         </a>`;
     });
-    await new Promise(resolve => setTimeout(resolve, 2000));
     await clickLink.apply(this, ["Click Here"]);
     const newHandles = _(await this.driver.getAllWindowHandles())
         .without(currentHandle);
@@ -502,7 +526,7 @@ async function newBrowser(): Promise<void> {
 }
 
 async function cleanSession(): Promise<void> {
-    await cleanDriverSession(this.driver);
+    await cleanDriverSession(this.driver, this.mochaState);
 }
 
 async function takeScreenshot(): Promise<void> {
@@ -560,19 +584,6 @@ async function seeBrowserTitle(title: string): Promise<void> {
 async function seeTheAlerts(
     table: Array<Object>,
 ): Promise<void> {
-    const alerts = await this.driver.findElements(
-        By.css(`.AlertBannerButton`)
-    )
-    console.log(alerts)
-    if (alerts.length > 0) {
-        await this.driver.findElement(By.css(
-            `.AlertBannerButton`
-        ))
-            .click();
-    }
-
-    await this.driver.wait(module.exports.documentReady(this.driver), 10000);
-
     const alertElements = await this.driver.findElements(
         By.css(`.AlertBannerList .AlertBanner`)
     )
@@ -588,19 +599,13 @@ async function seeTheAlerts(
         ).getText()
 
         let bodyElementText = ""
-        const timeouts = await this.driver.manage().getTimeouts()
         try {
-            await this.driver.manage().setTimeouts({implicit: 0})
             bodyElementText = await alertElement.findElement(
                 By.css(`.body`)
             ).getText()
         } catch (error) {
             // body is optional in some alerts so might not matter if we
             // don't find it
-        } finally {
-            await this.driver.manage().setTimeouts(
-                {implicit: timeouts.implicit}
-            )
         }
 
         const textMatchesGlob = (text, glob) => {

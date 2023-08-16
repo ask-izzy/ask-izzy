@@ -19,14 +19,14 @@ async function searchMockedService() {
     if (!mockedService) {
         throw new Error("Must set mockedService before visiting a service");
     }
-    await visitUrl(this.driver, `/search/${mockedService.id}`);
+    await visitUrl(this.driver, `/search/${mockedService.id}`, this.mochaState);
 }
 
 async function visitMockedService() {
     if (!mockedService) {
         throw new Error("Must set mockedService before visiting a service");
     }
-    await visitUrl(this.driver, `/service/${mockedService.id}`);
+    await visitUrl(this.driver, `/service/${mockedService.id}`, this.mochaState);
 }
 
 async function mockService(service: Service) {

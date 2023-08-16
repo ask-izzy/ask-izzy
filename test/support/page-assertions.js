@@ -41,7 +41,11 @@ assertExtended.textIsVisible = async function(
 ): Promise<void> {
     const element = await getElementWithText(driver, text)
 
+    assert(element, `Text "${text}" does not exist`);
+
     let visible = element ? await element.isDisplayed() : false;
+
+    assert(visible, `Text "${text}" is present but not visible`);
 
     // isDisplayed doesn't currently check if text is in a closed <details>
     // element so we've got to check for that manually.
@@ -72,7 +76,7 @@ assertExtended.textIsVisible = async function(
         )
     }
 
-    assert(visible, `Text ${text} was present but not visible`);
+    assert(visible, `Text "${text}" is present but not visible`);
 }
 
 assertExtended.linkIsVisible = async function(

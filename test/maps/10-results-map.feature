@@ -16,6 +16,15 @@ Feature: See results on a map
     Scenario: View results on a map
        Given I am not interested in any subcategory
         And my location is 37.822S 144.99E in "Melbourne, VIC"
+        And googles directions matrix will return
+        ----------------------------------------------
+        - status: OK
+          duration:
+              text: 8 hours 27 mins
+              value: 8000
+          distance:
+              value: 1000
+        ----------------------------------------------
         When I visit /everyday-needs
         And I click the "See more results" button
         And I wait for 10 results to load

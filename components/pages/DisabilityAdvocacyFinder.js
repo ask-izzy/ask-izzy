@@ -13,18 +13,18 @@ import {
     goToPersonalisationNextPath,
     getPersonalisationNextPath,
 } from "@/src/utils/routing"
-import isMounted from "@/hooks/useIsMounted"
+import useIsMounted from "@/hooks/useIsMounted"
 
 
 function DisabilityAdvocacyFinder(): ReactNode {
-
     const router = useRouter()
+    const isMounted = useIsMounted({rerenderAfterMount: true})
 
     const advocacyProviders = getPersonalisationNextPath({
         router,
         category: "search",
         searchText: "Disability Advocacy Providers",
-        pageMounted: isMounted(),
+        pageMounted: isMounted,
     });
     const disabilityGatewayURL = "https://www.disabilitygateway.gov.au/";
     const disabilityAdvocacyURL =

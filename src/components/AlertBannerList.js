@@ -78,10 +78,11 @@ function AlertBannerList({
         let hasNewAlerts = false
 
         for (let alert in alertStorageObj) {
-            if (!previousAlerts ||
+            if (
+                !previousAlerts ||
                 !(alert in previousAlerts) ||
-                alertStorageObj[alert].updated_at !==
-                previousAlerts[alert].updated_at) {
+                alertStorageObj[alert].updated_at !== previousAlerts[alert].updated_at
+            ) {
                 hasNewAlerts = true
             }
         }

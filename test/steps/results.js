@@ -146,6 +146,10 @@ async function assertNoSuchResults(table: Array<Object>): Promise<void> {
 
 async function assertISSSearchRequestFromStep(requestStringAsLines: Array<string>): Promise<void> {
     const expectedRequest = JSON.parse(requestStringAsLines.join(""))
-    const actualRequest = await this.driver.executeScript(() => window.issQuery)
+    const actualRequest = await this.driver.wait(
+        async() => this.driver.executeScript(() => window.issQuery),
+        5 * 1000,
+        "Timed out waiting for query to load"
+    )
     assert.deepStrictEqual(actualRequest, expectedRequest)
 }

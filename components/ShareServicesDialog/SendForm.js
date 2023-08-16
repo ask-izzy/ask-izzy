@@ -104,7 +104,7 @@ function SendForm({
 
     const messageText = getShareMessage({
         services,
-        baseUrl: isMounted ? location.origin : "",
+        baseUrl: isMounted.current ? location.origin : "",
         toName: watch("toName"),
         fromName: watch("fromName"),
         fromRole: watch("fromRole"),

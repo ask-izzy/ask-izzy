@@ -114,6 +114,14 @@ async function instrumentDistanceMatrix(results) {
                         },
                     };
                 },
+                TravelMode: {
+                    "DRIVING": "DRIVING",
+                    "WALKING": "WALKING",
+                    "TRANSIT": "TRANSIT",
+                },
+                UnitSystem: {
+                    "METRIC": "METRIC",
+                },
             },
         });
     }

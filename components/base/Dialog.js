@@ -5,7 +5,7 @@ import cnx from "classnames"
 import { useA11yDialog } from "react-a11y-dialog"
 import ReactDOM from "react-dom"
 
-import isMounted from "@/hooks/useIsMounted"
+import useIsMounted from "@/hooks/useIsMounted"
 import useUniqueId from "@/hooks/useUniqueId"
 
 type Props = {
@@ -20,6 +20,7 @@ type Props = {
 export default function Dialog(
     {className, open, children, onClose, ...rest}: Props
 ): ReactNode {
+    const isMounted = useIsMounted({rerenderAfterMount: true})
     const [instance, attr] = useA11yDialog({
         id: `dialog-${useUniqueId()}`,
     })
@@ -46,7 +47,7 @@ export default function Dialog(
         }
     }, [instance])
 
-    if (!isMounted()) {
+    if (!isMounted) {
         return null
     }
 
