@@ -5,7 +5,7 @@ services:
     build:
       context: .
       args:
-        - VERSION=emulated-production
+        - APP_VERSION=emulated-production
     platform: linux/amd64
     command: "deploy"
     depends_on:

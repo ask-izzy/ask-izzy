@@ -9,7 +9,7 @@ ARG HOME="/tmp/home"
 # development and serving states.                                             #
 ###############################################################################
 
-FROM --platform=linux/amd64 node:16 as base
+FROM node:16 as base
 
 ARG UID
 ARG GID
@@ -50,7 +50,7 @@ EXPOSE 8000
 # development version of the app.                                             #
 ###############################################################################
 
-FROM --platform=linux/amd64 base as development
+FROM base as development
 ARG UID
 ARG GID
 
@@ -106,8 +106,8 @@ RUN cp -r /tmp/.next-cache .next/cache && rm -rf /tmp/.next-cache
 
 # Note this essentially guarantees cache invalidation from this point for builds
 # of different versions.
-ARG VERSION
-RUN echo "Tag: $VERSION" > ./public/VERSION.txt
+ARG APP_VERSION
+RUN echo "App Version: $APP_VERSION" > ./public/VERSION.txt
 
 CMD ["dev"]
 
@@ -123,6 +123,8 @@ ARG UID
 ARG GID
 
 COPY ./package.json ./yarn.lock ./
+# We use mount cache for package cache so no need to empty
+# hadolint ignore=DL3060
 RUN --mount=type=cache,target=/tmp/home/.cache/yarn,uid=$UID,gid=$GID,sharing=locked \
     --mount=type=cache,target=/tmp/chromedriver,uid=$UID,gid=$GID,sharing=locked \
     yarn install --network-timeout 100000 --frozen-lockfile
@@ -135,7 +137,7 @@ COPY --chown=$UID:$GID --from=development /app/.next .next
 # just disable storybook for now.
 # RUN yarn with --test-env --mocks build-storybook
 
-ARG VERSION
-RUN echo "Tag: $VERSION" > ./public/VERSION.txt
+ARG APP_VERSION
+RUN echo "App Version: $APP_VERSION" > ./public/VERSION.txt
 
 CMD ["serve"]
