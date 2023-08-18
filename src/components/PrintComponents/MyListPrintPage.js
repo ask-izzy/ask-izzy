@@ -40,7 +40,7 @@ export default function MyListPrintPage({
                 </div>
             </div>
             <div>
-                The services bellow are from <b>www.askizzy.org.au</b>
+                The services below are from <b>www.askizzy.org.au</b>
             </div>
             <ul className="my-list-print-list">
                 {services.map((service, index) => {
