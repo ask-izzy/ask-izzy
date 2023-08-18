@@ -75,7 +75,7 @@ export default async function handler(req: any, res: any): any {
     try {
         const messageText = getShareMessage({
             services,
-            baseUrl: `${process.env.SITE_PROTOCOL}://${process.env.SITE_DOMAIN.split("|")[0]}`,
+            baseUrl: `${process.env.SITE_BASE_URL}`,
             toName: body.toName,
             fromName: body.fromName,
             fromRole: body.fromRole,

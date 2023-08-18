@@ -60,10 +60,8 @@ export default async function handler(req: any, res: any) {
             )
     )
 
-    const baseUrl = `${process.env.SITE_PROTOCOL}://${process.env.SITE_DOMAIN.split("|")[0]}`
-
     function getFullUrl(path: string): string {
-        return (new URL(path, baseUrl)).href
+        return (new URL(path, process.env.SITE_BASE_URL)).href
     }
 
     const xml = `

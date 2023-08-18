@@ -11,6 +11,7 @@ declare class ProcessWithEnvVars extends Process {
         NEXT_PUBLIC_SITE_EMAIL: string,
         SITE_PROTOCOL: string,
         SITE_DOMAIN: string,
+        SITE_BASE_URL: string,
         RECAPTCHA_SECRET_KEY: string,
         NEXT_PUBLIC_RECAPTCHA_SITE_KEY: string,
         NEXT_PUBLIC_SHARE_SERVICES_EMAIL_ENVIRONMENT: string,

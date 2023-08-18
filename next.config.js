@@ -108,6 +108,7 @@ module.exports = {
     env: {
         ENVIRONMENT: process.env.ENVIRONMENT,
         DOMAINS_TO_PROXY: getDomainsToProxy(),
+        SITE_BASE_URL: `${process.env.SITE_PROTOCOL}://${process.env.SITE_DOMAIN.split("|")[0]}`,
     },
     transpilePackages: [
         "is-plain-obj",
