@@ -1,7 +1,6 @@
 /* @flow */
 import fs from "fs-extra"
 import Path from "path"
-import ChildProcess from "child_process"
 
 import cmsAllPagesQuery from "@/queries/content/allPages"
 import {queryGraphQlWithErrorLogging} from "@/src/utils/apolloClient";
@@ -19,37 +18,11 @@ export default async function handler(req: any, res: any) {
         fetchPolicy: "no-cache",
     }).then(res => res.data.pages)
 
-    function getLastModifiedDate(filePath: string): string {
-        const lastModifiedDate = ChildProcess.spawnSync(
-            "git",
-            [
-                "--no-pager",
-                "log",
-                "-1",
-                "--date=iso-strict-local",
-                "--format='%ad'",
-                "--",
-                "pages/404.js",
-            ],
-            {
-                env: {
-                    TZ: "UTC",
-                },
-            }
-        ).stdout.toString().match(/^'(.*)'/)?.[1]
-
-        if (!lastModifiedDate) {
-            throw new Error(`Could not get last modified date for ${filePath}`)
-        }
-
-        return lastModifiedDate
-    }
-
     const staticPages = await fs.readdir("./pages").then(
         filenames => filenames
             .map(filename => ({
                 slug: filename.match(/([A-Za-z0-9_-]+).js/)?.[1],
-                modifiedOn: getLastModifiedDate(Path.join("./pages", filename)),
+                modifiedOn: (new Date()).toISOString(),
             }))
             .filter(
                 page =>
@@ -60,10 +33,8 @@ export default async function handler(req: any, res: any) {
             )
     )
 
-    const baseUrl = `${process.env.SITE_PROTOCOL}://${process.env.SITE_DOMAIN.split("|")[0]}`
-
     function getFullUrl(path: string): string {
-        return (new URL(path, baseUrl)).href
+        return (new URL(path, process.env.SITE_BASE_URL)).href
     }
 
     const xml = `

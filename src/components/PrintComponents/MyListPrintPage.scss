@@ -33,6 +33,7 @@
 
         .my-list-print-about-title {
             font-size: 16px;
+            font-weight: bold;
         }
 
         .my-list-print-about-description {
@@ -43,12 +44,15 @@
             display: flex;
             flex-direction: column;
             align-items: center;
+            min-width: 12em;
 
             .my-list-print-qr-description {
-                display: flex;
-                flex-direction: column;
-                align-items: center;
-                font-weight: bolder;
+                text-align: center;
+                font-weight: bold;
+            }
+
+            .qr-code {
+                width: 120px;
             }
         }
 

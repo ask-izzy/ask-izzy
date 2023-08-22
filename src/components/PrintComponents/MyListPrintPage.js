@@ -2,12 +2,13 @@
 
 import type {Element as ReactElement} from "React";
 import React from "react";
-import moment from "moment"
+import { generate } from "lean-qr";
+// $FlowIgnore TypeScript when???
+import { toSvgDataURL } from "lean-qr/extras/svg";
 
 import Address from "@/src/components/Address";
 import PhoneSolid from "@/src/icons/PhoneSolid";
 import AskIzzyGreyScale from "@/src/icons/AskIzzyGreyScale";
-import UsingAskIzzyQrCode from "@/src/icons/UsingAskIzzyQrCode";
 import Spacer from "@/src/components/Spacer";
 
 type Props = {
@@ -16,8 +17,17 @@ type Props = {
 export default function MyListPrintPage({
     services,
 }: Props): ReactElement<"div"> {
-    const date = moment();
-    const formattedDate = date.format("DD/MM/YYYY");
+    const qrCodeDataURL = toSvgDataURL(
+        generate(`${process.env.SITE_BASE_URL}/using-ask-izzy?p=p`),
+        {
+            on: "black",
+            off: "transparent",
+            padX: 4,
+            padY: 4,
+            xmlDeclaration: false,
+            scale: 1,
+        }
+    );
 
     return (
         <div
@@ -26,7 +36,7 @@ export default function MyListPrintPage({
             <div className="my-list-print-header">
                 <AskIzzyGreyScale />
                 <div className="date-container">
-                    {formattedDate}
+                    {(new Date()).toLocaleDateString()}
                 </div>
             </div>
             <div>
@@ -92,7 +102,7 @@ export default function MyListPrintPage({
             <Spacer />
             <div className="my-list-print-footer">
                 <div className="my-list-print-about">
-                    <div className="my-list-print-about-title"><b>About Ask Izzy</b></div>
+                    <div className="my-list-print-about-title">About Ask Izzy</div>
 
                     <div className="my-list-print-about-description">
                         Ask Izzy is a free online directory of support services when you need help with housing,
@@ -101,14 +111,13 @@ export default function MyListPrintPage({
                 </div>
                 <div className="my-list-print-qr">
                     <div className="my-list-print-qr-description">
-                        <div>
-                            Learn about Ask Izzy
-                        </div>
-                        <div>
-                            in other languages
-                        </div>
+                        Learn about Ask Izzy
+                        in other languages
                     </div>
-                    <UsingAskIzzyQrCode />
+                    <img
+                        src={qrCodeDataURL}
+                        className="qr-code"
+                    />
                 </div>
             </div>
         </div>

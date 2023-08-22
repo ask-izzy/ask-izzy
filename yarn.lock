@@ -9869,6 +9869,11 @@ lazy-universal-dotenv@^3.0.1:
     dotenv "^8.0.0"
     dotenv-expand "^5.1.0"
 
+lean-qr@^2.3.1:
+  version "2.3.1"
+  resolved "https://registry.yarnpkg.com/lean-qr/-/lean-qr-2.3.1.tgz#aea7afe3c0da65ab0ce9571eb64e38be78bb2004"
+  integrity sha512-RhvX+K3uEczJXxfON3HRvYD5ycxsg0s3bt/dz2RP42XjOPbsbgprJk1491iAJO6RZ7eVwQZG7n+X11vuht0o1w==
+
 levn@^0.3.0, levn@~0.3.0:
   version "0.3.0"
   resolved "https://registry.yarnpkg.com/levn/-/levn-0.3.0.tgz#3b09924edf9f083c0490fdd4c0bc4421e04764ee"
