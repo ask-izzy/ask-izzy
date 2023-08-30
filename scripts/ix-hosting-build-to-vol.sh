@@ -12,7 +12,7 @@ IFS=$'\n\t'
 if [ -z "$ECS_CONTAINER_METADATA_URI_V4" ]; then
     echo "Error: AWS ECS container agent endpoint not found. Aborting deployment" 1>&2
     exit 1
-fi 
+fi
 
 TASK_DEFINITION_REVISION=$(node -e "import('node-fetch').then( fetch => fetch.default('${ECS_CONTAINER_METADATA_URI_V4}/task').then(res => res.json()).then(res => console.log(res['Revision'] ?? '')) )")
 
@@ -27,7 +27,7 @@ STORAGE_BUILD_DIR="/storage/$TASK_DEFINITION_REVISION"
 BUILD_COMPLETE_FILE="$STORAGE_BUILD_DIR/.build-complete"
 BUILDER_HEARTBEAT_FILENAME=".builder-heartbeat"
 SERVER_HEARTBEAT_FILENAME=".server-heartbeat"
-FLATLINE_DURATION_BEFORE_BUILDER_DECLARED_DEAD=$((60 * 5)) # 5 minutes
+FLATLINE_DURATION_BEFORE_BUILDER_DECLARED_DEAD=$((60 * 10)) # 10 minutes
 FLATLINE_DURATION_BEFORE_SERVER_DECLARED_DEAD=$((60 * 60 * 24 * 7)) # 1 week
 
 # The first container that attempts to create the build dir is responsible for building.
@@ -76,11 +76,11 @@ if [ "$CREATE_STORAGE_BUILD_DIR_EXIT_STATUS" -eq 0 ]; then
         LAST_HEARTBEAT=0
         if [ -f "$STORAGE_DIR_ITEM/$BUILDER_HEARTBEAT_FILENAME" ]; then
             LAST_HEARTBEAT=$(cat "$STORAGE_DIR_ITEM/$BUILDER_HEARTBEAT_FILENAME")
-        fi 
+        fi
         if [ -f "$STORAGE_DIR_ITEM/$SERVER_HEARTBEAT_FILENAME" ]; then
             LAST_HEARTBEAT=$(cat "$STORAGE_DIR_ITEM/$SERVER_HEARTBEAT_FILENAME")
-        fi 
-        # Remove build if last heartbeat was longer than $FLATLINE_DURATION_BEFORE_SERVER_DECLARED_DEAD seconds ago 
+        fi
+        # Remove build if last heartbeat was longer than $FLATLINE_DURATION_BEFORE_SERVER_DECLARED_DEAD seconds ago
         if [ "$LAST_HEARTBEAT" -lt $(($(date +%s)-FLATLINE_DURATION_BEFORE_SERVER_DECLARED_DEAD)) ]; then
             echo Deleting previous build: "$STORAGE_DIR_ITEM"
             rm -r "$STORAGE_DIR_ITEM"
