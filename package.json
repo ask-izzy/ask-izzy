@@ -10,7 +10,7 @@
     "build": "next build",
     "start": "next start -p 8000",
     "deploy": "exit 0",
-    "serve": "scripts/ix-hosting-build-to-vol.sh && yarn start",
+    "serve": "scripts/ix-hosting-build-on-deploy.sh && yarn start",
     "test-mocha-personalisation": "mocha test/personalisation.js",
     "test-mocha-category-queries": "mocha test/category-queries.js",
     "test-mocha-features-1": "mocha test/features-1.js",

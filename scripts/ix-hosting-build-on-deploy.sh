@@ -3,6 +3,12 @@
 # This file is responsible for coordinating the build on deploy process which hosting Ask Izzy on Infoxchange infrastructure.
 # It is unlikely to be needed when deploying on other platforms.
 
+# We want to balance keeping around build files from recently active versions of izzy around so that if we have to rollback we don't
+# need to re-build and thus give us a better chance of a clean rollback. But we also don't want to keep all build files forever
+# for space reasons. So when an instance of izzy is actively running it updates a heartbeat file every minute with the version
+# that's running (it's versioned using the task defintion id). Then whenever a new deploy occurs as part of that process it'll
+# delete the build files of any version of ask izzy that hasn't been actively running in the past week.
+
 # Enable strict mode
 # http://redsymbol.net/articles/unofficial-bash-strict-mode/
 set -euo pipefail
@@ -95,16 +101,11 @@ else
         exit 1
     fi
 
-    # Report server heartbeat
-    (
-        while true; do
-            date +%s >"$STORAGE_BUILD_DIR/$SERVER_HEARTBEAT_FILENAME"
-            sleep 60
-        done
-    ) &
-
     # Wait if build is still in progress
     if [ ! -f "$BUILD_COMPLETE_FILE" ]; then
+        # Sleep for a second to avoid race condition where builder has started and created STORAGE_BUILD_DIR but hasn't yet
+        # created BUILDER_HEARTBEAT_FILENAME
+        sleep 1
         BUILDER_HEARTBEAT_PATH="$STORAGE_BUILD_DIR/$BUILDER_HEARTBEAT_FILENAME"
         if [ ! -f "$BUILDER_HEARTBEAT_PATH" ] || [ "$(cat "$BUILDER_HEARTBEAT_PATH")" -lt $(($(date +%s)-FLATLINE_DURATION_BEFORE_BUILDER_DECLARED_DEAD)) ]; then
             echo "Unfinished build exists but builder appears to have died" 1>&2
@@ -125,5 +126,13 @@ else
     time cp -a "$STORAGE_BUILD_DIR/.next" .
     echo "Finished copying."
 fi
+
+# Report server heartbeat - this continues running after this script exits
+(
+    while true; do
+        date +%s >"$STORAGE_BUILD_DIR/$SERVER_HEARTBEAT_FILENAME"
+        sleep 60
+    done
+) &
 
 echo "Build ID: $TASK_DEFINITION_REVISION" >> ./public/VERSION.txt
