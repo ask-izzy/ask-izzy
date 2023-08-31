@@ -11,6 +11,8 @@ services:
     depends_on:
       aws-ecs-api-mock:
         condition: service_healthy
+    networks:
+      - internal
     environment:
       SITE_PROTOCOL: "https"
       SITE_DOMAIN: "askizzy.org.au"
@@ -39,12 +41,18 @@ services:
       - app-serve
     ports:
       - "8000:8000"
+    networks:
+      - default
+      - internal
 
   http-proxy:
     image: vimagick/tinyproxy
     platform: linux/amd64
     command: sh -c "sed -i -e 's/^LogLevel.*/LogLevel Warning/' /etc/tinyproxy/tinyproxy.conf && tinyproxy -d"
     restart: unless-stopped
+    networks:
+      - default
+      - internal
 
   aws-ecs-api-mock:
     image: codfish/json-server:0.17.3
@@ -55,6 +63,13 @@ services:
       interval: 1s
       timeout: 3s
       retries: 30
+    networks:
+      - default
+      - internal
 
 volumes:
   storage:
+
+networks:
+  internal:
+    internal: true
