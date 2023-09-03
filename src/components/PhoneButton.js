@@ -10,7 +10,7 @@ import classnames from "classnames"
 import type { phone } from "../iss/general";
 import {toCamelCase} from "../utils/strings";
 import ScreenReader from "./ScreenReader";
-import UrlsToLinks from "./UrlsToLink"
+import FormatText from "./FormatText"
 import {PhoneHref} from "@/helpers/regex.helpers"
 
 type Props = phone & {
@@ -76,7 +76,7 @@ function PhoneButton({
                 </div>
             </Link>
             <div className="details-container">
-                <UrlsToLinks>{displayComment()}</UrlsToLinks>
+                <FormatText>{displayComment()}</FormatText>
                 {
                     hasDetails &&
                     <div className="crisis-line-details">

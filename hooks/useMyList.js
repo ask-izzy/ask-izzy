@@ -6,13 +6,14 @@ import Service from "@/src/iss/Service"
 type UseMyList = {
     myListServices: Array<Service>, // this array will be sorted from newest to oldest
     isLoading: boolean,
+    myListCount: number | void,
     addServiceToMyList: (service: Service) => void,
     removeServiceFromMyList: (service: Service) => void,
     clearAllMyListServices: () => void,
 }
 
 export default (): UseMyList => {
-    const {myList, setMyList, isLoading} = useMyListContext()
+    const {myList, setMyList, isLoading, myListCount} = useMyListContext()
     const {
         serviceAddedToMyList,
         serviceRemovedFromMyList,
@@ -43,6 +44,7 @@ export default (): UseMyList => {
     return {
         myListServices: myList,
         isLoading,
+        myListCount,
         addServiceToMyList,
         removeServiceFromMyList,
         clearAllMyListServices,

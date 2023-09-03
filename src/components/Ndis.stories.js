@@ -27,7 +27,7 @@ StandardWithSpacer.args = {
     object: getServiceFixture({
         ndis_approved: true,
     }),
-    spacer: true,
+    withSpacer: true,
 };
 
 export const Compact: typeof Template = Template.bind({});

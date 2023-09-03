@@ -17,7 +17,7 @@
         gap: 2em;
         padding-bottom: 2.5em;
 
-        @media ($tablet) {
+        @media ($viewport-is-wide) {
             grid-template-columns: 1fr 1fr;
             grid-template-areas:
                 'left-column right-column'

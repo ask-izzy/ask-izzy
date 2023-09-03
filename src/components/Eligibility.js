@@ -5,7 +5,7 @@ import React from "react"
 import _ from "underscore"
 import _string from "underscore.string"
 
-import UrlsToLinks from "./UrlsToLink"
+import FormatText from "./FormatText"
 
 type Props = {
     catchment: string,
@@ -66,34 +66,40 @@ function Eligibility({
 
     function renderCatchment(): void | ReactNode {
         if (catchment && !catchment.match(/^open.?$/i)) {
-            return renderItem(`Located in ${catchment}`)
+            return renderList([`Located in ${catchment}`])
         }
     }
 
-    function renderItem(text: string): void | ReactNode {
-        if (text) {
+    function renderList(listItems: string[]): ReactNode | void {
+        if (listItems.length) {
             return (
-                <li key={text}>
-                    <UrlsToLinks key={text}>{text}</UrlsToLinks>
-                </li>
+                <FormatText
+                    key={JSON.stringify(listItems)}
+                    paragraphWrapperElement="li"
+                >
+                    {listItems}
+                </FormatText>
             )
+        } else {
+            return
         }
     }
 
-    function renderEligibility(eligibility: ?string): any {
+    function renderEligibility(eligibility: ?string): ReactNode | void {
         const eligibilities = _.uniq(
             (eligibility || "")
                 .split(/\n|;/g)
                 .map((str) => _string.capitalize(str.trim()))
+                .filter(text => text)
         )
-        return _.compact(_(eligibilities).map(renderItem))
+        return renderList(eligibilities)
     }
 
     function renderReferralInfo(): void | ReactNode {
         const referral = (referralInfo || "").trim()
 
         if (referral && !referral.match(/^self\.?$/i)) {
-            return renderItem(`Referred by ${referral}`)
+            return renderList([`Referred by ${referral}`])
         }
     }
 
