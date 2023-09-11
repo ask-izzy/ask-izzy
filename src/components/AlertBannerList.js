@@ -32,7 +32,11 @@ function AlertBannerList({
             screenLocation,
         },
     });
-    useEffect(checkCollapsedStatus, [data])
+    useEffect(() => {
+        if (data?.alerts) {
+            checkCollapsedStatus(data.alerts)
+        }
+    }, [data])
 
     if (loading) {
         return null;
@@ -47,51 +51,42 @@ function AlertBannerList({
         info: 1,
         warn: 2,
     }
-    let containsWarnings = false
-    let alertStorageObj = {}
-    const alerts = data.alerts.map(
-        (alert) => {
-            //check for warnings
-            if (alert.alertLevel === "warn") {
-                containsWarnings = true
-            }
-            //arrange obj for storage
-            alertStorageObj[alert.id] = alert.updated_at
-            return ({
-                ...alert,
-                "created_at": new Date(alert.created_at),
-                "updated_at": new Date(alert.updated_at),
-            })
-        }
-    ).sort(
-        (a, b) =>
-            // more urgent first
-            alertLevelMap[b.alertLevel] - alertLevelMap[a.alertLevel] ||
+    const alerts = data.alerts.map(alert => ({
+        ...alert,
+        "created_at": new Date(alert.created_at),
+        "updated_at": new Date(alert.updated_at),
+    })).sort((a, b) =>
+    // more urgent first
+        alertLevelMap[b.alertLevel] - alertLevelMap[a.alertLevel] ||
             // state based alerts over national
             (b.states.length && 1) - (a.states.length && 1) ||
             // newer first
             b.updated_at - a.updated_at
     )
 
-    function checkCollapsedStatus() {
-        const previousAlerts = storage.getJSON("previous-Alerts")
-        let hasNewAlerts = false
+    function checkCollapsedStatus(alerts) {
+        const previousAlertsStorageKey = "previous-Alerts"
+        let previousAlertsUpdatedAtMap = storage.getJSON(previousAlertsStorageKey)
 
-        for (let alert in alertStorageObj) {
-            if (
-                !previousAlerts ||
-                !(alert in previousAlerts) ||
-                alertStorageObj[alert].updated_at !== previousAlerts[alert].updated_at
-            ) {
-                hasNewAlerts = true
-            }
+        if ((typeof previousAlertsUpdatedAtMap !== "object") || previousAlertsUpdatedAtMap === null) {
+            previousAlertsUpdatedAtMap = {}
         }
-        setIsCollapsed(!(containsWarnings && hasNewAlerts))
-        if (alertStorageObj) {
-            storage.setJSON(
-                "previous-Alerts", {...previousAlerts, ...alertStorageObj}
-            )
+
+        const hasNewAlerts = alerts.some(
+            alert => alert.updated_at !== previousAlertsUpdatedAtMap[alert.id]
+        )
+
+        const allAlertsDefaultToOpen = alerts.every(alert => alert.defaultToOpen)
+        const someAlertsAreWarnings = alerts.some(alert => alert.alertLevel === "warn")
+
+        if (hasNewAlerts && (someAlertsAreWarnings || allAlertsDefaultToOpen)) {
+            setIsCollapsed(false)
         }
+
+        const alertsUpdatedAtMap = Object.fromEntries(
+            alerts.map(alert => [alert.id, alert.updated_at])
+        )
+        storage.setJSON(previousAlertsStorageKey, alertsUpdatedAtMap)
     }
 
     function onCollapseButtonClick(
