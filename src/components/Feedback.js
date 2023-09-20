@@ -5,7 +5,6 @@ import React from "react"
 
 import Link from "./base/Link"
 import Service from "../iss/Service"
-import Spacer from "./Spacer"
 
 type Props = {
     object: Service,
@@ -14,9 +13,7 @@ type Props = {
 function Feedback({object}: Props): ReactNode {
     return (
         <div className="Feedback">
-            <Spacer />
             <p>
-                Email us at{" "}
                 <Link
                     className="suggestChange"
                     analyticsEvent={{
@@ -45,9 +42,8 @@ function Feedback({object}: Props): ReactNode {
                             )
                     }
                 >
-                    {process.env.NEXT_PUBLIC_SITE_EMAIL}
-                </Link> with feedback or changes to service information
-                if details here need updating.
+                    Report error
+                </Link> if service details are incorrect.
             </p>
         </div>
     )

@@ -262,9 +262,9 @@ function ServicePane({service}: Props): ReactNode {
                             }
                             <ContactMethods object={service} />
                             <ImportantInformation object={service}/>
-                            <Feedback object={service} />
                         </div>
                     </BoxedText>
+                    <Feedback object={service} />
                 </div>
 
                 { renderSiblings() }

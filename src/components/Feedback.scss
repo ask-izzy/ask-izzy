@@ -3,4 +3,5 @@
 .Feedback {
     color: #{colours.get-static('colour-text-mid')};
     color: var(--colour-text-mid);
+    margin: 15px;
 }
