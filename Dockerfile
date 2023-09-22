@@ -28,9 +28,7 @@ RUN --mount=type=cache,target=/var/cache/apt,sharing=locked \
     apt-get -y update && \
     apt-get -y --no-install-recommends install \
         # Used by start-server-and-test
-        procps \
-        # Used for open fd debugging
-        lsof && \
+        procps && \
     mkdir /storage && \
     chown $UID:$GID /storage
 
