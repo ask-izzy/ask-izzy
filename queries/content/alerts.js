@@ -1,32 +1,71 @@
-/* $FlowIgnore */
+/* @flow */
 
 import gql from "graphql-tag";
 
-export default gql`
+const alertsQuery: any = gql`
 query Alerts(
-  $state: [String],
-  $screenLocation: [String],
+    $state: [String],
+    $screenLocation: String,
 ) {
-  alerts(
-    where: {
-      _or: [
-        { states_null: true },
-        { states: { Name_in: [$state] } },
-      ]
-      screenLocation: $screenLocation,
-    },
-  ) {
-    id
-    title
-    body
-    created_at
-    updated_at
-    alertLevel
-    defaultToOpen
-    states {
-      Name
+    alerts(
+        filters: {
+            states: {
+                or: [
+                    { id: {null: true} }
+                    { Name: {in: $state} }
+                ]
+            }
+            screenLocation: {eq: $screenLocation}
+        }
+    ) {
+        data {
+
+            id
+            attributes {
+                title
+                body
+                createdAt
+                updatedAt
+                alertLevel
+                defaultToOpen
+                states {
+                    data {
+                        attributes {
+                            Name
+                        }
+                    }
+                }
+                screenLocation
+            }
+        }
     }
-    screenLocation
-  }
 }
 `
+
+export default alertsQuery
+
+export type CmsResponseAlerts = {
+    alerts: {
+        data: Array<CmsAlert>
+    } | null
+}
+
+export type CmsAlert = {
+    id: number | null,
+    attributes: {
+        title: string,
+        body: string,
+        createdAt: string | null,
+        updatedAt: string | null,
+        alertLevel: string,
+        defaultToOpen: boolean | null,
+        states: {
+            data: Array<{
+                attributes: {
+                    Name: string,
+                } | null
+            }>
+        } | null,
+        screenLocation: string,
+    } | null
+}

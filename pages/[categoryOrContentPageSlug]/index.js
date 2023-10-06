@@ -4,14 +4,15 @@ import type { GetStaticPaths, GetStaticProps } from "next"
 import {promises as fs} from "fs"
 
 import cmsPageQuery from "@/queries/content/page"
+import type {CmsResponsePage} from "@/queries/content/page"
 import cmsAllPagesQuery from "@/queries/content/allPages"
 import cmsCalloutQuery from "@/queries/content/callout";
+import type {CmsCalloutBoxType, CmsCalloutBoxFragmentType} from "@/queries/content/callout";
 import categories, { getCategory } from "@/src/constants/categories"
 import ResultsListPage from "@/components/pages/ResultsListPage"
 import DynamicPage from "@/components/pages/DynamicPage.js"
 import type {RouteSharedProps} from "@/flow/routes"
 import {queryGraphQlWithErrorLogging} from "@/src/utils/apolloClient";
-import type {CalloutType} from "@/src/components/CalloutBox"
 import NotFoundStaticPage from "@/components/pages/NotFoundStaticPage"
 
 type Props = {
@@ -21,7 +22,7 @@ type Props = {
         // query. After we move to typescript we should setup graphql-codegen
         // but it's okay to use Object for now since graphql is strictly typed
         // and will throw an error if the returned data doesn't fit the schema.
-    embeddedCallouts?: Array<CalloutType>,
+    embeddedCallouts?: Array<CmsCalloutBoxFragmentType>,
 }
 
 export const getStaticPaths: GetStaticPaths = async() => {
@@ -32,7 +33,7 @@ export const getStaticPaths: GetStaticPaths = async() => {
     const contentPages = await queryGraphQlWithErrorLogging({
         query: cmsAllPagesQuery,
         fetchPolicy: "no-cache",
-    }).then(res => res.data.pages)
+    }).then(res => res.data.pages.data)
 
     // Load static pages to make sure the paths don't clash the the paths of
     // pages in the CMS.
@@ -42,7 +43,7 @@ export const getStaticPaths: GetStaticPaths = async() => {
         .filter(pathSegment => pathSegment)
 
     const contentPagePaths = contentPages
-        .map(page => page.Path.replace(/^\//, ""))
+        .map(page => page.attributes.Path.replace(/^\//, ""))
         .filter(slug => {
             if (staticPaths.includes(slug)) {
                 console.warn(
@@ -66,6 +67,8 @@ export const getStaticPaths: GetStaticPaths = async() => {
     }
 }
 
+// We should break this up into several functions at some point
+// eslint-disable-next-line complexity
 export const getStaticProps: GetStaticProps<Props> = async({params}) => {
     const category = getCategory(params.categoryOrContentPageSlug)
     if (category) {
@@ -82,13 +85,13 @@ export const getStaticProps: GetStaticProps<Props> = async({params}) => {
     }
 
     try {
-        const contentPage = await queryGraphQlWithErrorLogging({
+        const contentPage = await queryGraphQlWithErrorLogging<CmsResponsePage>({
             query: cmsPageQuery,
             fetchPolicy: "no-cache",
             variables: {
                 path: `/${params.categoryOrContentPageSlug}`,
             },
-        }).then(res => res.data.pages[0])
+        }).then(res => res.data.pages?.data[0])
 
         if (!contentPage) {
             console.error(
@@ -103,13 +106,13 @@ export const getStaticProps: GetStaticProps<Props> = async({params}) => {
         }
 
         const embeddedCalloutSlugs = [
-            ...(contentPage.Body || "")
+            ...(contentPage.attributes?.Body || "")
                 .matchAll(/>\s+\[callout\(([^)]+)\)\]\s*(?:\n|$)/g),
         ].map(matchResult => matchResult[1])
 
         let embeddedCallouts = []
         if (embeddedCalloutSlugs.length) {
-            const { data } = await queryGraphQlWithErrorLogging({
+            const { data } = await queryGraphQlWithErrorLogging<CmsCalloutBoxType>({
                 query: cmsCalloutQuery,
                 fetchPolicy: "no-cache",
                 variables: {
@@ -117,17 +120,17 @@ export const getStaticProps: GetStaticProps<Props> = async({params}) => {
                 },
             })
 
-            embeddedCallouts = data.callouts
+            embeddedCallouts = data.callouts.data
         }
 
         return {
             props: {
                 contentPage,
                 embeddedCallouts,
-                pageTitle: contentPage.Title,
+                pageTitle: contentPage.attributes?.Title || "",
                 pageType: [
                     "Static Page",
-                    contentPage.Title,
+                    contentPage.attributes?.Title || "Error getting title",
                 ],
             },
             revalidate: 10,

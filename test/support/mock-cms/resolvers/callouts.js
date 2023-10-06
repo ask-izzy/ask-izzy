@@ -1,28 +1,34 @@
 /* @flow */
 
-type Callout = {
-    ShowHeading: boolean,
-    Key: string,
-    Heading: string,
-}
+type Callout = {|
+    attributes: {|
+        Key: string,
+        ShowHeading: boolean | null,
+        Heading: string,
+    |}
+|}
+
 
 export default (
     parent: Object, args: Object, context: Object, info: Object
-): Array<Callout> => {
-    let keys = args?.where?.Key || info?.variableValues?.keys
+): {data: Array<Callout>} => {
+    let keys = args?.filters?.Key?.eq || info?.variableValues?.keys
     if (typeof keys === "string") {
         keys = [keys]
     }
-    return callouts
-        .filter(callout => !keys || keys.includes(callout.Key))
+    return {
+        data: callouts.filter(callout => !keys || keys.includes(callout.attributes?.Key || "")),
+    }
 }
 
-export const testCallout = {
-    ShowHeading: true,
-    Key: "test",
-    Heading: "This callout was embedded in the page body",
+export const testCallout: Callout = {
+    attributes: {
+        ShowHeading: true,
+        Key: "test",
+        Heading: "This callout was embedded in the page body",
+    },
 }
 
-const callouts = [
+const callouts: Array<Callout> = [
     testCallout,
 ]

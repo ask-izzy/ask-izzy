@@ -7,41 +7,16 @@ import StaticPage from "@/components/pages/StaticPage";
 import Accordion from "@/src/components/Accordion";
 import StrapiMarkdown from "@/src/components/StrapiMarkdown";
 import CalloutBox from "@/src/components/CalloutBox";
-import type {
-    CalloutBoxType,
-    CalloutType,
-} from "@/src/components/CalloutBox";
+import type {CmsCalloutBoxFragmentType} from "@/queries/content/callout";
+import type {CmsPage} from "@/queries/content/page";
 import BlockQuote from "@/src/components/base/BlockQuote";
 
-type PageDetails = {
-    id: number,
-    created_at: string,
-    updated_at: string,
-    Title: string,
-    Body: string,
-    Path: string,
-    BannerTextPrimary: string,
-    BannerTextSecondary: string,
-    Banner: {
-        id: number,
-        Key: string,
-        created_at: string,
-        updated_at: string,
-    },
-    Accordion: Array<{
-        id: number,
-        Title: string,
-        Content: string,
-    }>,
-    AccordionTitle: string,
-    CalloutBoxes: Array<CalloutBoxType>
-  }
 type ReactMarkdownQuoteProps = {
     children: React.Node,
 }
 type Props = {|
-    pageDetails: PageDetails,
-    embeddedCallouts: Array<CalloutType>
+    pageDetails: CmsPage,
+    embeddedCallouts: Array<CmsCalloutBoxFragmentType>
 |}
 
 function DynamicPage({pageDetails, embeddedCallouts}: Props): ReactNode {
@@ -62,53 +37,48 @@ function DynamicPage({pageDetails, embeddedCallouts}: Props): ReactNode {
 
             const [, calloutKey] = textContent.match(/\[callout\((.+)\)]/) || [];
             const callout = embeddedCallouts
-                .find(callout => calloutKey && callout.Key === calloutKey)
+                .find(callout => calloutKey && callout.attributes?.Key === calloutKey)
             if (callout) {
                 return (
-                    <CalloutBox
-                        calloutBoxes={[callout].map(callout => ({
-                            callout,
-                            Bottom: false,
-                            Top: false,
-                            created_at: "null",
-                            id: 0,
-                            updated_at: "null",
-                        }))}
-                        embedded={true}
-                    />
+                    <CalloutBox calloutBoxes={[callout]} />
                 )
             }
             return <BlockQuote>{props.children}</BlockQuote>
         }
 
+    const calloutBoxesAtTop = (pageDetails.attributes?.CalloutBoxes || [])
+        .filter(box => box.Top)
+        // Flow.js filter doesn't recognise that we filter out any null values in the next step so we type cast
+        .map(box => (((box.callout?.data): any): CmsCalloutBoxFragmentType))
+        .filter(box => box)
+
+    const calloutBoxesAtBottom: Array<CmsCalloutBoxFragmentType> = (pageDetails.attributes?.CalloutBoxes || [])
+        .filter(box => box.Bottom)
+        // Flow.js filter doesn't recognise that we filter out any null values in the next step so we type cast
+        .map(box => (((box.callout?.data): any): CmsCalloutBoxFragmentType))
+        .filter(box => box)
+
     return (
         <StaticPage
-            title={pageDetails.Title}
-            bannerName={pageDetails.Banner ? pageDetails.Banner.Key
-                : "hand-and-person-with-heart"}
-            bannerPrimary={pageDetails.BannerTextPrimary}
-            bannerSecondary={pageDetails.BannerTextSecondary}
+            title={pageDetails.attributes?.Title || ""}
+            bannerName={pageDetails.attributes?.Banner?.data?.attributes?.Key || "hand-and-person-with-heart"}
+            bannerPrimary={pageDetails.attributes?.BannerTextPrimary}
+            bannerSecondary={pageDetails.attributes?.BannerTextSecondary}
         >
             <div className="DynamicPage">
-                <CalloutBox
-                    calloutBoxes={pageDetails.CalloutBoxes}
-                    position="top"
-                />
+                <CalloutBox calloutBoxes={calloutBoxesAtTop} />
                 <StrapiMarkdown
                     renderers={{
                         "blockquote": renderEmbCallout,
                     }}
                 >
-                    {pageDetails.Body}
+                    {pageDetails.attributes?.Body || ""}
                 </StrapiMarkdown>
                 <Accordion
-                    title={pageDetails.AccordionTitle}
-                    items={pageDetails.Accordion}
+                    title={pageDetails.attributes?.AccordionTitle || ""}
+                    items={pageDetails.attributes?.Accordion || []}
                 />
-                <CalloutBox
-                    calloutBoxes={pageDetails.CalloutBoxes}
-                    position="bottom"
-                />
+                <CalloutBox calloutBoxes={calloutBoxesAtBottom} />
             </div>
         </StaticPage>
     )

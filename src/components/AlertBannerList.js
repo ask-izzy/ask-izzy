@@ -11,12 +11,19 @@ import Link from "./base/Link";
 import Info from "./../icons/Info";
 import Button from "./base/Button";
 import alertsQuery from "@/queries/content/alerts.js";
+import type {CmsResponseAlerts, CmsAlert} from "@/queries/content/alerts.js";
 import storage from "../storage";
 
 type Props = {
     screenLocation: string,
     state?: string,
     format?: string
+}
+
+type UseQueryResponse = {
+    loading: boolean,
+    error: Error,
+    data: CmsResponseAlerts
 }
 
 function AlertBannerList({
@@ -26,15 +33,16 @@ function AlertBannerList({
 }: Props): React.Node {
     const [isCollapsed, setIsCollapsed] = useState<boolean>(true)
 
-    const { loading, error, data } = useQuery(alertsQuery, {
+    const { loading, error, data }: UseQueryResponse = useQuery(alertsQuery, {
         variables: {
             state,
             screenLocation,
         },
     });
+
     useEffect(() => {
         if (data?.alerts) {
-            checkCollapsedStatus(data.alerts)
+            checkCollapsedStatus(data.alerts.data)
         }
     }, [data])
 
@@ -51,20 +59,22 @@ function AlertBannerList({
         info: 1,
         warn: 2,
     }
-    const alerts = data.alerts.map(alert => ({
-        ...alert,
-        "created_at": new Date(alert.created_at),
-        "updated_at": new Date(alert.updated_at),
-    })).sort((a, b) =>
-    // more urgent first
-        alertLevelMap[b.alertLevel] - alertLevelMap[a.alertLevel] ||
+    const alerts = [...(data.alerts?.data || [])].sort((a, b) => {
+        const aUpdatedAt = new Date(a.attributes?.updatedAt || "")
+        const bUpdatedAt = new Date(b.attributes?.updatedAt || "")
+        return (
+            // more urgent first
+            alertLevelMap[b.attributes?.alertLevel || "info"] - alertLevelMap[a.attributes?.alertLevel || "info"]
+        ) || (
             // state based alerts over national
-            (b.states.length && 1) - (a.states.length && 1) ||
+            (b.attributes?.states?.data.length ? 1 : 0) - (a.attributes?.states?.data.length ? 1 : 0)
+        ) || (
             // newer first
-            b.updated_at - a.updated_at
-    )
+            bUpdatedAt - aUpdatedAt
+        )
+    })
 
-    function checkCollapsedStatus(alerts) {
+    function checkCollapsedStatus(alerts: Array<CmsAlert>) {
         const previousAlertsStorageKey = "previous-Alerts"
         let previousAlertsUpdatedAtMap = storage.getJSON(previousAlertsStorageKey)
 
@@ -73,18 +83,18 @@ function AlertBannerList({
         }
 
         const hasNewAlerts = alerts.some(
-            alert => alert.updated_at !== previousAlertsUpdatedAtMap[alert.id]
+            alert => alert.attributes?.updatedAt !== previousAlertsUpdatedAtMap[alert.id || ""]
         )
 
-        const allAlertsDefaultToOpen = alerts.every(alert => alert.defaultToOpen)
-        const someAlertsAreWarnings = alerts.some(alert => alert.alertLevel === "warn")
+        const allAlertsDefaultToOpen = alerts.every(alert => alert.attributes?.defaultToOpen)
+        const someAlertsAreWarnings = alerts.some(alert => alert.attributes?.alertLevel === "warn")
 
         if (hasNewAlerts && (someAlertsAreWarnings || allAlertsDefaultToOpen)) {
             setIsCollapsed(false)
         }
 
         const alertsUpdatedAtMap = Object.fromEntries(
-            alerts.map(alert => [alert.id, alert.updated_at])
+            alerts.map(alert => [alert.id, alert.attributes?.updatedAt])
         )
         storage.setJSON(previousAlertsStorageKey, alertsUpdatedAtMap)
     }
@@ -130,15 +140,17 @@ function AlertBannerList({
         ) : null
     )
 
-    function renderAlert({id, title, body, alertLevel, defaultToOpen}) {
+    function renderAlert(alert: CmsAlert) {
+        const id = alert.id ?? -1
+        const {title, body, alertLevel, defaultToOpen} = alert.attributes || {}
         return <li key={id}>
             <AlertBanner
                 title={renderContent(title, id)}
                 body={renderContent(body, id)}
                 alertLevel={alertLevel}
-                defaultToOpen={defaultToOpen}
+                defaultToOpen={defaultToOpen || false}
                 analyticsEvent={{
-                    eventLabel: id,
+                    eventLabel: String(id),
                 }}
             />
         </li>

@@ -34,7 +34,7 @@
     "lint-flow": "scripts/check-flow-annotations.sh && flow --quiet",
     "lint-stylelint": "stylelint **/*.{css,scss,sass}",
     "lint-stylelint-fix": "stylelint --fix **/*.{css,scss,sass}",
-    "lint-jsonlint": "find . -iname '*.json' -not -path './.next/*' -not -path './.git/*' -not -path './node_modules/*' | xargs -L 1 jsonlint -q -c",
+    "lint-jsonlint": "find . -iname '*.json' -not -path './.next/*' -not -path './.git/*' -not -path './node_modules/*' -not -path './.cache/*' | xargs -L 1 jsonlint -q -c",
     "lint-pa11y": "npx -p @babel/node babel-node scripts/run-pa11y.js --ignore-existing-issues",
     "lint-dev-pa11y": "yarn run with --test-env --dev env PORT=3000 yarn lint-pa11y",
     "lint-hadolint": "scripts/hadolint.sh Dockerfile",

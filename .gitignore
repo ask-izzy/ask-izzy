@@ -11,3 +11,4 @@ package-lock.json
 /public/storybook
 /testing-screenshots
 .next
+.cache

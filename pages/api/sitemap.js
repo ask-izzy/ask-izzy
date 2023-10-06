@@ -3,6 +3,7 @@ import fs from "fs-extra"
 import Path from "path"
 
 import cmsAllPagesQuery from "@/queries/content/allPages"
+import type { CmsResponsePages } from "@/queries/content/allPages"
 import {queryGraphQlWithErrorLogging} from "@/src/utils/apolloClient";
 import categories from "@/src/constants/categories"
 
@@ -13,10 +14,10 @@ export default async function handler(req: any, res: any) {
         .map(category => category.key)
         .filter(slug => slug !== "search")
 
-    const contentPages = await queryGraphQlWithErrorLogging({
+    const contentPages = await queryGraphQlWithErrorLogging<CmsResponsePages>({
         query: cmsAllPagesQuery,
         fetchPolicy: "no-cache",
-    }).then(res => res.data.pages)
+    }).then(res => res.data.pages?.data || [])
 
     const staticPages = await fs.readdir("./pages").then(
         filenames => filenames
@@ -45,8 +46,8 @@ export default async function handler(req: any, res: any) {
     </url>
     ${contentPages.map(page => `
     <url>
-        <loc>${getFullUrl(page.Path)}</loc>
-        <lastmod>${page.updated_at}</lastmod>
+        <loc>${getFullUrl(page.attributes?.Path || "")}</loc>
+        <lastmod>${page.attributes?.updatedAt || ""}</lastmod>
     </url>
     `).join("")}
     ${staticPages.map(page => `

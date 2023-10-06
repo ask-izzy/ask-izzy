@@ -20,7 +20,7 @@ export function initMockCMSServer(): void {
 
     // Required so exported strapi graphql schema will validate
     const resolvers = {
-        Morph: {
+        GenericMorph: {
             __resolveType(obj, context, info) {
                 return null;
             },

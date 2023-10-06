@@ -1,5 +1,6 @@
 /* @flow */
 import cmsAllPagesQuery from "@/queries/content/allPages"
+import type { CmsResponsePages } from "@/queries/content/allPages"
 import {queryGraphQlWithErrorLogging} from "@/src/utils/apolloClient";
 
 // $FlowIgnore This would be fiddly to type correctly using flow.js
@@ -23,19 +24,19 @@ export default async function handler(req: any, res: any): any {
         const calloutId = req.body.entry.id
         let contentPages
         try {
-            const { data } = await queryGraphQlWithErrorLogging({
+            const { data } = await queryGraphQlWithErrorLogging<CmsResponsePages>({
                 query: cmsAllPagesQuery,
                 fetchPolicy: "no-cache",
             })
-            contentPages = data.pages
+            contentPages = data.pages?.data || []
         } catch (error) {
             throw error
         }
         const pathsToRegenerate = contentPages.filter(
-            page => page.CalloutBoxes.some(
-                calloutBox => calloutBox.callout.id === calloutId
+            page => page.attributes?.CalloutBoxes?.some(
+                calloutBox => calloutBox.callout?.data?.id === calloutId
             )
-        ).map(page => page.Path)
+        )?.map(page => page.attributes?.Path || "") || []
 
         return regeneratePages(pathsToRegenerate, res)
     }
