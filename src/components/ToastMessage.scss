@@ -17,12 +17,13 @@
             width: 25px;
             height: 25px;
             margin-bottom: -7px;
-
+            color: var(--colour-text-very-light);
+        
             path {
-                fill: var(--colour-text-dark);
-            }
-        }
+                fill: var(--colour-text-very-light);  
+        }        
     }
+}
 
     button {
         background-color: transparent;
