@@ -36,12 +36,13 @@
             color: var(--raw-colour-pure-black);
         }
 
-        font-size: 16px;
+        font-size: 15px;
 
         .Contact-text {
             text-overflow: ellipsis;
             white-space: nowrap;
             overflow: hidden;
+            font-size: 14px;
         }
 
         .Icon {

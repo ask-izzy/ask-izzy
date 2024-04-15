@@ -14,12 +14,12 @@ function ContactMethods({object}: Props) {
     const foldPoint = 1;
 
     function phones(): Array<Object> {
-        return object.Phones().map(details => ({
+        return object.Phones().map((details, idx) => ({
             type: "Phone",
             component: PhoneButton,
             details: {
                 ...details,
-                styleType: "hollow",
+                styleType: idx > 0 ? "link" : "solid",
             },
         }));
     }
@@ -54,10 +54,11 @@ function ContactMethods({object}: Props) {
     return (
         <div className="ContactMethods">
             <Spacer />
+            
             {/* Main phone number */}
             {phones().slice(0, 1).map(renderContactMethod)}
-
-            {/* Collapser for extra phone numbers plz work*/}
+            
+            {/* Collapser for extra phone numbers */}
             <Collapser
                 expandMessage="Show other contact options"
                 analyticsEvent={{
@@ -68,6 +69,9 @@ function ContactMethods({object}: Props) {
             >
                 {phones().slice(1).map(renderContactMethod)}
             </Collapser>
+
+            {/* Spacer before Email */}
+            <Spacer />
 
             {/* Email */}
             {emails().map(renderContactMethod)}
