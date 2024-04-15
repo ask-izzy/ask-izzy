@@ -36,27 +36,30 @@
     }
 
     .ContactButton {
-        background-color: #{colours.get-static('colour-crisis-white')};
-        background-color: var(--colour-crisis-white);
-        color: #{colours.get-static('colour-brand-primary-mid')};
+        background-color: #{colours.get-static('colour-brand-primary-mid')};
+        background-color: var(--colour-brand-primary-mid);
+        color: #{colours.get-static('colour-crisis-white')};
         color: var(--colour-brand-primary-mid);
         max-width: 320px;
-        margin-bottom: 5px;
-        border-radius: $rounded-border;
-        font-size: 18px;
+        max-height: 400px;
+        margin-bottom: px;
+        border-radius: 5px;
+        font-size: 13px;
         text-align: center;
         text-decoration: none;
 
         .Contact-text {
-            padding: 0;
+            margin-left: 60px;
+            padding: 10;
             display: inline;
             font-weight: bold;
+            color: #{colours.get-static('colour-crisis-white')};
         }
 
         .Icon {
             path {
-                fill: #{colours.get-static('colour-brand-primary-mid')};
-                fill: var(--colour-brand-primary-mid);
+                fill: #{colours.get-static('colour-crisis-white')};
+                fill: var(--colour-crisis-white);
 
                 @media print {
                     fill: #{colours.get-static('raw-colour-pure-black')};
@@ -68,7 +71,7 @@
 
     &.styleHollow {
         .ContactButton {
-            background-color: transparent;
+            background-color: #{colours.get-static('colour-button-primary')};
             color: #{colours.get-static('colour-button-primary')};
             color: var(--colour-button-primary);
             border: 1px solid #{colours.get-static('colour-button-primary')};
@@ -80,8 +83,8 @@
 
             .Icon {
                 path {
-                    fill: #{colours.get-static('colour-button-primary')};
-                    fill: var(--colour-button-primary);
+                    fill: #{colours.get-static('colour-crisis-white')};
+                    fill: var(--colour-crisis-white);
                 }
             }
         }
