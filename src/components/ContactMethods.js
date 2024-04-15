@@ -11,7 +11,6 @@ type Props = {
 }
 
 function ContactMethods({object}: Props) {
-    const foldPoint = 1;
 
     function phones(): Array<Object> {
         return object.Phones().map((details, idx) => ({
