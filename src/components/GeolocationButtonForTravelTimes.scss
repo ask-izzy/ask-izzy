@@ -5,18 +5,44 @@
     flex-direction: row;
     align-items: center;
     padding: 10px;
-    margin: 10px;
+    margin: 10px -5px;
+    justify-content: center;
+    
+
+    
+    
+    
+
+    
+    
+    
+
+
+    
+    
+    
+    
+    
+ 
+    
+    
     background-color: #{colours.get-static('colour-bg-standard-tint-2')};
     background-color: var(--colour-bg-standard-tint-2);
     color: #{colours.get-static('colour-text-mid')};
     color: var(--colour-text-mid);
-
+    
     .explainer {
         display: flex;
         align-items: center;
         font-size: 14px;
         font-weight: 400;
         justify-content: center;
+        padding: 10px opx;
+        margin: 10px 0px;
+        
+        
+    
+
 
         .explainerIcons {
             display: inline-flex;
