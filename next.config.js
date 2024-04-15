@@ -130,7 +130,7 @@ module.exports = {
         "next/dist/compiled/stream-browserify",
         "next/dist/compiled/stream-http",
         "postcss-html/node_modules/readable-stream",
-        "@clevercanyon/merge-change.fork",
+        "merge-change",
     ],
     // We need to manually handle trailing slash redirection so as not to apply redirect to requests to our external
     // resources proxy
