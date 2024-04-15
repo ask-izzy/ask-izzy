@@ -9,7 +9,7 @@
 
     .travel-time {
         position: relative;
-        padding:  0px;
+        padding: 0;
         color: #{colours.get-static('colour-text-dark')};
         color: var(--colour-text-dark);
 
@@ -43,8 +43,6 @@
 
         .travel-time {
             display: block;
-            
-
 
             span:nth-child(n+2) {
                 margin-right: 1em;
