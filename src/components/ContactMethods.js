@@ -47,16 +47,16 @@ function ContactMethods({object}: Props) {
             ...record.details,
         };
 
-        return React.createElement(record.component, props);
+        return React.createElement(record.component,props);
     }
 
     return (
         <div className="ContactMethods">
-            <Spacer />
-            
+            <Spacer/>
+
             {/* Main phone number */}
             {phones().slice(0, 1).map(renderContactMethod)}
-            
+
             {/* Collapser for extra phone numbers */}
             <Collapser
                 expandMessage="Show other contact options"
@@ -69,8 +69,7 @@ function ContactMethods({object}: Props) {
                 {phones().slice(1).map(renderContactMethod)}
             </Collapser>
 
-            {/* Spacer before Email */}
-            <Spacer />
+            {/* Spacer before Email */}            <Spacer/>
 
             {/* Email */}
             {emails().map(renderContactMethod)}

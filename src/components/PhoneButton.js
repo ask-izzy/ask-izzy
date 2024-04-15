@@ -33,9 +33,9 @@ function PhoneButton({
     hasDetails,
     styleType,
 }: Props): ReactNode {
-    const icon = styleType === "hollow" ?
-        <icons.Phone /> :
-        <icons.PhoneSolid />;
+    const icon = styleType === "hollow"
+        ? <icons.Phone />
+        : <icons.PhoneSolid />;
 
     function displayComment(): string {
         return comment ? comment : titleize(kind);
@@ -47,8 +47,8 @@ function PhoneButton({
                 "Contact",
                 "Phone",
                 "link-style" // adding a specific class for the link style
-            )
-        }>
+            )}>
+
             <ScreenReader>
                 Phone contact:
             </ScreenReader>
@@ -61,6 +61,7 @@ function PhoneButton({
                     eventLabel: `${number}`,
                     ...analyticsEventDetails,
                 }}>
+
                 <div className="Contact-text">
                     {icon}
                     <span>Call </span>
