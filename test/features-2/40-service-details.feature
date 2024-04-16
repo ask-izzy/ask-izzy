@@ -161,7 +161,7 @@ Feature: Service details page
         Email contact: Reception reception@service.org
         Service website: example.org
         Phone contact: Call (03) 3333 3333 (Phone)
-        Phone contact: Call 0477 777 777 (really a mobile)
+        Phone contact: Call 0477 777 777  (really a mobile)
         Phone contact: Call 1300 111 111 (Phone)
         -------------------------------------------
         When I click the "example.org" link
