@@ -47,7 +47,7 @@ function ContactMethods({object}: Props) {
             ...record.details,
         };
 
-        return React.createElement(record.component,props);
+        return React.createElement(record.component, props);
     }
 
     return (
