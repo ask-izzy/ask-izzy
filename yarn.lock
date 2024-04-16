@@ -1206,11 +1206,6 @@
   resolved "https://registry.yarnpkg.com/@bcoe/v8-coverage/-/v8-coverage-0.2.3.tgz#75a2e8b51cb758a7553d6804a5932d7aace75c39"
   integrity sha512-0hYQ8SB4Db5zvZB4axdMHGwEaQjkZzFjQiN9LVYvIFB2nSUHW9tYpxWriPrWDASIxiaXax83REcLxuSdnGPZtw==
 
-"@clevercanyon/merge-change.fork@1.8.14":
-  version "1.8.14"
-  resolved "https://registry.yarnpkg.com/@clevercanyon/merge-change.fork/-/merge-change.fork-1.8.14.tgz#b4b53c9721c565fd248a745e3d44eb64a1cb9b79"
-  integrity sha512-p9qbh6jf+PgNn2ikB/FMZtyDwh/WTYMgW/Qk1ylRB0jmS/MQGeE49RkUjpSA98lyykcclUw5N0G/TmeMJRF/9A==
-
 "@cnakazawa/watch@^1.0.3":
   version "1.0.4"
   resolved "https://registry.yarnpkg.com/@cnakazawa/watch/-/watch-1.0.4.tgz#f864ae85004d0fcab6f50be9141c4da368d1656a"

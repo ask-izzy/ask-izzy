@@ -1,5 +1,5 @@
 /* @flow */
-import objectMerge, {utils} from "@clevercanyon/merge-change.fork";
+import objectMerge, {utils} from "merge-change";
 import type { NextRouter } from "next/router";
 import {
     getSearchQueryChanges,
