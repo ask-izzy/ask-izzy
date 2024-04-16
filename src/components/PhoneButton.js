@@ -70,7 +70,7 @@ function PhoneButton({
                     <span className="number value">
                         {number}
                     </span>
-                    {styleType === "link" && <span>{" (" + displayComment() + ")"}</span>}
+                    {styleType === "link" && <span>{"(" + displayComment() + ")"}</span>}
                 </div>
             </Link>
             {styleType !== "link" && (
