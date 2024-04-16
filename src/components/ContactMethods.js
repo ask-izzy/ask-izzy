@@ -1,5 +1,5 @@
 /* @flow */
-
+import type {Node as ReactNode} from "React"
 import React from "react";
 import Collapser from "./general/Collapser";
 import Spacer from "./Spacer";
@@ -12,7 +12,7 @@ type Props = {
     object: Service,
 }
 
-function ContactMethods({object}: Props) {
+function ContactMethods({object}: Props): ReactNode {
 
     function phones(): Array<Object> {
         return object.Phones().map((details, idx) => ({
@@ -43,7 +43,7 @@ function ContactMethods({object}: Props) {
         }] : [];
     }
 
-    function renderContactMethod(record: Object, idx: number): React.Node {
+    function renderContactMethod(record: Object, idx: number): ReactNode {
         const props = {
             key: idx,
             ...record.details,
