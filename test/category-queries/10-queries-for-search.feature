@@ -27,6 +27,7 @@ Feature: Search personalisation flow generates the expected query
         And the iss search request should be:
         --------------------------------------
         {
+            "catchment": "true",
             "location": {
                 "name": "Melbourne, VIC"
             },
@@ -42,6 +43,7 @@ Feature: Search personalisation flow generates the expected query
         And the iss search request should be:
         --------------------------------------
         {
+            "catchment": "true",
             "location": {
                 "name": "Melbourne, VIC"
             },
