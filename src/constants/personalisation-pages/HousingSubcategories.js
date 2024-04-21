@@ -48,13 +48,15 @@ export default ({
         },
         "Homelessness support": {
             serviceTypes: [],
-            minimumShouldMatch: "30%",
+            
             $concat: {
                 term: ["\"homelessness support\""],
             },
             $removeElms: {
                 term: [
                     "housing",
+
+                    "-\"housing information\"",
                 ],
             },
             $applyIfShouldInjectAccessPoints: {
