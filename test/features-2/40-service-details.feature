@@ -158,9 +158,9 @@ Feature: Service details page
         Then I should see the contacts
         -------------------------------------------
         Phone contact: Call 1800 111 111 Freecall
-        Phone contact: Call (03) 3333 3333(Phone)
-        Phone contact: Call 0477 777 777(really a mobile)
-        Phone contact: Call 1300 111 111(Phone)
+        Phone contact: Call (03) 3333 3333 (Phone)
+        Phone contact: Call 0477 777 777 (really a mobile)
+        Phone contact: Call 1300 111 111 (Phone)
         Email contact: Reception reception@service.org
         Service website: example.org
         -------------------------------------------

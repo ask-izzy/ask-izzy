@@ -31,7 +31,6 @@
         margin-top: 5px;
         padding: 6px;
 
-
         @media print {
             color: #{colours.get-static('raw-colour-pure-black')};
             color: var(--raw-colour-pure-black);
