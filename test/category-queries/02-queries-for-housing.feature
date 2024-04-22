@@ -91,7 +91,6 @@ Feature: Housing personalisation flow generates the expected query
                 "name": "Melbourne, VIC"
             },
             "catchment": "prefer",
-            "minimumShouldMatch": "30%",
             "term": [
                 "-\"coordinating bodies\"",
                 "-\"respite care\"",

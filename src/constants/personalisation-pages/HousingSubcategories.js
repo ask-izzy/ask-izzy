@@ -48,7 +48,6 @@ export default ({
         },
         "Homelessness support": {
             serviceTypes: [],
-            
             $concat: {
                 term: ["\"homelessness support\""],
             },
