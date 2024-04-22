@@ -95,7 +95,6 @@ Feature: Housing personalisation flow generates the expected query
             "term": [
                 "-\"coordinating bodies\"",
                 "-\"respite care\"",
-                "-\"housing information\"",
                 "-hef",
                 "-\"holiday accommodation\"",
                 "\"homelessness support\""
