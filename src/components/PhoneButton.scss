@@ -36,22 +36,13 @@
     }
 
     .ContactButton {
-        background-color: #{colours.get-static('colour-brand-primary-mid')};
-        background-color: var(--colour-brand-primary-mid);
-        color: #{colours.get-static('colour-crisis-white')};
-        color: var(--colour-brand-primary-mid);
-        max-width: 320px;
-        margin-bottom: 5px;
+        background-color: var(--colour-brand-primary);
+        color: var(--colour-text-very-light);
         border-radius: 5px;
-        font-size: 13px;
-        text-align: center;
+        padding: 10px;
         text-decoration: none;
-        padding: 2px;
 
         .Contact-text {
-            margin-left: 38px;
-            margin-top: 1px;
-            padding: 15px;
             display: inline;
             font-weight: bold;
             font-size: 17px;
@@ -92,4 +83,12 @@
             }
         }
     }
+}
+
+.call-text {
+    font-size: 0;
+}
+
+.call-text + .number.value {
+    font-size: initial;
 }

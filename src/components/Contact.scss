@@ -30,6 +30,7 @@
         width: auto;
         margin-top: 5px;
         padding: 6px;
+        
 
         @media print {
             color: #{colours.get-static('raw-colour-pure-black')};
@@ -50,6 +51,7 @@
             height: 40px;
             margin: -10px -5px; /* negative margin to crop svg extra space */
             vertical-align: bottom;
+            text-decoration: none;
 
             path {
                 fill: #{colours.get-static('colour-text-dark')};
