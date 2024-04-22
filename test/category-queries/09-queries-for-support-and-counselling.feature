@@ -193,7 +193,7 @@ Feature: Support and counselling personalisation flow generates the expected que
                 "-\"coordinating bodies\"",
                 "-\"respite care\"",
                 "-hef -\"holiday accommodation\"",
-                "\"homelessness support\"",
+                "\"homelessness support\""
             ]
         }
         --------------------------------------
