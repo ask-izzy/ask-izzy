@@ -45,7 +45,12 @@ export default ({
         "Homelessness support": {
             $unset: ["serviceTypes", "minimumShouldMatch"],
             $concat: {
-                term: ["-\"coordinating bodies\"", "-\"respite care\"","-hef -\"holiday accommodation\"" ,"\"homelessness support\""]
+                term: [
+                    "-\"coordinating bodies\"",
+                    "-\"respite care\"",
+                    "-hef -\"holiday accommodation\"",
+                    "\"homelessness support\"",
+                ],
             },
             $removeElms: {
                 term: [
