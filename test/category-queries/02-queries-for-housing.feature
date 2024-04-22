@@ -118,11 +118,9 @@ Feature: Housing personalisation flow generates the expected query
                 "name": "Adelaide, SA"
             },
             "catchment": "prefer",
-            "minimumShouldMatch": "30%",
             "term": [
                 "-\"coordinating bodies\"",
                 "-\"respite care\"",
-                "-\"housing information\"",
                 "-hef",
                 "-\"holiday accommodation\"",
                 "\"homelessness support\""
