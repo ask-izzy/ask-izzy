@@ -132,7 +132,7 @@ Feature: Service details page
               comment     :
             - kind        : phone
               number      : 0477 777 777
-              comment     :  really a mobile
+              comment     : (really a mobile)
             - kind        : freecall
               number      : 1300 111 111
               comment     :

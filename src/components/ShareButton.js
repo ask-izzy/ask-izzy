@@ -41,7 +41,7 @@ function ShareButton({
                 }
             </div>
         </Button>
-        
+
         {open &&
             <ShareServicesDialog
                 onCloseRequested={() => setOpen(false)}
