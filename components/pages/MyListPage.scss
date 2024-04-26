@@ -22,32 +22,6 @@
             margin-left: auto;
         }
     }
-
-    .ShareButton {
-        background-color: #{colours.get-static('colour-brand-primary')};
-        background-color: var(--colour-brand-primary);
-        padding: 9px 8px;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        border-radius: 4px;
-
-        .main-container {
-            .text-description {
-                color: #{colours.get-static('colour-share-white')};
-                color: var(--colour-share-white);
-                padding: 0 6px;
-            }
-        }
-
-        .SvgIcon {
-            path {
-                fill: #{colours.get-static('colour-share-white')};
-                fill: var(--colour-share-white);
-            }
-        }
-    }
-
     .other-mobile-features-container {
         display: flex;
         flex-direction: row;

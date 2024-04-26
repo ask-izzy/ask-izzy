@@ -4,7 +4,7 @@ import type {Node as ReactNode} from "react"
 import React from "react";
 import ReactToPrint from "react-to-print";
 
-import Button from "./base/Button";
+import Button from "../../components/general/StandardButton"
 import Print from "@/src/icons/Print";
 
 type Props = {
@@ -23,6 +23,7 @@ function PrintButton({
             className="printable-area"
             ref={ref}
             aria-hidden="true"
+            
         >
             {ComponentToPrint}
         </div>

@@ -10,19 +10,15 @@
         align-items: center;
 
         .text-description {
-            color: #{colours.get-static('colour-brand-primary')};
-            color: var(--colour-brand-primary);
-            font-weight: bolder;
+            
+            font-weight: normal;
             padding: 0 10px;
         }
 
         .SvgIcon {
-            margin-bottom: -6px;
+            margin-bottom: -3px;
 
-            path {
-                fill: #{colours.get-static('colour-brand-primary')};
-                fill: var(--colour-brand-primary);
-            }
+           
         }
     }
 }
