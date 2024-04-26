@@ -33,7 +33,11 @@
 
         .compare-share-container {
             display: flex;
-            column-gap: 20px;
+            column-gap: 6px;
+            
+            .ShareButton {
+                line-height: 23px;
+            }
         }
     }
 

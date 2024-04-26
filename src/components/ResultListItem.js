@@ -102,7 +102,11 @@ function ResultListItem({
                 </div>
                 <div className="compare-share-container">
                     <TooltipHover content="Share">
-                        <ShareButton services={[service]} />
+                        <ShareButton
+                            services={[service]}
+                            variant="icon"
+                            type="text"
+                        />
                     </TooltipHover>
                     <TooltipHover content="Add/remove">
                         <AddToCompareButton service={service} />
