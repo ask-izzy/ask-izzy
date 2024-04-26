@@ -208,10 +208,11 @@ function ServicePane({service}: Props): ReactNode {
 
                 <div className="provisions">
                     <Eligibility {...service} />
-                    <Cost catchment={service.catchment} cost={service.cost} />
+                    <Cost catchment={service.catchment} 
+                    cost={service.cost} />
                     {renderServiceProvisions()}
                 </div>
- 
+
                 <div className= "boxed-text-container">
                     {renderCompareShare("web")}
                     <BoxedText>
