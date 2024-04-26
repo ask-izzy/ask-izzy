@@ -1,0 +1,48 @@
+@use '../styles/mixins/colours';
+
+.Cost {
+        padding-right: 15px;
+        padding-left: 7px;
+
+    h2 {
+        font-size: 17px;
+        color: #{colours.get-static('colour-text-dark')};
+        color: var(--colour-text-dark);
+        size: 100px;
+        display:inline;
+    }
+
+    .tooltip-wrapper, .Tooltip{
+        display:inline;
+    }
+
+
+
+    .info-icon-container {
+       display:flex;
+       
+       svg {
+        width: 35px;
+        height: 35px;
+        margin: -12px -10px;
+      }
+    }
+
+     .h3, .tooltip-caption {
+        display:inline;
+        line-height: 20px;
+        font-style: bold;
+        font-size:15px;
+    }
+    
+    ul {
+        list-style: initial;
+        margin: 1em 0;
+
+        li {
+            margin: 1rem 0;
+        }
+    }
+}
+
+
