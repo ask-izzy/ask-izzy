@@ -3,7 +3,6 @@
 import type {Element as ReactElement, Node as ReactNode} from "React";
 import React, {useEffect, useState} from "react";
 import _ from "underscore";
-
 import Address from "./Address";
 import Accessibility from "./Accessibility";
 import CollapsedOpeningTimes from "./CollapsedOpeningTimes";
@@ -207,10 +206,12 @@ function ServicePane({service}: Props): ReactNode {
                 </div>
 
                 <div className="provisions">
-                    <Eligibility {...service} />
-                    <Cost catchment={service.catchment} 
-                    cost={service.cost} />
-                    {renderServiceProvisions()}
+                        <Eligibility {...service} />
+                        <Cost 
+                            catchment={service.catchment}
+                            cost={service.cost}
+                        />
+                        {renderServiceProvisions()}
                 </div>
 
                 <div className= "boxed-text-container">
