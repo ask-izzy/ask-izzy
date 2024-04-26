@@ -1,3 +1,5 @@
+/* $FlowIgnore */
+
 import React, { useState } from "react";
 import FormatText from "./FormatText";
 import TooltipInformation from "@/src/components/TooltipInformation";

@@ -1,3 +1,4 @@
+
 @use '../styles/mixins/colours';
 
 .Cost {
@@ -12,13 +13,14 @@
         display: inline;
     }
 
-    .tooltip-wrapper, .Tooltip {
+    .tooltip-wrapper,
+    .Tooltip {
         display: inline;
     }
 
     .info-icon-container {
         display: flex;
-        
+
         svg {
             width: 35px;
             height: 35px;
@@ -26,7 +28,8 @@
         }
     }
 
-    .h3, .tooltip-caption {
+    .h3,
+    .tooltip-caption {
         display: inline;
         line-height: 20px;
         font-weight: bold;  // Changed font-style to font-weight
