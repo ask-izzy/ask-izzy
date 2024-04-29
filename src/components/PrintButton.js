@@ -2,7 +2,8 @@
 
 import type {Node as ReactNode} from "react"
 import React from "react";
-import ReactToPrint from "react-to-print";
+
+import { useReactToPrint } from "react-to-print";
 
 import Button from "../../components/general/StandardButton"
 import Print from "@/src/icons/Print";
@@ -23,35 +24,35 @@ function PrintButton({
             className="printable-area"
             ref={ref}
             aria-hidden="true"
-            
         >
             {ComponentToPrint}
         </div>
     ));
+    const handlePrint = useReactToPrint({
+        content: () => printableComponentRef.current,
+    });
 
     return <div className="PrintButton">
-        <ReactToPrint
-            trigger={
-                () =>
-                    <Button
-                        className="print-component-button"
-                        analyticsEvent={{
-                            event: "Action Triggered - Page Printed",
-                            eventAction: "Page printed",
-                            eventLabel: null,
-                        }}
-                    >
-                        <div className="main-container">
-                            <Print />
-                            {
-                                hasTextDescription &&
+        <Button
+            className="print-component-button"
+            onClick={handlePrint}
+            analyticsEvent={{
+                event: "Action Triggered - Page Printed",
+                eventAction: "Page printed",
+                eventLabel: null,
+            }}
+        >
+            <div className="main-container">
+                <Print />
+                {
+                    hasTextDescription &&
                                     <span>Print Friendly</span>
-                            }
-                        </div>
-                    </Button>
-            }
-            content={() => printableComponentRef.current}
-        />
+                }
+            </div>
+        </Button>
+
+
+
         <PrintableComponent ref={printableComponentRef} />
     </div>
 }

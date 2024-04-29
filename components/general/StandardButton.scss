@@ -54,7 +54,7 @@
 
         path {
             fill: #{colours.get-static('colour-text-highlight')};
-            fill: var(--colour-text-highlight); 
+            fill: var(--colour-text-highlight);
         }
 
         &:hover,
@@ -82,24 +82,21 @@
             }
         }
     }
-    &.type-text { 
+
+    &.type-text {
         color: #{colours.get-static('colour-text-mid')};
         color: var(--colour-text-mid);
 
         path {
             fill: #{colours.get-static('colour-text-mid')};
-            fill: var(--colour-text-mid); 
+            fill: var(--colour-text-mid);
         }
 
         &:hover,
         &:focus {
             background-color: #{colours.get-static('colour-bg-standard-tint-3')};
             background-color: var(--colour-bg-standard-tint-3);
-
-          
-           
         }
-
     }
 
     svg {

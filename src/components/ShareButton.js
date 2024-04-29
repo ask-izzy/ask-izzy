@@ -17,7 +17,7 @@ type Props = {
 function ShareButton({
     hasTextDescription = false,
     services = [],
-    type="secondary",
+    type = "secondary",
 }: Props): ReactNode {
     const textDescription = "Share"
     const [open, setOpen] = useState(false)
