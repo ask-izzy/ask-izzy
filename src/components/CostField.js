@@ -67,7 +67,7 @@ function Cost({ catchment, cost }: Props) {
         <div className="Cost">
             <div className={isToolTip ? "tooltip-caption" : "Cost-desc"}>
                 <h2 aria-label="Cost">Cost</h2>
-                {costContent}
+                <br /> <ul> <li> {costContent} </li> </ul>
             </div>
         </div>
     );

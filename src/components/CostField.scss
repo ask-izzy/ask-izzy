@@ -3,14 +3,17 @@
 
 .Cost {
     padding-right: 15px;
-    padding-left: 7px;
+    padding-left: 15px;
 
     h2 {
         font-size: 17px;
         color: #{colours.get-static('colour-text-dark')};
-        color: var(--colour-text-dark);
         size: 100px;
         display: inline;
+    }
+
+    ol {
+        color: #{colours.get-static('colour-text-dark')};
     }
 
     .tooltip-wrapper,
