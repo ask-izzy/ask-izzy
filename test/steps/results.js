@@ -11,6 +11,7 @@ import dictionary from "../support/dictionary";
 import { documentReady } from "./browser";
 import { matchClass, escapeXPathString } from "../support/selectors";
 import asyncFilter from "../support/async-filter";
+import { FilterVisibleElements } from "../support/elements";
 
 module.exports = ((function(): YaddaLibraryEnglish {
     return Yadda.localisation.English.library(dictionary)
@@ -48,27 +49,26 @@ async function seeTheResultsIn(
     label: string,
     table: Array<Object>,
 ): Promise<void> {
-    const getText = element => element.getText();
     const keyToClass = (key) => key.match(/[(](.*)[)]/)[1];
     const selector = label && `.${label.replace(/ /g, "")}`;
+    console.log(table)
 
     await this.driver.wait(documentReady(this.driver), 10000);
 
     for (let key of _.keys(table[0])) {
         let expected = _.pluck(table, key);
-        const actual = await Promise.all(
-            (
-                await this.driver.findElements(
-                    By.css(`${selector} .${keyToClass(key)}`)
-                )
-            ).map(getText)
-        );
+
+        const elements = await this.driver.findElements(
+            By.css(`${selector} .${keyToClass(key)}`)
+        )
+        const visibleElements = await FilterVisibleElements(elements);
+        const elementsText = await Promise.all(visibleElements.map((element) => element.getText()));
 
         // replace '(nada)' with an empty string (to represent
         // an empty line)
-        expected = expected.map(text => text === "(nada)" ? "" : text);
+        expected = expected.filter(text => text !== "(nada)");
 
-        assert.deepStrictEqual(actual, expected,
+        assert.deepStrictEqual(elementsText, expected,
             `${key} is not correct`);
     }
 }

@@ -19,7 +19,6 @@
         }
 
         font-size: 14px;
-        font-weight: 400;
     }
 
     a {
@@ -30,18 +29,25 @@
         width: auto;
         margin-top: 5px;
         padding: 6px;
-
-        @media print {
-            color: #{colours.get-static('raw-colour-pure-black')};
-            color: var(--raw-colour-pure-black);
-        }
-
         font-size: 16px;
 
         .Contact-text {
             text-overflow: ellipsis;
             white-space: nowrap;
             overflow: hidden;
+        }
+
+        @media print {
+            color: #{colours.get-static('raw-colour-pure-black')};
+            color: var(--raw-colour-pure-black);
+
+            .Contact-text {
+                text-overflow: unset;
+                white-space: unset;
+                overflow: unset;
+                overflow-wrap: break-word;
+                word-break: break-all;
+            }
         }
 
         .Icon {

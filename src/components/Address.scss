@@ -2,7 +2,6 @@
 
 .Address {
     position: relative;
-    font-size: 16px;
     display: flex;
 
     > span,
@@ -19,6 +18,8 @@
             display: flex;
             align-items: center;
         }
+
+        font-size: 16px;
     }
 
     .MapIcon {

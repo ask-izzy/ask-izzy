@@ -1,7 +1,7 @@
 /* @flow */
 
 import type {Element as ReactElement, Node as ReactNode} from "React";
-import React, {useEffect, useState} from "react";
+import React, { useEffect, useState } from "react";
 import _ from "underscore";
 
 import Address from "./Address";
@@ -11,8 +11,9 @@ import Collapser from "./general/Collapser";
 import ContactMethods from "./ContactMethods";
 import DebugServiceRecord from "./DebugServiceRecord";
 import Eligibility from "./Eligibility";
+import Cost from "./CostField";
 import Feedback from "./Feedback";
-import ImportantInformation from "./ImportantInformation"
+import ImportantInformation from "./ImportantInformation";
 import LanguagesAvailable from "@/src/components/LanguagesAvailable";
 import TransportTime from "./TransportTime";
 import GoogleMapsLink from "./GoogleMapsLink";
@@ -23,29 +24,32 @@ import Chevron from "../icons/Chevron";
 import IndigenousServiceIcon from "./IndigenousServiceIcon";
 import LgbtiqIcon from "./LgbtiqIcon";
 import AlertBannerList from "../components/AlertBannerList";
-import AddToCompareButton from "../components/AddToCompareButton"
+import AddToCompareButton from "../components/AddToCompareButton";
 import Service from "../iss/Service";
 import icons from "../icons";
-import ShareButton from "../components/ShareButton"
+import ShareButton from "../components/ShareButton";
+import PrintButton from "@/src/components/PrintButton";
 import Storage from "../storage";
 import ScreenReader from "./ScreenReader";
-import FormatText from "./FormatText"
-import {getSiblingServices} from "../iss/load-services"
-import {MobileDetect} from "../effects/MobileDetect";
+import FormatText from "./FormatText";
+import { getSiblingServices } from "../iss/load-services";
+import { MobileDetect } from "../effects/MobileDetect";
+import ServicePagePrint from "@/src/components/PrintComponents/ServicePagePrint";
+
 type Props = {
     service: Service,
 }
 
-function ServicePane({service}: Props): ReactNode {
-    const [siblings, setSiblings] = useState<Array<Service>>([])
-    const isMobile = MobileDetect(799)
+function ServicePane({ service }: Props): ReactNode {
+    const [siblings, setSiblings] = useState<Array<Service>>([]);
+    const isMobile = MobileDetect(799);
 
     useEffect(() => {
         async function loadSiblings(): Promise<void> {
-            setSiblings(await getSiblingServices(service))
+            setSiblings(await getSiblingServices(service));
         }
         loadSiblings();
-    }, [service])
+    }, [service]);
 
     const renderServiceProvisions = (): ReactElement<"div"> => {
         if (_.isEmpty(service.serviceProvisions)) {
@@ -59,16 +63,16 @@ function ServicePane({service}: Props): ReactNode {
                 </h3>
                 <ul>
                     {service.serviceProvisions.map(
-                        (provision, index) =>
+                        (provision, index) => (
                             <li key={index}>{provision}</li>
+                        )
                     )}
                 </ul>
             </div>
         );
-    }
+    };
 
     const renderSiblings = (): ReactElement<"div"> | ReactElement<"span"> => {
-
         if (!siblings) {
             return <span />;
         }
@@ -86,7 +90,7 @@ function ServicePane({service}: Props): ReactNode {
                     Also at this location
                 </h3>
                 <div className="List">
-                    {siblings.map((service, index) =>
+                    {siblings.map((service, index) => (
                         <LinkListItem
                             className="plain-text"
                             to={`/service/${service.slug}`}
@@ -100,25 +104,27 @@ function ServicePane({service}: Props): ReactNode {
                             aria-label={`${service.name}. ${
                                 service.shortDescription[0]
                             }.`}
-                            primaryText={<>
-                                {service.name}
-                                <ScreenReader>.</ScreenReader>
-                            </>}
+                            primaryText={(
+                                <>
+                                    {service.name}
+                                    <ScreenReader>.</ScreenReader>
+                                </>
+                            )}
                             secondaryText={service.shortDescription[0]}
                             rightIcon={<Chevron />}
                         />
-                    )}
+                    ))}
                 </div>
             </div>
         );
-    }
+    };
 
     const renderDescription = (): ReactElement<"div"> => {
-        let description = service
-            .descriptionSentences.map(
-                (sentence, idx) =>
-                    <FormatText key={idx}>{sentence}</FormatText>
+        let description = service.descriptionSentences.map(
+            (sentence, idx) => (
+                <FormatText key={idx}>{sentence}</FormatText>
             )
+        );
 
         if (service.descriptionRemainder.length > 0) {
             description = (
@@ -135,26 +141,13 @@ function ServicePane({service}: Props): ReactNode {
                 >
                     {description}
                 </Collapser>
-            )
+            );
         }
 
-        return (
-            <div className="description">
-                {description}
-            </div>
-        )
-    }
-
-    const addToCompareButtonComponent = (
-        <AddToCompareButton
-            hasTextDescription={true}
-            service={service}
-        />
-    )
+        return <div className="description">{description}</div>;
+    };
 
     function renderCompareShare(typeOfDevice) {
-        // required due to different positioning
-        // with mobile and computer rendering
         if (typeOfDevice === "web" && !isMobile) {
             return (
                 <div className="compare-share-container">
@@ -162,9 +155,21 @@ function ServicePane({service}: Props): ReactNode {
                         hasTextDescription={true}
                         services={[service]}
                     />
-                    {addToCompareButtonComponent}
+                    <div className="print-button-container">
+                        <PrintButton
+                            hasTextDescription={true}
+                            ComponentToPrint={
+                                <ServicePagePrint service={service} />
+                            }
+                            isInServicePane={true}
+                        />
+                    </div>
+                    <AddToCompareButton
+                        hasTextDescription={true}
+                        service={service}
+                    />
                 </div>
-            )
+            );
         } else if (typeOfDevice === "mobile" && isMobile) {
             return (
                 <div className="compare-share-container mobile">
@@ -172,14 +177,10 @@ function ServicePane({service}: Props): ReactNode {
                         hasTextDescription={true}
                         services={[service]}
                     />
-                    {addToCompareButtonComponent}
                 </div>
-            )
+            );
         }
-        return (
-             <></>
-        )
-
+        return <></>;
     }
 
     return (
@@ -192,8 +193,7 @@ function ServicePane({service}: Props): ReactNode {
                 />
                 <DebugServiceRecord object={service} />
             </div>
-            <main
-                aria-label="Service details"
+            <main aria-label="Service details"
                 className="row"
             >
                 <div className="header">
@@ -207,15 +207,21 @@ function ServicePane({service}: Props): ReactNode {
 
                 <div className="provisions">
                     <Eligibility {...service} />
+                    <Cost
+                        catchment={service.catchment}
+                        cost={service.cost}
+                    />
                     {renderServiceProvisions()}
                 </div>
-                <div className= "boxed-text-container">
+
+                <div className="boxed-text-container">
                     {renderCompareShare("web")}
                     <BoxedText>
                         <div className="practicalities-container">
                             <CollapsedOpeningTimes
                                 object={service.open}
                                 serviceId={service.id}
+                                showTitleContainer={false}
                             />
                             <Accessibility
                                 service={service}
@@ -231,46 +237,39 @@ function ServicePane({service}: Props): ReactNode {
                                 site={service.site}
                                 withSpacer={true}
                             />
-                            {service.location && service.travelTimes &&
+                            {service.location && service.travelTimes && (
                                 <TransportTime
                                     location={service.location}
                                     withSpacer={true}
                                     travelTimes={service.travelTimes}
                                 />
-                            }
-                            {!service.location?.isConfidential() &&
-                            <GoogleMapsLink
-                                to={service.location}
-                                className={Storage.getUserGeolocation() ?
-                                    "withTimes" : "withoutTimes"}
-                                hideSpacer={true}
-                            >
-                                <span className="googleMapsLink">
-                                    Get directions in Google Maps
-                                    <icons.ExternalLink
-                                        className="ExternalLinkIcon"
-                                    />
-                                </span>
-                            </GoogleMapsLink>
-                            }
-                            {service.languages.length > 0 &&
-                                <LanguagesAvailable
-                                    service={service}
+                            )}
+                            {!service.location?.isConfidential() && (
+                                <GoogleMapsLink
+                                    to={service.location}
+                                    className={Storage.getUserGeolocation() ? "withTimes" : "withoutTimes"}
+                                    hideSpacer={true}
                                 >
-                                    {service.languages}
-                                </LanguagesAvailable>
-                            }
+                                    <span className="googleMapsLink">
+                                        Get directions in Google Maps
+                                        <icons.ExternalLink className="ExternalLinkIcon" />
+                                    </span>
+                                </GoogleMapsLink>
+                            )}
+                            {service.languages.length > 0 && (
+                                <LanguagesAvailable service={service}>{service.languages}</LanguagesAvailable>
+                            )}
                             <ContactMethods object={service} />
-                            <ImportantInformation object={service}/>
+                            <ImportantInformation object={service} />
                         </div>
                     </BoxedText>
                     <Feedback object={service} />
                 </div>
 
-                { renderSiblings() }
+                {renderSiblings()}
             </main>
         </div>
     );
 }
 
-export default ServicePane
+export default ServicePane;

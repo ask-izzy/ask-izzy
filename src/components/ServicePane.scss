@@ -54,7 +54,7 @@
     .compare-share-container {
         display: flex;
         justify-content: space-between;
-        margin: 0 10px;
+        margin: 10px;
 
         &.mobile {
             flex-direction: column;
@@ -64,6 +64,10 @@
                 padding-bottom: 15px;
             }
         }
+    }
+
+    .print-button-container {
+        margin-inline: 10px;
     }
 
     .error {

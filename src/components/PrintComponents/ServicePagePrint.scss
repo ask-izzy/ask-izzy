@@ -1,0 +1,144 @@
+@use '../styles/mixins/colours';
+
+.ServicePagePrint {
+    background-color: #fff;
+    color: #000;
+    padding: 40px;
+    position: relative;
+
+    .service-page-print-header {
+        display: flex;
+        justify-content: space-between;
+
+        .date-container {
+            font-size: 10px;
+        }
+
+        .service-info-caption {
+            padding: 10px;
+            font-size: 1.5px;
+        }
+
+        .AskIzzyGreyScaleIcon {
+            width: 130px;
+            height: 70px;
+        }
+    }
+
+    .Service-Containers {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+    }
+
+    .Service-Info {
+        line-height: 1.5;
+        flex: 1;
+    }
+
+    .service-description {
+        font-size: 15px;
+    }
+
+    .service-page-print-service-provisions {
+        padding-right: 15px;
+        padding-left: 15px;
+        font-size: 15px;
+    }
+
+    h2 {
+        font-size: 15px;
+        color: #{colours.get-static('colour-text-dark')};
+        color: var(--colour-text-dark);
+    }
+
+    .ServicePane-Info {
+        padding: 15px;
+        padding-top: 30px;
+        padding-bottom: 5px;
+        font-size: 14px;
+        flex: 1;
+
+        .BoxedText {
+            padding: -10px;
+            border: 1px;
+        }
+    }
+
+    .email-container {
+        margin-left: -8px;
+        font-size: 14px;
+        overflow-wrap: break-word;
+    }
+
+    .web-container {
+        font-size: 14px;
+        overflow-wrap: break-word;
+    }
+
+    .time-container {
+        font-size: 14px;
+        overflow-wrap: break-word;
+    }
+
+    .Contact a {
+        font-size: 14px;
+    }
+
+    .Address {
+        font-size: 14px;
+
+        .Address-wrapper {
+            color: #000;
+            font-size: 14px;
+        }
+    }
+
+    .need-an-interpreter {
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+        margin-top: 20px;
+    }
+
+    .Spacer {
+        height: 1px;
+        background-color: #000;
+        display: flex;
+    }
+
+    .page-print-footer {
+        display: flex;
+        justify-content: space-between;
+        page-break-inside: avoid;
+        column-gap: 10px;
+        align-items: first baseline;
+
+        .service-page-print-about-title {
+            font-size: 15px;
+            font-weight: bold;
+        }
+
+        .service-page-print-about-description {
+            margin-top: 10px;
+        }
+
+        .service-page-print-qr {
+            flex-direction: column;
+            align-items: flex-end;
+            min-width: 12em;
+            padding: 10px;
+            flex: 1;
+
+            .service-page-print-qr-description {
+                font-weight: bold;
+                font-size: 14px;
+            }
+
+            .qr-code {
+                width: 120px;
+                margin-left: 25px;
+            }
+        }
+    }
+}
