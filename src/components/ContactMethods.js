@@ -71,7 +71,8 @@ function ContactMethods({object}: Props): ReactNode {
                 {phones().slice(1).map(renderContactMethod)}
             </Collapser>
 
-            {/* Spacer before Email */}            <Spacer/>
+            {/* Spacer before Email */}            
+            <Spacer/>
 
             {/* Email */}
             {emails().map(renderContactMethod)}
