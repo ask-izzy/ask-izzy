@@ -8,7 +8,6 @@ import type {AnalyticsEvent} from "../google-tag-manager";
 import icons from "../icons";
 import classnames from "classnames"
 import type { phone } from "../iss/general";
-import {toCamelCase} from "../utils/strings";
 import ScreenReader from "./ScreenReader";
 import FormatText from "./FormatText"
 import {PhoneHref} from "@/helpers/regex.helpers"
@@ -47,29 +46,25 @@ function PhoneButton({
             classnames(
                 "Contact",
                 "Phone",
-                styleType ?
-                    ` ${toCamelCase("style " + styleType)}`
-                    : ""
-            )
-        }
+                "link-style"
+            )}
         >
             <ScreenReader>
                     Phone contact:
             </ScreenReader>
             <Link
                 to={PhoneHref(number)}
-                className="ContactButton"
+                className={styleType === "link" ? "ContactLink" : "ContactButton"}
                 analyticsEvent={{
                     event: "Link Followed - Phone Contact",
-                    eventAction: `Contact detail - phone` +
-                            `${crisis ? " - crisis line" : ""}`,
+                    eventAction: `Contact detail - phone${crisis ? " - crisis line" : ""}`,
+
                     eventLabel: `${number}`,
                     ...analyticsEventDetails,
                 }}
             >
                 <div className="Contact-text">
-                    {icon}
-                    <span>Call </span>
+                    {icon}<span>Call </span>
                     <span className="number value">
                         {number}
                     </span>
