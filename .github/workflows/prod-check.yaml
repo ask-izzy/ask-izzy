@@ -1,0 +1,15 @@
+name: Check prod is working correctly
+
+on:
+  schedule:
+    - cron: "00 23 * * *" # 11pm UTC is roughly 9am melbourne time
+
+jobs:
+  linkChecker:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v1
+      - name: Check for broken links
+        uses: ./.github/actions/broken-link-check
+        with:
+          msTeamsAlertsWebhook: ${{ secrets.MS_TEAMS_ALERTS_WEBHOOK }}
