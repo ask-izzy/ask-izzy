@@ -2,7 +2,7 @@ name: Check prod is working correctly
 
 on:
   schedule:
-    - cron: "00 10 * * *" # 10am UTC is roughly midnight melbourne time
+    - cron: "00 23 * * *" # 11pm UTC is roughly 9am melbourne time
 
 jobs:
   linkChecker:
