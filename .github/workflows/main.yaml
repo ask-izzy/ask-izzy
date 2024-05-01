@@ -1,4 +1,4 @@
-name: CI
+name: "Build, Test & Push"
 
 on:
   push:
@@ -74,6 +74,16 @@ jobs:
       image-target: development
       command: lint-storybook-components
 
+  lint-broken-links:
+    name: Lint - Broken links check
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v1
+      - name: Check for broken links
+        uses: ./.github/actions/broken-link-check
+        with:
+          msTeamsAlertsWebhook: ${{ secrets.MS_TEAMS_ALERTS_WEBHOOK }}
+
   test-mocha-personalisation:
     name: Test - Mocha personalisation
     uses: infoxchange/github-ci/.github/workflows/run-in-docker-with-possible-artifact.yaml@main
@@ -144,6 +154,7 @@ jobs:
       - lint-hadolint
       - lint-shellcheck
       - lint-storybook-components
+      - lint-broken-links
       - test-mocha-personalisation
       - test-mocha-category-queries
       - test-mocha-features-1
