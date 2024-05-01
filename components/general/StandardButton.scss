@@ -84,12 +84,12 @@
     }
 
     &.type-text {
-        color: #{colours.get-static('colour-text-mid')};
-        color: var(--colour-text-mid);
+        color: #{colours.get-static('colour-text-dark')};
+        color: var(--colour-text-dark);
 
         path {
-            fill: #{colours.get-static('colour-text-mid')};
-            fill: var(--colour-text-mid);
+            fill: #{colours.get-static('colour-text-dark')};
+            fill: var(--colour-text-dark);
         }
 
         &:hover,
