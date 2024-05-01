@@ -58,7 +58,6 @@ function Cost({ catchment, cost }: Props) {
                     </TooltipInformation>
                     <h3 className="tooltip-caption">More info</h3>
                 </div>
-                {cost.replace(/Inquire./gi, "")}
             </>
         );
     }
