@@ -10,7 +10,7 @@ type Props = {
 };
 
 function Cost({ catchment, cost }: Props) {
-    if (cost === "nothing") {
+    if (cost === "") {
         return null; // Don't render the cost section if the data is "nothing"
     }
 
