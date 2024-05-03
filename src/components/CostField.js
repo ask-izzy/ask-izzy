@@ -10,6 +10,10 @@ type Props = {
 };
 
 function Cost({ catchment, cost }: Props) {
+    if (cost === "nothing") {
+        return null; // Don't render the cost section if the data is "nothing"
+    }
+
     const [showAll, setShowAll] = useState(false);
     const isExceedingLimit = cost && cost.length > 100;
 
@@ -24,6 +28,7 @@ function Cost({ catchment, cost }: Props) {
             <Collapser
                 contentPreview={cost.substring(0, 100) + "..."}
                 expandMessage="Show all cost info"
+                collapseMessage="Close expanded info" // Added collapse message
                 analyticsEvent={{
                     event: "Action Triggered - Cost Info",
                     eventAction: "show all cost info",
@@ -38,8 +43,6 @@ function Cost({ catchment, cost }: Props) {
             </Collapser>
         );
     }
-
-
 
     return (
         <div className="Cost">
