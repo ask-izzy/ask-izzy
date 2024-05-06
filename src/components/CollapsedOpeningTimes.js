@@ -11,6 +11,7 @@ import Collapser from "./general/Collapser";
 import OpeningTimes from "./OpeningTimes";
 import type {openingHours as openingHoursType} from "../iss/general";
 
+
 function formatTime(str: string): string {
     return moment(str, "HH:mm:ss").format("h:mm A");
 }
@@ -80,7 +81,7 @@ function CollapsedOpeningTimes({
             <OpeningTimes object={object} />
             {openingHours.length > 0 && (
                 <Collapser
-                    expandMessage="Show open hours"
+                    expandMessage="Show open times"
                     analyticsEvent={{
                         event: `Action Triggered - Opening Times`,
                         eventAction: "Show opening times",
@@ -89,14 +90,15 @@ function CollapsedOpeningTimes({
                 >
                     <ul className="AllOpeningTimes">
                         {openingHours.map((record, idx) =>
-                            <li key={idx} >
+                            <li key={idx}>
                                 <span className="day">{record.day}</span>
-                                {" "}
+                                {""}
                                 <span className="time">
                                     {formatTime(record.open)}
                                     &ndash;
                                     {formatTime(record.close)}
                                 </span>
+                                <span className="note">{record.note} </span>
                             </li>
                         )}
                     </ul>

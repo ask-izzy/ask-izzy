@@ -34,12 +34,9 @@ function OpeningTimes({
         return (
             <span className="until">
                 <span className="open">
-                    Open now
+                    Hours may vary, see open times
                 </span>
                 {" "}
-                <span className="time">
-                    {object.until}
-                </span>
             </span>
         )
     }
