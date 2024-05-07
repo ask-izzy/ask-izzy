@@ -3,7 +3,6 @@
 import type {Element as ReactElement, Node as ReactNode} from "React";
 import React, {useEffect, useState} from "react";
 import _ from "underscore";
-
 import Address from "./Address";
 import Accessibility from "./Accessibility";
 import CollapsedOpeningTimes from "./CollapsedOpeningTimes";
@@ -11,6 +10,7 @@ import Collapser from "./general/Collapser";
 import ContactMethods from "./ContactMethods";
 import DebugServiceRecord from "./DebugServiceRecord";
 import Eligibility from "./Eligibility";
+import Cost from "./CostField";
 import Feedback from "./Feedback";
 import ImportantInformation from "./ImportantInformation"
 import LanguagesAvailable from "@/src/components/LanguagesAvailable";
@@ -207,8 +207,14 @@ function ServicePane({service}: Props): ReactNode {
 
                 <div className="provisions">
                     <Eligibility {...service} />
+                    <Cost
+                        catchment={service.catchment}
+                        cost={service.cost}
+                    />
                     {renderServiceProvisions()}
                 </div>
+
+
                 <div className= "boxed-text-container">
                     {renderCompareShare("web")}
                     <BoxedText>
