@@ -25,6 +25,7 @@ import ScreenReader from "./ScreenReader";
 import ListItem from "./ListItem";
 import Link from "./base/Link";
 import type {travelTimesStatus} from "../hooks/useTravelTimesUpdater";
+import TooltipHover from "@/src/components/TooltipHover";
 
 
 type Props = {
@@ -100,10 +101,12 @@ function ResultListItem({
                     </div>
                 </div>
                 <div className="compare-share-container">
-                    <ShareButton services={[service]} />
-                    <AddToCompareButton
-                        service={service}
-                    />
+                    <TooltipHover content="Share">
+                        <ShareButton services={[service]} />
+                    </TooltipHover>
+                    <TooltipHover content="Add/remove">
+                        <AddToCompareButton service={service} />
+                    </TooltipHover>
                 </div>
             </div>
             <div className="site_name">
