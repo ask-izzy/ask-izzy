@@ -11,11 +11,13 @@ import Print from "@/src/icons/Print";
 type Props = {
     ComponentToPrint?: ReactNode,
     hasTextDescription?: boolean,
+    type?:"primary" | "secondary" | "text" | "action"
 }
 
 function PrintButton({
     ComponentToPrint = <></>,
     hasTextDescription = true,
+    type = "secondary",
 }: Props): ReactNode {
 
     let printableComponentRef = React.useRef();
@@ -36,6 +38,7 @@ function PrintButton({
         <Button
             className="print-component-button"
             onClick={handlePrint}
+            type={type}
             analyticsEvent={{
                 event: "Action Triggered - Page Printed",
                 eventAction: "Page printed",
