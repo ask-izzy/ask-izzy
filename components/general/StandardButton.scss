@@ -103,6 +103,14 @@
         height: 18px;
         width: unset;
     }
+    &.variant-icon {
+        color: var(--colour-brand-primary);
+      
+      path {
+        fill: #{colours.get-static('colour-text-dark')};
+        fill: var(--colour-brand-primary);
+    }
+}
 
     &[disabled] {
         font-weight: 500;

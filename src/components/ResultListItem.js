@@ -100,7 +100,11 @@ function ResultListItem({
                     </div>
                 </div>
                 <div className="compare-share-container">
-                    <ShareButton services={[service]} />
+                    <ShareButton
+                        services={[service]}
+                        variant="icon"
+                        type="text"
+                    />
                     <AddToCompareButton
                         service={service}
                     />
