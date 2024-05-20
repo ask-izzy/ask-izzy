@@ -16,6 +16,7 @@ import Service from "@/src/iss/Service.js";
 import Eligibility from "../Eligibility";
 import Cost from "../CostField";
 import Accessibility from "../Accessibility";
+
 type Props = {
     service: Service,
     url: string,
@@ -49,7 +50,7 @@ export default function ServicePagePrint({service}: Props): ReactElement<"div"> 
                 The information for this service was taken from <b>www.askizzy.org.au</b>
             </div>
 
-            <div className= "Service-Containers">
+            <div className="Service-Containers">
                 {/* Service Info */}
                 <div className="Service-Info">
                     <b>{console.log(service)}</b>
@@ -60,27 +61,26 @@ export default function ServicePagePrint({service}: Props): ReactElement<"div"> 
                         {service.site.name}
                     </div>
                     {service.ndis_approved &&
-                    <div className="service-page-print-service-ndis">
-                        Part of the NDIS
-                    </div>
+                        <div className="service-page-print-service-ndis">
+                            Part of the NDIS
+                        </div>
                     }
 
                     {/* Header for "What you can get here" */}
                     <div className="service-page-print-service-provisions">
-                    {service._serviceProvisions && service._serviceProvisions.length > 0 ? (
-                        <>
-                            <h2>What you can get here</h2>
-                            <ul>
-                                {service.serviceProvisions.map((provision, index) => (
-                                    <li key={index}>{provision}</li>
-                                ))}
-                            </ul>
-                        </>
-                    ) : (
-                        <p>{service.description}</p>
-                    )}
-                </div>
-
+                        {service._serviceProvisions && service._serviceProvisions.length > 0 ? (
+                            <>
+                                <h2>What you can get here</h2>
+                                <ul>
+                                    {service.serviceProvisions.map((provision, index) => (
+                                        <li key={index}>{provision}</li>
+                                    ))}
+                                </ul>
+                            </>
+                        ) : (
+                            <p>{service.description}</p>
+                        )}
+                    </div>
 
                     <Eligibility
                         catchment={service.catchment}
@@ -90,112 +90,119 @@ export default function ServicePagePrint({service}: Props): ReactElement<"div"> 
                         special_requirements={service.special_requirements}
                     />
 
-                    <Cost
-                        catchment={service.catchment}
-                        cost={service.cost}
-                    />
+                   
                 </div>
-
-
 
                 {/* ServicePane Section */}
                 <div className="ServicePane-Info">
                     <BoxedText>
-                {/* ADDRESS */}
+                        {/* ADDRESS */}
                         {service.location && (
-                        <Spacer />
-                         )}
-                        <Address
-                            location={service.location}
-                            singleLineAddress={true}
-                            hasSolidIcon={true}
-                        />
+                            <>
+                                <Spacer />
+                                <Address
+                                    location={service.location}
+                                    singleLineAddress={true}
+                                    hasSolidIcon={true}
+                                />
+                            </>
+                        )}
                         {/* PHONE */}
                         {service.phones.length > 0 && (
-                    <>
-        <Spacer />
-        <div className="service-page-print-phone">
-            {Array.from(new Set(service.phones
-                .filter(phone => phone.kind !== "fax") // Exclude fax numbers
-                .map(phone => phone.number))
-            ).map((phoneNumber, index) => {
-                const comments = service.phones
-                    .filter(phone => phone.number === phoneNumber && phone.kind !== "fax")
-                    .map(phone => phone.comment);
-                return (
-                    <div key={index}
-                        className="my-list-print-phone-container"
-                    >
-                        <PhoneSolid />
-                        <span>
-                            {phoneNumber}
-                            {comments.length > 0 && (
-                                <span>{" "}{`(${comments.join(", ")})`}</span>
-                            )}
-                        </span>
-                    </div>
-                );
-            })}
-        </div>
-    </>
+                            <>
+                                <Spacer />
+                                <div className="service-page-print-phone">
+                                    {Array.from(new Set(service.phones
+                                        .filter(phone => phone.kind !== "fax") // Exclude fax numbers
+                                        .map(phone => phone.number))
+                                    ).map((phoneNumber, index) => {
+                                        const comments = service.phones
+                                            .filter(phone => phone.number === phoneNumber && phone.kind !== "fax")
+                                            .map(phone => phone.comment);
+                                        return (
+                                            <div key={index} className="my-list-print-phone-container">
+                                                <PhoneSolid />
+                                                <span>
+                                                    {phoneNumber}
+                                                    {comments.length > 0 && (
+                                                        <span>{" "}{`(${comments.join(", ")})`}</span>
+                                                    )}
+                                                </span>
+                                            </div>
+                                        );
+                                    })}
+                                </div>
+                            </>
                         )}
 
                         {/* WEB LINK */}
                         {service.web && (
-    <>
-        <Spacer />
-        <div className="web-container">
-            <Web url={service.web} />
-        </div>
-    </>
+                            <>
+                                <Spacer />
+                                <div className="web-container">
+                                    <Web url={service.web} />
+                                </div>
+                            </>
                         )}
-                        {/* OPENING TIMES*/}
-                        {service.open && (
-    <>
-        <Spacer />
-        <div className="time-container">
-            <CollapsedOpeningTimes
-                object={service.open}
-                serviceId={service.id}
-                showTitleContainer={false}
-            />
-        </div>
-    </>
+                        
+
+                        {/* EMAIL LINK */}
+                        {Array.isArray(service.emails) && service.emails.length > 0 && (
+                            <>
+                                <Spacer />
+                                <div className="email-container">
+                                    {service.emails.map((emailObject, index) => (
+                                        <Email
+                                            key={index}
+                                            email={emailObject.email}
+                                        />
+                                    ))}
+                                </div>
+                            </>
                         )}
 
                         {/* LANGUAGES */}
-            <Spacer />
-                        {/* EMAIL LINK*/}
-                        {Array.isArray(service.emails) && service.emails.length > 0 && (
-        <>
-            <div className="email-container">
-                {service.emails.map((emailObject, index) => (
-                    <Email
-                        key={index}
-                        email={emailObject.email}
-                    />
-                ))}
-            </div>
-            <Spacer />
-            {/* LANGUAGES */}
-            {service.languages && service.languages.length > 0 && (
-            <>
-                <div className="service-page-print-languages">
-                    {service.languages}
-                </div>
-                <Spacer />
-            </>
-        )}
-             <Spacer />
-            {/* Accessibility */}
-                <div className="service-page-print-accessibility">
-                {service.accessibility}
-            </div>
-            </>
-             )}
-                           <Spacer />
-                    </BoxedText>
+                        {service.languages && service.languages.length > 0 && (
+                            <>
+                             <Spacer />
+                                <div className="service-page-print-languages">
+                                    Languages spoken here: {service.languages.join(", ")}
+                                </div>
+                            </>
+                        )}
 
+                        {/* Accessibility */}
+                            {service.accessibility && service.accessibility !== "noaccess" && (
+                                <>
+                                    <Spacer />
+                                    <div className="service-page-print-accessibility">
+                                        <Accessibility service={service} />
+                                    </div>
+                                </>
+                            )}
+                   
+                                     {/* OPENING TIMES */}
+                    {service.open ? (
+                        <>
+                            <Spacer />
+                            <div className="time-container">
+                                <CollapsedOpeningTimes
+                                    object={service.open}
+                                    serviceId={service.id}
+                                />
+                            </div>
+                        </>
+                    ) : (
+                        <div className="time-container">
+                            <p>Contact for Opening hours</p>
+                        </div>
+                    )}
+                   <Spacer />
+                    </BoxedText>
+                    <Cost
+                        catchment={service.catchment}
+                        cost={service.cost}
+                    />
                 </div>
             </div>
 
@@ -217,9 +224,7 @@ export default function ServicePagePrint({service}: Props): ReactElement<"div"> 
                     <div className="service-page-print-qr-description">
                         Learn about Ask Izzy in other languages
                     </div>
-                    <img src={qrCodeDataURL}
-                        className="qr-code"
-                    />
+                    <img src={qrCodeDataURL} className="qr-code" />
                 </div>
             </div>
         </div>

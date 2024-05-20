@@ -46,6 +46,20 @@
         font-size: 15px;
     }
 
+    .cost-container {
+        display: flex;
+        flex-wrap: wrap;
+    }
+    
+    .cost-description {
+        flex: 1;
+    }
+    
+    .cost-details {
+        flex: 1;
+    }
+    
+
     h2 {
         font-size: 15px;
         color: #{colours.get-static('colour-text-dark')};
