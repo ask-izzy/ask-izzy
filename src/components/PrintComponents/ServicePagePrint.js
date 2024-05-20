@@ -15,6 +15,7 @@ import CollapsedOpeningTimes from "@/src/components/CollapsedOpeningTimes";
 import Service from "@/src/iss/Service.js";
 import Eligibility from "../Eligibility";
 import Cost from "../CostField";
+import Accessibility from "../Accessibility";
 type Props = {
     service: Service,
     url: string,
@@ -66,19 +67,20 @@ export default function ServicePagePrint({service}: Props): ReactElement<"div"> 
 
                     {/* Header for "What you can get here" */}
                     <div className="service-page-print-service-provisions">
-                        {service._serviceProvisions &&
-                     <h2>
-                        What you can get here
-                     </h2>
-                        }
-                        <ul>
-                            {service.serviceProvisions.map(
-                                (provision, index) => (
+                    {service._serviceProvisions && service._serviceProvisions.length > 0 ? (
+                        <>
+                            <h2>What you can get here</h2>
+                            <ul>
+                                {service.serviceProvisions.map((provision, index) => (
                                     <li key={index}>{provision}</li>
-                                )
-                            )}
-                        </ul>
-                    </div>
+                                ))}
+                            </ul>
+                        </>
+                    ) : (
+                        <p>{service.description}</p>
+                    )}
+                </div>
+
 
                     <Eligibility
                         catchment={service.catchment}
@@ -99,10 +101,10 @@ export default function ServicePagePrint({service}: Props): ReactElement<"div"> 
                 {/* ServicePane Section */}
                 <div className="ServicePane-Info">
                     <BoxedText>
-                        {/* ADDRESS */}
+                {/* ADDRESS */}
                         {service.location && (
-                            <Spacer />
-                        )}
+                        <Spacer />
+                         )}
                         <Address
                             location={service.location}
                             singleLineAddress={true}
@@ -162,14 +164,7 @@ export default function ServicePagePrint({service}: Props): ReactElement<"div"> 
                         )}
 
                         {/* LANGUAGES */}
-                        {service.languages && (
-        <>
             <Spacer />
-            <div className="service-page-print-languages">
-                {service.languages}
-            </div>
-        </>
-                        )}
                         {/* EMAIL LINK*/}
                         {Array.isArray(service.emails) && service.emails.length > 0 && (
         <>
@@ -182,10 +177,23 @@ export default function ServicePagePrint({service}: Props): ReactElement<"div"> 
                 ))}
             </div>
             <Spacer />
-
-
-        </>
-                        )}
+            {/* LANGUAGES */}
+            {service.languages && service.languages.length > 0 && (
+            <>
+                <div className="service-page-print-languages">
+                    {service.languages}
+                </div>
+                <Spacer />
+            </>
+        )}
+             <Spacer />
+            {/* Accessibility */}
+                <div className="service-page-print-accessibility">
+                {service.accessibility}
+            </div>
+            </>
+             )}
+                           <Spacer />
                     </BoxedText>
 
                 </div>
