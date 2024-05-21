@@ -280,3 +280,11 @@
         }
     }
 }
+
+.Collapser.collapsed .collapser-content {
+    display: none;
+}
+
+.collapser-content {
+    display: block;  
+}

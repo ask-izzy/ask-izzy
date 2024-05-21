@@ -1,12 +1,11 @@
 /* @flow */
-import type {Element as ReactElement} from "React"
-import React, { useState } from "react"
-import type {Node as ReactNode} from "react"
-
-import classnames from "classnames"
-import Chevron from "../../icons/Chevron"
-import Button from "../base/Button"
-import type {AnalyticsEvent} from "../../google-tag-manager"
+import type {Element as ReactElement} from "React";
+import React, { useState } from "react";
+import type {Node as ReactNode} from "react";
+import classnames from "classnames";
+import Chevron from "../../icons/Chevron";
+import Button from "../base/Button";
+import type {AnalyticsEvent} from "../../google-tag-manager";
 
 type Props = {
     className?: string,
@@ -16,11 +15,9 @@ type Props = {
     contentPreview?: ReactNode,
     children?: ReactNode,
     onClick?: Function,
-    analyticsEvent?: AnalyticsEvent
-}
+    analyticsEvent?: AnalyticsEvent,
+};
 
-// By default, if 'collapseMessage' is not defined, then the component will not
-// display a button to collapse once it has been expanded.
 function Collapser({
     className,
     expandMessage,
@@ -31,25 +28,21 @@ function Collapser({
     onClick: onClickProp,
     analyticsEvent,
 }: Props): ReactElement<"div"> {
-    const [isCollapsed, setIsCollapsed] = useState(!initiallyExpanded)
+    const [isCollapsed, setIsCollapsed] = useState(!initiallyExpanded);
 
     function onClick(event: SyntheticEvent<HTMLButtonElement>) {
-        setIsCollapsed(!isCollapsed)
-        onClickProp?.()
+        setIsCollapsed(!isCollapsed);
+        onClickProp?.();
     }
 
-    const message = isCollapsed ? expandMessage : collapseMessage
+    const message = isCollapsed ? expandMessage : collapseMessage;
 
     return (
         <div
-            className={classnames(
-                "Collapser",
-                className,
-                {collapsed: isCollapsed}
-            )}
+            className={classnames("Collapser", className, { collapsed: isCollapsed })}
         >
             {isCollapsed && contentPreview}
-            {message &&
+            {message && (
                 <Button
                     alt={message}
                     className="collapser-message"
@@ -62,20 +55,18 @@ function Collapser({
                         ...analyticsEvent,
                     }}
                 >
-                    <div className="title-container"> {/* wrapper for flex bug https://github.com/philipwalton/flexbugs#9-some-html-elements-cant-be-flex-containers */}
-                        { message }
+                    <div className="title-container">
+                        {message}
                         <Chevron />
                     </div>
                 </Button>
-            }
+            )}
 
-            <div
-                className={classnames({collapsed: isCollapsed})}
-            >
+            <div className={classnames("collapser-content", { collapsed: isCollapsed })}>
                 {children}
             </div>
         </div>
-    )
+    );
 }
 
-export default Collapser
+export default Collapser;
