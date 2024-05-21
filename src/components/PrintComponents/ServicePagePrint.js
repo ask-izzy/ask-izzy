@@ -89,8 +89,6 @@ export default function ServicePagePrint({service}: Props): ReactElement<"div"> 
                         referral_info={service.referral_info}
                         special_requirements={service.special_requirements}
                     />
-
-                   
                 </div>
 
                 {/* ServicePane Section */}
@@ -144,7 +142,6 @@ export default function ServicePagePrint({service}: Props): ReactElement<"div"> 
                                 </div>
                             </>
                         )}
-                        
 
                         {/* EMAIL LINK */}
                         {Array.isArray(service.emails) && service.emails.length > 0 && (
@@ -180,7 +177,7 @@ export default function ServicePagePrint({service}: Props): ReactElement<"div"> 
                                     </div>
                                 </>
                             )}
-                   
+ 
                                      {/* OPENING TIMES */}
                     {service.open ? (
                         <>
@@ -199,10 +196,7 @@ export default function ServicePagePrint({service}: Props): ReactElement<"div"> 
                     )}
                    <Spacer />
                     </BoxedText>
-                    <Cost
-                        catchment={service.catchment}
-                        cost={service.cost}
-                    />
+                    <Cost cost={service.cost} hideContentPreview={true} />
                 </div>
             </div>
 
