@@ -224,57 +224,71 @@ function ServicePane({ service }: Props): ReactNode {
                     {renderServiceProvisions()}
                 </div>
 
-                <div className="boxed-text-container">
-                    {renderCompareShare("web")}
-                    <BoxedText>
-                        <div className="practicalities-container">
-                            <CollapsedOpeningTimes
-                                service={service}
-                            />
-                            <Accessibility
-                                service={service}
-                                withSpacer={true}
-                            />
-                            <Ndis
-                                compact={false}
-                                object={service}
-                                withSpacer={true}
-                            />
-                            <Address
-                                location={service.location}
-                                site={service.site}
-                                withSpacer={true}
-                            />
-                            {service.location && service.travelTimes && (
-                                <TransportTime
-                                    location={service.location}
-                                    withSpacer={true}
-                                    travelTimes={service.travelTimes}
-                                />
-                            )}
-                            {!service.location?.isConfidential() && (
-                                <GoogleMapsLink
-                                    to={service.location}
-                                    className={Storage.getUserGeolocation() ? "withTimes" : "withoutTimes"}
-                                    hideSpacer={true}
-                                >
-                                    <span className="googleMapsLink">
-                                        Get directions in Google Maps
-                                        <icons.ExternalLink className="ExternalLinkIcon" />
-                                    </span>
-                                </GoogleMapsLink>
-                            )}
-                            {service.languages.length > 0 && (
-                                <LanguagesAvailable service={service}>{service.languages}</LanguagesAvailable>
-                            )}
-                            <ContactMethods object={service} />
-                            <ImportantInformation object={service} />
-                        </div>
-                    </BoxedText>
-                    <Feedback object={service} />
-                </div>
 
-                {renderSiblings()}
+                <div className="boxed-text-container">
+            {renderCompareShare("web")}
+            <Collapser
+                expandMessage="Expand all"
+                collapseMessage="Collapse all"
+                analyticsEvent={{
+                    event: `Action Triggered - Opening Times`,
+                    eventAction: "Show practicalities",
+                    eventLabel: null,
+                }}
+            >
+                <BoxedText>
+                    <div className="practicalities-container">
+                        <CollapsedOpeningTimes
+                            object={service.open}
+                            serviceId={service.id}
+                        />
+                        <Accessibility
+                            service={service}
+                            withSpacer={true}
+                        />
+                        <Ndis
+                            compact={false}
+                            object={service}
+                            withSpacer={true}
+                        />
+                        <Address
+                            location={service.location}
+                            site={service.site}
+                            withSpacer={true}
+                        />
+                        {service.location && service.travelTimes && (
+                            <TransportTime
+                                location={service.location}
+                                withSpacer={true}
+                                travelTimes={service.travelTimes}
+                            />
+                        )}
+                        {!service.location?.isConfidential() && (
+                            <GoogleMapsLink
+                                to={service.location}
+                                className={Storage.getUserGeolocation() ? "withTimes" : "withoutTimes"}
+                                hideSpacer={true}
+                            >
+                                <span className="googleMapsLink">
+                                    Get directions in Google Maps
+                                    <icons.ExternalLink className="ExternalLinkIcon" />
+                                </span>
+                            </GoogleMapsLink>
+                        )}
+                        {service.languages.length > 0 && (
+                            <LanguagesAvailable service={service}>
+                                {service.languages}
+                            </LanguagesAvailable>
+                        )}
+                        <ContactMethods object={service} />
+                        <ImportantInformation object={service} />
+                    </div>
+                </BoxedText>
+            </Collapser>
+
+                    <Feedback object={service} />
+        </div>
+                { renderSiblings() }
             </main>
         </div>
     );
