@@ -13,11 +13,6 @@
         color: #{colours.get-static('colour-text-mid')};
         color: var(--colour-text-mid);
         font-size: 14px;
-
-        @media print {
-            color: #{colours.get-static('raw-colour-pure-black')};
-            color: var(--raw-colour-pure-black);
-        }
     }
 
     a {
@@ -56,6 +51,7 @@
 
         a {
             text-decoration: none;
+            padding: 1px;
 
             .Contact-text {
                 text-overflow: ellipsis;
