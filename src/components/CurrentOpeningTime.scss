@@ -1,6 +1,6 @@
 @use '../styles/mixins/colours';
 
-.OpeningTimes {
+.CurrentOpeningTime {
     font-size: 16px;
     white-space: nowrap;
 
@@ -48,7 +48,7 @@
     }
 }
 
-.ResultListItem .OpeningTimes {
+.ResultListItem .CurrentOpeningTime {
     font-size: 14px;
 
     .Icon {

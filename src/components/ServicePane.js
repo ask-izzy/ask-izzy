@@ -219,9 +219,7 @@ function ServicePane({ service }: Props): ReactNode {
                     <BoxedText>
                         <div className="practicalities-container">
                             <CollapsedOpeningTimes
-                                object={service.open}
-                                serviceId={service.id}
-                                showTitleContainer={false}
+                                service={service}
                             />
                             <Accessibility
                                 service={service}

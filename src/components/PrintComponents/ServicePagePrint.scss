@@ -3,8 +3,12 @@
 .ServicePagePrint {
     background-color: #fff;
     color: #000;
-    padding: 40px;
     position: relative;
+    padding: 30px;
+    display: grid;
+    flex-direction: column;
+    justify-content: space-between;
+    min-height: 50vh;
 
     .service-page-print-header {
         display: flex;
@@ -14,15 +18,47 @@
             font-size: 10px;
         }
 
-        .service-info-caption {
-            padding: 10px;
-            font-size: 1.5px;
-        }
-
         .AskIzzyGreyScaleIcon {
             width: 130px;
             height: 70px;
         }
+    }
+
+    .Accessibility {
+        font-size: 14px;
+        color: var(--raw-colour-pure-black);
+    }
+
+    .Address .MapSolidIcon {
+        width: 25px;
+        height: 25px;
+        margin-left: -2px;
+        margin-right: 6px;
+        margin-top: 3px;
+    }
+
+    .my-service-page-phone-container {
+        display: flex;
+        align-items: center;
+        margin-top: 3px;
+        margin-bottom: -5px;
+    }
+
+    .my-service-page-phone-container .icon {
+        width: 30px;
+        height: 30px;
+        margin-right: 2px;
+    }
+
+    .ClockIcon {
+        width: 30px;
+        height: 30px;
+        margin-left: -3px;
+        margin-top: 3px;
+    }
+
+    .service-info-caption {
+        margin-bottom: 20px;
     }
 
     .Service-Containers {
@@ -36,58 +72,74 @@
         flex: 1;
     }
 
-    .service-description {
-        font-size: 14px;
-    }
-
     .service-page-print-service-provisions {
         padding-right: 15px;
-        padding-left: 15px;
-        font-size: 14px;
+        font-size: 13px;
     }
 
-    .cost-container {
-        display: flex;
-        flex-wrap: wrap;
-    }
-    
-    .cost-description {
-        flex: 1;
-    }
-    
-    .cost-details {
-        flex: 1;
-    }
-    
-
-    h2 {
+    .Cost h2 {
+        padding-top: 10px;
+        color: var(--raw-colour-pure-black);
         font-size: 15px;
-        color: #{colours.get-static('colour-text-dark')};
-        color: var(--colour-text-dark);
     }
 
     .ServicePane-Info {
-        padding: 14px;
-        padding-top: 30px;
+        padding: 12px;
         padding-bottom: 5px;
         font-size: 14px;
         flex: 1;
 
         .BoxedText {
-            padding: -10px;
-            border: 1px;
+            margin-top: 5px;
+            padding: 25px;
+
+            .BoxedText-container {
+                padding: 15px;
+                padding-top: 5px;
+                padding-bottom: 5px;
+                background-color: transparent;
+                border: 1px var(--colour-border-list-item-gray) solid;
+
+                .Spacer {
+                    background-color: var(--colour-border-list-item-gray);
+                }
+            }
+        }
+    }
+
+    .Eligibility {
+        .eligibility h2 {
+            font-size: 15px;
+            color: var(--raw-colour-pure-black);
+        }
+
+        .eligibility ul li {
+            font-size: 14px;
+            color: var(--raw-colour-pure-black);
         }
     }
 
     .email-container {
         margin-left: -8px;
+        margin-top: -10px;
         font-size: 14px;
         overflow-wrap: break-word;
+        text-decoration: none;
     }
 
     .web-container {
         font-size: 14px;
         overflow-wrap: break-word;
+        margin-top: -10px;
+        text-decoration: none;
+
+        .WebsiteIcon {
+            width: 45px;
+            height: 45px;
+            vertical-align: bottom;
+            text-decoration: none;
+            margin-left: -12px;
+        }
     }
 
     .time-container {
@@ -109,50 +161,45 @@
         }
     }
 
-    .need-an-interpreter {
-        display: flex;
-        align-items: center;
-        flex-direction: column;
-        margin-top: auto;
+    .service-page-print-about-title {
+        font-size: 16px;
+        font-weight: bold;
     }
 
-    .Spacer {
-        height: 1px;
-        background-color: #000;
-        display: flex;
-    }
+    .Bottom-container {
+        break-inside: avoid;
 
-    .page-print-footer {
-        display: flex;
-        justify-content: space-between;
-        page-break-inside: avoid;
-        column-gap: 10px;
-        align-items: first baseline;
+        .page-print-footer {
+            width: 100%;
+            display: flex;
+            padding: 20px;
+            box-sizing: border-box;
 
-        .service-page-print-about-title {
-            font-size: 15px;
-            font-weight: bold;
-        }
+            .top-section {
+                justify-content: space-between;
+                align-items: flex-start;
+                width: 100%;
+                text-align: left;
+                font-size: 13px;
 
-        .service-page-print-about-description {
-            margin-top: 10px;
-        }
+                .need-an-interpreter {
+                    text-align: left;
+                }
 
-        .service-page-print-qr {
-            flex-direction: column;
-            align-items: flex-end;
-            min-width: 12em;
-            padding: 10px;
-            flex: 1;
-
-            .service-page-print-qr-description {
-                font-weight: bold;
-                font-size: 14px;
+                .service-page-print-about-title {
+                    text-align: left;
+                    font-size: 13px;
+                }
             }
 
-            .qr-code {
-                width: 120px;
-                margin-left: 25px;
+            .service-page-print-qr {
+                text-align: center;
+                font-size: 13px;
+                font-weight: bold;
+
+                .qr-code {
+                    width: 120px;
+                }
             }
         }
     }
