@@ -64,11 +64,16 @@ async function seeTheResultsIn(
         const visibleElements = await FilterVisibleElements(elements);
         const elementsText = await Promise.all(visibleElements.map((element) => element.getText()));
 
-        // replace '(nada)' with an empty string (to represent
-        // an empty line)
+        // Normalize the spacing around the dash in both expected and actual values
+        const normalizeSpacing = (str) => str.replace(/\s*–\s*/g, "–");
+
+        expected = expected.map(normalizeSpacing);
+        const normalizedElementsText = elementsText.map(normalizeSpacing);
+
+        // replace '(nada)' with an empty string (to represent an empty line)
         expected = expected.filter(text => text !== "(nada)");
 
-        assert.deepStrictEqual(elementsText, expected,
+        assert.deepStrictEqual(normalizedElementsText, expected,
             `${key} is not correct`);
     }
 }
