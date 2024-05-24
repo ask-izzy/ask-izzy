@@ -1,6 +1,5 @@
 /* @flow */
 
-
 import type {Node as ReactNode} from "React";
 import React from "react";
 
@@ -10,12 +9,10 @@ import OpeningTimesList from "./OpeningTimesList";
 import Service from "../iss/Service";
 
 type Props = {
-
     service : Service
 }
 
-function CollapsedOpeningTimes({ service }: Props):ReactNode {
-
+function CollapsedOpeningTimes({ service }: Props): ReactNode {
     return (
         <div className="CollapsedOpeningTimes">
             <CurrentOpeningTime serviceOpening={service.open} />
@@ -28,11 +25,13 @@ function CollapsedOpeningTimes({ service }: Props):ReactNode {
                         eventLabel: null,
                     }}
                 >
-                    <OpeningTimesList service={service}/>
+                    <div className="AllOpeningTimes">
+                        <OpeningTimesList service={service}/>
+                    </div>
                 </Collapser>
             )}
         </div>
     )
 }
 
-export default CollapsedOpeningTimes
+export default CollapsedOpeningTimes;

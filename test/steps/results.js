@@ -51,7 +51,7 @@ async function seeTheResultsIn(
 ): Promise<void> {
     const keyToClass = (key) => key.match(/[(](.*)[)]/)[1];
     const selector = label && `.${label.replace(/ /g, "")}`;
-    console.log(table)
+    console.log(table);
 
     await this.driver.wait(documentReady(this.driver), 10000);
 
@@ -60,7 +60,7 @@ async function seeTheResultsIn(
 
         const elements = await this.driver.findElements(
             By.css(`${selector} .${keyToClass(key)}`)
-        )
+        );
         const visibleElements = await FilterVisibleElements(elements);
         const elementsText = await Promise.all(visibleElements.map((element) => element.getText()));
 
