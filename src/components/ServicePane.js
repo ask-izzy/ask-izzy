@@ -1,6 +1,6 @@
 /* @flow */
 
-import type {Element as ReactElement, Node as ReactNode} from "React";
+import type { Element as ReactElement, Node as ReactNode } from "React";
 import React, { useEffect, useState } from "react";
 import _ from "underscore";
 
@@ -176,6 +176,13 @@ function ServicePane({ service }: Props): ReactNode {
                     <ShareButton
                         hasTextDescription={true}
                         services={[service]}
+                    />
+                    <PrintButton
+                        hasTextDescription={true}
+                        ComponentToPrint={
+                            <ServicePagePrint service={service} />
+                        }
+                        isInServicePane={true}
                     />
                 </div>
             );

@@ -53,21 +53,67 @@
 
     .compare-share-container {
         display: flex;
-        justify-content: space-between;
-        margin: 10px;
+        align-items: center;
 
-        &.mobile {
-            flex-direction: column;
-            margin: 0;
+        .ShareButton {
+            font-size: 15px;
+        }
 
-            .ShareButton {
-                padding-bottom: 15px;
+        .ShareButton,
+        .AddToCompareButton {
+            svg {
+                height: 20px;
+                width: 20px;
+                margin-top: -10px;
             }
         }
-    }
 
-    .print-button-container {
-        margin-inline: 10px;
+        .StandardButton.type-secondary {
+            margin-right:10px;
+            border: transparent;
+            font-size: 15px;
+            margin-top: 0.5px;
+
+            &:hover {
+                background-color: transparent;
+            }
+        }
+
+        .SvgIcon {
+            height: 26px;
+            width: 26px;
+            padding-top: 13px;
+        }
+
+        &.mobile {
+            flex-direction: row;
+            flex-wrap: wrap;
+
+            .ShareButton,
+            .AddToCompareButton,
+            .PrintButton {
+                margin: 5px;
+            }
+
+            .PrintButton {
+                margin-inline: 10px;
+
+                .StandardButton.type-secondary {
+                    border: transparent;
+                    font-size: 15px;
+                }
+
+                .SvgIcon {
+                    height: 26px;
+                    width: 26px;
+                    padding-top: 13px;
+                }
+                
+                &:hover {
+                    color:transparent;
+                }
+            }
+        }
     }
 
     .error {
@@ -186,6 +232,7 @@
 
         &:hover .googleMapsLink {
             text-decoration: none;
+            color:transparent;
         }
     }
 

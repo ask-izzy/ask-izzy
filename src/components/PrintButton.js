@@ -8,17 +8,18 @@ import { useReactToPrint } from "react-to-print";
 import Button from "../../components/general/StandardButton"
 import Print from "@/src/icons/Print";
 
-// Add a new prop to indicate the context
 type Props = {
     ComponentToPrint?: ReactNode,
     hasTextDescription?: boolean,
-    isInServicePane?: boolean, // New prop to indicate context
+    type?:"primary" | "secondary" | "text" | "action",
+    isInServicePane?: boolean,
 }
 
 function PrintButton({
     ComponentToPrint = <></>,
     hasTextDescription = true,
-    isInServicePane = false, // Default to false if not provided
+    type = "secondary",
+    isInServicePane = false,
 }: Props): ReactNode {
 
     let printableComponentRef = React.useRef();
@@ -40,6 +41,7 @@ function PrintButton({
             <Button
                 className="print-component-button"
                 onClick={handlePrint}
+                type={type}
                 analyticsEvent={{
                     event: "Action Triggered - Page Printed",
                     eventAction: "Page printed",
@@ -48,7 +50,6 @@ function PrintButton({
             >
                 <div className="main-container">
                     <Print />
-                    {/* Render different text based on the context */}
                     {isInServicePane ? "Print" : (hasTextDescription && <span>Print Friendly</span>)}
                 </div>
             </Button>
