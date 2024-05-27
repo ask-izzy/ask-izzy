@@ -5,6 +5,52 @@
     color: var(--colour-text-dark);
     font-size: 14px;
     font-weight: light;
+    display: block;
+
+    .Boxed-Text-Collapser {
+        margin-top: 10px;
+        height: 20px;
+        display: flex;
+        align-items: center;
+
+        :focus {
+            outline: none;
+        }
+
+        .collapser-message-text {
+            margin-left: 100px;
+            flex-grow: 1;
+            padding-right: 0.5em;
+            width: 20%;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .collapser-header {
+            font-size: 17px;
+            font-weight: bold;
+        }
+
+        .collapser-icon {
+            flex-shrink: 0;
+        }
+    }
+
+    @media (max-width: 768px) {
+        .Boxed-Text-Collapser {
+            justify-content: center;
+            margin: 0 auto;
+            padding: 0 10px;
+
+            .collapser-message-text {
+                text-align: center;
+                flex-grow: 1;
+                width: auto;
+                padding-right: 1em;
+            }
+        }
+    }
 
     .AlertBannerList {
         text-align: right;
@@ -53,7 +99,7 @@
 
     .compare-share-container {
         display: flex;
-        align-items: center;
+        justify-content: space-between;
 
         .ShareButton {
             font-size: 15px;
@@ -61,7 +107,6 @@
             align-items: center;
             justify-content: center;
             margin-bottom: 2.5px;
-            margin-left: 10px;
 
             svg {
                 height: 23px;
@@ -81,19 +126,11 @@
             }
         }
 
-        .PrintButton .print-component-button .main-container {
-            display: flex;
-            align-items: center;
-            margin: -10px;
-        }
-
         .StandardButton.type-secondary {
             margin-right: 10px;
             border: transparent;
-            margin-bottom: 1px;
             font-size: 15px;
-            border-radius: 0.5px;
-            margin-left: 15px;
+            margin-top: 0.5px;
 
             &:hover {
                 background-color: transparent;
@@ -108,6 +145,7 @@
 
         &.mobile {
             flex-direction: row;
+            flex-wrap: wrap;
 
             .ShareButton,
             .AddToCompareButton,
@@ -350,12 +388,4 @@
             margin-left: 0;
         }
     }
-}
-
-.Collapser.collapsed .collapser-content {
-    display: none;
-}
-
-.collapser-content {
-    display: block;  
 }

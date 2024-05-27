@@ -61,7 +61,7 @@ function DebugPersonalisation({
     return (
         <DebugContainer
             message="Debug ISS Query"
-            initiallyExpanded={
+            externalCollapsed={
                 !!Storage.getJSON("issParamsOverride")
             }
         >

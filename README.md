@@ -71,7 +71,7 @@ Then edit `docker-compose.emulate-production.override.yml` and fill in the appro
 Once that is setup the emulated prod environment can be spun up with this command:
 
 ```bash
-env FAKE_TASK_DEFINITION_REVISION=$(date +%s) docker compose -p ask-izzy-prod -f docker-compose.emulate-production.yml -f docker-compose.emulate-production.override.yml up --build --scale app=2
+env FAKE_TASK_DEFINITION_REVISION=$(date +%s) docker compose -p ask-izzy-prod -f docker-compose.emulate-production.yml -f docker-compose.emulate-production.override.yml up --build --scale app-deploy=2 --scale app-serve=2
 ```
 
 ## Alternative Dev Process (No Docker)

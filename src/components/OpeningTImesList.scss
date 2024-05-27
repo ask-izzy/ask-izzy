@@ -1,0 +1,26 @@
+.OpeningTimesList {
+    margin: 0;
+    margin-left: 32px;
+    padding: 0;
+
+    & > li {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        list-style-type: none;
+    }
+
+    .day {
+        justify-content: flex-start;
+    }
+
+    .time {
+        justify-content: flex-end;
+    }
+
+    @media print {
+        .collapser-message {
+            font-size: 1px;
+        }
+    }
+}
