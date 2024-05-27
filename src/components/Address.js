@@ -2,12 +2,11 @@
 import type {Node as ReactNode} from "React";
 import React from "react";
 import classNames from "classnames";
-import Map from "@/src/icons/Map";
-import MapSolid from "@/src/icons/MapSolid";
+
 import ScreenReader from "./ScreenReader";
 import AddressLocation from "../iss/AddressLocation";
 import Spacer from "./Spacer";
-
+import {FmdGoodRounded} from "@mui/icons-material";
 import FormatText from "./FormatText"
 
 type Props = {
@@ -54,13 +53,10 @@ class Address extends React.Component<Props, void> {
         return <>
             {this.props.withSpacer && <Spacer />}
             <div className="Address">
+                <FmdGoodRounded />
                 <ScreenReader>
                     Address of the service is
                 </ScreenReader>
-                {this.props.hasSolidIcon ?
-                    <MapSolid aria-hidden={true} />
-                    : <Map aria-hidden={true} />
-                }
                 <div className={classNames("Address-wrapper", {"single-line": this.props.singleLineAddress})}>
                     {" "}
                     {
