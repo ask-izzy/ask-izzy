@@ -5,12 +5,13 @@ import { titleize } from "underscore.string";
 
 import Link from "./base/Link";
 import type {AnalyticsEvent} from "../google-tag-manager";
-import icons from "../icons";
+
 import classnames from "classnames"
 import type { phone } from "../iss/general";
 import ScreenReader from "./ScreenReader";
 import FormatText from "./FormatText"
 import {PhoneHref} from "@/helpers/regex.helpers"
+import { CallRounded} from "@mui/icons-material";
 
 type Props = phone & {
     crisis?: boolean,
@@ -34,8 +35,8 @@ function PhoneButton({
     styleType,
 }: Props): ReactNode {
     const icon = styleType === "hollow" ?
-        <icons.Phone />
-        : <icons.PhoneSolid />
+        <CallRounded/>
+        : <CallRounded fontSize="small"/>
 
     function displayComment(): string {
         return comment ? comment : titleize(kind)

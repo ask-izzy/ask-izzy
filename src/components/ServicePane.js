@@ -32,6 +32,12 @@ import ScreenReader from "./ScreenReader";
 import FormatText from "./FormatText"
 import {getSiblingServices} from "../iss/load-services"
 import {MobileDetect} from "../effects/MobileDetect";
+
+
+
+
+
+
 type Props = {
     service: Service,
 }

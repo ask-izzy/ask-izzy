@@ -50,7 +50,10 @@
             color: #{colours.get-static('colour-crisis-white')};
         }
 
-        .Icon {
+        svg {
+            margin-right: 6px;
+            vertical-align: middle;
+
             path {
                 fill: #{colours.get-static('colour-crisis-white')};
                 fill: var(--colour-crisis-white);
@@ -61,31 +64,24 @@
                 }
             }
         }
-    }
 
-    &.styleHollow {
-        .ContactButton {
-            background-color: #{colours.get-static('colour-button-primary')};
-            color: #{colours.get-static('colour-button-primary')};
-            color: var(--colour-button-primary);
-            border: 1px solid #{colours.get-static('colour-button-primary')};
-            border: 1px solid var(--colour-button-primary);
-            height: 25px;
+        &.styleHollow {
+            .ContactButton {
+                background-color: #{colours.get-static('colour-button-primary')};
+                color: #{colours.get-static('colour-button-primary')};
+                color: var(--colour-button-primary);
+                border: 1px solid #{colours.get-static('colour-button-primary')};
+                border: 1px solid var(--colour-button-primary);
+                height: 25px;
 
-            @media print {
-                border: 0;
-            }
-
-            .Icon {
-                path {
-                    fill: #{colours.get-static('colour-crisis-white')};
-                    fill: var(--colour-crisis-white);
+                @media print {
+                    border: 0;
                 }
             }
         }
-    }
-}
 
-.call-text + .number.value {
-    font-size: initial;
+        .call-text + .number.value {
+            font-size: initial;
+        }
+    }
 }

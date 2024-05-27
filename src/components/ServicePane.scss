@@ -135,8 +135,11 @@
 
     .OpeningTimes {
         svg {
-            top: 3px;
-            left: -4px;
+            margin: auto;
+            width: 1em;
+            height: 1em;
+            font-size: 24px;
+            vertical-align: text-bottom;
         }
     }
 

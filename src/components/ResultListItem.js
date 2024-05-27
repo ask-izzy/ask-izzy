@@ -3,12 +3,12 @@
 import type {Node as ReactNode, Element as ReactElement} from "React";
 import React from "react";
 
-import icons from "../icons";
 import Service from "../iss/Service";
 
 import DebugContainer from "./DebugContainer";
 import DebugQueryScore from "./DebugQueryScore";
 import DebugServiceRecord from "./DebugServiceRecord";
+import {FmdGoodRounded} from "@mui/icons-material";
 
 import Eligibility from "./Eligibility";
 import AddToCompareButton from "./AddToCompareButton"
@@ -50,7 +50,7 @@ function ResultListItem({
 
         return (
             <span className="location">
-                <icons.Map aria-hidden={true} />
+                <FmdGoodRounded aria-hidden={true} />
                 <ScreenReader>
                     Service located in
                 </ScreenReader>
@@ -130,7 +130,7 @@ function ResultListItem({
             <Eligibility {...service} />
             <Accessibility service={service} />
             {!service.travelTimes && travelTimesStatus === "loading" &&
-                <icons.Loading className="small"/>
+                <FmdGoodRounded.Loading className="small"/>
             }
             {service.travelTimes && renderTravelTimes()}
             <DebugServiceRecord object={service} />

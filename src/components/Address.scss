@@ -5,10 +5,10 @@
     font-size: 16px;
     display: flex;
 
-    > span,
-    > div {
-        display: inline-block;
-        vertical-align: middle;
+    svg {
+        margin-left: -2px;
+        margin-right: 6px;
+        vertical-align: text-bottom;
     }
 
     .Address-wrapper {
@@ -19,22 +19,6 @@
             display: flex;
             align-items: center;
         }
-    }
-
-    .MapIcon {
-        width: 40px;
-        height: 40px;
-        margin-left: -9px;
-        margin-right: 2px;
-        vertical-align: text-bottom;
-    }
-
-    .MapSolidIcon {
-        width: 25px;
-        height: 25px;
-        margin-left: -2px;
-        margin-right: 6px;
-        margin-top: 3px;
     }
 
     .details {
