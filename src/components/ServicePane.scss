@@ -55,14 +55,16 @@
         display: flex;
         align-items: center;
 
-        .ShareButton{
+        .ShareButton {
             font-size: 15px;
+
             svg {
                 height: 20px;
                 width: 20px;
                 margin-top: -13px;
             }
         }
+
         .AddToCompareButton {
             svg {
                 height: 20px;
@@ -75,8 +77,7 @@
             display: flex;
             align-items: center;
             column-gap: 5px;
-            margin:-10px;
-            border-radius: 0px;
+            margin: -10px;
         }
 
         .StandardButton.type-secondary {
@@ -84,7 +85,7 @@
             border: transparent;
             font-size: 15px;
             margin-top: 0.5px;
-            border-radius: 0px;
+            border-radius: 0.5px;
 
             &:hover {
                 background-color: transparent;
