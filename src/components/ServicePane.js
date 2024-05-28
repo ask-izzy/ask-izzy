@@ -184,6 +184,10 @@ function ServicePane({ service }: Props): ReactNode {
                         }
                         isInServicePane={true}
                     />
+                    <AddToCompareButton
+                        hasTextDescription={true}
+                        service={service}
+                    />
                 </div>
             );
         }

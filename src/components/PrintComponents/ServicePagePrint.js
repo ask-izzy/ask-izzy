@@ -122,7 +122,7 @@ export default function ServicePagePrint({service}: Props): ReactElement<"div"> 
                                 <Spacer />
                                 <Address
                                     location={service.location}
-                                    singleLineAddress={true}
+                                    singleLineAddress={false}
                                     hasSolidIcon={true}
                                 />
                             </>
