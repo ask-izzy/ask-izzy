@@ -1,5 +1,5 @@
 /* @flow */
-import type {Node as ReactNode} from "React"
+import type {Node as ReactNode} from "React";
 import React from "react";
 import Collapser from "./general/Collapser";
 import Spacer from "./Spacer";
@@ -10,9 +10,11 @@ import Service from "../iss/Service";
 
 type Props = {
     object: Service,
-}
+    externalCollapsed?: boolean, // New prop for external control
+    onToggle?: (isCollapsed: boolean) => void, // New prop for toggle handling
+};
 
-function ContactMethods({object}: Props): ReactNode {
+function ContactMethods({ object, externalCollapsed, onToggle }: Props): ReactNode {
 
     function phones(): Array<Object> {
         return object.Phones().map((details, idx) => ({
@@ -39,7 +41,7 @@ function ContactMethods({object}: Props): ReactNode {
         return url ? [{
             type: "Website",
             component: Web,
-            details: {url},
+            details: { url },
         }] : [];
     }
 
@@ -54,7 +56,7 @@ function ContactMethods({object}: Props): ReactNode {
 
     return (
         <div className="ContactMethods">
-            <Spacer/>
+            <Spacer />
 
             {/* Main phone number */}
             {phones().slice(0, 1).map(renderContactMethod)}
@@ -62,17 +64,20 @@ function ContactMethods({object}: Props): ReactNode {
             {/* Collapser for extra phone numbers */}
             <Collapser
                 expandMessage="Show other contact options"
+                collapseMessage="Hide other contact options" // Add collapse message
                 analyticsEvent={{
                     event: "Action Triggered - Other Contact Details",
                     eventAction: "Show other contact details",
                     eventLabel: null,
                 }}
+                externalCollapsed={externalCollapsed} // Passing externalCollapsed prop
+                onToggle={onToggle} // Passing onToggle prop
             >
                 {phones().slice(1).map(renderContactMethod)}
             </Collapser>
 
             {/* Spacer before Email */}
-            <Spacer/>
+            <Spacer />
 
             {/* Email */}
             {emails().map(renderContactMethod)}

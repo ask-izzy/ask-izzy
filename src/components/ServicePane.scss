@@ -5,6 +5,14 @@
     color: var(--colour-text-dark);
     font-size: 14px;
     font-weight: light;
+    display: block;
+
+
+    .Boxed-Text-Collapser{
+    .collapser-message-text {
+        margin-left:130px;
+        }
+    }
 
     .AlertBannerList {
         text-align: right;
