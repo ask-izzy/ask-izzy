@@ -82,18 +82,7 @@ export default function ServicePagePrint({service}: Props): ReactElement<"div"> 
 
                         {/* Header for "What you can get here" */}
                         <div className="service-page-print-service-provisions">
-                            {service._serviceProvisions && service._serviceProvisions.length > 0 ? (
-                            <>
-                                <h2>What you can get here</h2>
-                                <ul>
-                                    {service.serviceProvisions.map((provision, index) => (
-                                        <li key={index}>{provision}</li>
-                                    ))}
-                                </ul>
-                            </>
-                            ) : (
-                                <p>{service.description}</p>
-                            )}
+                            <p>{service.description}</p>
                         </div>
 
                         <Eligibility
