@@ -7,11 +7,52 @@
     font-weight: light;
     display: block;
 
+    .Boxed-Text-Collapser {
+        margin-top: 10px;
+        height: 20px;
+        display: flex;
+        align-items: center;
 
-    .Boxed-Text-Collapser{
-    .collapser-message-text {
-        margin-left:130px;
+        :focus {
+            outline: none;
         }
+        .collapser-message-text {
+            margin-left: 100px; /* this makes a gap between the title + collapser header please dont adjust this anymore */
+            flex-grow: 1;
+            padding-right: 7px;
+            width: 83px; /*this is for the icon to not be shifted by the collapser header */
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .collapser-header {
+            font-size: 17px; /* Adjust this size as needed */
+            font-weight: bold; /* Add any other styles you need */
+        }
+
+        .collapser-icon {
+            flex-shrink: 0;
+        }
+    }
+
+    @media (max-width: 768px) {
+        .Boxed-Text-Collapser {
+            justify-content: center;
+            margin: 0 auto;  
+            padding: 0 10px;  
+
+            .collapser-message-text {
+                margin-left: 100; /* for mobile devices giving it a fixed width is easier */
+                text-align: center;
+                flex-grow: 1;
+                width: auto;
+            }
+        }
+    }
+
+    .collapser-icon {
+        flex-shrink: 0;
     }
 
     .AlertBannerList {

@@ -26,7 +26,7 @@ function CollapsedOpeningTimes({ service, externalCollapsed, onToggle }: Props):
                         eventLabel: null,
                     }}
                     externalCollapsed={externalCollapsed} // Pass externalCollapsed prop
-                    onToggle={onToggle} // Passing onToggle prop
+                    onToggle={onToggle} // Pass onToggle prop
                 >
                     <div className="AllOpeningTimes">
                         <OpeningTimesList service={service} />

@@ -17,6 +17,7 @@ type Props = {
     analyticsEvent?: AnalyticsEvent,
     onToggle?: (isCollapsed: boolean) => void,
     externalCollapsed?: boolean,
+    icon?: ReactNode,
 };
 
 function Collapser({
@@ -31,6 +32,7 @@ function Collapser({
     analyticsEvent,
     onToggle,
     externalCollapsed,
+    icon,
 }: Props): ReactElement<"div"> {
     const [isCollapsed, setIsCollapsed] = useState(!initiallyExpanded);
 
@@ -72,7 +74,7 @@ function Collapser({
                     <div className="title-container">
                         {header && <span className="collapser-header">{header}</span>}
                         <span className="collapser-message-text">{message}</span>
-                        <Chevron />
+                        {icon || <Chevron />}
                     </div>
                 </Button>
             )}

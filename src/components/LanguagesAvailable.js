@@ -38,7 +38,7 @@ export default function LanguagesAvailable({ service, externalCollapsed, onToggl
                                     eventLabel: null,
                                 }}
                                 externalCollapsed={externalCollapsed} // Pass externalCollapsed prop
-                                onToggle={onToggle} // Passing onToggle prop
+                                onToggle={onToggle} // Pass onToggle prop
                             >
                                 {languagesSpoken}
                             </Collapser>

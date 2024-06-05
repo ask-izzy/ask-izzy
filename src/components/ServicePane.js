@@ -30,8 +30,10 @@ import ShareButton from "../components/ShareButton";
 import Storage from "../storage";
 import ScreenReader from "./ScreenReader";
 import FormatText from "./FormatText";
-import { getSiblingServices } from "../iss/load-services";
-import { MobileDetect } from "../effects/MobileDetect";
+import {getSiblingServices} from "../iss/load-services";
+import {MobileDetect} from "../effects/MobileDetect";
+import UnfoldLessIcon from "@mui/icons-material/UnfoldLess";
+import UnfoldMoreIcon from "@mui/icons-material/UnfoldMore";
 
 type Props = {
     service: Service,
@@ -44,7 +46,7 @@ function ServicePane({ service }: Props): ReactNode {
         openingTimes: true,
         languages: true,
         contactMethods: true,
-    }); // State to track individual collapsers [experimenting :)]
+    }); // State to track individual collapsers
 
     const isMobile = MobileDetect(799);
 
@@ -72,7 +74,12 @@ function ServicePane({ service }: Props): ReactNode {
         }));
     };
 
-    const allExpanded = !Object.values(collapserStates).some(state => state);
+    useEffect(() => {
+        const allExpanded = Object.values(collapserStates).every(state => !state);
+        if (allExpanded !== !isCollapsed) {
+            setIsCollapsed(!allExpanded);
+        }
+    }, [collapserStates]);
 
     const renderServiceProvisions = (): ReactElement<"div"> => {
         if (_.isEmpty(service.serviceProvisions)) {
@@ -171,8 +178,6 @@ function ServicePane({ service }: Props): ReactNode {
     );
 
     function renderCompareShare(typeOfDevice) {
-        // required due to different positioning
-        // with mobile and computer rendering
         if (typeOfDevice === "web" && !isMobile) {
             return (
                 <div className="compare-share-container">
@@ -231,7 +236,7 @@ function ServicePane({ service }: Props): ReactNode {
                     {renderCompareShare("web")}
                     <Collapser
                         header="Service Details"
-                        expandMessage={allExpanded ? "Collapse all" : "Expand all"}
+                        expandMessage={isCollapsed ? "Expand all" : "Collapse all"}
                         collapseMessage="Collapse all"
                         analyticsEvent={{
                             event: `Action Triggered - Opening Times`,
@@ -241,6 +246,7 @@ function ServicePane({ service }: Props): ReactNode {
                         className="Boxed-Text-Collapser"
                         onClick={toggleAll}
                         externalCollapsed={isCollapsed}
+                        icon={isCollapsed ? <UnfoldMoreIcon className="collapser-icon" /> : <UnfoldLessIcon className="collapser-icon" />}
                     />
                     <BoxedText>
                         <div className="boxed-text-content">
@@ -287,9 +293,7 @@ function ServicePane({ service }: Props): ReactNode {
                                     service={service}
                                     externalCollapsed={collapserStates.languages}
                                     onToggle={handleToggle("languages")}
-                                >
-                                    {service.languages}
-                                </LanguagesAvailable>
+                                />
                             )}
                             <ContactMethods
                                 object={service}
