@@ -7147,15 +7147,22 @@ expand-tilde@^2.0.0, expand-tilde@^2.0.2:
   dependencies:
     homedir-polyfill "^1.0.1"
 
+express-rate-limit@7:
+  version "7.3.0"
+  resolved "https://registry.yarnpkg.com/express-rate-limit/-/express-rate-limit-7.3.0.tgz#b3ea0dc4fc3ca9739e3af04565184f6edcdf0240"
+  integrity sha512-ZPfWlcQQ1PsZonB/vqksOsBQV74z5osi/QcdoBCyKJXl/wOVjS1yRDmvkpMM52KJeLbiF2+djwVEnEgVCDdvtw==
+
 express-rate-limit@^6.4.0:
   version "6.7.0"
   resolved "https://registry.yarnpkg.com/express-rate-limit/-/express-rate-limit-6.7.0.tgz#6aa8a1bd63dfe79702267b3af1161a93afc1d3c2"
   integrity sha512-vhwIdRoqcYB/72TK3tRZI+0ttS8Ytrk24GfmsxDXK9o9IhHNO5bXRiXQSExPQ4GbaE5tvIS7j1SGrxsuWs+sGA==
 
-express-slow-down@^1.4.0:
-  version "1.6.0"
-  resolved "https://registry.yarnpkg.com/express-slow-down/-/express-slow-down-1.6.0.tgz#6af1cd98471c4928e43e97d02770fdfe03b894a1"
-  integrity sha512-M2+Gl6vtvHW5CiRwy82epoiMHWWDVsLws+YnhO2C0lY6eAbRSvRdCA1G1VxSY68y+Urfb74npTO0kdHgC6OPHg==
+express-slow-down@^2.0.3:
+  version "2.0.3"
+  resolved "https://registry.yarnpkg.com/express-slow-down/-/express-slow-down-2.0.3.tgz#7b953a15c95105386d78370f8d172d88bb225dd6"
+  integrity sha512-vATCiFd8uQHtTeK5/Q0nLUukhZh+RV5zkcHxLQr0X5dEFVEYqzVXEe48nW23Z49fwtR+ApD9zn9sZRisTCR99w==
+  dependencies:
+    express-rate-limit "7"
 
 express@4.16.3:
   version "4.16.3"
