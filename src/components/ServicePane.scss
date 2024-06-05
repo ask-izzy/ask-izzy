@@ -16,11 +16,12 @@
         :focus {
             outline: none;
         }
+
         .collapser-message-text {
-            margin-left: 100px; /* this makes a gap between the title + collapser header please dont adjust this anymore */
+            margin-left: 100px;
             flex-grow: 1;
             padding-right: 7px;
-            width: 83px; /*this is for the icon to not be shifted by the collapser header */
+            width: 83px;
             white-space: nowrap;
             overflow: hidden;
             text-overflow: ellipsis;
@@ -37,10 +38,11 @@
     }
 
     @media (max-width: 768px) {
+
         .Boxed-Text-Collapser {
             justify-content: center;
-            margin: 0 auto;  
-            padding: 0 10px;  
+            margin: 0 auto;
+            padding: 0 10px;
 
             .collapser-message-text {
                 margin-left: 100; /* for mobile devices giving it a fixed width is easier */

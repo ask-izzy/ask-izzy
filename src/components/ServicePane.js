@@ -39,10 +39,16 @@ type Props = {
     service: Service,
 };
 
+type CollapserStates = {
+    openingTimes: boolean,
+    languages: boolean,
+    contactMethods: boolean,
+};
+
 function ServicePane({ service }: Props): ReactNode {
     const [siblings, setSiblings] = useState<Array<Service>>([]);
     const [isCollapsed, setIsCollapsed] = useState(true); // State to manage global collapse/expand
-    const [collapserStates, setCollapserStates] = useState({
+    const [collapserStates, setCollapserStates] = useState<CollapserStates>({
         openingTimes: true,
         languages: true,
         contactMethods: true,
@@ -67,7 +73,7 @@ function ServicePane({ service }: Props): ReactNode {
         });
     };
 
-    const handleToggle = (key) => (collapsed) => {
+    const handleToggle = (key: $Keys<CollapserStates>) => (collapsed: boolean) => {
         setCollapserStates(prevState => ({
             ...prevState,
             [key]: collapsed,
@@ -246,7 +252,9 @@ function ServicePane({ service }: Props): ReactNode {
                         className="Boxed-Text-Collapser"
                         onClick={toggleAll}
                         externalCollapsed={isCollapsed}
-                        icon={isCollapsed ? <UnfoldMoreIcon className="collapser-icon" /> : <UnfoldLessIcon className="collapser-icon" />}
+                        icon={isCollapsed ?
+                            <UnfoldMoreIcon className="collapser-icon" />
+                            : <UnfoldLessIcon className="collapser-icon" />}
                     />
                     <BoxedText>
                         <div className="boxed-text-content">
