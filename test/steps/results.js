@@ -51,7 +51,6 @@ async function seeTheResultsIn(
 ): Promise<void> {
     const keyToClass = (key) => key.match(/[(](.*)[)]/)[1];
     const selector = label && `.${label.replace(/ /g, "")}`;
-    console.log(table);
 
     await this.driver.wait(documentReady(this.driver), 10000);
 
