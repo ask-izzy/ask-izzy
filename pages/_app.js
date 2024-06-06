@@ -45,14 +45,6 @@ function App(appProps: AppProps): ReactNode {
             }
         })
 
-        // Allow typography.com to record the hit for licencing
-        // This causes a CORS error after the request is run,
-        // which is not a problem as we don't need to do anything
-        // with the response.
-        fetch("https://cloud.typography.com/7948374/730248/css/fonts.css", {
-            redirect: "manual",
-        }).catch(() => {})
-
         const myListLength = Object.keys(
             storage.getJSON("my-list-services") || {}
         ).length
@@ -316,6 +308,30 @@ function renderHeadMetadata(pageInfo: any, router: NextRouter): ReactNode {
             <meta
                 name="msapplication-TileImage"
                 content="/favicons/mstile-144x144.png"
+            />
+            <link rel="preload"
+                href="/fonts/hoc/GothamRnd-Light_Web.woff2"
+                as="font"
+                type="font/woff2"
+                crossOrigin="true"
+            />
+            <link rel="preload"
+                href="/fonts/hoc/GothamRnd-Book_Web.woff2"
+                as="font"
+                type="font/woff2"
+                crossOrigin="true"
+            />
+            <link rel="preload"
+                href="/fonts/hoc/GothamRnd-Medium_Web.woff2"
+                as="font"
+                type="font/woff2"
+                crossOrigin="true"
+            />
+            <link rel="preload"
+                href="/fonts/hoc/GothamRnd-Bold_Web.woff2"
+                as="font"
+                type="font/woff2"
+                crossOrigin="true"
             />
             <title>
                 {getFullPageTitle(pageInfo.title, router, pageInfo.type)}
