@@ -11,9 +11,7 @@ async function isVisibleElement(
     element: typeof WebElement
 ) {
     while (element) {
-        console.log("Checking Element", await element.getTagName());
         if (!await element.isDisplayed()) {
-            console.log("Invisible");
             return false;
         }
         element = await element.findElement(By.xpath(".."));
