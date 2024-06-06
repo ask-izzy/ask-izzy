@@ -73,7 +73,7 @@ function ServicePane({ service }: Props): ReactNode {
         });
     };
 
-    const handleToggle = (key: $Keys<CollapserStates>) => (collapsed: boolean) => {
+    const handleToggle = (key: 'openingTimes' | 'languages' | 'contactMethods') => (collapsed: boolean) => {
         setCollapserStates(prevState => ({
             ...prevState,
             [key]: collapsed,
