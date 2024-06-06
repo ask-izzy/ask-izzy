@@ -7,6 +7,33 @@ import {
     elementWithTextSubstring,
 } from "./selectors"
 
+async function isVisibleElement(
+    element: typeof WebElement
+) {
+    while (element) {
+        if (!await element.isDisplayed()) {
+            return false;
+        }
+        element = await element.findElement(By.xpath(".."));
+        if (await element.getTagName() === "body") {
+            return true;
+        }
+    }
+    return true;
+}
+
+export async function FilterVisibleElements(
+    elements:Array<typeof WebElement>
+): Promise<Array<typeof WebElement>> {
+    const visibleElements = []
+    for (const element of elements) {
+        if (await isVisibleElement(element)) {
+            visibleElements.push(element)
+        }
+    }
+    return visibleElements
+}
+
 export async function getElementWithText(
     driver: typeof WebDriver,
     elementText: string,
@@ -15,8 +42,10 @@ export async function getElementWithText(
     const locator = By.xpath(
         elementWithText(elementText, elementType)
     )
-    const driverFound = await driver.findElement(locator)
-    return driverFound
+
+    const elementsFound = await driver.findElements(locator)
+    const visibleElementsFound = await FilterVisibleElements(elementsFound)
+    return visibleElementsFound[0]
 }
 
 export async function getElementWithTextSubstring(

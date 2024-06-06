@@ -12,7 +12,8 @@ type Props = {
     onClick: Function,
     disabled?: boolean,
     children?: any,
-    type?: "primary" | "secondary" | "text" | "action"
+    type?: "primary" | "secondary" | "text" | "action",
+    variant?: "default" | "icon"
 }
 
 function StandardButton(
@@ -23,6 +24,7 @@ function StandardButton(
         disabled,
         children,
         type = "primary",
+        variant = "default",
         ...rest
     }: Props): ReactElement<typeof Button> {
 
@@ -30,7 +32,7 @@ function StandardButton(
         <Button
             onClick={onClick}
             disabled={disabled}
-            className={classnames("StandardButton", className, `type-${type}`)}
+            className={classnames("StandardButton", className, `type-${type}`, `variant-${variant}`)}
             {...(rest: any)}
         >
             {label}

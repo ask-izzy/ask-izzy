@@ -9,7 +9,7 @@ import Service from "../iss/Service";
 
 import AddToCompareButton from "./AddToCompareButton"
 import ServiceProvisions from "./service/ServiceProvisions"
-import OpeningTimes from "./OpeningTimes";
+import CurrentOpeningTime from "./CurrentOpeningTime";
 import Ndis from "./Ndis";
 import { titleize } from "underscore.string";
 import ScreenReader from "./ScreenReader";
@@ -82,9 +82,9 @@ function ResultListItem({
                         />
                     </div>
                     {service.location && renderLocation()}
-                    <OpeningTimes
+                    <CurrentOpeningTime
                         className="opening_hours"
-                        object={service.open}
+                        serviceOpening={service.open}
                     />
                     <ServiceProvisions
                         service={service}

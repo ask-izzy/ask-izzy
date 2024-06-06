@@ -4,13 +4,13 @@ import type {Node as ReactNode} from "React";
 import React from "react";
 import moment from "moment-timezone";
 
-import OpeningTimes from "./OpeningTimes";
+import CurrentOpeningTime from "./CurrentOpeningTime";
 import getServiceOpeningFixture from "../../fixtures/factories/ServiceOpening";
 import type {openingHours} from "../iss/general";
 
 export default {
-    title: "Service Components/OpeningTimes",
-    component: OpeningTimes,
+    title: "Service Components/CurrentOpeningTime",
+    component: CurrentOpeningTime,
     excludeStories: [
         "mockedTimeDecorator",
         "addTimesToStory",
@@ -19,7 +19,7 @@ export default {
 };
 
 const Template = (args: Object): ReactNode => {
-    (Template.args: any); return <OpeningTimes {...args} />;
+    (Template.args: any); return <CurrentOpeningTime {...args} />;
 };
 
 export const CurrentlyOpen: typeof Template = Template.bind({});
