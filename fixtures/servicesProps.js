@@ -63,7 +63,7 @@ export const phoneableServiceProps: serviceFixtureProps = {
             number: "0477 777 777",
         },
         {
-            comment: "(really a mobile)",
+            comment: "really a mobile",
             kind: "phone",
             number: "0477 777 777",
         },

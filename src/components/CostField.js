@@ -5,11 +5,11 @@ import FormatText from "./FormatText";
 import Collapser from "@/src/components/general/Collapser";
 
 type Props = {
+    catchment: string;
     cost: string;
-    hideContentPreview?: boolean; // Define hideContentPreview as an optional prop
 };
 
-function Cost({ cost, hideContentPreview }: Props) {
+function Cost({ catchment, cost }: Props) {
     if (cost === "") {
         return null; // Don't render the cost section if the data is "nothing"
     }
@@ -21,16 +21,14 @@ function Cost({ cost, hideContentPreview }: Props) {
         setShowAll(!showAll);
     };
 
-    let costContent = (
-        <FormatText paragraphWrapperElement="p">{cost}</FormatText>
-    );
+    let costContent = cost;
 
-    if (isExceedingLimit && !showAll && !hideContentPreview) { // Check if hideContentPreview is false
+    if (isExceedingLimit && !showAll) {
         costContent = (
             <Collapser
                 contentPreview={cost.substring(0, 100) + "..."}
                 expandMessage="Show all cost info"
-                collapseMessage="Close expanded info"
+                collapseMessage="Close expanded info" // Added collapse message
                 analyticsEvent={{
                     event: "Action Triggered - Cost Info",
                     eventAction: "show all cost info",
@@ -41,7 +39,7 @@ function Cost({ cost, hideContentPreview }: Props) {
                 toggleAccordion={toggleShowAll}
                 items={[cost]}
             >
-                {costContent}
+                <FormatText paragraphWrapperElement="p">{cost}</FormatText>
             </Collapser>
         );
     }
@@ -49,7 +47,7 @@ function Cost({ cost, hideContentPreview }: Props) {
     return (
         <div className="Cost">
             <h2 aria-label="Cost">Cost</h2>
-            {costContent}
+            <br /> <ul> <li> {costContent} </li> </ul>
         </div>
     );
 }

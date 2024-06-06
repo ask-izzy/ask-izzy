@@ -3,7 +3,6 @@
 import type { Element as ReactElement, Node as ReactNode } from "React";
 import React, { useEffect, useState } from "react";
 import _ from "underscore";
-
 import Address from "./Address";
 import Accessibility from "./Accessibility";
 import CollapsedOpeningTimes from "./CollapsedOpeningTimes";
