@@ -28,8 +28,8 @@
         }
 
         .collapser-header {
-            font-size: 17px; /* Adjust this size as needed */
-            font-weight: bold; /* Add any other styles you need */
+            font-size: 17px;
+            font-weight: bold;
         }
 
         .collapser-icon {
@@ -44,7 +44,7 @@
             padding: 0 10px;
 
             .collapser-message-text {
-                margin-left: 100; /* for mobile devices giving it a fixed width is easier */
+                margin-left: 100;
                 text-align: center;
                 flex-grow: 1;
                 width: auto;
@@ -103,14 +103,26 @@
 
     .compare-share-container {
         display: flex;
-        align-items: center;
+        justify-content: space-between;
 
         .ShareButton {
             font-size: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 2.5px;
+
+            svg {
+                height: 23px;
+                width: 23px;
+                margin-top: -13px;
+            }
         }
 
-        .ShareButton,
         .AddToCompareButton {
+            margin-top: -2px;
+            margin-left: 15px;
+
             svg {
                 height: 20px;
                 width: 20px;

@@ -47,12 +47,12 @@ type CollapserStates = {
 
 function ServicePane({ service }: Props): ReactNode {
     const [siblings, setSiblings] = useState<Array<Service>>([]);
-    const [isCollapsed, setIsCollapsed] = useState(true); // State to manage global collapse/expand
+    const [isCollapsed, setIsCollapsed] = useState(true);
     const [collapserStates, setCollapserStates] = useState<CollapserStates>({
         openingTimes: true,
         languages: true,
         contactMethods: true,
-    }); // State to track individual collapsers
+    });
 
     const isMobile = MobileDetect(799);
 
@@ -76,14 +76,17 @@ function ServicePane({ service }: Props): ReactNode {
     const handleToggle = (key: 'openingTimes' | 'languages' | 'contactMethods') => (collapsed: boolean) => {
         setCollapserStates(prevState => ({
             ...prevState,
-            [key]: collapsed,
+            [(key:string)]: collapsed,
         }));
+        if (!collapsed) {
+            setIsCollapsed(false);
+        }
     };
 
     useEffect(() => {
-        const allExpanded = Object.values(collapserStates).every(state => !state);
-        if (allExpanded !== !isCollapsed) {
-            setIsCollapsed(!allExpanded);
+        const anyExpanded = Object.values(collapserStates).some(state => !state);
+        if (anyExpanded !== !isCollapsed) {
+            setIsCollapsed(!anyExpanded);
         }
     }, [collapserStates]);
 
