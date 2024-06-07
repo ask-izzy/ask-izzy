@@ -3,6 +3,7 @@
 import type {Node as ReactNode, Element as ReactElement} from "React";
 import React from "react";
 
+import icons from "../icons";
 import Service from "../iss/Service";
 
 import DebugContainer from "./DebugContainer";
@@ -130,7 +131,7 @@ function ResultListItem({
             <Eligibility {...service} />
             <Accessibility service={service} />
             {!service.travelTimes && travelTimesStatus === "loading" &&
-                <FmdGoodRounded.Loading className="small"/>
+                <icons.Loading className="small"/>
             }
             {service.travelTimes && renderTravelTimes()}
             <DebugServiceRecord object={service} />
