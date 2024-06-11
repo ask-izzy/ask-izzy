@@ -28,6 +28,8 @@ services:
     <<: *app
     command: "serve"
     depends_on:
+      aws-ecs-api-mock:
+        condition: service_healthy
       app-deploy:
         condition: service_completed_successfully
 
@@ -49,7 +51,7 @@ services:
   aws-ecs-api-mock:
     image: codfish/json-server:0.17.3
     platform: linux/amd64
-    command: ["bash", "-c", "echo '{\"task\": {\"Revision\": \"${FAKE_TASK_DEFINITION_REVISION}\"}}' > /app/db.json && npm run dev"]
+    entrypoint: ["bash", "-c", "echo '{\"task\": {\"Revision\": \"${FAKE_TASK_DEFINITION_REVISION}\"}}' > /app/db.json && nodemon server.mjs"]
     healthcheck:
       test: ["CMD", "node", "-e", "fetch('http://localhost')"]
       interval: 1s
