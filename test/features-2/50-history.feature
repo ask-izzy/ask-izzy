@@ -6,6 +6,7 @@ Feature: History navigation
     # And I want it to take me to the home page if I haven't previously visited
     #     any Ask Izzy pages this session.
     Scenario: Bookmark a service page and press back to reach home page
+        When I visit /
         Given I open a new browser
         When I visit /service/111-my-housing-service
         And I click home from the title bar
@@ -44,7 +45,7 @@ Feature: History navigation
         Then I should see "Safe tonight | Melbourne, VIC | Men | 18-26"
         And I should see "Showing housing services"
         And I should be at /housing/Melbourne-VIC
-        And I should see the results
+        Then I should see the results
         ------------------------------------------------------------------------------------------
         Service Name (name)          | Site Name (site_name) | Service provisions (ServiceProvisions)
         ==========================================================================================

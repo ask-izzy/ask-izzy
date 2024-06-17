@@ -2,7 +2,7 @@
 
 import React, {useState} from "react";
 import type {Node as ReactNode} from "react";
-import { useRouter } from "next/router"
+import { useRouter } from "next/router";
 
 import HeaderBar from "@/src/components/HeaderBar"
 import MyListResults from "@/src/components/MyListResults"
@@ -18,7 +18,6 @@ import useMyList from "@/hooks/useMyList"
 import ClearMyListDialog from "@/src/components/ClearMyListDialog"
 import BrandedFooter from "@/src/components/BrandedFooter"
 import MyListPrintPage from "@/src/components/PrintComponents/MyListPrintPage"
-
 
 function MyListPage(): ReactNode {
     const router = useRouter()

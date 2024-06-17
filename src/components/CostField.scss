@@ -1,0 +1,25 @@
+@use '../styles/mixins/colours';
+
+.Cost {
+    padding-right: 15px;
+    padding-left: 15px;
+
+    h2 {
+        font-size: 17px;
+        color: #{colours.get-static('colour-text-dark')};
+        display: inline;
+    }
+
+    ol {
+        color: #{colours.get-static('colour-text-dark')};
+    }
+
+    ul {
+        list-style: initial;
+        margin: 1em 0;
+
+        li {
+            margin: 1rem 0;
+        }
+    }
+}

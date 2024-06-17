@@ -9,14 +9,12 @@ import ScreenReader from "./ScreenReader"
 import icons from "../icons"
 
 type Props = {
-    object: ServiceOpening,
+    serviceOpening: ServiceOpening,
 }
 
-function OpeningTimes({
-    object,
-}: Props): ReactNode {
+function CurrentOpeningTime({serviceOpening}: Props): ReactNode {
 
-    let open = object.now_open
+    let open = serviceOpening.now_open
     let renderMethod: ?Function
 
     if (open === true) {
@@ -38,7 +36,7 @@ function OpeningTimes({
                 </span>
                 {" "}
                 <span className="time">
-                    {object.until}
+                    {serviceOpening.until}
                 </span>
             </span>
         )
@@ -55,7 +53,7 @@ function OpeningTimes({
                 </span>
                 {" "}
                 <span className="time">
-                    {object.until}
+                    {serviceOpening.until}
                 </span>
             </span>
         )
@@ -66,7 +64,7 @@ function OpeningTimes({
      * the place is currently open.
      */
     function renderUnsure(): ReactElement<"span"> {
-        const openTime = object.nextOpeningTimes
+        const openTime = serviceOpening.nextOpeningTimes
 
         if (!openTime) {
             return (
@@ -76,8 +74,8 @@ function OpeningTimes({
             )
         }
 
-        const start = object.ifTime`from ${openTime.start}`
-        const end = object.ifTime`until ${openTime.end}`
+        const start = serviceOpening.ifTime`from ${openTime.start}`
+        const end = serviceOpening.ifTime`until ${openTime.end}`
 
         return (
             <span className="until">
@@ -88,7 +86,7 @@ function OpeningTimes({
     }
 
     return (
-        <div className="OpeningTimes">
+        <div className="CurrentOpeningTime">
             <icons.Clock
                 className="ColoredIcon"
                 aria-hidden={true}
@@ -101,4 +99,4 @@ function OpeningTimes({
     )
 }
 
-export default OpeningTimes
+export default CurrentOpeningTime

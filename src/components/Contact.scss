@@ -12,14 +12,7 @@
         max-width: 100px;
         color: #{colours.get-static('colour-text-mid')};
         color: var(--colour-text-mid);
-
-        @media print {
-            color: #{colours.get-static('raw-colour-pure-black')};
-            color: var(--raw-colour-pure-black);
-        }
-
         font-size: 14px;
-        font-weight: 400;
     }
 
     a {
@@ -30,12 +23,6 @@
         width: auto;
         margin-top: 5px;
         padding: 6px;
-
-        @media print {
-            color: #{colours.get-static('raw-colour-pure-black')};
-            color: var(--raw-colour-pure-black);
-        }
-
         font-size: 16px;
 
         .Contact-text {
@@ -48,16 +35,45 @@
             display: inline-block;
             width: 40px;
             height: 40px;
-            margin: -10px -5px; /* negative margin to crop svg extra space */
+            margin: -10px -5px;
             vertical-align: bottom;
+            text-decoration: none;
 
             path {
                 fill: #{colours.get-static('colour-text-dark')};
                 fill: var(--colour-text-dark);
+            }
+        }
+    }
 
-                @media print {
-                    fill: #{colours.get-static('raw-colour-pure-black')};
-                    fill: var(--raw-colour-pure-black);
+    @media print {
+        color: #{colours.get-static('raw-colour-pure-black')};
+        color: var(--raw-colour-pure-black);
+
+        a {
+            text-decoration: none;
+            padding: 1px;
+
+            .Contact-text {
+                text-overflow: ellipsis;
+                overflow: hidden;
+                overflow-wrap: break-word;
+                white-space: normal;
+                margin-top: 3px;
+                color: var(--raw-colour-pure-black);
+                padding-left: 8px;
+            }
+
+            .Icon {
+                display: inline-block;
+                width: 40px;
+                height: 40px;
+                margin: -10px -5px;
+                vertical-align: bottom;
+
+                path {
+                    fill: #{colours.get-static('colour-text-dark')};
+                    fill: var(--colour-text-dark);
                 }
             }
         }

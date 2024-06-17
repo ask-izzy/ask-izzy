@@ -5,6 +5,52 @@
     color: var(--colour-text-dark);
     font-size: 14px;
     font-weight: light;
+    display: block;
+
+    .Boxed-Text-Collapser {
+        margin-top: 10px;
+        height: 20px;
+        display: flex;
+        align-items: center;
+
+        :focus {
+            outline: none;
+        }
+
+        .collapser-message-text {
+            margin-left: 100px;
+            flex-grow: 1;
+            padding-right: 0.5em;
+            width: 20%;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .collapser-header {
+            font-size: 17px;
+            font-weight: bold;
+        }
+
+        .collapser-icon {
+            flex-shrink: 0;
+        }
+    }
+
+    @media (max-width: 768px) {
+        .Boxed-Text-Collapser {
+            justify-content: center;
+            margin: 0 auto;
+            padding: 0 10px;
+
+            .collapser-message-text {
+                text-align: center;
+                flex-grow: 1;
+                width: auto;
+                padding-right: 1em;
+            }
+        }
+    }
 
     .AlertBannerList {
         text-align: right;
@@ -54,14 +100,76 @@
     .compare-share-container {
         display: flex;
         justify-content: space-between;
-        margin: 0 10px;
+
+        .ShareButton {
+            font-size: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 2.5px;
+
+            svg {
+                height: 23px;
+                width: 23px;
+                margin-top: -13px;
+            }
+        }
+
+        .AddToCompareButton {
+            margin-top: -2px;
+            margin-left: 15px;
+
+            svg {
+                height: 20px;
+                width: 20px;
+                margin-top: -10px;
+            }
+        }
+
+        .StandardButton.type-secondary {
+            margin-right: 10px;
+            border: transparent;
+            font-size: 15px;
+            margin-top: 0.5px;
+
+            &:hover {
+                background-color: transparent;
+            }
+        }
+
+        .SvgIcon {
+            height: 26px;
+            width: 26px;
+            padding-top: 13px;
+        }
 
         &.mobile {
-            flex-direction: column;
-            margin: 0;
+            flex-direction: row;
+            flex-wrap: wrap;
 
-            .ShareButton {
-                padding-bottom: 15px;
+            .ShareButton,
+            .AddToCompareButton,
+            .PrintButton {
+                margin: 5px;
+            }
+
+            .PrintButton {
+                margin-inline: 10px;
+
+                .StandardButton.type-secondary {
+                    border: transparent;
+                    font-size: 15px;
+                }
+
+                .SvgIcon {
+                    height: 26px;
+                    width: 26px;
+                    padding-top: 13px;
+                }
+
+                &:hover {
+                    color: transparent;
+                }
             }
         }
     }
@@ -133,7 +241,7 @@
         line-height: 140%;
     }
 
-    .OpeningTimes {
+    .CurrentOpeningTime {
         svg {
             top: 3px;
             left: -4px;
@@ -152,7 +260,7 @@
         }
     }
 
-    .OpeningTimes,
+    .CurrentOpeningTime,
     .Address,
     .Accessibility,
     .CollapsedPhones,
@@ -182,6 +290,7 @@
 
         &:hover .googleMapsLink {
             text-decoration: none;
+            color: transparent;
         }
     }
 

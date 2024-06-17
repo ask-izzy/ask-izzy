@@ -15,7 +15,7 @@ import AddToCompareButton from "./AddToCompareButton"
 import ShareButton from "./ShareButton"
 import ServiceProvisions from "./service/ServiceProvisions"
 import Accessibility from "./Accessibility";
-import OpeningTimes from "./OpeningTimes";
+import CurrentOpeningTime from "./CurrentOpeningTime";
 import Ndis from "./Ndis";
 import TransportTime from "./TransportTime";
 import IndigenousServiceIcon from "./IndigenousServiceIcon";
@@ -123,9 +123,9 @@ function ResultListItem({
                 />
             </div>
             {service.location && renderLocation()}
-            <OpeningTimes
+            <CurrentOpeningTime
                 className="opening_hours"
-                object={service.open}
+                serviceOpening={service.open}
             />
             <ServiceProvisions
                 service={service}

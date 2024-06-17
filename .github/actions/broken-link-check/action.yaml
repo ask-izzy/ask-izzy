@@ -1,0 +1,75 @@
+name: 'Broken Links Check'
+description: 'Check askizzy.org.au for broken links'
+
+inputs:
+  msTeamsAlertsWebhook:
+    required: true
+
+runs:
+  using: "composite"
+  steps:
+      - name: Link Checker
+        id: lychee
+        uses: lycheeverse/lychee-action@v1
+        with:
+          args: -v --exclude 'http://purl.org/dc/elements/1.1/' https://askizzy.org.au/
+          jobSummary: false
+
+      - id: get-lychee-results
+        shell: bash
+        run: |
+          output_text="$(cat ./lychee/out.md)"
+          # Only include text from the "Errors in..." header, onwards
+          output_error_text="$(printf '# Errors in%s\n' "${output_text#*# Errors in}")"
+          # Encode as a json string so it can be interpolated into json string below
+          echo "output_string=$(echo "$output_error_text" | jq -Rs '.' -)" >> $GITHUB_OUTPUT
+
+      - name: Microsoft Teams Notification
+        uses: skitionek/notify-microsoft-teams@master
+        if: env.lychee_exit_code != 0
+        with:
+          webhook_url: ${{ inputs.msTeamsAlertsWebhook }}
+          raw: >-
+            {
+              "type": "message",
+              "attachments": [
+                {
+                  "contentType": "application/vnd.microsoft.card.adaptive",
+                  "content": {
+                    "type": "AdaptiveCard",
+                    "body": [
+                      {
+                        "type": "TextBlock",
+                        "text": "Broken Link Checker Error for Ask Izzy",
+                        "wrap": true,
+                        "size": "large",
+                        "weight": "bolder"
+                      },
+                      {
+                        "type": "TextBlock",
+                        "text": ${{ steps.get-lychee-results.outputs.output_string }},
+                        "wrap": true
+                      },
+                      {
+                        "type": "TextBlock",
+                        "text": "Ping: <at>Callum Gare</at>",
+                        "wrap": true
+                      }
+                    ],
+                    "msteams": {
+                      "width": "Full",
+                      "entities": [
+                        {
+                          "type": "mention",
+                          "text": "<at>Callum Gare</at>",
+                          "mentioned": {
+                            "id": "cgare@infoxchange.org",
+                            "name": "Callum Gare"
+                          }
+                        }
+                      ]
+                    }
+                  }
+                }
+              ]
+            }

@@ -1,11 +1,10 @@
 @use '../styles/mixins/colours';
 
 .ContactMethods {
-    padding-bottom: 10px;
+    padding-bottom: 100px;
 
     .collapser-message {
         display: block;
-        padding-top: 10px;
 
         &:visited {
             color: #{colours.get-static('colour-link')};

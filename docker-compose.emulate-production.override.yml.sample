@@ -1,10 +1,7 @@
-version: "3.4"
-
 services:
-  app:
+  app-serve:
     environment:
       NEXT_PUBLIC_SENTRY_DSN: "<SENTRY PROJECT DSN>"
       SENTRY_AUTH_TOKEN: "<SENTRY AUTH TOKEN>"
       SENTRY_ORG: "<SENTRY ORGANISATION SLUG>"
       SENTRY_PROJECT: "<SENTRY PROJECT SLUG>"
-      HOSTNAME: askizzy-deployment-a1b2cd-9876 # To trigger a new build the middle value (currently "a1b2cd") must be changed to a different value each time
