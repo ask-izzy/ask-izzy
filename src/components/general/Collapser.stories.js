@@ -30,7 +30,7 @@ export const ExpandedByDefault: typeof Template = Template.bind({});
 ExpandedByDefault.args = {
     expandMessage: "Open section",
     collapseMessage: "Close section",
-    initiallyExpanded: true,
+    externalCollapsed: true,
     children: "Body text",
 };
 
@@ -38,7 +38,7 @@ export const BodyWithJSXElements: typeof Template = Template.bind({});
 BodyWithJSXElements.args = {
     expandMessage: "Open section",
     collapseMessage: "Close section",
-    initiallyExpanded: true,
+    externalCollapsed: true,
     children: <div>
       The Collapser body takes JSX elements so it can contain content
       like <strong>bold text</strong> and <br /><br />

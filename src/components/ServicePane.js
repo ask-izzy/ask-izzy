@@ -34,13 +34,28 @@ import FormatText from "./FormatText";
 import { getSiblingServices } from "../iss/load-services";
 import { MobileDetect } from "../effects/MobileDetect";
 import ServicePagePrint from "@/src/components/PrintComponents/ServicePagePrint";
+import UnfoldLessIcon from "@mui/icons-material/UnfoldLess";
+import UnfoldMoreIcon from "@mui/icons-material/UnfoldMore";
 
 type Props = {
     service: Service,
-}
+};
+
+type CollapserStates = {
+    openingTimes: boolean,
+    languages: boolean,
+    contactMethods: boolean,
+};
 
 function ServicePane({ service }: Props): ReactNode {
     const [siblings, setSiblings] = useState<Array<Service>>([]);
+    const [isCollapsed, setIsCollapsed] = useState(true);
+    const [collapserStates, setCollapserStates] = useState<CollapserStates>({
+        openingTimes: true,
+        languages: true,
+        contactMethods: true,
+    });
+
     const isMobile = MobileDetect(799);
 
     useEffect(() => {
@@ -50,6 +65,33 @@ function ServicePane({ service }: Props): ReactNode {
         loadSiblings();
     }, [service]);
 
+    const toggleAll = () => {
+        const newCollapsedState = !isCollapsed;
+        setIsCollapsed(newCollapsedState);
+        setCollapserStates({
+            openingTimes: newCollapsedState,
+            languages: newCollapsedState,
+            contactMethods: newCollapsedState,
+        });
+    };
+
+    const handleToggle = (key: 'openingTimes' | 'languages' | 'contactMethods') => (collapsed: boolean) => {
+        setCollapserStates(prevState => ({
+            ...prevState,
+            [(key:string)]: collapsed,
+        }));
+        if (!collapsed) {
+            setIsCollapsed(false);
+        }
+    };
+
+    useEffect(() => {
+        const anyExpanded = Object.values(collapserStates).some(state => !state);
+        if (anyExpanded !== !isCollapsed) {
+            setIsCollapsed(!anyExpanded);
+        }
+    }, [collapserStates]);
+
     const renderServiceProvisions = (): ReactElement<"div"> => {
         if (_.isEmpty(service.serviceProvisions)) {
             return <div />;
@@ -57,15 +99,11 @@ function ServicePane({ service }: Props): ReactNode {
 
         return (
             <div className="serviceProvisions-container">
-                <h3 className="serviceProvisions-header">
-                    What you can get here
-                </h3>
+                <h3 className="serviceProvisions-header">What you can get here</h3>
                 <ul>
-                    {service.serviceProvisions.map(
-                        (provision, index) => (
-                            <li key={index}>{provision}</li>
-                        )
-                    )}
+                    {service.serviceProvisions.map((provision, index) => (
+                        <li key={index}>{provision}</li>
+                    ))}
                 </ul>
             </div>
         );
@@ -81,9 +119,10 @@ function ServicePane({ service }: Props): ReactNode {
         }
 
         return (
-            <div className="siblings-container">
-                <h3
-                    className="siblings-header"
+            <div className="siblings-container"
+                key="siblings-container"
+            >
+                <h3 className="siblings-header"
                     aria-label="Also at this location."
                 >
                     Also at this location
@@ -100,15 +139,13 @@ function ServicePane({ service }: Props): ReactNode {
                                 eventLabel: `${service.slug}`,
                                 sendDirectlyToGA: true,
                             }}
-                            aria-label={`${service.name}. ${
-                                service.shortDescription[0]
-                            }.`}
-                            primaryText={(
+                            aria-label={`${service.name}. ${service.shortDescription[0]}.`}
+                            primaryText={
                                 <>
                                     {service.name}
                                     <ScreenReader>.</ScreenReader>
                                 </>
-                            )}
+                            }
                             secondaryText={service.shortDescription[0]}
                             rightIcon={<Chevron />}
                         />
@@ -119,18 +156,16 @@ function ServicePane({ service }: Props): ReactNode {
     };
 
     const renderDescription = (): ReactElement<"div"> => {
-        let description = service.descriptionSentences.map(
-            (sentence, idx) => (
-                <FormatText key={idx}>{sentence}</FormatText>
-            )
-        );
+        let description = service.descriptionSentences.map((sentence, idx) => (
+            <FormatText key={idx}>{sentence}</FormatText>
+        ));
 
         if (service.descriptionRemainder.length > 0) {
             description = (
                 <Collapser
-                    contentPreview={service.shortDescription.map(
-                        (sentence, idx) => <p key={idx}>{sentence}</p>
-                    )}
+                    contentPreview={service.shortDescription.map((sentence, idx) => (
+                        <p key={idx}>{sentence}</p>
+                    ))}
                     expandMessage="Read more"
                     analyticsEvent={{
                         event: `Action Triggered - Service Description`,
@@ -196,8 +231,7 @@ function ServicePane({ service }: Props): ReactNode {
     return (
         <div className="ServicePane">
             <div>
-                <AlertBannerList
-                    state={service.location?.state}
+                <AlertBannerList state={service.location?.state}
                     screenLocation="servicePage"
                     format="inline"
                 />
@@ -226,10 +260,28 @@ function ServicePane({ service }: Props): ReactNode {
 
                 <div className="boxed-text-container">
                     {renderCompareShare("web")}
+                    <Collapser
+                        header="Service Details"
+                        expandMessage={isCollapsed ? "Expand all" : "Collapse all"}
+                        collapseMessage="Collapse all"
+                        analyticsEvent={{
+                            event: `Action Triggered - Opening Times`,
+                            eventAction: "Show practicalities",
+                            eventLabel: null,
+                        }}
+                        className="Boxed-Text-Collapser"
+                        onClick={toggleAll}
+                        externalCollapsed={isCollapsed}
+                        icon={isCollapsed ?
+                            <UnfoldMoreIcon className="collapser-icon" />
+                            : <UnfoldLessIcon className="collapser-icon" />}
+                    />
                     <BoxedText>
-                        <div className="practicalities-container">
+                        <div className="boxed-text-content">
                             <CollapsedOpeningTimes
                                 service={service}
+                                externalCollapsed={collapserStates.openingTimes}
+                                onToggle={handleToggle("openingTimes")}
                             />
                             <Accessibility
                                 service={service}
@@ -265,15 +317,22 @@ function ServicePane({ service }: Props): ReactNode {
                                 </GoogleMapsLink>
                             )}
                             {service.languages.length > 0 && (
-                                <LanguagesAvailable service={service}>{service.languages}</LanguagesAvailable>
+                                <LanguagesAvailable
+                                    service={service}
+                                    externalCollapsed={collapserStates.languages}
+                                    onToggle={handleToggle("languages")}
+                                />
                             )}
-                            <ContactMethods object={service} />
+                            <ContactMethods
+                                object={service}
+                                externalCollapsed={collapserStates.contactMethods}
+                                onToggle={handleToggle("contactMethods")}
+                            />
                             <ImportantInformation object={service} />
                         </div>
                     </BoxedText>
                     <Feedback object={service} />
                 </div>
-
                 {renderSiblings()}
             </main>
         </div>
