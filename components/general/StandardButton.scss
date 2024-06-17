@@ -83,9 +83,41 @@
         }
     }
 
+    &.type-text {
+        color: #{colours.get-static('colour-text-dark')};
+        color: var(--colour-text-dark);
+
+        path {
+            fill: #{colours.get-static('colour-text-dark')};
+            fill: var(--colour-text-dark);
+        }
+
+        &:hover,
+        &:focus {
+            background-color: #{colours.get-static('colour-bg-standard-tint-3')};
+            background-color: var(--colour-bg-standard-tint-3);
+        }
+    }
+
     svg {
         height: 18px;
         width: unset;
+    }
+
+    &.variant-icon {
+        color: var(--colour-brand-primary);
+
+        svg {
+            display: inline-block;
+            height: 20px;
+            width: unset;
+            padding: 0 0.1em;
+        }
+
+        path {
+            fill: #{colours.get-static('colour-text-dark')};
+            fill: var(--colour-brand-primary);
+        }
     }
 
     &[disabled] {

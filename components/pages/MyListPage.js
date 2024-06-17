@@ -45,6 +45,7 @@ function MyListPage(): ReactNode {
                     <ShareButton
                         hasTextDescription={true}
                         services={myListServices}
+                        type="text"
                     />
                 </div>
 
@@ -103,9 +104,11 @@ function MyListPage(): ReactNode {
                             <ShareButton
                                 hasTextDescription={false}
                                 services={myListServices}
+                                type="secondary"
                             />
                             <PrintButton
                                 hasTextDescription={false}
+                                type="secondary"
                                 ComponentToPrint={
                                     <MyListPrintPage
                                         services={myListServices}
@@ -134,6 +137,7 @@ function MyListPage(): ReactNode {
                     }
                     {!isMobile &&
                         <PrintButton
+                            type="secondary"
                             ComponentToPrint={
                                 <MyListPrintPage
                                     services={myListServices}
