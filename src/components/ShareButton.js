@@ -2,7 +2,7 @@
 
 import type {Node as ReactNode} from "react"
 import React, {useState} from "react";
-import Button from "./base/Button";
+import Button from "../../components/general/StandardButton"
 import Share from "../icons/Share"
 
 import Service from "@/src/iss/Service"
@@ -11,18 +11,23 @@ import ShareServicesDialog from "@/components/ShareServicesDialog"
 type Props = {
     services?: Array<Service>,
     hasTextDescription?: boolean,
+    type?:"primary" | "secondary" | "text" | "action",
+    variant?: "default" | "icon"
 }
 
 function ShareButton({
     hasTextDescription = false,
     services = [],
+    type = "secondary",
+    variant = "default",
 }: Props): ReactNode {
     const textDescription = "Share"
     const [open, setOpen] = useState(false)
-
     return <>
         <Button
             className="ShareButton"
+            type={type}
+            variant={variant}
             onClick={() => setOpen(true)}
             analyticsEvent={{
                 event: "Action Triggered - Share Services Opened",
