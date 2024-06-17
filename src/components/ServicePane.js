@@ -27,11 +27,13 @@ import AddToCompareButton from "../components/AddToCompareButton";
 import Service from "../iss/Service";
 import icons from "../icons";
 import ShareButton from "../components/ShareButton";
+import PrintButton from "@/src/components/PrintButton";
 import Storage from "../storage";
 import ScreenReader from "./ScreenReader";
 import FormatText from "./FormatText";
-import {getSiblingServices} from "../iss/load-services";
-import {MobileDetect} from "../effects/MobileDetect";
+import { getSiblingServices } from "../iss/load-services";
+import { MobileDetect } from "../effects/MobileDetect";
+import ServicePagePrint from "@/src/components/PrintComponents/ServicePagePrint";
 import UnfoldLessIcon from "@mui/icons-material/UnfoldLess";
 import UnfoldMoreIcon from "@mui/icons-material/UnfoldMore";
 
@@ -178,13 +180,6 @@ function ServicePane({ service }: Props): ReactNode {
 
         return <div className="description">{description}</div>;
     };
-
-    const addToCompareButtonComponent = (
-        <AddToCompareButton
-            hasTextDescription={true}
-            service={service}
-        />
-    );
 
     function renderCompareShare(typeOfDevice) {
         if (typeOfDevice === "web" && !isMobile) {

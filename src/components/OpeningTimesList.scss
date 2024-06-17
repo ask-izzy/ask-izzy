@@ -17,10 +17,4 @@
     .time {
         justify-content: flex-end;
     }
-
-    @media print {
-        .collapser-message {
-            font-size: 1px;
-        }
-    }
 }
