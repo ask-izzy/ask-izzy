@@ -5,7 +5,7 @@ import Collapser from "./general/Collapser";
 import Spacer from "./Spacer";
 import { shortenText } from "@/helpers/string.helpers";
 import Service from "../iss/Service";
-import Language from "@/src/icons/Language";
+import {RecordVoiceOver} from "@mui/icons-material";
 
 type Props = {
     service: Service,
@@ -21,7 +21,7 @@ export default function LanguagesAvailable({ service, externalCollapsed, onToggl
         <div className="LanguagesAvailable">
             <Spacer />
             <div className="languages-spoken-container">
-                <Language />
+                <RecordVoiceOver />
                 {
                     languagesSpoken.length < maxCharLength ?
                         <span className="languages-spoken">
