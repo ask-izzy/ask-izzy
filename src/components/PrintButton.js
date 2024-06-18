@@ -36,26 +36,26 @@ function PrintButton({
         content: () => printableComponentRef.current,
     });
 
-    return (
-        <div className="PrintButton">
-            <Button
-                className="print-component-button"
-                onClick={handlePrint}
-                type={type}
-                analyticsEvent={{
-                    event: "Action Triggered - Page Printed",
-                    eventAction: "Page printed",
-                    eventLabel: null,
-                }}
-            >
-                <div className="main-container">
-                    <Print />
-                    {isInServicePane ? "Print" : (hasTextDescription && <span>Print Friendly</span>)}
-                </div>
-            </Button>
-            <PrintableComponent ref={printableComponentRef} />
-        </div>
-    );
+    return <div className="PrintButton">
+        <Button
+            className="print-component-button"
+            onClick={handlePrint}
+            analyticsEvent={{
+                event: "Action Triggered - Page Printed",
+                eventAction: "Page printed",
+                eventLabel: null,
+            }}
+        >
+            <div className="main-container">
+                <Print />
+                {
+                    hasTextDescription &&
+                                    <span>Print Friendly</span>
+                }
+            </div>
+        </Button>
+        <PrintableComponent ref={printableComponentRef} />
+    </div>
 }
 
 export default PrintButton;

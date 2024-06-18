@@ -23,7 +23,7 @@ function StandardButton(
         onClick,
         disabled,
         children,
-        type = "primary",
+        type = "secondary",
         variant = "default",
         ...rest
     }: Props): ReactElement<typeof Button> {

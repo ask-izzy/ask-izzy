@@ -32,9 +32,8 @@ function CurrentOpeningTime({serviceOpening}: Props): ReactNode {
         return (
             <span className="until">
                 <span className="open">
-                    Open now
+                    Hours may vary, see open times
                 </span>
-                {" "}
                 <span className="time">
                     {serviceOpening.until}
                 </span>
@@ -51,7 +50,6 @@ function CurrentOpeningTime({serviceOpening}: Props): ReactNode {
                 <span className="closed">
                     Closed
                 </span>
-                {" "}
                 <span className="time">
                     {serviceOpening.until}
                 </span>

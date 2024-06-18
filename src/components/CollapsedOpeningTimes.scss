@@ -28,5 +28,32 @@
                 color: var(--colour-link);
             }
         }
+
+        .AllOpeningTimes {
+            margin: 0;
+            margin-left: 32px;
+            padding: 0;
+
+            & > li {
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: space-between;
+                list-style-type: none;
+            }
+
+            .day {
+                justify-content: flex-start;
+                font-weight: bold;
+            }
+
+            .note {
+                flex-basis: 100%;
+            }
+
+            .time {
+                justify-content: flex-end;
+                font-weight: bold;
+            }
+        }
     }
 }
