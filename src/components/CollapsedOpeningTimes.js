@@ -5,9 +5,7 @@ import Collapser from "./general/Collapser";
 import CurrentOpeningTime from "./CurrentOpeningTime.js";
 import OpeningTimesList from "./OpeningTimesList";
 import Service from "../iss/Service";
-import OpeningTimes from "./OpeningTimes";
 import type {openingHours as openingHoursType} from "../iss/general";
-
 
 function formatTime(str: string): string {
     return moment(str, "HH:mm:ss").format("h:mm A");
@@ -56,9 +54,8 @@ function CollapsedOpeningTimes({ service, externalCollapsed, onToggle }: Props):
             <CurrentOpeningTime serviceOpening={service.open} />
             {service.open.openingTimes.length > 0 && (
                 <Collapser
-                    expandMessage="Show open hours"
-                    collapseMessage="Hide open hours" // Add collapse message
                     expandMessage="Show open times"
+                    collapseMessage="Hide open hours" // Add collapse message
                     analyticsEvent={{
                         event: `Action Triggered - Opening Times`,
                         eventAction: "Show opening times",
