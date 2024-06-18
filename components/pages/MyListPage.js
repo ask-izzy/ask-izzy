@@ -107,6 +107,7 @@ function MyListPage(): ReactNode {
                             />
                             <PrintButton
                                 hasTextDescription={false}
+                                type="secondary"
                                 ComponentToPrint={
                                     <MyListPrintPage
                                         services={myListServices}
@@ -135,6 +136,7 @@ function MyListPage(): ReactNode {
                     }
                     {!isMobile &&
                         <PrintButton
+                            type="secondary"
                             ComponentToPrint={
                                 <MyListPrintPage
                                     services={myListServices}

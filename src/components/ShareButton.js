@@ -11,13 +11,15 @@ import ShareServicesDialog from "@/components/ShareServicesDialog"
 type Props = {
     services?: Array<Service>,
     hasTextDescription?: boolean,
-    type?:"primary" | "secondary" | "text" | "action"
+    type?:"primary" | "secondary" | "text" | "action",
+    variant?: "default" | "icon"
 }
 
 function ShareButton({
     hasTextDescription = false,
     services = [],
     type = "secondary",
+    variant = "default",
 }: Props): ReactNode {
     const textDescription = "Share"
     const [open, setOpen] = useState(false)
@@ -25,6 +27,7 @@ function ShareButton({
         <Button
             className="ShareButton"
             type={type}
+            variant={variant}
             onClick={() => setOpen(true)}
             analyticsEvent={{
                 event: "Action Triggered - Share Services Opened",
