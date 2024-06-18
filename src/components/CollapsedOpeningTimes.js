@@ -1,5 +1,6 @@
 /* @flow */
 import type {Node as ReactNode} from "React";
+import moment from "moment-timezone";
 import React from "react";
 import Collapser from "./general/Collapser";
 import CurrentOpeningTime from "./CurrentOpeningTime.js";
@@ -67,20 +68,6 @@ function CollapsedOpeningTimes({ service, externalCollapsed, onToggle }: Props):
                     <div className="AllOpeningTimes">
                         <OpeningTimesList service={service} />
                     </div>
-
-                    <ul className="AllOpeningTimes">
-                        {openingHours.map((record, idx) =>
-                            <li key={idx}>
-                                <span className="day">{record.day}</span>
-                                <span className="time">
-                                    {formatTime(record.open)}
-                                    &ndash;
-                                    {formatTime(record.close)}
-                                </span>
-                                <span className="note">{record.note} </span>
-                            </li>
-                        )}
-                    </ul>
                 </Collapser>
             )}
         </div>
