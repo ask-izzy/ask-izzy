@@ -20,8 +20,8 @@
         .collapser-message-text {
             margin-left: 100px;
             flex-grow: 1;
-            padding-right: 0.5em;
-            width: 20%;
+            padding-right: 7px;
+            width: 83px;
             white-space: nowrap;
             overflow: hidden;
             text-overflow: ellipsis;
@@ -46,7 +46,7 @@
             .collapser-message-text {
                 text-align: center;
                 flex-grow: 1;
-                width: auto;
+                width: 83px;
                 padding-right: 1em;
             }
         }
