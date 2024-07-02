@@ -53,7 +53,7 @@ function ResultListItemContact({
                         <Link
                             to={`/service/${service.slug}`}
                         >
-                            More Call options >
+                            More call options >
                         </Link>
                     </div>
                     : <div className="contact-other">

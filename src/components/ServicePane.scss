@@ -243,8 +243,11 @@
 
     .CurrentOpeningTime {
         svg {
-            top: 3px;
-            left: -4px;
+            margin: auto;
+            width: 20px;
+            height: 20px;
+            font-size: 24px;
+            vertical-align: text-bottom;
         }
     }
 

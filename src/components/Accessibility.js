@@ -2,10 +2,11 @@
 
 import type {Node as ReactNode} from "React";
 import React from "react";
-import icons from "../icons";
+
 import Service from "../iss/Service";
 import Spacer from "./Spacer";
 import ScreenReader from "./ScreenReader";
+import {AccessibleForwardRounded} from "@mui/icons-material";
 
 type Props = {
     service: Service,
@@ -25,7 +26,7 @@ function Accessibility({service, withSpacer = false}: Props): ReactNode {
             <>
                 {withSpacer && <Spacer />}
                 <div className="Accessibility">
-                    <icons.Accessibility
+                    <AccessibleForwardRounded
                         className="ColoredIcon"
                         aria-hidden={true}
                     />

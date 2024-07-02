@@ -190,10 +190,11 @@ Feature: Support and counselling personalisation flow generates the expected que
             },
             "catchment": "prefer",
             "term": [
-                "counselling",
-                "housing"
-            ],
-            "minimumShouldMatch": "1"
+                "-\"coordinating bodies\"",
+                "-\"respite care\"",
+                "-hef -\"holiday accommodation\"",
+                "\"homelessness support\""
+            ]
         }
         --------------------------------------
 

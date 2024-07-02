@@ -12,9 +12,15 @@
 
     .day {
         justify-content: flex-start;
+        font-weight: bold;
+    }
+
+    .note {
+        flex-basis: 100%;
     }
 
     .time {
         justify-content: flex-end;
+        font-weight: bold;
     }
 }

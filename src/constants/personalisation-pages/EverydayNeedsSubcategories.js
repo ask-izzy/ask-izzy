@@ -50,20 +50,20 @@ export default ({
                 "Swags/Blankets",
             ],
         },
-        "Technology": {
+        "Support with everyday tasks": {
             $concat: {
                 term: [
-                    "wifi",
-                    "internet",
-                    "computer",
+                    "daily living support",
+                    "-\"respite care\"",
+                    "-hef",
+                    "-\"holiday accommodation\"",
                 ],
             },
             $removeElms: {
                 term: ["material", "aid"],
             },
             serviceTypes: [
-                "Internet Kiosks",
-                "Libraries",
+                "Daily Living Support",
             ],
         },
         "Showers and laundry": {
@@ -109,20 +109,20 @@ export default ({
                 "Public Toilets",
             ],
         },
-        "Support with everyday tasks": {
+        "Technology": {
             $concat: {
                 term: [
-                    "daily living support",
-                    "-\"respite care\"",
-                    "-hef",
-                    "-\"holiday accommodation\"",
+                    "wifi",
+                    "internet",
+                    "computer",
                 ],
             },
             $removeElms: {
                 term: ["material", "aid"],
             },
             serviceTypes: [
-                "Daily Living Support",
+                "Internet Kiosks",
+                "Libraries",
             ],
         },
         "Help with pets": {
@@ -148,7 +148,7 @@ export default ({
         "Personal products": "Hygiene and sanitary products",
         "Toilets": "Free to access toilets",
         "Support with everyday tasks":
-            "Home help with cleaning, food, personal care",
+            "Home help with cleaning, food, personal care, disability support",
         "Help with pets": "Shelter or assistance for pets",
     },
     showSupportSearchBar: true,

@@ -6,7 +6,7 @@ import React from "react"
 import ServiceOpening from "../iss/ServiceOpening"
 import ScreenReader from "./ScreenReader"
 
-import icons from "../icons"
+import {AccessTimeFilled} from "@mui/icons-material";
 
 type Props = {
     serviceOpening: ServiceOpening,
@@ -87,7 +87,7 @@ function CurrentOpeningTime({serviceOpening}: Props): ReactNode {
 
     return (
         <div className="CurrentOpeningTime">
-            <icons.Clock
+            <AccessTimeFilled
                 className="ColoredIcon"
                 aria-hidden={true}
             />

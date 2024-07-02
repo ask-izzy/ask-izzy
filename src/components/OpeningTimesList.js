@@ -42,6 +42,7 @@ function OpeningTimesList({ service, withSpacer = false, withIcon = false}: Prop
                     <span className="time">
                         {formatTime(record.open)} &ndash; {formatTime(record.close)}
                     </span>
+                    <span className="note">{record.note} </span>
                 </li>
             ))}
         </ul>

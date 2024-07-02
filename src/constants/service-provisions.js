@@ -160,7 +160,7 @@ const serviceProvisions: Array<ServiceProvision> = [
 
     /* Legal aid */
     provides({
-        name: "Legal assistance to help you pay for a lawyer",
+        name: "Legal assistance",
         form: anyOf(
             "legal aid",
             "legal representation",
