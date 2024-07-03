@@ -107,6 +107,13 @@
     &.variant-icon {
         color: var(--colour-brand-primary);
 
+        svg {
+            display: inline-block;
+            height: 20px;
+            width: unset;
+            padding: 0 0.1em;
+        }
+
         path {
             fill: #{colours.get-static('colour-text-dark')};
             fill: var(--colour-brand-primary);

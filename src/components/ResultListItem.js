@@ -2,13 +2,13 @@
 
 import type {Node as ReactNode, Element as ReactElement} from "React";
 import React from "react";
-
 import icons from "../icons";
 import Service from "../iss/Service";
 
 import DebugContainer from "./DebugContainer";
 import DebugQueryScore from "./DebugQueryScore";
 import DebugServiceRecord from "./DebugServiceRecord";
+import {FmdGoodRounded} from "@mui/icons-material";
 
 import Eligibility from "./Eligibility";
 import AddToCompareButton from "./AddToCompareButton"
@@ -25,6 +25,7 @@ import ScreenReader from "./ScreenReader";
 import ListItem from "./ListItem";
 import Link from "./base/Link";
 import type {travelTimesStatus} from "../hooks/useTravelTimesUpdater";
+import TooltipHover from "@/src/components/TooltipHover";
 
 
 type Props = {
@@ -50,7 +51,7 @@ function ResultListItem({
 
         return (
             <span className="location">
-                <icons.Map aria-hidden={true} />
+                <FmdGoodRounded aria-hidden={true} />
                 <ScreenReader>
                     Service located in
                 </ScreenReader>
@@ -100,10 +101,16 @@ function ResultListItem({
                     </div>
                 </div>
                 <div className="compare-share-container">
-                    <ShareButton services={[service]} />
-                    <AddToCompareButton
-                        service={service}
-                    />
+                    <TooltipHover content="Share">
+                        <ShareButton
+                            services={[service]}
+                            variant="icon"
+                            type="text"
+                        />
+                    </TooltipHover>
+                    <TooltipHover content="Add/remove">
+                        <AddToCompareButton service={service} />
+                    </TooltipHover>
                 </div>
             </div>
             <div className="site_name">

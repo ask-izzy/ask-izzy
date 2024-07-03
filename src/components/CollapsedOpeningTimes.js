@@ -18,8 +18,8 @@ function CollapsedOpeningTimes({ service, externalCollapsed, onToggle }: Props):
             <CurrentOpeningTime serviceOpening={service.open} />
             {service.open.openingTimes.length > 0 && (
                 <Collapser
-                    expandMessage="Show open hours"
-                    collapseMessage="Hide open hours" // Add collapse message
+                    expandMessage="Show open times"
+                    collapseMessage="Hide open times" // Add collapse message
                     analyticsEvent={{
                         event: `Action Triggered - Opening Times`,
                         eventAction: "Show opening times",

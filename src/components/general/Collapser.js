@@ -1,3 +1,4 @@
+/* @flow */
 import React, { useState, useEffect } from "react";
 import type { Element as ReactElement, Node as ReactNode } from "react";
 import classnames from "classnames";
