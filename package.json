@@ -102,7 +102,7 @@
     "escape-string-regexp": "^4.0.0",
     "eslint": "5.1.0",
     "eslint-plugin-react": "7.10.0",
-    "express": "4.16.3",
+    "express": "4.19.2",
     "express-rate-limit": "^6.4.0",
     "express-slow-down": "^1.4.0",
     "extract-text-webpack-plugin": "3.0.2",
