@@ -135,7 +135,7 @@ function DisabilityAdvocacyFinder(): ReactNode {
                         support, counselling and much more.
                     </p>
                     <p>
-                        It is free and anonymous, with over 400,000 services
+                        It is free and anonymous, with over 450,000 services
                         listed across Australia.
                     </p>
                     <Link
