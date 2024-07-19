@@ -15,10 +15,10 @@ Feature: Homepage
         Housing
         Everyday needs
         Money help
-        Health
+        Health and wellbeing
         Domestic and family violence help
         Advice and advocacy
-        Work and learning
+        Work, learning and things to do
         Support and counselling
         ---------------
         And I should see the branding footer

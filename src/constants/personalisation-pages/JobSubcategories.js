@@ -86,6 +86,22 @@ export default ({
             serviceTypes: ["Libraries"],
             term: ["library"],
         },
+        "Things to do": {
+            serviceTypesRaw: ["Recreation and leisure"],
+            serviceTypes: [],
+            $concat: {
+                term: [
+                    "recreation",
+                    "social",
+                ],
+            },
+            $removeElms: {
+                term: [
+                    "employment",
+                    "education",
+                ],
+            },
+        },
     },
     descriptionsForAnswers: {
         "Finding a job": "Employment programs and services",
@@ -96,6 +112,7 @@ export default ({
             "Local programs such as parenting, computer, or other skills",
         "Volunteering": "Places to help and gain experience",
         "Libraries": "Access to computers, books and information",
+        "Things to do": "Social and recreational activities",
     },
     showSupportSearchBar: true,
     title: "Jobs",

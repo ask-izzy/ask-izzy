@@ -213,9 +213,9 @@ const categories = [
         bannerName: "hands-and-person-and-square",
     }): Category),
     (new Category({
-        name: "Health",
+        name: "Health and wellbeing",
         key: "health",
-        byline: "Doctors, clinics, specialists",
+        byline: "Doctor, clinics, specialists and activities for healthy living",
         icon: icons.Health,
         searchQueryChanges: {
             catchment: "prefer",
@@ -272,9 +272,9 @@ const categories = [
         bannerName: "hand-and-building-and-person",
     }): Category),
     (new Category({
-        name: "Work and learning",
+        name: "Work, learning and things to do",
         key: "work-and-learning",
-        byline: "Jobs, education and skills",
+        byline: "Jobs, education, skills and social/recreational activities",
         icon: icons.Job,
         searchQueryChanges: {
             catchment: "prefer",

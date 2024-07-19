@@ -196,3 +196,50 @@ Feature: Health personalisation flow generates the expected query
             ]
         }
         --------------------------------------
+
+    Scenario: Health and wellbeing
+        Given I am interested in the "Health and wellbeing" subcategory for health
+        When I visit /health
+        Then I should see "See all and edit"
+        And the iss search request should be:
+        --------------------------------------
+        {
+            "catchment": "prefer",
+            "location": {
+                "name": "Melbourne, VIC"
+            },
+            "minimumShouldMatch": "30%",
+            "serviceTypes": [],
+            "serviceTypesRaw": [
+                "Recreation and leisure"
+            ],
+            "term": [
+                "-\"coordinating bodies\"",
+                "health",
+                "wellbeing"
+            ]
+        }
+        --------------------------------------
+
+    Scenario: Eye health
+        Given I am interested in the "Eye health" subcategory for health
+        When I visit /health
+        Then I should see "See all and edit"
+        And the iss search request should be:
+        --------------------------------------
+        {
+            "catchment": "prefer",
+            "location": {
+                "name": "Melbourne, VIC"
+            },
+            "minimumShouldMatch": "30%",
+            "serviceTypes": [],
+            "serviceTypesRaw": [
+                "Optometrists"
+            ],
+            "term": [
+                "-\"coordinating bodies\"",
+                "eye"
+            ]
+        }
+        --------------------------------------
