@@ -311,7 +311,7 @@ function ServicePane({ service }: Props): ReactNode {
                                     hideSpacer={true}
                                 >
                                     <span className="googleMapsLink">
-                                        Get directions in Google Maps
+                                        Get directions in Google Maps!
                                         <icons.ExternalLink className="ExternalLinkIcon" />
                                     </span>
                                 </GoogleMapsLink>
