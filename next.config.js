@@ -95,6 +95,11 @@ module.exports = {
                 destination: "/storybook/index.html",
                 permanent: false,
             },
+            {
+                source: "/disability/advocacy-finder",
+                destination: "/disability-advocacy-finder",
+                permanent: true,
+            },
         ]
     },
     webpack: (config) => {
