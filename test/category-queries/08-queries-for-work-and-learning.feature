@@ -1,4 +1,4 @@
-Feature: Work and learning personalisation flow generates the expected query
+Feature: Work, learning and things to do personalisation flow generates the expected query
 
     Background:
         Given the area to search is "Melbourne, VIC"
@@ -7,8 +7,8 @@ Feature: Work and learning personalisation flow generates the expected query
     Scenario: No subcategory
     When I visit /
         And I am not interested in a subcategory for work-and-learning
-        When I click the link with "Work and learning" substring
-        # On the Work and learning category page, the demographics personalisation question
+        When I click the link with "Work, learning and things to do" substring
+        # On the Work, learning and things to do category page, the demographics personalisation question
         # is always asked regardless of whether the user has already answered it
         Then I should see "Would you like Aboriginal & Torres Strait Islander specific services?"
         When I click the "Skip" button
@@ -37,8 +37,8 @@ Feature: Work and learning personalisation flow generates the expected query
     Scenario: Finding a job subcategory
         When I visit /
         And I am interested in the "Finding a job" subcategory for work-and-learning
-        When I click the link with "Work and learning" substring
-        # On the Work and learning category page, the demographics personalisation question
+        When I click the link with "Work, learning and things to do" substring
+        # On the Work, learning and things to do category page, the demographics personalisation question
         # is always asked regardless of whether the user has already answered it
         Then I should see "Would you like Aboriginal & Torres Strait Islander specific services?"
         When I click the "Skip" button
@@ -69,8 +69,8 @@ Feature: Work and learning personalisation flow generates the expected query
     Scenario: Supported employment subcategory
         When I visit /
         And I am interested in the "Supported employment" subcategory for work-and-learning
-        When I click the link with "Work and learning" substring
-        # On the Work and learning category page, the demographics personalisation question
+        When I click the link with "Work, learning and things to do" substring
+        # On the Work, learning and things to do category page, the demographics personalisation question
         # is always asked regardless of whether the user has already answered it
         Then I should see "Would you like Aboriginal & Torres Strait Islander specific services?"
         When I click the "Skip" button
@@ -97,8 +97,8 @@ Feature: Work and learning personalisation flow generates the expected query
     Scenario: Education subcategory
         When I visit /
         And I am interested in the "Education" subcategory for work-and-learning
-        When I click the link with "Work and learning" substring
-        # On the Work and learning category page, the demographics personalisation question
+        When I click the link with "Work, learning and things to do" substring
+        # On the Work, learning and things to do category page, the demographics personalisation question
         # is always asked regardless of whether the user has already answered it
         Then I should see "Would you like Aboriginal & Torres Strait Islander specific services?"
         When I click the "Skip" button
@@ -125,8 +125,8 @@ Feature: Work and learning personalisation flow generates the expected query
     Scenario: Community skills training subcategory
         When I visit /
         And I am interested in the "Community skills training" subcategory for work-and-learning
-        When I click the link with "Work and learning" substring
-        # On the Work and learning category page, the demographics personalisation question
+        When I click the link with "Work, learning and things to do" substring
+        # On the Work, learning and things to do category page, the demographics personalisation question
         # is always asked regardless of whether the user has already answered it
         Then I should see "Would you like Aboriginal & Torres Strait Islander specific services?"
         When I click the "Skip" button
@@ -154,8 +154,8 @@ Feature: Work and learning personalisation flow generates the expected query
     Scenario: Volunteering subcategory
         When I visit /
         And I am interested in the "Volunteering" subcategory for work-and-learning
-        When I click the link with "Work and learning" substring
-        # On the Work and learning category page, the demographics personalisation question
+        When I click the link with "Work, learning and things to do" substring
+        # On the Work, learning and things to do category page, the demographics personalisation question
         # is always asked regardless of whether the user has already answered it
         Then I should see "Would you like Aboriginal & Torres Strait Islander specific services?"
         When I click the "Skip" button
@@ -180,8 +180,8 @@ Feature: Work and learning personalisation flow generates the expected query
     Scenario: Libraries subcategory
         When I visit /
         And I am interested in the "Libraries" subcategory for work-and-learning
-        When I click the link with "Work and learning" substring
-        # On the Work and learning category page, the demographics personalisation question
+        When I click the link with "Work, learning and things to do" substring
+        # On the Work, learning and things to do category page, the demographics personalisation question
         # is always asked regardless of whether the user has already answered it
         Then I should see "Would you like Aboriginal & Torres Strait Islander specific services?"
         When I click the "Skip" button
@@ -198,6 +198,37 @@ Feature: Work and learning personalisation flow generates the expected query
             ],
             "serviceTypes": [
                 "Libraries"
+            ]
+        }
+        --------------------------------------
+
+
+    Scenario: Things to do subcategory
+        When I visit /
+        And I am interested in the "Things to do" subcategory for work-and-learning
+        When I click the link with "Work, learning and things to do" substring
+        # On the Work, learning and things to do category page, the demographics personalisation question
+        # is always asked regardless of whether the user has already answered it
+        Then I should see "Would you like Aboriginal & Torres Strait Islander specific services?"
+        When I click the "Skip" button
+        Then I should see "See all and edit"
+        And the iss search request should be:
+        --------------------------------------
+        {
+            "catchment": "prefer",
+            "location": {
+                "name": "Melbourne, VIC"
+            },
+            "serviceTypes": [],
+            "serviceTypesRaw": [
+                "Recreation and leisure"
+            ],
+            "term": [
+                "-\"coordinating bodies\"",
+                "-chsp",
+                "-hacc",
+                "recreation",
+                "social"
             ]
         }
         --------------------------------------

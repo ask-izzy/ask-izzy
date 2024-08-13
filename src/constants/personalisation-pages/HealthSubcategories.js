@@ -105,6 +105,31 @@ export default ({
             },
             $unset: ["showInAskIzzyHealth"],
         },
+        "Health and wellbeing": {
+            serviceTypesRaw: ["Recreation and leisure"],
+            serviceTypes: [],
+            $unset: ["showInAskIzzyHealth"],
+            $concat: {
+                term: [
+                    "wellbeing",
+                ],
+            },
+        },
+        "Eye health": {
+            serviceTypesRaw: ["Optometrists"],
+            serviceTypes: [],
+            $unset: ["showInAskIzzyHealth"],
+            $concat: {
+                term: [
+                    "eye",
+                ],
+            },
+            $removeElms: {
+                term: [
+                    "health",
+                ],
+            },
+        },
     },
     descriptionsForAnswers: {
         "Doctor": "Someone to talk to about any health problem.",
@@ -115,6 +140,8 @@ export default ({
         "Problems with feet": "Podiatrists for help with foot problems.",
         "Hospital": "Emergency rooms for urgent problems.",
         "Alcohol and other drugs": "Rehab, detox, managing withdrawals.",
+        "Health and wellbeing": "Social groups and activities for healthy living.",
+        "Eye health": "Optometrists/eye health",
     },
     showSupportSearchBar: true,
     title: "Health",
