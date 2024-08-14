@@ -114,6 +114,11 @@ export default ({
                     "wellbeing",
                 ],
             },
+            $removeElms: {
+                term: [
+                    "health",
+                ],
+            },
         },
         "Eye health": {
             serviceTypesRaw: ["Optometrists"],

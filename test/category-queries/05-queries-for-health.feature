@@ -215,7 +215,6 @@ Feature: Health personalisation flow generates the expected query
             ],
             "term": [
                 "-\"coordinating bodies\"",
-                "health",
                 "wellbeing"
             ]
         }
