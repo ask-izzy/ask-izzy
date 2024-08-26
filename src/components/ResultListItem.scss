@@ -36,7 +36,9 @@
             column-gap: 6px;
 
             .ShareButton {
-                line-height: 23px;
+                display: flex;
+                line-height: 20px;
+                vertical-align: middle;
             }
         }
     }
