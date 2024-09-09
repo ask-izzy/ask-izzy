@@ -3,7 +3,7 @@
 .ServicePane {
     color: #{colours.get-static('colour-text-dark')};
     color: var(--colour-text-dark);
-    font-size: 14px;
+    font-size: 17px;
     font-weight: light;
     display: block;
 
@@ -111,7 +111,6 @@
             svg {
                 height: 23px;
                 width: 23px;
-                margin-top: -13px;
             }
         }
 
@@ -155,6 +154,7 @@
 
             .PrintButton {
                 margin-inline: 10px;
+                font-weight: bold;
 
                 .StandardButton.type-secondary {
                     border: transparent;
