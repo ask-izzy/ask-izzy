@@ -71,7 +71,7 @@ Feature: Search personalisation flow generates the expected query
             "location": {
                 "name": "Melbourne, VIC"
             },
-            "term": ["General Disability Advocacy"],
+            "term": ["Culturally & Linguistically Diverse services (CALD)"],
             "cald_specific": true
         }
         --------------------------------------
