@@ -43,7 +43,7 @@ Feature: Search personalisation flow generates the expected query
             "location": {
                 "name": "Melbourne, VIC"
             },
-            "term": ["ndis appeals"]
+            "term": ["AAT - NDIS Appeals"]
         }
         --------------------------------------
 
