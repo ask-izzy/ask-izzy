@@ -13,10 +13,10 @@
 
     h2 {
         text-align: center;
-    }    
+    }
 
     hr {
-        border: none;
+        border: 0;
         border-top: 2px solid #000;
         margin: 0 auto;
         width: 100%;
@@ -37,7 +37,7 @@
     li {
         margin-bottom: 5px;
     }
-    
+
     .disabilityHeader {
         text-align: center;
         margin-top: 20px;
@@ -45,7 +45,7 @@
 
     .disabilityButton {
         background-color: #005568;
-        color: white;
+        color: #ffffff;
         border: 0;
         padding: 15px 30px;
         font-size: 22px;
@@ -57,7 +57,7 @@
         border-radius: 8px;
         height: 65px;
     }
-    
+
     .disabilityButton.static {
         cursor: default;
     }
@@ -72,13 +72,12 @@
         width: 67%;
         margin: 0 auto;
         padding: 0;
-        margin-top: -1.5px;
         padding-bottom: 20px;
     }
 
     .disabilitySubButton {
-        background-color: #BEBFC7;
-        color:  #000;
+        background-color: #bebfc7;
+        color: #000;
         border: 0;
         padding: 15px 30px;
         font-size: 17px;
@@ -94,14 +93,14 @@
     }
 
     .disabilitySubButton:hover {
-    background-color: #8a8b93;
-    color: white;
-}
+        background-color: #8a8b93;
+        color:  #ffffff;
+    }
 
     .divider {
-        height: 2px;
-        background-color:  #000;
-        margin: 0; 
+        height: 1.5px;
+        background-color: #000;
+        margin: 0;
     }
 
     .socialserviceslist {

@@ -35,7 +35,7 @@ Feature: Search personalisation flow generates the expected query
 
     Scenario: Disability Advocacy Finder search for NDIS Appeals
         When I visit /disability-advocacy-finder
-        And I click the "AAT - NDIS Appeals" button
+        And I click the "Administrative Appeals Tribunal (AAT) - NDIS appeals" button
         Then I should see "See all and edit"
         And the iss search request should be:
         --------------------------------------
