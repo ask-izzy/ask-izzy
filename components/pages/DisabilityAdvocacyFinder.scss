@@ -17,9 +17,9 @@
 
     hr {
         border: none;
-        border-top: 2px solid #000; 
+        border-top: 2px solid #000;
         margin: 0 auto;
-        width: 100%; 
+        width: 100%;
         padding-bottom: 20px;
     }
 
@@ -29,11 +29,11 @@
     }
 
     ul {
-        list-style-type: none; 
+        list-style-type: none;
         padding: 0;
         text-align: center;
     }
-    
+
     li {
         margin-bottom: 5px;
     }
@@ -42,11 +42,11 @@
         text-align: center;
         margin-top: 20px;
     }
-    
+
     .disabilityButton {
         background-color: #005568;
         color: white;
-        border: none;
+        border: 0;
         padding: 15px 30px;
         font-size: 22px;
         width: 67%;
@@ -61,13 +61,13 @@
     .disabilityButton.static {
         cursor: default;
     }
-    
+
     .orText {
         font-size: 18px;
         font-weight: bold;
         margin: 20px 0;
     }
-    
+
     .connectedButtons {
         width: 67%;
         margin: 0 auto;
@@ -75,11 +75,11 @@
         margin-top: -1.5px;
         padding-bottom: 20px;
     }
-    
+
     .disabilitySubButton {
         background-color: #BEBFC7;
-        color: black;
-        border: none;
+        color:  #000;
+        border: 0;
         padding: 15px 30px;
         font-size: 17px;
         width: 100%;
@@ -89,18 +89,18 @@
         text-align: left;
         border-radius: 0;
         height: 75px;
-        margin: 0; 
-        outline: none;
+        margin: 0;
+        outline: 0;
     }
 
     .disabilitySubButton:hover {
-    background-color: #8A8B93;
+    background-color: #8a8b93;
     color: white;
 }
 
     .divider {
         height: 2px;
-        background-color: black;
+        background-color:  #000;
         margin: 0; 
     }
 

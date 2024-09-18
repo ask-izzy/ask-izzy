@@ -26,12 +26,10 @@ Feature: Search personalisation flow generates the expected query
         And the iss search request should be:
         --------------------------------------
         {
-            "catchment": "true",
             "location": {
                 "name": "Melbourne, VIC"
             },
-            "term": ["advocacy"],
-            "serviceTypesRaw": ["disability advocacy"]
+            "term": ["General Disability Advocacy"]
         }
         --------------------------------------
 
@@ -42,12 +40,10 @@ Feature: Search personalisation flow generates the expected query
         And the iss search request should be:
         --------------------------------------
         {
-            "catchment": "true",
             "location": {
                 "name": "Melbourne, VIC"
             },
-            "term": ["ndis appeals"],
-            "serviceTypesRaw": ["disability advocacy"]
+            "term": ["ndis appeals"]
         }
         --------------------------------------
 
@@ -58,12 +54,10 @@ Feature: Search personalisation flow generates the expected query
         And the iss search request should be:
         --------------------------------------
         {
-            "catchment": "true",
             "location": {
                 "name": "Melbourne, VIC"
             },
-            "term": ["indigenous"],
-            "serviceTypesRaw": ["disability advocacy"]
+            "term": ["advocacy indigenous_classification: specific indigenous_classification: cater"]
         }
         --------------------------------------
 
@@ -74,12 +68,10 @@ Feature: Search personalisation flow generates the expected query
         And the iss search request should be:
         --------------------------------------
         {
-            "catchment": "true",
             "location": {
                 "name": "Melbourne, VIC"
             },
-            "term": ["advocacy"],
-            "serviceTypesRaw": ["disability advocacy"],
+            "term": ["General Disability Advocacy"],
             "cald_specific": true
         }
         --------------------------------------
