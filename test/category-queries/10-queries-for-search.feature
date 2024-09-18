@@ -19,10 +19,9 @@ Feature: Search personalisation flow generates the expected query
         }
         --------------------------------------
 
-    Scenario: Disability Advocacy Finder search with search term
+    Scenario: Disability Advocacy Finder search with specific service type
         When I visit /disability-advocacy-finder
-        When I search for "food help"
-        And I click the "Search" button
+        And I click the "General disability Advocacy" button
         Then I should see "See all and edit"
         And the iss search request should be:
         --------------------------------------
@@ -31,14 +30,14 @@ Feature: Search personalisation flow generates the expected query
             "location": {
                 "name": "Melbourne, VIC"
             },
-            "term": ["food help"],
+            "term": ["advocacy"],
             "serviceTypesRaw": ["disability advocacy"]
         }
         --------------------------------------
 
-    Scenario: Disability Advocacy Finder search without search term
+    Scenario: Disability Advocacy Finder search for NDIS Appeals
         When I visit /disability-advocacy-finder
-        When I click the link with "Browse all disability advocacy services" substring
+        And I click the "AAT - NDIS Appeals" button
         Then I should see "See all and edit"
         And the iss search request should be:
         --------------------------------------
@@ -47,7 +46,40 @@ Feature: Search personalisation flow generates the expected query
             "location": {
                 "name": "Melbourne, VIC"
             },
-            "term": ["disability"],
+            "term": ["ndis appeals"],
             "serviceTypesRaw": ["disability advocacy"]
+        }
+        --------------------------------------
+
+    Scenario: Disability Advocacy Finder search for Indigenous services
+        When I visit /disability-advocacy-finder
+        And I click the "Aboriginal & Torres Strait Islander services" button
+        Then I should see "See all and edit"
+        And the iss search request should be:
+        --------------------------------------
+        {
+            "catchment": "true",
+            "location": {
+                "name": "Melbourne, VIC"
+            },
+            "term": ["indigenous"],
+            "serviceTypesRaw": ["disability advocacy"]
+        }
+        --------------------------------------
+
+    Scenario: Disability Advocacy Finder search for CALD services
+        When I visit /disability-advocacy-finder
+        And I click the "Culturally & Linguistically Diverse services (CALD)" button
+        Then I should see "See all and edit"
+        And the iss search request should be:
+        --------------------------------------
+        {
+            "catchment": "true",
+            "location": {
+                "name": "Melbourne, VIC"
+            },
+            "term": ["advocacy"],
+            "serviceTypesRaw": ["disability advocacy"],
+            "cald_specific": true
         }
         --------------------------------------
