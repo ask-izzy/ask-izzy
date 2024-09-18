@@ -57,7 +57,7 @@ Feature: Search personalisation flow generates the expected query
             "location": {
                 "name": "Melbourne, VIC"
             },
-            "term": ["advocacy indigenous_classification: specific indigenous_classification: cater"]
+            "term": ["Aboriginal & Torres Strait Islander services"]
         }
         --------------------------------------
 
