@@ -39,9 +39,7 @@ function DisabilityAdvocacyFinder(): ReactNode {
                     <button
                         className="disabilityButton clickable"
                         onClick={() => handleSearch(
-                            "Disability Advocacy",
-                            "advocacy (-ndis appeals)",
-                            "Disability advocacy"
+                            "Disability Advocacy Providers"
                         )}
                     >
                         Find a disability advocate

@@ -72,6 +72,5 @@ Feature: Search personalisation flow generates the expected query
                 "name": "Melbourne, VIC"
             },
             "term": ["Culturally & Linguistically Diverse services (CALD)"],
-            cald_specific: true,
         }
         --------------------------------------
