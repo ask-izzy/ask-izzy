@@ -68,9 +68,12 @@ Feature: Search personalisation flow generates the expected query
         And the iss search request should be:
         --------------------------------------
         {
-            "location": {
-                "name": "Melbourne, VIC"
+            "location":{
+                "name":"Melbourne, VIC"
             },
-            "term": ["Culturally & Linguistically Diverse services (CALD)"],
+            "term":[
+                "Culturally & Linguistically Diverse services (CALD)"
+            ],
+            "cald_specific":true
         }
         --------------------------------------
