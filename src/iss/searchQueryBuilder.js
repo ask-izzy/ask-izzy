@@ -68,6 +68,7 @@ type SearchQueryOtherProps = {|
     apiVersion?: "3" | "4",
     name?: string,
     isBulkBilling?: boolean,
+    caldSpecific?: boolean,
 
     // to figure out
     minimumShouldMatch?: string,
