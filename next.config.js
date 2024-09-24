@@ -27,14 +27,24 @@ module.exports = {
             ],
             afterFiles: [
                 {
-                    source: `/search/:search/:remainingPath*`,
-                    destination: `/search/:remainingPath*?search=:search`,
-                },
-                {
                     source: `/search/:search/:suburb-:state/:remainingPath*`,
                     destination:
                         `/search/:remainingPath*?suburb=:suburb&state=:state` +
                             `&search=:search`,
+                },
+                {
+                    source: `/search/:search/:remainingPath*`,
+                    destination: `/search/:remainingPath*?search=:search`,
+                },
+                {
+                    source: `/disability-advocacy-finder/:helpSpecialisation/:suburb-:state/:remainingPath*`,
+                    destination:
+                        `/disability-advocacy-finder/:remainingPath*?suburb=:suburb&state=:state` +
+                            `&helpSpecialisation=:helpSpecialisation`,
+                },
+                {
+                    source: `/disability-advocacy-finder/:helpSpecialisation/:remainingPath*`,
+                    destination: `/disability-advocacy-finder/:remainingPath*?helpSpecialisation=:helpSpecialisation`,
                 },
                 {
                     source: "/VERSION",

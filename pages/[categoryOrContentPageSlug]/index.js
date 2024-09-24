@@ -25,21 +25,24 @@ type Props = {
 }
 
 export const getStaticPaths: GetStaticPaths = async() => {
-    const categoryPaths = categories.map(category => ({
-        params: { categoryOrContentPageSlug: category.key},
-    }))
+    // Load static pages to make sure the paths don't clash the the paths of
+    // pages in the CMS or categories.
+    const topLevelStaticPages = await fs.readdir("./pages")
+    const staticPaths = topLevelStaticPages
+        .map(filename => filename.match(/([A-Za-z0-9_-]+)(?:.js)?/)?.[1])
+        .filter(pathSegment => pathSegment)
+
+    const categoryPaths = categories
+        .filter(category => !staticPaths.includes(category.key))
+        .map(category => ({
+            params: { categoryOrContentPageSlug: category.key},
+        }))
 
     const contentPages = await queryGraphQlWithErrorLogging({
         query: cmsAllPagesQuery,
         fetchPolicy: "no-cache",
     }).then(res => res.data.pages)
 
-    // Load static pages to make sure the paths don't clash the the paths of
-    // pages in the CMS.
-    const topLevelStaticPages = await fs.readdir("./pages")
-    const staticPaths = topLevelStaticPages
-        .map(filename => filename.match(/([A-Za-z0-9_-]+).js/)?.[1])
-        .filter(pathSegment => pathSegment)
 
     const contentPagePaths = contentPages
         .map(page => page.Path.replace(/^\//, ""))

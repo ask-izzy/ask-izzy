@@ -334,6 +334,34 @@ const categories = [
         dontShowInCategoryList: true,
         bannerName: "hand-and-person-with-heart",
     }): Category),
+    (new Category({
+        name: "Disability Advocacy Finder",
+        key: "disability-advocacy-finder",
+        byline: "",
+        icon: () => <></>,
+        searchQueryChanges(router: NextRouter) {
+            console.log("searchQueryChanges, router.query", router.query)
+            const helpSpecialisation = decodeURIComponent(router.query.helpSpecialisation)
+
+            if (helpSpecialisation === "general") {
+                return {
+                    term: ["advocacy -\"ndis appeals\""],
+                    serviceTypesRaw: ["service_type_raw"],
+                    caldSpecific: true,
+                }
+            } else {
+                throw new Error(`Unknown helpSpecialisation: ${helpSpecialisation}`)
+            }
+        },
+        personalisation: [
+            FreeTextAreYouSafe,
+            OnlineSafetyScreen,
+            WhoIsLookingForHelpSearch,
+            Location,
+        ],
+        dontShowInCategoryList: true,
+        bannerName: "hand-and-person-with-heart",
+    }): Category),
 ];
 
 export default categories;
