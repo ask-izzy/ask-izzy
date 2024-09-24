@@ -53,6 +53,7 @@ export type ISS3SearchQuery = {|
     show_in_askizzy_health?: boolean,
     is_bulk_billing?: boolean,
     name?: string,
+    cald_specific?: boolean,
 |};
 
 export type ISS3SearchQueryWithDefaults = {|

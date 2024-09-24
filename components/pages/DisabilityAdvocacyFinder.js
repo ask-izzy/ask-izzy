@@ -7,6 +7,7 @@ import { useRouter } from "next/router";
 import Link from "@/src/components/base/Link";
 import StaticPage from "@/components/pages/StaticPage";
 import Chevron from "@/src/icons/Chevron";
+import { getCategory } from "@/src/constants/categories"; // Import categories
 import {
     goToPersonalisationNextPath,
 } from "@/src/utils/routing";
@@ -16,12 +17,18 @@ function DisabilityAdvocacyFinder(): ReactNode {
 
     const disabilityGatewayURL = "https://www.disabilitygateway.gov.au/";
 
-    const handleSearch = (displayText, searchText, serviceTypeRaw, caldSpecific = null) => {
-        goToPersonalisationNextPath({
-            router,
-            category: "search",
-            searchText: displayText,
-        });
+    const handleSearch = (helpSpecialisation) => {
+        const category = getCategory("disability-advocacy-finder");
+
+        if (category) {
+            goToPersonalisationNextPath({
+                router,
+                category: "disability-advocacy-finder",
+                searchText: helpSpecialisation,
+            });
+        } else {
+            console.error("Category not found");
+        }
     };
 
     return (
@@ -38,9 +45,7 @@ function DisabilityAdvocacyFinder(): ReactNode {
                 <div className="disabilityHeader">
                     <button
                         className="disabilityButton clickable"
-                        onClick={() => handleSearch(
-                            "Disability Advocacy Providers"
-                        )}
+                        onClick={() => handleSearch("general")}
                     >
                         Find a disability advocate
                     </button>
@@ -51,47 +56,28 @@ function DisabilityAdvocacyFinder(): ReactNode {
                     <div className="connectedButtons">
                         <button
                             className="disabilitySubButton"
-                            onClick={() => handleSearch(
-                                "General Disability Advocacy",
-                                "advocacy",
-                                "Disability advocacy"
-                            )}
+                            onClick={() => handleSearch("general")}
                         >
                             General disability Advocacy
                         </button>
                         <div className="divider" />
                         <button
                             className="disabilitySubButton"
-                            onClick={() => handleSearch(
-                                "AAT - NDIS Appeals",
-                                "ndis appeals",
-                                "NDIS"
-                            )}
+                            onClick={() => handleSearch("ndis-appeals")}
                         >
                             Administrative Appeals Tribunal (AAT) - NDIS appeals
                         </button>
                         <div className="divider" />
                         <button
                             className="disabilitySubButton"
-                            onClick={() =>
-                                handleSearch(
-                                    "Aboriginal & Torres Strait Islander services",
-                                    "advocacy indigenous_classification: specific indigenous_classification: cater",
-                                    "Disability advocacy"
-                                )
-                            }
+                            onClick={() => handleSearch("indigenous")}
                         >
                             Aboriginal & Torres Strait Islander services
                         </button>
                         <div className="divider" />
                         <button
                             className="disabilitySubButton"
-                            onClick={() => handleSearch(
-                                "Culturally & Linguistically Diverse services (CALD)",
-                                "advocacy",
-                                "Disability advocacy",
-                                true
-                            )}
+                            onClick={() => handleSearch("cald")}
                         >
                             Culturally & Linguistically Diverse services (CALD)
                         </button>
