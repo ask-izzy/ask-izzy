@@ -21,7 +21,7 @@ Feature: Search personalisation flow generates the expected query
 
     Scenario: Disability Advocacy Finder search with general disability advocacy
         When I visit /disability-advocacy-finder
-        And I click the "General disability Advocacy" button
+        And I click the "General disability advocacy" button
         Then I should see "See all and edit"
         And the iss search request should be:
         --------------------------------------
@@ -72,7 +72,7 @@ Feature: Search personalisation flow generates the expected query
 
     Scenario: Disability Advocacy Finder search for CALD services
         When I visit /disability-advocacy-finder
-        And I click the "Culturally & Linguistically Diverse services (CALD)" button
+        And I click the "Culturally & Linguistically Diverse (CALD) services" button
         Then I should see "See all and edit"
         And the iss search request should be:
         --------------------------------------
