@@ -58,7 +58,7 @@ function DisabilityAdvocacyFinder(): ReactNode {
                             className="disabilitySubButton"
                             onClick={() => handleSearch("general")}
                         >
-                            General disability Advocacy
+                            General disability advocacy
                         </button>
                         <div className="divider" />
                         <button
@@ -79,7 +79,7 @@ function DisabilityAdvocacyFinder(): ReactNode {
                             className="disabilitySubButton"
                             onClick={() => handleSearch("cald")}
                         >
-                            Culturally & Linguistically Diverse services (CALD)
+                            Culturally & Linguistically Diverse (CALD) services
                         </button>
                     </div>
                 </div>
