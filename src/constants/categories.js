@@ -348,24 +348,28 @@ const categories = [
                     term: ["advocacy -\"ndis appeals\""],
                     serviceTypesRaw: ["Disability advocacy"],
                     caldSpecific: false,
+                    catchment: "true",
                 };
             } else if (helpSpecialisation === "ndis-appeals") {
                 return {
                     term: ["ndis appeals"],
                     serviceTypesRaw: ["Disability advocacy"],
                     caldSpecific: false,
+                    catchment: "true",
                 };
             } else if (helpSpecialisation === "indigenous") {
                 return {
                     term: ["advocacy indigenous_classification: specific indigenous_classification: cater"],
                     serviceTypesRaw: ["Disability advocacy"],
                     caldSpecific: false,
+                    catchment: "true",
                 };
             } else if (helpSpecialisation === "cald") {
                 return {
                     term: ["advocacy"],
                     serviceTypesRaw: ["Disability advocacy"],
                     caldSpecific: true,
+                    catchment: "true",
                 };
             } else {
                 throw new Error(`Unknown helpSpecialisation: ${helpSpecialisation}`)

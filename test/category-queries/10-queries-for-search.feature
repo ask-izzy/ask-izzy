@@ -19,66 +19,70 @@ Feature: Search personalisation flow generates the expected query
         }
         --------------------------------------
 
-Scenario: Disability Advocacy Finder search with general disability advocacy
-    When I visit /disability-advocacy-finder
-    And I click the "General disability Advocacy" button
-    Then I should see "See all and edit"
-    And the iss search request should be:
-    --------------------------------------
-    {
-        "location": {
-            "name": "Melbourne, VIC"
-        },
-        "term": ["advocacy -\"ndis appeals\""],
-        "serviceTypesRaw": ["Disability advocacy"],
-        "caldSpecific": false
-    }
-    --------------------------------------
+    Scenario: Disability Advocacy Finder search with general disability advocacy
+        When I visit /disability-advocacy-finder
+        And I click the "General disability Advocacy" button
+        Then I should see "See all and edit"
+        And the iss search request should be:
+        --------------------------------------
+        {
+            "location": {
+                "name": "Melbourne, VIC"
+            },
+            "term": ["advocacy -\"ndis appeals\""],
+            "serviceTypesRaw": ["Disability advocacy"],
+            "caldSpecific": false,
+            "catchment": "true"
+        }
+        --------------------------------------
 
-Scenario: Disability Advocacy Finder search for NDIS Appeals
-    When I visit /disability-advocacy-finder
-    And I click the "Administrative Appeals Tribunal (AAT) - NDIS appeals" button
-    Then I should see "See all and edit"
-    And the iss search request should be:
-    --------------------------------------
-    {
-        "location": {
-            "name": "Melbourne, VIC"
-        },
-        "term": ["ndis appeals"],
-        "serviceTypesRaw": ["Disability advocacy"],
-        "caldSpecific": false
-    }
-    --------------------------------------
+    Scenario: Disability Advocacy Finder search for NDIS Appeals
+        When I visit /disability-advocacy-finder
+        And I click the "Administrative Appeals Tribunal (AAT) - NDIS appeals" button
+        Then I should see "See all and edit"
+        And the iss search request should be:
+        --------------------------------------
+        {
+            "location": {
+                "name": "Melbourne, VIC"
+            },
+            "term": ["ndis appeals"],
+            "serviceTypesRaw": ["Disability advocacy"],
+            "caldSpecific": false,
+            "catchment": "true"
+        }
+        --------------------------------------
 
-Scenario: Disability Advocacy Finder search for Indigenous services
-    When I visit /disability-advocacy-finder
-    And I click the "Aboriginal & Torres Strait Islander services" button
-    Then I should see "See all and edit"
-    And the iss search request should be:
-    --------------------------------------
-    {
-        "location": {
-            "name": "Melbourne, VIC"
-        },
-        "term": ["advocacy indigenous_classification: specific indigenous_classification: cater"],
-        "serviceTypesRaw": ["Disability advocacy"],
-        "caldSpecific": false
-    }
-    --------------------------------------
+    Scenario: Disability Advocacy Finder search for Indigenous services
+        When I visit /disability-advocacy-finder
+        And I click the "Aboriginal & Torres Strait Islander services" button
+        Then I should see "See all and edit"
+        And the iss search request should be:
+        --------------------------------------
+        {
+            "location": {
+                "name": "Melbourne, VIC"
+            },
+            "term": ["advocacy indigenous_classification: specific indigenous_classification: cater"],
+            "serviceTypesRaw": ["Disability advocacy"],
+            "caldSpecific": false,
+            "catchment": "true"
+        }
+        --------------------------------------
 
-Scenario: Disability Advocacy Finder search for CALD services
-    When I visit /disability-advocacy-finder
-    And I click the "Culturally & Linguistically Diverse services (CALD)" button
-    Then I should see "See all and edit"
-    And the iss search request should be:
-    --------------------------------------
-    {
-        "location": {
-            "name": "Melbourne, VIC"
-        },
-        "term": ["advocacy"],
-        "serviceTypesRaw": ["Disability advocacy"],
-        "caldSpecific": true
-    }
-    --------------------------------------
+    Scenario: Disability Advocacy Finder search for CALD services
+        When I visit /disability-advocacy-finder
+        And I click the "Culturally & Linguistically Diverse services (CALD)" button
+        Then I should see "See all and edit"
+        And the iss search request should be:
+        --------------------------------------
+        {
+            "location": {
+                "name": "Melbourne, VIC"
+            },
+            "term": ["advocacy"],
+            "serviceTypesRaw": ["Disability advocacy"],
+            "caldSpecific": true,
+            "catchment": "true"
+        }
+        --------------------------------------
