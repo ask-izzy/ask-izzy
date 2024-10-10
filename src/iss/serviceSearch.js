@@ -194,7 +194,6 @@ export class PaginatedSearchIss4 extends PaginatedSearch {
 export function isDisabilityAdvocacySearch(
     router: NextRouter
 ): boolean {
-    console.log("isDisabilityAdvocacySearch", router)
     return decodeURIComponent(router.query.categoryOrContentPageSlug) ===
         "disability-advocacy-finder"
 }
