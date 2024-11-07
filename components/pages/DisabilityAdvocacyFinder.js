@@ -7,7 +7,7 @@ import { useRouter } from "next/router";
 import Link from "@/src/components/base/Link";
 import StaticPage from "@/components/pages/StaticPage";
 import Chevron from "@/src/icons/Chevron";
-import { getCategory } from "@/src/constants/categories"; // Import categories
+import { getCategory } from "@/src/constants/categories";
 import {
     goToPersonalisationNextPath,
 } from "@/src/utils/routing";
@@ -39,7 +39,9 @@ function DisabilityAdvocacyFinder(): ReactNode {
             bannerName="hand-and-building-and-person static"
         >
             <div className="DisabilityAdvocacyFinder">
-                <h2>A disability advocate can support you with a problem to understand your rights and options</h2>
+                <h2>
+                    A disability advocate can support you with a problem to understand your rights and options
+                </h2>
                 <hr />
 
                 <div className="disabilityHeader">
@@ -65,8 +67,9 @@ function DisabilityAdvocacyFinder(): ReactNode {
                             className="disabilitySubButton"
                             onClick={() => handleSearch("ndis-appeals")}
                         >
-                            Administrative Appeals Tribunal (AAT) - NDIS appeals
+                            Administrative Review Tribunal (ART) - NDIS appeals
                         </button>
+                        {/* Commented out for future use
                         <div className="divider" />
                         <button
                             className="disabilitySubButton"
@@ -81,11 +84,14 @@ function DisabilityAdvocacyFinder(): ReactNode {
                         >
                             Culturally & Linguistically Diverse (CALD) services
                         </button>
+                        */}
                     </div>
                 </div>
 
                 <div className="socialserviceslist">
-                    <h3>For information about disability advocacy go to the Department of Social Services website:</h3>
+                    <h3>
+                        For information about disability advocacy go to the Department of Social Services website:
+                    </h3>
                     <ul>
                         <li>
                             <Link to="https://www.dss.gov.au/our-responsibilities/disability-and-carers/program-services/for-people-with-disability/national-disability-advocacy-program-ndap">
@@ -111,13 +117,14 @@ function DisabilityAdvocacyFinder(): ReactNode {
                     </h2>
                     <p>
                         Ask Izzy is a free and anonymous website that connects people in need
-                        with housing, a meal, money help, family violence support, counselling and much more.
+                        with housing, a meal, money help, family violence support, counselling, and much more.
                     </p>
                 </div>
                 <div className="backToDSS">
                     <Link to={disabilityGatewayURL}>
                         <strong>
-                            Return to The Disability Gateway website<Chevron />
+                            Return to The Disability Gateway website
+                            <Chevron />
                         </strong>
                     </Link>
                 </div>
