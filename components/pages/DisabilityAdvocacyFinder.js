@@ -67,7 +67,8 @@ function DisabilityAdvocacyFinder(): ReactNode {
                             className="disabilitySubButton"
                             onClick={() => handleSearch("ndis-appeals")}
                         >
-                            Administrative Review Tribunal (ART) - NDIS appeals
+                             Administrative Review Tribunal (ART) - <br />
+                            <span className="ndisAppealsText">NDIS Appeals</span>
                         </button>
                         {/* Commented out for future use
                         <div className="divider" />
