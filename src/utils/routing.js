@@ -97,7 +97,7 @@ export function getCategoryFromRouter(
     router: NextRouter
 ): ?Category {
     return getCategory(
-        router.query.categoryOrContentPageSlug
+        router.query.categoryOrContentPageSlug || router.route.split("/")[1]
     )
 }
 
@@ -194,7 +194,11 @@ export function getServicesPath({
         summary = router.pathname.includes("/summary")
     }
     if (searchText === undefined && pageMounted) {
-        searchText = router.query.search && decodeURIComponent(router.query.search)
+        if (router.query.search) {
+            searchText = decodeURIComponent(router.query.search)
+        } else if (router.query.helpSpecialisation) {
+            searchText = decodeURIComponent(router.query.helpSpecialisation)
+        }
     }
     if (location === undefined && pageMounted) {
         location = storage.getSearchArea();
@@ -206,7 +210,7 @@ export function getServicesPath({
     // Begin constructing the new route
     const pathSegments = ["", category.key]
 
-    if (category.key === "search" && searchText) {
+    if (["search", "disability-advocacy-finder"].includes(category.key) && searchText) {
         pathSegments.push(searchText)
     }
 

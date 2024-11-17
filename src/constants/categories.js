@@ -305,24 +305,60 @@ const categories = [
         searchQueryChanges(router: NextRouter) {
             const searchTerm = decodeURIComponent(router.query.search)
 
-            const [isDAFSearch, DAFSearchTerm] = searchTerm.match(/^Disability Advocacy Providers(?: - )?(.*)/) || []
-
-            // A special case for the "Find advocacy" button on the
-            // DisabilityAdvocacyFinder page.
-            if (isDAFSearch) {
-                return {
-                    term: [DAFSearchTerm || "disability"],
-                    catchment: "true",
-                    $push: {
-                        serviceTypesRaw: "disability advocacy",
-                    },
-                }
-            }
-
             return {
                 $push: {
                     term: searchTerm,
                 },
+            }
+        },
+        personalisation: [
+            FreeTextAreYouSafe,
+            OnlineSafetyScreen,
+            WhoIsLookingForHelpSearch,
+            Location,
+        ],
+        dontShowInCategoryList: true,
+        bannerName: "hand-and-person-with-heart",
+    }): Category),
+    (new Category({
+        name: "Disability Advocacy Finder",
+        key: "disability-advocacy-finder",
+        byline: "",
+        icon: () => <></>,
+        searchQueryChanges(router: NextRouter) {
+            console.log("searchQueryChanges, router.query", router.query)
+            const helpSpecialisation = decodeURIComponent(router.query.helpSpecialisation)
+
+            if (helpSpecialisation === "general") {
+                return {
+                    term: ["advocacy -\"ndis appeals\""],
+                    serviceTypesRaw: ["Disability advocacy"],
+                    caldSpecific: false,
+                    catchment: "true",
+                };
+            } else if (helpSpecialisation === "ndis-appeals") {
+                return {
+                    term: ["ndis appeals"],
+                    serviceTypesRaw: ["Disability advocacy"],
+                    caldSpecific: false,
+                    catchment: "true",
+                };
+            } else if (helpSpecialisation === "indigenous") {
+                return {
+                    term: ["advocacy indigenous_classification: specific indigenous_classification: cater"],
+                    serviceTypesRaw: ["Disability advocacy"],
+                    caldSpecific: false,
+                    catchment: "true",
+                };
+            } else if (helpSpecialisation === "cald") {
+                return {
+                    term: ["advocacy"],
+                    serviceTypesRaw: ["Disability advocacy"],
+                    caldSpecific: true,
+                    catchment: "true",
+                };
+            } else {
+                throw new Error(`Unknown helpSpecialisation: ${helpSpecialisation}`)
             }
         },
         personalisation: [

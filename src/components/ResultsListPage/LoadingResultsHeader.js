@@ -1,32 +1,24 @@
 /* @flow */
 
 import React from "react";
-import type {Node as ReactNode} from "React"
-
+import type { Node as ReactNode } from "React";
 import HeaderBar from "../HeaderBar";
 import Category from "@/src/constants/Category";
-import {getBannerName} from "../../utils/personalisation"
-import type Service from "../../iss/Service"
+import { getBannerName } from "../../utils/personalisation";
+import type Service from "../../iss/Service";
 
 const formatResultsPageHeading = (title: string) => {
-    switch (title) {
-    case "finding work":
-        return "Showing services to help";
-    case "facilities":
-        return "Showing places and services with bathrooms";
-    case "something to do":
-        return "Showing community and leisure services";
-    case "technology":
-        return "Showing places to connect to the internet";
-    case "centrelink":
-        return "Showing Centrelink sites";
-    case "everyday needs":
-        return "Showing services that provide everyday needs";
-    default:
-        return `Showing ${title} services`;
-    }
-}
+    const headings = {
+        "finding work": "Showing services to help",
+        "facilities": "Showing places and services with bathrooms",
+        "something to do": "Showing community and leisure services",
+        "technology": "Showing places to connect to the internet",
+        "centrelink": "Showing Centrelink sites",
+        "everyday needs": "Showing services that provide everyday needs",
+    };
 
+    return headings[title] || `Showing ${title} services`;
+};
 
 type Props = {
     error: string,
@@ -35,8 +27,7 @@ type Props = {
     category: Category,
     title: string,
     services: Array<Service>,
-}
-
+};
 
 function LoadingResultsHeader({
     error,
@@ -46,65 +37,46 @@ function LoadingResultsHeader({
     title,
     services,
 }: Props): ReactNode {
-    const bannerName = getBannerName(category)
+    const bannerName = getBannerName(category);
 
     if (loading) {
         return (
             <HeaderBar
                 className="LoadingResultsHeader"
                 primaryText="Searching..."
-                secondaryText={
-                    <div>
-                            Loading results...
-                    </div>
-                }
+                secondaryText="Loading results..."
                 bannerName={bannerName}
             />
         );
     }
-    const primaryText = (category: Category) => (
+
+    const primaryText = `Sorry, we weren't able to find any ${
         category.key !== "search" ?
-            "Sorry, we weren't able to find any " +
-                    "services for this search."
-            : `Sorry, we weren't able to find any
-                    services matching your search for ${title}.`
-    )
+            "services for this search."
+            : `services matching your search for ${title}.`
+    }`;
 
-    if (error) {
-        if (statusCode === 402) {
-            return (
-                <HeaderBar
-                    className="LoadingResultsHeader"
-                    primaryText={primaryText(category)}
-                    bannerName={bannerName}
-                />
-            );
-        }
-
+    if (error || statusCode === 402) {
         return (
             <HeaderBar
                 className="LoadingResultsHeader"
-                primaryText={primaryText(category)}
+                primaryText={primaryText}
                 bannerName={bannerName}
             />
         );
     }
 
     return (
-        <React.Fragment>
-            <HeaderBar
-                className="LoadingResultsHeader"
-                primaryText={
-                    services.length > 0 ?
-                        formatResultsPageHeading(
-                            title.toLocaleLowerCase()
-                        )
-                        : primaryText(category)
-                }
-                bannerName={bannerName}
-            />
-        </React.Fragment>
-    )
+        <HeaderBar
+            className="LoadingResultsHeader"
+            primaryText={
+                services.length > 0 ?
+                    formatResultsPageHeading(title.toLocaleLowerCase())
+                    : primaryText
+            }
+            bannerName={bannerName}
+        />
+    );
 }
 
 export default LoadingResultsHeader;

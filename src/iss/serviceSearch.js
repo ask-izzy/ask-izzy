@@ -194,10 +194,10 @@ export class PaginatedSearchIss4 extends PaginatedSearch {
 export function isDisabilityAdvocacySearch(
     router: NextRouter
 ): boolean {
-    return decodeURIComponent(router.query.search) ===
-        "Disability Advocacy Providers"
+    return decodeURIComponent(router.query.categoryOrContentPageSlug) ===
+        "disability-advocacy-finder"
 }
-
+//cald_specifc needs to be set for ISS4
 export function convertIzzySearchQueryToIss(
     query: IzzySearchQuery
 ): ISS4SearchQuery {
@@ -316,6 +316,10 @@ export function convertIzzySearchQueryToIss3(
 
     if (query.minimumShouldMatch) {
         issQuery.minimum_should_match = query.minimumShouldMatch
+    }
+
+    if (query.caldSpecific) {
+        issQuery.cald_specific = query.caldSpecific
     }
 
     if (query.showInAskIzzyHealth) {

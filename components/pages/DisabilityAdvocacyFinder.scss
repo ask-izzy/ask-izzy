@@ -11,12 +11,102 @@
         }
     }
 
-    h3 {
-        margin-bottom: 0;
+    h2 {
+        text-align: center;
     }
 
-    .searchSection {
-        margin: 2em 0;
+    hr {
+        border: 0;
+        border-top: 2px solid #000;
+        margin: 0 auto;
+        width: 100%;
+        padding-bottom: 20px;
+    }
+
+    h3 {
+        margin-bottom: 0;
+        text-align: center;
+    }
+
+    ul {
+        list-style-type: none;
+        padding: 0;
+        text-align: center;
+    }
+
+    li {
+        margin-bottom: 5px;
+    }
+
+    .disabilityHeader {
+        text-align: center;
+        margin-top: 20px;
+    }
+
+    .disabilityButton {
+        background-color: #005568;
+        color: #fff;
+        border: 0;
+        padding: 15px 30px;
+        font-size: 22px;
+        width: 67%;
+        cursor: pointer;
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+        border-radius: 8px;
+        height: 65px;
+    }
+
+    .disabilityButton.static {
+        cursor: default;
+    }
+
+    .orText {
+        font-size: 18px;
+        font-weight: bold;
+        margin: 20px 0;
+    }
+
+    .connectedButtons {
+        width: 67%;
+        margin: 0 auto;
+        padding: 0;
+        padding-bottom: 20px;
+    }
+
+    .disabilitySubButton {
+        background-color: #bebfc7;
+        color: #000;
+        border: 0;
+        padding: 15px 30px;
+        font-size: 17px;
+        width: 100%;
+        cursor: pointer;
+        display: block;
+        font-weight: bold;
+        text-align: left;
+        border-radius: 0;
+        height: 75px;
+        margin: 0;
+        outline: 0;
+    }
+
+    .disabilitySubButton:hover {
+        background-color: #8a8b93;
+        color: #fff;
+    }
+
+    .divider {
+        height: 1.2px;
+        background-color: #000;
+        margin: 0;
+    }
+
+    .socialserviceslist {
+        padding: -10px;
+        width: 70%;
+        margin: 0 auto;
     }
 
     .de-emphasised {
@@ -31,6 +121,7 @@
         border: #{colours.get-static('colour-border-standard-callout')} 1px solid;
         border: var(--colour-border-standard-callout) 1px solid;
         border-radius: 5px;
+        text-align: center;
 
         .allServicesLink {
             margin-top: 1em;
