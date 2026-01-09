@@ -31,13 +31,17 @@ For example if you want to run all the linters and automaticity fix any issue wh
 Testing can be run with `docker compose run --rm app test-dev` which will sequentially run all testing programs.
 
 - **Mocha**\
-  Currently used for e2e and unit tests. It's split up into 4 testing suites, which can be individually run with `docker-compose run --rm -p 3000:3000 -p 5000:5000 -p 5001:5001 app test-dev-mocha-<test suite name>`
+  Currently used for e2e and unit tests. It's split up into 4 testing suites, which can be individually run with `docker compose run --rm -p 3000:3000 -p 5000:5000 -p 5001:5001 app test-dev-mocha-<test suite name>`
     - **personalisation**\
       For e2e tests related to the personalisation flow in Ask Izzy.
-    - **map**\
+    - **category-queries**\
+      Tests to determine if a category results in a correct search API query.
+    - **maps**\
       e2e tests for the map view are here.
-    - **features**\
+    - **features-1**\
       Other features are e2e tested here.
+    - **features-2**\
+      Even more features, split into two suites.
     - **unit**\
       All unit tests are here.
 
