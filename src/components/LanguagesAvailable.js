@@ -5,7 +5,7 @@ import Collapser from "./general/Collapser";
 import Spacer from "./Spacer";
 import { shortenText } from "@/helpers/string.helpers";
 import Service from "../iss/Service";
-import {RecordVoiceOver} from "@mui/icons-material";
+import RecordVoiceOver from "@mui/icons-material/RecordVoiceOver";
 
 type Props = {
     service: Service,

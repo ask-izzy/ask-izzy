@@ -5,7 +5,7 @@ import React from "react";
 
 
 import Service from "../iss/Service";
-import {FmdGoodRounded} from "@mui/icons-material";
+import FmdGoodRounded from "@mui/icons-material/FmdGoodRounded";
 
 
 import AddToCompareButton from "./AddToCompareButton"

@@ -6,7 +6,7 @@ import classNames from "classnames";
 import ScreenReader from "./ScreenReader";
 import AddressLocation from "../iss/AddressLocation";
 import Spacer from "./Spacer";
-import {FmdGoodRounded} from "@mui/icons-material";
+import FmdGoodRounded from "@mui/icons-material/FmdGoodRounded";
 import FormatText from "./FormatText"
 
 type Props = {
