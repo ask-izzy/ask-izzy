@@ -115,6 +115,7 @@
     "has-geolocation": "1.0.1",
     "html-react-parser": "^2.0.0",
     "http-proxy-middleware": "^2.0.6",
+    "https-proxy-agent": "^7.0.6",
     "js-yaml": "3.14.1",
     "jsonlint": "1.6.3",
     "just-debounce-it": "^2.0.0",
