@@ -1,10 +1,23 @@
 /* @flow */
-import { ApolloClient, InMemoryCache } from "@apollo/client";
+import { ApolloClient, InMemoryCache, HttpLink } from "@apollo/client";
+import { HttpsProxyAgent } from "https-proxy-agent";
+
+const fetch = global.fetch;
+
+function proxyFetch(url, options = {}) {
+    if (typeof window === "undefined" && process.env.HTTP_PROXY) {
+        options.agent = new HttpsProxyAgent(process.env.HTTP_PROXY);
+    }
+    return fetch(url, options);
+}
 
 // $FlowIgnore Let's not bother trying to type this with flow. I'll be easy to
 // do when we move to typescript.
 const client: any = new ApolloClient({
-    uri: new URL("/graphql", process.env.NEXT_PUBLIC_STRAPI_URL),
+    link: new HttpLink({
+        uri: `${process.env.NEXT_PUBLIC_STRAPI_URL}/graphql`,
+        fetch: proxyFetch,
+    }),
     cache: new InMemoryCache(),
 });
 
