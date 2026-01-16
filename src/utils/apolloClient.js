@@ -2,13 +2,12 @@
 import { ApolloClient, InMemoryCache, HttpLink } from "@apollo/client";
 import { HttpsProxyAgent } from "https-proxy-agent";
 import axios from "axios";
-import fetch from "cross-fetch";
 
 const proxy = process.env.HTTP_PROXY;
 
 async function axiosFetch(url, options = {}) {
-    const agent = (typeof window === "undefined" && proxy)
-        ? new HttpsProxyAgent(proxy)
+    const agent = (typeof window === "undefined" && proxy) ?
+        new HttpsProxyAgent(proxy)
         : undefined;
 
     const axiosOptions = {
@@ -31,16 +30,6 @@ async function axiosFetch(url, options = {}) {
             get: (key) => response.headers[key.toLowerCase()],
         },
     };
-}
-
-
-function proxyFetch(url, options = {}) {
-    console.log(`Fetching URL: ${url}`);
-
-    if (typeof window === "undefined" && proxy) {
-        options.agent = new HttpsProxyAgent(proxy);
-    }
-    return fetch(url, options);
 }
 
 // $FlowIgnore Let's not bother trying to type this with flow. I'll be easy to
