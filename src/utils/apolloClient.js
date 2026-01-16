@@ -1,12 +1,44 @@
 /* @flow */
 import { ApolloClient, InMemoryCache, HttpLink } from "@apollo/client";
 import { HttpsProxyAgent } from "https-proxy-agent";
+import axios from "axios";
+import fetch from "cross-fetch";
 
-const fetch = global.fetch;
+const proxy = process.env.HTTP_PROXY;
+
+async function axiosFetch(url, options = {}) {
+    const agent = (typeof window === "undefined" && proxy)
+        ? new HttpsProxyAgent(proxy)
+        : undefined;
+
+    const axiosOptions = {
+        url,
+        method: options.method || "POST",
+        headers: options.headers,
+        data: options.body,
+        httpAgent: agent,
+        httpsAgent: agent,
+        // Axios expects data for POST requests
+    };
+
+    const response = await axios(axiosOptions);
+    return {
+        ok: true,
+        status: response.status,
+        json: async() => response.data,
+        text: async() => JSON.stringify(response.data),
+        headers: {
+            get: (key) => response.headers[key.toLowerCase()],
+        },
+    };
+}
+
 
 function proxyFetch(url, options = {}) {
-    if (typeof window === "undefined" && process.env.HTTP_PROXY) {
-        options.agent = new HttpsProxyAgent(process.env.HTTP_PROXY);
+    console.log(`Fetching URL: ${url}`);
+
+    if (typeof window === "undefined" && proxy) {
+        options.agent = new HttpsProxyAgent(proxy);
     }
     return fetch(url, options);
 }
@@ -16,7 +48,7 @@ function proxyFetch(url, options = {}) {
 const client: any = new ApolloClient({
     link: new HttpLink({
         uri: `${process.env.NEXT_PUBLIC_STRAPI_URL}/graphql`,
-        fetch: proxyFetch,
+        fetch: axiosFetch,
     }),
     cache: new InMemoryCache(),
 });
