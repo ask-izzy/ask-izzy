@@ -17,7 +17,7 @@ async function axiosFetch(url, options = {}) {
         data: options.body,
         httpAgent: agent,
         httpsAgent: agent,
-        // Axios expects data for POST requests
+        proxy: false, // See https://github.com/axios/axios/issues/2072#issuecomment-567473812
     };
 
     const response = await axios(axiosOptions);
