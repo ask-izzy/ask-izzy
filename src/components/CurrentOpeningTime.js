@@ -6,7 +6,7 @@ import React from "react"
 import ServiceOpening from "../iss/ServiceOpening"
 import ScreenReader from "./ScreenReader"
 
-import {AccessTimeFilled} from "@mui/icons-material";
+import AccessTimeFilled from "@mui/icons-material/AccessTimeFilled";
 
 type Props = {
     serviceOpening: ServiceOpening,

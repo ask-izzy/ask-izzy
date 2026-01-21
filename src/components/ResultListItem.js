@@ -8,7 +8,7 @@ import Service from "../iss/Service";
 import DebugContainer from "./DebugContainer";
 import DebugQueryScore from "./DebugQueryScore";
 import DebugServiceRecord from "./DebugServiceRecord";
-import {FmdGoodRounded} from "@mui/icons-material";
+import FmdGoodRounded from "@mui/icons-material/FmdGoodRounded";
 
 import Eligibility from "./Eligibility";
 import AddToCompareButton from "./AddToCompareButton"

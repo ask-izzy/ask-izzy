@@ -5,7 +5,7 @@ import React from "react";
 import Link from "./base/Link";
 import type {AnalyticsEvent} from "../google-tag-manager";
 import ScreenReader from "./ScreenReader";
-import {MarkunreadRounded} from "@mui/icons-material";
+import MarkunreadRounded from "@mui/icons-material/MarkunreadRounded";
 
 type Props = {
     email: string,

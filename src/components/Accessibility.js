@@ -6,7 +6,7 @@ import React from "react";
 import Service from "../iss/Service";
 import Spacer from "./Spacer";
 import ScreenReader from "./ScreenReader";
-import {AccessibleForwardRounded} from "@mui/icons-material";
+import AccessibleForwardRounded from "@mui/icons-material/AccessibleForwardRounded";
 
 type Props = {
     service: Service,

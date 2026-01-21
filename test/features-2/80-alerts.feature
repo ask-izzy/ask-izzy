@@ -51,7 +51,7 @@ Feature: Alerts
         Title               | Body
         ===========================================
         A vic and qld*      |
-        COVID19 affecting*  |
+        COVID19 affecting*  | *
         The fox*            |
         Title is*           | Body is*
         -------------------------------------------

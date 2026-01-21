@@ -11,7 +11,7 @@ import type { phone } from "../iss/general";
 import ScreenReader from "./ScreenReader";
 import FormatText from "./FormatText"
 import {PhoneHref} from "@/helpers/regex.helpers"
-import { CallRounded} from "@mui/icons-material";
+import CallRounded from "@mui/icons-material/CallRounded";
 
 type Props = phone & {
     crisis?: boolean,

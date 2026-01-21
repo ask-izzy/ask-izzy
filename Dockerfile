@@ -9,7 +9,7 @@ ARG HOME="/tmp/home"
 # development and serving states.                                             #
 ###############################################################################
 
-FROM node:16 as base
+FROM node:20 as base
 
 ARG UID
 ARG GID
