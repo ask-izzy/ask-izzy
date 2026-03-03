@@ -158,7 +158,7 @@
     "stylelint-config-standard": "^22.0.0",
     "stylelint-scss": "^3.19.0",
     "svg-inline-loader": "0.8.0",
-    "underscore": "^1.13.1",
+    "underscore": "^1.13.8",
     "underscore.string": "3.3.5",
     "whatwg-fetch": "2.0.4",
     "yadda": "1.5.0",
