@@ -11,6 +11,11 @@ const allowedDomains = new Set(process.env.DOMAINS_TO_PROXY)
 const proxyMiddleware = createProxyMiddleware({
     router: req => getTargetBaseUrl(req).origin,
     changeOrigin: true,
+    on: {
+        error: (err, req) => {
+            console.error(`Proxy error for target "${getTargetBaseUrl(req).origin}":`, err.message)
+        },
+    },
 });
 
 export default function handler(req: any, res: any): void {
