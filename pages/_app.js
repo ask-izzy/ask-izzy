@@ -9,7 +9,7 @@ import type { NextRouter } from "next/router"
 import "core-js/actual/string/replace-all";
 import * as Sentry from "@sentry/nextjs";
 
-import "@/src/utils/global-setup"
+import initialiseRequestInterceptor from "@/lib/request-interceptor.js"
 import "../src/styles/bundle.scss"
 import {DebugModeProvider} from "@/contexts/debug-mode-context";
 import {MyListProvider} from "@/contexts/my-list-context";
@@ -26,6 +26,10 @@ import "@/src/analytics"
 import * as gtm from "@/src/google-tag-manager";
 import storage from "@/src/storage";
 import useTrackInitialRenderStatus from "@/hooks/useTrackInitialRenderStatus";
+
+if (typeof window !== "undefined") {
+    initialiseRequestInterceptor()
+}
 
 function App(appProps: AppProps): ReactNode {
     const { Component, pageProps, err } = appProps

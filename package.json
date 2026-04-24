@@ -60,6 +60,7 @@
     "@emotion/styled": "^11.9.3",
     "@googlemaps/js-api-loader": "1.12.6",
     "@hookform/resolvers": "^2.9.5",
+    "@infoxchange/make-it-so": "^3.1.1",
     "@jsonforms/core": "^2.5.2",
     "@jsonforms/react": "^2.5.2",
     "@jsonforms/vanilla-renderers": "^2.5.2",

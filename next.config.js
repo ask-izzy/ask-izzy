@@ -1,4 +1,6 @@
 /* $FlowIgnore */
+const { setupProxyGlobally } = require("@infoxchange/make-it-so/proxy");
+setupProxyGlobally()
 const path = require("path")
 const globImporter = require("node-sass-glob-importer");
 const fs = require("fs");
