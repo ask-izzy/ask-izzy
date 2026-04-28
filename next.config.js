@@ -1,8 +1,14 @@
 /* $FlowIgnore */
+const { setupProxyGlobally } = require("@infoxchange/make-it-so/proxy");
+setupProxyGlobally()
 const path = require("path")
 const globImporter = require("node-sass-glob-importer");
 const fs = require("fs");
 const { withSentryConfig } = require("@sentry/nextjs");
+const util = require("node:util")
+
+// By default util.inspect only goes 2 levels deep which sometimes truncates important error info
+util.inspect.defaultOptions.depth = 4
 
 require("./lib/env-var-check.js")
 
