@@ -20,7 +20,7 @@ export default async function handler(req: any, res: any): any {
         return regeneratePages([req.body.entry.Path], res)
 
     } else if (modifiedCollectionType === "callout") {
-        const calloutId = req.body.entry.id
+        const calloutId = req.body.entry.documentId
         let contentPages
         try {
             const { data } = await queryGraphQlWithErrorLogging({
@@ -33,7 +33,7 @@ export default async function handler(req: any, res: any): any {
         }
         const pathsToRegenerate = contentPages.filter(
             page => page.CalloutBoxes.some(
-                calloutBox => calloutBox.callout.id === calloutId
+                calloutBox => calloutBox.callout.documentId === calloutId
             )
         ).map(page => page.Path)
 

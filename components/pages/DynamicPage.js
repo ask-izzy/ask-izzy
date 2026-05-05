@@ -14,19 +14,17 @@ import type {
 import BlockQuote from "@/src/components/base/BlockQuote";
 
 type PageDetails = {
-    id: number,
-    created_at: string,
-    updated_at: string,
+    documentId: string,
+    createdAt: string,
+    updatedAt: string,
     Title: string,
     Body: string,
     Path: string,
     BannerTextPrimary: string,
     BannerTextSecondary: string,
-    Banner: {
-        id: number,
+    banner: {
+        documentId: string,
         Key: string,
-        created_at: string,
-        updated_at: string,
     },
     Accordion: Array<{
         id: number,
@@ -70,9 +68,7 @@ function DynamicPage({pageDetails, embeddedCallouts}: Props): ReactNode {
                             callout,
                             Bottom: false,
                             Top: false,
-                            created_at: "null",
-                            id: 0,
-                            updated_at: "null",
+                            documentId: "embedded",
                         }))}
                         embedded={true}
                     />
@@ -84,7 +80,7 @@ function DynamicPage({pageDetails, embeddedCallouts}: Props): ReactNode {
     return (
         <StaticPage
             title={pageDetails.Title}
-            bannerName={pageDetails.Banner ? pageDetails.Banner.Key
+            bannerName={pageDetails.banner ? pageDetails.banner.Key
                 : "hand-and-person-with-heart"}
             bannerPrimary={pageDetails.BannerTextPrimary}
             bannerSecondary={pageDetails.BannerTextSecondary}

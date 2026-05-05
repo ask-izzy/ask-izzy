@@ -6,10 +6,10 @@ const pageQuery = gql`
     query Page {
         pages {
             Path
-            updated_at
+            updatedAt
             CalloutBoxes {
                 callout {
-                    id
+                    documentId
                 }
             }
         }

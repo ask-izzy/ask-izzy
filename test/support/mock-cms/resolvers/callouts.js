@@ -9,7 +9,7 @@ type Callout = {
 export default (
     parent: Object, args: Object, context: Object, info: Object
 ): Array<Callout> => {
-    let keys = args?.where?.Key || info?.variableValues?.keys
+    let keys = args?.filters?.Key?.in || info?.variableValues?.keys
     if (typeof keys === "string") {
         keys = [keys]
     }

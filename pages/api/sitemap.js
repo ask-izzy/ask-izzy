@@ -46,7 +46,7 @@ export default async function handler(req: any, res: any) {
     ${contentPages.map(page => `
     <url>
         <loc>${getFullUrl(page.Path)}</loc>
-        <lastmod>${page.updated_at}</lastmod>
+        <lastmod>${page.updatedAt}</lastmod>
     </url>
     `).join("")}
     ${staticPages.map(page => `

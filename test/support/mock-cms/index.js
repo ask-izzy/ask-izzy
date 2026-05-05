@@ -18,18 +18,8 @@ export function initMockCMSServer(): void {
         port,
     };
 
-    // Required so exported strapi graphql schema will validate
-    const resolvers = {
-        Morph: {
-            __resolveType(obj, context, info) {
-                return null;
-            },
-        },
-    };
-
     const server = new ApolloServer({
         typeDefs,
-        resolvers,
         mocks,
         introspection: true,
         playground: true,

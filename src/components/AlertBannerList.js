@@ -53,15 +53,15 @@ function AlertBannerList({
     }
     const alerts = data.alerts.map(alert => ({
         ...alert,
-        "created_at": new Date(alert.created_at),
-        "updated_at": new Date(alert.updated_at),
+        "createdAt": new Date(alert.createdAt),
+        "updatedAt": new Date(alert.updatedAt),
     })).sort((a, b) =>
     // more urgent first
         alertLevelMap[b.alertLevel] - alertLevelMap[a.alertLevel] ||
             // state based alerts over national
             (b.states.length && 1) - (a.states.length && 1) ||
             // newer first
-            b.updated_at - a.updated_at
+            b.updatedAt - a.updatedAt
     )
 
     function checkCollapsedStatus(alerts) {
@@ -73,7 +73,7 @@ function AlertBannerList({
         }
 
         const hasNewAlerts = alerts.some(
-            alert => alert.updated_at !== previousAlertsUpdatedAtMap[alert.id]
+            alert => alert.updatedAt !== previousAlertsUpdatedAtMap[alert.documentId]
         )
 
         const allAlertsDefaultToOpen = alerts.every(alert => alert.defaultToOpen)
@@ -84,7 +84,7 @@ function AlertBannerList({
         }
 
         const alertsUpdatedAtMap = Object.fromEntries(
-            alerts.map(alert => [alert.id, alert.updated_at])
+            alerts.map(alert => [alert.documentId, alert.updatedAt])
         )
         storage.setJSON(previousAlertsStorageKey, alertsUpdatedAtMap)
     }
@@ -130,15 +130,15 @@ function AlertBannerList({
         ) : null
     )
 
-    function renderAlert({id, title, body, alertLevel, defaultToOpen}) {
-        return <li key={id}>
+    function renderAlert({documentId, title, body, alertLevel, defaultToOpen}) {
+        return <li key={documentId}>
             <AlertBanner
-                title={renderContent(title, id)}
-                body={renderContent(body, id)}
+                title={renderContent(title, documentId)}
+                body={renderContent(body, documentId)}
                 alertLevel={alertLevel}
                 defaultToOpen={defaultToOpen}
                 analyticsEvent={{
-                    eventLabel: id,
+                    eventLabel: documentId,
                 }}
             />
         </li>

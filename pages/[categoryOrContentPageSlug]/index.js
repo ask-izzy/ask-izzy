@@ -145,7 +145,9 @@ export const getStaticProps: GetStaticProps<Props> = async({params}) => {
         }
         console.info("Request params:", params)
         console.error(
-            "Error when getting props for category/content page: " + error.message
+            "Error when getting props for category/content page:",
+            error?.message || error,
+            error?.networkError?.response?.data
         )
         return {
             notFound: true,
