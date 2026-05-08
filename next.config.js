@@ -128,7 +128,7 @@ module.exports = {
     },
     env: {
         ENVIRONMENT: process.env.ENVIRONMENT,
-        DOMAINS_TO_PROXY: getDomainsToProxy(),
+        DOMAINS_TO_PROXY: process.env.DOMAINS_TO_PROXY || "",
         SITE_BASE_URL: `${process.env.SITE_PROTOCOL}://${process.env.SITE_DOMAIN.split("|")[0]}`,
     },
     transpilePackages: [
@@ -213,12 +213,7 @@ if (!process.env.NEXT_PUBLIC_IS_TEST_ENV) {
         },
         {
             silent: true,
+            dryRun: !process.env.CI,
         }
     )
-}
-
-function getDomainsToProxy() {
-    return (process.env.DOMAINS_TO_PROXY || "")
-        .split(",")
-        .map(domain => domain.trim())
 }

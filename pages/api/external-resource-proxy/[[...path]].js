@@ -6,7 +6,9 @@ import { createProxyMiddleware } from "http-proxy-middleware";
 
 import { unflattenDomain } from "@/helpers/url.helpers"
 
-const allowedDomains = new Set(process.env.DOMAINS_TO_PROXY)
+const allowedDomains = new Set(
+    (process.env.DOMAINS_TO_PROXY || "").split(",").map(domain => domain.trim()).filter(Boolean)
+)
 
 const proxyMiddleware = createProxyMiddleware({
     router: req => getTargetBaseUrl(req).origin,
