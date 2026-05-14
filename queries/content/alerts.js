@@ -8,19 +8,19 @@ query Alerts(
   $screenLocation: [String],
 ) {
   alerts(
-    where: {
-      _or: [
-        { states_null: true },
-        { states: { Name_in: [$state] } },
+    filters: {
+      or: [
+        { states: { documentId: { null: true } } },
+        { states: { Name: { in: $state } } },
       ]
-      screenLocation: $screenLocation,
+      screenLocation: { in: $screenLocation },
     },
   ) {
-    id
+    documentId
     title
     body
-    created_at
-    updated_at
+    createdAt
+    updatedAt
     alertLevel
     defaultToOpen
     states {

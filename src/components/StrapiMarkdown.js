@@ -21,9 +21,11 @@ function StrapiMarkdown({
     renderers: additionalRenderers,
 }: Props): ReactNode {
     function absoluteImageUrl(uri: string): string {
-        // Strapi returns a relative image url, we need to change
-        // it to point to our content server.
-        return process.env.NEXT_PUBLIC_STRAPI_URL + uri;
+        // Strapi may return a relative image url, if so we need to make sure it points to the CMS
+        if (!uri.startsWith("http")) {
+            return String(new URL(uri, process.env.NEXT_PUBLIC_STRAPI_URL));
+        }
+        return uri;
     }
 
     const renderers: Renderers = {

@@ -3,8 +3,8 @@ import gql from "graphql-tag";
 
 const CalloutQuery = gql`
 query Callout($keys: [String]!) {
-    callouts(where: {Key: $keys}) {
-        id,
+    callouts(filters: {Key: {in: $keys}}) {
+        documentId,
         Key,
         ShowHeading,
         Link,

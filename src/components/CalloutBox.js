@@ -8,7 +8,7 @@ import Link from "./base/Link";
 import * as gtm from "../google-tag-manager";
 
 export type CalloutType = {
-    id: number,
+    documentId: string,
     Key: string,
     Heading: string,
     ShowHeading: boolean,
@@ -17,17 +17,13 @@ export type CalloutType = {
     Phone: string,
     Link: string | null,
     className: number,
-    created_at: string,
-    updated_at: string,
 }
 
 export type CalloutBoxType = {
-    id: number,
+    documentId: string,
     callout: CalloutType,
     Top: boolean,
     Bottom: boolean,
-    created_at: string,
-    updated_at: string,
 }
 
 type Props = {
@@ -140,21 +136,21 @@ function CalloutBox(
             return (
                 <Box
                     callout={calloutObj}
-                    key={`${callout.callout.id}_${index}`}
+                    key={`${callout.callout.documentId}_${index}`}
                 />
             )
         } else if (position && position === "top" && callout.Top) {
             return (
                 <Box
                     callout={calloutObj}
-                    key={`${callout?.callout.id}_${index}`}
+                    key={`${callout?.callout.documentId}_${index}`}
                 />
             )
         } else if (position && position === "bottom" && callout.Bottom) {
             return (
                 <Box
                     callout={calloutObj}
-                    key={`${callout?.callout.id}_${index}`}
+                    key={`${callout?.callout.documentId}_${index}`}
                 />
             )
         }

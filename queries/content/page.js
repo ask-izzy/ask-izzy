@@ -4,11 +4,11 @@ import gql from "graphql-tag";
 
 const pageQuery = gql`
 query Page($path: String!) {
-  pages(where: {Path: $path}) {
+  pages(filters: {Path: {eq: $path}}) {
     Body,
     Path,
     Title,
-    Banner {
+    banner {
       Key
     }
     BannerTextPrimary,
@@ -23,7 +23,7 @@ query Page($path: String!) {
         Top,
         Bottom,
         callout {
-          id,
+          documentId,
           ShowHeading,
           Link,
           className {

@@ -4,7 +4,7 @@ type Page = {
     Title?: string,
     Path: string,
     Body?: string,
-    Banner?: {
+    banner?: {
         Key: string,
     },
     BannerTextPrimary?: string,
@@ -19,7 +19,7 @@ type Page = {
 export default (
     parent: Object, args: Object, context: Object, info: Object
 ): Array<Page> => {
-    const pathToFilterBy = args?.where?.Path || info?.variableValues?.path
+    const pathToFilterBy = args?.filters?.Path?.eq || info?.variableValues?.path
     return pages
         .filter(page => !pathToFilterBy || (page.Path === pathToFilterBy))
 }
@@ -28,7 +28,7 @@ export const aboutPage = {
     Title: "About Ask Izzy",
     Path: "/about",
     Body: "We’re always making improvements.",
-    Banner: {
+    banner: {
         Key: "food",
     },
     BannerTextPrimary: "About Ask Izzy",
