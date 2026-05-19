@@ -56,7 +56,7 @@ function LgbtiqaDomesticViolenceScreen(): ReactNode {
     const link1800Respect = "/service/634190-1800respect";
     const phone1800Respect = "1800 737 732";
     const chat1800Respect = "https://1800respect.org.au/help-and-support";
-    const linkAcon = "http://www.anothercloset.com.au/";
+    const linkAcon = "http://ssdv.acon.org.au/";
 
     return (
         <div className="AreYouSafe">
