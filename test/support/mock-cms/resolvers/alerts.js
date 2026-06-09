@@ -47,13 +47,13 @@ export const resultsPageVicAndQldWarnAlert = {
     defaultToOpen: false,
     __typename: "Alert",
 }
-export const covidServicesAffectedAlert = {
+export const warningWithBodyAlert = {
     documentId: "2",
-    title: "COVID19 affecting services",
+    title: "Alert affecting services",
     body: (
         "Services listed here may not be operating or limited. Contact " +
-        "services directly for up-to-date information.\n\n[Get COVID19 " +
-        "help and information near you.](/covid-19-support)"
+        "services directly for up-to-date information.\n\n[Get help " +
+        "and information near you.](/bushfire-support)"
     : string),
     createdAt: "2021-05-25T12:19:33.039Z",
     updatedAt: "2021-05-25T12:19:33.039Z",
@@ -63,9 +63,9 @@ export const covidServicesAffectedAlert = {
     defaultToOpen: false,
     __typename: "Alert",
 }
-export const covidInfoAlert = {
+export const homeInfoAlert = {
     documentId: "3",
-    title: "COVID19",
+    title: "Home alert",
     body: "Hello World",
     createdAt: "2021-05-25T12:19:33.039Z",
     updatedAt: "2021-05-25T12:19:33.039Z",
@@ -156,16 +156,16 @@ export const bodyOpenByDefaultResultsPageAlert = {
 
 export const resultsPageAlerts = [
     resultsPageVicAndQldWarnAlert,
-    covidServicesAffectedAlert,
+    warningWithBodyAlert,
     resultsPageNationalInfoAlert,
     bodyOpenByDefaultResultsPageAlert,
 ]
 
 export const allAlerts = [
     resultsPageVicAndQldWarnAlert,
-    covidServicesAffectedAlert,
+    warningWithBodyAlert,
     resultsPageNationalInfoAlert,
-    covidInfoAlert,
+    homeInfoAlert,
     nationalServiceAlert,
     vicServiceAlert,
     waServiceAlert,

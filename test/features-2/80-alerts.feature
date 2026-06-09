@@ -3,12 +3,12 @@ Feature: Alerts
     Scenario: National alerts are visible on the home page
         Given a fresh session
         When I visit /
-        And I click the "COVID19" collapsible section
+        And I click the "Home alert" collapsible section
         Then I should see the alerts
         -------------------------------------------
         Title               | Body
         ===========================================
-        COVID19             | Hello World
+        Home alert             | Hello World
         -------------------------------------------
 
     Scenario: Alerts with a body can be expanded
@@ -16,10 +16,10 @@ Feature: Alerts
         And I need help for myself
         And I am not interested in a subcategory for everyday-needs
         When I visit /everyday-needs
-        Then I should see "COVID19 affecting services"
+        Then I should see "Alert affecting services"
         And I should not see "Services listed here may not be operating or limited. Contact services directly for up-to-date information."
 
-        When I click the "COVID19 affecting services" collapsible section
+        When I click the "Alert affecting services" collapsible section
         Then I should see "Services listed here may not be operating or limited. Contact services directly for up-to-date information."
 
     Scenario: Alerts defaultToOpen are initially open
@@ -51,7 +51,7 @@ Feature: Alerts
         Title               | Body
         ===========================================
         A vic and qld*      |
-        COVID19 affecting*  | *
+        Alert affecting*  | *
         The fox*            |
         Title is*           | Body is*
         -------------------------------------------
