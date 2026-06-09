@@ -3,7 +3,7 @@ name: "Build, Test & Push"
 on:
   push:
     branches:
-      - "*" # Required to avoid needlessly running the CI on tag push
+      - "**/**" # Required to avoid needlessly running the CI on tag push
 
 jobs:
   build-development:
