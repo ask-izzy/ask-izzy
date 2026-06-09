@@ -47,11 +47,6 @@ function BrandedFooter(): ReactElement<"footer"> {
                                 Online Safety
                             </Link>
                         </li>
-                        <li>
-                            <Link to="/covid-19-support">
-                                COVID-19
-                            </Link>
-                        </li>
                     </ul>
                 </div>
                 <div
