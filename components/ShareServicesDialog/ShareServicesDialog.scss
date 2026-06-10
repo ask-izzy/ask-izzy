@@ -1,32 +1,7 @@
 @use '../../src/styles/mixins/colours';
 
 .ShareServicesDialog {
-    border-radius: 8px 8px 10px 10px;
-    margin: 0 15px;
-    background-color: #{colours.get-static('colour-bg-standard')};
-    background-color: var(--colour-bg-standard);
     max-width: 700px;
-
-    header {
-        display: flex;
-        align-items: center;
-        margin: 1em;
-
-        h1 {
-            color: #{colours.get-static('colour-text-highlight')};
-            color: var(--colour-text-highlight);
-            flex: 1 1 auto;
-            margin: 0.3em 0;
-        }
-
-        .close {
-            border: 0;
-            background-color: unset;
-            font-size: 2em;
-            color: #{colours.get-static('colour-text-mid')};
-            color: var(--colour-text-mid);
-        }
-    }
 
     .highlighted-box {
         background-color: #{colours.get-static('colour-bg-highlight')};
@@ -41,7 +16,7 @@
             display: flex;
             flex-direction: column;
             overflow: auto;
-            padding: 0.3em 1.3em 1.3em;
+            padding: 0.3em 1.5em 1.3em;
             text-align: center;
 
             .send-via-askizzy-container {

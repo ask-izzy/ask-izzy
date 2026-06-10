@@ -18,9 +18,9 @@ export const Example = (args: Object): ReactNode => {
             open={open}
             onClose={() => setOpen(false)}
         >
-            {({titleProps}) => (
+            {({customTitleProps}) => (
                 <div
-                    {...titleProps}
+                    {...customTitleProps}
                     style={{
                         backgroundColor: "grey",
                         padding: "0.5em 2em 2em",

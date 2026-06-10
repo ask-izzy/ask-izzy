@@ -3,6 +3,7 @@ import * as React from "react";
 
 import Dialog from "@/components/base/Dialog"
 import Button from "@/src/components/base/Button"
+import cnx from "classnames"
 
 type Props = {
     onCloseRequested: () => void,
@@ -17,12 +18,13 @@ export default function ShareServicesPage({
         <Dialog
             open={true}
             onClose={onCloseRequested}
+            showCloseButton={false}
         >
             {
-                ({titleProps}) =>
-                    <div className="ClearMyListDialog">
+                ({customTitleProps, bodyClassName}) =>
+                    <div className={cnx("ClearMyListDialog", bodyClassName)}>
                         <header>
-                            <div {...titleProps}>
+                            <div {...customTitleProps}>
                                 Clear all services from My List?
                             </div>
                         </header>

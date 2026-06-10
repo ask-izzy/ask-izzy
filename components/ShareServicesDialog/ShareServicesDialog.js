@@ -6,7 +6,6 @@ import type {Node as ReactNode} from "react";
 import ShareDirectlyOptions from "./ShareDirectlyOptions"
 import SendForm from "./SendForm"
 import Dialog from "@/components/base/Dialog"
-import Button from "@/src/components/base/Button"
 import StandardButton from "@/components/general/StandardButton"
 import Service from "@/src/iss/Service"
 import storage from "@/src/storage";
@@ -35,19 +34,10 @@ function ShareServicesDialog({
         <Dialog
             open={true}
             onClose={onCloseRequested}
+            title={title}
         >
-            {({titleProps}) => (
+            {() => (
                 <div className="ShareServicesDialog">
-                    <header>
-                        <h1 {...titleProps}>{title}{isSingleService}</h1>
-                        <Button
-                            onClick={onCloseRequested}
-                            className="close"
-                            aria-label="Close dialog"
-                        >
-                            <span>&times;</span>
-                        </Button>
-                    </header>
                     {renderScreen(screenName, {setScreenName, services, onCloseRequested})}
                 </div>
             )}

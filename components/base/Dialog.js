@@ -10,15 +10,20 @@ import useUniqueId from "@/hooks/useUniqueId"
 
 type Props = {
     children: ({
-        titleProps: {[string]: any}
+        customTitleProps: {[string]: any},
+        closeDialog: () => void,
+        bodyClassName: string,
     }) => ReactNode,
     className?: string,
     open: boolean,
-    onClose: () => void
+    onClose: () => void,
+    type?: "standard" | "unstyled",
+    title?: string,
+    showCloseButton?: boolean
 }
 
 export default function Dialog(
-    {className, open, children, onClose, ...rest}: Props
+    {className, open, children, onClose, type = "standard", title, showCloseButton = true, ...rest}: Props
 ): ReactNode {
     const isMounted = useIsMounted({rerenderAfterMount: true})
     const [instance, attr] = useA11yDialog({
@@ -54,7 +59,7 @@ export default function Dialog(
     return ReactDOM.createPortal(
         <div
             {...attr.container}
-            className={cnx("Dialog", className)}
+            className={cnx("Dialog", `type-${type}`, className)}
         >
             <div
                 {...attr.overlay}
@@ -65,7 +70,25 @@ export default function Dialog(
                 {...attr.dialog}
                 className="content"
             >
-                {children && children({titleProps: attr.title})}
+                {(title || showCloseButton) && (
+                    <header>
+                        {title && <h1 {...attr.title}>{title}</h1>}
+                        {showCloseButton && (
+                            <button
+                                onClick={onClose}
+                                className="close"
+                                aria-label="Close dialog"
+                            >
+                                <span>&times;</span>
+                            </button>
+                        )}
+                    </header>
+                )}
+                {children && children({
+                    customTitleProps: attr.title,
+                    closeDialog: onClose,
+                    bodyClassName: "body",
+                })}
             </div>
         </div>,
         document.body
