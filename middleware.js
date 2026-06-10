@@ -37,8 +37,7 @@ we're stuck with using a middleware.
 
 import { NextResponse } from "next/server"
 
-export const REQUEST_THROTTLED_HEADER = "x-request-throttled"
-export const REQUEST_ORG_THROTTLED_HEADER = "x-request-org-throttled"
+export const REQUEST_ORG_THROTTLED_COOKIE = "request-throttled-org"
 
 function getRequestIp(req: any): string | null {
     const forwardedFor = req.headers.get("x-forwarded-for")
@@ -68,26 +67,21 @@ export function middleware(req: any, event: any): any {
 }
 
 function applyRateLimiting(req: any, event: any): any {
-    const headers = new Headers(req.headers)
     const requestIp = getRequestIp(req)
-    if (!requestIp) {
-        // Allow traffic if we can't determine the IP address, rather than risk blocking legitimate users.
-        return
-    }
-    const orgId = getRequestOrgFromIp(requestIp)
+    const orgId = requestIp ? getRequestOrgFromIp(requestIp) : null
 
-    if (!orgId) {
-        return
+    if (orgId) {
+        const response = NextResponse.next()
+        response.cookies.set(REQUEST_ORG_THROTTLED_COOKIE, orgId, { path: "/" })
+        return response
     }
 
-    headers.set(REQUEST_THROTTLED_HEADER, "1")
-    headers.set(REQUEST_ORG_THROTTLED_HEADER, orgId)
-
-    return NextResponse.next({
-        request: {
-            headers,
-        },
-    })
+    // Clear the cookie if the IP is no longer in a throttled range
+    if (req.cookies.get(REQUEST_ORG_THROTTLED_COOKIE)) {
+        const response = NextResponse.next()
+        response.cookies.delete(REQUEST_ORG_THROTTLED_COOKIE)
+        return response
+    }
 }
 
 function isIpInRange(ipAddr: string, range: string): boolean {

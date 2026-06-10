@@ -1,8 +1,7 @@
 /* @flow */
-import React, {useEffect} from "react";
+import React, {useEffect, useState} from "react";
 import type { Node as ReactNode } from "react"
-import NextApp from "next/app"
-import type { AppContext, AppInitialProps, AppProps } from "next/app"
+import type { AppProps } from "next/app"
 import { ApolloProvider } from "@apollo/client";
 import Head from "next/head"
 import { useRouter } from "next/router"
@@ -28,7 +27,7 @@ import "@/src/analytics"
 import * as gtm from "@/src/google-tag-manager";
 import storage from "@/src/storage";
 import useTrackInitialRenderStatus from "@/hooks/useTrackInitialRenderStatus";
-import { REQUEST_THROTTLED_HEADER, REQUEST_ORG_THROTTLED_HEADER } from "@/middleware";
+import { REQUEST_ORG_THROTTLED_COOKIE } from "@/middleware";
 
 if (typeof window !== "undefined") {
     initialiseRequestInterceptor()
@@ -37,8 +36,7 @@ if (typeof window !== "undefined") {
 function App(appProps: AppProps): ReactNode {
     const { Component, pageProps, err } = appProps
     const router = useRouter()
-    const requestThrottled = pageProps.requestThrottled === true
-    const requestOrgThrottled = pageProps.requestOrgThrottled || null
+    const [requestOrgThrottled, setRequestOrgThrottled] = useState<string | null>(null)
 
     useTrackInitialRenderStatus()
 
@@ -67,6 +65,13 @@ function App(appProps: AppProps): ReactNode {
         });
     }, [])
 
+    useEffect(() => {
+        const cookieRegex = new RegExp(`(?:^|;\\s*)${REQUEST_ORG_THROTTLED_COOKIE}=([^;]*)`)
+        const cookieMatch = document.cookie.match(cookieRegex)
+        const cookieOrgId = cookieMatch ? decodeURIComponent(cookieMatch[1]) : null
+        setRequestOrgThrottled(cookieOrgId)
+    }, [])
+
     const pageInfo = getPageInfo(appProps)
 
     usePageViewAnalytics(pageInfo)
@@ -81,7 +86,7 @@ function App(appProps: AppProps): ReactNode {
                         <MyListProvider>
                             {renderHeadMetadata(pageInfo, router)}
                             <DebugColours />
-                            {requestThrottled && <ThrottleDialog requestOrgId={requestOrgThrottled} />}
+                            {requestOrgThrottled && <ThrottleDialog requestOrgId={requestOrgThrottled} />}
                             <DebugModeOffSwitch />
                             <div className="BasePage">
                                 {/* err prop recommended by https://github.com/vercel/next.js/blob/dba9e2a12adeb2066d0d5bb9a49bdb3e29689b92/examples/with-sentry/pages/_app.js */}
@@ -97,27 +102,6 @@ function App(appProps: AppProps): ReactNode {
             </DebugModeProvider>
         </ApolloProvider>
     )
-}
-
-App.getInitialProps = async(appContext: AppContext): Promise<AppInitialProps> => {
-    const appProps = await NextApp.getInitialProps(appContext)
-    const requestThrottled =
-        appContext.ctx.req?.headers?.[REQUEST_THROTTLED_HEADER] === "1"
-    const requestOrgThrottled =
-        appContext.ctx.req?.headers?.[REQUEST_ORG_THROTTLED_HEADER] || null
-
-    if (requestThrottled && appContext.ctx.res) {
-        appContext.ctx.res.statusCode = 429
-    }
-
-    return {
-        ...appProps,
-        pageProps: {
-            ...appProps.pageProps,
-            requestThrottled,
-            requestOrgThrottled,
-        },
-    }
 }
 
 export default App
