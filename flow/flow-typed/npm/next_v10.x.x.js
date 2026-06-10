@@ -233,6 +233,8 @@ declare module "next/app" {
     ...
   };
 
+  declare export type AppContext = AppInitialProps
+
   declare export type AppProps = {
     Component: any,
     pageProps: {[string]: any},

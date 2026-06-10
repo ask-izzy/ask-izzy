@@ -37,6 +37,17 @@ we're stuck with using a middleware.
 
 import { NextResponse } from "next/server"
 
+export const REQUEST_THROTTLED_HEADER = "x-request-throttled"
+export const REQUEST_ORG_THROTTLED_HEADER = "x-request-org-throttled"
+
+function getRequestIp(req: any): string | null {
+    const forwardedFor = req.headers.get("x-forwarded-for")
+    if (forwardedFor) {
+        return forwardedFor.split(",")[0].trim()
+    }
+    return null
+}
+
 export function middleware(req: any, event: any): any {
     let response
 
@@ -49,6 +60,85 @@ export function middleware(req: any, event: any): any {
     if (response) {
         return response
     }
+
+    response = applyRateLimiting(req, event)
+    if (response) {
+        return response
+    }
+}
+
+function applyRateLimiting(req: any, event: any): any {
+    const headers = new Headers(req.headers)
+    const requestIp = getRequestIp(req)
+    if (!requestIp) {
+        // Allow traffic if we can't determine the IP address, rather than risk blocking legitimate users.
+        return
+    }
+    const orgId = getRequestOrgFromIp(requestIp)
+
+    if (!orgId) {
+        return
+    }
+
+    headers.set(REQUEST_THROTTLED_HEADER, "1")
+    headers.set(REQUEST_ORG_THROTTLED_HEADER, orgId)
+
+    return NextResponse.next({
+        request: {
+            headers,
+        },
+    })
+}
+
+function isIpInRange(ipAddr: string, range: string): boolean {
+    // Single IP address - exact match
+    if (!range.includes("/")) {
+        return ipAddr === range
+    }
+
+    // CIDR notation
+    const [rangeIp, maskBits] = range.split("/")
+    const mask = parseInt(maskBits, 10)
+
+    // Convert IP addresses to 32-bit integers
+    const ipToNumber = (ipStr: string): number => {
+        const parts = ipStr.split(".")
+        return parts.reduce((acc, part, idx) => {
+            return acc + (parseInt(part, 10) << (8 * (3 - idx)))
+        }, 0)
+    }
+
+    const ipNum = ipToNumber(ipAddr)
+    const rangeNum = ipToNumber(rangeIp)
+
+    // Create mask
+    const maskValue = mask === 0 ? 0 : (0xFFFFFFFF << (32 - mask)) & 0xFFFFFFFF
+
+    return (ipNum & maskValue) === (rangeNum & maskValue)
+}
+
+function getRequestOrgFromIp(requestIp: string): string | null {
+    // Get all env var keys
+    const envKeys = Object.keys(process.env)
+
+    // Find all IP_RANGE_FOR_* env vars
+    for (const key of envKeys) {
+        if (key.startsWith("IP_RANGE_FOR_")) {
+            const envValue = process.env[key]
+            if (!envValue) {
+                continue
+            }
+
+            const ranges = envValue.split(",").map(range => range.trim())
+            if (ranges.some(range => isIpInRange(requestIp, range))) {
+                // Extract the org name: IP_RANGE_FOR_ACME -> ACME -> acme
+                const orgName = key.replace("IP_RANGE_FOR_", "")
+                return orgName.toLowerCase().replace(/_/g, "-")
+            }
+        }
+    }
+
+    return null
 }
 
 function unsupportedBrowserRedirect(req: any, event: any): any {
