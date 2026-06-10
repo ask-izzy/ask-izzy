@@ -69,6 +69,7 @@ export function middleware(req: any, event: any): any {
 function applyRateLimiting(req: any, event: any): any {
     const requestIp = getRequestIp(req)
     const orgId = requestIp ? getRequestOrgFromIp(requestIp) : null
+    console.log(`Request from IP ${requestIp || "unknown"} associated with org ${orgId || "none"}`)
 
     if (orgId) {
         const response = NextResponse.next()
