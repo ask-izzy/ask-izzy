@@ -20,15 +20,15 @@ const Template = (args: Object): ReactNode => {
 export const WarningWithBody: typeof Template = Template.bind({});
 WarningWithBody.args = {
     alertLevel: "warn",
-    title: <p><strong>COVID19 affected services</strong></p>,
+    title: <p><strong>Alert affected services</strong></p>,
     body: <>
         <p>
             Services listed here may not be operating or limited.
             Contact services directly for up-to-date information.
         </p>
         <p>
-            <Link to="/covid-19-support">
-                Get COVID19 help and information near you.
+            <Link to="/bushfire-support">
+                Get help and information near you.
             </Link>
         </p>
     </>,
@@ -45,15 +45,15 @@ export const WarningWithBodyOpenByDefault: typeof Template = Template.bind({});
 WarningWithBodyOpenByDefault.args = {
     alertLevel: "warn",
     defaultToOpen: true,
-    title: <p><strong>COVID19 affected services</strong></p>,
+    title: <p><strong>Alert affected services</strong></p>,
     body: <>
         <p>
             Services listed here may not be operating or limited.
             Contact services directly for up-to-date information.
         </p>
         <p>
-            <Link to="/covid-19-support">
-                Get COVID19 help and information near you.
+            <Link to="/bushfire-support">
+                Get help and information near you.
             </Link>
         </p>
     </>,
@@ -69,15 +69,15 @@ WarningWithBodyOpenByDefault.parameters = {
 export const InfoWithBody: typeof Template = Template.bind({});
 InfoWithBody.args = {
     alertLevel: "info",
-    title: <p><strong>COVID19 affected services</strong></p>,
+    title: <p><strong>Alert affected services</strong></p>,
     body: <>
         <p>
             Services listed here may not be operating or limited.
             Contact services directly for up-to-date information.
         </p>
         <p>
-            <Link to="/covid-19-support">
-                Get COVID19 help and information near you.
+            <Link to="/bushfire-support">
+                Get help and information near you.
             </Link>
         </p>
     </>,
@@ -87,8 +87,8 @@ export const InfoTitleWithLinkAndWithoutBody: typeof Template =
     Template.bind({});
 InfoTitleWithLinkAndWithoutBody.args = {
     alertLevel: "info",
-    title: <strong><a href="/covid-19-support">
-        Get COVID19 help and information near you.
+    title: <strong><a href="/bushfire-support">
+        Get help and information near you.
     </a></strong>,
 };
 InfoTitleWithLinkAndWithoutBody.parameters = {
@@ -104,7 +104,7 @@ export const InfoTitleWithoutLinkAndWithoutBody: typeof Template =
 InfoTitleWithoutLinkAndWithoutBody.args = {
     alertLevel: "info",
     title: <p>
-        Get COVID19 help and information near you.
+        Get help and information near you.
     </p>,
 };
 
