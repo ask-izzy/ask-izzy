@@ -1,5 +1,5 @@
 /* @flow */
-import React, {useEffect, useState} from "react";
+import React, {useEffect} from "react";
 import type { Node as ReactNode } from "react"
 import type { AppProps } from "next/app"
 import { ApolloProvider } from "@apollo/client";
@@ -27,7 +27,6 @@ import "@/src/analytics"
 import * as gtm from "@/src/google-tag-manager";
 import storage from "@/src/storage";
 import useTrackInitialRenderStatus from "@/hooks/useTrackInitialRenderStatus";
-import { REQUEST_ORG_THROTTLED_COOKIE } from "@/middleware";
 
 if (typeof window !== "undefined") {
     initialiseRequestInterceptor()
@@ -36,7 +35,6 @@ if (typeof window !== "undefined") {
 function App(appProps: AppProps): ReactNode {
     const { Component, pageProps, err } = appProps
     const router = useRouter()
-    const [requestOrgThrottled, setRequestOrgThrottled] = useState<string | null>(null)
 
     useTrackInitialRenderStatus()
 
@@ -65,12 +63,6 @@ function App(appProps: AppProps): ReactNode {
         });
     }, [])
 
-    useEffect(() => {
-        const cookieRegex = new RegExp(`(?:^|;\\s*)${REQUEST_ORG_THROTTLED_COOKIE}=([^;]*)`)
-        const cookieMatch = document.cookie.match(cookieRegex)
-        const cookieOrgId = cookieMatch ? decodeURIComponent(cookieMatch[1]) : null
-        setRequestOrgThrottled(cookieOrgId)
-    }, [])
 
     const pageInfo = getPageInfo(appProps)
 
@@ -86,7 +78,7 @@ function App(appProps: AppProps): ReactNode {
                         <MyListProvider>
                             {renderHeadMetadata(pageInfo, router)}
                             <DebugColours />
-                            {requestOrgThrottled && <ThrottleDialog requestOrgId={requestOrgThrottled} />}
+                            <ThrottleDialog />
                             <DebugModeOffSwitch />
                             <div className="BasePage">
                                 {/* err prop recommended by https://github.com/vercel/next.js/blob/dba9e2a12adeb2066d0d5bb9a49bdb3e29689b92/examples/with-sentry/pages/_app.js */}

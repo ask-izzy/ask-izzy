@@ -1,17 +1,45 @@
-/* $FlowIgnore */
-
-import React from "react";
+/* @flow */
+import React, {useState, useEffect} from "react";
+import type {Node as ReactNode} from "react";
 import Dialog from "@/components/base/Dialog"
-import Link from "@/src/components/base/Link";
+import { useRouter } from "next/router";
 import cnx from "classnames"
+import { REQUEST_ORG_THROTTLED_COOKIE } from "@/src/utils/nextjs-middleware/rate-limiting.js";
+import Link from "@/src/components/base/Link";
 
-type Props = {
-    requestOrgId: string,
-}
-
-export default function ThrottleDialog({ requestOrgId }: Props) {
-    const [open, setOpen] = React.useState(true)
+export default function ThrottleDialog(): ReactNode {
+    const [open, setOpen] = useState(false)
     const close = () => setOpen(false)
+    const [requestOrgId, setRequestOrgId] = useState<string | null>(null)
+    const router = useRouter()
+
+    // Update requestOrgId on cookie change
+    useEffect(() => {
+        const cookieRegex = new RegExp(`(?:^|;\\s*)${REQUEST_ORG_THROTTLED_COOKIE}=([^;]*)`)
+        const cookieMatch = document.cookie.match(cookieRegex)
+        const cookieOrgId = cookieMatch ? decodeURIComponent(cookieMatch[1]) : null
+        // We don't clear requestOrgId if it is removed from us falling back under the rate limit amount because if the
+        // request rate is around about the rate limit amount then requestOrgId could be rapidly set and unset which
+        // would cause the message to be repeatedly added and removed. If the user has fallen back under the rate limit
+        // amount the the message will be moved next time reload or close and open the page.
+        if (cookieOrgId && requestOrgId !== cookieOrgId) {
+            setRequestOrgId(cookieOrgId)
+        }
+    }, [requestOrgId, router.pathname, router.isReady])
+
+    // Update model visibility on requestOrgId change
+    useEffect(() => {
+        if (requestOrgId) {
+            setOpen(true)
+        } else {
+            setOpen(false)
+        }
+    }, [requestOrgId])
+
+    // If no throttling is needed then don't render anything
+    if (!requestOrgId) {
+        return null
+    }
 
     function renderBody() {
         if (requestOrgId === "services-australia") {
