@@ -11,6 +11,7 @@ import Link from "./base/Link";
 import Info from "./../icons/Info";
 import Button from "./base/Button";
 import alertsQuery from "@/queries/content/alerts.js";
+import { useLocalAlerts } from "@/src/hooks/useLocalAlerts";
 import storage from "../storage";
 
 type Props = {
@@ -19,14 +20,29 @@ type Props = {
     format?: string
 }
 
+export type Alert = {
+    documentId: string,
+    title: string,
+    body: string,
+    createdAt: string,
+    updatedAt: string,
+    alertLevel: string,
+    defaultToOpen: boolean,
+    states: Array<string>,
+    screenLocation: string,
+}
+
 function AlertBannerList({
     state,
     screenLocation,
     format,
 }: Props): React.Node {
+    console.log("Rendering AlertBannerList with state:", state, "and screenLocation:", screenLocation)
     const [isCollapsed, setIsCollapsed] = useState<boolean>(true)
 
-    const { loading, error, data } = useQuery(alertsQuery, {
+    const { localAlerts } = useLocalAlerts()
+
+    const { error, data } = useQuery(alertsQuery, {
         variables: {
             state,
             screenLocation,
@@ -36,14 +52,10 @@ function AlertBannerList({
         if (data?.alerts) {
             checkCollapsedStatus(data.alerts)
         }
-    }, [data])
+    }, [data, localAlerts])
 
-    if (loading) {
-        return null;
-    }
     if (error) {
         console.warn("An error occurred when trying to fetch alerts:", error)
-        return null
     }
 
     //organize alerts
@@ -51,18 +63,21 @@ function AlertBannerList({
         info: 1,
         warn: 2,
     }
-    const alerts = data.alerts.map(alert => ({
-        ...alert,
-        "createdAt": new Date(alert.createdAt),
-        "updatedAt": new Date(alert.updatedAt),
-    })).sort((a, b) =>
-    // more urgent first
-        alertLevelMap[b.alertLevel] - alertLevelMap[a.alertLevel] ||
-            // state based alerts over national
-            (b.states.length && 1) - (a.states.length && 1) ||
-            // newer first
-            b.updatedAt - a.updatedAt
-    )
+
+    const alerts = [...(data?.alerts || []), ...localAlerts]
+        .map(alert => ({
+            ...alert,
+            "createdAt": new Date(alert.createdAt),
+            "updatedAt": new Date(alert.updatedAt),
+        }))
+        .sort((a, b) =>
+            // more urgent first
+            alertLevelMap[b.alertLevel] - alertLevelMap[a.alertLevel] ||
+                // state based alerts over national
+                (b.states.length && 1) - (a.states.length && 1) ||
+                // newer first
+                b.updatedAt - a.updatedAt
+        )
 
     function checkCollapsedStatus(alerts) {
         const previousAlertsStorageKey = "previous-Alerts"

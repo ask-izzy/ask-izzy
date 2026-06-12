@@ -5,13 +5,18 @@ import Dialog from "@/components/base/Dialog"
 import { useRouter } from "next/router";
 import cnx from "classnames"
 import { REQUEST_ORG_THROTTLED_COOKIE } from "@/src/utils/nextjs-middleware/rate-limiting.js";
-import Link from "@/src/components/base/Link";
+import { useLocalAlerts } from "@/src/hooks/useLocalAlerts";
+import StrapiMarkdown from "@/src/components/StrapiMarkdown";
+import { dedent } from "ts-dedent";
 
 export default function ThrottleDialog(): ReactNode {
     const [open, setOpen] = useState(false)
     const close = () => setOpen(false)
     const [requestOrgId, setRequestOrgId] = useState<string | null>(null)
     const router = useRouter()
+    const { addAlert, removeAlert } = useLocalAlerts()
+
+    const title = "Usage Limited"
 
     // Update requestOrgId on cookie change
     useEffect(() => {
@@ -31,8 +36,20 @@ export default function ThrottleDialog(): ReactNode {
     useEffect(() => {
         if (requestOrgId) {
             setOpen(true)
+            addAlert({
+                documentId: "throttle-dialog",
+                title,
+                body: bodyText(requestOrgId),
+                createdAt: new Date().toISOString(),
+                updatedAt: new Date().toISOString(),
+                alertLevel: "warn",
+                defaultToOpen: false,
+                states: [],
+                screenLocation: "top",
+            })
         } else {
             setOpen(false)
+            removeAlert("throttle-dialog")
         }
     }, [requestOrgId])
 
@@ -41,37 +58,35 @@ export default function ThrottleDialog(): ReactNode {
         return null
     }
 
-    function renderBody() {
+    function article(text: string): ReactNode {
+        return "aeiou".includes(text[0].toLowerCase()) ? "an" : "a"
+    }
+
+    function bodyText(requestOrgId: string) {
         if (requestOrgId === "services-australia") {
-            return <>
-                <p>
-                    Recently Services Australia opted to no longer continue a contract with Infoxchange, the makers of
-                    Ask Izzy. As such usage by Services Australia is now in violation of Ask Izzy's
-                    {" "}<Link to="/terms">Terms of use</Link>.
-                </p>
-                <p>
-                    If you are someone looking for help for yourself please disregard this message
-                    and continue to use Ask Izzy as normal.
-                </p>
-                <p>
-                    If you are a Services Australia employee please contact your manager for more information.
-                </p>
-            </>
+            return dedent`
+                Recently Services Australia opted to no longer continue a contract with Infoxchange, the makers of
+                Ask Izzy. As such usage by Services Australia is now in violation of Ask Izzy's
+                [Terms of use](/terms).
+
+                If you are someone looking for help for yourself please disregard this message
+                and continue to use Ask Izzy as normal.
+
+                If you are a Services Australia employee please contact your manager for more information.
+            `
         } else {
-            return <>
-                <p>
-                    The organisation, {requestOrgId.replace("-", " ")}, has been detected as violating Ask Izzy's
-                    {" "}<Link to="/terms">Terms of use</Link>.
-                </p>
-                <p>
-                    If you are someone looking for help for yourself please disregard this message
-                    and continue to use Ask Izzy as normal.
-                </p>
-                <p>
-                    If you are a {requestOrgId.replace("-", " ")} employee please contact your manager for more
-                    information.
-                </p>
-            </>
+            const orgName = requestOrgId.replace("-", " ")
+
+            return dedent`
+                The organisation, ${orgName}, has been detected as violating Ask Izzy's
+                [Terms of use](/terms).
+
+                If you are someone looking for help for yourself please disregard this message
+                and continue to use Ask Izzy as normal.
+
+                If you are ${article(orgName)} ${orgName} employee please contact your manager for
+                more information.
+            `
         }
     }
 
@@ -79,11 +94,13 @@ export default function ThrottleDialog(): ReactNode {
         <Dialog
             open={open}
             onClose={close}
-            title="Usage Limited"
+            title={title}
         >
             {({bodyClassName}) => (
                 <div className={cnx("ThrottleDialog", bodyClassName)}>
-                    {renderBody()}
+                    <StrapiMarkdown>
+                        {bodyText(requestOrgId)}
+                    </StrapiMarkdown>
                 </div>
             )}
         </Dialog>
