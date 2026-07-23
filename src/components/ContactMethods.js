@@ -6,6 +6,7 @@ import Spacer from "./Spacer";
 import Email from "./Email";
 import PhoneButton from "./PhoneButton";
 import Web from "./Web";
+import SocialMedia from "./SocialMedia";
 import Service from "../iss/Service";
 
 type Props = {
@@ -43,6 +44,14 @@ function ContactMethods({ object, externalCollapsed, onToggle }: Props): ReactNo
             component: Web,
             details: { url },
         }] : [];
+    }
+
+    function socials(): Array<Object> {
+        return (object.social_media || []).map(details => ({
+            type: "SocialMedia",
+            component: SocialMedia,
+            details,
+        }));
     }
 
     function renderContactMethod(record: Object, idx: number): ReactNode {
@@ -95,6 +104,10 @@ function ContactMethods({ object, externalCollapsed, onToggle }: Props): ReactNo
 
             {/* Website */}
             {websites().map(renderContactMethod)}
+
+            {/* Socials */}
+            {socials().length > 0 && <Spacer />}
+            {socials().map(renderContactMethod)}
         </div>
     );
 }
