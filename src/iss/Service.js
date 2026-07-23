@@ -82,6 +82,10 @@ export default class Service {
     service_types: Array<string>;
     site: site;
     special_requirements: string;
+    social_media: Array<{
+        type: string;
+        url: string;
+    }>;
     target_gender: 'u' | 'f' | 'm' | 'x';
     type: 'organisation' |
         'site' |
