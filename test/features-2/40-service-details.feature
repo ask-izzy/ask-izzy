@@ -167,6 +167,19 @@ Feature: Service details page
         When I click the "example.org" link
         Then I should be at https://example.org/
 
+        Scenario: Social media contact methods are displayed with formatted labels
+                Given A service with:
+                ----------------------------------------------
+                social_media:
+                        - type: twitter
+                            url: https://example.org/twitter-profile
+                        - type: mastodon
+                            url: https://example.org/mastodon-profile
+                ----------------------------------------------
+                When I navigate to the service page
+                Then I should see "Twitter / X"
+                And I should see "Mastodon"
+
     Scenario: Can view all opening times
         When I visit /service/5551234
         And I click the "Show open times" button
