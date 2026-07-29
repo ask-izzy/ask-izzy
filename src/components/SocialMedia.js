@@ -6,6 +6,7 @@ import FacebookIcon from "@mui/icons-material/Facebook";
 import LinkedInIcon from "@mui/icons-material/LinkedIn";
 import YouTubeIcon from "@mui/icons-material/YouTube";
 import XIcon from "@mui/icons-material/X";
+import OpenInNewIcon from "@mui/icons-material/OpenInNew";
 
 import Link from "./base/Link";
 import type {AnalyticsEvent} from "../google-tag-manager";
@@ -36,7 +37,7 @@ function SocialMedia({
     const getIcon = () => {
         switch (type.toLowerCase()) {
         case "instagram":
-            return <InstagramIcon aria-hidden={true} />;
+            return <InstagramIcon aria-hidden={true} /> ;
         case "facebook":
             return <FacebookIcon aria-hidden={true} />;
         case "twitter":
@@ -57,6 +58,8 @@ function SocialMedia({
             </ScreenReader>
             <Link
                 to={url}
+                target="_blank"
+                aria-label="Opens in a new tab"
                 analyticsEvent={{
                     event: `Link Followed - ${getFormattedType()} Social Media`,
                     eventAction: `Contact detail - ${type.toLowerCase()}`,
@@ -70,6 +73,10 @@ function SocialMedia({
                         {getFormattedType()}
                     </span>
                 </div>
+                <OpenInNewIcon
+                    aria-hidden={true}
+                    className="Contact-icon-end"
+                />
             </Link>
         </div>
     )

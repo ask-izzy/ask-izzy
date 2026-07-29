@@ -1,5 +1,16 @@
 
 .SocialMedia {
+    display: flex;
+    align-items: center;
+    padding-top: 0;
+
+    a {
+        display: flex;
+        align-items: center;
+        text-decoration: none;
+        color: inherit;
+    }
+
     svg {
         width: 20px;
         height: 30px;
@@ -11,5 +22,13 @@
     .Contact-text {
         line-height: 30px;
         padding-left: 5px;
+        flex-grow: 1;
+    }
+
+    .Contact-icon-end {
+        width: 14px;
+        height: 14px;
+        margin-left: 5px;
+        flex-shrink: 0;
     }
 }
