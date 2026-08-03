@@ -54,6 +54,7 @@ ARG GID
 
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 
+# hadolint ignore=DL3066
 USER root
 
 # Install any packages needed for building/testing the app.
