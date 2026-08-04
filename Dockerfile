@@ -9,7 +9,7 @@ ARG HOME="/tmp/home"
 # development and serving states.                                             #
 ###############################################################################
 
-FROM node:20 as base
+FROM node:20 AS base
 
 ARG UID
 ARG GID
@@ -48,7 +48,7 @@ EXPOSE 8000
 # development version of the app.                                             #
 ###############################################################################
 
-FROM base as development
+FROM base AS development
 ARG UID
 ARG GID
 
@@ -117,7 +117,7 @@ CMD ["dev"]
 # This stage contains everything necessary to serve the app and nothing more. #
 ###############################################################################
 
-FROM base as distribution
+FROM base AS distribution
 ARG UID
 ARG GID
 
