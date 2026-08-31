@@ -137,7 +137,7 @@ function ResultsMapPage({router}: Props): ReactNode {
                         // On IE11 `display:contents` doesn't work so the map
                         // doesn't show. This is to set the height of the map
                         // if a service is selected it's 60vh otherwise 100vh
-                        height: selectedSite ? "60vh" : "90vh",
+                        height: selectedSite ? "60vh" : "100vh",
                     }}
                 >
                     <SitesMap
