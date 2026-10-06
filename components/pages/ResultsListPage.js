@@ -12,7 +12,7 @@ import type { NextRouter } from "next/router"
 import DebugPersonalisation from "@/src/components/DebugPersonalisation";
 import ResultsList from "@/src/components/ResultsList";
 import LoadingResultsHeader from
-"@/src/components/ResultsListPage/LoadingResultsHeader";
+    "@/src/components/ResultsListPage/LoadingResultsHeader";
 import AlertBannerList from "@/src/components/AlertBannerList";
 import icons from "@/src/icons";
 import NotFoundStaticPage from "@/pages/404"

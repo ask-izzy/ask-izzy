@@ -17,9 +17,9 @@ import type {
     PersonalisationInfoPage,
 } from "@/flow/personalisation-page"
 import LgbtiqaDomesticViolenceScreen
-from "./static-page-contents/LgbtiqaDomesticViolenceScreen"
+    from "./static-page-contents/LgbtiqaDomesticViolenceScreen"
 import Under18DomesticViolenceScreen
-from "./static-page-contents/Under18DomesticViolenceScreen"
+    from "./static-page-contents/Under18DomesticViolenceScreen"
 import UsingViolenceScreen from "./static-page-contents/UsingViolenceScreen"
 import OnlineSafetyScreen from "./static-page-contents/OnlineSafetyScreen"
 

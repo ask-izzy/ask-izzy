@@ -10,7 +10,7 @@ import SortResult, {SORT_OPTIONS} from "./SortResult";
 import {getScrollPosition} from "../../effects/scrollPosition";
 import type {SortType} from "../base/Dropdown";
 import GeolocationButtonForTravelTimes from
-"../GeolocationButtonForTravelTimes";
+    "../GeolocationButtonForTravelTimes";
 import {MobileDetect} from "../../effects/MobileDetect";
 import type {travelTimesStatus} from "../../hooks/useTravelTimesUpdater";
 import Service from "../../iss/Service"

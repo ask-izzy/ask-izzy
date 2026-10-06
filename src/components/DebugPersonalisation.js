@@ -17,7 +17,7 @@ import Diff from "./debug/Diff"
 import type { DiffType } from "./debug/Diff"
 import DebugContainer from "../components/DebugContainer";
 import IssParamsOverrideControls from
-"../components/debug/IssParamsOverrideControls";
+    "../components/debug/IssParamsOverrideControls";
 import Storage from "../storage";
 
 type Props = {|

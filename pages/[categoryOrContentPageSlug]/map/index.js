@@ -2,7 +2,7 @@
 import type { GetStaticProps } from "next"
 
 import ResultsMapPage from
-"@/components/pages/ResultsMapPage";
+    "@/components/pages/ResultsMapPage";
 export {getStaticPaths} from
     "@/pages/[categoryOrContentPageSlug]/personalise/index.js"
 import type {RouteSharedProps} from "@/flow/routes"

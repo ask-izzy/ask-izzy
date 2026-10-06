@@ -4,7 +4,7 @@ import type { GetStaticPaths, GetStaticProps } from "next"
 
 import categories from "@/src/constants/categories"
 import RenderPersonalisationPage from
-"@/components/pages/personalisation/RenderPersonalisationPage";
+    "@/components/pages/personalisation/RenderPersonalisationPage";
 import type {RouteSharedProps} from "@/flow/routes"
 
 export const getStaticPaths: GetStaticPaths = async() => {

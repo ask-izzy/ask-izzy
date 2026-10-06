@@ -2,7 +2,7 @@
 import type { GetStaticProps } from "next"
 
 import PersonalisationSummaryPage from
-"@/components/pages/personalisation/PersonalisationSummaryPage";
+    "@/components/pages/personalisation/PersonalisationSummaryPage";
 import type {RouteSharedProps} from "@/flow/routes"
 
 export {getStaticPaths} from

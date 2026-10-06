@@ -1,8 +1,9 @@
 {
     "root": true,
     "parserOptions": {
-        "ecmaVersion": 6,
+        "ecmaVersion": "latest",
         "sourceType": "module",
+        "requireConfigFile": true,
         "ecmaFeatures": {
             "jsx": true
         }
@@ -11,11 +12,16 @@
         "browser": true,
         "node": true
     },
-    "parser": "babel-eslint",
+    "parser": "@babel/eslint-parser",
     "plugins": [
         "react"
     ],
     "extends": "eslint:recommended",
+    "settings": {
+        "react": {
+            "version": "detect"
+        }
+    },
     "rules": {
         "array-bracket-spacing": [2, "never"],
         "arrow-spacing": 2,
@@ -23,7 +29,13 @@
         "block-spacing": 2,
         "brace-style": [2, "1tbs"],
         "camelcase": [2, {"properties": "never"}],
-        "comma-dangle": [2, "always-multiline"],
+        "comma-dangle": [2, {
+            "arrays": "always-multiline",
+            "objects": "always-multiline",
+            "imports": "always-multiline",
+            "exports": "always-multiline",
+            "functions": "ignore"
+        }],
         "comma-spacing": [2, {"before": false, "after": true}],
         "comma-style": [2, "last"],
         "complexity": [2, 10],
@@ -117,5 +129,23 @@
         "react/prop-types": 0, // Does not track proptypes across inheritance / mixins / composition
         "react/react-in-jsx-scope": 2,
         "react/self-closing-comp": 2
-    }
+    },
+    "overrides": [
+        {
+            "files": ["*.ts", "*.tsx"],
+            "parser": "@typescript-eslint/parser",
+            "plugins": ["@typescript-eslint"],
+            "rules": {
+                "no-unused-vars": 0,
+                "@typescript-eslint/no-unused-vars": [
+                    2,
+                    {
+                        "vars": "all",
+                        "args": "none",
+                        "ignoreRestSiblings": true
+                    }
+                ]
+            }
+        }
+    ]
 }

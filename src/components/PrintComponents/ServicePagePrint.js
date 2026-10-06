@@ -107,74 +107,76 @@ export default function ServicePagePrint({service}: Props): ReactElement<"div"> 
 
                             {/* ADDRESS */}
                             {service.location && (
-                            <>
-                                <Spacer />
-                                <Address
-                                    location={service.location}
-                                    singleLineAddress={false}
-                                    hasSolidIcon={true}
-                                />
-                            </>
-                            )}
-                            {/* PHONE */}
-                             <>
-                            {service.phones.length > 0 && (
                                 <>
                                     <Spacer />
-                                    <div className="service-page-print-phone">
-                                        {Array.from(new Set(service.phones
-                                            .filter(phone => phone.kind !== "fax") // Exclude fax numbers
-                                            .map(phone => phone.number))
-                                        ).map((phoneNumber, index) => {
-                                            const comments = service.phones
-                                                .filter(phone => phone.number === phoneNumber && phone.kind !== "fax")
-                                                .map(phone => phone.comment);
-                                            return (
-                                                <div key={index}
-                                                    className="my-service-page-phone-container"
-                                                >
-                                                    <PhoneSolid className="icon" />
-                                                    <span className="text">
-                                                        {phoneNumber}
-                                                        {comments.length > 0 && (
-                                                            <span>{" "}{`(${comments.join(", ")})`}</span>
-                                                        )}
-                                                    </span>
-                                                </div>
-                                            );
-                                        })}
+                                    <Address
+                                        location={service.location}
+                                        singleLineAddress={false}
+                                        hasSolidIcon={true}
+                                    />
+                                </>
+                            )}
+                            {/* PHONE */}
+                            <>
+                                {service.phones.length > 0 && (
+                                    <>
+                                        <Spacer />
+                                        <div className="service-page-print-phone">
+                                            {Array.from(new Set(service.phones
+                                                .filter(phone => phone.kind !== "fax") // Exclude fax numbers
+                                                .map(phone => phone.number))
+                                            ).map((phoneNumber, index) => {
+                                                const comments = service.phones
+                                                    .filter(phone =>
+                                                        phone.number === phoneNumber && phone.kind !== "fax"
+                                                    )
+                                                    .map(phone => phone.comment);
+                                                return (
+                                                    <div key={index}
+                                                        className="my-service-page-phone-container"
+                                                    >
+                                                        <PhoneSolid className="icon" />
+                                                        <span className="text">
+                                                            {phoneNumber}
+                                                            {comments.length > 0 && (
+                                                                <span>{" "}{`(${comments.join(", ")})`}</span>
+                                                            )}
+                                                        </span>
+                                                    </div>
+                                                );
+                                            })}
+                                        </div>
+                                    </>
+                                )}
+                            </>
+
+                            {/* WEB LINK */}
+                            {service.web && (
+                                <>
+                                    <Spacer />
+                                    <div className="web-container">
+                                        <Web url={service.web} />
                                     </div>
                                 </>
                             )}
-                        </>
 
-                             {/* WEB LINK */}
-                             {service.web && (
-                            <>
-                                <Spacer />
-                                <div className="web-container">
-                                    <Web url={service.web} />
-                                </div>
-                            </>
-                             )}
+                            {renderEmail}
 
-                             {renderEmail}
-
-                             {/* LANGUAGES */}
-                             {service.languages && service.languages.length > 0 && (
+                            {/* LANGUAGES */}
+                            {service.languages && service.languages.length > 0 && (
                                 <>
-                                <Spacer />
+                                    <Spacer />
                                     <div className="service-page-print-languages">
                                         Languages spoken here: {service.languages.join(", ")}
                                     </div>
                                 </>
-                             )}
+                            )}
 
-                             {/* Accessibility */}
-                             <Accessibility
-                                 service={service}
-                                 withSpacer={true}
-                             />
+                            {/* Accessibility */}
+                            <Accessibility
+                                service={service}
+                                withSpacer={true}
+                            />
 
                         </BoxedText>
                         <Cost cost={service.cost}

@@ -19,12 +19,12 @@ import {
     getPersonalisationBackPath,
 } from "@/src/utils/routing"
 import WhoIsLookingForHelpBaseInfo from
-"@/src/constants/personalisation-pages/WhoIsLookingForHelp"
+    "@/src/constants/personalisation-pages/WhoIsLookingForHelp"
 import {
     getBannerName,
 } from "@/src/utils/personalisation"
 import type {PersonalisationLookingForHelpPage} from
-"@/flow/personalisation-page"
+    "@/flow/personalisation-page"
 type Props = {
     router: NextRouter,
     details: PersonalisationLookingForHelpPage,

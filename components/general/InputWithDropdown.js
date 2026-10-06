@@ -178,20 +178,20 @@ function InputWithDropdown({
                 (event.key !== "Enter" || !suggestionSelected) &&
                 (event.key !== "Escape" || !suggestionSelected)
             ) {
-                    otherProps.onKeyDown?.(event)
+                otherProps.onKeyDown?.(event)
             }
         },
         // Same situation for onBlur
         onBlur(event) {
             downshiftInputProps.onBlur(event)
-                otherProps.onBlur?.(event)
+            otherProps.onBlur?.(event)
         },
         // Show autocomplete suggestions when focusing on input
         onFocus(event) {
             if (!downshiftCombobox.isOpen) {
                 downshiftCombobox.openMenu(event)
             }
-                otherProps.onFocus?.(event)
+            otherProps.onFocus?.(event)
         },
     }
 

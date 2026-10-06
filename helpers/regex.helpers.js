@@ -9,10 +9,10 @@
 export function lookbehindIsSupported(): boolean {
     try {
         return !!(
-        "text-test1-behind-test2-test3"
-            .match(
-                new RegExp("(?<=behind)-test\\d", "g")
-            )?.[0] === "-test2" &&
+            "text-test1-behind-test2-test3"
+                .match(
+                    new RegExp("(?<=behind)-test\\d", "g")
+                )?.[0] === "-test2" &&
         "behind-test1-test2"
             .match(
                 new RegExp("(?<!behind)-test\\d", "g")

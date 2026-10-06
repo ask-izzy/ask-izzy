@@ -16,7 +16,7 @@ import {
     buildSearchQueryFromModifiers,
 } from "@/src/iss/searchQueryBuilder"
 import type {SearchQuery, SearchQueryModifier}
-from "@/src/iss/searchQueryBuilder"
+    from "@/src/iss/searchQueryBuilder"
 import * as gtm from "@/src/google-tag-manager";
 import {attachTransportTimes} from "@/src/iss/travelTimes"
 import storage from "@/src/storage";
@@ -32,10 +32,10 @@ import {
 } from "@/src/utils/routing"
 import Category from "@/src/constants/Category";
 import WhoIsLookingForHelpPage
-from "@/src/constants/personalisation-pages/WhoIsLookingForHelp.js"
+    from "@/src/constants/personalisation-pages/WhoIsLookingForHelp.js"
 import { usersnapFireEvent } from "@/helpers/usersnap.helpers.js"
 import WhoIsLookingForHelpBaseInfo from
-"@/src/constants/personalisation-pages/WhoIsLookingForHelp"
+    "@/src/constants/personalisation-pages/WhoIsLookingForHelp"
 import type { UserType } from "@/components/pages/personalisation/WhoIsLookingForHelp"
 import useEffectOnChange from "@/hooks/useEffectOnChange"
 

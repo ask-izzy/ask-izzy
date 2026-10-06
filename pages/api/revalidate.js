@@ -21,16 +21,11 @@ export default async function handler(req: any, res: any): any {
 
     } else if (modifiedCollectionType === "callout") {
         const calloutId = req.body.entry.documentId
-        let contentPages
-        try {
-            const { data } = await queryGraphQlWithErrorLogging({
-                query: cmsAllPagesQuery,
-                fetchPolicy: "no-cache",
-            })
-            contentPages = data.pages
-        } catch (error) {
-            throw error
-        }
+        const { data } = await queryGraphQlWithErrorLogging({
+            query: cmsAllPagesQuery,
+            fetchPolicy: "no-cache",
+        })
+        const contentPages = data.pages
         const pathsToRegenerate = contentPages.filter(
             page => page.CalloutBoxes.some(
                 calloutBox => calloutBox.callout.documentId === calloutId

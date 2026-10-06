@@ -46,7 +46,7 @@ function OpeningTimesList({ service, withSpacer = false, withIcon = false}: Prop
                 </li>
             ))}
         </ul>
-     </>;
+    </>;
 }
 
 export default OpeningTimesList;

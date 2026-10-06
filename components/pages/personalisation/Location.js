@@ -396,14 +396,14 @@ function Location({router, details}: Props): ReactNode {
                                             value: `${location.name},` +
                                             ` ${location.state}`,
                                             label: <>
-                                            <div className="suburb">
-                                                {location.name}
-                                            </div>
-                                            <ScreenReader>,{" "}</ScreenReader>
-                                            <div className="state">
-                                                {location.state}
-                                            </div>
-                                        </>,
+                                                <div className="suburb">
+                                                    {location.name}
+                                                </div>
+                                                <ScreenReader>,{" "}</ScreenReader>
+                                                <div className="state">
+                                                    {location.state}
+                                                </div>
+                                            </>,
                                         }))
                                 }
                             />

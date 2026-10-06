@@ -19,7 +19,7 @@ import type { site } from "@/src/iss/site";
 import Service from "@/src/iss/Service"
 
 import GeolocationButtonForTravelTimes from
-"@/src/components/GeolocationButtonForTravelTimes";
+    "@/src/components/GeolocationButtonForTravelTimes";
 import { goToPersonalisationNextPath } from "@/src/utils/routing"
 import useServiceResults from "@/hooks/useServiceResults"
 

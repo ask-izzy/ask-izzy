@@ -153,6 +153,10 @@ module.exports = {
         "postcss-html/node_modules/readable-stream",
         "merge-change",
     ],
+    eslint: {
+        // Linting is run as a separate CI step so there's no need to also run it as part of the build
+        ignoreDuringBuilds: true,
+    },
     // We need to manually handle trailing slash redirection so as not to apply redirect to requests to our external
     // resources proxy
     skipTrailingSlashRedirect: true,
