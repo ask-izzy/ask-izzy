@@ -6,7 +6,8 @@ import cors from "cors";
 import express from "express";
 import * as servicesProps from "../../../fixtures/servicesProps";
 import {getServiceFixtureProps} from "../../../fixtures/factories/Service";
-import type { serviceFixtureProps } from "../../../fixtures/factories/Service";
+// serviceFixtureProps is written in TypeScript which Flow can't read
+type serviceFixtureProps = any
 
 export function initMockISSServer() {
     const app = express();

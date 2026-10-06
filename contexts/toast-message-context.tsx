@@ -13,7 +13,7 @@ type Context = {
     actionDescriptor: ReactNode | null,
     setActionDescriptor: (arg0: ReactNode | null) => void,
     onClick: () => void,
-    setOnClick: (arg0: () => function) => void,
+    setOnClick: (arg0: () => Function) => void,
     forceToastMessageUpdateState: boolean,
     forceToastMessageUpdate: () => void,
 }

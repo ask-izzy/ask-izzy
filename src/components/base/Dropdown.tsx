@@ -17,7 +17,7 @@ export type SortType = {
 type Props = {
     selection: SortType,
     options: Array<SortType>,
-    onChange: function,
+    onChange: Function,
     title: string,
     analyticsEvent?: AnalyticsEvent,
     hideOptionsOnScrollBreakpoint?: number,

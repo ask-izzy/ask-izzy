@@ -18,7 +18,7 @@ export const SORT_OPTIONS: Array<SortType> = [
 ]
 
 type Props = {
-    callback: function,
+    callback: Function,
     showDivider: boolean,
     sortOption: SortType,
     hideOptionsOnScrollBreakpoint?: number

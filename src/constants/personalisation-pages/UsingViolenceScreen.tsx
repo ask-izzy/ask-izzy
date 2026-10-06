@@ -6,6 +6,7 @@ import DemographicsAtsiCaldLgbtiqa from "./DemographicsAtsiCaldLgbtiqa";
 import {
     getSavedPersonalisationAnswer,
 } from "../../utils/personalisation"
+import type {PersonalisationInfoPage} from "@/types/personalisation-page"
 
 export default ({
     type: "info",
@@ -34,4 +35,4 @@ export default ({
                 ?.includes("Using violence")
         );
     },
-});
+} as PersonalisationInfoPage);

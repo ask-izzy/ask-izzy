@@ -28,7 +28,7 @@ type Props = {
     showClearLocation?: boolean,
     hideStepInfo?: boolean,
     showEditAnswers?: boolean,
-    onClearLocation?: function | null | undefined,
+    onClearLocation?: Function | null | undefined,
 }
 
 /*

@@ -34,7 +34,7 @@ export async function request<ResBody = any, ReqPayload = any>(
     headers?: Headers,
     payload?: ReqPayload
 ): Promise<ResBody> {
-    const options: RequestOptions = {
+    const options: RequestInit = {
         method,
         headers: {
             ...headers,

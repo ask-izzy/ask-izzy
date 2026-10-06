@@ -15,7 +15,7 @@ type Props = {
     hasSolidIcon?: boolean,
 }
 
-class Address extends React.Component<Props, void> {
+class Address extends React.Component<Props> {
     static defaultProps: any = {
         withSpacer: false,
         singleLineAddress: false,

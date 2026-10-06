@@ -96,7 +96,7 @@ function HeaderBar({
     }
 
 
-    const renderSecondaryText = (): void | React.ReactElement<"div"> => {
+    const renderSecondaryText = (): React.ReactElement<"div"> | undefined => {
         if (secondaryText) {
             return (
                 <div className="secondary">
@@ -107,7 +107,7 @@ function HeaderBar({
         }
     }
 
-    const renderInfoText = (): void | React.ReactElement<"div"> => {
+    const renderInfoText = (): React.ReactElement<"div"> | undefined => {
         if (infoText) {
             return (
                 <div className="info">

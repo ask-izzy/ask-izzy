@@ -21,7 +21,7 @@ type GeolocationButtonProps = {
     showLocationInSuccessMessage?: boolean,
     successMessageSuffix?: string | null | undefined,
     showClearButton?: boolean,
-    buttonClickRef?: ((arg0: function) => void) | null | undefined,
+    buttonClickRef?: ((arg0: Function) => void) | null | undefined,
 }
 
 function GeolocationButton({

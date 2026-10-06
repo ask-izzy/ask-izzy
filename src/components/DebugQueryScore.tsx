@@ -5,7 +5,7 @@ type Props = {
     expl: any,
 }
 
-class DebugQueryScore extends React.Component<Props, void> {
+class DebugQueryScore extends React.Component<Props> {
     render(): ReactElement<"div"> {
         const {expl} = this.props;
 

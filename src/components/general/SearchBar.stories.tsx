@@ -23,7 +23,7 @@ export default {
 
 type SearchBarProps = ReactElementConfig<typeof SearchBar>
 type RequiredSearchBarProps = Omit<SearchBarProps, keyof {
-        onSubmit: SearchBarProps['onSubmit'],
+        onSubmit: SearchBarProps["onSubmit"],
     }>
 
 const Template = (args: SearchBarProps): ReactNode => {

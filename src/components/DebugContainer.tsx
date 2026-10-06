@@ -10,7 +10,7 @@ type Props = {
     externalCollapsed?: boolean,
 }
 
-class DebugContainer extends React.Component<Props, void> {
+class DebugContainer extends React.Component<Props> {
     static contextType: any = debugModeContext;
 
     render(): null | ReactElement<"div"> {

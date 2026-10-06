@@ -2,7 +2,7 @@ import cmsAllPagesQuery from "@/queries/content/allPages"
 import {queryGraphQlWithErrorLogging} from "@/src/utils/apolloClient";
 
 // so instead let's not bother and fix it up when we move to typescript
-export default async function handler(req: any, res: any): any {
+export default async function handler(req: any, res: any): Promise<any> {
     if (req.query.secret !== process.env.STATIC_PAGE_REGENERATION_SECRET) {
         return res.status(401).json({ message: "Invalid token" });
     }

@@ -73,7 +73,7 @@ export class ISS4Client {
         )
     }
 
-    async getService(serviceId: number): any {
+    async getService(serviceId: number): Promise<any> {
         const url = new URL(
             `/api/directory/services/${serviceId}/`,
             this.baseUrl

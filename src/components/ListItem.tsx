@@ -17,7 +17,7 @@ type ListItemSpecific<T extends React.ComponentType<any> | string> = {
 
     children?: ReactNode,
 
-    onClick?: (event?: React.SyntheticEvent<>) => any,
+    onClick?: (event?: React.SyntheticEvent) => any,
 }
 export type Props<T extends React.ComponentType<any> | string> =
     ListItemSpecific<T> & Omit<ReactElementConfig<T>, keyof {children: any | void}>

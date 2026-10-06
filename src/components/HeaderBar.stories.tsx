@@ -3,7 +3,7 @@ import type {ReactNode} from "react";
 
 import HeaderBar from "./HeaderBar";
 
-declare var storyBookControlValues: {HeaderBar: {bannerName: Array<string>}};
+declare const storyBookControlValues: {HeaderBar: {bannerName: Array<string>}};
 
 export default {
     title: "App Components/HeaderBar",

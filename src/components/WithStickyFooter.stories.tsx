@@ -6,7 +6,7 @@ import FlatButton from "./FlatButton";
 import ListItem from "./ListItem";
 import icons from "../icons";
 /* eslint-disable-next-line no-unused-vars */
-import Style from "./WithStickyFooter.stories.scss";
+import "./WithStickyFooter.stories.scss";
 
 export default {
     title: "Basic UI Components/WithStickyFooter",

@@ -42,14 +42,14 @@ export type phone = {
     number: string,
 }
 
-export type dayOfWeek = 'Monday' |
-    'Tuesday' |
-    'Wednesday' |
-    'Thursday' |
-    'Friday' |
-    'Saturday' |
-    'Sunday' |
-    'Public Holiday';
+export type dayOfWeek = "Monday" |
+    "Tuesday" |
+    "Wednesday" |
+    "Thursday" |
+    "Friday" |
+    "Saturday" |
+    "Sunday" |
+    "Public Holiday";
 
 export type geoPoint = {
     lat: number,

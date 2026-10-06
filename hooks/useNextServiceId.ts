@@ -1,6 +1,6 @@
 let idCounter = 1
 
-export default (): function => {
+export default (): Function => {
     function getNextIdx() {
         idCounter += 1
 

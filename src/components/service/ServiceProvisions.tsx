@@ -8,7 +8,7 @@ type Props = {
     service: Service
 }
 
-export default class ServiceProvisions extends React.Component<Props, void> {
+export default class ServiceProvisions extends React.Component<Props> {
     maxAboveFold: number = 4
     get provisions(): Array<string> {
         return this.props.service?.serviceProvisions || []

@@ -26,7 +26,7 @@ export function getRateLimitMiddlewares({
     windowMs = 60 * 1000,
     delayAfter = Math.round(10 / 2),
     delayMs = 500,
-}: rateLimitArgs): Array<function> {
+}: rateLimitArgs): Array<Function> {
     return [
         slowDown({ keyGenerator: getIP, windowMs, delayAfter, delayMs }),
         rateLimit({ keyGenerator: getIP, windowMs, max: limit }),

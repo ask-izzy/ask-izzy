@@ -36,7 +36,7 @@ type Props = {
     resultNumber: number
 }
 
-class CrisisLineItem extends React.Component<Props, void> {
+class CrisisLineItem extends React.Component<Props> {
     static displayName: string | null | undefined = "CrisisLineItem";
 
     PhoneButtonDetails: ReactNode =

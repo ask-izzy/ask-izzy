@@ -1,5 +1,3 @@
-/* @flow */
-
 // Warning: the following is fairly ugly code. This file was written
 // to be manually run during the process of reorganising the categories
 // as a way to verify the service types used in all ISS queries actually
@@ -15,7 +13,7 @@
 
 import type {
     PersonalisationPage,
-} from "@/flow/personalisation-page"
+} from "@/types/personalisation-page"
 /* eslint-disable max-len */
 import AdvocacySubcategories from "@/src/constants/personalisation-pages/AdvocacySubcategories";
 import Age from "@/src/constants/personalisation-pages/Age";
@@ -108,7 +106,7 @@ if (typeof global?.fetch === "undefined") {
 }
 
 function getAllDeepKeyValues(
-    objectToSearch: {[string]: any},
+    objectToSearch: {[key: string]: any},
     key: string,
     deepSearchMatchingValues = false
 ): Array<any> {

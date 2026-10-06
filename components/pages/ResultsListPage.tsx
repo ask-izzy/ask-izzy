@@ -1,7 +1,5 @@
 import type {
     ReactNode,
-    ReactElement,
-    ComponentProps as ReactElementConfig,
 } from "react";
 import React from "react"
 import { withRouter } from "next/router"
@@ -125,7 +123,7 @@ function ResultsListPage({router}: Props): ReactNode {
         )
     }
 
-    function renderSuggestionBox(): void | ReactNode {
+    function renderSuggestionBox(): ReactNode {
         if (
             !searchHasNextPage() &&
             !searchIsLoading()
@@ -144,7 +142,7 @@ function ResultsListPage({router}: Props): ReactNode {
         }
     }
 
-    function renderLoadMore(): void | ReactElement<"div"> | ReactNode {
+    function renderLoadMore(): ReactNode {
         if (searchHasNextPage() && !searchError) {
             return (
                 <div className="moreResultsContainer">

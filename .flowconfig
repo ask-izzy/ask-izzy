@@ -24,7 +24,10 @@ types_first=true
 sharedmemory.hash_table_pow=21
 module.name_mapper='.*\.\(jpe\?g\|png\|gif\|svg\)$' -> '<PROJECT_ROOT>/flow/stubs/image.js'
 module.name_mapper='.*\.\(css\|s[ac]ss\)$' -> '<PROJECT_ROOT>/flow/stubs/css.js'
-module.name_mapper='^.*/src/utils/strings$' -> '<PROJECT_ROOT>/flow/stubs/typescript-module.js'
+# App code has been converted to TypeScript which Flow can't read so map any
+# imports of it to an untyped stub
+module.name_mapper='^\(\.\./\)+\(src\|fixtures\|components\|hooks\|contexts\|helpers\|pages\|queries\|types\)/.*' -> '<PROJECT_ROOT>/flow/stubs/typescript-module.js'
+module.name_mapper='^@/\(src\|fixtures\|components\|hooks\|contexts\|helpers\|pages\|queries\|types\)/.*' -> '<PROJECT_ROOT>/flow/stubs/typescript-module.js'
 module.name_mapper='^@/\(.*\)' -> '<PROJECT_ROOT>/\1'
 
 [version]

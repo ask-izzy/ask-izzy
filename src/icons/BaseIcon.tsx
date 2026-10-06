@@ -11,7 +11,7 @@ type Props = {
     noSpanWrapper?: boolean,
 }
 
-class BaseIcon extends React.Component<Props, void> {
+class BaseIcon extends React.Component<Props> {
     readonly svgContent: string;
 
     get classNames(): any {

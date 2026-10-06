@@ -148,7 +148,7 @@ export default class ServiceOpening {
      * comes back empty.
      *
      */
-    ifTime(strings: Array<string>, ...values: Array<any>): string {
+    ifTime(strings: ReadonlyArray<string>, ...values: Array<any>): string {
         if (_(values).contains(undefined)) {
             return "";
         }

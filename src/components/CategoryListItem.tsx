@@ -1,6 +1,5 @@
 import type {
     ReactNode,
-    ComponentProps as ReactElementConfig,
 } from "react";
 import React from "react";
 import { withRouter } from "next/router"

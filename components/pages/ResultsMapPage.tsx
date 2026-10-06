@@ -2,7 +2,6 @@ import React, {useState} from "react"
 import type {
     ReactNode,
     ReactElement,
-    ComponentProps as ReactElementConfig,
 } from "react"
 import { withRouter } from "next/router"
 import type { NextRouter } from "next/router"

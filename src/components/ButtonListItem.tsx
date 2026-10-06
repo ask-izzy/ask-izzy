@@ -11,7 +11,7 @@ type Props = Omit<ListItemProps<typeof Button>, keyof PropsRest & {rootElement: 
 
 
 
-export default class ButtonListItem extends React.Component<Props, void> {
+export default class ButtonListItem extends React.Component<Props> {
     render(): ReactNode {
         return <>
             <ListItem

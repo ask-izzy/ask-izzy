@@ -5,9 +5,9 @@ type Props = {
 }
 
 function useIsMounted(props: {rerenderAfterMount: true}): boolean;
-function useIsMounted(props?: {rerenderAfterMount?: false}): $Call<typeof useRef, boolean>;
+function useIsMounted(props?: {rerenderAfterMount?: false}): React.MutableRefObject<boolean>;
 
-function useIsMounted({rerenderAfterMount}: Props = {}): $Call<typeof useRef, boolean> | boolean {
+function useIsMounted({rerenderAfterMount}: Props = {}): React.MutableRefObject<boolean> | boolean {
     const isMountedRef = useRef(false);
     const [isMountedState, setIsMountedState] = useState(false)
 

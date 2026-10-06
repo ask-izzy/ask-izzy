@@ -5,6 +5,7 @@ import OnlineSafetyLink from "../../components/OnlineSafetyLink";
 import {
     getSavedPersonalisationAnswer,
 } from "../../utils/personalisation"
+import type {PersonalisationInfoPage} from "@/types/personalisation-page"
 
 export default ({
     type: "info",
@@ -20,4 +21,4 @@ export default ({
         return !["", "Yes", "(skipped)"]
             .includes(getSavedPersonalisationAnswer(AreYouSafe) || "");
     },
-});
+} as PersonalisationInfoPage);

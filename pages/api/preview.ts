@@ -1,5 +1,5 @@
 // We'll type these correctly with typescript
-export default async function handler(req: any, res: any): any {
+export default async function handler(req: any, res: any): Promise<any> {
     const secret = req.query.secret;
     const path = req.query.slug;
 

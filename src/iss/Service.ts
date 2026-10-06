@@ -84,11 +84,11 @@ export default class Service {
         type: string;
         url: string;
     }>;
-    target_gender: 'u' | 'f' | 'm' | 'x';
-    type: 'organisation' |
-        'site' |
-        'service' |
-        'practitioner';
+    target_gender: "u" | "f" | "m" | "x";
+    type: "organisation" |
+        "site" |
+        "service" |
+        "practitioner";
     web: string;
     travelTimes: Array<travelTime> | null | undefined;
 

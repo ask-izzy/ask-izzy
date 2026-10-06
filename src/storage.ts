@@ -183,7 +183,7 @@ const Storage = {
         sessionStore.removeItem(key);
     },
 
-    subscribeToJsonChange(key: string, uniqueCallbackKey: string, callback: function) {
+    subscribeToJsonChange(key: string, uniqueCallbackKey: string, callback: Function) {
         if (!this.subscribedJsonEvents) {
             this.subscribedJsonEvents = {}
         }

@@ -1,6 +1,6 @@
 import {useRef} from "react";
 
-export default (): Array<function> => {
+export default (): Array<Function> => {
     // ref is to fix the stale closure issue
     // caused by updateServices callback
     // fix requires using a ref and a useState hook

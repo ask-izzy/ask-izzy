@@ -6,6 +6,7 @@ import DfvDemographics from "./DfvDemographics";
 import {
     getSavedPersonalisationAnswer,
 } from "../../utils/personalisation"
+import type {PersonalisationInfoPage} from "@/types/personalisation-page"
 
 
 export default ({
@@ -35,4 +36,4 @@ export default ({
             getSavedPersonalisationAnswer(DfvDemographics)?.includes("Under 18")
         );
     },
-});
+} as PersonalisationInfoPage);

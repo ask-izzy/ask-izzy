@@ -16,7 +16,7 @@ type Props = {
     onChange?: (arg0: React.ChangeEvent<HTMLInputElement>) => void,
     onSubmit: (arg0: string) => void,
     placeholder?: string,
-    iconPosition?: ReactElementConfig<typeof Input>['iconPosition'],
+    iconPosition?: ReactElementConfig<typeof Input>["iconPosition"],
     autocompleteValues?: Array<string>,
     inputAriaLabel?: string
 }

@@ -5,7 +5,7 @@ type Props = {
     plural: boolean
 }
 
-class CrisisHeader extends React.Component<Props, void> {
+class CrisisHeader extends React.Component<Props> {
     render(): ReactElement<"h3"> {
         return (
             <h3 className="CrisisHeader">

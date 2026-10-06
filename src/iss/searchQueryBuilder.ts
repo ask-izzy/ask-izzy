@@ -13,15 +13,14 @@ import storage from "../storage";
 export type SearchQuery = SearchQueryArrayProps & SearchQueryOtherProps
 
 export type SearchQueryChanges = SearchQueryArrayProps & SearchQueryOtherProps & {
-    $push?: $ObjMap<
-        SearchQueryArrayProps,
-        <T>(t: T) => T[number]
-    >,
+    $push?: {
+        [Key in keyof SearchQueryArrayProps]: SearchQueryArrayProps[Key][number]
+    },
     $unset?: string[],
     $removeElms?: SearchQueryArrayProps,
     $concat?: SearchQueryArrayProps,
     $applyIfShouldInjectAccessPoints?: SearchQueryChanges,
-} | {}
+}
 
 export type SearchQueryModifier = {
     name: string,

@@ -142,6 +142,7 @@
                     {
                         "vars": "all",
                         "args": "none",
+                        "caughtErrors": "none",
                         "ignoreRestSiblings": true
                     }
                 ]

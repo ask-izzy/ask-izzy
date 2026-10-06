@@ -9,7 +9,7 @@ type Props = {
     className?: string,
 }
 
-export default class SvgIconQuestionMark extends React.Component<Props, void> {
+export default class SvgIconQuestionMark extends React.Component<Props> {
 
     render(): ReactElement<"span"> {
         const {className, ...rest} = this.props;

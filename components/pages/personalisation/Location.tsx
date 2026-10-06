@@ -1,6 +1,5 @@
 import type {
     ReactNode,
-    ComponentProps as ReactElementConfig,
 } from "react"
 
 import React, {useRef, useState, useEffect} from "react"

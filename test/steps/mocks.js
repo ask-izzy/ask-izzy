@@ -9,11 +9,14 @@ import type { LibraryEnglish as YaddaLibraryEnglish } from "yadda";
 
 import dictionary from "../support/dictionary";
 import fetch from "node-fetch";
-import Service from "../../src/iss/Service";
+
+// Service (src/iss/Service.ts) is written in TypeScript which Flow can't read
+// so it's untyped here
+type ServiceInstance = any
 
 import { visitUrl } from "./browser";
 
-let mockedService: ?Service;
+let mockedService: ?ServiceInstance;
 
 async function searchMockedService() {
     if (!mockedService) {
@@ -29,7 +32,7 @@ async function visitMockedService() {
     await visitUrl(this.driver, `/service/${mockedService.id}`, this.mochaState);
 }
 
-async function mockService(service: Service) {
+async function mockService(service: ServiceInstance) {
     mockedService = service;
     const res = await fetch(`${process.env.NEXT_PUBLIC_ISS_BASE_URL}/mock/service`, {
         method: "POST",
@@ -45,7 +48,7 @@ async function mockService(service: Service) {
 
 async function mockSearchForServices(
     search: string,
-    services: Array<Service>
+    services: Array<ServiceInstance>
 ): Promise<void> {
     const res = await fetch(`${process.env.NEXT_PUBLIC_ISS_BASE_URL}/mock/search`, {
         method: "POST",

@@ -65,7 +65,7 @@ export type GTMEventDirectToGA = {
     eventAction: string | null,
     eventLabel: string | null,
     eventValue?: number | null,
-    sendDirectlyToGA: bool,
+    sendDirectlyToGA: boolean,
 };
 export type GTMEventOther = {
     event: string,

@@ -43,7 +43,7 @@ const client: any = new ApolloClient({
 export default client;
 
 // We'll type these property when moving to typescript
-export async function queryGraphQlWithErrorLogging(query: any): any {
+export async function queryGraphQlWithErrorLogging(query: any): Promise<any> {
     try {
         return await client.query(query)
     } catch (error) {

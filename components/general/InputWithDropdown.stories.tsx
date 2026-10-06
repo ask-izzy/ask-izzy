@@ -34,8 +34,8 @@ export default {
 
 type InputProps = ReactElementConfig<typeof InputWithDropdown>
 type InputRequiredProps = Omit<InputProps, keyof {
-        onChange: InputProps['onChange'],
-        value: InputProps['value'],
+        onChange: InputProps["onChange"],
+        value: InputProps["value"],
     }>
 
 const Template = (args: InputProps): ReactNode => {

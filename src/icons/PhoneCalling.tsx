@@ -9,7 +9,7 @@ type Props = {
     className?: string,
 };
 
-class SvgIconPhoneCalling extends React.Component<Props, void> {
+class SvgIconPhoneCalling extends React.Component<Props> {
     render(): ReactElement<"span"> {
         const {className, ...rest} = this.props;
         const classes = classnames(

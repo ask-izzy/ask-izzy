@@ -15,7 +15,7 @@ export default function initialiseRequestInterceptor() {
     )
     const domainsAllowedWithoutProxy = (process.env.NEXT_PUBLIC_DOMAINS_ALLOWED_WITHOUT_PROXY || "")
         .split(",").map(domain => domain.trim())
-    const zeroRatingHelper = new Object();
+    const zeroRatingHelper: any = new Object();
 
     // Common replace function: Replace known external domains to internal proxy
     zeroRatingHelper.replaceDomain = function(oldUrlString) {

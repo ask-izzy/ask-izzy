@@ -56,8 +56,8 @@ export type ISS3SearchQuery = {
 };
 
 export type ISS3SearchQueryWithDefaults = ISS3SearchQuery & {
-    type?: ISS3SearchQuery['type'],
-    limit?: ISS3SearchQuery['limit']
+    type?: ISS3SearchQuery["type"],
+    limit?: ISS3SearchQuery["limit"]
 };
 
 export type ISS3LocationSearchQuery = {

@@ -10,7 +10,7 @@ import { getAddressLocationPropsFixture } from "./AddressLocation";
 import getSiteFixture from "./site";
 import {getNowOpenFixture, getPhoneFixture} from "./general";
 
-export type serviceFixtureProps = Partial<ServiceProps & {
+export type serviceFixtureProps = Partial<Omit<ServiceProps, "location" | "now_open" | "phones" | "site"> & {
     location: Partial<AddressLocationProps>,
     now_open: Partial<nowOpen>,
     phones: Array<Partial<phone>>,

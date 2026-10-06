@@ -25,5 +25,14 @@
     ]
   },
   "include": ["next-env.d.ts", "types/**/*.d.ts", "**/*.ts", "**/*.tsx"],
-  "exclude": ["node_modules", ".next", ".cache", "public"]
+  "exclude": [
+    "node_modules",
+    ".next",
+    ".cache",
+    "public",
+    // Storybook is currently disabled and the stories will need to be updated
+    // when it's upgraded so for now they're not type checked.
+    "**/*.stories.tsx",
+    "**/*.stories.ts"
+  ]
 }
