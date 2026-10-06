@@ -37,13 +37,13 @@ export function createServiceSearch(query: IzzySearchQuery): PaginatedSearch {
     return search
 }
 
-export class PaginatedSearch {
-    readonly loadNextPage: () => Promise<void>;
-    readonly loadedServices: Array<Service>;
-    readonly numOfPagesLoaded: number;
-    readonly issQuery: ISS4SearchQuery | ISS3SearchQuery
-    readonly izzyQuery: IzzySearchQuery
-    readonly isNext: boolean | null | undefined
+export abstract class PaginatedSearch {
+    abstract loadNextPage(): Promise<void>;
+    abstract get loadedServices(): Array<Service>;
+    abstract get numOfPagesLoaded(): number;
+    abstract get issQuery(): ISS4SearchQuery | ISS3SearchQuery;
+    abstract get izzyQuery(): IzzySearchQuery;
+    abstract get isNext(): boolean | null | undefined;
 }
 
 export class PaginatedSearchIss3 extends PaginatedSearch {
@@ -78,7 +78,6 @@ export class PaginatedSearchIss3 extends PaginatedSearch {
         this.#issQuery = issQuery
     }
 
-    // @ts-expect-error TODO(ts-migration): Class 'PaginatedSearch' defines instance member property 'loadNextPage', bu…
     async loadNextPage() {
         const iss3Client = await getIssClient("3")
         const offset = this.#pagesLoaded * this.#maxPageSize
@@ -98,27 +97,22 @@ export class PaginatedSearchIss3 extends PaginatedSearch {
 
     }
 
-    // @ts-expect-error TODO(ts-migration): 'loadedServices' is defined as a property in class 'PaginatedSearch', but i…
     get loadedServices(): Array<Service> {
         return this.#loadedServices
     }
 
-    // @ts-expect-error TODO(ts-migration): 'numOfPagesLoaded' is defined as a property in class 'PaginatedSearch', but…
     get numOfPagesLoaded(): number {
         return this.#pagesLoaded
     }
 
-    // @ts-expect-error TODO(ts-migration): 'issQuery' is defined as a property in class 'PaginatedSearch', but is over…
     get issQuery(): ISS3SearchQuery {
         return this.#issQuery
     }
 
-    // @ts-expect-error TODO(ts-migration): 'izzyQuery' is defined as a property in class 'PaginatedSearch', but is ove…
     get izzyQuery(): IzzySearchQuery {
         return this.#izzyQuery
     }
 
-    // @ts-expect-error TODO(ts-migration): 'isNext' is defined as a property in class 'PaginatedSearch', but is overri…
     get isNext(): boolean | null | undefined {
         return Boolean(this._lastMeta?.next)
     }
@@ -153,7 +147,6 @@ export class PaginatedSearchIss4 extends PaginatedSearch {
         this.#issQuery = issQuery
     }
 
-    // @ts-expect-error TODO(ts-migration): Class 'PaginatedSearch' defines instance member property 'loadNextPage', bu…
     async loadNextPage() {
         const issClient = await getIssClient("4")
         const res = await issClient.search({
@@ -174,27 +167,22 @@ export class PaginatedSearchIss4 extends PaginatedSearch {
         }
     }
 
-    // @ts-expect-error TODO(ts-migration): 'loadedServices' is defined as a property in class 'PaginatedSearch', but i…
     get loadedServices(): Array<Service> {
         return this.#loadedServices
     }
 
-    // @ts-expect-error TODO(ts-migration): 'numOfPagesLoaded' is defined as a property in class 'PaginatedSearch', but…
     get numOfPagesLoaded(): number {
         return this.#pagesLoaded
     }
 
-    // @ts-expect-error TODO(ts-migration): 'issQuery' is defined as a property in class 'PaginatedSearch', but is over…
     get issQuery(): ISS4SearchQuery {
         return this.#issQuery
     }
 
-    // @ts-expect-error TODO(ts-migration): 'izzyQuery' is defined as a property in class 'PaginatedSearch', but is ove…
     get izzyQuery(): IzzySearchQuery {
         return this.#izzyQuery
     }
 
-    // @ts-expect-error TODO(ts-migration): 'isNext' is defined as a property in class 'PaginatedSearch', but is overri…
     get isNext(): boolean | null | undefined {
         return Boolean(
             this._lastMeta?.page.current < this._lastMeta?.page.total_pages
