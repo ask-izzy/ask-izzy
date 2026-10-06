@@ -26,6 +26,7 @@ import {
 } from "@/src/utils/routing"
 import type {
     PersonalisationPage,
+    PersonalisationQuestionPage,
 } from "@/types/personalisation-page"
 import Loading from "@/src/icons/Loading"
 
@@ -88,8 +89,7 @@ function PersonalisationSummaryPage({router}: Props): ReactNode {
         personalisationPage: PersonalisationPage
     ): string | null {
         return personalisationPage.summaryLabel ||
-            // @ts-expect-error TODO(ts-migration): Property 'question' does not exist on type 'PersonalisationPage'.
-            personalisationPage.question || null
+            (personalisationPage as PersonalisationQuestionPage).question || null
     }
 
     function getFormattedAnswers(personalisationPage: PersonalisationPage) {

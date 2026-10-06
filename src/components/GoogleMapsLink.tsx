@@ -73,7 +73,6 @@ function GoogleMapsLink({
     return (
         <Link
             className={classnames("GoogleMapsLink", className)}
-            // @ts-expect-error TODO(ts-migration): Type '{ children: any[]; className: any; target: string; onClick: (…
             target="_blank"
             onClick={onClick}
             aria-label="Open Google Maps in a new tab"

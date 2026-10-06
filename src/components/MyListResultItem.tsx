@@ -82,8 +82,6 @@ function ResultListItem({
                     </div>
                     {service.location && renderLocation()}
                     <CurrentOpeningTime
-                        // @ts-expect-error TODO(ts-migration): Type '{ className: string; serviceOpening: ServiceOpeni…
-                        className="opening_hours"
                         serviceOpening={service.open}
                     />
                     <ServiceProvisions

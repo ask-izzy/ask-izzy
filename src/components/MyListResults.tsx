@@ -42,8 +42,6 @@ function MyListResults({
                     newList.push(
                         <MyListResultItem
                             key={index}
-                            // @ts-expect-error TODO(ts-migration): Type '{ key: number; travelTimesStatus: travelTimes…
-                            travelTimesStatus={travelTimesStatus}
                             service={myListService}
                             resultNumber={index + 1}
                         />

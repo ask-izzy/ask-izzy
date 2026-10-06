@@ -123,8 +123,7 @@ function SitesMap(
                             title="You are here"
                             icon={{
                                 url: "/images/you-are-here.png",
-                                // @ts-expect-error TODO(ts-migration): No overload matches this call.
-                                scaledSize: {width: 32, height: 32},
+                                scaledSize: {width: 32, height: 32} as google.maps.Size,
                             }}
                             position={{
                                 lat: storage.getUserGeolocation()?.latitude,
@@ -144,8 +143,7 @@ function SitesMap(
                                 url: marker.selected ?
                                     "/images/map-marker-with-dot.png"
                                     : "/images/map-marker.png",
-                                // @ts-expect-error TODO(ts-migration): No overload matches this call.
-                                scaledSize: {width: 27, height: 43},
+                                scaledSize: {width: 27, height: 43} as google.maps.Size,
                             }}
                             onClick={() => markerOnClickHandler(marker)}
                         />

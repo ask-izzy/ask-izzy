@@ -28,6 +28,5 @@
 
     CustomEvent.prototype = window.Event.prototype;
 
-    // @ts-expect-error TODO(ts-migration): Type '{ (event: any, params: any): CustomEvent<any>; prototype: Event; }' i…
-    window.CustomEvent = CustomEvent;
+    window.CustomEvent = CustomEvent as unknown as typeof window.CustomEvent;
 })();

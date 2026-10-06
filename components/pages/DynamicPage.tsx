@@ -51,10 +51,9 @@ function DynamicPage({pageDetails, embeddedCallouts}: Props): ReactNode {
         (props: ReactMarkdownQuoteProps) => {
             // Get the text content of the children
             const textContent = React.Children.map(props.children,
-                paragraphElm => (
-                    // @ts-expect-error TODO(ts-migration): Property 'props' does not exist on type 'ReactNode'.
+                (paragraphElm: React.ReactElement) => (
                     React.Children.map(paragraphElm.props.children,
-                        textElm => textElm.type(textElm.props))
+                        (textElm: React.ReactElement<any, React.FunctionComponent>) => textElm.type(textElm.props))
                 )).join("")
 
             const [, calloutKey] = textContent.match(/\[callout\((.+)\)]/) || [];

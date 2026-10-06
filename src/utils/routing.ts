@@ -128,17 +128,15 @@ export function getPageTitleFromRouter(
 export function getPathOfSSRPage(
     router: NextRouter
 ): string {
-    // @ts-expect-error TODO(ts-migration): Argument of type 'ParsedUrlQuery' is not assignable to parameter of type '{…
     return convertRouteToPath(router.pathname, router.query)
 }
 
 export function convertRouteToPath(
     route: string,
-    params: {[key: string]: [string]}
+    params: {[key: string]: string | string[]}
 ): string {
     return route.replaceAll(
         /\[([^/\]]+?)\]/g,
-        // @ts-expect-error TODO(ts-migration): No overload matches this call.
         (fullMatch, param) => {
             if (!(param in params)) {
                 console.error(
@@ -147,7 +145,7 @@ export function convertRouteToPath(
                     params,
                 )
             }
-            return params[param]
+            return params[param] as string
         }
     )
 }

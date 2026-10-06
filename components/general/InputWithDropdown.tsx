@@ -1,8 +1,5 @@
 import React, {useRef, useState} from "react"
-import type {
-    ReactNode,
-    ComponentType as ReactAbstractComponent,
-} from "react"
+import type {ReactNode} from "react"
 import cnx from "classnames"
 import { useCombobox, resetIdCounter } from "downshift"
 
@@ -28,10 +25,10 @@ type Props = {
     onBlur?: (arg0: React.FocusEvent<HTMLInputElement>) => void,
     onFocus?: (arg0: React.FocusEvent<HTMLInputElement>) => void,
     loadingResults?: boolean,
-}
-
-type refType = { current: null | HTMLInputElement } |
-    ((arg0: null | HTMLInputElement) => unknown)
+} & Omit<
+    React.ComponentPropsWithoutRef<"input">,
+    "value" | "onChange" | "onKeyDown" | "onBlur" | "onFocus"
+>
 
 function InputWithDropdown({
     className,
@@ -45,7 +42,7 @@ function InputWithDropdown({
     autocompleteValues = [],
     loadingResults = false,
     ...otherProps
-}: Props, ref?: refType | null | undefined): ReactNode {
+}: Props, ref: React.ForwardedRef<HTMLInputElement>): ReactNode {
     //previousAutocompleteLength is used to solve regression AI-41 caused by
     //not proper reloading of the input component. Overriding the function
     //getA11yStatusMessage to use previousAutocompleteLength was necessary.
@@ -56,11 +53,10 @@ function InputWithDropdown({
             previousAutocompleteLength,
             setPreviousAutocompleteLength,
         ] = useState([0, 0])
-    // Flow.js doesn't look like it has a way to type React.forwardRef() so that
-    // it only accepts new style refs. So typechecking won't fail if a old style
-    // ref is passed in but we can't use old style refs in this function so
-    // we'll silently ignore the passed in ref if it's an old style ref.
-    const inputRef = (ref && typeof ref !== "function") ? ref : useRef()
+    // We can't use old style (callback) refs in this function so we'll silently
+    // ignore the passed in ref if it's an old style ref.
+    const inputRef: React.MutableRefObject<HTMLInputElement | null | undefined> =
+        (ref && typeof ref !== "function") ? ref : useRef<HTMLInputElement>()
 
     const showInitialSuggestions = autocompleteValues.length == 0 &&
         initialSuggestions.length > 0
@@ -125,8 +121,9 @@ function InputWithDropdown({
                     // the emitted event and then call onChange with it.
                     inputRef.current.addEventListener(
                         "change",
-                        // @ts-expect-error TODO(ts-migration): No overload matches this call.
-                        (event: React.ChangeEvent<HTMLInputElement>) => otherProps.onChange(event),
+                        event => otherProps.onChange(
+                            event as unknown as React.ChangeEvent<HTMLInputElement>
+                        ),
                         {once: true}
                     )
                     inputRef.current?.dispatchEvent(inputEvent)
@@ -256,8 +253,9 @@ function InputWithDropdown({
                                 )}
                                 onMouseDown={event => {
                                     if (showInitialSuggestions) {
-                                        // @ts-expect-error TODO(ts-migration): Property 'preventDownshiftDefault' does…
-                                        event.preventDownshiftDefault = true
+                                        (
+                                            event as typeof event & {preventDownshiftDefault?: boolean}
+                                        ).preventDownshiftDefault = true
                                     }
                                 }}
 
@@ -284,20 +282,15 @@ function InputWithDropdown({
             value={value}
             containerProps={downshiftCombobox?.getComboboxProps()}
             customInputElement={(inputProps) =>
-                // @ts-expect-error TODO(ts-migration): Type '{ ref: { current: HTMLInputElement; }; value: string; onC…
                 <input
                     {...inputProps}
                     {...otherInputProps}
                 />
             }
-            // @ts-expect-error TODO(ts-migration): Type '{ icon: ReactNode; iconPosition: "left" | "right"; showClearB…
             ref={inputRef}
             extraContainerChildren={renderAutoCompleteList()}
         />
     )
 }
 
-export default (
-    // @ts-expect-error TODO(ts-migration): Conversion of type 'ForwardRefExoticComponent<HTMLInputElement & RefAttribu…
-    React.forwardRef<Props, HTMLInputElement>(InputWithDropdown) as ReactAbstractComponent<Props>
-)
+export default React.forwardRef<HTMLInputElement, Props>(InputWithDropdown)

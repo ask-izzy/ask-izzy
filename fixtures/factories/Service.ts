@@ -83,7 +83,6 @@ export function getServiceFixtureProps(
         type: "service",
         web: "",
     };
-    // @ts-expect-error TODO(ts-migration): Type '{ abn: string; accessibility: string; accessibility_details: string; …
     return merge(
         defaultProps,
         {

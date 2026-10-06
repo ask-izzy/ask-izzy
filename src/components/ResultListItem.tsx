@@ -66,8 +66,6 @@ function ResultListItem({
                 </ScreenReader>
                 <TransportTime
                     location={service.location}
-                    // @ts-expect-error TODO(ts-migration): Type '{ location: AddressLocation; compact: boolean; travel…
-                    compact={true}
                     travelTimes={service.travelTimes}
                 />
             </>
@@ -121,8 +119,6 @@ function ResultListItem({
             </div>
             {service.location && renderLocation()}
             <CurrentOpeningTime
-                // @ts-expect-error TODO(ts-migration): Type '{ className: string; serviceOpening: ServiceOpening; }' i…
-                className="opening_hours"
                 serviceOpening={service.open}
             />
             <ServiceProvisions

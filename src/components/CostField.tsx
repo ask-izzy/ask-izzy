@@ -1,9 +1,10 @@
 import React, { useState } from "react";
+import type {ReactNode} from "react";
 import FormatText from "./FormatText";
 import Collapser from "@/src/components/general/Collapser";
 
 type Props = {
-    catchment: string;
+    catchment?: string;
     cost: string;
 };
 
@@ -12,17 +13,12 @@ function Cost({ catchment, cost }: Props) {
         return null; // Don't render the cost section if the data is "nothing"
     }
 
-    const [showAll, setShowAll] = useState(false);
+    const [showAll] = useState(false);
     const isExceedingLimit = cost && cost.length > 100;
 
-    const toggleShowAll = () => {
-        setShowAll(!showAll);
-    };
-
-    let costContent = cost;
+    let costContent: ReactNode = cost;
 
     if (isExceedingLimit && !showAll) {
-        // @ts-expect-error TODO(ts-migration): Type 'Element' is not assignable to type 'string'.
         costContent = (
             <Collapser
                 contentPreview={cost.substring(0, 100) + "..."}
@@ -33,11 +29,6 @@ function Cost({ catchment, cost }: Props) {
                     eventAction: "show all cost info",
                     eventLabel: null,
                 }}
-                // @ts-expect-error TODO(ts-migration): Type '{ children: Element; contentPreview: string; expandMessag…
-                title="Show all cost info"
-                isOpen={showAll}
-                toggleAccordion={toggleShowAll}
-                items={[cost]}
             >
                 <FormatText paragraphWrapperElement="p">{cost}</FormatText>
             </Collapser>

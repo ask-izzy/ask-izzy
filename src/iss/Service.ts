@@ -20,7 +20,7 @@ import type {SortType} from "../components/base/Dropdown"
 import {getIssClient, getIssVersion} from "./client"
 import {lookbehindIsSupported} from "@/helpers/regex.helpers"
 
-export type ServiceProps = Service & {
+export type ServiceProps = Omit<Service, "location"> & {
     location: AddressLocationProps
 }
 
@@ -44,6 +44,7 @@ export default class Service {
     availability: string;
     billing_method: string;
     capacity: {
+        frequency?: number;
         status: string;
         status_text: string;
     };

@@ -6,7 +6,7 @@ import Tooltip from "@/src/components/Tooltip";
 type TooltipProps = {
     content: string,
     children: ReactNode,
-}
+} & Omit<React.ComponentProps<typeof Tooltip>, "content" | "children">
 export default function TooltipHover({
     content,
     children,
@@ -26,7 +26,6 @@ export default function TooltipHover({
                 <Tooltip
                     {...otherProps}
                     content={<>{content}</>}
-                    // @ts-expect-error TODO(ts-migration): Type '{ children: Element; content: Element; componentsProp…
                     componentsProps={{
                         tooltip: {
                             sx: {

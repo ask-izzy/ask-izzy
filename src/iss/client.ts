@@ -17,6 +17,7 @@ let iss3Client: ISS3Client,
 
 function getIssClient(version: "3"): Promise<ISS3Client>;
 function getIssClient(version: "4"): Promise<ISS4Client>;
+function getIssClient(version: "3" | "4"): Promise<ISS3Client | ISS4Client>;
 
 async function getIssClient(
     version: "3" | "4"

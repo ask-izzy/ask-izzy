@@ -1,16 +1,11 @@
 import {request, postRequestWithToken} from "../lib/requests"
+// Either username and password or apiKey should be given
 type ClientProps = {
     baseUrl: string;
-} & (
-    {
-        password: string;
-        username: string;
-    }
-    |
-    {
-        apiKey: string;
-    }
-)
+    password?: string;
+    username?: string;
+    apiKey?: string;
+}
 
 export default async function createClient(
     props: ClientProps
@@ -55,14 +50,10 @@ class NotificationsApiClient {
         // We know that if username exists then so must password but flow is stupid and dumb.
         // I checked and typescript can handle this situation correctly. I'm so ready to move
         // to typescript already :/
-        // @ts-expect-error TODO(ts-migration): Property 'username' does not exist on type 'ClientProps'.
         if (props.username) {
-            // @ts-expect-error TODO(ts-migration): Property 'username' does not exist on type 'ClientProps'.
             this.username = props.username
-            // @ts-expect-error TODO(ts-migration): Property 'password' does not exist on type 'ClientProps'.
             this.password = props.password
         } else {
-            // @ts-expect-error TODO(ts-migration): Property 'apiKey' does not exist on type 'ClientProps'.
             this.apiKey = props.apiKey
         }
         this.baseUrl = props.baseUrl

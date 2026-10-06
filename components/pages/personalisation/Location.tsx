@@ -48,9 +48,9 @@ type initialSuggestions = {
 }
 
 function Location({router, details}: Props): ReactNode {
-    const searchInputRef = useRef()
-    const GeolocationButtonClickRef = useRef()
-    const locationNameInputRef = useRef()
+    const searchInputRef = useRef<HTMLInputElement>()
+    const GeolocationButtonClickRef = useRef<Function>()
+    const locationNameInputRef = useRef<string>()
     const [gettingAutocompletionsInProgress, setGettingAutocompletionsInProgress] = useState<boolean>(false)
     const [locationNameInput, setLocationNameInput] = useState<string>("")
     const [selectedLocation, setSelectedLocation] = useState<LocationType | null>(null)
@@ -62,8 +62,7 @@ function Location({router, details}: Props): ReactNode {
     useEffect(() => {
         const userLocation = storage.getUserGeolocation()
         const searchLocation = storage.getSearchArea()
-        // @ts-expect-error TODO(ts-migration): Type '{}' is not assignable to type 'LocationType'.
-        let location: LocationType = {}
+        let location: LocationType | Record<string, never> = {}
         if (userLocation) {
 
             if (searchLocation.length == 0 || searchLocation === userLocation.name) {
@@ -75,7 +74,7 @@ function Location({router, details}: Props): ReactNode {
         }
 
         if (location && Object.keys(location).length !== 0) {
-            setLocation(location)
+            setLocation(location as LocationType)
         }
 
     }, [])
@@ -107,7 +106,6 @@ function Location({router, details}: Props): ReactNode {
     }
 
     function setLocationInput(input: string) {
-        // @ts-expect-error TODO(ts-migration): Type 'string' is not assignable to type 'undefined'.
         locationNameInputRef.current = input
         setLocationNameInput(input)
     }
@@ -127,7 +125,6 @@ function Location({router, details}: Props): ReactNode {
         }
         storage.setSearchArea(selectedLocation.name);
         if (isGeolocation(selectedLocation)) {
-            // @ts-expect-error TODO(ts-migration): Argument of type 'LocationType' is not assignable to parameter of t…
             storage.setUserGeolocation(selectedLocation)
         } else {
             storage.clearUserGeolocation()
@@ -200,7 +197,6 @@ function Location({router, details}: Props): ReactNode {
             // Scroll the input to just under the appbar
             window.scrollTo(
                 0,
-                // @ts-expect-error TODO(ts-migration): Property 'getBoundingClientRect' does not exist on type 'never'.
                 searchInputRef.current.getBoundingClientRect().top +
                     window.scrollY - 50
             );
@@ -249,14 +245,12 @@ function Location({router, details}: Props): ReactNode {
                         {isGeolocation(selectedLocation)}
                         <GeolocationButton
                             onStatusChange={onGeolocationStatusChange}
-                            // @ts-expect-error TODO(ts-migration): Type 'LocationType' is not assignable to type 'Geol…
                             locationValue={
                                 isGeolocation(selectedLocation) ?
                                     selectedLocation
                                     : undefined
                             }
                             buttonClickRef={(clickRef) => {
-                                // @ts-expect-error TODO(ts-migration): Type 'Function' is not assignable to type 'unde…
                                 GeolocationButtonClickRef.current = clickRef
                             }}
                         />
@@ -298,7 +292,6 @@ function Location({router, details}: Props): ReactNode {
 
     function onInitialSuggestionsSelected() {
         GeolocationButtonClickRef.current &&
-        // @ts-expect-error TODO(ts-migration): This expression is not callable.
         GeolocationButtonClickRef.current()
 
     }
@@ -318,9 +311,9 @@ function Location({router, details}: Props): ReactNode {
         )
     }
 
-    function isGeolocation(location?: LocationType | null | undefined): boolean {
-        // @ts-expect-error TODO(ts-migration): Property 'longitude' does not exist on type 'LocationType'.
-        return !!(location && location.longitude && location.latitude)
+    function isGeolocation(location?: LocationType | null | undefined): location is Geolocation {
+        const maybeGeolocation = location as Partial<Geolocation> | null | undefined
+        return !!(maybeGeolocation && maybeGeolocation.longitude && maybeGeolocation.latitude)
     }
 
     return (
@@ -375,7 +368,6 @@ function Location({router, details}: Props): ReactNode {
                         </legend>
                         <div className="search">
                             <InputWithDropdown
-                                // @ts-expect-error TODO(ts-migration): Type '{ ref: MutableRefObject<undefined>; type:…
                                 ref={searchInputRef}
                                 type="search"
                                 showClearButton={true}

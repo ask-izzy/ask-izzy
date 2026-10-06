@@ -14,8 +14,7 @@ class DebugContainer extends React.Component<Props> {
     static contextType: any = debugModeContext;
 
     render(): null | ReactElement<"div"> {
-        // @ts-expect-error TODO(ts-migration): Type 'unknown' must have a '[Symbol.iterator]()' method that returns an…
-        const [debugMode] = this.context;
+        const [debugMode] = this.context as React.ContextType<typeof debugModeContext>;
         if (!debugMode) {
             return null;
         }

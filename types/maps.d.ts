@@ -1,6 +1,6 @@
 // Minimal types for the parts of the Google Maps API we use
 
-type callback = (results: any, status: number) => void;
+type callback = (results: any, status: string) => void;
 
 type LatLngLiteral = {
     lat: number,

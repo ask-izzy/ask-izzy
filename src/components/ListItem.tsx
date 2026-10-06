@@ -5,7 +5,7 @@ import type {
 import React from "react";
 import classnames from "classnames";
 
-type ListItemSpecific<T extends React.ComponentType<any> | string> = {
+type ListItemSpecific<T extends React.ElementType> = {
     rootElement?: T,
     className?: string,
 
@@ -19,12 +19,11 @@ type ListItemSpecific<T extends React.ComponentType<any> | string> = {
 
     onClick?: (event?: React.SyntheticEvent) => any,
 }
-export type Props<T extends React.ComponentType<any> | string> =
-    // @ts-expect-error TODO(ts-migration): Type 'T' does not satisfy the constraint 'JSXElementConstructor<any> | keyo…
+export type Props<T extends React.ElementType> =
     ListItemSpecific<T> & Omit<ReactElementConfig<T>, keyof {children: any | void}>
 
 function ListItem<
-    T extends React.ComponentType<any> | string
+    T extends React.ElementType
 >({
     rootElement,
     className,
@@ -36,8 +35,7 @@ function ListItem<
     ...rest
 }: Props<T>): ReactNode {
     if (!rootElement) {
-        // @ts-expect-error TODO(ts-migration): Type 'string' is not assignable to type 'T'.
-        rootElement = "div";
+        rootElement = "div" as T;
     }
 
     return React.createElement(

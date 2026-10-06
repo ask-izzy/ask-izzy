@@ -53,7 +53,6 @@ export default function TooltipInformation({
                             {content}
                             <Button
                                 className="close-tooltip"
-                                // @ts-expect-error TODO(ts-migration): Type '{ children: Element; className: string; r…
                                 ref={closeButtonRef}
                                 aria-label="Dismiss tooltip"
                                 onClick={() => setTooltipOpen(false)}
@@ -63,7 +62,6 @@ export default function TooltipInformation({
                             </Button>
                         </div>
                     }
-                    // @ts-expect-error TODO(ts-migration): Type '{ children: Element; content: Element; open: boolean;…
                     open={tooltipOpen}
                     disableHoverListener={true}
                     disableTouchListener={true}

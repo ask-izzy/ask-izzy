@@ -8,7 +8,7 @@ import MarkunreadRounded from "@mui/icons-material/MarkunreadRounded";
 
 type Props = {
     email: string,
-    comment: string,
+    comment?: string,
     analyticsEventDetails?: AnalyticsEvent
 }
 

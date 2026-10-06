@@ -15,7 +15,7 @@ import MyListButton from "./MyListButton"
 type Props = {
     transition?: boolean,
     hideLogoWhenNotABar?: boolean,
-    onBackTouchTap?: Function | null | undefined,
+    onBackTouchTap?: (() => void) | null | undefined,
     backMessage?: string,
     containerClassName?: string | null | undefined,
     breakpoint? : number,
@@ -90,7 +90,6 @@ function AppBar({
                         name={onBackTouchTap ? backMessage
                             : "Link to home page"
                         }
-                        // @ts-expect-error TODO(ts-migration): Type 'Function' is not assignable to type 'Function & (…
                         onClick={onBackTouchTap || goHome}
                         analyticsEvent={{
                             event: "Action Triggered - Back",

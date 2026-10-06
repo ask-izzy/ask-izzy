@@ -1,6 +1,7 @@
 import React from "react"
 import type {ReactNode} from "react"
 import { FormProvider } from "react-hook-form";
+import type { UseFormReturn } from "react-hook-form";
 import cnx from "classnames"
 
 type Props = {
@@ -22,7 +23,11 @@ type Props = {
     trigger?: any,
     control?: any,
     schema?: any,
-}
+} & Omit<React.ComponentPropsWithoutRef<"form">, "children">
+
+// As well as the standard react-hook-form methods we make the yup schema
+// available via the form context
+export type FormContext = UseFormReturn & {schema?: any}
 
 export default function Form({
     children,
@@ -63,8 +68,7 @@ export default function Form({
         schema,
     }
     return (
-        // @ts-expect-error TODO(ts-migration): Property 'control' is missing in type '{ children: Element; register: a…
-        <FormProvider {...formProviderProps}>
+        <FormProvider {...(formProviderProps as FormContext)}>
             <form
                 {...formProps}
                 className={cnx("Code", className)}

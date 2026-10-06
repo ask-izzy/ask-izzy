@@ -3,12 +3,13 @@ import type {ReactNode} from "react"
 import { useFormContext } from "react-hook-form";
 
 import Input from "@/src/components/base/Input"
+import type { FormContext } from "@/components/forms/Form"
 
 type Props = {
     label: string,
     id: string,
     description?: string,
-}
+} & Omit<React.ComponentProps<typeof Input>, "id" | "value">
 
 export default function FormTextInput({
     label,
@@ -16,8 +17,7 @@ export default function FormTextInput({
     description = null,
     ...otherProps
 }: Props): ReactNode {
-    // @ts-expect-error TODO(ts-migration): Property 'schema' does not exist on type 'UseFormReturn<FieldValues>'.
-    const { register, formState, schema } = useFormContext();
+    const { register, formState, schema } = useFormContext() as FormContext;
     const { errors } = formState
 
     const required = schema?.describe().fields[id].tests
@@ -41,7 +41,6 @@ export default function FormTextInput({
             {description && <div className="description">{description}</div>}
         </label>
         <Input
-            // @ts-expect-error TODO(ts-migration): Type '{ onChange: ChangeHandler; onBlur: ChangeHandler; ref: RefCal…
             id={id}
             {...inputProps}
             {...otherProps}

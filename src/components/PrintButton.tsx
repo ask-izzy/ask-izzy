@@ -21,10 +21,9 @@ function PrintButton({
 }: Props): ReactNode {
 
     let printableComponentRef = React.useRef();
-    const PrintableComponent = React.forwardRef((props, ref) => (
+    const PrintableComponent = React.forwardRef<HTMLDivElement>((props, ref) => (
         <div
             className="printable-area"
-            // @ts-expect-error TODO(ts-migration): Type 'ForwardedRef<unknown>' is not assignable to type 'LegacyRef<H…
             ref={ref}
             aria-hidden="true"
         >
@@ -41,7 +40,6 @@ function PrintButton({
                 className="print-component-button"
                 onClick={handlePrint}
                 type={type}
-                // @ts-expect-error TODO(ts-migration): Type '{ children: Element; className: string; onClick: UseReact…
                 analyticsEvent={{
                     event: "Action Triggered - Page Printed",
                     eventAction: "Page printed",

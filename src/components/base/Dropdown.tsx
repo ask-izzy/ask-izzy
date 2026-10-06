@@ -144,8 +144,7 @@ function Dropdown({
             role="listbox"
         >
             <div
-                // @ts-expect-error TODO(ts-migration): Type 'string' is not assignable to type 'number'.
-                tabIndex="0"
+                tabIndex={0}
                 className={`optionSelect ${
                     showOptions ? "activeOptionSelect open" : "closed"}`}
                 onClick={() => setShowOptions(!showOptions)}

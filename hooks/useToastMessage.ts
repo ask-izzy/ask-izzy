@@ -11,7 +11,7 @@ type UseToastMessage = {
     onActionDescriptorClick: () => void,
     openToastMessage: (
         arg0: string,
-        arg1: ReactNode | null | undefined | null,
+        arg1?: ReactNode | null,
         arg2?: (() => void) | null | undefined,
     ) => void,
     forceToastMessageUpdateState: boolean,

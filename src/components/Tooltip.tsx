@@ -8,8 +8,8 @@ type TooltipProps = {
     disableHoverListener?: boolean,
     disableTouchListener?: boolean,
     disableFocusListener?: boolean,
-    children: ReactNode
-}
+    children: React.ReactElement,
+} & Omit<React.ComponentProps<typeof TooltipComponent>, "title" | "children" | "content">
 export default function Tooltip({
     content,
     children,
@@ -32,7 +32,6 @@ export default function Tooltip({
             disableHoverListener={disableHoverListener}
             disableTouchListener={disableTouchListener}
         >
-            {/* @ts-expect-error TODO(ts-migration): Type 'ReactNode' is not assignable to type 'ReactElement<any, … */}
             {children}
         </TooltipComponent>
     );

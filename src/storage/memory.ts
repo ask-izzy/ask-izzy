@@ -25,9 +25,8 @@ class ObjectStorage {
         delete this._store[key]
     }
 
-    // @ts-expect-error TODO(ts-migration): A function whose declared type is neither 'undefined', 'void', nor 'any' mu…
     key(index: number): string | null | undefined {
-        Object.keys(this._store)[index]
+        return Object.keys(this._store)[index]
     }
 
 }

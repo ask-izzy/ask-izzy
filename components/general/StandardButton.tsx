@@ -7,12 +7,12 @@ import Button from "@/src/components/base/Button"
 type Props = {
     label?: string,
     className?: string,
-    onClick: Function,
+    onClick: React.ComponentProps<typeof Button>["onClick"],
     disabled?: boolean,
     children?: any,
     type?: "primary" | "secondary" | "text" | "action",
     variant?: "default" | "icon"
-}
+} & Omit<React.ComponentProps<typeof Button>, "onClick" | "children" | "type">
 
 function StandardButton(
     {
@@ -31,7 +31,7 @@ function StandardButton(
             onClick={onClick}
             disabled={disabled}
             className={classnames("StandardButton", className, `type-${type}`, `variant-${variant}`)}
-            {...(rest as any)}
+            {...rest}
         >
             {label}
             {children}

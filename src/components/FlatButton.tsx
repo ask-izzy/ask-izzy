@@ -12,10 +12,10 @@ type Props = {
     label?: string,
     prompt?: string,
     className?: string,
-    onClick: Function,
+    onClick: React.ComponentProps<typeof Button>["onClick"],
     disabled?: boolean,
     children?: any,
-}
+} & Omit<React.ComponentProps<typeof Button>, "onClick" | "children">
 
 function FlatButton(
     {
@@ -39,7 +39,7 @@ function FlatButton(
             onClick={onClick}
             disabled={disabled}
             className={classnames("FlatButton", className)}
-            {...(rest as any)}
+            {...rest}
         >
             {prompt && showPrompt && <span className="prompt">{prompt}</span>}
             {label}

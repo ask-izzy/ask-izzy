@@ -155,8 +155,6 @@ function BaseQuestion({
                 aria-label={answer}
                 value={answer}
                 onClick={() => onAnswerTouchTap(answer, false)}
-                // @ts-expect-error TODO(ts-migration): Type '{ key: number; leftIcon: ReactNode; primaryText: string; …
-                readOnly={true}
             />
         )
     }

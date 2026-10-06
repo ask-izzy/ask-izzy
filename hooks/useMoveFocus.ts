@@ -3,26 +3,23 @@ import {useState, useEffect, useRef} from "react";
 type refType = { current: null | HTMLElement | typeof undefined} | null
 
 
-export default (): [(arg0: refType) => void, () => void, () => void] => {
+export default (): [(arg0: refType) => void, () => void, (event: any) => void] => {
     const [prevFocus, setPrevFocus] = useState<HTMLElement | null>(null)
     // required to solve react closure issue
     // stackoverflow.com/questions/62806541/
     // how-to-solve-the-react-hook-closure-issue
-    const prevFocusRef = useRef()
+    const prevFocusRef = useRef<HTMLElement | null>()
 
     useEffect(() => {
-        // @ts-expect-error TODO(ts-migration): Type 'HTMLElement' is not assignable to type 'undefined'.
         prevFocusRef.current = prevFocus
     }, [prevFocus])
 
     const focusElement = (ref: refType) => {
-        // @ts-expect-error TODO(ts-migration): Argument of type 'Element' is not assignable to parameter of type 'SetS…
-        setPrevFocus(document.activeElement)
+        setPrevFocus(document.activeElement as HTMLElement | null)
         ref?.current?.focus()
     }
 
     const revertFocus = () => {
-        // @ts-expect-error TODO(ts-migration): 'prevFocusRef.current' is possibly 'undefined'.
         prevFocusRef.current?.focus()
     }
 
@@ -42,7 +39,6 @@ export default (): [(arg0: refType) => void, () => void, () => void] => {
         }
     }
 
-    // @ts-expect-error TODO(ts-migration): Type '(event: any) => void' is not assignable to type '() => void'.
     return [focusElement, revertFocus, skipLastTab]
 };
 

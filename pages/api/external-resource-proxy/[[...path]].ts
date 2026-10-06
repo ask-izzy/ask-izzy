@@ -2,6 +2,7 @@
 // https://github.com/vercel/next.js/issues/37028 stopping us
 // proxying the google maps api
 import { createProxyMiddleware } from "http-proxy-middleware";
+import type { Options } from "http-proxy-middleware";
 
 import { unflattenDomain } from "@/helpers/url.helpers"
 
@@ -9,16 +10,18 @@ const allowedDomains = new Set(
     (process.env.DOMAINS_TO_PROXY || "").split(",").map(domain => domain.trim()).filter(Boolean)
 )
 
+// FIXME: `on` is the http-proxy-middleware v3 API but we're using v2 so this
+// error handler is never called. Note v2's equivalent (`onError`) replaces the
+// default error handler so it would also need to send a response.
 const proxyMiddleware = createProxyMiddleware({
     router: req => getTargetBaseUrl(req).origin,
     changeOrigin: true,
-    // @ts-expect-error TODO(ts-migration): Object literal may only specify known properties, and 'on' does not exist i…
     on: {
         error: (err, req) => {
             console.error(`Proxy error for target "${getTargetBaseUrl(req).origin}":`, err.message)
         },
     },
-});
+} as Options);
 
 export default function handler(req: any, res: any): void {
     if (!process.env.DOMAINS_TO_PROXY) {

@@ -5,6 +5,7 @@ import {
 } from "../timeout";
 import type {
     geoPoint,
+    travelTime,
 } from "./general"
 import Maps from "../maps";
 
@@ -23,8 +24,7 @@ export async function attachTransportTimes(
 
     const formatPoint = (point: geoPoint) => `${point.lat},${point.lon}`;
 
-    const maps = await TryWithDefault < Readonly < {travelTime: Function} >>(
-        // @ts-expect-error TODO(ts-migration): Argument of type '{}' is not assignable to parameter of type 'Readonly<…
+    const maps = await TryWithDefault < Readonly < {travelTime?: Function} >>(
         1000, Maps(), {}
     );
 
@@ -37,7 +37,7 @@ export async function attachTransportTimes(
             service => !service.travelTimes
         )
 
-        const travelTimesForServices = await Timeout(
+        const travelTimesForServices = await Timeout<Array<Array<travelTime>>>(
             1000 * 10, // wait for 10 secs before giving up
             maps.travelTime(servicesToLoadTravelTimesFor
                 .map(({location}) => formatPoint(location.point))
@@ -45,7 +45,6 @@ export async function attachTransportTimes(
         );
 
         for (const service of servicesToLoadTravelTimesFor) {
-            // @ts-expect-error TODO(ts-migration): Property 'shift' does not exist on type 'unknown'.
             service.travelTimes = travelTimesForServices.shift()
         }
 

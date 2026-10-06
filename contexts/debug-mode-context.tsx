@@ -77,10 +77,9 @@ export const DebugModeProvider = (
         }
     }
 
-    const context = [debugMode, setDebugModePersistently]
+    const context: Context = [debugMode, setDebugModePersistently]
 
     return (
-        // @ts-expect-error TODO(ts-migration): Type '(boolean | ((newDebugModeState: any) => void))[]' is not assignab…
         <DebugModeContext.Provider value={context}>
             {children}
         </DebugModeContext.Provider>

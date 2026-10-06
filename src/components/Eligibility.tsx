@@ -56,7 +56,6 @@ function Eligibility({
                     Ineligibility
                 </h2>
                 <ul>
-                    {/* @ts-expect-error TODO(ts-migration): Type 'void | ReactNode' is not assignable to type 'Rea… */}
                     {ineligibleItems}
                 </ul>
             </div>
@@ -69,7 +68,7 @@ function Eligibility({
         }
     }
 
-    function renderList(listItems: string[]): ReactNode | void {
+    function renderList(listItems: string[]): ReactNode {
         if (listItems.length) {
             return (
                 <FormatText
@@ -84,7 +83,7 @@ function Eligibility({
         }
     }
 
-    function renderEligibility(eligibility?: string | null | undefined): ReactNode | void {
+    function renderEligibility(eligibility?: string | null | undefined): ReactNode {
         const eligibilities = _.uniq(
             (eligibility || "")
                 .split(/\n|;/g)

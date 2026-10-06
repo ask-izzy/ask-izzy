@@ -5,7 +5,6 @@ import DisabilityAdvocacyFinderInfoPage from "@/components/pages/DisabilityAdvoc
 import type {RouteSharedProps} from "@/types/routes"
 import { useRouter } from "next/router"
 import ResultsListPage from "@/components/pages/ResultsListPage"
-import { getCategory } from "@/src/constants/categories"
 
 export const getStaticProps: GetStaticProps<RouteSharedProps> = (context) => {
     return {
@@ -19,12 +18,8 @@ export const getStaticProps: GetStaticProps<RouteSharedProps> = (context) => {
 export default function DisabilityAdvocacyFinderPage(): React.ReactNode {
     const router = useRouter()
     if ("helpSpecialisation" in router.query) {
-        const category = getCategory("disability-advocacy-finder")
         return (
-            <ResultsListPage
-                // @ts-expect-error TODO(ts-migration): Type '{ category: Category; }' is not assignable to type 'Intri…
-                category={category}
-            />
+            <ResultsListPage />
         )
     }
     return <DisabilityAdvocacyFinderInfoPage />

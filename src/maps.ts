@@ -113,7 +113,6 @@ export class MapsApi {
 
         return new Promise((resolve, reject) =>
             geocoder.geocode(params, (results, status) => {
-                // @ts-expect-error TODO(ts-migration): This comparison appears to be unintentional because the types '…
                 if (status === this.api.GeocoderStatus.OK) {
                     resolve(results);
                 } else {
@@ -167,8 +166,7 @@ function maps(): Promise<MapsApi> {
                     google = merge(google, googleMock)
                 }
             }
-            // @ts-expect-error TODO(ts-migration): Argument of type 'typeof maps' is not assignable to parameter of ty…
-            return new MapsApi(google.maps);
+            return new MapsApi(google.maps as unknown as GoogleMaps);
         })
     }
     return mapsAPIPromise;

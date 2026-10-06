@@ -148,7 +148,7 @@ export default class ServiceOpening {
      * comes back empty.
      *
      */
-    ifTime(strings: ReadonlyArray<string>, ...values: Array<any>): string {
+    ifTime(strings: TemplateStringsArray, ...values: Array<any>): string {
         if (_(values).contains(undefined)) {
             return "";
         }
@@ -168,7 +168,6 @@ export default class ServiceOpening {
             return value;
         });
 
-        // @ts-expect-error TODO(ts-migration): Argument of type 'readonly string[]' is not assignable to parameter of …
         return String.raw(strings, ...timeValues);
     }
 

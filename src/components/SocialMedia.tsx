@@ -57,7 +57,6 @@ function SocialMedia({
             </ScreenReader>
             <Link
                 to={url}
-                // @ts-expect-error TODO(ts-migration): Type '{ children: Element[]; to: string; target: string; "aria-…
                 target="_blank"
                 aria-label="Opens in a new tab"
                 analyticsEvent={{

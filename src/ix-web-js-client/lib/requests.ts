@@ -55,19 +55,19 @@ export async function request<ResBody = any, ReqPayload = any>(
         } catch (error) {
             // Body might not be JSON so we don't care if this fails
         }
-        const error = Error(
+        const error: Error & {
+            statusCode?: number,
+            resBodyText?: string,
+            resBodyJSON?: unknown,
+            url?: string,
+        } = Error(
             `Got error status "${statusCode}" for <${url}>:\n\t` +
                 `${resBodyText}`
         )
 
-        // Type correctly with typescript
-        // @ts-expect-error TODO(ts-migration): Property 'statusCode' does not exist on type 'Error'.
         error.statusCode = statusCode
-        // @ts-expect-error TODO(ts-migration): Property 'resBodyText' does not exist on type 'Error'.
         error.resBodyText = resBodyText
-        // @ts-expect-error TODO(ts-migration): Property 'resBodyJSON' does not exist on type 'Error'.
         error.resBodyJSON = resBodyJSON
-        // @ts-expect-error TODO(ts-migration): Property 'url' does not exist on type 'Error'.
         error.url = url
         throw error
     }

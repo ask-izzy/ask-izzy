@@ -13,8 +13,7 @@ type Props = {
     className?: string,
     analyticsEvent?: AnalyticsEvent,
     onClick?: (event: React.SyntheticEvent<HTMLAnchorElement>) => void,
-    remainingProps?: any,
-}
+} & Omit<React.ComponentPropsWithoutRef<"a">, "href" | "onClick" | "children" | "className">
 
 function Link({
     to,

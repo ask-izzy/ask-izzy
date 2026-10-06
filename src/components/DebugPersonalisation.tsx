@@ -10,6 +10,7 @@ import {
 } from "../iss/searchQueryBuilder"
 import type {SearchQueryModifier, SearchQuery} from "../iss/searchQueryBuilder"
 import {convertIzzySearchQueryToIss3} from "../iss/serviceSearch"
+import type {ISS3SearchQuery} from "../ix-web-js-client/apis/iss/v3"
 import Button from "./base/Button"
 import Diff from "./debug/Diff"
 import type { DiffType } from "./debug/Diff"
@@ -126,20 +127,18 @@ function getDiffedLayers(
         : searchQueryModifiers
     const diffedLayers: DiffedLayer[] = []
     for (let i = 0; i < formattedLayers.length; i++) {
-        let mergedUpToPreviousLayer = buildSearchQueryFromModifiers(
+        let mergedUpToPreviousLayer: SearchQuery | ISS3SearchQuery = buildSearchQueryFromModifiers(
             formattedLayers.slice(0, i || 1)
         )
-        let mergedUpToIncludingLayer = buildSearchQueryFromModifiers(
+        let mergedUpToIncludingLayer: SearchQuery | ISS3SearchQuery = buildSearchQueryFromModifiers(
             formattedLayers.slice(0, i + 1)
         )
 
 
         if (convertToISSQuery) {
-            // @ts-expect-error TODO(ts-migration): Type 'ISS3SearchQuery' is not assignable to type 'SearchQuery'.
             mergedUpToPreviousLayer = convertIzzySearchQueryToIss3(
                 mergedUpToPreviousLayer
             )
-            // @ts-expect-error TODO(ts-migration): Type 'ISS3SearchQuery' is not assignable to type 'SearchQuery'.
             mergedUpToIncludingLayer = convertIzzySearchQueryToIss3(
                 mergedUpToIncludingLayer
             )

@@ -358,6 +358,5 @@ export function convertIzzySearchQueryToIss3(
         issQuery.name = query.name
     }
 
-    // @ts-expect-error TODO(ts-migration): Type 'Partial<ISS3SearchQuery>' is not assignable to type 'ISS3SearchQuery'.
-    return issQuery
+    return issQuery as ISS3SearchQuery
 }

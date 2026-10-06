@@ -2,6 +2,7 @@ import React, {useEffect} from "react"
 import type {ReactNode} from "react"
 import cnx from "classnames"
 import { useA11yDialog } from "react-a11y-dialog"
+import type { A11yDialogProps } from "react-a11y-dialog"
 import ReactDOM from "react-dom"
 
 import useIsMounted from "@/hooks/useIsMounted"
@@ -20,10 +21,10 @@ export default function Dialog(
     {className, open, children, onClose, ...rest}: Props
 ): ReactNode {
     const isMounted = useIsMounted({rerenderAfterMount: true})
-    // @ts-expect-error TODO(ts-migration): Argument of type '{ id: string; }' is not assignable to parameter of type '…
+    // The title prop is only used by the A11yDialog component, not the hook
     const [instance, attr] = useA11yDialog({
         id: `dialog-${useUniqueId()}`,
-    })
+    } as A11yDialogProps)
 
     if (children && typeof children !== "function") {
         throw Error("Dialog children must be a single function")

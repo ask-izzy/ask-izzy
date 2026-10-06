@@ -2,7 +2,6 @@ import React, {useRef} from "react"
 import type {
     ReactNode,
     ReactElement,
-    ComponentType as ReactAbstractComponent,
 } from "react"
 import cnx from "classnames"
 
@@ -15,7 +14,7 @@ type autocompleteObjValue = {
 
 type Props = {
     className?: string,
-    value: string,
+    value?: string,
     icon?: ReactNode,
     iconPosition?: "left" | "right",
     showClearButton?: boolean,
@@ -27,19 +26,20 @@ type Props = {
     onBlur?: (arg0: React.FocusEvent<HTMLInputElement>) => void,
     onFocus?: (arg0: React.FocusEvent<HTMLInputElement>) => void,
     containerProps?: {[key: string]: any},
-    extraContainerChildren?: ReactNode
-} & (
-    {
-        onChange: (arg0: React.ChangeEvent<HTMLInputElement>) => void,
-    }
-    |
-    {
-        customInputElement: (props: HTMLInputElement) => ReactElement<"input">,
-    }
-)
+    extraContainerChildren?: ReactNode,
+    // Either onChange or customInputElement should be given
+    onChange?: (arg0: React.ChangeEvent<HTMLInputElement>) => void,
+    customInputElement?: (props: CustomInputElementProps) => ReactElement<"input">,
+} & Omit<
+    React.ComponentPropsWithoutRef<"input">,
+    "value" | "onChange" | "onKeyDown" | "onBlur" | "onFocus"
+>
 
-type refType = { current: null | HTMLInputElement } |
-    ((arg0: null | HTMLInputElement) => unknown)
+export type CustomInputElementProps = {
+    className: string,
+    onChange?: (arg0: React.ChangeEvent<HTMLInputElement>) => void,
+    value?: string,
+}
 
 function Input({
     className,
@@ -51,20 +51,20 @@ function Input({
     onInitialSuggestionsSelected = () => {},
     initialSuggestionsA11yStatusMessage,
     autocompleteValues = [],
-    // @ts-expect-error TODO(ts-migration): Property 'customInputElement' does not exist on type 'Props'.
     customInputElement,
     containerProps,
     extraContainerChildren,
     ...otherProps
-}: Props, refProp?: refType | null | undefined): ReactNode {
+}: Props, refProp: React.ForwardedRef<HTMLInputElement>): ReactNode {
 
     if (customInputElement && !refProp) {
         throw Error("If the customInputElement prop is used a ref should also be given.")
     }
 
-    const inputRef = (refProp && typeof refProp !== "function") ? refProp : useRef()
+    const inputRef: React.MutableRefObject<HTMLInputElement | null | undefined> =
+        (refProp && typeof refProp !== "function") ? refProp : useRef<HTMLInputElement>()
 
-    function setRef(elm) {
+    function setRef(elm: HTMLInputElement | null) {
         inputRef.current = elm
         if (typeof refProp === "function") {
             refProp(elm)
@@ -116,9 +116,8 @@ function Input({
         "iconRight": (iconPosition === "right" && icon),
     })
 
-    const customInputElementProps = {
+    const customInputElementProps: CustomInputElementProps = {
         className: inputClassName,
-        // @ts-expect-error TODO(ts-migration): Property 'onChange' does not exist on type '{ onKeyDown?: (arg0: Keyboa…
         onChange: otherProps.onChange,
         value,
     }
@@ -159,7 +158,4 @@ function Input({
     )
 }
 
-export default (
-    // @ts-expect-error TODO(ts-migration): Conversion of type 'ForwardRefExoticComponent<HTMLInputElement & RefAttribu…
-    React.forwardRef<Props, HTMLInputElement>(Input) as ReactAbstractComponent<Props>
-)
+export default React.forwardRef<HTMLInputElement, Props>(Input)

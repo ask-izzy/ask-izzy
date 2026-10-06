@@ -12,7 +12,7 @@ import {
 import {
     getServicesPath,
 } from "@/src/utils/routing"
-import type {PersonalisationPage} from "@/types/personalisation-page"
+import type {PersonalisationPage, PersonalisationQuestionPage} from "@/types/personalisation-page"
 
 type Props = {
     personalisationPage: PersonalisationPage,
@@ -91,9 +91,8 @@ export function getMaxNumberOfAnswersToShowInBreadcrumb(
     const maxBreadcrumbs = 6;
     const numOfSingleChoicePersonalisationPages = personalisationPages.filter(
         // ternary statement required because flow is wack
-        // @ts-expect-error TODO(ts-migration): Property 'multipleChoice' does not exist on type 'PersonalisationPage'.
         // eslint-disable-next-line no-unneeded-ternary
-        page => page.multipleChoice ? false : true
+        page => (page as PersonalisationQuestionPage).multipleChoice ? false : true
     ).length
 
     return maxBreadcrumbs - numOfSingleChoicePersonalisationPages;
@@ -103,8 +102,7 @@ export function getBreadcrumbText(
     personalisationPage: PersonalisationPage,
     personalisationPages: Array<PersonalisationPage>
 ): Array<ReactNode> {
-    // @ts-expect-error TODO(ts-migration): Property 'possibleAnswers' does not exist on type 'PersonalisationPage'.
-    const possibleAnswers = personalisationPage.possibleAnswers ||
+    const possibleAnswers = (personalisationPage as PersonalisationQuestionPage).possibleAnswers ||
         null
 
     let savedAnswers: Array<string> =

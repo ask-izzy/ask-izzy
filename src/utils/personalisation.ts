@@ -9,16 +9,15 @@ import storage from "../storage";
 import type { SearchQueryChanges } from "../../src/iss/searchQueryBuilder";
 import type {
     PersonalisationPage,
+    PersonalisationQuestionPage,
 } from "@/types/personalisation-page"
 
 export function prettyPrintAnswer(
     personalisationPage: PersonalisationPage,
     answer: string
 ): ReactNode {
-    // @ts-expect-error TODO(ts-migration): Property 'prettyPrintAnswer' does not exist on type 'PersonalisationPage'.
-    if (personalisationPage.prettyPrintAnswer) {
-        // @ts-expect-error TODO(ts-migration): Property 'prettyPrintAnswer' does not exist on type 'PersonalisationPag…
-        return personalisationPage.prettyPrintAnswer(answer)
+    if ((personalisationPage as PersonalisationQuestionPage).prettyPrintAnswer) {
+        return (personalisationPage as PersonalisationQuestionPage).prettyPrintAnswer(answer)
     }
     return answer
 }
@@ -46,8 +45,8 @@ export function setLocationFromUrl(
     const {suburb, state} = router.query
 
     if (suburb && state) {
-        // @ts-expect-error TODO(ts-migration): Argument of type 'string | string[]' is not assignable to parameter of …
-        const locationFromUrl = `${decodeURIComponent(suburb)}, ${decodeURIComponent(state)}`
+        const locationFromUrl =
+            `${decodeURIComponent(suburb as string)}, ${decodeURIComponent(state as string)}`
         if (storage.getSearchArea() !== locationFromUrl) {
             // Use the location from the URL.
             storage.setSearchArea(locationFromUrl);
@@ -59,19 +58,16 @@ export function setLocationFromUrl(
 export function getSavedPersonalisationAnswer(
     personalisationPage: PersonalisationPage
 ): string | Array<string> {
-    // @ts-expect-error TODO(ts-migration): Property 'multipleChoice' does not exist on type 'PersonalisationPage'.
-    if (personalisationPage.multipleChoice) {
+    if ((personalisationPage as PersonalisationQuestionPage).multipleChoice) {
         let savedAnswer = storage.getJSON(personalisationPage.name);
 
         if (Array.isArray(savedAnswer)) {
             // Update answers if we had stored an old answer
             savedAnswer = savedAnswer.map((answer) =>
-                // @ts-expect-error TODO(ts-migration): Property 'oldAnswers' does not exist on type 'PersonalisationPa…
-                personalisationPage.oldAnswers?.[answer] || answer
+                (personalisationPage as PersonalisationQuestionPage).oldAnswers?.[answer] || answer
             )
             return _.union(
-                // @ts-expect-error TODO(ts-migration): Property 'possibleAnswers' does not exist on type 'Personalisat…
-                personalisationPage.possibleAnswers.keys,
+                (personalisationPage as PersonalisationQuestionPage).possibleAnswers.keys,
                 savedAnswer
             );
         }

@@ -24,11 +24,10 @@ export const getStaticPaths: GetStaticPaths = async() => {
     }
 }
 
-// @ts-expect-error TODO(ts-migration): Type '({ params }: GetStaticPropsContext<ParsedUrlQuery, PreviewData>) => { pro…
 export const getStaticProps: GetStaticProps<RouteSharedProps> = ({params}) => {
     return {
         props: {
-            pageTitle: params.categoryOrContentPageSlug,
+            pageTitle: params.categoryOrContentPageSlug as string,
             pageType: [
                 params.categoryOrContentPageSlug === "search" ?
                     "Search"

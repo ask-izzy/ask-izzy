@@ -21,8 +21,7 @@ const ServicePage = function(): React.ReactNode {
 
     useEffect(() => {
         const {serviceSlug} = router.query
-        // @ts-expect-error TODO(ts-migration): Argument of type 'string | string[]' is not assignable to parameter of …
-        const serviceId = serviceSlug && extractId(serviceSlug)
+        const serviceId = serviceSlug && extractId(serviceSlug as string)
         if (serviceId) {
             loadService(serviceId)
         }

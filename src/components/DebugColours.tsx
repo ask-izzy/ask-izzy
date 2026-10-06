@@ -78,14 +78,13 @@ export default function DebugColours() {
         }
     }
 
-    const style = {
+    const style: React.CSSProperties = {
         position: "fixed",
         left: "calc( ( (100vw - 800px) / 2 ) + 800px )",
         width: "calc( ( (100vw - 800px) / 2 ) - 20px )",
         maxHeight: "100vh",
         overflowY: "auto",
     }
-    // @ts-expect-error TODO(ts-migration): Type '{ position: string; left: string; width: string; maxHeight: string; o…
     return <details style={style}>
         <summary>See colours</summary>
         Replacement colour:
@@ -122,8 +121,7 @@ export default function DebugColours() {
                                     backgroundColor: colourOverride,
                                     height: "1em",
                                     lineHeight: "1em",
-                                    // @ts-expect-error TODO(ts-migration): Object literal may only specify known prope…
-                                    alignText: "center",
+                                    textAlign: "center",
                                     flex: 1,
                                 }}
                                 onClick={event => {
@@ -157,13 +155,10 @@ function getColourVars() {
                     ...Array.from(sheet.cssRules).reduce(
                         (def, rule) =>
                             (def =
-                                // @ts-expect-error TODO(ts-migration): Property 'selectorText' does not exist on type …
-                                rule.selectorText === ":root" ?
+                                (rule as CSSStyleRule).selectorText === ":root" ?
                                     [
                                         ...def,
-                                        // @ts-expect-error TODO(ts-migration): Property 'style' does not exist on type…
-                                        ...Array.from(rule.style).filter(name =>
-                                            // @ts-expect-error TODO(ts-migration): Property 'match' does not exist on …
+                                        ...Array.from((rule as CSSStyleRule).style).filter(name =>
                                             name.match(/^--(?:raw-)?colour-/)
                                         ),
                                     ]

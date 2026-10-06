@@ -2,7 +2,6 @@ import type {ReactElement} from "react";
 import React from "react"
 import type {
     ReactNode,
-    ComponentType as ReactAbstractComponent,
 } from "react"
 import cnx from "classnames"
 
@@ -15,17 +14,14 @@ type Props = {
     onClick?: (event: React.SyntheticEvent<HTMLButtonElement>) => any,
     analyticsEvent?: AnalyticsEvent,
     className?: string,
-} & HTMLElementProps
-
-type refType = { current: null | HTMLButtonElement } |
-    ((arg0: null | HTMLButtonElement) => unknown)
+} & HTMLElementProps & Omit<React.ComponentPropsWithoutRef<"button">, "onClick">
 
 function Button({
     className,
     onClick: onClickFromParent,
     analyticsEvent,
     ...otherProps
-}: Props, ref?: refType | null | undefined): ReactElement<"button"> {
+}: Props, ref: React.ForwardedRef<HTMLButtonElement>): ReactElement<"button"> {
     function onClickHandler(event: React.SyntheticEvent<HTMLButtonElement>) {
         const buttonText = event.currentTarget.innerText || "<no text>"
         gtm.emit({
@@ -44,13 +40,9 @@ function Button({
             {...otherProps}
             className={cnx("Button", className)}
             onClick={onClickHandler}
-            // @ts-expect-error TODO(ts-migration): Type 'refType' is not assignable to type 'LegacyRef<HTMLButtonEleme…
             ref={ref}
         />
     )
 }
 
-export default (
-    // @ts-expect-error TODO(ts-migration): Argument of type '({ className, onClick: onClickFromParent, analyticsEvent,…
-    React.forwardRef<Props, HTMLButtonElement>(Button) as ReactAbstractComponent<Props>
-)
+export default React.forwardRef<HTMLButtonElement, Props>(Button)

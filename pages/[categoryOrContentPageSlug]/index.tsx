@@ -68,8 +68,7 @@ export const getStaticPaths: GetStaticPaths = async() => {
 }
 
 export const getStaticProps: GetStaticProps<Props> = async({params}) => {
-    // @ts-expect-error TODO(ts-migration): Argument of type 'string | string[]' is not assignable to parameter of type…
-    const category = getCategory(params.categoryOrContentPageSlug)
+    const category = getCategory(params.categoryOrContentPageSlug as string)
     if (category) {
         return {
             props: {
@@ -159,10 +158,7 @@ export default function CategoryOrContentPage(props: Props): React.ReactNode {
     const category = getCategory(props.categoryKey || "")
     if (category) {
         return (
-            <ResultsListPage
-                // @ts-expect-error TODO(ts-migration): Type '{ category: Category; }' is not assignable to type 'Intri…
-                category={category}
-            />
+            <ResultsListPage />
         )
     }
 

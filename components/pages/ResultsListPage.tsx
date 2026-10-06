@@ -150,7 +150,6 @@ function ResultsListPage({router}: Props): ReactNode {
                         className="MoreResultsButton"
                         label="See more results"
                         onClick={loadNextSearchPage}
-                        // @ts-expect-error TODO(ts-migration): Type '{ className: string; label: string; onClick: () =…
                         analyticsEvent={{
                             event: "Action Triggered - Load More Results",
                             eventAction: "Load more results",
