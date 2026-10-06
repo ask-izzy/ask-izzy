@@ -49,9 +49,11 @@ Testing can be run with `docker compose run --rm app test-dev` which will sequen
 All linters can be run using `docker compose run --rm app lint`. You can use `lint-fix` instead of `lint` to also try and automatically correct any issues where that is possible. Indvidual linters can be run using: `docker compose run --rm app lint-<linter name>` (if the linter supports it `-fix` can be append to the end of the linter name to auto-fix issues.)
 
 - **ESLint**\
-  For JavaScript errors and style violations
+  For JavaScript/TypeScript errors and style violations
+- **TypeScript** (`lint-tsc`)\
+  For static type checking of the app code. The app was migrated from [Flow.js](https://flow.org/) to TypeScript. Any type errors left over from the migration are suppressed with `@ts-expect-error` comments tagged with `TODO(ts-migration)` which should be fixed over time.
 - **Flow.js**\
-  For static type checking. Most JavaScript in Ask Izzy is written with [Flow.js](https://flow.org/) types with Babel.js used to compile it into plain JavaScript so it can be executed by browsers. This decision was made before it was clear that TypeScript would win the the JavaScript typing wars. At some point we hope to migrate to TypeScript.
+  The tests have not yet been migrated to TypeScript and are still type checked with Flow.js. Since Flow can't read TypeScript any imports of app code from the tests are untyped. Babel compiles both Flow (.js) and TypeScript (.ts/.tsx) files so the two can be used side by side.
 - **stylelint**\
   Stylelint is used for linting SASS/CSS files.
 - **jsonlint**\
@@ -99,5 +101,5 @@ Original icons files are stored in a separate repo hosted on GitHub. To add new 
 2) Add desired icons to designs repo and commit
 3) Run the iconify script: `./scripts/iconify ../ask-izzy-designs/icons/*.svg`
 
-The icons/index.js file will be updated, and a new js file for the icon will be generated in /icons.
+The src/icons/index.ts file will be updated, and a new ts file for the icon will be generated in src/icons.
 
