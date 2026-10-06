@@ -52,6 +52,7 @@ export default ({
                 "Hospital",
                 "Alcohol and other drugs",
             ].includes(
+                // @ts-expect-error TODO(ts-migration): Argument of type 'string | string[]' is not assignable to param…
                 getSavedPersonalisationAnswer(HealthSubcategories)
             )
         } else if (category?.key === "support-and-counselling") {
@@ -61,6 +62,7 @@ export default ({
                 "Homelessness support",
                 "Sexual assault or family violence",
             ]
+                // @ts-expect-error TODO(ts-migration): Argument of type 'string | string[]' is not assignable to param…
                 .includes(getSavedPersonalisationAnswer(CounsellingSubcategories))
         }
         return true

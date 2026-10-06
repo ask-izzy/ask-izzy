@@ -168,6 +168,7 @@ export default class ServiceOpening {
             return value;
         });
 
+        // @ts-expect-error TODO(ts-migration): Argument of type 'readonly string[]' is not assignable to parameter of …
         return String.raw(strings, ...timeValues);
     }
 

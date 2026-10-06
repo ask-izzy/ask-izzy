@@ -125,6 +125,7 @@ function InputWithDropdown({
                     // the emitted event and then call onChange with it.
                     inputRef.current.addEventListener(
                         "change",
+                        // @ts-expect-error TODO(ts-migration): No overload matches this call.
                         (event: React.ChangeEvent<HTMLInputElement>) => otherProps.onChange(event),
                         {once: true}
                     )
@@ -255,6 +256,7 @@ function InputWithDropdown({
                                 )}
                                 onMouseDown={event => {
                                     if (showInitialSuggestions) {
+                                        // @ts-expect-error TODO(ts-migration): Property 'preventDownshiftDefault' does…
                                         event.preventDownshiftDefault = true
                                     }
                                 }}
@@ -282,11 +284,13 @@ function InputWithDropdown({
             value={value}
             containerProps={downshiftCombobox?.getComboboxProps()}
             customInputElement={(inputProps) =>
+                // @ts-expect-error TODO(ts-migration): Type '{ ref: { current: HTMLInputElement; }; value: string; onC…
                 <input
                     {...inputProps}
                     {...otherInputProps}
                 />
             }
+            // @ts-expect-error TODO(ts-migration): Type '{ icon: ReactNode; iconPosition: "left" | "right"; showClearB…
             ref={inputRef}
             extraContainerChildren={renderAutoCompleteList()}
         />
@@ -294,5 +298,6 @@ function InputWithDropdown({
 }
 
 export default (
+    // @ts-expect-error TODO(ts-migration): Conversion of type 'ForwardRefExoticComponent<HTMLInputElement & RefAttribu…
     React.forwardRef<Props, HTMLInputElement>(InputWithDropdown) as ReactAbstractComponent<Props>
 )

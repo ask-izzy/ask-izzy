@@ -16,6 +16,7 @@ export default function FormTextInput({
     description = null,
     ...otherProps
 }: Props): ReactNode {
+    // @ts-expect-error TODO(ts-migration): Property 'schema' does not exist on type 'UseFormReturn<FieldValues>'.
     const { register, formState, schema } = useFormContext();
     const { errors } = formState
 
@@ -40,6 +41,7 @@ export default function FormTextInput({
             {description && <div className="description">{description}</div>}
         </label>
         <Input
+            // @ts-expect-error TODO(ts-migration): Type '{ onChange: ChangeHandler; onBlur: ChangeHandler; ref: RefCal…
             id={id}
             {...inputProps}
             {...otherProps}

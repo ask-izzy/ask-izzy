@@ -22,6 +22,7 @@ export default function DisabilityAdvocacyFinderPage(): React.ReactNode {
         const category = getCategory("disability-advocacy-finder")
         return (
             <ResultsListPage
+                // @ts-expect-error TODO(ts-migration): Type '{ category: Category; }' is not assignable to type 'Intri…
                 category={category}
             />
         )

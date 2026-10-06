@@ -64,9 +64,11 @@ export default ({
     getShouldIncludePage: (category) => {
         if (category?.key === "health") {
             return ["Children's health", "Doctor or general practitioner"]
+                // @ts-expect-error TODO(ts-migration): Argument of type 'string | string[]' is not assignable to param…
                 .includes(getSavedPersonalisationAnswer(HealthSubcategories))
         } else if (category?.key === "support-and-counselling") {
             return ["Gambling counselling"]
+                // @ts-expect-error TODO(ts-migration): Argument of type 'string | string[]' is not assignable to param…
                 .includes(getSavedPersonalisationAnswer(CounsellingSubcategories))
         }
         return false

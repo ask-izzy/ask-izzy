@@ -100,6 +100,7 @@ export default function IssParamsOverrideControls({
             renderers={vanillaRenderers}
             cells={vanillaCells}
             validationMode={"NoValidation"}
+            // @ts-expect-error TODO(ts-migration): Property '_errors' does not exist on type 'Pick<JsonFormsCore, "dat…
             onChange={({ data, _errors }) => setIssParams(data)}
         />
         <Diff diff={diff} />
@@ -118,6 +119,7 @@ export default function IssParamsOverrideControls({
     }
 
     function clearIssParamsOverride() {
+        // @ts-expect-error TODO(ts-migration): Expected 1 arguments, but got 0.
         setIssParamsOverride()
     }
 }

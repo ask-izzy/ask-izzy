@@ -88,6 +88,7 @@ function renderDirectlyScreen({services, onCloseRequested, setScreenName}) {
                 <StandardButton
                     className="send-via-askizzy-container"
                     onClick={() => setScreenName("Via Ask Izzy")}
+                    // @ts-expect-error TODO(ts-migration): Type '{ children: (string | Element)[]; className: string; …
                     analyticsEvent={{
                         event: "Action Triggered - Opened Share Services Via Ask Izzy",
                         eventAction: "Opened share services via Ask Izzy",

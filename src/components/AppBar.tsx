@@ -90,6 +90,7 @@ function AppBar({
                         name={onBackTouchTap ? backMessage
                             : "Link to home page"
                         }
+                        // @ts-expect-error TODO(ts-migration): Type 'Function' is not assignable to type 'Function & (…
                         onClick={onBackTouchTap || goHome}
                         analyticsEvent={{
                             event: "Action Triggered - Back",

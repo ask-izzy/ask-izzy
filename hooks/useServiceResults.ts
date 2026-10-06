@@ -213,6 +213,7 @@ export default (router: NextRouter): UseServiceResults => {
         if (
             previousSearchHash === searchHash &&
             previousSearchDate &&
+            // @ts-expect-error TODO(ts-migration): Operator '>' cannot be applied to types 'Date' and 'number'.
             previousSearchDate > oneDayAgo
         ) {
             queryChangedSinceLastFetch = false

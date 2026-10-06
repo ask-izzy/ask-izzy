@@ -52,6 +52,7 @@ function DynamicPage({pageDetails, embeddedCallouts}: Props): ReactNode {
             // Get the text content of the children
             const textContent = React.Children.map(props.children,
                 paragraphElm => (
+                    // @ts-expect-error TODO(ts-migration): Property 'props' does not exist on type 'ReactNode'.
                     React.Children.map(paragraphElm.props.children,
                         textElm => textElm.type(textElm.props))
                 )).join("")

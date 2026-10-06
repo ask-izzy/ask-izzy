@@ -85,6 +85,7 @@ export default function DebugColours() {
         maxHeight: "100vh",
         overflowY: "auto",
     }
+    // @ts-expect-error TODO(ts-migration): Type '{ position: string; left: string; width: string; maxHeight: string; o…
     return <details style={style}>
         <summary>See colours</summary>
         Replacement colour:
@@ -121,6 +122,7 @@ export default function DebugColours() {
                                     backgroundColor: colourOverride,
                                     height: "1em",
                                     lineHeight: "1em",
+                                    // @ts-expect-error TODO(ts-migration): Object literal may only specify known prope…
                                     alignText: "center",
                                     flex: 1,
                                 }}
@@ -155,10 +157,13 @@ function getColourVars() {
                     ...Array.from(sheet.cssRules).reduce(
                         (def, rule) =>
                             (def =
+                                // @ts-expect-error TODO(ts-migration): Property 'selectorText' does not exist on type …
                                 rule.selectorText === ":root" ?
                                     [
                                         ...def,
+                                        // @ts-expect-error TODO(ts-migration): Property 'style' does not exist on type…
                                         ...Array.from(rule.style).filter(name =>
+                                            // @ts-expect-error TODO(ts-migration): Property 'match' does not exist on …
                                             name.match(/^--(?:raw-)?colour-/)
                                         ),
                                     ]

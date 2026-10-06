@@ -8,6 +8,7 @@ import {
 export async function getService(
     serviceId: number
 ): Promise<Service> {
+    // @ts-expect-error TODO(ts-migration): No overload matches this call.
     const issClient = await getIssClient(getIssVersion())
 
     const response = await issClient.getService(serviceId)

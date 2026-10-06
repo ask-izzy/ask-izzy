@@ -90,6 +90,7 @@ function ResultsMapPage({router}: Props): ReactNode {
 
         let mapHeight =
             window.innerHeight -
+            // @ts-expect-error TODO(ts-migration): Property 'offsetHeight' does not exist on type 'Element'.
             (document.querySelector(".AppBarContainer")?.offsetHeight || 0)
 
         /* resize the map to make room

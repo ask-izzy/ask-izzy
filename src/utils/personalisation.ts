@@ -15,7 +15,9 @@ export function prettyPrintAnswer(
     personalisationPage: PersonalisationPage,
     answer: string
 ): ReactNode {
+    // @ts-expect-error TODO(ts-migration): Property 'prettyPrintAnswer' does not exist on type 'PersonalisationPage'.
     if (personalisationPage.prettyPrintAnswer) {
+        // @ts-expect-error TODO(ts-migration): Property 'prettyPrintAnswer' does not exist on type 'PersonalisationPag…
         return personalisationPage.prettyPrintAnswer(answer)
     }
     return answer
@@ -44,6 +46,7 @@ export function setLocationFromUrl(
     const {suburb, state} = router.query
 
     if (suburb && state) {
+        // @ts-expect-error TODO(ts-migration): Argument of type 'string | string[]' is not assignable to parameter of …
         const locationFromUrl = `${decodeURIComponent(suburb)}, ${decodeURIComponent(state)}`
         if (storage.getSearchArea() !== locationFromUrl) {
             // Use the location from the URL.
@@ -56,15 +59,18 @@ export function setLocationFromUrl(
 export function getSavedPersonalisationAnswer(
     personalisationPage: PersonalisationPage
 ): string | Array<string> {
+    // @ts-expect-error TODO(ts-migration): Property 'multipleChoice' does not exist on type 'PersonalisationPage'.
     if (personalisationPage.multipleChoice) {
         let savedAnswer = storage.getJSON(personalisationPage.name);
 
         if (Array.isArray(savedAnswer)) {
             // Update answers if we had stored an old answer
             savedAnswer = savedAnswer.map((answer) =>
+                // @ts-expect-error TODO(ts-migration): Property 'oldAnswers' does not exist on type 'PersonalisationPa…
                 personalisationPage.oldAnswers?.[answer] || answer
             )
             return _.union(
+                // @ts-expect-error TODO(ts-migration): Property 'possibleAnswers' does not exist on type 'Personalisat…
                 personalisationPage.possibleAnswers.keys,
                 savedAnswer
             );

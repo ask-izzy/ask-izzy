@@ -100,6 +100,7 @@ function GeolocationButton({
                 type: "FAILED",
                 error,
             }
+            // @ts-expect-error TODO(ts-migration): Argument of type '{ type: string; error: any; }' is not assignable …
             setStatus(newGeolocationStatus)
             console.error(error);
             return
@@ -109,6 +110,7 @@ function GeolocationButton({
             type: "COMPLETE",
             location,
         }
+        // @ts-expect-error TODO(ts-migration): Argument of type '{ type: string; location: Geolocation; }' is not assi…
         setStatus(newGeolocationStatus)
         gtm.emit({
             event: "Action Triggered - Geolocate",
@@ -124,6 +126,7 @@ function GeolocationButton({
             className="undo"
             onClick={() => {
                 const newGeolocationStatus = {type: "NOT_STARTED"}
+                // @ts-expect-error TODO(ts-migration): Argument of type '{ type: string; }' is not assignable to param…
                 setStatus(newGeolocationStatus)
             }}
         >

@@ -88,6 +88,7 @@ export default function initialiseRequestInterceptor() {
 
     // 1. Replace domains for all XMLHttpRequests
     (function(open) {
+        // @ts-expect-error TODO(ts-migration): Type '(method: string, url: string | URL, async: boolean, user: string,…
         XMLHttpRequest.prototype.open = function(method, url, async, user, pass) {
             // Replace external domain
             let newUrl = zeroRatingHelper.replaceDomain(url);
@@ -136,6 +137,7 @@ export default function initialiseRequestInterceptor() {
             if (arguments[0]) {
                 arguments[0] = zeroRatingHelper.replaceDomain(arguments[0])
             }
+            // @ts-expect-error TODO(ts-migration): A spread argument must either have a tuple type or be passed to a r…
             return originalFetchFunction(...arguments)
         };
     })(window.fetch);

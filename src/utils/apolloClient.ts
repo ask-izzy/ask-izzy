@@ -11,14 +11,18 @@ async function axiosFetch(url, options = {}) {
 
     const axiosOptions = {
         url,
+        // @ts-expect-error TODO(ts-migration): Property 'method' does not exist on type '{}'.
         method: options.method || "POST",
+        // @ts-expect-error TODO(ts-migration): Property 'headers' does not exist on type '{}'.
         headers: options.headers,
+        // @ts-expect-error TODO(ts-migration): Property 'body' does not exist on type '{}'.
         data: options.body,
         httpAgent: agent,
         httpsAgent: agent,
         proxy: false, // See https://github.com/axios/axios/issues/2072#issuecomment-567473812
     };
 
+    // @ts-expect-error TODO(ts-migration): No overload matches this call.
     const response = await axios(axiosOptions);
     return {
         ok: true,
@@ -35,6 +39,7 @@ async function axiosFetch(url, options = {}) {
 const client: any = new ApolloClient({
     link: new HttpLink({
         uri: `${process.env.NEXT_PUBLIC_STRAPI_URL}/graphql`,
+        // @ts-expect-error TODO(ts-migration): Type '(url: any, options?: {}) => Promise<{ ok: boolean; status: number…
         fetch: axiosFetch,
     }),
     cache: new InMemoryCache(),

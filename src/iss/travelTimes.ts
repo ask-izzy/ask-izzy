@@ -24,6 +24,7 @@ export async function attachTransportTimes(
     const formatPoint = (point: geoPoint) => `${point.lat},${point.lon}`;
 
     const maps = await TryWithDefault < Readonly < {travelTime: Function} >>(
+        // @ts-expect-error TODO(ts-migration): Argument of type '{}' is not assignable to parameter of type 'Readonly<…
         1000, Maps(), {}
     );
 
@@ -44,6 +45,7 @@ export async function attachTransportTimes(
         );
 
         for (const service of servicesToLoadTravelTimesFor) {
+            // @ts-expect-error TODO(ts-migration): Property 'shift' does not exist on type 'unknown'.
             service.travelTimes = travelTimesForServices.shift()
         }
 

@@ -33,7 +33,7 @@ export type UserType = "User Worker" | "User Myself"| "User Someone Else"
 function WhoIsLookingForHelp({router, details}: Props): ReactNode {
     const [category] = useState<Category | null | undefined>(
         getCategory(
-            router.query.categoryOrContentPageSlug
+            (router.query.categoryOrContentPageSlug as string)
         )
     )
 

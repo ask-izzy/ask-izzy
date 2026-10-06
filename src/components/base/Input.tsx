@@ -51,6 +51,7 @@ function Input({
     onInitialSuggestionsSelected = () => {},
     initialSuggestionsA11yStatusMessage,
     autocompleteValues = [],
+    // @ts-expect-error TODO(ts-migration): Property 'customInputElement' does not exist on type 'Props'.
     customInputElement,
     containerProps,
     extraContainerChildren,
@@ -117,6 +118,7 @@ function Input({
 
     const customInputElementProps = {
         className: inputClassName,
+        // @ts-expect-error TODO(ts-migration): Property 'onChange' does not exist on type '{ onKeyDown?: (arg0: Keyboa…
         onChange: otherProps.onChange,
         value,
     }
@@ -158,5 +160,6 @@ function Input({
 }
 
 export default (
+    // @ts-expect-error TODO(ts-migration): Conversion of type 'ForwardRefExoticComponent<HTMLInputElement & RefAttribu…
     React.forwardRef<Props, HTMLInputElement>(Input) as ReactAbstractComponent<Props>
 )

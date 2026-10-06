@@ -167,6 +167,7 @@ export function verifyPhoneNumber(phoneNumber: string): boolean {
         // RegEx must be created via a string rather than a literal otherwise
         // it will bork browsers that don't support lookbehinds even if those
         // browsers never execute this line.
+        // @ts-expect-error TODO(ts-migration): Type 'RegExpMatchArray' is not assignable to type 'boolean'.
         hasNonLeadingPlus = phoneNumber.match(new RegExp("(?<!^\\s*)\\+", "g"))
     } else {
         // Remove this when regex lookbehinds are supported in all browsers we
@@ -193,6 +194,7 @@ type EscapeTextOptions = {
     multiline: boolean
 }
 
+// @ts-expect-error TODO(ts-migration): Property 'multiline' is missing in type '{}' but required in type 'EscapeTextOp…
 function escapeText(text?: string | null | undefined, options: EscapeTextOptions = {}): string | null {
     if (typeof text !== "string") {
         return null

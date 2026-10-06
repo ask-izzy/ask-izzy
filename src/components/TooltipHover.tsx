@@ -26,6 +26,7 @@ export default function TooltipHover({
                 <Tooltip
                     {...otherProps}
                     content={<>{content}</>}
+                    // @ts-expect-error TODO(ts-migration): Type '{ children: Element; content: Element; componentsProp…
                     componentsProps={{
                         tooltip: {
                             sx: {

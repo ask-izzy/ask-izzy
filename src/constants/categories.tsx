@@ -302,7 +302,7 @@ const categories = [
         byline: "Free text search",
         icon: () => <icons.Search viewBox="14 14 35 35" />,
         searchQueryChanges(router: NextRouter) {
-            const searchTerm = decodeURIComponent(router.query.search)
+            const searchTerm = decodeURIComponent((router.query.search as string))
 
             return {
                 $push: {
@@ -326,7 +326,7 @@ const categories = [
         icon: () => <></>,
         searchQueryChanges(router: NextRouter) {
             console.log("searchQueryChanges, router.query", router.query)
-            const helpSpecialisation = decodeURIComponent(router.query.helpSpecialisation)
+            const helpSpecialisation = decodeURIComponent((router.query.helpSpecialisation as string))
 
             if (helpSpecialisation === "general") {
                 return {

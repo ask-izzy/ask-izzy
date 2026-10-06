@@ -15,6 +15,7 @@ function WithStickyFooter({children, footerContents}: Props): ReactNode {
     useEffect(() => {
         if (window.IntersectionObserver) {
             overlapObserver = new IntersectionObserver(
+                // @ts-expect-error TODO(ts-migration): 'footerRef.current' is possibly 'undefined'.
                 ([event]) => footerRef?.current?.toggleAttribute(
                     "floating", event.intersectionRatio < 1
                 ),

@@ -123,6 +123,7 @@ function SitesMap(
                             title="You are here"
                             icon={{
                                 url: "/images/you-are-here.png",
+                                // @ts-expect-error TODO(ts-migration): No overload matches this call.
                                 scaledSize: {width: 32, height: 32},
                             }}
                             position={{
@@ -143,6 +144,7 @@ function SitesMap(
                                 url: marker.selected ?
                                     "/images/map-marker-with-dot.png"
                                     : "/images/map-marker.png",
+                                // @ts-expect-error TODO(ts-migration): No overload matches this call.
                                 scaledSize: {width: 27, height: 43},
                             }}
                             onClick={() => markerOnClickHandler(marker)}

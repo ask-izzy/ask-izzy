@@ -44,11 +44,13 @@ function Button({
             {...otherProps}
             className={cnx("Button", className)}
             onClick={onClickHandler}
+            // @ts-expect-error TODO(ts-migration): Type 'refType' is not assignable to type 'LegacyRef<HTMLButtonEleme…
             ref={ref}
         />
     )
 }
 
 export default (
+    // @ts-expect-error TODO(ts-migration): Argument of type '({ className, onClick: onClickFromParent, analyticsEvent,…
     React.forwardRef<Props, HTMLButtonElement>(Button) as ReactAbstractComponent<Props>
 )

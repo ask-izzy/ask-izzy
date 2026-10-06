@@ -80,7 +80,7 @@ function QuestionStepper({
     const CategoryIcon = category?.icon || (() => null)
     const title = category?.key !== "search" ?
         category?.name
-        : `Search for “${decodeURIComponent(router.query.search)}”`
+        : `Search for “${decodeURIComponent((router.query.search as string))}”`
 
     function renderProgressBar() {
         const stepTotal = getTotalSteps(router)

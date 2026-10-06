@@ -11,15 +11,18 @@ export default (): [(arg0: refType) => void, () => void, () => void] => {
     const prevFocusRef = useRef()
 
     useEffect(() => {
+        // @ts-expect-error TODO(ts-migration): Type 'HTMLElement' is not assignable to type 'undefined'.
         prevFocusRef.current = prevFocus
     }, [prevFocus])
 
     const focusElement = (ref: refType) => {
+        // @ts-expect-error TODO(ts-migration): Argument of type 'Element' is not assignable to parameter of type 'SetS…
         setPrevFocus(document.activeElement)
         ref?.current?.focus()
     }
 
     const revertFocus = () => {
+        // @ts-expect-error TODO(ts-migration): 'prevFocusRef.current' is possibly 'undefined'.
         prevFocusRef.current?.focus()
     }
 
@@ -39,6 +42,7 @@ export default (): [(arg0: refType) => void, () => void, () => void] => {
         }
     }
 
+    // @ts-expect-error TODO(ts-migration): Type '(event: any) => void' is not assignable to type '() => void'.
     return [focusElement, revertFocus, skipLastTab]
 };
 

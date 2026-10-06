@@ -32,6 +32,7 @@ export default function Tooltip({
             disableHoverListener={disableHoverListener}
             disableTouchListener={disableTouchListener}
         >
+            {/* @ts-expect-error TODO(ts-migration): Type 'ReactNode' is not assignable to type 'ReactElement<any, … */}
             {children}
         </TooltipComponent>
     );

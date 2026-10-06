@@ -7,6 +7,7 @@ export default function initSentry(additionalConfig: any = {}) {
     if (!process.env.NEXT_PUBLIC_IS_TEST_ENV) {
         Sentry.init({
             dsn: process.env.SENTRY_DSN || process.env.NEXT_PUBLIC_SENTRY_DSN || "null",
+            // @ts-expect-error TODO(ts-migration): Argument of type 'string' is not assignable to parameter of type 'n…
             tracesSampleRate: isNaN(process.env.NEXT_PUBLIC_SENTRY_TRACES_SAMPLE_RATE) 
                 ? 1.0
                 : parseFloat(process.env.NEXT_PUBLIC_SENTRY_TRACES_SAMPLE_RATE),

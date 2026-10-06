@@ -47,8 +47,10 @@ function StrapiMarkdown({
     return (
         <ReactMarkdown
             plugins={[gfm]}
+            // @ts-expect-error TODO(ts-migration): Type 'ReactNode' is not assignable to type 'string'.
             source={children}
             transformImageUri={absoluteImageUrl}
+            // @ts-expect-error TODO(ts-migration): Type '{ [x: string]: Function; }' is not assignable to type '{ [nod…
             renderers={{...renderers, ...additionalRenderers}}
         />
     )

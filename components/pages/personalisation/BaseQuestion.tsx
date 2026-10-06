@@ -51,7 +51,7 @@ function BaseQuestion({
         useState<string | null | undefined | Set<string>>(details.multipleChoice ? new Set() : null)
     const [category] =
         useState<Category | null | undefined>(getCategory(
-            router.query.categoryOrContentPageSlug
+            (router.query.categoryOrContentPageSlug as string)
         ))
 
     let listClassName = "List"
@@ -155,6 +155,7 @@ function BaseQuestion({
                 aria-label={answer}
                 value={answer}
                 onClick={() => onAnswerTouchTap(answer, false)}
+                // @ts-expect-error TODO(ts-migration): Type '{ key: number; leftIcon: ReactNode; primaryText: string; …
                 readOnly={true}
             />
         )

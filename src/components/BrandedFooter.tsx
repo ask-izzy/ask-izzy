@@ -258,10 +258,12 @@ function BrandedFooter(): ReactElement<"footer"> {
                 >
                     <icons.AboriginalFlag
                         className="other-content-icon"
+                        // @ts-expect-error TODO(ts-migration): No overload matches this call.
                         alt="Australian Aboriginal flag"
                     />
                     <icons.TorresStraitIslandersFlag
                         className="other-content-icon"
+                        // @ts-expect-error TODO(ts-migration): No overload matches this call.
                         alt="Torres Strait Islander flag"
                     />
                     <p>

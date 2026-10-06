@@ -12,6 +12,7 @@ const allowedDomains = new Set(
 const proxyMiddleware = createProxyMiddleware({
     router: req => getTargetBaseUrl(req).origin,
     changeOrigin: true,
+    // @ts-expect-error TODO(ts-migration): Object literal may only specify known properties, and 'on' does not exist i…
     on: {
         error: (err, req) => {
             console.error(`Proxy error for target "${getTargetBaseUrl(req).origin}":`, err.message)

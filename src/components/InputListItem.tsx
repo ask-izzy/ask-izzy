@@ -39,6 +39,7 @@ function InputListItem({
             {...otherProps}
             className="InputListItem"
             rootElement={Button}
+            // @ts-expect-error TODO(ts-migration): Type '{ analyticsEvent: { event: string; eventCat?: string; eventAc…
             role={type || "button"}
             aria-label={label}
             rightIcon={!type ? rightIcon || <icons.Chevron />

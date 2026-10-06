@@ -37,6 +37,7 @@ export default function ServicePagePrint({service}: Props): ReactElement<"div"> 
             <Spacer />
             <div className="email-container">
                 {service.emails.map((emailObject, index) => (
+                    // @ts-expect-error TODO(ts-migration): Property 'comment' is missing in type '{ key: number; email…
                     <Email
                         key={index}
                         email={emailObject.email}
@@ -65,6 +66,7 @@ export default function ServicePagePrint({service}: Props): ReactElement<"div"> 
                 <div className="Service-Containers">
                     {/* Service Info */}
                     <div className="Service-Info">
+                        {/* @ts-expect-error TODO(ts-migration): Type 'void' is not assignable to type 'ReactNode'. */}
                         <b>{console.log(service)}</b>
                         <div className="service-page-print-service-name">
                             <b>{service.name}</b>
@@ -178,6 +180,7 @@ export default function ServicePagePrint({service}: Props): ReactElement<"div"> 
 
                         </BoxedText>
                         <Cost cost={service.cost}
+                            // @ts-expect-error TODO(ts-migration): Type '{ cost: string; hideContentPreview: boolean; …
                             hideContentPreview={true}
                         />
                     </div>

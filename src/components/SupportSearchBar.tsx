@@ -27,6 +27,7 @@ function SupportSearchBar(): ReactNode {
                     Don't see what you're looking for?
                 </p>
                 <SearchBar
+                    // @ts-expect-error TODO(ts-migration): Type '{ type: string; placeholder: string; onSubmit: (searc…
                     type="search"
                     placeholder="Search Ask Izzy for a service"
                     onSubmit={(searchText) => {

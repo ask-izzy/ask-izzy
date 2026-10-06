@@ -22,6 +22,7 @@ function Cost({ catchment, cost }: Props) {
     let costContent = cost;
 
     if (isExceedingLimit && !showAll) {
+        // @ts-expect-error TODO(ts-migration): Type 'Element' is not assignable to type 'string'.
         costContent = (
             <Collapser
                 contentPreview={cost.substring(0, 100) + "..."}
@@ -32,6 +33,7 @@ function Cost({ catchment, cost }: Props) {
                     eventAction: "show all cost info",
                     eventLabel: null,
                 }}
+                // @ts-expect-error TODO(ts-migration): Type '{ children: Element; contentPreview: string; expandMessag…
                 title="Show all cost info"
                 isOpen={showAll}
                 toggleAccordion={toggleShowAll}

@@ -44,6 +44,7 @@ function BaseStaticPersonalisation({details, router}: Props): ReactNode {
                 <div className="done-button">
                     <FlatButton
                         label={details.getDoneButtonLabel()}
+                        // @ts-expect-error TODO(ts-migration): Type '{ label: string; autoFocus: boolean; onClick: () …
                         autoFocus={true}
                         onClick={onDoneTouchTap}
                     />

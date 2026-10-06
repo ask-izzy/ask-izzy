@@ -21,12 +21,15 @@ export default ({
             return null;
         }
 
+        // @ts-expect-error TODO(ts-migration): Property 'location' does not exist on type '{}'.
         searchQuery.location = {}
+        // @ts-expect-error TODO(ts-migration): Property 'location' does not exist on type '{}'.
         searchQuery.location.name = searchArea
 
         /* Coordinates are optional */
         const userLocation = storage.getUserGeolocation();
         if (userLocation && userLocation.name === searchArea) {
+            // @ts-expect-error TODO(ts-migration): Property 'location' does not exist on type '{}'.
             searchQuery.location.coordinates = userLocation;
         }
 

@@ -58,6 +58,7 @@ function Collapser({
             {isCollapsed && contentPreview}
             {message && (
                 <Button
+                    // @ts-expect-error TODO(ts-migration): Type '{ children: Element; alt: string; className: string; …
                     alt={message}
                     className="collapser-message"
                     onClick={onClick}

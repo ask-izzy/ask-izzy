@@ -42,7 +42,9 @@ function ShareDirectlyOptions({
 
     const shareData = {}
 
+    // @ts-expect-error TODO(ts-migration): Property 'title' does not exist on type '{}'.
     shareData.title = "List of Ask Izzy services"
+    // @ts-expect-error TODO(ts-migration): Property 'text' does not exist on type '{}'.
     shareData.text = textToShare
 
 
@@ -79,8 +81,10 @@ function ShareDirectlyOptions({
                         "Clipboard"
                     )
                     onClose()
+                    // @ts-expect-error TODO(ts-migration): Expected 2-3 arguments, but got 1.
                     openToastMessage(`Link${isPlural ? "s" : ""} copied`)
                 }}
+                // @ts-expect-error TODO(ts-migration): Type '{ children: (string | Element)[]; onClick: () => Promise<…
                 analyticsEvent={{
                     event: "Action Triggered - Services Shared Via Clipboard",
                     eventAction: "Services shared",
@@ -109,6 +113,7 @@ function ShareDirectlyOptions({
                         }
 
                     }}
+                    // @ts-expect-error TODO(ts-migration): Type '{ children: string; onClick: () => Promise<void>; ana…
                     analyticsEvent={{
                         event: "Action Triggered - Services Shared Via Web Share API",
                         eventAction: "Services shared",
@@ -123,6 +128,7 @@ function ShareDirectlyOptions({
                 <input
                     type="checkbox"
                     id="includeOtherDetails"
+                    // @ts-expect-error TODO(ts-migration): Type 'boolean' is not assignable to type 'string | number |…
                     value={includeOtherDetails}
                     checked={true}
                     onChange={({target}) => setIncludeOtherDetails(target.checked)}

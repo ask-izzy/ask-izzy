@@ -63,6 +63,7 @@ export default function Form({
         schema,
     }
     return (
+        // @ts-expect-error TODO(ts-migration): Property 'control' is missing in type '{ children: Element; register: a…
         <FormProvider {...formProviderProps}>
             <form
                 {...formProps}

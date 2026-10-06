@@ -20,6 +20,7 @@ export default function Dialog(
     {className, open, children, onClose, ...rest}: Props
 ): ReactNode {
     const isMounted = useIsMounted({rerenderAfterMount: true})
+    // @ts-expect-error TODO(ts-migration): Argument of type '{ id: string; }' is not assignable to parameter of type '…
     const [instance, attr] = useA11yDialog({
         id: `dialog-${useUniqueId()}`,
     })

@@ -88,6 +88,7 @@ function PersonalisationSummaryPage({router}: Props): ReactNode {
         personalisationPage: PersonalisationPage
     ): string | null {
         return personalisationPage.summaryLabel ||
+            // @ts-expect-error TODO(ts-migration): Property 'question' does not exist on type 'PersonalisationPage'.
             personalisationPage.question || null
     }
 

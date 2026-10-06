@@ -19,6 +19,7 @@ export default ({
     getDoneButtonLabel: (): string => "OK - keep searching",
     getShouldIncludePage(): boolean {
         return !["", "Yes", "(skipped)"]
+            // @ts-expect-error TODO(ts-migration): Argument of type 'string | string[]' is not assignable to parameter…
             .includes(getSavedPersonalisationAnswer(AreYouSafe) || "");
     },
 } as PersonalisationInfoPage);

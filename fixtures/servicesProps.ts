@@ -181,6 +181,7 @@ export const ixaServiceProps: serviceFixtureProps = {
     availability: "",
     billing_method: "",
     capacity: {
+        // @ts-expect-error TODO(ts-migration): Object literal may only specify known properties, and 'frequency' does …
         frequency: 1,
         status: "expired",
         status_text: "green",

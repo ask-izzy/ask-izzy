@@ -96,7 +96,7 @@ export function getCategoryFromRouter(
     router: NextRouter
 ): Category | null | undefined {
     return getCategory(
-        router.query.categoryOrContentPageSlug || router.route.split("/")[1]
+        (router.query.categoryOrContentPageSlug || router.route.split("/")[1]) as string
     )
 }
 
@@ -105,7 +105,7 @@ export function getPageTitleFromRouter(
 ): string {
     if (router.query.search) {
         const search = decodeURIComponent(
-            router.query.search
+            (router.query.search as string)
         );
         return `“${search.replace(/["']/g, "")}”`
     }
@@ -128,6 +128,7 @@ export function getPageTitleFromRouter(
 export function getPathOfSSRPage(
     router: NextRouter
 ): string {
+    // @ts-expect-error TODO(ts-migration): Argument of type 'ParsedUrlQuery' is not assignable to parameter of type '{…
     return convertRouteToPath(router.pathname, router.query)
 }
 
@@ -137,6 +138,7 @@ export function convertRouteToPath(
 ): string {
     return route.replaceAll(
         /\[([^/\]]+?)\]/g,
+        // @ts-expect-error TODO(ts-migration): No overload matches this call.
         (fullMatch, param) => {
             if (!(param in params)) {
                 console.error(
@@ -193,9 +195,9 @@ export function getServicesPath({
     }
     if (searchText === undefined && pageMounted) {
         if (router.query.search) {
-            searchText = decodeURIComponent(router.query.search)
+            searchText = decodeURIComponent((router.query.search as string))
         } else if (router.query.helpSpecialisation) {
-            searchText = decodeURIComponent(router.query.helpSpecialisation)
+            searchText = decodeURIComponent((router.query.helpSpecialisation as string))
         }
     }
     if (location === undefined && pageMounted) {

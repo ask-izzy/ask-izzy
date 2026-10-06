@@ -44,6 +44,7 @@ export const getFullPageTitle = (
     }
 
     if (params?.search) {
+        // @ts-expect-error TODO(ts-migration): Argument of type 'string | string[]' is not assignable to parameter of …
         pageTitleArr.push(`Search "${titleize(decodeURIComponent(params.search))}"`);
     } else if (category?.name) {
         pageTitleArr.push(category.name);
@@ -79,6 +80,7 @@ export const getFullPageTitle = (
             }
         } else {
             pageTitleArr.push(
+                // @ts-expect-error TODO(ts-migration): Argument of type 'string | string[]' is not assignable to param…
                 `in ${decodeURIComponent(params?.suburb)}, ${decodeURIComponent(params?.state)}`
             )
         }

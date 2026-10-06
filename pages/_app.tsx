@@ -31,6 +31,7 @@ if (typeof window !== "undefined") {
 }
 
 function App(appProps: AppProps): ReactNode {
+    // @ts-expect-error TODO(ts-migration): Property 'err' does not exist on type 'AppProps'.
     const { Component, pageProps, err } = appProps
     const router = useRouter()
 
@@ -103,7 +104,9 @@ export type PageInfo = {
 // at some point we should find a cleaner way of doing this.
 function getPageInfo({ Component, pageProps }: AppProps): PageInfo {
     const router = useRouter()
+    // @ts-expect-error TODO(ts-migration): Property 'pageTitle' does not exist on type 'NextComponentType<NextPageCont…
     const title = pageProps.pageTitle ?? Component.pageTitle
+    // @ts-expect-error TODO(ts-migration): Property 'pageType' does not exist on type 'NextComponentType<NextPageConte…
     const type = pageProps.pageType ?? Component.pageType
     if (title === undefined || type === undefined) {
         Sentry.captureException(
@@ -316,24 +319,28 @@ function renderHeadMetadata(pageInfo: any, router: NextRouter): ReactNode {
                 href="/fonts/hoc/GothamRnd-Light_Web.woff2"
                 as="font"
                 type="font/woff2"
+                // @ts-expect-error TODO(ts-migration): Type '"true"' is not assignable to type 'CrossOrigin'.
                 crossOrigin="true"
             />
             <link rel="preload"
                 href="/fonts/hoc/GothamRnd-Book_Web.woff2"
                 as="font"
                 type="font/woff2"
+                // @ts-expect-error TODO(ts-migration): Type '"true"' is not assignable to type 'CrossOrigin'.
                 crossOrigin="true"
             />
             <link rel="preload"
                 href="/fonts/hoc/GothamRnd-Medium_Web.woff2"
                 as="font"
                 type="font/woff2"
+                // @ts-expect-error TODO(ts-migration): Type '"true"' is not assignable to type 'CrossOrigin'.
                 crossOrigin="true"
             />
             <link rel="preload"
                 href="/fonts/hoc/GothamRnd-Bold_Web.woff2"
                 as="font"
                 type="font/woff2"
+                // @ts-expect-error TODO(ts-migration): Type '"true"' is not assignable to type 'CrossOrigin'.
                 crossOrigin="true"
             />
             <title>

@@ -69,6 +69,7 @@ function CalloutBox(
         if (path.charAt(0) === "/") {
             router.push(path);
         } else {
+            // @ts-expect-error TODO(ts-migration): Type 'string' is not assignable to type 'string & Location'.
             window.location = path;
         }
 

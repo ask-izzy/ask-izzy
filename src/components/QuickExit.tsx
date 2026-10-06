@@ -20,6 +20,7 @@ function QuickExit(
     return <div className={classnames("QuickExit", className)} >
         <Link className="link"
             to={redirectUri}
+            // @ts-expect-error TODO(ts-migration): Type '{ children: Element; className: string; to: string; title: st…
             title={tooltip}
             analyticsEvent={{
                 event: `Link Followed - Quick Exit`,

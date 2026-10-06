@@ -56,6 +56,7 @@ function Eligibility({
                     Ineligibility
                 </h2>
                 <ul>
+                    {/* @ts-expect-error TODO(ts-migration): Type 'void | ReactNode' is not assignable to type 'Rea… */}
                     {ineligibleItems}
                 </ul>
             </div>

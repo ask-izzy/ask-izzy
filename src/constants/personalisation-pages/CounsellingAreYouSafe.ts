@@ -17,6 +17,7 @@ export default ({
     ...AreYouSafe,
     getShouldIncludePage(): boolean {
         return triggerSubcategories.includes(
+            // @ts-expect-error TODO(ts-migration): Argument of type 'string | string[]' is not assignable to parameter…
             getSavedPersonalisationAnswer(CounsellingSubcategories)
         )
     },

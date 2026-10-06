@@ -50,10 +50,12 @@ function SendForm({
 
     async function onSubmit(data) {
         const status = await submitForm(data)
+        // @ts-expect-error TODO(ts-migration): 'recaptchaRef.current' is possibly 'undefined'.
         recaptchaRef.current?.reset();
         let displayToastMessage = () => {}
         if (status === "Message is sent") {
             displayToastMessage = () => {
+                // @ts-expect-error TODO(ts-migration): Expected 2-3 arguments, but got 1.
                 openToastMessage(`${messageType} sent via Ask Izzy`)
             }
             usersnapFireEvent("services-shared")
@@ -77,6 +79,7 @@ function SendForm({
             }
         } else {
             displayToastMessage = () => {
+                // @ts-expect-error TODO(ts-migration): Expected 2-3 arguments, but got 1.
                 openToastMessage("Error sharing services, please try again")
             }
             gtm.emit({
@@ -158,10 +161,12 @@ function SendForm({
                     <TooltipHover
                         content = {whyCantEditTooltipContent}
 
+                        // @ts-expect-error TODO(ts-migration): Type '{ children: Element; content: string; disableFocu…
                         disableFocusListener={false}
                     >
                         <div
                             className="why-cant-i-edit-tooltip"
+                            // @ts-expect-error TODO(ts-migration): Type 'string' is not assignable to type 'number'.
                             tabIndex="0"
                             aria-label={whyCantEditTooltipContent}
                         >
@@ -238,6 +243,7 @@ function SendForm({
             </nav>
         </div>
         <Form
+            // @ts-expect-error TODO(ts-migration): Type '{ children: Element[]; schema: any; watch: UseFormWatch<Field…
             onSubmit={formProps.handleSubmit(onSubmit)}
             action="/api/share-services"
             method="post"

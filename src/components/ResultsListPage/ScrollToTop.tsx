@@ -42,6 +42,7 @@ function ScrollToTop({label}: Props): ReactNode {
         <div className="ScrollToTop">
             <Button
                 className={`button ${showButton ? "showToTop" : ""}`}
+                // @ts-expect-error TODO(ts-migration): Type '{ children: Element[]; className: string; disabled: boole…
                 disabled={!showButton}
                 onClick={scrollToTop}
                 analyticsEvent={{

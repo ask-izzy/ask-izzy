@@ -98,6 +98,7 @@ const personalisationPages: Array<PersonalisationPage> = [
 ]
 
 if (typeof global?.window === "undefined") {
+    // @ts-expect-error TODO(ts-migration): Type 'ProcessEnv' is not assignable to type 'Window & typeof globalThis'.
     global.window = process.env
 }
 

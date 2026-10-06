@@ -71,13 +71,19 @@ function fixQueryParamTypes(diagnostics) {
         edits.push({
             start: expression.getStart(diagnostic.file),
             end: expression.getEnd(),
+            needsParens: !(
+                ts.isPropertyAccessExpression(expression) ||
+                ts.isElementAccessExpression(expression) ||
+                ts.isIdentifier(expression)
+            ),
         })
         editsByFile.set(diagnostic.file.fileName, edits)
     }
     for (const [fileName, edits] of editsByFile) {
         let source = fs.readFileSync(fileName, "utf8")
-        for (const {start, end} of edits.sort((a, b) => b.start - a.start)) {
-            source = `${source.slice(0, start)}(${source.slice(start, end)} as string)${source.slice(end)}`
+        for (const {start, end, needsParens} of edits.sort((a, b) => b.start - a.start)) {
+            const expression = needsParens ? `(${source.slice(start, end)})` : source.slice(start, end)
+            source = `${source.slice(0, start)}(${expression} as string)${source.slice(end)}`
         }
         fs.writeFileSync(fileName, source)
     }

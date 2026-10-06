@@ -49,6 +49,7 @@ function SearchBar({
             )}
         >
             <InputWithDropdown
+                // @ts-expect-error TODO(ts-migration): Type '{ "aria-label"?: string; type: string; onChange: (event: …
                 type="search"
                 onChange={handleOnChange}
                 value={value}

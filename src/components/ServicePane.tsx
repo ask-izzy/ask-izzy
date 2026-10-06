@@ -159,6 +159,7 @@ function ServicePane({ service }: Props): ReactNode {
         ));
 
         if (service.descriptionRemainder.length > 0) {
+            // @ts-expect-error TODO(ts-migration): Type 'ReactElement<any, any>' is missing the following properties f…
             description = (
                 <Collapser
                     contentPreview={service.shortDescription.map((sentence, idx) => (
@@ -191,6 +192,7 @@ function ServicePane({ service }: Props): ReactNode {
                         <PrintButton
                             hasTextDescription={true}
                             ComponentToPrint={
+                                // @ts-expect-error TODO(ts-migration): Property 'url' is missing in type '{ service: S…
                                 <ServicePagePrint service={service} />
                             }
                             isInServicePane={true}
@@ -212,6 +214,7 @@ function ServicePane({ service }: Props): ReactNode {
                     <PrintButton
                         hasTextDescription={true}
                         ComponentToPrint={
+                            // @ts-expect-error TODO(ts-migration): Property 'url' is missing in type '{ service: Servi…
                             <ServicePagePrint service={service} />
                         }
                         isInServicePane={true}

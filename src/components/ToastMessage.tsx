@@ -34,6 +34,7 @@ export default function ToastMessage(): ReactNode {
             )
             const refToFocus = hasActionDescriptor ? actionDescriptorRef : closeButtonRef
             setFocus(refToFocus)
+            // @ts-expect-error TODO(ts-migration): Argument of type 'Timeout' is not assignable to parameter of type '…
             setFocusTimer(setTimeout(
                 () => setOpen(false), autoHideDuration
             ))
@@ -45,8 +46,10 @@ export default function ToastMessage(): ReactNode {
     useEffect(() => {
         // accessibility work around if toast bar is the last element in the document
         if (open) {
+            // @ts-expect-error TODO(ts-migration): 'snackBarRef.current' is possibly 'undefined'.
             snackBarRef.current?.addEventListener("keydown", skipLastTab)
         } else {
+            // @ts-expect-error TODO(ts-migration): 'snackBarRef.current' is possibly 'undefined'.
             snackBarRef.current?.removeEventListener("keydown", skipLastTab)
         }
     }, [open])
@@ -62,6 +65,7 @@ export default function ToastMessage(): ReactNode {
                 actionDescriptor &&
                 <Button
                     className="action-description-button"
+                    // @ts-expect-error TODO(ts-migration): Type '{ children: string | number | bigint | true | ReactEl…
                     ref={actionDescriptorRef}
                     onClick={onActionClick}
                 >
@@ -70,6 +74,7 @@ export default function ToastMessage(): ReactNode {
             }
             <Button
                 className="close-toast-message-button"
+                // @ts-expect-error TODO(ts-migration): Type '{ children: Element; className: string; ref: MutableRefOb…
                 ref={closeButtonRef}
                 aria-label="Dismiss toast message"
                 onClick={() => setOpen(false)}

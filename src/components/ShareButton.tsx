@@ -27,6 +27,7 @@ function ShareButton({
             type={type}
             variant={variant}
             onClick={() => setOpen(true)}
+            // @ts-expect-error TODO(ts-migration): Type '{ children: Element; className: string; type: "text" | "prima…
             analyticsEvent={{
                 event: "Action Triggered - Share Services Opened",
                 eventAction: "Share services opened",

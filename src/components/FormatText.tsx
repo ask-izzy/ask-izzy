@@ -38,6 +38,7 @@ function FormatText({children, paragraphWrapperElement: ParagraphWrapper = "p"}:
     children = ensureReactNodeIsAnArray(children)
     children = children
         // Firstly break string in paragraphs by splitting along the boundary of multiple sequential newlines
+        // @ts-expect-error TODO(ts-migration): Property 'flatMap' does not exist on type 'Iterable<ReactNode>'.
         .flatMap(
             child => typeof child === "string" ?
                 child.split(/(?:\r\n|\n|\r){2,}/)
@@ -74,6 +75,7 @@ function FormatText({children, paragraphWrapperElement: ParagraphWrapper = "p"}:
             (url, index) => <br key={`${i} ${index}`} />
         ))
         // Wrap paragraphs in paragraph tag
+        // @ts-expect-error TODO(ts-migration): Type '{ children: any; key: any; }' is not assignable to type 'Intrinsi…
         .map((child, i) => <ParagraphWrapper key={i}>{child}</ParagraphWrapper>)
 
     // Note that regexMatcher must include a capture group around the whole matched output to ensure .split()
@@ -85,6 +87,7 @@ function FormatText({children, paragraphWrapperElement: ParagraphWrapper = "p"}:
     ) {
         children = ensureReactNodeIsAnArray(children)
         return children
+            // @ts-expect-error TODO(ts-migration): Property 'flatMap' does not exist on type 'Iterable<ReactNode>'.
             .flatMap(textOrElement => (typeof textOrElement === "string") ?
                 textOrElement.split(regexMatcher)
                 : textOrElement

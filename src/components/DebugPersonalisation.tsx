@@ -135,9 +135,11 @@ function getDiffedLayers(
 
 
         if (convertToISSQuery) {
+            // @ts-expect-error TODO(ts-migration): Type 'ISS3SearchQuery' is not assignable to type 'SearchQuery'.
             mergedUpToPreviousLayer = convertIzzySearchQueryToIss3(
                 mergedUpToPreviousLayer
             )
+            // @ts-expect-error TODO(ts-migration): Type 'ISS3SearchQuery' is not assignable to type 'SearchQuery'.
             mergedUpToIncludingLayer = convertIzzySearchQueryToIss3(
                 mergedUpToIncludingLayer
             )

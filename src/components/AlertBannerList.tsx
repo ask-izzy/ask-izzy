@@ -106,6 +106,7 @@ function AlertBannerList({
                 {
                     isCollapsed &&
                     <Button
+                        // @ts-expect-error TODO(ts-migration): Type '{ children: Element; alt: string; className: stri…
                         alt="Alert List"
                         className="AlertBannerButton"
                         onClick={onCollapseButtonClick}
@@ -161,6 +162,7 @@ function AlertBannerList({
                 {
                     <Button
                         className="DismissAlertList"
+                        // @ts-expect-error TODO(ts-migration): Type '{ children: Element; className: string; alt: stri…
                         alt="Dismiss Alert List"
                         onClick={onCollapseButtonClick}
                     >

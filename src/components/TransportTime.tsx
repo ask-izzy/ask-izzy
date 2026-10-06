@@ -70,6 +70,7 @@ function TransportTime({
             );
 
             if (travel.mode === "TRANSIT") {
+                // @ts-expect-error TODO(ts-migration): Type 'Element' is not assignable to type 'string'.
                 icon = (
                     <icons.Tram
                         className="ColoredIcon"
@@ -77,6 +78,7 @@ function TransportTime({
                 );
                 method = (" transport");
             } else if (travel.mode === "DRIVING") {
+                // @ts-expect-error TODO(ts-migration): Type 'Element' is not assignable to type 'string'.
                 icon = (
                     <icons.Car
                         className="ColoredIcon"
@@ -84,6 +86,7 @@ function TransportTime({
                 );
                 method = (" drive");
             } else {
+                // @ts-expect-error TODO(ts-migration): Type 'Element' is not assignable to type 'string'.
                 icon = (
                     <icons.Walk
                         className="ColoredIcon"

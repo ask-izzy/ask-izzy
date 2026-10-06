@@ -131,6 +131,7 @@ function BushfireReliefStaticPage(): ReactNode {
                 by bushfires. See the{" "}
                 <Link
                     to="https://www.humanservices.gov.au/individuals/help-emergency/bushfires"
+                    // @ts-expect-error TODO(ts-migration): Type '{ children: string; to: string; rel: string; }' is no…
                     rel="noreferer noopener"
                 >
                     Department of Human Services
@@ -152,6 +153,7 @@ function BushfireReliefStaticPage(): ReactNode {
                 {" "}
                 <Link
                     to="https://www.surveygizmo.com/s3/5391212/Ask-Izzy-service-update-form"
+                    // @ts-expect-error TODO(ts-migration): Type '{ children: string; to: string; rel: string; }' is no…
                     rel="noopener noreferer"
                 >
                     this form
