@@ -39,6 +39,15 @@ jobs:
       image-target: development
       command: lint-flow
 
+  lint-tsc:
+    name: Lint - TypeScript
+    needs: build-development
+    uses: infoxchange/github-ci/.github/workflows/run-in-docker.yaml@v2
+    with:
+      workflow-ref: v2
+      image-target: development
+      command: lint-tsc
+
   lint-stylelint:
     name: Lint - Stylelint
     needs: build-development

@@ -90,6 +90,12 @@ lint-flow:
   script:
     - docker run --rm -t $TAG_DEVELOPMENT_STAGE lint-flow
 
+lint-tsc:
+  stage: Lint
+  needs: ['build-development']
+  script:
+    - docker run --rm -t $TAG_DEVELOPMENT_STAGE lint-tsc
+
 lint-stylelint:
   stage: Lint
   needs: ['build-development']
