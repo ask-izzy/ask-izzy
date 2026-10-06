@@ -68,6 +68,7 @@ RUN --mount=type=cache,target=/var/cache/apt,sharing=locked \
         git \
         # Used by selenium
         chromium \
+        chromium-driver \
         # Used for pa11y
         libatk-bridge2.0-0 \
         libgtk-3-0 \
@@ -89,7 +90,6 @@ USER $UID:$GID
 
 COPY ./package.json ./yarn.lock ./
 RUN --mount=type=cache,target=/tmp/home/.cache/yarn,uid=$UID,gid=$GID,sharing=locked \
-    --mount=type=cache,target=/tmp/chromedriver,uid=$UID,gid=$GID,sharing=locked \
     yarn install --network-timeout 100000 --frozen-lockfile
 
 COPY --chown=$UID:$GID . .
@@ -125,7 +125,6 @@ COPY ./package.json ./yarn.lock ./
 # We use mount cache for package cache so no need to empty
 # hadolint ignore=DL3060
 RUN --mount=type=cache,target=/tmp/home/.cache/yarn,uid=$UID,gid=$GID,sharing=locked \
-    --mount=type=cache,target=/tmp/chromedriver,uid=$UID,gid=$GID,sharing=locked \
     yarn install --network-timeout 100000 --frozen-lockfile
 
 COPY --chown=$UID:$GID . .

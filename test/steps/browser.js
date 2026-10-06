@@ -220,8 +220,30 @@ async function clickElementWithText(
             }
         }, elementWithText(elementText, elementType))
     } else {
-        const element =
-            await getElementWithText(driver, elementText, elementType)
+        // The element may not be visible yet (eg if it's still rendering) so
+        // give it a chance to appear
+        let element
+        try {
+            element = await driver.wait(async() => {
+                try {
+                    return await getElementWithText(
+                        driver,
+                        elementText,
+                        elementType
+                    )
+                } catch (error) {
+                    if (error instanceof Webdriver.error.StaleElementReferenceError) {
+                        return null
+                    }
+                    throw error
+                }
+            }, 10 * 1000)
+        } catch (error) {
+            throw Error(
+                `Could not find a visible ${elementType || "element"} ` +
+                `with the text "${elementText}"`
+            )
+        }
         await element.click();
     }
     await module.exports.documentReady(driver);
@@ -475,15 +497,27 @@ async function assertItemNotChecked(label: string): Promise<void> {
 }
 
 async function checkMetaCanonical(expected: string): Promise<void> {
+    const getCanonicalPath = async() => {
+        const content = await this.driver.findElement(By.css(
+            "link[rel=canonical]"
+        ))
+            .getAttribute("content");
 
-    let content = await this.driver.findElement(By.css(
-        "link[rel=canonical]"
-    ))
-        .getAttribute("content");
+        return decodeURIComponent(content).replace(/^.*\/\/[^/]+/, "");
+    }
 
-    content = decodeURIComponent(content);
+    // The page may still be redirecting client-side (eg to add the location
+    // to the path) so give the canonical url a chance to update
+    try {
+        await this.driver.wait(
+            async() => await getCanonicalPath() === expected,
+            10 * 1000
+        );
+    } catch (error) {
+        // Fall through to the assertion below for a useful error message
+    }
 
-    content = content.replace(/^.*\/\/[^/]+/, "");
+    const content = await getCanonicalPath();
 
     assert.equal(
         content,

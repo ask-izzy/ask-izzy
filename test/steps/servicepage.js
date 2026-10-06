@@ -90,16 +90,35 @@ async function getTransportTimes(
 }
 
 async function checkPhoneNumbers(lines: Array<string>): Promise<void> {
-    let phoneElems = await this.driver.findElements(By.css(".Contact"));
-    let visiblePhoneElems = await asyncFilter(
-        phoneElems,
-        elem => elem.isDisplayed()
-    );
-    let text = await Promise.all(visiblePhoneElems.map(
-        elem => elem.getText()
-    ));
+    const getVisibleContactsText = async() => {
+        let phoneElems = await this.driver.findElements(By.css(".Contact"));
+        let visiblePhoneElems = await asyncFilter(
+            phoneElems,
+            elem => elem.isDisplayed()
+        );
+        let text = await Promise.all(visiblePhoneElems.map(
+            elem => elem.getText()
+        ));
+        return text.map(string => string.replace(/\n/g, " "))
+    }
 
-    assert.deepStrictEqual(text.map(
-        (string) => string.replace(/\n/g, " ")
-    ), lines);
+    // The contacts may be re-rendered while we're reading them (making the
+    // elements stale) so keep trying until they match or we time out
+    try {
+        await this.driver.wait(async() => {
+            try {
+                const text = await getVisibleContactsText()
+                return JSON.stringify(text) === JSON.stringify(lines)
+            } catch (error) {
+                if (error instanceof Webdriver.error.StaleElementReferenceError) {
+                    return false
+                }
+                throw error
+            }
+        }, 5 * 1000);
+    } catch (error) {
+        // Fall through to the assertion below for a useful error message
+    }
+
+    assert.deepStrictEqual(await getVisibleContactsText(), lines);
 }

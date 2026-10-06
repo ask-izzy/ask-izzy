@@ -80,6 +80,14 @@ export default async function webDriverInstance(): Promise<typeof Webdriver.WebD
         Webdriver.logging.Level.ALL
     );
 
+    const chromeArgs = [
+        "--headless",
+        "--no-sandbox",
+        "--ignore-certificate-errors",
+        "--disable-dev-shm-usage", // https://developers.google.com/web/tools/puppeteer/troubleshooting#running_on_alpine
+        "--window-size=1000,1000",
+    ]
+
     const driver = await new Webdriver.Builder()
         /**
          * Default to using headless chrome if `SELENIUM_BROWSER` not provided.
@@ -88,20 +96,16 @@ export default async function webDriverInstance(): Promise<typeof Webdriver.WebD
             new Webdriver.Capabilities()
                 .setAcceptInsecureCerts(true)
                 .setLoggingPrefs(preferences)
+                // The version of selenium-webdriver we use only sends the
+                // legacy (non-W3C) "chromeOptions" and "loggingPrefs"
+                // capabilities which modern versions of chromedriver ignore
+                // so we also need to set the vendor-prefixed versions.
+                .set("goog:chromeOptions", {args: chromeArgs})
+                .set("goog:loggingPrefs", preferences.toJSON())
         )
         .forBrowser(browserName || "chrome")
         .setChromeOptions(
-            new ChromeWebDriver.Options()
-                .addArguments([
-                    "headless",
-                    "no-sandbox",
-                    "acceptInsecureCerts=true",
-                    "ignore-certificate-errors",
-                    "disable-dev-shm-usage", // https://developers.google.com/web/tools/puppeteer/troubleshooting#running_on_alpine
-                ])
-                .windowSize(
-                    {width: 1000, height: 1000}
-                )
+            new ChromeWebDriver.Options().addArguments(chromeArgs)
         )
         .build();
 
