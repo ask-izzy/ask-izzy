@@ -9,6 +9,7 @@ node_modules/
 public/VERSION.txt
 .next/
 .git/
+.local
 .gitlab-ci.yml
 .gitignore
 testing-screenshots
@@ -22,3 +23,6 @@ docker-compose.*.yml.sample
 Dockerfile
 .cache
 .github
+.dockerignore
+Dockerfile
+.vscode

@@ -14,14 +14,17 @@ fi
 
 for file in $( git ls-files '*.js' '**/*.js' ); do
     if [ -e "$file" ] ; then
+        firstTwoChars=""
+        lineToCheck=""
+
         if [[ "$file" == external-resources-proxy/* ]]; then
             continue
         elif [[ "$file" == flow/flow-typed/* ]]; then
             continue
         fi
 
-        # "|| true" is needed to stop "set -e" killing us if file doesn't have enough lines
-        read -rN2 firstTwoChars < "$file" || true
+        # "|| true" is needed to stop "set -e" killing us if file doesn't have enough chars
+        IFS= read -r -n 2 firstTwoChars < "$file" || true
         if [ "$firstTwoChars" = "#!" ]; then
             { read -r; read -r lineToCheck; } < "$file" || true
         else

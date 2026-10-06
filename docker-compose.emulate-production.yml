@@ -9,6 +9,8 @@ services:
     depends_on:
       aws-ecs-api-mock:
         condition: service_healthy
+      http-proxy:
+        condition: service_started
     environment:
       SITE_PROTOCOL: "https"
       SITE_DOMAIN: "askizzy.org.au"
@@ -28,6 +30,8 @@ services:
     depends_on:
       aws-ecs-api-mock:
         condition: service_healthy
+      http-proxy:
+        condition: service_started
       app-deploy:
         condition: service_completed_successfully
 
