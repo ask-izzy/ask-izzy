@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 /* @flow */
 
-require("@babel/register");
+require("../../../babel-register");
 const path = require("path");
 const loadEnvConfig = require("@next/env").loadEnvConfig
 

@@ -2,7 +2,7 @@
 module.exports = {
 	require: [
 		'test/mocha.env.js',
-		'@babel/register',
+		'./babel-register.js',
 		'regenerator-runtime/runtime'
 	],
 	exit: true,

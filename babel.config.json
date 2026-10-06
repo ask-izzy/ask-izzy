@@ -13,7 +13,6 @@
         }
       }
     ],
-    "@babel/preset-flow",
     "@babel/preset-react"
   ],
   "plugins": [
@@ -22,8 +21,26 @@
       {
         "alias": {
           "@": "."
-        }
+        },
+        "extensions": [
+          ".js",
+          ".jsx",
+          ".ts",
+          ".tsx",
+          ".json"
+        ]
       }
     ]
+  ],
+  "overrides": [
+    {
+      "test": [
+        "**/*.js",
+        "**/*.jsx"
+      ],
+      "presets": [
+        "@babel/preset-flow"
+      ]
+    }
   ]
 }
