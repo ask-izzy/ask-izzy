@@ -61,7 +61,13 @@ USER root
 RUN rm -f /etc/apt/apt.conf.d/docker-clean; echo 'Binary::apt::APT::Keep-Downloaded-Packages "true";' > /etc/apt/apt.conf.d/keep-cache
 RUN --mount=type=cache,target=/var/cache/apt,sharing=locked \
     --mount=type=cache,target=/var/lib/apt,sharing=locked \
+    ARCH="$(uname -m)" && \
+    # The version of flow-bin we use doesn't include a linux arm64 binary so on
+    # arm64 we run the x86_64 one under emulation (see scripts/flow.sh) which
+    # requires the x86_64 dynamic loader.
+    if [ "$ARCH" = "aarch64" ]; then dpkg --add-architecture amd64; fi && \
     apt-get -y update && \
+    if [ "$ARCH" = "aarch64" ]; then apt-get -y --no-install-recommends install libc6:amd64; fi && \
     apt-get -y --no-install-recommends install \
         curl \
         # Used by scripts/check-flow-annotations.sh & scripts/check-storybook-components.sh
@@ -75,11 +81,12 @@ RUN --mount=type=cache,target=/var/cache/apt,sharing=locked \
         # Used below for unpacking shellcheck program
         xz-utils && \
     # Install Hadolint
-    curl -sSL -o /usr/bin/hadolint https://github.com/hadolint/hadolint/releases/latest/download/hadolint-Linux-x86_64 && \
+    HADOLINT_ARCH="$(if [ "$ARCH" = "aarch64" ]; then echo arm64; else echo "$ARCH"; fi)" && \
+    curl -sSL -o /usr/bin/hadolint "https://github.com/hadolint/hadolint/releases/latest/download/hadolint-Linux-${HADOLINT_ARCH}" && \
     chmod +x /usr/bin/hadolint && \
     # Install ShellCheck
     SHELLCHECK_VERSION="stable" && \
-    curl -sSL "https://github.com/koalaman/shellcheck/releases/download/${SHELLCHECK_VERSION?}/shellcheck-${SHELLCHECK_VERSION?}.linux.x86_64.tar.xz" | \
+    curl -sSL "https://github.com/koalaman/shellcheck/releases/download/${SHELLCHECK_VERSION?}/shellcheck-${SHELLCHECK_VERSION?}.linux.${ARCH}.tar.xz" | \
         tar -xJv -C /tmp && \
     cp "/tmp/shellcheck-${SHELLCHECK_VERSION}/shellcheck" /usr/bin/ && \
     rm -rf "/tmp/shellcheck-${SHELLCHECK_VERSION}" && \

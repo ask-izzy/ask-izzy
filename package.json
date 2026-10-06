@@ -31,7 +31,7 @@
     "lint-fix": "yarn lint-eslint-fix && yarn lint-flow && yarn lint-stylelint-fix  && yarn lint-jsonlint && yarn lint-hadolint && yarn lint-shellcheck",
     "lint-eslint": "eslint src/ test/ fixtures/ .storybook/ pages/ components/ lib/ helpers/ hooks/ next.config.js",
     "lint-eslint-fix": "eslint --fix src/ test/ fixtures/ .storybook/ pages/ components/ lib/ helpers/ hooks/ next.config.js",
-    "lint-flow": "scripts/check-flow-annotations.sh && flow --quiet",
+    "lint-flow": "scripts/check-flow-annotations.sh && scripts/flow.sh --quiet",
     "lint-stylelint": "stylelint **/*.{css,scss,sass}",
     "lint-stylelint-fix": "stylelint --fix **/*.{css,scss,sass}",
     "lint-jsonlint": "find . -iname '*.json' -not -path './.next/*' -not -path './.git/*' -not -path './node_modules/*' -not -path './.cache/*' | xargs -L 1 jsonlint -q -c",
