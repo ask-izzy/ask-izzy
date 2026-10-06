@@ -51,7 +51,7 @@ All linters can be run using `docker compose run --rm app lint`. You can use `li
 - **ESLint**\
   For JavaScript/TypeScript errors and style violations
 - **TypeScript** (`lint-tsc`)\
-  For static type checking of the app code. The app was migrated from [Flow.js](https://flow.org/) to TypeScript. Any type errors left over from the migration are suppressed with `@ts-expect-error` comments tagged with `TODO(ts-migration)` which should be fixed over time.
+  For static type checking of the app code. The app was migrated from [Flow.js](https://flow.org/) to TypeScript. Any type errors left over from the migration are suppressed with `@ts-expect-error` comments tagged with `TODO(ts-migration)` which should be fixed over time. Storybook stories are currently excluded from type checking (see tsconfig.json) since Storybook is disabled and the stories will need to be updated when it's upgraded.
 - **Flow.js**\
   The tests have not yet been migrated to TypeScript and are still type checked with Flow.js. Since Flow can't read TypeScript any imports of app code from the tests are untyped. Babel compiles both Flow (.js) and TypeScript (.ts/.tsx) files so the two can be used side by side.
 - **stylelint**\

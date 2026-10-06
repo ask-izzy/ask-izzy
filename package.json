@@ -167,6 +167,7 @@
   },
   "devDependencies": {
     "@babel/eslint-parser": "^7.28.0",
+    "@babel/plugin-transform-typescript": "^7.29.9",
     "@storybook/builder-webpack5": "^6.4.22",
     "@storybook/manager-webpack5": "^6.4.22",
     "@types/node": "^20",

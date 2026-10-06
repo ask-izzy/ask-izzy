@@ -10,6 +10,9 @@
           "bugfixes": true,
           "useBuiltIns": "usage",
           "corejs": 3.22
+        },
+        "preset-typescript": {
+          "onlyRemoveTypeImports": true
         }
       }
     ],
@@ -40,6 +43,35 @@
       ],
       "presets": [
         "@babel/preset-flow"
+      ]
+    },
+    {
+      "test": [
+        "**/*.ts"
+      ],
+      "plugins": [
+        [
+          "@babel/plugin-transform-typescript",
+          {
+            "onlyRemoveTypeImports": true,
+            "allowNamespaces": true
+          }
+        ]
+      ]
+    },
+    {
+      "test": [
+        "**/*.tsx"
+      ],
+      "plugins": [
+        [
+          "@babel/plugin-transform-typescript",
+          {
+            "onlyRemoveTypeImports": true,
+            "allowNamespaces": true,
+            "isTSX": true
+          }
+        ]
       ]
     }
   ]
