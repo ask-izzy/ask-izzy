@@ -1,0 +1,13 @@
+import type { GetStaticProps } from "next"
+
+export { default } from "@/components/pages/MyListPage"
+import type {RouteSharedProps} from "@/types/routes"
+
+export const getStaticProps: GetStaticProps<RouteSharedProps> = (context) => {
+    return {
+        props: {
+            pageTitle: "My List",
+            pageType: ["Service List"],
+        },
+    }
+}

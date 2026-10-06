@@ -1,0 +1,11 @@
+import type {
+    PersonalisationLookingForHelpPage,
+} from "@/types/personalisation-page"
+
+export default ({
+    type: "who-is-looking-for-help",
+    name: "who-is-looking-for-help",
+    title: "Who is looking for help?",
+    noQuestionStepperBreadcrumb: true,
+    getShouldShowInSummary: () => false,
+} as PersonalisationLookingForHelpPage)

@@ -1,0 +1,31 @@
+import type {ReactNode} from "react";
+import React from "react";
+
+import SocialMedia from "./SocialMedia";
+
+export default {
+    title: "Service Components/SocialMedia",
+    component: SocialMedia,
+};
+
+const Template = (args: any): ReactNode => {
+    (Template.args as any); return <SocialMedia {...args} />;
+};
+
+export const TwitterX: typeof Template = Template.bind({});
+TwitterX.args = {
+    type: "twitter",
+    url: "https://x.com/askizzy",
+};
+
+export const LinkedIn: typeof Template = Template.bind({});
+LinkedIn.args = {
+    type: "linkedin",
+    url: "https://linkedin.com/company/askizzy",
+};
+
+export const UnknownPlatform: typeof Template = Template.bind({});
+UnknownPlatform.args = {
+    type: "mastodon",
+    url: "https://mastodon.social/@askizzy",
+};
