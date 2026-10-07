@@ -10,18 +10,30 @@ const allowedDomains = new Set(
     (process.env.DOMAINS_TO_PROXY || "").split(",").map(domain => domain.trim()).filter(Boolean)
 )
 
-// FIXME: `on` is the http-proxy-middleware v3 API but we're using v2 so this
-// error handler is never called. Note v2's equivalent (`onError`) replaces the
-// default error handler so it would also need to send a response.
+// Providing an error handler replaces http-proxy-middleware's default one so
+// as well as logging the error this sends the same response the default
+// handler would.
+const handleProxyError: Options["onError"] = (err, req, res) => {
+    console.error(`Proxy error for target "${getTargetBaseUrl(req).origin}":`, err.message)
+
+    const code = (err as NodeJS.ErrnoException).code
+    if (res.writeHead && !res.headersSent) {
+        if (/HPE_INVALID/.test(code)) {
+            res.writeHead(502)
+        } else if (["ECONNRESET", "ENOTFOUND", "ECONNREFUSED", "ETIMEDOUT"].includes(code)) {
+            res.writeHead(504)
+        } else {
+            res.writeHead(500)
+        }
+    }
+    res.end(`Error occurred while trying to proxy: ${req.headers?.host}${req.url}`)
+}
+
 const proxyMiddleware = createProxyMiddleware({
     router: req => getTargetBaseUrl(req).origin,
     changeOrigin: true,
-    on: {
-        error: (err, req) => {
-            console.error(`Proxy error for target "${getTargetBaseUrl(req).origin}":`, err.message)
-        },
-    },
-} as Options);
+    onError: handleProxyError,
+});
 
 export default function handler(req: any, res: any): void {
     if (!process.env.DOMAINS_TO_PROXY) {
