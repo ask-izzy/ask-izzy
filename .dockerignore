@@ -10,7 +10,6 @@ public/VERSION.txt
 .next/
 .git/
 .local
-.gitlab-ci.yml
 .gitignore
 testing-screenshots
 .githooks
