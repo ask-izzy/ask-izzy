@@ -120,3 +120,7 @@ no-op or equivalent and be listed in the commit message.
   changes behaviour: the external resources proxy uses the http-proxy-middleware
   v3 `on.error` API with v2, so its error handler never runs (marked with a
   `FIXME`).
+
+  > **Post-implementation edit (2026-10-07, Claude at Callum Gare's request):**
+  > the proxy error handler has since been fixed to use v2's `onError` while
+  > still sending the default error responses, so the `FIXME` no longer exists.
