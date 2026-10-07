@@ -38,15 +38,6 @@
   "overrides": [
     {
       "test": [
-        "**/*.js",
-        "**/*.jsx"
-      ],
-      "presets": [
-        "@babel/preset-flow"
-      ]
-    },
-    {
-      "test": [
         "**/*.ts"
       ],
       "plugins": [

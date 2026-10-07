@@ -1,4 +1,3 @@
-/* @flow */
 import pa11y from "pa11y";
 import path from "path";
 import ansiEscapes from "ansi-escapes";
@@ -88,7 +87,7 @@ async function checkForIssues(ignoreExistingIssues) {
     const numOfResolvedIssues =
         resolvedIssues && Object.values(resolvedIssues).flat().length;
     const numOfNewIssues = Object.values(newIssues).flat().length;
-    const numOfNewErrors = (Object.values(newIssues).flat(): Array<any>).filter(
+    const numOfNewErrors = (Object.values(newIssues).flat() as Array<any>).filter(
         (issue) => issue?.type !== "warning"
     ).length;
 
@@ -125,8 +124,8 @@ async function checkForIssues(ignoreExistingIssues) {
  * been logged and which ones are new.
  */
 function findContinuingIssues(
-    issues: Array<Object>,
-    previousIssues: Array<Object>
+    issues: Array<any>,
+    previousIssues: Array<any>
 ) {
     const newIssues = [];
     const continuingIssues = [];

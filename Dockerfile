@@ -62,19 +62,13 @@ RUN rm -f /etc/apt/apt.conf.d/docker-clean; echo 'Binary::apt::APT::Keep-Downloa
 RUN --mount=type=cache,target=/var/cache/apt,sharing=locked \
     --mount=type=cache,target=/var/lib/apt,sharing=locked \
     ARCH="$(uname -m)" && \
-    # The version of flow-bin we use doesn't include a linux arm64 binary so on
-    # arm64 we run the x86_64 one under emulation (see scripts/flow.sh) which
-    # requires the x86_64 dynamic loader.
-    if [ "$ARCH" = "aarch64" ]; then dpkg --add-architecture amd64; fi && \
     apt-get -y update && \
-    if [ "$ARCH" = "aarch64" ]; then apt-get -y --no-install-recommends install libc6:amd64; fi && \
     apt-get -y --no-install-recommends install \
         curl \
-        # Used by scripts/check-flow-annotations.sh & scripts/check-storybook-components.sh
+        # Used by scripts/check-storybook-components.sh
         git \
-        # Used by selenium
+        # Used by playwright for the e2e tests
         chromium \
-        chromium-driver \
         # Used for pa11y
         libatk-bridge2.0-0 \
         libgtk-3-0 \
@@ -137,9 +131,7 @@ RUN --mount=type=cache,target=/tmp/home/.cache/yarn,uid=$UID,gid=$GID,sharing=lo
 COPY --chown=$UID:$GID . .
 COPY --chown=$UID:$GID --from=development /app/.next .next
 
-# Upgrading next.js has forced the need to upgrade storybook. And as usual trying to make storybook work with flow.js is always
-# a major PITA. Since the typescript migrations is (hopefully just around the corner) rather than waste time trying to make it work
-# just disable storybook for now.
+# Upgrading next.js has forced the need to upgrade storybook which has been disabled until that can be done.
 # RUN yarn with --test-env --mocks build-storybook
 
 ARG APP_VERSION

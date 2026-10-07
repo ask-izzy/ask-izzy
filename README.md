@@ -30,8 +30,8 @@ For example if you want to run all the linters and automaticity fix any issue wh
 ## Testing
 Testing can be run with `docker compose run --rm app test-dev` which will sequentially run all testing programs.
 
-- **Mocha**\
-  Currently used for e2e and unit tests. It's split up into 4 testing suites, which can be individually run with `docker compose run --rm -p 3000:3000 -p 5000:5000 -p 5001:5001 app test-dev-mocha-<test suite name>`
+- **Playwright**\
+  Used for both the e2e and unit tests. The e2e tests are written as [Yadda](https://github.com/acuminous/yadda) feature files (eg `test/personalisation/*.feature`) which are turned into Playwright tests by `test/e2e/run-features.ts` using the step definitions in `test/e2e/steps/`. They're split up into several testing suites, which can be individually run with `docker compose run --rm app test-dev-e2e-<test suite name>` (or `test-unit` for the unit tests). Screenshots and traces of failed tests are saved in `testing-screenshots/` and can be viewed with `npx playwright show-trace <path to trace.zip>`.
     - **personalisation**\
       For e2e tests related to the personalisation flow in Ask Izzy.
     - **category-queries**\
@@ -43,7 +43,7 @@ Testing can be run with `docker compose run --rm app test-dev` which will sequen
     - **features-2**\
       Even more features, split into two suites.
     - **unit**\
-      All unit tests are here.
+      All unit tests are here (`test/unit/**/*.spec.ts`).
 
 ## Linting
 All linters can be run using `docker compose run --rm app lint`. You can use `lint-fix` instead of `lint` to also try and automatically correct any issues where that is possible. Indvidual linters can be run using: `docker compose run --rm app lint-<linter name>` (if the linter supports it `-fix` can be append to the end of the linter name to auto-fix issues.)
@@ -51,9 +51,7 @@ All linters can be run using `docker compose run --rm app lint`. You can use `li
 - **ESLint**\
   For JavaScript/TypeScript errors and style violations
 - **TypeScript** (`lint-tsc`)\
-  For static type checking of the app code. The app was migrated from [Flow.js](https://flow.org/) to TypeScript. Any type errors left over from the migration are suppressed with `@ts-expect-error` comments tagged with `TODO(ts-migration)` which should be fixed over time. Storybook stories are currently excluded from type checking (see tsconfig.json) since Storybook is disabled and the stories will need to be updated when it's upgraded.
-- **Flow.js**\
-  The tests have not yet been migrated to TypeScript and are still type checked with Flow.js. Since Flow can't read TypeScript any imports of app code from the tests are untyped. Babel compiles both Flow (.js) and TypeScript (.ts/.tsx) files so the two can be used side by side.
+  For static type checking. Storybook stories are currently excluded from type checking (see tsconfig.json) since Storybook is disabled and the stories will need to be updated when it's upgraded.
 - **stylelint**\
   Stylelint is used for linting SASS/CSS files.
 - **jsonlint**\

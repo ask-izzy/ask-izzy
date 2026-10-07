@@ -1,4 +1,3 @@
-/* $FlowIgnore */
 
 const fs = require("fs");
 const webpack = require("webpack");
