@@ -6,9 +6,9 @@ import Link from "./base/Link";
 import ListItem from "./ListItem";
 import type {Props as ListItemProps} from "./ListItem";
 
-type PropsRest = {onClick?: Function}
+type PropsRest = {onClick?: (event?: React.SyntheticEvent) => any}
 
-type Props = Omit<ListItemProps<typeof Link>, keyof PropsRest & {rootElement: any}> & PropsRest
+type Props = Omit<ListItemProps<typeof Link>, keyof PropsRest | "rootElement"> & PropsRest
 
 function LinkListItem({className, ...rest}: Props): ReactNode {
 
