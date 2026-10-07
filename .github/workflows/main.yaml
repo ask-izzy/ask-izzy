@@ -30,15 +30,6 @@ jobs:
       image-target: development
       command: lint-eslint
 
-  lint-flow:
-    name: Lint - Flow
-    needs: build-development
-    uses: infoxchange/github-ci/.github/workflows/run-in-docker.yaml@v2
-    with:
-      workflow-ref: v2
-      image-target: development
-      command: lint-flow
-
   lint-tsc:
     name: Lint - TypeScript
     needs: build-development
@@ -104,88 +95,87 @@ jobs:
         with:
           msTeamsAlertsWebhook: ${{ secrets.MS_TEAMS_ALERTS_WEBHOOK }}
 
-  test-mocha-personalisation:
-    name: Test - Mocha personalisation
+  test-e2e-personalisation:
+    name: Test - personalisation
     needs: build-development
     uses: infoxchange/github-ci/.github/workflows/run-in-docker-with-possible-artifact.yaml@v2
     with:
       workflow-ref: v2
       image-target: development
-      command: with --test-env --built --mocks test-mocha-personalisation
+      command: with --test-env --built --mocks test-e2e-personalisation
       docker-path-to-copy-from: /app/testing-screenshots
       host-path-to-copy-to: testing-screenshots
 
-  test-mocha-category-queries:
-    name: Test - Mocha category queries
+  test-e2e-category-queries:
+    name: Test - category queries
     needs: build-development
     uses: infoxchange/github-ci/.github/workflows/run-in-docker-with-possible-artifact.yaml@v2
     with:
       workflow-ref: v2
       image-target: development
-      command: with --test-env --built --mocks test-mocha-category-queries
+      command: with --test-env --built --mocks test-e2e-category-queries
       docker-path-to-copy-from: /app/testing-screenshots
       host-path-to-copy-to: testing-screenshots
 
-  test-mocha-features-1:
-    name: Test - Mocha features 1
+  test-e2e-features-1:
+    name: Test - features 1
     needs: build-development
     uses: infoxchange/github-ci/.github/workflows/run-in-docker-with-possible-artifact.yaml@v2
     with:
       workflow-ref: v2
       image-target: development
-      command: with --test-env --built --mocks test-mocha-features-1
+      command: with --test-env --built --mocks test-e2e-features-1
       docker-path-to-copy-from: /app/testing-screenshots
       host-path-to-copy-to: testing-screenshots
 
-  test-mocha-features-2:
-    name: Test - Mocha features 2
+  test-e2e-features-2:
+    name: Test - features 2
     needs: build-development
     uses: infoxchange/github-ci/.github/workflows/run-in-docker-with-possible-artifact.yaml@v2
     with:
       workflow-ref: v2
       image-target: development
-      command: with --test-env --built --mocks test-mocha-features-2
+      command: with --test-env --built --mocks test-e2e-features-2
       docker-path-to-copy-from: /app/testing-screenshots
       host-path-to-copy-to: testing-screenshots
 
-  test-mocha-maps:
-    name: Test - Mocha maps
+  test-e2e-maps:
+    name: Test - maps
     needs: build-development
     uses: infoxchange/github-ci/.github/workflows/run-in-docker-with-possible-artifact.yaml@v2
     with:
       workflow-ref: v2
       image-target: development
-      command: with --test-env --built --mocks test-mocha-maps
+      command: with --test-env --built --mocks test-e2e-maps
       docker-path-to-copy-from: /app/testing-screenshots
       host-path-to-copy-to: testing-screenshots
 
-  test-mocha-unit:
-    name: Test - Mocha unit
+  test-unit:
+    name: Test - unit
     needs: build-development
     uses: infoxchange/github-ci/.github/workflows/run-in-docker.yaml@v2
     with:
       workflow-ref: v2
       image-target: development
-      command: test-mocha-unit
+      command: test-unit
 
   deploy:
     name: Deploy - Push image to ECR
     needs:
       - build-distribution
       - lint-eslint
-      - lint-flow
       - lint-stylelint
       - lint-jsonlint
       - lint-hadolint
       - lint-shellcheck
       - lint-storybook-components
       - lint-broken-links
-      - test-mocha-personalisation
-      - test-mocha-category-queries
-      - test-mocha-features-1
-      - test-mocha-features-2
-      - test-mocha-maps
-      - test-mocha-unit
+      - test-e2e-personalisation
+      - test-e2e-category-queries
+      - test-e2e-features-1
+      - test-e2e-features-2
+      - test-e2e-maps
+      - test-unit
     uses: infoxchange/github-ci/.github/workflows/push-docker-image-to-ecr.yaml@v2
     with:
       workflow-ref: v2

@@ -9,7 +9,7 @@ import {
 import alertsQuery from "@/queries/content/alerts";
 import {
     vicServiceAlert,
-} from "../../test/support/mock-cms/resolvers/alerts.js"
+} from "../../test/support/mock-cms/resolvers/alerts"
 
 
 export default {

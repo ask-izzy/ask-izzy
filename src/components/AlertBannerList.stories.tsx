@@ -5,7 +5,7 @@ import AlertBannerList from "./AlertBannerList";
 import alertsQuery from "@/queries/content/alerts";
 import {
     resultsPageAlerts,
-} from "../../test/support/mock-cms/resolvers/alerts.js"
+} from "../../test/support/mock-cms/resolvers/alerts"
 
 export default {
     title: "App Components/AlertBanner/AlertBannerList",

@@ -1,5 +1,6 @@
 {
     "recommendations": [
-        "flowtype.flow-for-vscode"
+        "dbaeumer.vscode-eslint",
+        "ms-playwright.playwright"
     ]
 }

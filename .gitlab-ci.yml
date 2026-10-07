@@ -84,12 +84,6 @@ lint-eslint:
   script:
     - docker run --rm -t $TAG_DEVELOPMENT_STAGE lint-eslint
 
-lint-flow:
-  stage: Lint
-  needs: ['build-development']
-  script:
-    - docker run --rm -t $TAG_DEVELOPMENT_STAGE lint-flow
-
 lint-tsc:
   stage: Lint
   needs: ['build-development']
@@ -126,11 +120,11 @@ lint-storybook-components:
   script:
     - docker run --rm -t $TAG_DEVELOPMENT_STAGE lint-storybook-components
 
-test-mocha-personalisation:
+test-e2e-personalisation:
   stage: Test
   needs: ['build-development']
   script:
-    - CONTAINER_ID=$(docker create -t $TAG_DEVELOPMENT_STAGE with --test-env --built --mocks test-mocha-personalisation)
+    - CONTAINER_ID=$(docker create -t $TAG_DEVELOPMENT_STAGE with --test-env --built --mocks test-e2e-personalisation)
     - docker start -a "$CONTAINER_ID" && exitCode=$? || exitCode=$?
     - docker cp "$CONTAINER_ID:/app/testing-screenshots" testing-screenshots || true
     - exit $exitCode
@@ -140,11 +134,11 @@ test-mocha-personalisation:
     when: on_failure
     expire_in: 1 week
 
-test-mocha-category-queries:
+test-e2e-category-queries:
   stage: Test
   needs: ['build-development']
   script:
-    - CONTAINER_ID=$(docker create -t $TAG_DEVELOPMENT_STAGE with --test-env --built --mocks test-mocha-category-queries)
+    - CONTAINER_ID=$(docker create -t $TAG_DEVELOPMENT_STAGE with --test-env --built --mocks test-e2e-category-queries)
     - docker start -a "$CONTAINER_ID" && exitCode=$? || exitCode=$?
     - docker cp "$CONTAINER_ID:/app/testing-screenshots" testing-screenshots || true
     - exit $exitCode
@@ -154,11 +148,11 @@ test-mocha-category-queries:
     when: on_failure
     expire_in: 1 week
 
-test-mocha-features:
+test-e2e-features:
   stage: Test
   needs: ['build-development']
   script:
-    - CONTAINER_ID=$(docker create -t $TAG_DEVELOPMENT_STAGE with --test-env --built --mocks test-mocha-features)
+    - CONTAINER_ID=$(docker create -t $TAG_DEVELOPMENT_STAGE with --test-env --built --mocks test-e2e-features)
     - docker start -a "$CONTAINER_ID" && exitCode=$? || exitCode=$?
     - docker cp "$CONTAINER_ID:/app/testing-screenshots" testing-screenshots || true
     - exit $exitCode
@@ -168,11 +162,11 @@ test-mocha-features:
     when: on_failure
     expire_in: 1 week
 
-test-mocha-maps:
+test-e2e-maps:
   stage: Test
   needs: ['build-development']
   script:
-    - CONTAINER_ID=$(docker create -t $TAG_DEVELOPMENT_STAGE with --test-env --built --mocks test-mocha-maps)
+    - CONTAINER_ID=$(docker create -t $TAG_DEVELOPMENT_STAGE with --test-env --built --mocks test-e2e-maps)
     - docker start -a "$CONTAINER_ID" && exitCode=$? || exitCode=$?
     - docker cp "$CONTAINER_ID:/app/testing-screenshots" testing-screenshots || true
     - exit $exitCode
@@ -182,11 +176,11 @@ test-mocha-maps:
     when: on_failure
     expire_in: 1 week
 
-test-mocha-unit:
+test-unit:
   stage: Test
   needs: ['build-development']
   script:
-    - docker run --rm -t $TAG_DEVELOPMENT_STAGE test-mocha-unit
+    - docker run --rm -t $TAG_DEVELOPMENT_STAGE test-unit
 
 # Deploy to test environment when tagged
 deploy:
