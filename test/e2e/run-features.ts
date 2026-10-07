@@ -6,7 +6,7 @@
  */
 
 import { test } from "@playwright/test"
-import type { ConsoleMessage, Page } from "@playwright/test"
+import type { BrowserContext, ConsoleMessage, Page } from "@playwright/test"
 import Yadda from "yadda"
 
 import libraries from "./steps"
@@ -35,6 +35,37 @@ function runStep(world: World, step: string): Promise<void> {
     })
 }
 
+// Each test gets a fresh browser context which would mean the google maps
+// api is downloaded for every test. Ask Izzy only waits a second for it to
+// load before giving up on things like travel times so cache it between tests
+// (the previous test harness reused the same browser which had the same
+// effect).
+type CachedResponse = {status: number, headers: Record<string, string>, body: Buffer}
+const googleMapsCache = new Map<string, CachedResponse>()
+
+async function cacheGoogleMapsFiles(context: BrowserContext): Promise<void> {
+    await context.route(/^https:\/\/maps\.(googleapis|gstatic)\.com\//, async route => {
+        const request = route.request()
+        if (request.method() !== "GET") {
+            return route.continue()
+        }
+        const url = request.url()
+        let cached = googleMapsCache.get(url)
+        if (!cached) {
+            const response = await route.fetch()
+            cached = {
+                status: response.status(),
+                headers: response.headers(),
+                body: await response.body(),
+            }
+            if (response.ok()) {
+                googleMapsCache.set(url, cached)
+            }
+        }
+        await route.fulfill(cached)
+    })
+}
+
 function formatConsoleMessage(message: ConsoleMessage): string {
     return `${message.type().toUpperCase()}: ${message.text()}`
 }
@@ -54,8 +85,15 @@ export default function runFeatures(directory: string): void {
                 test.skip()
             }
 
+            // Playwright requires test titles to be unique
+            const titleCounts: Record<string, number> = {}
+            const uniqueTitle = (title: string) => {
+                titleCounts[title] = (titleCounts[title] || 0) + 1
+                return titleCounts[title] > 1 ? `${title} (${titleCounts[title]})` : title
+            }
+
             for (const scenario of feature.scenarios) {
-                test(scenario.title, async({page, context}, testInfo) => {
+                test(uniqueTitle(scenario.title), async({page, context}, testInfo) => {
                     test.skip(isSkipped(scenario.annotations))
 
                     // Collect logs so they can be printed if the test fails
@@ -75,6 +113,7 @@ export default function runFeatures(directory: string): void {
 
                     try {
                         await test.step("Before scenario", async() => {
+                            await cacheGoogleMapsFiles(context)
                             await page.addInitScript(() => {
                                 console.log("------------- Loading Page -------------")
                                 console.log("URL: " + location.href)
@@ -98,6 +137,9 @@ export default function runFeatures(directory: string): void {
                             })
                         }
                         throw error
+                    } finally {
+                        // Don't fail the test due to requests still in flight
+                        await context.unrouteAll({behavior: "ignoreErrors"})
                     }
                 })
             }
