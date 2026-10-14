@@ -1,0 +1,29 @@
+import * as Sentry from "@sentry/nextjs";
+import getConfig from 'next/config';
+
+getConfig();
+
+export default function initSentry(additionalConfig: any = {}) {
+    if (!process.env.NEXT_PUBLIC_IS_TEST_ENV) {
+        Sentry.init({
+            dsn: process.env.SENTRY_DSN || process.env.NEXT_PUBLIC_SENTRY_DSN || "null",
+            // isNaN() coerces its argument to a number
+            tracesSampleRate: isNaN(process.env.NEXT_PUBLIC_SENTRY_TRACES_SAMPLE_RATE as unknown as number) 
+                ? 1.0
+                : parseFloat(process.env.NEXT_PUBLIC_SENTRY_TRACES_SAMPLE_RATE),
+            environment: process.env.ENVIRONMENT || process.env.NODE_ENV,
+            ignoreErrors: [
+                /is neither a category or a content page$/,
+                /^Fast Refresh had to perform a full reload/,
+            ],
+            beforeSend(event) {
+                if (event.message?.startsWith("[HPM] Error occurred while proxying request")) {
+                    event.message = "[HPM] Error occurred while proxying request"
+                }
+                return event;
+            },
+            ...additionalConfig
+        });
+    }
+
+}

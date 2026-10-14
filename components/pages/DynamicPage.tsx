@@ -1,0 +1,111 @@
+import * as React from "react";
+import type {ReactNode} from "react";
+
+import StaticPage from "@/components/pages/StaticPage";
+import Accordion from "@/src/components/Accordion";
+import StrapiMarkdown from "@/src/components/StrapiMarkdown";
+import CalloutBox from "@/src/components/CalloutBox";
+import type {
+    CalloutBoxType,
+    CalloutType,
+} from "@/src/components/CalloutBox";
+import BlockQuote from "@/src/components/base/BlockQuote";
+
+type PageDetails = {
+    documentId: string,
+    createdAt: string,
+    updatedAt: string,
+    Title: string,
+    Body: string,
+    Path: string,
+    BannerTextPrimary: string,
+    BannerTextSecondary: string,
+    banner: {
+        documentId: string,
+        Key: string,
+    },
+    Accordion: Array<{
+        id: number,
+        Title: string,
+        Content: string,
+    }>,
+    AccordionTitle: string,
+    CalloutBoxes: Array<CalloutBoxType>
+  }
+type ReactMarkdownQuoteProps = {
+    children: React.ReactNode,
+}
+type Props = {
+    pageDetails: PageDetails,
+    embeddedCallouts: Array<CalloutType>
+}
+
+function DynamicPage({pageDetails, embeddedCallouts}: Props): ReactNode {
+    /**
+     * This is used to render any embedded callouts that are written as
+     * > [callout(code)] - where it uses the blockquote tag
+     * @param props - Thr Markdown props of a blockquote
+     * @returns {JSX.Element} - returns either a callout or blockqupte
+     */
+    const renderEmbCallout: (props: ReactMarkdownQuoteProps) => ReactNode =
+        (props: ReactMarkdownQuoteProps) => {
+            // Get the text content of the children
+            const textContent = React.Children.map(props.children,
+                (paragraphElm: React.ReactElement) => (
+                    React.Children.map(paragraphElm.props.children,
+                        (textElm: React.ReactElement<any, React.FunctionComponent>) => textElm.type(textElm.props))
+                )).join("")
+
+            const [, calloutKey] = textContent.match(/\[callout\((.+)\)]/) || [];
+            const callout = embeddedCallouts
+                .find(callout => calloutKey && callout.Key === calloutKey)
+            if (callout) {
+                return (
+                    <CalloutBox
+                        calloutBoxes={[callout].map(callout => ({
+                            callout,
+                            Bottom: false,
+                            Top: false,
+                            documentId: "embedded",
+                        }))}
+                        embedded={true}
+                    />
+                )
+            }
+            return <BlockQuote>{props.children}</BlockQuote>
+        }
+
+    return (
+        <StaticPage
+            title={pageDetails.Title}
+            bannerName={pageDetails.banner ? pageDetails.banner.Key
+                : "hand-and-person-with-heart"}
+            bannerPrimary={pageDetails.BannerTextPrimary}
+            bannerSecondary={pageDetails.BannerTextSecondary}
+        >
+            <div className="DynamicPage">
+                <CalloutBox
+                    calloutBoxes={pageDetails.CalloutBoxes}
+                    position="top"
+                />
+                <StrapiMarkdown
+                    renderers={{
+                        "blockquote": renderEmbCallout,
+                    }}
+                >
+                    {pageDetails.Body}
+                </StrapiMarkdown>
+                <Accordion
+                    title={pageDetails.AccordionTitle}
+                    items={pageDetails.Accordion}
+                />
+                <CalloutBox
+                    calloutBoxes={pageDetails.CalloutBoxes}
+                    position="bottom"
+                />
+            </div>
+        </StaticPage>
+    )
+}
+
+export default DynamicPage

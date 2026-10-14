@@ -61,12 +61,13 @@ USER root
 RUN rm -f /etc/apt/apt.conf.d/docker-clean; echo 'Binary::apt::APT::Keep-Downloaded-Packages "true";' > /etc/apt/apt.conf.d/keep-cache
 RUN --mount=type=cache,target=/var/cache/apt,sharing=locked \
     --mount=type=cache,target=/var/lib/apt,sharing=locked \
+    ARCH="$(uname -m)" && \
     apt-get -y update && \
     apt-get -y --no-install-recommends install \
         curl \
-        # Used by scripts/check-flow-annotations.sh & scripts/check-storybook-components.sh
+        # Used by scripts/check-storybook-components.sh
         git \
-        # Used by selenium
+        # Used by playwright for the e2e tests
         chromium \
         # Used for pa11y
         libatk-bridge2.0-0 \
@@ -74,11 +75,12 @@ RUN --mount=type=cache,target=/var/cache/apt,sharing=locked \
         # Used below for unpacking shellcheck program
         xz-utils && \
     # Install Hadolint
-    curl -sSL -o /usr/bin/hadolint https://github.com/hadolint/hadolint/releases/latest/download/hadolint-Linux-x86_64 && \
+    HADOLINT_ARCH="$(if [ "$ARCH" = "aarch64" ]; then echo arm64; else echo "$ARCH"; fi)" && \
+    curl -sSL -o /usr/bin/hadolint "https://github.com/hadolint/hadolint/releases/latest/download/hadolint-Linux-${HADOLINT_ARCH}" && \
     chmod +x /usr/bin/hadolint && \
     # Install ShellCheck
     SHELLCHECK_VERSION="stable" && \
-    curl -sSL "https://github.com/koalaman/shellcheck/releases/download/${SHELLCHECK_VERSION?}/shellcheck-${SHELLCHECK_VERSION?}.linux.x86_64.tar.xz" | \
+    curl -sSL "https://github.com/koalaman/shellcheck/releases/download/${SHELLCHECK_VERSION?}/shellcheck-${SHELLCHECK_VERSION?}.linux.${ARCH}.tar.xz" | \
         tar -xJv -C /tmp && \
     cp "/tmp/shellcheck-${SHELLCHECK_VERSION}/shellcheck" /usr/bin/ && \
     rm -rf "/tmp/shellcheck-${SHELLCHECK_VERSION}" && \
@@ -89,7 +91,6 @@ USER $UID:$GID
 
 COPY ./package.json ./yarn.lock ./
 RUN --mount=type=cache,target=/tmp/home/.cache/yarn,uid=$UID,gid=$GID,sharing=locked \
-    --mount=type=cache,target=/tmp/chromedriver,uid=$UID,gid=$GID,sharing=locked \
     yarn install --network-timeout 100000 --frozen-lockfile
 
 COPY --chown=$UID:$GID . .
@@ -125,15 +126,12 @@ COPY ./package.json ./yarn.lock ./
 # We use mount cache for package cache so no need to empty
 # hadolint ignore=DL3060
 RUN --mount=type=cache,target=/tmp/home/.cache/yarn,uid=$UID,gid=$GID,sharing=locked \
-    --mount=type=cache,target=/tmp/chromedriver,uid=$UID,gid=$GID,sharing=locked \
     yarn install --network-timeout 100000 --frozen-lockfile
 
 COPY --chown=$UID:$GID . .
 COPY --chown=$UID:$GID --from=development /app/.next .next
 
-# Upgrading next.js has forced the need to upgrade storybook. And as usual trying to make storybook work with flow.js is always
-# a major PITA. Since the typescript migrations is (hopefully just around the corner) rather than waste time trying to make it work
-# just disable storybook for now.
+# Upgrading next.js has forced the need to upgrade storybook which has been disabled until that can be done.
 # RUN yarn with --test-env --mocks build-storybook
 
 ARG APP_VERSION

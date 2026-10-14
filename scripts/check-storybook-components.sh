@@ -12,16 +12,17 @@ if [ -z "$(which git)" ]; then
     exit 1
 fi
 
-for file in $( git ls-files 'components/*.js' 'components/**/*.js' 'src/components/*.js' 'src/components/**/*.js'); do
+for file in $( git ls-files 'components/*.ts' 'components/**/*.ts' 'src/components/*.ts' 'src/components/**/*.ts' 'components/*.tsx' 'components/**/*.tsx' 'src/components/*.tsx' 'src/components/**/*.tsx' ); do
     if [ -e "$file" ] ; then
-        if [[ "$file" == *.stories.js || "$file" == *.service.js  || "$file" == *.hook.js  || "$file" == */index.js  || "$file" == components/pages/* ]]; then
+        if [[ "$file" == *.stories.ts || "$file" == *.stories.tsx || "$file" == *.service.ts  || "$file" == *.hook.ts  || "$file" == */index.ts || "$file" == */index.tsx || "$file" == components/pages/* ]]; then
             continue
         fi
         parentDir=$(dirname "$file")
-        name=$(basename "$file" ".js")
-        if [ ! -f "$parentDir/$name.stories.js" ]; then
+        name=$(basename "$file")
+        name="${name%.*}"
+        if [ ! -f "$parentDir/$name.stories.tsx" ] && [ ! -f "$parentDir/$name.stories.ts" ]; then
             SOME_COMPONENTS_MISSING_STORY=true
-            echo 1>&2 "Component does not have storybook stories: $parentDir/$name.js"
+            echo 1>&2 "Component does not have storybook stories: $file"
         fi
     fi
 done

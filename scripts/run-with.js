@@ -1,5 +1,4 @@
 #!/usr/bin/env node
-/* @flow */
 
 /*
  * A script to help ensure other services are started up before running a command.
@@ -21,14 +20,7 @@
 const {spawnSync} = require("child_process");
 const {loadEnvConfig} = require("@next/env")
 
-/*::
-type Service = {
-    command: string,
-    startupCheck: string,
-}
-*/
-
-function getService(name, nodeEnv)/*: Service*/ {
+function getService(name, nodeEnv) {
     const appPort = nodeEnv === "test" ? "3000" : "8000"
     if (name === "mockIss") {
         const port = getLocalhostPortFromEnvVar("NEXT_PUBLIC_ISS_BASE_URL")

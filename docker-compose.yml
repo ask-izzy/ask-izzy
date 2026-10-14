@@ -3,7 +3,6 @@ services:
     build:
       context: .
       target: development
-    platform: linux/amd64
     environment:
       SITE_PROTOCOL: "http"
       SITE_DOMAIN: "localhost"

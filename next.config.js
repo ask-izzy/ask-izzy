@@ -1,4 +1,3 @@
-/* $FlowIgnore */
 const { setupProxyGlobally } = require("@infoxchange/make-it-so/proxy");
 setupProxyGlobally()
 const path = require("path")
@@ -153,6 +152,10 @@ module.exports = {
         "postcss-html/node_modules/readable-stream",
         "merge-change",
     ],
+    eslint: {
+        // Linting is run as a separate CI step so there's no need to also run it as part of the build
+        ignoreDuringBuilds: true,
+    },
     // We need to manually handle trailing slash redirection so as not to apply redirect to requests to our external
     // resources proxy
     skipTrailingSlashRedirect: true,
@@ -182,10 +185,10 @@ function getRewritesForCategories() {
     // We want to know the names of the different categories but Next.js doesn't
     // yet support loading this file with babel or a typescript complier so
     // we can't import source files directly here. But we can do a really ugly
-    // hack where read the categories.js file in as plain text and regex out the
+    // hack where read the categories.tsx file in as plain text and regex out the
     // names.
     const categoryKeys = fs.readFileSync(
-        "./src/constants/categories.js",
+        "./src/constants/categories.tsx",
         {encoding: "utf8"}
     )
         .split("\n")
