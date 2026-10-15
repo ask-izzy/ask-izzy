@@ -2,7 +2,7 @@ import Service from "./Service"
 
 export function countCrisisResults(results: Array<Service>): number {
     const firstRegularServiceIdx = results.findIndex(
-        ({crisis}) => !crisis
+        service => !service.is_crisis
     )
 
     if (firstRegularServiceIdx === -1) {

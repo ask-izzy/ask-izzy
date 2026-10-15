@@ -9,6 +9,7 @@ import {
 } from "../utils/routing"
 import type {Geolocation} from "../storage";
 import storage from "../storage";
+import type {IndigenousClassification} from "./Service";
 
 export type SearchQuery = SearchQueryArrayProps & SearchQueryOtherProps
 
@@ -47,8 +48,7 @@ type SearchQueryArrayProps = {
         | "Aged Persons"
         | "unspecified"
     >,
-    serviceTypesRaw?: Array<string>, // This should be removed after ISS3 is no
-        // longer supported
+    indigenousClassification?: Array<IndigenousClassification>,
 }
 type SearchQueryOtherProps = {
     catchment?: "prefer"|"true"|"false",
@@ -58,14 +58,8 @@ type SearchQueryOtherProps = {
     },
     siteId?: number,
     maxPageSize?: number,
-    apiVersion?: "3" | "4",
     name?: string,
-    isBulkBilling?: boolean,
     caldSpecific?: boolean,
-
-    // to figure out
-    minimumShouldMatch?: string,
-    showInAskIzzyHealth?: boolean
 }
 
 export function buildSearchQueryFromModifiers(

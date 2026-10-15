@@ -4,140 +4,152 @@ import { slugify } from "underscore.string";
 import lo_ from "lodash";
 
 import serviceProvisions from "../constants/service-provisions";
-import type {site} from "./site"
+import type {site, SiteProps} from "./site"
 import AddressLocation from "./AddressLocation"
-import type {AddressLocationProps} from "./AddressLocation"
 import type {
-    ymdWithDashesDate,
     travelTime,
-    nowOpen,
-    postalAddress,
     openingHours,
     phone,
+    email,
+    socialMedia,
+    language,
 } from "./general"
 import ServiceOpening from "./ServiceOpening";
 import type {SortType} from "../components/base/Dropdown"
-import {getIssClient, getIssVersion} from "./client"
 import {lookbehindIsSupported} from "@/helpers/regex.helpers"
 
-export type ServiceProps = Omit<Service, "location"> & {
-    location: AddressLocationProps
+// The fields we request from ISS when fetching services as part of a search.
+// Only fields which are actually used should be included here since every
+// extra field slows down the response.
+export const SEARCH_RESULT_FIELDS = [
+    "id",
+    "name",
+    "description",
+    "is_crisis",
+    "open_now",
+    "opening_hours",
+    "phones",
+    "indigenous_classification",
+    "is_lgbtiqa_plus_specific",
+    "is_ndis_approved",
+    "accessibility",
+    "catchment",
+    "eligibility_info",
+    "ineligibility_info",
+    "referral_info",
+    "special_requirements",
+    "location_details",
+    "site.id",
+    "site.name",
+    "site.location",
+]
+
+// The fields we request from ISS when fetching a single service to display
+// in full.
+export const SERVICE_DETAIL_FIELDS = [
+    ...SEARCH_RESULT_FIELDS,
+    "emails",
+    "web",
+    "social_media",
+    "cost",
+    "intake_info",
+    "intake_point",
+    "languages",
+]
+
+// The shape of a service as returned by ISS
+export type ServiceProps = Omit<Service, "site"> & {
+    site: SiteProps
 }
+
+export type IndigenousClassification =
+    "specific" | "culturally_safe" | "mainstream_who_cater" | "mainstream"
 
 export default class Service {
     constructor(props: any) {
-        const {location, ...remainingProps} = props
-        if (location) {
-            this.location = new AddressLocation(props.location);
-        }
+        const {site, ...remainingProps} = props
 
         Object.assign(this, remainingProps);
+
+        if (site) {
+            this.site = {
+                ...site,
+                location: site.location ?
+                    new AddressLocation({
+                        ...site.location,
+                        details: props.location_details,
+                    })
+                    : site.location,
+            }
+        }
     }
 
-    abn: string;
-    accessibility: "noaccess" | "access" | "fullaccess";
-    accessibility_details: string;
-    accreditation: Array<string>;
-    adhc_eligible: boolean;
-    age_groups: Array<ageGroup>;
-    assessment_criteria: string;
-    availability: string;
-    billing_method: string;
-    capacity: {
-        frequency?: number;
-        status: string;
-        status_text: string;
-    };
-    catchment: string;
-    cost: string;
-    crisis: boolean;
+    accessibility?: Array<string> | null;
+    catchment?: Array<string> | null;
+    cost?: string | null;
     description: string;
-    eligibility_info: string;
-    emails: Array<{
-        comment: string;
-        email: string,
-    }>;
-    funding_body: string;
-    show_in_askizzy_health: boolean;
+    eligibility_info?: string | null;
+    emails?: Array<email>;
     id: number;
-    indigenous_classification: Array<string>;
-    ineligibility_info: string;
-    intake_info: string;
-    intake_point: string;
-    is_bulk_billing: boolean;
-    languages: Array<string>;
-    last_updated: ymdWithDashesDate;
-    lgbtiqa_plus_specific: boolean;
-    location: AddressLocation;
+    indigenous_classification?: IndigenousClassification | null;
+    ineligibility_info?: string | null;
+    intake_info?: string | null;
+    intake_point?: string | null;
+    is_crisis: boolean;
+    is_lgbtiqa_plus_specific?: boolean;
+    is_ndis_approved?: boolean;
+    languages?: Array<language>;
+    location_details?: string | null;
     name: string;
-    ndis_approved: boolean;
-    now_open: nowOpen;
+    open_now?: boolean | null;
     opening_hours: Array<openingHours>;
-    parking_info: string;
     phones: Array<phone>;
-    postal_address: Array<postalAddress>;
-    public_transport_info: string;
-    referral_info: string;
-    service_types: Array<string>;
+    referral_info?: string | null;
     site: site;
-    special_requirements: string;
-    social_media: Array<{
-        type: string;
-        url: string;
-    }>;
-    target_gender: "u" | "f" | "m" | "x";
-    type: "organisation" |
-        "site" |
-        "service" |
-        "practitioner";
-    web: string;
+    special_requirements?: string | null;
+    social_media?: Array<socialMedia>;
+    web?: string;
     travelTimes: Array<travelTime> | null | undefined;
 
     _serviceProvisions: Array<string>;
-    _explanation: any;
 
     Phones(): Array<phone> {
         const phoneKinds = ["freecall", "phone", "mobile"];
 
         return _(_(this.phones
-            .filter(({kind}) => phoneKinds.includes(kind))
-            .map(({comment, kind, number}) => {
+            .filter(({phone_type, confidential}) =>
+                phoneKinds.includes(phone_type) && !confidential
+            )
+            .map(({comment, phone_type, number}) => {
                 // 13* lines are not free calls
-                if ((kind === "freecall") && (number.match(/^13/))) {
-                    kind = "phone";
+                if ((phone_type === "freecall") && (number.match(/^13/))) {
+                    phone_type = "phone";
                 }
 
                 return {
                     comment: (comment || "").trim(),
-                    kind: (kind || "").trim(),
+                    phone_type: (phone_type || "").trim(),
                     number: (number || "").trim(),
                 }
             }))
-            .sortBy((({kind}) => phoneKinds.indexOf(kind))))
+            .sortBy((({phone_type}) => phoneKinds.indexOf(phone_type))))
             .uniq(phone => phone.number);
     }
 
     Indigenous(): boolean {
-        if (this.indigenous_classification) {
-            let classification = this.indigenous_classification;
-
-            return (
-                classification.indexOf(
-                    "Mainstream who cater for Aboriginal (indigenous)") > -1 ||
-                classification.indexOf("Aboriginal (indigenous) specific") > -1
-            )
-        }
-
-        return false;
-
+        return this.indigenous_classification === "specific" ||
+            this.indigenous_classification === "mainstream_who_cater"
     }
-
 
     /**
      * The service opening hours
      */
     get open(): (ServiceOpening) {
-        return new ServiceOpening(this);
+        return new ServiceOpening({
+            open_now: this.open_now,
+            opening_hours: this.opening_hours,
+            state: this.site?.location?.state,
+        });
     }
 
     /**
@@ -238,51 +250,6 @@ export default class Service {
     get slug(): string {
         return slugify(`${this.id}-${this.site.name}`);
     }
-}
-
-export type ageGroup = "unspecified" |
-    "prenatal" |
-    "baby" |
-    "toddler" |
-    "preschool" |
-    "schoolage" |
-    "earlyadolescent" |
-    "midadolescent" |
-    "lateadolescent" |
-    "youngadult" |
-    "adult" |
-    "middleagedadult" |
-    "preretirementage" |
-    "agedpersons";
-
-
-export async function getSiblingServices(service: Service): Promise<Service[]> {
-    let servicesAtSite = []
-    const issVersion = getIssVersion()
-    if (issVersion === "3") {
-        const issClient = await getIssClient(issVersion)
-
-        const result = await issClient.search({
-            site_id: service.site.id,
-            limit: 100,
-        });
-
-        if (!result) {
-            // We currently don't worry about if sibling services fail to load
-            return []
-        }
-
-        servicesAtSite = result.objects
-    } else if (issVersion === "4") {
-        throw Error("ISS4 not yet supported")
-    }
-
-    // Exclude self from services at site
-    const siblingServices = servicesAtSite.filter(
-        serviceResult => serviceResult.id != service.id
-    )
-
-    return siblingServices.map(service => new Service(service));
 }
 
 /**

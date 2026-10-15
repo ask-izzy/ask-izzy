@@ -35,7 +35,7 @@ export function getShareMessage(args: GetMessageProps): { subject: string, body:
         },`
     for (const service of services) {
         const serviceURL = `${baseUrl}/service/${service.slug}`
-        const serviceAddress = service.location?.singleLineStreetAddress()
+        const serviceAddress = service.site.location?.singleLineStreetAddress()
         if (messageType === "Email") {
             messageText += `\n\n${service.name}` +
                 (serviceAddress ? `\n${serviceAddress}` : "") +

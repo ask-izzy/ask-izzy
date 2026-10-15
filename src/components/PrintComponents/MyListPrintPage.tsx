@@ -53,7 +53,7 @@ export default function MyListPrintPage({
                                 {service.site.name}
                             </div>
                             {
-                                service.ndis_approved &&
+                                service.is_ndis_approved &&
                                  <div className="my-list-print-service-ndis">
                                     Part of the NDIS
                                  </div>
@@ -62,7 +62,7 @@ export default function MyListPrintPage({
                                 {service.shortDescription}
                             </div>
                             <Address
-                                location={service.location}
+                                location={service.site.location}
                                 singleLineAddress={true}
                                 hasSolidIcon={true}
                             />

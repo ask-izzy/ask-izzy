@@ -72,8 +72,7 @@ Feature: Money help personalisation flow generates the expected query
                 "\"Emergency Relief\"",
                 "disadvantage"
             ],
-            "isBulkBilling": false,
-            "serviceTypesRaw": [
+            "serviceTypes": [
                 "Financial Aid"
             ]
         }

@@ -3,8 +3,6 @@ import React from "react";
 import icons from "../icons";
 import Service from "../iss/Service";
 
-import DebugContainer from "./DebugContainer";
-import DebugQueryScore from "./DebugQueryScore";
 import DebugServiceRecord from "./DebugServiceRecord";
 import FmdGoodRounded from "@mui/icons-material/FmdGoodRounded";
 
@@ -38,12 +36,12 @@ function ResultListItem({
     travelTimesStatus,
 }: Props): ReactNode {
     const renderLocation = (): ReactElement<"span"> | null | undefined => {
-        if (!service.location) {
+        if (!service.site.location) {
             return null
         }
-        let suburb = service.location.suburb;
+        let suburb = service.site.location.suburb;
 
-        if (service.location.isConfidential()) {
+        if (service.site.location.isConfidential()) {
             suburb = "Confidential location";
         }
 
@@ -59,13 +57,13 @@ function ResultListItem({
     }
 
     const renderTravelTimes = (): ReactNode => {
-        if (service.location && service.travelTimes) {
+        if (service.site.location && service.travelTimes) {
             return <>
                 <ScreenReader>
                     Travel times
                 </ScreenReader>
                 <TransportTime
-                    location={service.location}
+                    location={service.site.location}
                     travelTimes={service.travelTimes}
                 />
             </>
@@ -117,7 +115,7 @@ function ResultListItem({
                     object={service}
                 />
             </div>
-            {service.location && renderLocation()}
+            {service.site.location && renderLocation()}
             <CurrentOpeningTime
                 serviceOpening={service.open}
             />
@@ -137,11 +135,6 @@ function ResultListItem({
             }
             {service.travelTimes && renderTravelTimes()}
             <DebugServiceRecord object={service} />
-            {service._explanation &&
-                <DebugContainer message="Query score">
-                    <DebugQueryScore expl={service._explanation} />
-                </DebugContainer>
-            }
         </ListItem>
     );
 }

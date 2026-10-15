@@ -18,5 +18,5 @@ Example.args = {
     children: (
         <div>Link text</div>
     ),
-    to: ixaService.location,
+    to: ixaService.site.location,
 };

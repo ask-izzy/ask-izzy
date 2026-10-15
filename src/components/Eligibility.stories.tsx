@@ -14,12 +14,12 @@ const Template = (args: any): ReactNode => {
 
 export const CatchmentIsAustralia: typeof Template = Template.bind({});
 CatchmentIsAustralia.args = {
-    catchment: "Australia.",
+    catchment: ["Australia"],
 };
 
 export const ExtensiveRequirements: typeof Template = Template.bind({});
 ExtensiveRequirements.args = {
-    catchment: "City of Darebin and surrounds.",
+    catchment: ["VIC;Darebin City"],
     "eligibility_info": "Victorian tenants, including people with " +
         "disabilities, who have urgent or non-urgent repairs needing " +
         "to be attended to in their rented home.",

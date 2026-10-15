@@ -1,48 +1,49 @@
 import {
-    postRequestWithToken,
     getRequestWithToken,
 } from "../../lib/requests"
+import {addSearchParamsToUrl} from "../../lib/urls"
 
 export type ISS4ClientProps = {
     baseUrl: string,
     token: string,
 }
 
+// Params accepted by /api/directory/search/. See the "search_retrieve"
+// operation in the ISS4 API docs for full details. Any param can be given
+// multiple values in which case they are OR'd together.
 export type ISS4SearchQuery = {
-    query?: string,
-    page?: {
-        current: number,
-        size: number
-    },
-    filters?: {
-        all?: Array<any>
-    },
-    boosts?: {[key: string]: any}
-}
-
-export type ISS4SearchProps = ISS4SearchQuery & {
-    serialiser?: string,
+    "entity-type"?: string | string[],
+    "search-terms"?: string | string[],
+    site?: string | string[],
+    name?: string | string[],
+    "service-type"?: string | string[],
+    "is-cald-specific"?: boolean,
+    "target-gender"?: string | string[],
+    "age-group"?: string | string[],
+    "indigenous-classification"?: string | string[],
+    catchment?: string | string[],
+    "prefer-catchment"?: string | string[],
+    "located-near"?: string,
+    limit?: number,
+    offset?: number,
+    fields?: string[],
+    // Allow any other supported param to be passed through (eg when using
+    // the debug ISS query override)
+    [param: string]: unknown,
 }
 
 export type ISS4SearchResultsMeta = {
-    alerts: Array<any>,
-    warnings: number,
-    precision: number,
-    page: {
-        current: number,
-        total_pages: number,
-        total_results: number,
-    },
-    engine: {
-        name: string,
-        type: string
-    },
-    request_id: string
-};
+    // Total number of records matching the query
+    count: number,
+    // Number of records which can actually be paged through (results are
+    // capped by ISS)
+    count_available: number,
+    next: string | null,
+    prev: string | null,
+}
 
-export type ISS4SearchResults = {
-    meta: ISS4SearchResultsMeta,
-    objects: Array<any>,
+export type ISS4SearchResults = ISS4SearchResultsMeta & {
+    results: Array<any>,
 }
 
 export class ISS4Client {
@@ -51,34 +52,36 @@ export class ISS4Client {
 
     constructor({token, baseUrl}: ISS4ClientProps) {
         this.baseUrl = baseUrl
-        this.authString = `Bearer ${token}`
+        this.authString = `Token ${token}`
     }
 
-    async search({
-        serialiser = "detail",
-        ...query
-    }: ISS4SearchProps): Promise<ISS4SearchResults> {
-        const params = {
-            serialiser,
+    async search(query: ISS4SearchQuery): Promise<ISS4SearchResults> {
+        const {fields, ...params} = {
+            "entity-type": "service",
+            limit: 10,
+            ...query,
         }
 
-        const url = new URL("/api/search/", this.baseUrl)
-        for (const [key, value] of Object.entries(params)) {
-            url.searchParams.append(key, String(value))
+        const url = new URL("/api/directory/search/", this.baseUrl)
+        addSearchParamsToUrl(url, params)
+        if (fields) {
+            url.searchParams.set("fields", fields.join(","))
         }
-        return postRequestWithToken<ISS4SearchResults>(
+        return getRequestWithToken<ISS4SearchResults>(
             url.href,
-            this.authString,
-            query
+            this.authString
         )
     }
 
-    async getService(serviceId: number): Promise<any> {
+    async getService(serviceId: number, fields?: string[]): Promise<any> {
         const url = new URL(
             `/api/directory/services/${serviceId}/`,
             this.baseUrl
-        ).href
-        return getRequestWithToken(url, this.authString)
+        )
+        if (fields) {
+            url.searchParams.set("fields", fields.join(","))
+        }
+        return getRequestWithToken(url.href, this.authString)
     }
 
     async getServiceTypes(

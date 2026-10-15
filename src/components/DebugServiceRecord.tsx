@@ -7,10 +7,9 @@ type Props = {
 }
 
 function DebugServiceRecord({object}: Props): ReactNode {
-    // need to remove _explanation to get ...rest
     // Remove siblingServices to stop circle ref.
     /* eslint-disable no-unused-vars */
-    const {_explanation, _siblingServices, ...rest} = object
+    const {_siblingServices, ...rest} = object
 
     return (
         <DebugContainer message="ISS Object">

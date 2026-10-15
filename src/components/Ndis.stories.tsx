@@ -16,14 +16,14 @@ const Template = (args: any): ReactNode => {
 export const Standard: typeof Template = Template.bind({});
 Standard.args = {
     object: getServiceFixture({
-        ndis_approved: true,
+        is_ndis_approved: true,
     }),
 };
 
 export const StandardWithSpacer: typeof Template = Template.bind({});
 StandardWithSpacer.args = {
     object: getServiceFixture({
-        ndis_approved: true,
+        is_ndis_approved: true,
     }),
     withSpacer: true,
 };
@@ -31,7 +31,7 @@ StandardWithSpacer.args = {
 export const Compact: typeof Template = Template.bind({});
 Compact.args = {
     object: getServiceFixture({
-        ndis_approved: true,
+        is_ndis_approved: true,
     }),
     compact: true,
 };

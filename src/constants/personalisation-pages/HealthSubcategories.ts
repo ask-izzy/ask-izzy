@@ -21,7 +21,7 @@ export default ({
             },
         },
         "Mental and emotional health": {
-            serviceTypes: ["Mental Health"],
+            serviceTypes: ["Mental health"],
             $concat: {
                 term: [
                     "\"mental health\"",
@@ -86,7 +86,6 @@ export default ({
                     "health",
                 ],
             },
-            $unset: ["showInAskIzzyHealth"],
         },
         "Alcohol and other drugs": {
             serviceTypes: ["Alcohol & Other Drugs"],
@@ -102,12 +101,9 @@ export default ({
                     "health",
                 ],
             },
-            $unset: ["showInAskIzzyHealth"],
         },
         "Health and wellbeing": {
-            serviceTypesRaw: ["Recreation and leisure"],
-            serviceTypes: [],
-            $unset: ["showInAskIzzyHealth"],
+            serviceTypes: ["Recreation and leisure"],
             $concat: {
                 term: [
                     "wellbeing",
@@ -120,9 +116,7 @@ export default ({
             },
         },
         "Eye health": {
-            serviceTypesRaw: ["Optometrists"],
-            serviceTypes: [],
-            $unset: ["showInAskIzzyHealth"],
+            serviceTypes: ["Optometrists"],
             $concat: {
                 term: [
                     "eye",

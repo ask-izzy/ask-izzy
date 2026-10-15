@@ -19,12 +19,9 @@ export default function getServiceOpeningFixture(
 
     return new ServiceOpening(
         {
-            now_open: {
-                now_open: nowOpen,
-                local_time: clonedCurrentTime.format(),
-                notes: "",
-            },
+            open_now: nowOpen,
             opening_hours: openingHours,
+            now: clonedCurrentTime,
         }
     );
 }

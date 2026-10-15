@@ -160,12 +160,17 @@ export function addTimesToStory(
     const mockedCurrentTime = currentTime ||
         moment("2015-09-09 1pm", "YYYY-MM-DD ha");
 
+    const serviceOpening = getServiceOpeningFixture(
+        times,
+        mockedCurrentTime,
+        currentlyOpen
+    )
     Story.args = {
-        object: getServiceOpeningFixture(
-            times,
-            mockedCurrentTime,
-            currentlyOpen
-        ),
+        // Used by CurrentOpeningTime
+        serviceOpening,
+        // Used by CollapsedOpeningTimes which only needs the opening times
+        // of the service
+        service: {open: serviceOpening},
         ...(typeof compact !== "undefined" ? {compact} : {}),
     };
     Story.parameters = {

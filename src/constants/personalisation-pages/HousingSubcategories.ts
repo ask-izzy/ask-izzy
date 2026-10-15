@@ -12,8 +12,7 @@ export default ({
     question: "Which situation is most like yours?",
     possibleAnswers: {
         "Emergency accommodation": {
-            $unset: ["serviceTypes"],
-            serviceTypesRaw: [
+            serviceTypes: [
                 "Refuge/ Crisis accommodation",
             ],
             $concat: {
@@ -29,7 +28,6 @@ export default ({
                     "-\"holiday accommodation\"",
                 ],
             },
-            minimumShouldMatch: "30%",
             $applyIfShouldInjectAccessPoints: {
                 catchment: "true",
                 $push: {
@@ -40,7 +38,7 @@ export default ({
                         "\"crisis accommodation\"",
                     ],
                 },
-                serviceTypesRaw: [
+                serviceTypes: [
                     "Homelessness Access Point",
                 ],
             },
@@ -66,7 +64,6 @@ export default ({
         },
         "Affordable housing": {
             serviceTypes: ["Housing", "Social Housing"],
-            minimumShouldMatch: "30%",
         },
         "Bond or rent help": {
             serviceTypes: [
@@ -95,7 +92,6 @@ export default ({
             serviceTypes: [
                 "Housing/Tenancy Information & Referral",
             ],
-            minimumShouldMatch: "30%",
             $concat: {
                 term: [
                     "rent",
@@ -130,7 +126,6 @@ export default ({
                 "Supported Residential Accommodation",
                 "Supported Residential Accommodation/Aged Care",
             ],
-            minimumShouldMatch: "30%",
             $concat: {
                 term: [
                     "\"supported accommodation\"",

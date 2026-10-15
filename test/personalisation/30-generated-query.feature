@@ -49,7 +49,7 @@ Feature: Personalisation flow generates the expected query
             "location": {
                 "name": "Melbourne, VIC"
             },
-            "serviceTypesRaw": [
+            "serviceTypes": [
                 "Meals"
             ],
             "term": [

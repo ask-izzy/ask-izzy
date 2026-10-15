@@ -62,7 +62,7 @@ export default ({
         },
         "Sexual assault support": {
             serviceTypes: [
-                "Sexual Assault Services",
+                "Sexual assault services",
                 "Incest/sexual abuse counselling",
             ],
             $concat: {

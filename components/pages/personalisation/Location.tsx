@@ -12,8 +12,8 @@ import {browserSupportsGeolocation} from "@/src/geolocation";
 import icons from "@/src/icons";
 import storage from "@/src/storage";
 import type {Geolocation} from "@/src/storage";
-import {getIssClient, getIssVersion} from "@/src/iss/client"
-import type {ISS3AreaLocation} from "@/src/ix-web-js-client/apis/iss/v3";
+import {getRequest} from "@/src/ix-web-js-client/lib/requests"
+import type {LocationSuggestion} from "@/pages/api/location-suggest"
 import QuestionStepper from "@/src/components/QuestionStepper";
 import WithStickyFooter from "@/src/components/WithStickyFooter";
 import ScreenReader from "@/src/components/ScreenReader";
@@ -54,8 +54,8 @@ function Location({router, details}: Props): ReactNode {
     const [gettingAutocompletionsInProgress, setGettingAutocompletionsInProgress] = useState<boolean>(false)
     const [locationNameInput, setLocationNameInput] = useState<string>("")
     const [selectedLocation, setSelectedLocation] = useState<LocationType | null>(null)
-    const [autocompletions, setAutocompletionsState] = useState<Array<ISS3AreaLocation>>([])
-    const [prevAutocompletions, setPrevAutocompletions] = useState<Array<ISS3AreaLocation>>([])
+    const [autocompletions, setAutocompletionsState] = useState<Array<LocationSuggestion>>([])
+    const [prevAutocompletions, setPrevAutocompletions] = useState<Array<LocationSuggestion>>([])
     const [nextDisabled, setNextDisabled] = useState<boolean>(true)
     const [category] = useState<Category | null | undefined>(getCategoryFromRouter(router))
 
@@ -100,7 +100,7 @@ function Location({router, details}: Props): ReactNode {
         setAutocompletions([])
     }
 
-    function setAutocompletions(newAutocompletions: Array<ISS3AreaLocation>): void {
+    function setAutocompletions(newAutocompletions: Array<LocationSuggestion>): void {
         setPrevAutocompletions(autocompletions)
         setAutocompletionsState(newAutocompletions)
     }
@@ -146,18 +146,11 @@ function Location({router, details}: Props): ReactNode {
 
     const getAutocompletionSuggestions: (arg0: string) => Promise<void> = debounce(
         async(input: string) => {
-            let results
+            let results: Array<LocationSuggestion> | undefined
             try {
-                const issVersion = getIssVersion()
-                if (issVersion === "3") {
-                    const iss3Client = await getIssClient(issVersion)
-                    results = await iss3Client.searchLocations({
-                        name: input,
-                        kind: ["postcode", "suburb", "town"],
-                    })
-                } else if (issVersion === "4") {
-                    throw Error("ISS4 not yet supported")
-                }
+                const url = new URL("/api/location-suggest", window.location.origin)
+                url.searchParams.set("q", input)
+                results = await getRequest<Array<LocationSuggestion>>(url.href)
             } catch (error) {
                 console.error(
                     "Error trying to get location autocomplete",
@@ -173,7 +166,7 @@ function Location({router, details}: Props): ReactNode {
 
             if (results) {
                 setAutocompletions(_.uniq(
-                    Array.from(results.objects),
+                    results,
                     false,
                     ({name, state}) => name + state
                 ))
@@ -227,7 +220,7 @@ function Location({router, details}: Props): ReactNode {
         }
     }
 
-    function selectAutocomplete(result: ISS3AreaLocation): void {
+    function selectAutocomplete(result: LocationSuggestion): void {
         /* set the text box to this value
          * and remove the autocompletions */
         const location: LocationType = {

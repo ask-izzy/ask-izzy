@@ -1,15 +1,8 @@
 // Warning: the following is fairly ugly code. This file was written
 // to be manually run during the process of reorganising the categories
 // as a way to verify the service types used in all ISS queries actually
-// exist in ISS.
-// At some point it probably makes sense to move this into a CI step however
-// as it doesn't seem like ISS3 supports checking fetching all service types
-// so ISS4 as used. Since, at the time of writing, Ask Izzy hasn't switched
-// over to using ISS4 yet it would be a bit of a pain to maintain creds for
-// ISS3 and ISS4 to be used where ever the tests would be run (basically CI +
-// local development) and the potential gain is fairly small. So for now
-// let's leave it and as is and when Izzy moves to ISS4 we can consider
-// cleaning this up and moving it into a CI step.
+// exist in ISS. At some point it probably makes sense to move this into a CI
+// step.
 
 import type {
     PersonalisationPage,
@@ -146,7 +139,6 @@ function getAllUsedServiceTypes() {
             }
             const serviceTypes = [
                 getAllDeepKeyValues(answers, "serviceTypes").flat(),
-                getAllDeepKeyValues(answers, "serviceTypesRaw").flat(),
             ].flat()
             for (const serviceType of serviceTypes) {
                 allUsedServiceTypes.add(serviceType)
@@ -161,7 +153,6 @@ function getAllUsedServiceTypes() {
         }
         const serviceTypes = [
             getAllDeepKeyValues(searchQueryChanges, "serviceTypes").flat(),
-            getAllDeepKeyValues(searchQueryChanges, "serviceTypesRaw").flat(),
         ].flat()
         for (const serviceType of serviceTypes) {
             allUsedServiceTypes.add(serviceType)
@@ -185,8 +176,7 @@ async function validateServiceTypes() {
         {
             baseUrl: ISS4ProdBaseUrl,
             token: ISS4ProdAPIToken,
-        },
-        "4"
+        }
     )
 
     const issServiceTypes = []

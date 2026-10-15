@@ -17,11 +17,12 @@ export function getAddressLocationPropsFixture(
     props?: Partial<AddressLocationProps>
 ): AddressLocationProps {
     return merge({
-        building: "",
+        confidential: false,
+        building_name: "",
         details: "",
         flat_unit: "",
-        level: "",
-        point: {
+        floor_level: "",
+        geo_point: {
             lat: 33.54,
             lon: -141.23,
         },

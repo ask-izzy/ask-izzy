@@ -4,12 +4,11 @@ import FormatText from "./FormatText";
 import Collapser from "@/src/components/general/Collapser";
 
 type Props = {
-    catchment?: string;
-    cost: string;
+    cost?: string | null;
 };
 
-function Cost({ catchment, cost }: Props) {
-    if (cost === "") {
+function Cost({ cost }: Props) {
+    if (!cost) {
         return null; // Don't render the cost section if the data is "nothing"
     }
 

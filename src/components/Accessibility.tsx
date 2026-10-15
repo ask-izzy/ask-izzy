@@ -17,9 +17,9 @@ function Accessibility({service, withSpacer = false}: Props): ReactNode {
         // "access": "Partial wheelchair access",
         "fullaccess": "Full wheelchair access",
     };
-    let issAccessibility = service.accessibility;
+    const issAccessibility = "fullaccess"
 
-    if (issAccessibility === "fullaccess") {
+    if (service.accessibility?.includes(issAccessibility)) {
         return (
             <>
                 {withSpacer && <Spacer />}

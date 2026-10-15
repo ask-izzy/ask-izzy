@@ -89,7 +89,7 @@ Feature: Work, learning and things to do personalisation flow generates the expe
             ],
             "serviceTypes": [
                 "Employment",
-                "Supported Employment"
+                "Supported employment"
             ]
         }
         --------------------------------------
@@ -219,8 +219,7 @@ Feature: Work, learning and things to do personalisation flow generates the expe
             "location": {
                 "name": "Melbourne, VIC"
             },
-            "serviceTypes": [],
-            "serviceTypesRaw": [
+            "serviceTypes": [
                 "Recreation and leisure"
             ],
             "term": [

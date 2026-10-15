@@ -13,7 +13,8 @@ type Props = {
 }
 
 export default function LanguagesAvailable({ service, externalCollapsed, onToggle }: Props): ReactNode {
-    const languagesSpoken = `Languages spoken at this service are English, ${service.languages.join(", ")}`;
+    const languageNames = (service.languages || []).map(language => language.name)
+    const languagesSpoken = `Languages spoken at this service are English, ${languageNames.join(", ")}`;
     const maxCharLength = 60;
 
     return (

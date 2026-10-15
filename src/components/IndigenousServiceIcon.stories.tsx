@@ -21,7 +21,7 @@ export const ServiceWithIndigenousClassification: typeof Template =
     Template.bind({});
 ServiceWithIndigenousClassification.args = {
     object: getServiceFixture({
-        indigenous_classification: ["Aboriginal (indigenous) specific"],
+        indigenous_classification: "specific",
     }),
 };
 export const ServiceWithoutIndigenousClassification: typeof Template =

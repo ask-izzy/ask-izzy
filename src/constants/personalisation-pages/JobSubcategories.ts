@@ -28,7 +28,7 @@ export default ({
         "Supported employment": {
             serviceTypes: [
                 "Employment",
-                "Supported Employment",
+                "Supported employment",
             ],
             $concat: {
                 term: [
@@ -86,8 +86,7 @@ export default ({
             term: ["library"],
         },
         "Things to do": {
-            serviceTypesRaw: ["Recreation and leisure"],
-            serviceTypes: [],
+            serviceTypes: ["Recreation and leisure"],
             $concat: {
                 term: [
                     "recreation",

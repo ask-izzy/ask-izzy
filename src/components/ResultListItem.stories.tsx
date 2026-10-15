@@ -4,9 +4,6 @@ import React from "react";
 import ResultListItem from "./ResultListItem";
 import getServiceFixture from "../../fixtures/factories/Service";
 import {
-    getAddressLocationPropsFixture,
-} from "../../fixtures/factories/AddressLocation";
-import {
     ixaService,
     susansHouseService,
     housingService,
@@ -46,13 +43,15 @@ ConfidentialLocation.args = {
 export const ServiceWithFlags: typeof Template = Template.bind({});
 ServiceWithFlags.args = {
     service: getServiceFixture({
-        lgbtiqa_plus_specific: true,
-        indigenous_classification: ["Aboriginal (indigenous) specific"],
-        location: {
-            suburb: "Richmond",
-            point: {
-                lat: -37.8228,
-                lon: 144.998,
+        is_lgbtiqa_plus_specific: true,
+        indigenous_classification: "specific",
+        site: {
+            location: {
+                suburb: "Richmond",
+                geo_point: {
+                    lat: -37.8228,
+                    lon: 144.998,
+                },
             },
         },
     }),
@@ -61,13 +60,15 @@ ServiceWithFlags.args = {
 export const NDISService: typeof Template = Template.bind({});
 NDISService.args = {
     service: getServiceFixture({
-        ndis_approved: true,
-        location: getAddressLocationPropsFixture({
-            suburb: "Richmond",
-            point: {
-                lat: -37.8228,
-                lon: 144.998,
+        is_ndis_approved: true,
+        site: {
+            location: {
+                suburb: "Richmond",
+                geo_point: {
+                    lat: -37.8228,
+                    lon: 144.998,
+                },
             },
-        }),
+        },
     }),
 }

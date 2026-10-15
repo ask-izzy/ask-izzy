@@ -21,7 +21,6 @@ Feature: Support and counselling personalisation flow generates the expected que
             "term": [
                 "counselling"
             ],
-            "minimumShouldMatch": "1",
             "serviceTypes": [
                 "Counselling"
             ]
@@ -48,10 +47,8 @@ Feature: Support and counselling personalisation flow generates the expected que
                 "-\"coordinating bodies\"",
                 "\"mental health\""
             ],
-            "minimumShouldMatch": "30%",
-            "showInAskIzzyHealth": true,
-            "serviceTypesRaw": [
-                "Mental Health"
+            "serviceTypes": [
+                "Mental health"
             ]
         }
         --------------------------------------
@@ -80,8 +77,7 @@ Feature: Support and counselling personalisation flow generates the expected que
                 "counselling",
                 "crisis"
             ],
-            "minimumShouldMatch": "1",
-            "serviceTypesRaw": [
+            "serviceTypes": [
                 "Crisis counselling"
             ]
         }
@@ -112,7 +108,6 @@ Feature: Support and counselling personalisation flow generates the expected que
                 "family",
                 "relationship"
             ],
-            "minimumShouldMatch": "1",
             "serviceTypes": [
                 "Relationship Assistance"
             ]
@@ -139,11 +134,7 @@ Feature: Support and counselling personalisation flow generates the expected que
                 "drugs",
                 "alcohol"
             ],
-            "minimumShouldMatch": "30%",
             "serviceTypes": [
-                "Counselling"
-            ],
-            "serviceTypesRaw": [
                 "Alcohol & Other Drug Counselling"
             ]
         }
@@ -168,8 +159,7 @@ Feature: Support and counselling personalisation flow generates the expected que
             "term": [
                 "counselling",
                 "sexuality"
-            ],
-            "minimumShouldMatch": "1"
+            ]
         }
         --------------------------------------
 
@@ -221,8 +211,7 @@ Feature: Support and counselling personalisation flow generates the expected que
             "term": [
                 "counselling"
             ],
-            "minimumShouldMatch": "1",
-            "serviceTypesRaw": [
+            "serviceTypes": [
                 "Incest/sexual abuse counselling",
                 "Domestic violence counselling"
             ]
@@ -249,7 +238,6 @@ Feature: Support and counselling personalisation flow generates the expected que
                 "counselling",
                 "gambling"
             ],
-            "minimumShouldMatch": "1",
             "serviceTypes": [
                 "Gambling Counselling"
             ]

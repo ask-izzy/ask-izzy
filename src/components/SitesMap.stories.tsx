@@ -46,11 +46,13 @@ ThreeSites.args = {
         ixaService,
         housingService,
         getServiceFixture({
-            location: {
-                suburb: "Geelong",
-                point: {
-                    lat: -38.1472,
-                    lon: 144.3575,
+            site: {
+                location: {
+                    suburb: "Geelong",
+                    geo_point: {
+                        lat: -38.1472,
+                        lon: 144.3575,
+                    },
                 },
             },
         }),
@@ -65,11 +67,11 @@ NoSites.args = {
 function calculateSiteProps(services: Array<Service>) {
     const sites = []
     const siteLocations = {}
-    for (const {site, location} of services) {
+    for (const {site} of services) {
         const id = site.id.toString()
         if (!siteLocations[id]) {
             sites.push(site)
-            siteLocations[id] = location
+            siteLocations[id] = site.location
         }
     }
     return {

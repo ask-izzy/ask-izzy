@@ -1,6 +1,6 @@
-import {getIssClient, getIssVersion} from "../iss/client"
+import {getIssClient} from "../iss/client"
 import {attachTransportTimes} from "./travelTimes"
-import Service from "./Service"
+import Service, {SERVICE_DETAIL_FIELDS} from "./Service"
 import {
     createServiceSearch,
 } from "../iss/serviceSearch"
@@ -8,9 +8,12 @@ import {
 export async function getService(
     serviceId: number
 ): Promise<Service> {
-    const issClient = await getIssClient(getIssVersion())
+    const issClient = await getIssClient()
 
-    const response = await issClient.getService(serviceId)
+    const response = await issClient.getService(
+        serviceId,
+        SERVICE_DETAIL_FIELDS
+    )
     const service = new Service(response);
 
     try {

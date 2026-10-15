@@ -46,11 +46,10 @@ Feature: Housing personalisation flow generates the expected query
                 "name": "Melbourne, VIC"
             },
             "catchment": "true",
-            "minimumShouldMatch": "30%",
             "term": [
                 "\"Homelessness Access Point\""
             ],
-            "serviceTypesRaw": [
+            "serviceTypes": [
                 "Homelessness Access Point"
             ]
         }
@@ -69,11 +68,10 @@ Feature: Housing personalisation flow generates the expected query
                 "name": "Adelaide, SA"
             },
             "catchment": "prefer",
-            "minimumShouldMatch": "30%",
             "term": [
                 "\"crisis accommodation\""
             ],
-            "serviceTypesRaw": [
+            "serviceTypes": [
                 "Refuge/ Crisis accommodation"
             ]
         }
@@ -141,7 +139,6 @@ Feature: Housing personalisation flow generates the expected query
                 "name": "Melbourne, VIC"
             },
             "catchment": "prefer",
-            "minimumShouldMatch": "30%",
             "term": [
                 "housing",
                 "-\"coordinating bodies\"",
@@ -195,7 +192,6 @@ Feature: Housing personalisation flow generates the expected query
                 "name": "Melbourne, VIC"
             },
             "catchment": "prefer",
-            "minimumShouldMatch": "30%",
             "term": [
                 "-\"coordinating bodies\"",
                 "-\"respite care\"",
@@ -248,7 +244,6 @@ Feature: Housing personalisation flow generates the expected query
                 "name": "Melbourne, VIC"
             },
             "catchment": "prefer",
-            "minimumShouldMatch": "30%",
             "term": [
                 "-\"coordinating bodies\"",
                 "-\"respite care\"",

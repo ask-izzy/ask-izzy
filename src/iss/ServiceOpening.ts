@@ -2,20 +2,35 @@ import moment from "moment-timezone";
 import _ from "underscore";
 
 import type {
-    nowOpen,
     hmsWithColonsTime,
     openingHours,
     dayOfWeek,
 } from "./general";
 
 type props = {
-    now_open: nowOpen,
-    opening_hours: Array<openingHours>
+    open_now: boolean | null | undefined,
+    opening_hours: Array<openingHours>,
+    // The state the service is located in. Used to work out what the current
+    // time is for the service.
+    state?: string | null,
+    // The current time. Generally only needed for tests and stories.
+    now?: Moment,
 };
+
+const timezonesByState = {
+    ACT: "Australia/Sydney",
+    NSW: "Australia/Sydney",
+    NT: "Australia/Darwin",
+    QLD: "Australia/Brisbane",
+    SA: "Australia/Adelaide",
+    TAS: "Australia/Hobart",
+    VIC: "Australia/Melbourne",
+    WA: "Australia/Perth",
+}
 
 type serviceOpeningHours = {
     "day": dayOfWeek,
-    "note": string,
+    "note"?: string | null,
     "close": hmsWithColonsTime,
     "end": Moment,
     "open": hmsWithColonsTime,
@@ -24,19 +39,20 @@ type serviceOpeningHours = {
 
 /* eslint-disable camelcase */
 export default class ServiceOpening {
-    now_open: boolean | null | undefined;
+    open_now: boolean | null | undefined;
     _opening_times: Array<serviceOpeningHours>;
     _closing_times: Array<serviceOpeningHours>;
     _now: Moment;
 
     constructor(properties: props) {
-        this.now_open = properties.now_open.now_open;
-        this._now = moment(properties.now_open.local_time || []);
-        let timezone = properties.now_open.local_time &&
-            properties.now_open.local_time.match(/([-+][0-9:]*)$/)
-
-        if (timezone) {
-            this._now = this._now.utcOffset(timezone.pop())
+        this.open_now = properties.open_now;
+        if (properties.now) {
+            this._now = moment(properties.now)
+        } else {
+            const timezone = timezonesByState[
+                properties.state?.toUpperCase() || ""
+            ]
+            this._now = timezone ? moment().tz(timezone) : moment()
         }
 
         // Turn opening_hours into a sorted list
@@ -82,7 +98,7 @@ export default class ServiceOpening {
     // Is it open now?
     // null indicates "we don't know"
     get open(): boolean | null | undefined {
-        return this.now_open;
+        return this.open_now;
     }
 
     // When it next opens, when does it open/close?
@@ -97,10 +113,10 @@ export default class ServiceOpening {
 
     // Describes how long the current open state will continue
     get until(): string {
-        if (this.now_open) {
+        if (this.open_now) {
             // Service is open
             return this.ifTime`until ${this.nextCloses}`
-        } else if (this.now_open === false) {
+        } else if (this.open_now === false) {
             // Service is closed
             let nextOpeningTimes = this.nextOpeningTimes;
 

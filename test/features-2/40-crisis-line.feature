@@ -15,14 +15,14 @@ Feature: Crisis Line
     Scenario: Get helpline phone number
         Given A search for "get helpline phone number" returns:
         ----------------------------------------------
-        -   crisis: true
+        -   is_crisis: true
             phones:
-                - kind        : phone
+                - phone_type  : phone
                   number      : (03) 3333 3333
                   comment     :
-        -   crisis: true
+        -   is_crisis: true
             phones:
-                - kind        : phone
+                - phone_type  : phone
                   number      : 03 1111 1111
                   comment     :
         ----------------------------------------------

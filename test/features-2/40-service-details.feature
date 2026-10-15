@@ -68,8 +68,7 @@ Feature: Service details page
     Scenario: ATSI flags appear if there is an indigenous classification
         Given A service with:
         ----------------------------------------------
-        indigenous_classification:
-          - "Mainstream who cater for Aboriginal (indigenous)"
+        indigenous_classification: mainstream_who_cater
         ----------------------------------------------
         When I navigate to the service page
         Then I should see ATSI flags
@@ -109,9 +108,10 @@ Feature: Service details page
     Scenario: There is no travel information for old-style confidential services
         Given A service with:
         ----------------------------------------------
-        location:
-            street_number: Confidential
-            street_name: secret
+        site:
+            location:
+                street_number: Confidential
+                street_name: secret
         ----------------------------------------------
         When I navigate to the service page
         Then I should see "Confidential location"
@@ -121,25 +121,25 @@ Feature: Service details page
         Given A service with:
         ----------------------------------------------
         phones:
-            - kind        : phone
+            - phone_type  : phone
               number      : (03) 3333 3333
               comment     :
-            - kind        : fax
+            - phone_type  : fax
               number      : (03) 5555 5555
               comment     :
-            - kind        : mobile
+            - phone_type  : mobile
               number      : 0477 777 777
               comment     :
-            - kind        : phone
+            - phone_type  : phone
               number      : 0477 777 777
               comment     : (really a mobile)
-            - kind        : freecall
+            - phone_type  : freecall
               number      : 1300 111 111
               comment     :
-            - kind        : freecall
+            - phone_type  : freecall
               number      : 1800 111 111
               comment     :
-            - kind        : tty
+            - phone_type  : tty
               number      : (03) 9999 9999
               comment     :
         emails:

@@ -56,7 +56,7 @@ function ResultListItemContact({
                     </div>
                     : <div className="contact-other">
                         <GoogleMapsLink
-                            to={service.location}
+                            to={service.site.location}
                             className="withoutTimes"
                             hideSpacer={true}
                             hideConfidential={true}

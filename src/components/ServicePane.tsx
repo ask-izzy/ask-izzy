@@ -229,7 +229,7 @@ function ServicePane({ service }: Props): ReactNode {
     return (
         <div className="ServicePane">
             <div>
-                <AlertBannerList state={service.location?.state}
+                <AlertBannerList state={service.site.location?.state}
                     screenLocation="servicePage"
                     format="inline"
                 />
@@ -249,10 +249,7 @@ function ServicePane({ service }: Props): ReactNode {
 
                 <div className="provisions">
                     <Eligibility {...service} />
-                    <Cost
-                        catchment={service.catchment}
-                        cost={service.cost}
-                    />
+                    <Cost cost={service.cost} />
                     {renderServiceProvisions()}
                 </div>
 
@@ -291,20 +288,19 @@ function ServicePane({ service }: Props): ReactNode {
                                 withSpacer={true}
                             />
                             <Address
-                                location={service.location}
-                                site={service.site}
+                                location={service.site.location}
                                 withSpacer={true}
                             />
-                            {service.location && service.travelTimes && (
+                            {service.site.location && service.travelTimes && (
                                 <TransportTime
-                                    location={service.location}
+                                    location={service.site.location}
                                     withSpacer={true}
                                     travelTimes={service.travelTimes}
                                 />
                             )}
-                            {!service.location?.isConfidential() && (
+                            {!service.site.location?.isConfidential() && (
                                 <GoogleMapsLink
-                                    to={service.location}
+                                    to={service.site.location}
                                     className={Storage.getUserGeolocation() ? "withTimes" : "withoutTimes"}
                                     hideSpacer={true}
                                 >
@@ -314,7 +310,7 @@ function ServicePane({ service }: Props): ReactNode {
                                     </span>
                                 </GoogleMapsLink>
                             )}
-                            {service.languages.length > 0 && (
+                            {service.languages?.length > 0 && (
                                 <LanguagesAvailable
                                     service={service}
                                     externalCollapsed={collapserStates.languages}

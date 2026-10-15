@@ -4,6 +4,7 @@ import {diffJson} from "diff";
 import { JsonForms } from "@jsonforms/react";
 import { vanillaCells, vanillaRenderers } from "@jsonforms/vanilla-renderers";
 import Diff from "./Diff"
+import {SEARCH_RESULT_FIELDS} from "../../iss/Service"
 
 type Props = {
     originalIssParams: { [key: string]: any },
@@ -19,77 +20,78 @@ export default function IssParamsOverrideControls({
         issParamsOverride
     )
 
-    const cleanIssParams = (issParams) => ({
-        ...issParams,
-        service_type_raw: issParams.service_type_raw?.length ? issParams.service_type_raw : undefined,
-        location: issParams.location ? issParams.location : undefined,
-        minimum_should_match: issParams.minimum_should_match ? issParams.minimum_should_match : undefined,
-        type: issParams.type ? issParams.type : undefined,
-        service_type: issParams.service_type?.length ? issParams.service_type : undefined,
-        age_group: issParams.age_group?.length ? issParams.age_group : undefined,
-        catchment: issParams.catchment ? issParams.catchment : undefined,
-    })
+    const cleanIssParams = (issParams) => {
+        const cleanedIssParams = {
+            // Make sure we always get the fields Izzy needs to display results
+            fields: SEARCH_RESULT_FIELDS,
+            ...issParams,
+        }
+        // Remove any empty values so they aren't sent to ISS
+        for (const [key, value] of Object.entries(cleanedIssParams)) {
+            if (
+                value === "" ||
+                value === null ||
+                (Array.isArray(value) && value.length === 0)
+            ) {
+                delete cleanedIssParams[key]
+            }
+        }
+        return cleanedIssParams
+    }
 
     const diff = diffJson(originalIssParams, cleanIssParams(issParams))
+
+    const stringArray = {
+        type: "array",
+        items: {
+            type: "string",
+        },
+    }
 
     const schema = {
         type: "object",
         properties: {
-            q: {
+            "search-terms": {
                 type: "string",
-                title: "Query String",
+                title: "Search terms",
             },
-            location: {
+            "located-near": {
                 type: "string",
-            },
-            area: {
-                type: "string",
+                title: "Located near",
             },
             catchment: {
                 type: "string",
-                enum: ["prefer", "true", "false"],
             },
-            client_gender: {
-                "type": "array",
-                "items": {
-                    "type": "string",
-                },
+            "prefer-catchment": {
+                type: "string",
+                title: "Prefer catchment",
             },
-            age_group: {
-                "type": "array",
-                "items": {
-                    "type": "string",
-                },
+            "service-type": {
+                ...stringArray,
+                title: "Service type",
             },
-            service_type: {
-                "type": "array",
-                "items": {
-                    "type": "string",
-                },
+            "target-gender": {
+                ...stringArray,
+                title: "Target gender",
             },
-            service_type_raw: {
-                "type": "array",
-                "items": {
-                    "type": "string",
-                },
+            "age-group": {
+                ...stringArray,
+                title: "Age group",
             },
-            show_in_askizzy_health: {
+            "indigenous-classification": {
+                ...stringArray,
+                title: "Indigenous classification",
+            },
+            "is-cald-specific": {
                 type: "boolean",
+                title: "Is CALD specific",
             },
-            minimum_should_match: {
+            name: {
                 type: "string",
             },
-            site_id: {
-                type: "number",
-                title: "Site ID (not used in Izzy search)",
-            },
-            type: {
+            site: {
                 type: "string",
-                title: "Type (not used in Izzy search)",
-            },
-            is_bulk_billing: {
-                type: "boolean",
-                title: "Is Bulk Billing (not used in Izzy search)",
+                title: "Site ID",
             },
         },
     };

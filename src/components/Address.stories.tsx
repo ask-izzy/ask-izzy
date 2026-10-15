@@ -16,9 +16,9 @@ const Template = (args: any): ReactNode => {
 export const ComplexLocation: typeof Template = Template.bind({});
 ComplexLocation.args = {
     location: new AddressLocation({
-        "building": "Hamy building",
+        "building_name": "Hamy building",
         "flat_unit": "Room 35",
-        "level": "Level 3",
+        "floor_level": "Level 3",
         "postcode": "3121",
         "state": "VIC",
         "street_name": "Elizabeth",
@@ -35,6 +35,6 @@ ConfidentialLocation.args = {
         "postcode": "3121",
         "state": "VIC",
         "suburb": "RICHMOND",
-        "point": undefined,
+        "geo_point": null,
     }),
 };

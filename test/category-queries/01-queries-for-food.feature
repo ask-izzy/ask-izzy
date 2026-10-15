@@ -48,7 +48,7 @@ Feature: Food personalisation flow generates the expected query
             "term": [
                 "meals"
             ],
-            "serviceTypesRaw": [
+            "serviceTypes": [
                 "Meals"
             ]
         }
@@ -69,7 +69,7 @@ Feature: Food personalisation flow generates the expected query
             "term": [
                 "\"food parcels\""
             ],
-            "serviceTypesRaw": [
+            "serviceTypes": [
                 "Food Parcels"
             ]
         }
@@ -90,7 +90,7 @@ Feature: Food personalisation flow generates the expected query
             "term": [
                 "\"food vouchers\""
             ],
-            "serviceTypesRaw": [
+            "serviceTypes": [
                 "Food Vouchers"
             ]
         }

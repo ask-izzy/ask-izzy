@@ -4,9 +4,7 @@ import React from "react";
 import Link from "./base/Link";
 import Service from "../iss/Service";
 import PhoneButton from "./PhoneButton";
-import DebugContainer from "./DebugContainer";
 import Info from "../icons/Info";
-import DebugQueryScore from "./DebugQueryScore";
 import DebugServiceRecord from "./DebugServiceRecord";
 import TooltipInformation from "@/src/components/TooltipInformation";
 
@@ -87,11 +85,6 @@ class CrisisLineItem extends React.Component<Props> {
                     }
                 />
                 <DebugServiceRecord object={service} />
-                {service._explanation &&
-                    <DebugContainer message="Query score">
-                        <DebugQueryScore expl={service._explanation} />
-                    </DebugContainer>
-                }
             </li>
         );
     }

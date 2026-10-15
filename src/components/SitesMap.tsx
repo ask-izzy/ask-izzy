@@ -66,7 +66,7 @@ function SitesMap(
         if (sites?.length) {
             return sites?.filter(
                 site => {
-                    if (siteLocations[site.id]?.point) {
+                    if (siteLocations[site.id]?.geo_point) {
                         return true
                     }
                     console.warn(
@@ -79,7 +79,7 @@ function SitesMap(
                 })
                 .map(site => ({
                     site,
-                    point: siteLocations[site.id].point,
+                    point: siteLocations[site.id].geo_point,
                     selected: site.id === selectedSite?.id,
                 }))
         }

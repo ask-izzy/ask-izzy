@@ -2,8 +2,10 @@
 declare namespace NodeJS {
     interface ProcessEnv {
         NEXT_PUBLIC_ISS_BASE_URL: string,
-        NEXT_PUBLIC_ISS_VERSION: string,
-        NEXT_PUBLIC_ISS_API_KEY: string,
+        NEXT_PUBLIC_ISS_API_TOKEN: string,
+        LOCATIONS_API_BASE_URL: string,
+        LOCATIONS_API_USERNAME: string,
+        LOCATIONS_API_PASSWORD: string,
         NEXT_PUBLIC_NOTIFICATIONS_API_BASE_URL: string,
         NEXT_PUBLIC_NOTIFICATIONS_API_KEY: string,
         NEXT_PUBLIC_STRAPI_URL: string,

@@ -31,8 +31,8 @@ function ShareDirectlyOptions({
     if (includeOtherDetails) {
         textToShare = services.map(service => `
             ${service.name}
-            Address: ${(service.location?.singleLineStreetAddress() ?? "")}
-            ${service.location?.details ?? ""}
+            Address: ${(service.site.location?.singleLineStreetAddress() ?? "")}
+            ${service.location_details ?? ""}
             More info: ${baseUrl}/service/${service.slug}
         `
             .replace(/\n {12}/g, "\n").replace(/\n(?=\n)/g, "").trim()).join("\n\n")

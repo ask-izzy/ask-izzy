@@ -31,7 +31,8 @@ export async function attachTransportTimes(
     if (typeof maps.travelTime === "function") {
         const servicesToLoadTravelTimesFor = services.filter(
             // skip services without publicly known locations
-            service => !service.location?.isConfidential()
+            service => service.site.location &&
+                !service.site.location.isConfidential()
         ).filter(
             // skip services that already have travel times
             service => !service.travelTimes
@@ -40,7 +41,7 @@ export async function attachTransportTimes(
         const travelTimesForServices = await Timeout<Array<Array<travelTime>>>(
             1000 * 10, // wait for 10 secs before giving up
             maps.travelTime(servicesToLoadTravelTimesFor
-                .map(({location}) => formatPoint(location.point))
+                .map(({site}) => formatPoint(site.location.geo_point))
             )
         );
 

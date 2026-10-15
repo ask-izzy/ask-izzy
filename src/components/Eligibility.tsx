@@ -6,11 +6,11 @@ import _string from "underscore.string"
 import FormatText from "./FormatText"
 
 type Props = {
-    catchment: string,
-    eligibility_info: string,
-    ineligibility_info: string,
-    referral_info: string,
-    special_requirements: string,
+    catchment?: Array<string> | null,
+    eligibility_info?: string | null,
+    ineligibility_info?: string | null,
+    referral_info?: string | null,
+    special_requirements?: string | null,
 }
 
 
@@ -26,8 +26,8 @@ function Eligibility({
     let eligibleItems = _.compact(_([
         renderCatchment(),
         renderEligibility(
-            eligibilityInfo + "\n" +
-            specialRequirements
+            (eligibilityInfo || "") + "\n" +
+            (specialRequirements || "")
         ),
         renderReferralInfo(),
     ]).flatten())
@@ -63,8 +63,11 @@ function Eligibility({
     }
 
     function renderCatchment(): void | ReactNode {
-        if (catchment && !catchment.match(/^open.?$/i)) {
-            return renderList([`Located in ${catchment}`])
+        const catchmentAreas = (catchment || [])
+            .filter(area => !area.match(/^open.?$/i))
+            .map(formatCatchmentArea)
+        if (catchmentAreas.length) {
+            return renderList([`Located in ${catchmentAreas.join("; ")}`])
         }
     }
 
@@ -107,6 +110,16 @@ function Eligibility({
             {ineligibleMarkup}
         </div>
     )
+}
+
+/*
+ * ISS gives catchment areas in the form "VIC;Yarra City". Convert them to
+ * something more readable, eg "Yarra City, VIC".
+ */
+function formatCatchmentArea(area: string): string {
+    const [state, ...placeParts] = area.split(";")
+    const place = placeParts.join(";").trim()
+    return place ? `${place}, ${state.trim()}` : state.trim()
 }
 
 export default Eligibility

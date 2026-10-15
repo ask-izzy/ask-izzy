@@ -2,19 +2,15 @@ import merge from "deepmerge";
 
 import Service from "../../src/iss/Service";
 import type {ServiceProps} from "../../src/iss/Service";
-import type {AddressLocationProps} from "../../src/iss/AddressLocation";
-import type {site} from "../../src/iss/site";
-import type {nowOpen, phone} from "../../src/iss/general";
-import { Abn, Id } from "./Value";
-import { getAddressLocationPropsFixture } from "./AddressLocation";
+import type {phone} from "../../src/iss/general";
+import { Id } from "./Value";
 import getSiteFixture from "./site";
-import {getNowOpenFixture, getPhoneFixture} from "./general";
+import type {siteFixtureProps} from "./site";
+import {getPhoneFixture} from "./general";
 
-export type serviceFixtureProps = Partial<Omit<ServiceProps, "location" | "now_open" | "phones" | "site"> & {
-    location: Partial<AddressLocationProps>,
-    now_open: Partial<nowOpen>,
+export type serviceFixtureProps = Partial<Omit<ServiceProps, "phones" | "site"> & {
     phones: Array<Partial<phone>>,
-    site: Partial<site>
+    site: siteFixtureProps,
 }>
 
 export default function getServiceFixture(
@@ -29,76 +25,47 @@ export function getServiceFixtureProps(
     additionalProps?: serviceFixtureProps
 ): ServiceProps {
     const defaultProps = {
-        abn: Abn(),
-        accessibility: "access",
-        accessibility_details: "",
-        accreditation: [],
-        age_groups: [
-            "youngadult",
-            "adult",
-            "middleagedadult",
-        ],
-        assessment_criteria: "",
-        availability: "Some",
-        billing_method: "",
-        capacity: {
-            frequency: 1,
-            status: "amber",
-            status_text: "",
-        },
-        catchment: "",
+        accessibility: ["access"],
+        catchment: [],
         cost: "",
-        crisis: false,
         description: "Offers swags and blankets to those sleeping rough.",
         eligibility_info: "",
         emails: [],
-        funding_body: "Department of Human Services (VIC)",
         id: Id(),
-        indigenous_classification: [],
+        indigenous_classification: "mainstream",
         ineligibility_info: "",
         intake_info: "",
         intake_point: "",
-        is_bulk_billing: true,
+        is_crisis: false,
+        is_lgbtiqa_plus_specific: false,
+        is_ndis_approved: false,
         languages: [
-            "English",
-            "Italian",
+            {id: 105, name: "Italian"},
         ],
-        last_updated: "2015-02-03",
-        lgbtiqa_plus_specific: false,
-        location: getAddressLocationPropsFixture(),
+        location_details: "",
         name: "Bare Needs",
-        ndis_approved: false,
-        now_open: getNowOpenFixture(),
+        open_now: true,
         opening_hours: [],
-        parking_info: "",
         phones: [],
-        postal_address: [],
-        public_transport_info: "Near South Yarra station",
         referral_info: "",
-        service_types: [],
-        show_in_askizzy_health: false,
         site: getSiteFixture(),
+        social_media: [],
         special_requirements: "",
-        target_gender: "u",
-        type: "service",
         web: "",
     };
     return merge(
         defaultProps,
         {
             ...additionalProps,
-            location: getAddressLocationPropsFixture(
-                additionalProps?.location
-            ),
-            now_open: getNowOpenFixture(
-                additionalProps?.now_open
-            ),
             phones: additionalProps?.phones?.map(props =>
                 getPhoneFixture(props)
             ) || [],
             site: getSiteFixture(
                 additionalProps?.site
             ),
-        }
-    )
+        },
+        // Arrays given in additionalProps should replace the defaults
+        // rather than being appended to them.
+        {arrayMerge: (destinationArray, sourceArray) => sourceArray}
+    ) as ServiceProps
 }

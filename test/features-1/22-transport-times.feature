@@ -17,11 +17,12 @@ Feature: Transport times
         and A service with:
         ----------------------------------------------
         name: "Transportable"
-        location:
-            suburb: Richmond
-            point:
-                lat: -37.8578706
-                lon: 144.5192432
+        site:
+            location:
+                suburb: Richmond
+                geo_point:
+                    lat: -37.8578706
+                    lon: 144.5192432
         ----------------------------------------------
         And googles directions matrix will return
         ----------------------------------------------
@@ -61,11 +62,12 @@ Feature: Transport times
         And A service with:
         ----------------------------------------------
         name: "Transportable"
-        location:
-            suburb: Richmond
-            point:
-                lat: -37.8578706
-                lon: 144.5192432
+        site:
+            location:
+                suburb: Richmond
+                geo_point:
+                    lat: -37.8578706
+                    lon: 144.5192432
         ----------------------------------------------
         And googles directions matrix will return
         ----------------------------------------------

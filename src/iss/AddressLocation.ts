@@ -4,11 +4,12 @@ import { titleize } from "underscore.string";
 import type {geoPoint} from "./general"
 
 export type AddressLocationProps = {
-    building: string,
-    details?: string,
+    confidential?: boolean,
+    building_name: string,
     flat_unit: string,
-    level: string,
-    point?: geoPoint,
+    floor_level: string,
+    geo_point?: geoPoint | null,
+    lga?: string,
     postcode: string,
     state: string,
     street_name: string,
@@ -16,15 +17,18 @@ export type AddressLocationProps = {
     street_suffix: string,
     street_type: string,
     suburb: string,
+    // Not part of an ISS location. This is the "location_details" field of
+    // the service the location belongs to.
+    details?: string | null,
 };
+
 export default class AddressLocation {
-    building: string;
+    confidential?: boolean;
+    building_name: string;
     flat_unit: string;
-    level: string;
-    point: {
-        "lat": number,
-        "lon": number
-    };
+    floor_level: string;
+    geo_point?: geoPoint | null;
+    lga?: string;
     postcode: string;
     state: string;
     street_name: string;
@@ -32,51 +36,32 @@ export default class AddressLocation {
     street_suffix: string;
     street_type: string;
     suburb: string;
-    details: string;
+    details?: string | null;
 
     constructor(props: AddressLocationProps) {
         Object.assign(this, props);
     }
 
-    /* If there is no point value,
-     * that means it's being suppressed.
-     * Otherwise, check whether the data includes
-     * 'confidential', since older records
-     * aren't marked this way.
+    /* If the location is marked as confidential or there is no geo_point
+     * value then it's being suppressed. Otherwise, check whether the data
+     * includes 'confidential', since older records aren't always marked
+     * this way.
      */
     isConfidential(): boolean {
-        return Boolean((
-            this.building +
-            this.flat_unit +
-            this.level +
-            this.postcode +
-            this.state +
-            this.street_name +
-            this.street_number +
-            this.street_suffix +
-            this.street_type +
-            this.suburb +
-            this.details
-        ).match(/confidential|secret/i) || !this.point);
+        return Boolean(
+            this.confidential ||
+            !this.geo_point ||
+            allAddressText(this).match(/confidential|secret/i)
+        );
     }
 
     /*
      * Does this record lack a useful street address?
      */
     isSuburbOnly(): boolean {
-        return Boolean((
-            this.building +
-            this.flat_unit +
-            this.level +
-            this.postcode +
-            this.state +
-            this.street_name +
-            this.street_number +
-            this.street_suffix +
-            this.street_type +
-            this.suburb +
-            this.details
-        ).match(/(local ?access)|(no ?street ?access)/i));
+        return Boolean(
+            allAddressText(this).match(/(local ?access)|(no ?street ?access)/i)
+        );
     }
 
     streetAddressLine1(): string {
@@ -90,9 +75,9 @@ export default class AddressLocation {
 
         let addrDescriptors = [
             this.flat_unit,
-            this.level,
-            this.building,
-        ].map(text => text.trim());
+            this.floor_level,
+            this.building_name,
+        ].map(text => (text || "").trim());
 
         // FIXME: find a way to make this way clearer
         addrDescriptors = _(addrDescriptors)
@@ -127,4 +112,20 @@ export default class AddressLocation {
             .filter(text => text)
             .join(", ")
     }
+}
+
+function allAddressText(location: AddressLocation): string {
+    return [
+        location.building_name,
+        location.flat_unit,
+        location.floor_level,
+        location.postcode,
+        location.state,
+        location.street_name,
+        location.street_number,
+        location.street_suffix,
+        location.street_type,
+        location.suburb,
+        location.details,
+    ].join("")
 }

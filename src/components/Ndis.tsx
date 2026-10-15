@@ -15,7 +15,7 @@ function Ndis({
     withSpacer = false,
 }: Props): null | ReactNode {
 
-    let ndisApproved = object.ndis_approved
+    let ndisApproved = object.is_ndis_approved
 
     if (ndisApproved) {
         if (compact) {

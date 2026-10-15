@@ -15,12 +15,12 @@ const Template = (args: any): ReactNode => {
 export const Example: typeof Template = Template.bind({});
 Example.args = {
     originalIssParams: {
-        "q": "house",
-        "area": "Brunswick West, VIC",
+        "search-terms": "house",
+        "located-near": "brunswick west,vic",
     },
     issParamsOverride: {
-        "q": "housing",
-        "area": "Brunswick West, VIC",
+        "search-terms": "housing",
+        "located-near": "brunswick west,vic",
     },
     setIssParamsOverride: () => {},
 };

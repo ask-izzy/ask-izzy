@@ -106,7 +106,7 @@ function CalloutBox(
                 <PhoneButton
                     number={callout.Phone}
                     comment=""
-                    kind=""
+                    phone_type=""
                     crisis={true}
                 />}
         </div>

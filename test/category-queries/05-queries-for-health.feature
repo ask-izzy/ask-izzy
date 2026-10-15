@@ -18,8 +18,6 @@ Feature: Health personalisation flow generates the expected query
                 "name": "Melbourne, VIC"
             },
             "catchment": "prefer",
-            "minimumShouldMatch": "30%",
-            "showInAskIzzyHealth": true,
             "term": [
                 "-\"coordinating bodies\"",
                 "health"
@@ -43,8 +41,6 @@ Feature: Health personalisation flow generates the expected query
                 "name": "Melbourne, VIC"
             },
             "catchment": "prefer",
-            "minimumShouldMatch": "30%",
-            "showInAskIzzyHealth": true,
             "term": [
                 "-\"coordinating bodies\"",
                 "\"general medical practitioners\""
@@ -66,14 +62,12 @@ Feature: Health personalisation flow generates the expected query
                 "name": "Melbourne, VIC"
             },
             "catchment": "prefer",
-            "minimumShouldMatch": "30%",
-            "showInAskIzzyHealth": true,
             "term": [
                 "-\"coordinating bodies\"",
                 "\"mental health\""
             ],
             "serviceTypes": [
-                "Mental Health"
+                "Mental health"
             ]
         }
         --------------------------------------
@@ -89,8 +83,6 @@ Feature: Health personalisation flow generates the expected query
                 "name": "Melbourne, VIC"
             },
             "catchment": "prefer",
-            "minimumShouldMatch": "30%",
-            "showInAskIzzyHealth": true,
             "term": [
                 "-\"coordinating bodies\"",
                 "dentistry"
@@ -112,8 +104,6 @@ Feature: Health personalisation flow generates the expected query
                 "name": "Melbourne, VIC"
             },
             "catchment": "prefer",
-            "minimumShouldMatch": "30%",
-            "showInAskIzzyHealth": true,
             "term": [
                 "-\"coordinating bodies\"",
                 "health",
@@ -137,8 +127,6 @@ Feature: Health personalisation flow generates the expected query
                 "name": "Melbourne, VIC"
             },
             "catchment": "prefer",
-            "minimumShouldMatch": "30%",
-            "showInAskIzzyHealth": true,
             "term": [
                 "-\"coordinating bodies\"",
                 "podiatry"
@@ -160,7 +148,6 @@ Feature: Health personalisation flow generates the expected query
                 "name": "Melbourne, VIC"
             },
             "catchment": "prefer",
-            "minimumShouldMatch": "30%",
             "term": [
                 "-\"coordinating bodies\"",
                 "\"public hospital services\"",
@@ -184,7 +171,6 @@ Feature: Health personalisation flow generates the expected query
                 "name": "Melbourne, VIC"
             },
             "catchment": "prefer",
-            "minimumShouldMatch": "30%",
             "term": [
                 "-\"coordinating bodies\"",
                 "substance abuse",
@@ -208,9 +194,7 @@ Feature: Health personalisation flow generates the expected query
             "location": {
                 "name": "Melbourne, VIC"
             },
-            "minimumShouldMatch": "30%",
-            "serviceTypes": [],
-            "serviceTypesRaw": [
+            "serviceTypes": [
                 "Recreation and leisure"
             ],
             "term": [
@@ -231,9 +215,7 @@ Feature: Health personalisation flow generates the expected query
             "location": {
                 "name": "Melbourne, VIC"
             },
-            "minimumShouldMatch": "30%",
-            "serviceTypes": [],
-            "serviceTypesRaw": [
+            "serviceTypes": [
                 "Optometrists"
             ],
             "term": [

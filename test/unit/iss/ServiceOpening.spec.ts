@@ -33,11 +33,8 @@ function serviceFactory(openingHours) {
     return function(open: boolean | null | undefined, now: string) {
         return new ServiceOpening(
             {
-                now_open: {
-                    now_open: open,
-                    local_time: time(now).format(),
-                    notes: "",
-                },
+                open_now: open,
+                now: time(now),
                 opening_hours: openingHours.map(
                     openingHours => _.clone(openingHours)
                 ),

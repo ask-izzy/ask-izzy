@@ -20,8 +20,8 @@ export default {
                 name: "Best match",
             },
             {
-                key: "now_open",
-                value: {now_open: true},
+                key: "open_now",
+                value: true,
                 name: "Open now",
             },
         ],

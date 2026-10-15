@@ -17,20 +17,20 @@ const Template = (args: any): ReactNode => {
 export const ServiceWithFullAccess: typeof Template = Template.bind({});
 ServiceWithFullAccess.args = {
     service: getServiceFixture(
-        {...susansHouseServiceProps, accessibility: "fullaccess"}
+        {...susansHouseServiceProps, accessibility: ["fullaccess"]}
     ),
 };
 
 export const ServiceWithAccess: typeof Template = Template.bind({});
 ServiceWithAccess.args = {
     service: getServiceFixture(
-        {...susansHouseServiceProps, accessibility: "access"}
+        {...susansHouseServiceProps, accessibility: ["access"]}
     ),
 };
 
 export const ServiceWithNoAccess: typeof Template = Template.bind({});
 ServiceWithNoAccess.args = {
     object: getServiceFixture(
-        {...susansHouseServiceProps, accessibility: "noaccess"}
+        {...susansHouseServiceProps, accessibility: ["noaccess"]}
     ),
 };

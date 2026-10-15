@@ -9,8 +9,8 @@ import {
     buildSearchQueryFromModifiers,
 } from "../iss/searchQueryBuilder"
 import type {SearchQueryModifier, SearchQuery} from "../iss/searchQueryBuilder"
-import {convertIzzySearchQueryToIss3} from "../iss/serviceSearch"
-import type {ISS3SearchQuery} from "../ix-web-js-client/apis/iss/v3"
+import {convertIzzySearchQueryToIss} from "../iss/serviceSearch"
+import type {ISS4SearchQuery} from "../ix-web-js-client/apis/iss/v4"
 import Button from "./base/Button"
 import Diff from "./debug/Diff"
 import type { DiffType } from "./debug/Diff"
@@ -50,7 +50,7 @@ function DebugPersonalisation({
         ).filter(layer => layer) as any
     )
 
-    const originalIssQuery = convertIzzySearchQueryToIss3(
+    const originalIssQuery = convertIzzySearchQueryToIss(
         issQuery
     )
 
@@ -127,20 +127,24 @@ function getDiffedLayers(
         : searchQueryModifiers
     const diffedLayers: DiffedLayer[] = []
     for (let i = 0; i < formattedLayers.length; i++) {
-        let mergedUpToPreviousLayer: SearchQuery | ISS3SearchQuery = buildSearchQueryFromModifiers(
+        const izzyQueryUpToPreviousLayer = buildSearchQueryFromModifiers(
             formattedLayers.slice(0, i || 1)
         )
-        let mergedUpToIncludingLayer: SearchQuery | ISS3SearchQuery = buildSearchQueryFromModifiers(
+        const izzyQueryUpToIncludingLayer = buildSearchQueryFromModifiers(
             formattedLayers.slice(0, i + 1)
         )
 
+        let mergedUpToPreviousLayer: SearchQuery | ISS4SearchQuery =
+            izzyQueryUpToPreviousLayer
+        let mergedUpToIncludingLayer: SearchQuery | ISS4SearchQuery =
+            izzyQueryUpToIncludingLayer
 
         if (convertToISSQuery) {
-            mergedUpToPreviousLayer = convertIzzySearchQueryToIss3(
-                mergedUpToPreviousLayer
+            mergedUpToPreviousLayer = convertIzzySearchQueryToIss(
+                izzyQueryUpToPreviousLayer
             )
-            mergedUpToIncludingLayer = convertIzzySearchQueryToIss3(
-                mergedUpToIncludingLayer
+            mergedUpToIncludingLayer = convertIzzySearchQueryToIss(
+                izzyQueryUpToIncludingLayer
             )
         }
 

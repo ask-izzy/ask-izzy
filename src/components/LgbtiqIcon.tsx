@@ -8,7 +8,7 @@ type Props = {
 }
 
 function LgbtiqIcon({object}: Props): ReactNode {
-    let lgbtiqaPlus = object.lgbtiqa_plus_specific
+    let lgbtiqaPlus = object.is_lgbtiqa_plus_specific
 
     if (!lgbtiqaPlus) {
         return null

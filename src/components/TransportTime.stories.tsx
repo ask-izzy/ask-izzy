@@ -10,7 +10,7 @@ export default {
     title: "Service Components/TransportTime",
     component: TransportTime,
     args: {
-        location: ixaService.location,
+        location: ixaService.site.location,
         travelTimes: [
             {
                 mode: "DRIVING",

@@ -13,7 +13,6 @@ export default ({
             serviceTypes: ["Centrelink"],
         },
         "Financial aid": {
-            isBulkBilling: false,
             $concat: {
                 term: [
                     "\"Emergency Relief\"",
@@ -23,8 +22,7 @@ export default ({
             $removeElms: {
                 term: ["aid"],
             },
-            $unset: ["serviceTypes"],
-            serviceTypesRaw: ["Financial Aid"],
+            serviceTypes: ["Financial Aid"],
         },
         "No or low interest loans": {
             $concat: {

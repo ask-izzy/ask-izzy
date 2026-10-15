@@ -9,10 +9,10 @@ export default ({
     possibleAnswers: {
         "Legal aid and advice": {
             serviceTypes: [
-                "Legal Advice",
-                "Legal Aid",
-                "Legal Information",
-                "Legal Representation",
+                "Legal advice",
+                "Legal aid",
+                "Legal information",
+                "Legal representation",
             ],
             $concat: {
                 term: [
@@ -63,8 +63,7 @@ export default ({
             },
         },
         "Disability advocacy": {
-            $unset: ["serviceTypes"],
-            serviceTypesRaw: ["Disability advocacy"],
+            serviceTypes: ["Disability advocacy"],
             $concat: {
                 term: [
                     "disability",

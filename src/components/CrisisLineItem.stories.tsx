@@ -16,12 +16,12 @@ const Template = (args: any): ReactNode => {
 
 export const BasicService: typeof Template = Template.bind({});
 BasicService.args = {
-    object: getServiceFixture(ixaServiceProps),
+    service: getServiceFixture(ixaServiceProps),
 };
 
 export const VicHousingServiceSpecialCase: typeof Template = Template.bind({});
 VicHousingServiceSpecialCase.args = {
-    object: getServiceFixture({
+    service: getServiceFixture({
         ...ixaServiceProps,
         id: 2721562,
     }),
@@ -30,7 +30,7 @@ VicHousingServiceSpecialCase.args = {
 export const NSWLink2HomeServiceSpecialCase: typeof Template =
     Template.bind({});
 NSWLink2HomeServiceSpecialCase.args = {
-    object: getServiceFixture({
+    service: getServiceFixture({
         ...ixaServiceProps,
         id: 1838208,
     }),

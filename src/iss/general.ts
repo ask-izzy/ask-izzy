@@ -1,14 +1,4 @@
-export type ymdWithDashesDate = string;
 export type hmsWithColonsTime = string;
-export type isoDateAndTime = string;
-
-export type postalAddress = {
-    line1: string,
-    line2: string,
-    postcode: string,
-    state: string,
-    suburb: string
-};
 
 export type travelTime = {
     duration: {
@@ -23,23 +13,35 @@ export type travelTime = {
     status: string,
 };
 
-export type nowOpen = {
-    local_time: isoDateAndTime,
-    notes: string,
-    now_open: boolean | null | undefined
-}
-
 export type openingHours = {
     close: hmsWithColonsTime,
     day: dayOfWeek,
-    note?: string,
+    note?: string | null,
     open: hmsWithColonsTime,
 };
 
 export type phone = {
     comment: string,
-    kind: string,
+    phone_type: string,
     number: string,
+    confidential?: boolean,
+}
+
+export type email = {
+    comment: string,
+    email: string,
+    confidential?: boolean,
+}
+
+export type socialMedia = {
+    type: string,
+    url: string,
+    comment?: string | null,
+}
+
+export type language = {
+    id: number,
+    name: string,
 }
 
 export type dayOfWeek = "Monday" |

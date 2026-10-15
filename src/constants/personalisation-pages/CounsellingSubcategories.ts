@@ -8,21 +8,17 @@ export default ({
     question: "What issues are you dealing with?",
     possibleAnswers: {
         "Mental and emotional health": {
-            serviceTypesRaw: ["Mental Health"],
-            $unset: ["serviceTypes"],
+            serviceTypes: ["Mental health"],
             term: [
                 "-\"coordinating bodies\"",
                 "\"mental health\"",
             ],
-            minimumShouldMatch: "30%",
-            showInAskIzzyHealth: true,
         },
         "Emergency support": {
             $concat: {
                 term: ["crisis"],
             },
-            $unset: ["serviceTypes"],
-            serviceTypesRaw: ["Crisis counselling"],
+            serviceTypes: ["Crisis counselling"],
         },
         "Family or relationships": {
             $concat: {
@@ -32,8 +28,7 @@ export default ({
         },
         "Drugs and alcohol counselling": {
             term: ["drugs", "alcohol"],
-            serviceTypesRaw: ["Alcohol & Other Drug Counselling"],
-            minimumShouldMatch: "30%",
+            serviceTypes: ["Alcohol & Other Drug Counselling"],
         },
         "Gender or sexual identity": {
             $unset: ["serviceTypes"],
@@ -42,7 +37,7 @@ export default ({
             },
         },
         "Homelessness support": {
-            $unset: ["serviceTypes", "minimumShouldMatch"],
+            $unset: ["serviceTypes"],
             $concat: {
                 term: [
                     "-\"coordinating bodies\"",
@@ -59,8 +54,7 @@ export default ({
         },
 
         "Sexual assault or family violence": {
-            $unset: ["serviceTypes"],
-            serviceTypesRaw: [
+            serviceTypes: [
                 "Incest/sexual abuse counselling",
                 "Domestic violence counselling",
             ],

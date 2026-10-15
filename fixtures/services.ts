@@ -36,5 +36,5 @@ export const domesticViolenceService: Service = getServiceFixture(
 )
 
 export const unhelpfulService: Service = getServiceFixture(
-    serviceProps.domesticViolenceServiceProps
+    serviceProps.unhelpfulServiceProps
 )

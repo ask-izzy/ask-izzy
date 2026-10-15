@@ -32,7 +32,7 @@ export default ({
                 term: ["material", "aid"],
             },
             serviceTypes: [
-                "Community Transport",
+                "Community transport",
             ],
         },
         "Keeping warm": {

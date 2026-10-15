@@ -16,7 +16,7 @@ const Template = (args: any): ReactNode => {
 export const ServiceFlaggedLGBTIQA: typeof Template = Template.bind({});
 ServiceFlaggedLGBTIQA.args = {
     object: getServiceFixture({
-        lgbtiqa_plus_specific: true,
+        is_lgbtiqa_plus_specific: true,
     }),
 };
 

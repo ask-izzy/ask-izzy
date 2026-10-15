@@ -12,7 +12,7 @@ type Props = {
 
 function CurrentOpeningTime({serviceOpening}: Props): ReactNode {
 
-    let open = serviceOpening.now_open
+    let open = serviceOpening.open_now
     let renderMethod: Function | null | undefined
 
     if (open === true) {

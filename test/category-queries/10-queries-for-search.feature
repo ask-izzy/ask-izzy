@@ -29,8 +29,12 @@ Feature: Search personalisation flow generates the expected query
             "location": {
                 "name": "Melbourne, VIC"
             },
-            "term": ["advocacy -\"ndis appeals\""],
-            "serviceTypesRaw": ["Disability advocacy"],
+            "term": [
+                "advocacy -\"ndis appeals\""
+            ],
+            "serviceTypes": [
+                "Disability advocacy"
+            ],
             "caldSpecific": false,
             "catchment": "true"
         }
@@ -46,8 +50,12 @@ Feature: Search personalisation flow generates the expected query
             "location": {
                 "name": "Melbourne, VIC"
             },
-            "term": ["ndis appeals"],
-            "serviceTypesRaw": ["Disability advocacy"],
+            "term": [
+                "ndis appeals"
+            ],
+            "serviceTypes": [
+                "Disability advocacy"
+            ],
             "caldSpecific": false,
             "catchment": "true"
         }
@@ -65,8 +73,9 @@ Feature: Search personalisation flow generates the expected query
     #         "location": {
     #             "name": "Melbourne, VIC"
     #         },
-    #         "term": ["advocacy indigenous_classification: specific indigenous_classification: cater"],
-    #         "serviceTypesRaw": ["Disability advocacy"],
+    #         "term": ["advocacy"],
+    #         "serviceTypes": ["Disability advocacy"],
+    #         "indigenousClassification": ["specific", "mainstream_who_cater"],
     #         "caldSpecific": false,
     #         "catchment": "true"
     #     }
@@ -83,7 +92,7 @@ Feature: Search personalisation flow generates the expected query
     #             "name": "Melbourne, VIC"
     #         },
     #         "term": ["advocacy"],
-    #         "serviceTypesRaw": ["Disability advocacy"],
+    #         "serviceTypes": ["Disability advocacy"],
     #         "caldSpecific": true,
     #         "catchment": "true"
     #     }

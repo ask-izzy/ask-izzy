@@ -71,7 +71,7 @@ export default function ServicePagePrint({service}: Props): ReactElement<"div"> 
                         <div className="service-page-print-service-site">
                             {service.site.name}
                         </div>
-                        {service.ndis_approved &&
+                        {service.is_ndis_approved &&
                         <div className="service-page-print-service-ndis">
                             Part of the NDIS
                         </div>
@@ -103,11 +103,11 @@ export default function ServicePagePrint({service}: Props): ReactElement<"div"> 
                             />
 
                             {/* ADDRESS */}
-                            {service.location && (
+                            {service.site.location && (
                                 <>
                                     <Spacer />
                                     <Address
-                                        location={service.location}
+                                        location={service.site.location}
                                         singleLineAddress={false}
                                         hasSolidIcon={true}
                                     />
@@ -120,12 +120,12 @@ export default function ServicePagePrint({service}: Props): ReactElement<"div"> 
                                         <Spacer />
                                         <div className="service-page-print-phone">
                                             {Array.from(new Set(service.phones
-                                                .filter(phone => phone.kind !== "fax") // Exclude fax numbers
+                                                .filter(phone => phone.phone_type !== "fax") // Exclude fax numbers
                                                 .map(phone => phone.number))
                                             ).map((phoneNumber, index) => {
                                                 const comments = service.phones
                                                     .filter(phone =>
-                                                        phone.number === phoneNumber && phone.kind !== "fax"
+                                                        phone.number === phoneNumber && phone.phone_type !== "fax"
                                                     )
                                                     .map(phone => phone.comment);
                                                 return (
@@ -164,7 +164,8 @@ export default function ServicePagePrint({service}: Props): ReactElement<"div"> 
                                 <>
                                     <Spacer />
                                     <div className="service-page-print-languages">
-                                        Languages spoken here: {service.languages.join(", ")}
+                                        Languages spoken here:{" "}
+                                        {service.languages.map(({name}) => name).join(", ")}
                                     </div>
                                 </>
                             )}

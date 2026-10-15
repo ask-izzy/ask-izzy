@@ -41,8 +41,9 @@ function ResultsMapPage({router}: Props): ReactNode {
         }
 
         return searchResults.filter(
-            service => !service.location?.isConfidential() &&
-                !service.crisis
+            service => service.site.location &&
+                !service.site.location.isConfidential() &&
+                !service.is_crisis
         );
     }
 
@@ -63,7 +64,7 @@ function ResultsMapPage({router}: Props): ReactNode {
     function getSiteLocations(): any {
         const locations = {}
         for (const service of services()) {
-            locations[service.site.id.toString()] = service.location
+            locations[service.site.id.toString()] = service.site.location
         }
         return locations
     }

@@ -71,7 +71,7 @@ Feature: Everyday needs personalisation flow generates the expected query
                 "-hacc"
             ],
             "serviceTypes": [
-                "Community Transport"
+                "Community transport"
             ]
         }
         --------------------------------------

@@ -9,18 +9,15 @@ export default ({
     possibleAnswers: {
         "Meals": {
             term: ["meals"],
-            $unset: ["serviceTypes"],
-            serviceTypesRaw: ["Meals"],
+            serviceTypes: ["Meals"],
         },
         "Food parcels / groceries": {
             term: ["\"food parcels\""],
-            $unset: ["serviceTypes"],
-            serviceTypesRaw: ["Food Parcels"],
+            serviceTypes: ["Food Parcels"],
         },
         "Food vouchers": {
             term: ["\"food vouchers\""],
-            $unset: ["serviceTypes"],
-            serviceTypesRaw: ["Food Vouchers"],
+            serviceTypes: ["Food Vouchers"],
         },
     },
     descriptionsForAnswers: {

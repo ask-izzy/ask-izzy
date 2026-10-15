@@ -12,11 +12,8 @@ import FormatText from "./FormatText"
 import {PhoneHref} from "@/helpers/regex.helpers"
 import CallRounded from "@mui/icons-material/CallRounded";
 
-type Props = phone & {
+type Props = Partial<phone> & {
     crisis?: boolean,
-    number?: string,
-    kind?: string,
-    comment?: string,
     analyticsEventDetails?: AnalyticsEvent,
     className?: string | null | undefined,
     hasDetails?: ReactNode,
@@ -26,7 +23,7 @@ type Props = phone & {
 function PhoneButton({
     crisis,
     number,
-    kind,
+    phone_type: phoneType,
     comment,
     analyticsEventDetails,
     className,
@@ -38,7 +35,7 @@ function PhoneButton({
         : <CallRounded fontSize="small"/>
 
     function displayComment(): string {
-        return comment ? comment : titleize(kind)
+        return comment ? comment : titleize(phoneType)
     }
 
     return (

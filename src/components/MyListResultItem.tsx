@@ -27,12 +27,12 @@ function ResultListItem({
     resultNumber,
 }: Props): ReactNode {
     const renderLocation = (): ReactElement<"span"> | null | undefined => {
-        if (!service.location) {
+        if (!service.site.location) {
             return null
         }
-        let suburb = service.location.suburb;
+        let suburb = service.site.location.suburb;
 
-        if (service.location.isConfidential()) {
+        if (service.site.location.isConfidential()) {
             suburb = "Confidential location";
         }
 
@@ -80,7 +80,7 @@ function ResultListItem({
                             object={service}
                         />
                     </div>
-                    {service.location && renderLocation()}
+                    {service.site.location && renderLocation()}
                     <CurrentOpeningTime
                         serviceOpening={service.open}
                     />

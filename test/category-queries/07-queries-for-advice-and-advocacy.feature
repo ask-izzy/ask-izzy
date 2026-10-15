@@ -59,10 +59,10 @@ Feature: Advice and advocacy personalisation flow generates the expected query
                 "-ceremonies"
             ],
             "serviceTypes": [
-                "Legal Advice",
-                "Legal Aid",
-                "Legal Information",
-                "Legal Representation"
+                "Legal advice",
+                "Legal aid",
+                "Legal information",
+                "Legal representation"
             ]
         }
         --------------------------------------
@@ -145,7 +145,7 @@ Feature: Advice and advocacy personalisation flow generates the expected query
             "term": [
                 "disability"
             ],
-            "serviceTypesRaw": [
+            "serviceTypes": [
                 "Disability advocacy"
             ]
         }

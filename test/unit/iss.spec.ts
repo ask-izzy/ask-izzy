@@ -10,32 +10,24 @@ test.describe("iss service", function() {
     test.describe("Identifying indigenous services", function() {
 
         test.describe("by classification", function() {
-
-            const culturalySafe =
-                "Culturally safe for Aboriginal (indigenous)";
-            const mainstreamCaterAboriginal =
-                "Mainstream who cater for Aboriginal (indigenous)"
-            const aboriginalSpecific = "Aboriginal (indigenous) specific"
-
-            test("if type is 'Culturally safe for Aboriginal'", function() {
+            test("if type is 'culturally_safe'", function() {
                 assert(!getServiceFixture({
-                    indigenous_classification: [culturalySafe],
+                    indigenous_classification: "culturally_safe",
                 }).Indigenous());
             });
-            test("if type is 'Mainstream who cater Aboriginal'", function() {
-                assert(getServiceFixture(
-                    {indigenous_classification:
-                        [mainstreamCaterAboriginal],
-                    }).Indigenous());
-            });
-            test("if type is 'Aboriginal (indigenous) specific'", function() {
+            test("if type is 'mainstream_who_cater'", function() {
                 assert(getServiceFixture({
-                    indigenous_classification: [aboriginalSpecific],
+                    indigenous_classification: "mainstream_who_cater",
                 }).Indigenous());
             });
-            test("if type is 'Mainstream'", function() {
+            test("if type is 'specific'", function() {
+                assert(getServiceFixture({
+                    indigenous_classification: "specific",
+                }).Indigenous());
+            });
+            test("if type is 'mainstream'", function() {
                 assert(!getServiceFixture({
-                    indigenous_classification: ["Mainstream"],
+                    indigenous_classification: "mainstream",
                 }).Indigenous());
             });
         });
@@ -84,7 +76,7 @@ test.describe("iss service", function() {
 
     test.describe("counting crisis results", function() {
         const result = (crisis: boolean) => {
-            return getServiceFixture({crisis: crisis})
+            return getServiceFixture({is_crisis: crisis})
         };
 
         test("returns zero when there are none", function() {

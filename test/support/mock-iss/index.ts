@@ -1,11 +1,35 @@
 /**
- * ISS mock using Express */
+ * ISS (and locations API) mock using Express */
 
 import cors from "cors";
 import express from "express";
 import * as servicesProps from "../../../fixtures/servicesProps";
 import {getServiceFixtureProps} from "../../../fixtures/factories/Service";
 import type { serviceFixtureProps } from "../../../fixtures/factories/Service";
+
+function searchResults(
+    results: Array<unknown>,
+    {count = results.length, next = null}: {count?: number, next?: string | null} = {}
+) {
+    return {
+        count,
+        count_available: count,
+        next,
+        prev: null,
+        results,
+    }
+}
+
+function createFakeJwt(): string {
+    const encode = (obj: object) =>
+        Buffer.from(JSON.stringify(obj)).toString("base64url")
+    const oneDayInSeconds = 60 * 60 * 24
+    return [
+        encode({alg: "HS256", typ: "JWT"}),
+        encode({exp: Math.round(Date.now() / 1000) + oneDayInSeconds}),
+        "fake-signature",
+    ].join(".")
+}
 
 export function initMockISSServer() {
     const app = express();
@@ -35,58 +59,70 @@ export function initMockISSServer() {
 
     app.get("/", (req, res) => res.send("Sever started"));
 
-    app.get("/api/v3/location/search/", (req, res) => {
+    /* Locations API */
+
+    app.post("/api/token/", (req, res) => {
         res.json({
-            meta: {},
-            objects: [
-                {name: "Carlton", state: "VIC"},
-                {name: "Carlton North", state: "VIC"},
-            ],
+            access: createFakeJwt(),
+            refresh: createFakeJwt(),
         });
     });
 
-    app.get("/api/v3/list-all-mocked/", (req, res) => {
+    app.post("/api/token/refresh/", (req, res) => {
+        res.json({
+            access: createFakeJwt(),
+        });
+    });
+
+    app.get("/api/search/all/suggest/", (req, res) => {
+        res.json(searchResults([
+            {
+                id: 1,
+                name: "Carlton",
+                location_type: "suburb",
+                suburb: "Carlton",
+                state: "VIC",
+                postcode: "3053",
+            },
+            {
+                id: 2,
+                name: "Carlton North",
+                location_type: "suburb",
+                suburb: "Carlton North",
+                state: "VIC",
+                postcode: "3054",
+            },
+        ]));
+    });
+
+    /* ISS */
+
+    app.get("/api/directory/list-all-mocked/", (req, res) => {
         res.json(mocks);
     });
 
     /* eslint-disable complexity */
     /* FIXME: refactor to use mocks instead of these */
-    app.get("/api/v3/search/", (req, res) => {
-        let mockId = parseInt((req.query.q as string));
+    app.get("/api/directory/search/", (req, res) => {
+        const searchTerms = req.query["search-terms"] as string | undefined
+        const site = req.query.site as string | undefined
+        let mockId = parseInt(searchTerms as string);
 
         if (mocks[mockId]) {
-            res.json({
-                meta: {
-                    total_count: 1,
-                    location: {
-                        name: "Richmond",
-                        suburb: "Richmond",
-                        state: "VIC",
-                    },
-                },
-                objects: [mocks[mockId]],
-            });
-        } else if (req.query.site_id === "111") {
+            res.json(searchResults([mocks[mockId]]));
+        } else if (site === "111") {
             /* related services search for housingService */
-            res.json({
-                meta: {
-                    total_count: 2,
-                },
-                objects: [
-                    getServiceFixtureProps(
-                        servicesProps.housingServiceProps
-                    ),
-                    getServiceFixtureProps(
-                        servicesProps.housingServiceSiblingProps
-                    ),
-                ],
-            });
-        } else if (req.query.site_id === "444") {
-            res.json({
-                meta: {
-                    total_count: 6,
-                },
-                objects: [
+            res.json(searchResults([
+                getServiceFixtureProps(
+                    servicesProps.housingServiceProps
+                ),
+                getServiceFixtureProps(
+                    servicesProps.housingServiceSiblingProps
+                ),
+            ]));
+        } else if (site === "444") {
+            res.json(searchResults(
+                [
                     {
                         id: 444, // ourselves
                         name: "Community Lunch",
@@ -106,67 +142,46 @@ export function initMockISSServer() {
                         id: 449,
                         name: "Drug & Alcohol Counselling",
                     },
-                ].map(getServiceFixtureProps as (props: unknown) => ReturnType<typeof getServiceFixtureProps>),
-            });
-        } else if (req.query.site_id) {
+                ].map(getServiceFixtureProps as (props: unknown) => ReturnType<typeof getServiceFixtureProps>)
+            ));
+        } else if (site) {
             /* other related services search */
-            res.json({
-                meta: {},
-                objects: [],
-            });
-        } else if (req.query.area === "carlt") {
+            res.json(searchResults([]));
+        } else if (req.query["located-near"] === "carlt") {
             res
-                .status(402)
+                .status(400)
                 .json({
-                    error_message: "Could not find a location matching \"carlt\"",
+                    "located-near": "Could not find a location matching \"carlt\"",
                 });
-        } else if (searchMocks[(req.query.q as string)]) {
-            res.json({
-                meta: {
-                    total_count: searchMocks[(req.query.q as string)].length,
-                    location: {
-                        name: "Richmond",
-                        suburb: "Richmond",
-                        state: "VIC",
-                    },
-                },
-                objects: searchMocks[(req.query.q as string)],
-            });
-        } else if ((req.query.q as string)?.match(/food/) && !(req.query.q as string)?.match(/pet/)) {
-            res.json({
-                meta: {
-                    total_count: 4,
-                    location: {
-                        name: "Richmond",
-                        suburb: "Richmond",
-                        state: "VIC",
-                    },
-                },
-                objects: [
+        } else if (searchMocks[searchTerms as string]) {
+            res.json(searchResults(searchMocks[searchTerms as string]));
+        } else if (searchTerms?.match(/food/) && !searchTerms?.match(/pet/)) {
+            res.json(searchResults(
+                [
                     {
-                        crisis: true,
+                        is_crisis: true,
                         name: "Community Urgent",
                         site: {name: "Youth Support Net"},
                         phones: [{
                             number: "0311111111",
-                            kind: "mobile",
+                            phone_type: "mobile",
                         }],
                     }, {
                         name: "Instant Service",
                         site: {name: "Youth Support Net"},
-                        crisis: true,
+                        is_crisis: true,
                         phones: [
                             {
                                 number: "0322221122",
-                                kind: "",
+                                phone_type: "",
                             },
                             {
                                 number: "0345671234",
-                                kind: "phone",
+                                phone_type: "phone",
                             },
                             {
                                 number: "0345671259",
-                                kind: "freecall",
+                                phone_type: "freecall",
                             },
                         ],
                     }, {
@@ -180,10 +195,11 @@ export function initMockISSServer() {
                         site: {
                             id: 444,
                             name: "Youth Support Net",
+                            location: {
+                                suburb: "Richmond",
+                            },
                         },
-                        now_open: {
-                            now_open: false,
-                        },
+                        open_now: false,
                         opening_hours: [
                             {
                                 day: "Wednesday",
@@ -191,9 +207,6 @@ export function initMockISSServer() {
                                 close: "17:00:00",
                             },
                         ],
-                        location: {
-                            suburb: "Richmond",
-                        },
                     },
                     {
                         id: 446,
@@ -201,34 +214,37 @@ export function initMockISSServer() {
                         site: {
                             id: 446,
                             name: "Youth Support Net",
+                            location: {
+                                suburb: "Richmond",
+                            },
                         },
-                        now_open: {
-                            now_open: false,
-                        },
+                        open_now: false,
                         opening_hours: [],
-                        location: {
-                            suburb: "Richmond",
-                        },
-                        crisis: true,
+                        is_crisis: true,
                         phones: [{
                             comment: "",
                             number: "0345671234",
-                            kind: "phone",
+                            phone_type: "phone",
                         }],
                     },
-                ].map(getServiceFixtureProps as (props: unknown) => ReturnType<typeof getServiceFixtureProps>),
-            });
-        } else if ((req.query.q as string)?.match(/material aid/)) {
+                ].map(getServiceFixtureProps as (props: unknown) => ReturnType<typeof getServiceFixtureProps>)
+            ));
+        } else if (searchTerms?.match(/material aid/)) {
             const object = {
                 name: "Community Lunch",
                 description: "A weekly lunch.",
                 site: {
                     id: 444,
                     name: "Youth Support Net",
+                    location: {
+                        suburb: "Richmond",
+                        geo_point: {
+                            lat: -37.8228,
+                            lon: 144.998,
+                        },
+                    },
                 },
-                now_open: {
-                    now_open: false,
-                },
+                open_now: false,
                 opening_hours: [
                     {
                         day: "Wednesday",
@@ -236,80 +252,45 @@ export function initMockISSServer() {
                         close: "17:00:00",
                     },
                 ],
-                location: {
-                    suburb: "Richmond",
-                    point: {
-                        lat: -37.8228,
-                        lon: 144.998,
-                    },
-                },
             };
 
-            res.json({
-                meta: {
-                    total_count: 8,
-                    location: {
-                        name: "Richmond",
-                        suburb: "Richmond",
-                        state: "VIC",
-                    },
+            res.json(searchResults(
+                [
+                    getServiceFixtureProps({...object, id: Seq()} as serviceFixtureProps),
+                    getServiceFixtureProps({...object, id: Seq()} as serviceFixtureProps),
+                    getServiceFixtureProps({...object, id: Seq()} as serviceFixtureProps),
+                    getServiceFixtureProps({...object, id: Seq()} as serviceFixtureProps),
+                    getServiceFixtureProps({...object, id: Seq()} as serviceFixtureProps),
+                ],
+                {
+                    count: 8,
                     next: req.originalUrl + "&offset=5",
-                },
-                objects: [
-                    getServiceFixtureProps({...object, id: Seq()} as serviceFixtureProps),
-                    getServiceFixtureProps({...object, id: Seq()} as serviceFixtureProps),
-                    getServiceFixtureProps({...object, id: Seq()} as serviceFixtureProps),
-                    getServiceFixtureProps({...object, id: Seq()} as serviceFixtureProps),
-                    getServiceFixtureProps({...object, id: Seq()} as serviceFixtureProps),
-                ],
-            });
-        } else if ((req.query.q as string)?.match(/zero results/)) {
-            res.json({
-                meta: {
-                    total_count: 0,
-                },
-                objects: [],
-            });
-        } else if ((req.query.q as string)?.match(/cause error/)) {
+                }
+            ));
+        } else if (searchTerms?.match(/zero results/)) {
+            res.json(searchResults([]));
+        } else if (searchTerms?.match(/cause error/)) {
             res
-                .status(402)
+                .status(400)
                 .json({
-                    error_message: "You have specifically asked for an error.",
+                    detail: "You have specifically asked for an error.",
                 });
-        } else if ((req.query.q as string)?.match(/domestic violence/)) {
-            res.json({
-                meta: {
-                    total_count: 1,
-                    location: {
-                        name: "Richmond",
-                        suburb: "Richmond",
-                        state: "VIC",
-                    },
-                },
-                objects: [
-                    getServiceFixtureProps(
-                        servicesProps.domesticViolenceServiceProps
-                    ),
-                ],
-            });
-        } else if ((req.query.q as string)?.match(/elasticsearch unavailable/)) {
+        } else if (searchTerms?.match(/domestic violence/)) {
+            res.json(searchResults([
+                getServiceFixtureProps(
+                    servicesProps.domesticViolenceServiceProps
+                ),
+            ]));
+        } else if (searchTerms?.match(/elasticsearch unavailable/)) {
             res
                 .status(503)
                 .json({
-                    error_message: "The Elasticsearch service is unavailable.",
+                    detail: "The Elasticsearch service is unavailable.",
                 });
         } else {
             /* conventional search */
-            res.json({
-                meta: {
-                    total_count: 3,
-                    location: {
-                        name: "Richmond",
-                        suburb: "Richmond",
-                        state: "VIC",
-                    },
-                },
-                objects: [
+            res.json(searchResults(
+                [
                     getServiceFixtureProps(
                         servicesProps.housingServiceProps
                     ),
@@ -322,8 +303,8 @@ export function initMockISSServer() {
                     getServiceFixtureProps(
                         servicesProps.susansHouseServiceProps
                     ),
-                ],
-            });
+                ]
+            ));
         }
     });
 
@@ -351,18 +332,25 @@ export function initMockISSServer() {
         }
 
         mocks[service.id] = service;
-        app.get(`/api/v3/service/${service.id}`, (req, res) => {
-            res.json(service);
-        });
         res.send()
     })
 
+    const fixtureServices = {}
     for (const servicePropsKey in servicesProps) {
         const serviceProps: serviceFixtureProps = servicesProps[servicePropsKey]
-        app.get(`/api/v3/service/${serviceProps.id}/`, (req, res) => {
-            res.json(getServiceFixtureProps(serviceProps));
-        });
+        fixtureServices[serviceProps.id] = serviceProps
     }
+
+    app.get("/api/directory/services/:id/", (req, res) => {
+        const id = req.params.id
+        if (mocks[id]) {
+            res.json(mocks[id]);
+        } else if (fixtureServices[id]) {
+            res.json(getServiceFixtureProps(fixtureServices[id]));
+        } else {
+            res.status(404).json({detail: "No Service matches the given query."});
+        }
+    });
 
 
     function logErrors(err, req, res, next) {

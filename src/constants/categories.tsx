@@ -136,6 +136,8 @@ const categories = [
         key: "support-and-counselling",
         byline: "Mental health, relationships, addiction",
         icon: icons.Support,
+        // TODO: ISS3 queries for this category used minimum_should_match
+        // which has no equivalent in ISS4 yet.
         searchQueryChanges: {
             catchment: "prefer",
             $concat: {
@@ -144,7 +146,6 @@ const categories = [
                     "Counselling",
                 ],
             },
-            minimumShouldMatch: "1",
         },
         personalisation: [
             CounsellingSubcategories,
@@ -216,6 +217,8 @@ const categories = [
         key: "health",
         byline: "Doctor, clinics, specialists and activities for healthy living",
         icon: icons.Health,
+        // TODO: ISS3 queries for this category used minimum_should_match and
+        // show_in_askizzy_health which have no equivalent in ISS4 yet.
         searchQueryChanges: {
             catchment: "prefer",
             $concat: {
@@ -229,8 +232,6 @@ const categories = [
                     "Health Professionals/ Practitioners",
                 ],
             },
-            minimumShouldMatch: "30%",
-            showInAskIzzyHealth: true,
         },
         personalisation: [
             HealthSubcategories,
@@ -331,28 +332,32 @@ const categories = [
             if (helpSpecialisation === "general") {
                 return {
                     term: ["advocacy -\"ndis appeals\""],
-                    serviceTypesRaw: ["Disability advocacy"],
+                    serviceTypes: ["Disability advocacy"],
                     caldSpecific: false,
                     catchment: "true",
                 };
             } else if (helpSpecialisation === "ndis-appeals") {
                 return {
                     term: ["ndis appeals"],
-                    serviceTypesRaw: ["Disability advocacy"],
+                    serviceTypes: ["Disability advocacy"],
                     caldSpecific: false,
                     catchment: "true",
                 };
             } else if (helpSpecialisation === "indigenous") {
                 return {
-                    term: ["advocacy indigenous_classification: specific indigenous_classification: cater"],
-                    serviceTypesRaw: ["Disability advocacy"],
+                    term: ["advocacy"],
+                    serviceTypes: ["Disability advocacy"],
+                    indigenousClassification: [
+                        "specific",
+                        "mainstream_who_cater",
+                    ],
                     caldSpecific: false,
                     catchment: "true",
                 };
             } else if (helpSpecialisation === "cald") {
                 return {
                     term: ["advocacy"],
-                    serviceTypesRaw: ["Disability advocacy"],
+                    serviceTypes: ["Disability advocacy"],
                     caldSpecific: true,
                     catchment: "true",
                 };

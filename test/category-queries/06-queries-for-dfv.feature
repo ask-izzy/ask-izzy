@@ -139,7 +139,7 @@ Feature: Domestic and family violence help personalisation flow generates the ex
                 "\"sexual assault\""
             ],
             "serviceTypes": [
-                "Sexual Assault Services",
+                "Sexual assault services",
                 "Incest/sexual abuse counselling"
             ]
         }
