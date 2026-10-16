@@ -1,5 +1,13 @@
-import snakecaseKeys from "snakecase-keys"
-import {request, getRequestWithToken} from "../lib/requests"
+import {
+    searchAllSuggestList,
+    tokenCreate,
+    tokenRefreshCreate,
+} from "@infoxchange/locations-api"
+import type {
+    PaginatedGenericLocationSuggestList,
+    SearchAllSuggestListData,
+} from "@infoxchange/locations-api"
+
 type Props = {
     baseUrl: string,
     username: string,
@@ -14,26 +22,6 @@ export default async function createClient(
     return client
 }
 
-type ResultsPage<ResultItem> = {
-    count: number,
-    next: string,
-    previous: string | null,
-    facets: any,
-    results: Array<ResultItem>
-}
-
-export type Location = {
-    id: number,
-    name: string,
-    location_type: string,
-    suburb?: string,
-    state: string,
-    lga: string,
-    postcode: string,
-    // In the form [longitude, latitude]
-    centroid?: [number, number],
-}
-
 type Token = {
     value: string,
     // Unix timestamp in seconds
@@ -43,28 +31,6 @@ type Token = {
 // Refresh tokens a little before they actually expire so they don't expire
 // while a request is in flight.
 const tokenExpiryBufferInSeconds = 30
-
-const locationTypeToMap = {
-    "local government area": "lgas",
-    "local health district": "lhds",
-    "postcode": "postcodes",
-    "state": "states",
-    "suburb": "suburbs",
-    "landmark": "landmarks",
-}
-
-function getLocationTypePathComponent(locationType: string) {
-    const locationTypePathComponent = locationTypeToMap[locationType]
-
-    if (locationTypePathComponent) {
-        return locationTypePathComponent
-    } else {
-        throw Error(
-            `The location type "${locationType}" is not supported. ` +
-                `Supported types are: ` +
-                `${Object.keys(locationTypeToMap).join(", ")}`)
-    }
-}
 
 export class LocationsApiClient {
     baseUrl: string;
@@ -79,18 +45,14 @@ export class LocationsApiClient {
         this.baseUrl = baseUrl
     }
 
-    get authString(): string {
-        return `Bearer ${this.accessToken?.value}`
-    }
-
     async getToken(): Promise<void> {
-        const url = new URL("/api/token/", this.baseUrl).href
-        const res = await request(url, "POST", {}, {
-            username: this.username,
-            password: this.password,
+        const {data} = await tokenCreate({
+            baseUrl: this.baseUrl,
+            body: {username: this.username, password: this.password},
+            throwOnError: true,
         })
-        this.accessToken = parseToken(res.access)
-        this.refreshToken = parseToken(res.refresh)
+        this.accessToken = parseToken(data.access)
+        this.refreshToken = parseToken(data.refresh)
     }
 
     // Access tokens are short lived so make sure we have one which is still
@@ -102,11 +64,12 @@ export class LocationsApiClient {
 
         if (this.refreshToken && isTokenValid(this.refreshToken)) {
             try {
-                const url = new URL("/api/token/refresh/", this.baseUrl).href
-                const res = await request(url, "POST", {}, {
-                    refresh: this.refreshToken.value,
+                const {data} = await tokenRefreshCreate({
+                    baseUrl: this.baseUrl,
+                    body: {refresh: this.refreshToken.value},
+                    throwOnError: true,
                 })
-                this.accessToken = parseToken(res.access)
+                this.accessToken = parseToken(data.access)
                 return
             } catch (error) {
                 console.warn(
@@ -119,83 +82,19 @@ export class LocationsApiClient {
         await this.getToken()
     }
 
-    async search({
-        locationType,
-        includeGeoshapes,
-        id,
-        ...otherParams
-    }: any): Promise<ResultsPage<Location>> {
+    // Search all location types. Shapes aren't returned which makes this
+    // suitable for search-as-you-type.
+    async searchSuggest(
+        query: SearchAllSuggestListData["query"]
+    ): Promise<PaginatedGenericLocationSuggestList> {
         await this.ensureValidToken()
-
-        const pathComponents = ["", "api", "search"]
-
-        if (locationType && !Array.isArray(locationType)) {
-            pathComponents.push(
-                getLocationTypePathComponent(locationType)
-            )
-        } else {
-            pathComponents.push("all")
-            if (Array.isArray(locationType)) {
-                otherParams.locationType = locationType
-            }
-        }
-
-        if (!includeGeoshapes) {
-            pathComponents.push("suggest")
-        }
-
-        if (id) {
-            if (!locationType) {
-                throw Error(
-                    `The use of an id without specifying an area type is` +
-                        ` not supported. Please provide the area type.`
-                )
-            } else {
-                pathComponents.push(id)
-            }
-        }
-
-        // if (Object.keys(otherParams).length) {
-        //     throw Error(
-        //         `Other params (${Object.keys(otherParams).join(', ')}) ` +
-        //          `are not yet supported.`
-        //     )
-        // }
-
-
-
-        const url = new URL(pathComponents.join("/") + "/", this.baseUrl)
-        const otherParamsArray = Object.entries(snakecaseKeys(otherParams))
-        for (const [key, value] of otherParamsArray) {
-            const arrayOfValues = Array.isArray(value) ? value : [value]
-            for (const singleValue of arrayOfValues) {
-                url.searchParams.append(key, String(singleValue))
-            }
-        }
-        return getRequestWithToken(url.href, this.authString)
-    }
-
-    async getLocation({
-        locationType,
-        id,
-        includeGeoshapes,
-    }: any): Promise<Location> {
-        await this.ensureValidToken()
-
-        const pathComponents = ["", "api", "search"]
-
-        pathComponents.push(
-            getLocationTypePathComponent(locationType)
-        )
-
-        if (!includeGeoshapes) {
-            pathComponents.push("suggest")
-        }
-
-        pathComponents.push(id)
-
-        const url = new URL(pathComponents.join("/") + "/", this.baseUrl)
-        return getRequestWithToken(url.href, this.authString)
+        const {data} = await searchAllSuggestList({
+            baseUrl: this.baseUrl,
+            query,
+            auth: () => this.accessToken?.value,
+            throwOnError: true,
+        })
+        return data
     }
 }
 

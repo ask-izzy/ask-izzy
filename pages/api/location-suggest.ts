@@ -53,7 +53,7 @@ export default async function handler(req: any, res: any): Promise<any> {
 
     try {
         const client = await getClient()
-        const results = await client.search({
+        const results = await client.searchSuggest({
             search: query.trim(),
             limit: 20,
         })
@@ -64,8 +64,8 @@ export default async function handler(req: any, res: any): Promise<any> {
             )
             .map(location => ({
                 name: location.name,
-                state: location.state,
-                postcode: location.postcode,
+                state: location.state ?? "",
+                postcode: location.postcode ?? "",
                 locationType: location.location_type as
                     LocationSuggestion["locationType"],
             }))

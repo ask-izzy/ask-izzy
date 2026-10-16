@@ -20,19 +20,17 @@ function mockFetch(
     responses: {[path: string]: Array<MockedResponse>}
 ): Array<string> {
     const requestedPaths: Array<string> = []
-    global.fetch = (async(url: string) => {
-        const path = new URL(url).pathname
+    global.fetch = (async(request: Request) => {
+        const path = new URL(request.url).pathname
         requestedPaths.push(path)
         const response = responses[path]?.shift()
         if (!response) {
             throw new Error(`Unexpected request to ${path}`)
         }
-        const status = response.status || 200
-        return {
-            status,
-            json: async() => response.body,
-            text: async() => JSON.stringify(response.body),
-        }
+        return new Response(JSON.stringify(response.body), {
+            status: response.status || 200,
+            headers: {"Content-Type": "application/json"},
+        })
     }) as unknown as typeof fetch
     return requestedPaths
 }
@@ -63,12 +61,32 @@ test.describe("Locations API client", function() {
             "/api/search/all/suggest/": [suggestResponse],
         })
 
-        await createClient().search({search: "carlt"})
+        await createClient().searchSuggest({search: "carlt"})
 
         assert.deepStrictEqual(requestedPaths, [
             "/api/token/",
             "/api/search/all/suggest/",
         ])
+    })
+
+    test("sends the access token with requests", async function() {
+        const accessToken = createFakeJwt(300)
+        let authHeader: string | null = null
+        global.fetch = (async(request: Request) => {
+            const path = new URL(request.url).pathname
+            if (path === "/api/token/") {
+                return Response.json({
+                    access: accessToken,
+                    refresh: createFakeJwt(86400),
+                })
+            }
+            authHeader = request.headers.get("Authorization")
+            return Response.json(suggestResponse.body)
+        }) as unknown as typeof fetch
+
+        await createClient().searchSuggest({search: "carlt"})
+
+        assert.strictEqual(authHeader, `Bearer ${accessToken}`)
     })
 
     test("reuses a valid access token", async function() {
@@ -81,8 +99,8 @@ test.describe("Locations API client", function() {
         })
 
         const client = createClient()
-        await client.search({search: "carlt"})
-        await client.search({search: "carlton"})
+        await client.searchSuggest({search: "carlt"})
+        await client.searchSuggest({search: "carlton"})
 
         assert.deepStrictEqual(requestedPaths, [
             "/api/token/",
@@ -103,7 +121,7 @@ test.describe("Locations API client", function() {
 
         const client = createClient()
         await client.getToken()
-        await client.search({search: "carlt"})
+        await client.searchSuggest({search: "carlt"})
 
         assert.deepStrictEqual(requestedPaths, [
             "/api/token/",
@@ -129,7 +147,7 @@ test.describe("Locations API client", function() {
 
         const client = createClient()
         await client.getToken()
-        await client.search({search: "carlt"})
+        await client.searchSuggest({search: "carlt"})
 
         assert.deepStrictEqual(requestedPaths, [
             "/api/token/",
@@ -156,7 +174,7 @@ test.describe("Locations API client", function() {
 
         const client = createClient()
         await client.getToken()
-        await client.search({search: "carlt"})
+        await client.searchSuggest({search: "carlt"})
 
         assert.deepStrictEqual(requestedPaths, [
             "/api/token/",

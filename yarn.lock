@@ -1713,6 +1713,11 @@
   resolved "https://registry.yarnpkg.com/@humanwhocodes/object-schema/-/object-schema-2.0.3.tgz#4a2868d75d6d6963e423bcf90b7fd1be343409d3"
   integrity sha512-93zYdMES/c1D69yZiKDBj0V24vqNzB/koF26KPaagAfd3P/4gUlh3Dys5ogAK+Exi9QyzlD8x/08Zt7wIKcDcA==
 
+"@infoxchange/locations-api@0.0.0-dev.38854028725":
+  version "0.0.0-dev.38854028725"
+  resolved "https://registry.yarnpkg.com/@infoxchange/locations-api/-/locations-api-0.0.0-dev.38854028725.tgz#ea007d7bb65052cbcdd76b195192eb70b49135f7"
+  integrity sha512-8xeNBCQuKbBBfFwLNCFXn1jV8PWqU+RZlD2EAoRI+VEKr0vH7d0Er6g0Rdx6sYvyUbb6COyU0GKasSVhaoSyYA==
+
 "@infoxchange/make-it-so@^3.1.1":
   version "3.1.1"
   resolved "https://registry.yarnpkg.com/@infoxchange/make-it-so/-/make-it-so-3.1.1.tgz#601dbe1b6d7224c7224be31ec19413421750a3f8"
@@ -11631,7 +11636,7 @@ map-obj@^1.0.0, map-obj@^1.0.1:
   resolved "https://registry.yarnpkg.com/map-obj/-/map-obj-1.0.1.tgz#d933ceb9205d82bdcf4886f6742bdc2b4dea146d"
   integrity sha512-7N/q3lyZ+LVCp7PzuxrJr4KMbBE2hW7BT7YNia330OFxIf4d3r5zVpicP2650l7CPN6RM9zOJRl3NGpqSiw3Eg==
 
-map-obj@^4.0.0, map-obj@^4.1.0:
+map-obj@^4.0.0:
   version "4.3.0"
   resolved "https://registry.yarnpkg.com/map-obj/-/map-obj-4.3.0.tgz#9304f906e93faae70880da102a9f1df0ea8bb05a"
   integrity sha512-hdN1wVrZbb29eBGiGjJbeP8JbKjq1urkHJ/LIP/NY48MZ1QVXUsQBV1G1zvYFHn1XE06cwjBsOI2K3Ulnj1YXQ==
@@ -15151,23 +15156,6 @@ snake-case@^2.1.0:
   dependencies:
     no-case "^2.2.0"
 
-snake-case@^3.0.4:
-  version "3.0.4"
-  resolved "https://registry.yarnpkg.com/snake-case/-/snake-case-3.0.4.tgz#4f2bbd568e9935abdfd593f34c691dadb49c452c"
-  integrity sha512-LAOh4z89bGQvl9pFfNF8V146i7o7/CqFPbqzYgP+yYzDIDeS9HaNFtXABamRW+AQzEVODcvE79ljJ+8a9YSdMg==
-  dependencies:
-    dot-case "^3.0.4"
-    tslib "^2.0.3"
-
-snakecase-keys@^5.1.2:
-  version "5.4.5"
-  resolved "https://registry.yarnpkg.com/snakecase-keys/-/snakecase-keys-5.4.5.tgz#1d452c1557faf8d68f17f04a4991ccfd27afa239"
-  integrity sha512-qSQVcgcWk8mQUN1miVGnRMAUye1dbj9+F9PVkR7wZUXNCidQwrl/kOKmoYf+WbH2ju6c9pXnlmbS2he7pb2/9A==
-  dependencies:
-    map-obj "^4.1.0"
-    snake-case "^3.0.4"
-    type-fest "^2.5.2"
-
 snapdragon-node@^2.0.1:
   version "2.1.1"
   resolved "https://registry.yarnpkg.com/snapdragon-node/-/snapdragon-node-2.1.1.tgz#6c175f86ff14bdb0724563e8f3c1b021a286853b"
@@ -16492,11 +16480,6 @@ type-fest@^0.8.1:
   version "0.8.1"
   resolved "https://registry.yarnpkg.com/type-fest/-/type-fest-0.8.1.tgz#09e249ebde851d3b1e48d27c105444667f17b83d"
   integrity sha512-4dbzIzqvjtgiM5rw1k5rEHtBANKmdudhGyBEajN01fEyhaAIhsoKNy6y7+IN93IfpFtwY9iqi7kD+xwKhQsNJA==
-
-type-fest@^2.5.2:
-  version "2.19.0"
-  resolved "https://registry.yarnpkg.com/type-fest/-/type-fest-2.19.0.tgz#88068015bb33036a598b952e55e9311a60fd3a9b"
-  integrity sha512-RAH822pAdBgcNMAfWnCBU3CFZcfZ/i1eZjwFU/dsLKumyuuP3niueg2UAukXYF0E2AAoc82ZSSf9J0WQBinzHA==
 
 type-is@^1.6.16, type-is@~1.6.15, type-is@~1.6.16, type-is@~1.6.18:
   version "1.6.18"
