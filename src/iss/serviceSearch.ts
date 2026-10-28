@@ -41,6 +41,9 @@ export abstract class PaginatedSearch {
     abstract loadNextPage(): Promise<void>;
     abstract get loadedServices(): Array<Service>;
     abstract get numOfPagesLoaded(): number;
+    // The number of services loaded at the end of each page, so the results
+    // list can tell where one page of results ends and the next begins.
+    abstract get pageBoundaries(): Array<number>;
     abstract get issQuery(): ISS4SearchQuery | ISS3SearchQuery;
     abstract get izzyQuery(): IzzySearchQuery;
     abstract get isNext(): boolean | null | undefined;
@@ -52,6 +55,7 @@ export class PaginatedSearchIss3 extends PaginatedSearch {
     #pagesLoaded: number = 0;
     #maxPageSize: number;
     #loadedServices: Array<Service> = [];
+    #pageBoundaries: Array<number> = [];
 
     #izzyQuery: IzzySearchQuery
     #issQuery: ISS3SearchQuery;
@@ -92,6 +96,7 @@ export class PaginatedSearchIss3 extends PaginatedSearch {
                 serviceData => new Service(serviceData)
             ) || []
             this.#loadedServices.push(...services)
+            this.#pageBoundaries.push(this.#loadedServices.length)
             this.#pagesLoaded++;
         }
 
@@ -103,6 +108,10 @@ export class PaginatedSearchIss3 extends PaginatedSearch {
 
     get numOfPagesLoaded(): number {
         return this.#pagesLoaded
+    }
+
+    get pageBoundaries(): Array<number> {
+        return this.#pageBoundaries
     }
 
     get issQuery(): ISS3SearchQuery {
@@ -124,6 +133,7 @@ export class PaginatedSearchIss4 extends PaginatedSearch {
     #pagesLoaded: number = 0;
     #maxPageSize: number;
     #loadedServices: Array<Service> = [];
+    #pageBoundaries: Array<number> = [];
 
     #izzyQuery: IzzySearchQuery
     #issQuery: ISS4SearchQuery;
@@ -163,6 +173,7 @@ export class PaginatedSearchIss4 extends PaginatedSearch {
                 serviceData => new Service(serviceData)
             ) || []
             this.#loadedServices.push(...services)
+            this.#pageBoundaries.push(this.#loadedServices.length)
             this.#pagesLoaded++;
         }
     }
@@ -173,6 +184,10 @@ export class PaginatedSearchIss4 extends PaginatedSearch {
 
     get numOfPagesLoaded(): number {
         return this.#pagesLoaded
+    }
+
+    get pageBoundaries(): Array<number> {
+        return this.#pageBoundaries
     }
 
     get issQuery(): ISS4SearchQuery {

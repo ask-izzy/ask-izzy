@@ -26,6 +26,7 @@ export default Yadda.localisation.English.library(dictionary)
     .then("I should see a hotline in position $NUM which says \"$STRING\"", hotlinePositionAndText)
     .then("I should see \"$STRING\" before first hotline", assertHotlineHeading)
     .then("my results should not contain\n$table", assertNoSuchResults)
+    .then("I should see other services panels after results $STRING", assertOtherServicesPanelPositions)
     .then("the iss search request should be:\n$lines", assertISSSearchRequestFromStep)
 
 async function waitForResultCount(this: StepContext, expected: number): Promise<void> {
@@ -141,4 +142,30 @@ async function assertISSSearchRequestFromStep(
         return query
     }, 5 * 1000)
     assert.deepStrictEqual(actualRequest, expectedRequest)
+}
+
+/*
+ * Check where the "Other services you may be interested in" panels sit by
+ * counting how many results come before each one. Expects a comma separated
+ * list of counts, eg "5, 10".
+ */
+async function assertOtherServicesPanelPositions(
+    this: StepContext,
+    expectedPositions: string,
+): Promise<void> {
+    const expected = expectedPositions
+        .split(",")
+        .map(position => Number(position.trim()))
+
+    await retry(async() => {
+        const actual = await this.world.page.evaluate(() => {
+            const results = [...document.querySelectorAll(".ResultListItem")]
+            return [...document.querySelectorAll(".OtherServicesPanel")]
+                .map(panel => results.filter(result =>
+                    result.compareDocumentPosition(panel) &
+                        Node.DOCUMENT_POSITION_FOLLOWING
+                ).length)
+        })
+        assert.deepStrictEqual(actual, expected)
+    }, 5 * 1000)
 }

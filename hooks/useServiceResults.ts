@@ -40,6 +40,7 @@ import useEffectOnChange from "@/hooks/useEffectOnChange"
 
 type UseServiceResults = {
     searchResults: Array<Service> | null,
+    searchPageBoundaries: Array<number>,
 
     category: Category,
 
@@ -65,6 +66,7 @@ export default (router: NextRouter): UseServiceResults => {
     const [searchStatus, setSearchStatus] =
         useState<"loading" | "error" | "some loaded" | "all loaded">("loading")
     const [searchResults, setSearchResults] = useState<Array<Service> | null>(null)
+    const [searchPageBoundaries, setSearchPageBoundaries] = useState<Array<number>>([])
     const [searchError, setSearchError] = useState<{message: string, status: number} | null>(null)
     const [searchType] = useState<string | null>("true")
     const [sortBy, setSortBy] = useState<SortType | null>(null)
@@ -144,6 +146,7 @@ export default (router: NextRouter): UseServiceResults => {
         if (search.loadedServices.length > 0) {
             setSearchStatus(search.isNext ? "some loaded" : "all loaded")
             setSearchResults(search.loadedServices)
+            setSearchPageBoundaries([...search.pageBoundaries])
             setSearchError(null)
         } else {
             await loadNextSearchPage()
@@ -182,6 +185,7 @@ export default (router: NextRouter): UseServiceResults => {
         }
         setSearchStatus(search.isNext ? "some loaded" : "all loaded")
         setSearchResults(search.loadedServices)
+        setSearchPageBoundaries([...search.pageBoundaries])
 
         setSearchError(null)
 
@@ -256,6 +260,7 @@ export default (router: NextRouter): UseServiceResults => {
 
     return {
         searchResults,
+        searchPageBoundaries,
         pageTitle,
         category,
         searchIsLoading,

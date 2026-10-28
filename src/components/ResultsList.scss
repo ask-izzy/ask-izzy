@@ -1,6 +1,11 @@
 @use '../styles/mixins/colours';
 
 .ResultsList {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 10px;
+
     > ol {
         padding-left: 0;
         margin: 0;
@@ -10,9 +15,17 @@
         }
     }
 
-    .ResultListItem ~ .ResultListItem {
-        border-top: 10px solid #{colours.get-static('colour-bg-standard-tint-2')};
-        border-top: 10px solid var(--colour-bg-standard-tint-2);
+    &:not(.crisisResults) {
+        > ol {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+
+            > li {
+                background-color: #{colours.get-static('colour-bg-standard')};
+                background-color: var(--colour-bg-standard);
+            }
+        }
     }
 
     &.crisisResults {
