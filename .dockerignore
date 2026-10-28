@@ -23,6 +23,5 @@ Dockerfile
 .cache
 .github
 .dockerignore
-Dockerfile
 .vscode
 *.tsbuildinfo
