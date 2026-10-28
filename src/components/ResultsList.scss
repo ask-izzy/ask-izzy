@@ -1,18 +1,23 @@
 @use '../styles/mixins/colours';
 
 .ResultsList {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 10px;
+
     > ol {
         padding-left: 0;
         margin: 0;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
 
         > li {
             list-style-type: none;
+            background-color: #{colours.get-static('colour-bg-standard')};
+            background-color: var(--colour-bg-standard);
         }
-    }
-
-    .ResultListItem ~ .ResultListItem {
-        border-top: 10px solid #{colours.get-static('colour-bg-standard-tint-2')};
-        border-top: 10px solid var(--colour-bg-standard-tint-2);
     }
 
     &.crisisResults {

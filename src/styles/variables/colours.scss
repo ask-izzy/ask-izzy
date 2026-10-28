@@ -90,6 +90,12 @@ $lightness-button-hover: 10%;
         colours.set-transparency('colour-brand-primary', 'global', 0.15),
     );
 
+    @include colours.define(
+        'colour-bg-highlight-muted-1',
+        'global',
+        colours.set-transparency('colour-brand-primary', 'global', 0.1),
+    );
+
     @include colours.define('colour-bg-opposite', 'global', 'raw-colour-slate-gray');
     @include colours.define('colour-bg-opposite-light', 'global', colours.lighten('raw-colour-warm-gray', 'global', -60%));
 

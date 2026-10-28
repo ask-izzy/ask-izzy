@@ -2,6 +2,23 @@
 
 .ResultsListPage {
     position: relative;
+    // Pass .BasePage's full-height flex column down to the results list so
+    // it fills the rest of the page, eg while results are still loading
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+
+    > main {
+        display: flex;
+        flex-direction: column;
+        flex-grow: 1;
+    }
+
+    .List.results {
+        display: flex;
+        flex-direction: column;
+        flex-grow: 1;
+    }
 
     .QuestionStepper {
         margin: 1em 20px;
@@ -18,14 +35,11 @@
         width: 100%;
         padding-top: 20px;
         padding-bottom: 20px;
-
-        & > * {
-            display: block;
-            width: 57px;
-            height: 57px;
-            margin-right: auto;
-            margin-left: auto;
-        }
+        display: flex;
+        flex-direction: column;
+        flex-grow: 1;
+        justify-content: center;
+        align-items: center;
     }
 
     .rightIcon {
@@ -50,29 +64,12 @@
 
     .List {
         padding: 0;
-    }
-
-    .ViewOnMapButton {
-        background-color: #{colours.get-static('colour-bg-standard-tint-2')};
-        background-color: var(--colour-bg-standard-tint-2);
-        color: #{colours.get-static('colour-text-mid')};
-        color: var(--colour-text-mid);
-
-        .primaryText {
-            font-size: 18px;
-            line-height: 18px;
-        }
-
-        & > div > .leftIcon {
-            min-width: 55px;
-            padding-left: 10px;
-        }
+        background: #{colours.get-static('colour-bg-standard-tint-2')};
+        background: var(--colour-bg-standard-tint-2);
     }
 
     .moreResultsContainer {
-        padding: 20px 0;
-        background-color: #{colours.get-static('colour-bg-standard-tint-2')};
-        background-color: var(--colour-bg-standard-tint-2);
+        margin: 10px 0 20px;
     }
 
     .MoreResultsButton {

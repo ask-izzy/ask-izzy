@@ -1,6 +1,7 @@
 import * as React from "react";
 import type { GetStaticPaths, GetStaticProps } from "next"
 import {promises as fs} from "fs"
+import { useRouter } from "next/router"
 
 import cmsPageQuery from "@/queries/content/page"
 import cmsAllPagesQuery from "@/queries/content/allPages"
@@ -155,10 +156,16 @@ export const getStaticProps: GetStaticProps<Props> = async({params}) => {
 }
 
 export default function CategoryOrContentPage(props: Props): React.ReactNode {
+    const router = useRouter()
     const category = getCategory(props.categoryKey || "")
     if (category) {
+        // The results page keeps the category, title and search status of the
+        // path it was first rendered for, so give each path its own instance.
+        // Otherwise following a link from one results page to another (eg a
+        // suggestion in the "other services" panel) shows stale results.
+        // See docs/other-services-panel.md § "Results pages are remounted per path"
         return (
-            <ResultsListPage />
+            <ResultsListPage key={router.asPath.split(/[?#]/)[0]} />
         )
     }
 

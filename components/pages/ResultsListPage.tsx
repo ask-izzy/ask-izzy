@@ -19,6 +19,8 @@ import { stateFromLocation } from "@/src/utils";
 import ScrollToTop from "@/src/components/ResultsListPage/ScrollToTop";
 import Storage from "@/src/storage";
 import Controls from "@/src/components/ResultsListPage/Controls";
+import OtherServicesPanel from "@/src/components/OtherServicesPanel";
+import otherServicesSuggestions from "@/src/constants/other-services-suggestions";
 
 import useServiceResults from "@/hooks/useServiceResults"
 
@@ -29,6 +31,7 @@ type Props = {
 function ResultsListPage({router}: Props): ReactNode {
     const {
         searchResults,
+        searchPageBoundaries,
         pageTitle,
         category,
         searchIsLoading,
@@ -115,11 +118,21 @@ function ResultsListPage({router}: Props): ReactNode {
                     crisisResults={false}
                     travelTimesStatus={travelTimesStatus}
                     sortBy={sortBy}
+                    pageBoundaries={searchPageBoundaries}
+                    renderAfterPage={renderOtherServicesPanel}
                 />
                 {renderLoadMore()}
                 {renderSuggestionBox()}
                 <ScrollToTop label="To top"/>
             </div>
+        )
+    }
+
+    function renderOtherServicesPanel(): ReactNode {
+        return (
+            <OtherServicesPanel
+                suggestions={otherServicesSuggestions}
+            />
         )
     }
 
@@ -184,11 +197,7 @@ function ResultsListPage({router}: Props): ReactNode {
     }
 
     if (searchType) {
-        return (
-            <div>
-                {renderPage()}
-            </div>
-        )
+        return renderPage()
     }
 
     return <NotFoundStaticPage/>

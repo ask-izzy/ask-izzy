@@ -85,6 +85,16 @@ export default Yadda.localisation.English.library(dictionary)
             }
         }
     )
+    .given("I have not said who is looking for help with $STRING", async function(
+        this: StepContext,
+        categoryKey: string,
+    ) {
+        const pageName = `${WhoIsLookingForHelpPage.name}-${categoryKey}`
+        await this.world.page.evaluate(
+            pageName => window.IzzyStorage.removeItem(pageName),
+            pageName,
+        )
+    })
     .given("I am not part of any relevant demographics", async function(this: StepContext) {
         const page = this.world.page
         await setStorageValue(page, DemographicsPage.name, JSON.stringify([]))
