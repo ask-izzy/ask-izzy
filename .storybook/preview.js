@@ -1,4 +1,3 @@
-/* @flow */
 import { MockedProvider } from "@apollo/client/testing";
 
 import "../src/styles/bundle.scss";

@@ -12,3 +12,6 @@ package-lock.json
 /testing-screenshots
 .next
 .idea
+.local
+.cache
+*.tsbuildinfo

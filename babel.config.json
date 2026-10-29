@@ -10,10 +10,12 @@
           "bugfixes": true,
           "useBuiltIns": "usage",
           "corejs": 3.22
+        },
+        "preset-typescript": {
+          "onlyRemoveTypeImports": true
         }
       }
     ],
-    "@babel/preset-flow",
     "@babel/preset-react"
   ],
   "plugins": [
@@ -22,8 +24,46 @@
       {
         "alias": {
           "@": "."
-        }
+        },
+        "extensions": [
+          ".js",
+          ".jsx",
+          ".ts",
+          ".tsx",
+          ".json"
+        ]
       }
     ]
+  ],
+  "overrides": [
+    {
+      "test": [
+        "**/*.ts"
+      ],
+      "plugins": [
+        [
+          "@babel/plugin-transform-typescript",
+          {
+            "onlyRemoveTypeImports": true,
+            "allowNamespaces": true
+          }
+        ]
+      ]
+    },
+    {
+      "test": [
+        "**/*.tsx"
+      ],
+      "plugins": [
+        [
+          "@babel/plugin-transform-typescript",
+          {
+            "onlyRemoveTypeImports": true,
+            "allowNamespaces": true,
+            "isTSX": true
+          }
+        ]
+      ]
+    }
   ]
 }

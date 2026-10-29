@@ -30,8 +30,8 @@ For example if you want to run all the linters and automaticity fix any issue wh
 ## Testing
 Testing can be run with `docker compose run --rm app test-dev` which will sequentially run all testing programs.
 
-- **Mocha**\
-  Currently used for e2e and unit tests. It's split up into 4 testing suites, which can be individually run with `docker compose run --rm -p 3000:3000 -p 5000:5000 -p 5001:5001 app test-dev-mocha-<test suite name>`
+- **Playwright**\
+  Used for both the e2e and unit tests. The e2e tests are written as [Yadda](https://github.com/acuminous/yadda) feature files (eg `test/personalisation/*.feature`) which are turned into Playwright tests by `test/e2e/run-features.ts` using the step definitions in `test/e2e/steps/`. They're split up into several testing suites, which can be individually run with `docker compose run --rm app test-dev-e2e-<test suite name>` (or `test-unit` for the unit tests). Screenshots and traces of failed tests are saved in `testing-screenshots/` and can be viewed with `npx playwright show-trace <path to trace.zip>`.
     - **personalisation**\
       For e2e tests related to the personalisation flow in Ask Izzy.
     - **category-queries**\
@@ -43,15 +43,15 @@ Testing can be run with `docker compose run --rm app test-dev` which will sequen
     - **features-2**\
       Even more features, split into two suites.
     - **unit**\
-      All unit tests are here.
+      All unit tests are here (`test/unit/**/*.spec.ts`).
 
 ## Linting
 All linters can be run using `docker compose run --rm app lint`. You can use `lint-fix` instead of `lint` to also try and automatically correct any issues where that is possible. Indvidual linters can be run using: `docker compose run --rm app lint-<linter name>` (if the linter supports it `-fix` can be append to the end of the linter name to auto-fix issues.)
 
 - **ESLint**\
-  For JavaScript errors and style violations
-- **Flow.js**\
-  For static type checking. Most JavaScript in Ask Izzy is written with [Flow.js](https://flow.org/) types with Babel.js used to compile it into plain JavaScript so it can be executed by browsers. This decision was made before it was clear that TypeScript would win the the JavaScript typing wars. At some point we hope to migrate to TypeScript.
+  For JavaScript/TypeScript errors and style violations
+- **TypeScript** (`lint-tsc`)\
+  For static type checking. Storybook stories are currently excluded from type checking (see tsconfig.json) since Storybook is disabled and the stories will need to be updated when it's upgraded.
 - **stylelint**\
   Stylelint is used for linting SASS/CSS files.
 - **jsonlint**\
@@ -99,5 +99,5 @@ Original icons files are stored in a separate repo hosted on GitHub. To add new 
 2) Add desired icons to designs repo and commit
 3) Run the iconify script: `./scripts/iconify ../ask-izzy-designs/icons/*.svg`
 
-The icons/index.js file will be updated, and a new js file for the icon will be generated in /icons.
+The src/icons/index.ts file will be updated, and a new ts file for the icon will be generated in src/icons.
 

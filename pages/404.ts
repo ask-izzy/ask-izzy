@@ -1,0 +1,14 @@
+import type { GetStaticProps } from "next"
+
+import type {RouteSharedProps} from "@/types/routes"
+
+export const getStaticProps: GetStaticProps<RouteSharedProps> = (context) => {
+    return {
+        props: {
+            pageTitle: "404",
+            pageType: ["404"],
+        },
+    }
+}
+
+export { default } from "@/components/pages/NotFoundStaticPage"

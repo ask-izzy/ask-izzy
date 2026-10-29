@@ -1,0 +1,69 @@
+import type {ReactNode} from "react";
+import React from "react";
+
+import ListItem from "./ListItem";
+import Button from "./base/Button";
+import type { Props as ListItemProps } from "./ListItem";
+import type {AnalyticsEvent} from "../google-tag-manager";
+import icons from "../icons";
+
+type Props = {
+    type?: "checkbox" | "radio",
+    checked?: boolean,
+    value?: string,
+    ariaLabel?: string,
+    checkedIcon?: any,
+    uncheckedIcon?: any,
+    analyticsEvent?: AnalyticsEvent,
+} & Omit<ListItemProps<typeof Button>, "type" | "value">
+
+function InputListItem({
+    checkedIcon,
+    uncheckedIcon,
+    primaryText,
+    secondaryText,
+    onClick,
+    ariaLabel,
+    rightIcon,
+    type,
+    checked,
+    analyticsEvent,
+    ...otherProps
+}: Props): ReactNode {
+    const label = ariaLabel || `${typeof primaryText === "string" ?
+        `${primaryText}.` : ""} ${typeof secondaryText === "string" ?
+        `${secondaryText}` : ""}`
+
+    return (
+        <ListItem
+            {...otherProps}
+            className="InputListItem"
+            rootElement={Button}
+            role={type || "button"}
+            aria-label={label}
+            rightIcon={!type ? rightIcon || <icons.Chevron />
+                : checked ? checkedIcon : uncheckedIcon
+            }
+            primaryText={primaryText}
+            secondaryText={secondaryText}
+            onClick={onClick}
+            {...(typeof checked !== "undefined" ?
+                {
+                    checked,
+                    "aria-checked": checked,
+                }
+                : {}
+            )}
+            analyticsEvent={{
+                event: "Action Triggered - Option",
+                eventAction: "Option selected",
+                eventLabel: label,
+                eventValue: checked ? 0 : 1,
+                ...analyticsEvent,
+            }}
+        />
+    );
+
+}
+
+export default InputListItem
