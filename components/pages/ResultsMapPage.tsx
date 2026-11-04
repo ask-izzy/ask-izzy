@@ -160,7 +160,7 @@ function ResultsMapPage({router}: Props): ReactNode {
                     onTravelTimesStatusChange={
                         travelTimesStatus => setTravelTimesStatus(travelTimesStatus)
                     }
-                    showMessage={false}
+                    showMoreDetails={false}
                 />
                 <ResultsList
                     crisisResults={false}

@@ -4,88 +4,58 @@
     display: flex;
     flex-direction: row;
     align-items: center;
-    padding: 10px;
-    margin: 10px -5px;
+    padding: 5px 16px;
+    column-gap: 1em;
     justify-content: center;
     background-color: #{colours.get-static('colour-bg-standard-tint-2')};
     background-color: var(--colour-bg-standard-tint-2);
     color: #{colours.get-static('colour-text-mid')};
     color: var(--colour-text-mid);
 
-    .explainer {
+    .explainerIcons {
+        display: inline-flex;
+
+        .SvgIcon {
+            margin-left: -1px;
+            margin-right: -1px;
+
+            &.WalkIcon {
+                width: 20px;
+            }
+
+            path {
+                fill: #{colours.get-static('colour-text-mid')};
+                fill: var(--colour-text-mid);
+            }
+
+            circle {
+                fill: #{colours.get-static('colour-text-mid')};
+                fill: var(--colour-text-mid);
+            }
+        }
+    }
+
+    .content {
         display: flex;
         align-items: center;
         font-size: 14px;
         font-weight: 400;
         justify-content: center;
+        column-gap: 0.5em;
+        row-gap: 0.2em;
+        flex-wrap: wrap;
+        text-align: center;
 
-        .explainerIcons {
-            display: inline-flex;
-            margin-right: 1em;
-            margin-bottom: -4px;
-
-            .SvgIcon {
-                margin-left: -1px;
-                margin-right: -1px;
-
-                &.WalkIcon {
-                    width: 20px;
-                }
-
-                path {
-                    fill: #{colours.get-static('colour-text-mid')};
-                    fill: var(--colour-text-mid);
-                }
-
-                circle {
-                    fill: #{colours.get-static('colour-text-mid')};
-                    fill: var(--colour-text-mid);
-                }
-            }
+        .explainer {
+            text-wrap: balance;
         }
-    }
-
-    .collapserContainer {
-        position: relative;
-        width: 100%;
-
-        .Button {
-            border: 0;
-            background: none;
-            font-weight: bold;
-            position: absolute;
-            top: -12px;
-            right: 0;
-
-            .plus {
-                transform: rotate(90deg);
-                transition: transform 200ms ease;
-
-                &.close {
-                    transform: rotate(-90deg);
-                    transition: transform 200ms ease;
-                }
-            }
-
-            .SvgIcon {
-                width: 20px;
-                stroke-width: 6px;
-
-                path {
-                    stroke: #{colours.get-static('colour-text-mid')};
-                    stroke: var(--colour-text-mid);
-                }
-            }
-        }
-    }
-
-    .undo {
-        border: 0;
-        background: none;
-        font-weight: bold;
     }
 
     .GeoLocationButton {
+        &:not(.complete) {
+            flex: 0 0 auto;
+        }
+
         display: flex;
         align-items: center;
 
@@ -100,44 +70,12 @@
             color: #{colours.get-static('colour-text-dark')};
             color: var(--colour-text-dark);
         }
-    }
 
-    @media (max-width: 771px) {
-        .explainer {
-            width: 60%;
-        }
-    }
-
-    @media (max-width: 674px) {
-        width: 90%;
-    }
-
-    @media (max-width: 674px) {
-        flex-direction: column;
-
-        .explainer {
-            width: 100%;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            text-align: center;
-        }
-
-        .GeoLocationButton {
-            width: auto;
-        }
-
-        .specificLocationBanner {
-            margin: 1em;
-            display: flex;
-            flex-direction: column;
-
-            .GeoLocationButton {
-                margin: 1em 0;
-                display: flex;
-                flex-direction: row;
-                align-items: center;
-            }
+        .undo {
+            border: 0;
+            background: none;
+            font-weight: bold;
+            margin-left: 0.3em;
         }
     }
 }

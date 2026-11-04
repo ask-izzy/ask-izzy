@@ -56,7 +56,7 @@ function Controls({
 
     const renderResultsPageGeolocationButton = () => (
         <GeolocationButtonForTravelTimes
-            showMessage={true}
+            showMoreDetails={true}
             onTravelTimesStatusChange={onTravelTimesStatusChange}
             servicesToUpdateTravelTimes={servicesToUpdateTravelTimes}
         />

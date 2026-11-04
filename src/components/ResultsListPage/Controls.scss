@@ -4,7 +4,9 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 10px 10px 5px;
+    flex-wrap: wrap;
+    gap: 1em;
+    padding: 16px;
     height: 44px;
     background-color: #{colours.get-static('colour-bg-standard-tint-2')};
     background-color: var(--colour-bg-standard-tint-2);
@@ -17,8 +19,6 @@
     }
 
     &.sticky {
-        padding: 5px 20px 8px;
-        margin-left: -5px;
         position: fixed;
         top: 44px;
         transition: background-color 150ms ease;
@@ -77,23 +77,9 @@
         }
     }
 
-    @media (max-width: 768px) {
-        padding: 10px 0;
-        margin: 0 10px;
-
-        &.sticky {
-            padding: 5px 10px;
-        }
-    }
-
     @media (max-width: 556px) {
         height: 100%;
         margin: 0;
-
-        .SortResult {
-            margin-right: 10px;
-            align-items: flex-end;
-        }
 
         &.sticky {
             height: 44px;
@@ -104,10 +90,6 @@
             .SortResult {
                 align-items: flex-start;
             }
-        }
-
-        .dropDownContainer {
-            width: 100%;
         }
     }
 }

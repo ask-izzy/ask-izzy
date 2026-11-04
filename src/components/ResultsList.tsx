@@ -43,9 +43,13 @@ function ResultsList({
             CrisisLineItem
             : ResultListItem
 
+    if (crisisResults && !filteredResults.length) {
+        return null
+    }
+
     return (
         <div className={cnx("ResultsList", {crisisResults})}>
-            {crisisResults && filteredResults.length > 0 &&
+            {crisisResults &&
                 <CrisisHeader
                     plural={filteredResults.length > 1}
                 />
