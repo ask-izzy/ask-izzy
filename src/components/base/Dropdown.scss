@@ -4,9 +4,9 @@
     display: flex;
     position: relative;
     align-items: center;
+    gap: 1em;
 
     .title {
-        margin: 5px 10px;
         color: #{colours.get-static('colour-text-dark')};
         color: var(--colour-text-dark);
         text-align: left;
