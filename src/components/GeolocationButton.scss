@@ -2,7 +2,6 @@
 
 .GeoLocationButton {
     .LocationButton {
-        padding: 0 15px 0 0;
         width: auto;
         background: none;
         border-radius: 3px;
@@ -20,53 +19,52 @@
         }
     }
 
-    .SvgIcon {
-        height: 42px;
-        width: 42px;
-        margin-bottom: -4px;
-
-        path {
-            fill: #{colours.get-static('colour-text-dark')};
-            fill: var(--colour-text-dark);
-        }
-    }
-
-    .primary {
-        font-size: 16px;
-        font-weight: bold;
-        text-align: left;
-    }
-
-    .secondary {
-        font-size: 14px;
-        color: #{colours.get-static('colour-text-mid')};
-        color: var(--colour-text-mid);
-    }
-
-    .complete {
-        display: flex;
-        justify-content: center;
-
-        .primary {
-            font-weight: normal;
-            color: #{colours.get-static('colour-text-dark')};
-            color: var(--colour-text-dark);
-        }
-
-        path {
-            fill: #{colours.get-static('colour-text-mid')};
-            fill: var(--colour-text-mid);
-        }
-    }
-
     .label {
         display: flex;
+        gap: 0.4em;
         align-items: center;
+
+        .primary {
+            font-size: 16px;
+            font-weight: bold;
+            text-align: center;
+            flex: 0 0 auto;
+        }
+
+        .secondary {
+            font-size: 14px;
+            color: #{colours.get-static('colour-text-mid')};
+            color: var(--colour-text-mid);
+        }
+
+        .SvgIcon {
+            flex: 0 0 auto;
+
+            // The loading state has 2 lines and looks better with the spinner being larger
+            // so we don't shrink that one to match the text size like the others
+            &:not(.LoadingIcon) {
+                height: 20px;
+                box-sizing: border-box;
+            }
+
+            path {
+                fill: #{colours.get-static('colour-text-dark')};
+                fill: var(--colour-text-dark);
+            }
+        }
 
         .multiLine {
             display: flex;
             flex-direction: column;
             align-items: flex-start;
+        }
+    }
+
+    &.complete {
+        .label {
+            .primary {
+                flex: 1 1 auto;
+            }
         }
     }
 }

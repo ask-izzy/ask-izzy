@@ -10,7 +10,7 @@ export default class SvgIconLoading extends BaseIcon {
     }
 
     svgContent: string = `
-        <svg class='${this.classNames}' xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 64 64">
+        <svg class='${this.classNames}' xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="${this.props.viewBox || "12.71 12.69 38.61 38.61"}">
         <g>
         <path fill="#231F20"  d="M32.001,21.933c-0.607,0-1.1-0.492-1.1-1.1v-7c0-0.607,0.492-1.1,1.1-1.1s1.1,0.492,1.1,1.1v7 C33.101,21.44,32.608,21.933,32.001,21.933z"></path>
         <path fill="#231F20"  d="M26.418,23.43c-0.38,0-0.75-0.197-0.953-0.551l-3.5-6.062c-0.305-0.525-0.124-1.198,0.402-1.502 c0.525-0.305,1.199-0.124,1.502,0.402l3.5,6.062c0.305,0.525,0.124,1.198-0.402,1.502C26.794,23.382,26.604,23.43,26.418,23.43z"></path>
