@@ -4,13 +4,13 @@ import type {ReactNode} from "react";
 import SearchIcon from "@/src/icons/Search";
 import Link from "@/src/components/base/Link";
 import {
-    getOtherServicesSuggestionTarget,
     getOtherServicesSuggestionPath,
     saveOtherServicesSuggestionAnswers,
 } from "@/src/utils/other-services-suggestions"
+import type {OtherServicesSuggestion} from "@/src/utils/other-services-suggestions"
 
 type Props = {
-    suggestions: Array<string>,
+    suggestions: Array<OtherServicesSuggestion>,
 }
 
 function OtherServicesPanel({suggestions}: Props): ReactNode {
@@ -30,10 +30,9 @@ function OtherServicesPanel({suggestions}: Props): ReactNode {
                 People also searched for
             </p>
             <ul aria-labelledby={headingId}>
-                {suggestions.map(suggestion => {
-                    const target = getOtherServicesSuggestionTarget(suggestion)
+                {suggestions.map(({label, target}) => {
                     return (
-                        <li key={suggestion}>
+                        <li key={label}>
                             <Link
                                 to={getOtherServicesSuggestionPath(target)}
                                 onClick={() =>
@@ -42,10 +41,10 @@ function OtherServicesPanel({suggestions}: Props): ReactNode {
                                 analyticsEvent={{
                                     event: "Link Followed - Other Services Suggestion",
                                     eventAction: "Other services suggestion",
-                                    eventLabel: suggestion,
+                                    eventLabel: label,
                                 }}
                             >
-                                {suggestion}
+                                {label}
                             </Link>
                         </li>
                     )

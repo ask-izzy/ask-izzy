@@ -20,8 +20,13 @@ export const LongSuggestions: typeof Template = Template.bind({});
 LongSuggestions.args = {
     suggestions: [
         ...otherServicesSuggestions,
-        "Emergency accommodation",
-        "Help paying the rent",
-        "Free legal advice",
+        ...[
+            "Emergency accommodation",
+            "Help paying the rent",
+            "Free legal advice",
+        ].map(label => ({
+            label,
+            target: {type: "search", searchText: label},
+        })),
     ],
 };

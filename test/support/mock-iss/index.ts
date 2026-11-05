@@ -45,6 +45,26 @@ export function initMockISSServer() {
         });
     });
 
+    // ISS4 related searches used by the "People also searched for" panel.
+    // The same related searches are returned for every query. They are raw
+    // ISS3 "q" values: three that are in src/constants/related-search-flows.json,
+    // one plain search and one with query syntax that isn't in the table (so
+    // should be dropped).
+    // See docs/other-services-panel.md § "Turning a related search back into a flow"
+    app.get("/api/directory/search/related/", (req, res) => {
+        res.json({
+            query: String(req.query.query ?? "").trim(),
+            segment: req.query.segment ?? null,
+            results: [
+                "meals",
+                "(food vouchers)",
+                "drugs alcohol",
+                "relief",
+                "(no longer used) -(coordinating bodies)",
+            ],
+        });
+    });
+
     app.get("/api/v3/list-all-mocked/", (req, res) => {
         res.json(mocks);
     });
