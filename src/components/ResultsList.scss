@@ -9,14 +9,22 @@
     > ol {
         padding-left: 0;
         margin: 0;
-        display: flex;
-        flex-direction: column;
-        gap: 10px;
 
         > li {
             list-style-type: none;
-            background-color: #{colours.get-static('colour-bg-standard')};
-            background-color: var(--colour-bg-standard);
+        }
+    }
+
+    &:not(.crisisResults) {
+        > ol {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+
+            > li {
+                background-color: #{colours.get-static('colour-bg-standard')};
+                background-color: var(--colour-bg-standard);
+            }
         }
     }
 
