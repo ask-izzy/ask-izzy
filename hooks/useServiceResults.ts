@@ -41,6 +41,8 @@ import useEffectOnChange from "@/hooks/useEffectOnChange"
 type UseServiceResults = {
     searchResults: Array<Service> | null,
     searchPageBoundaries: Array<number>,
+    // The query of the current search, once it's been created
+    izzyQuery: SearchQuery | null,
 
     category: Category,
 
@@ -261,6 +263,7 @@ export default (router: NextRouter): UseServiceResults => {
     return {
         searchResults,
         searchPageBoundaries,
+        izzyQuery: search?.izzyQuery ?? null,
         pageTitle,
         category,
         searchIsLoading,

@@ -2,67 +2,130 @@ import categories from "@/src/constants/categories"
 import Category from "@/src/constants/Category"
 import storage from "@/src/storage"
 
+type Answer = string | Array<string>
+
+// The category and personalisation answers which produce an ISS3 "q" value
+export type RelatedSearchFlow = {
+    category: string,
+    // Keyed by personalisation page name
+    answers: {[personalisationPageName: string]: Answer},
+}
+
+// Normalised ISS3 "q" values to the flow which produces them
+export type RelatedSearchFlows = {[q: string]: RelatedSearchFlow}
+
+/*
+ * The lookup table is several hundred KB so it's loaded separately only when
+ * a results page needs it rather than being part of the main bundle.
+ */
+export async function loadRelatedSearchFlows(): Promise<RelatedSearchFlows> {
+    const module = await import("@/src/constants/related-search-flows.json")
+    return (module.default ?? module) as RelatedSearchFlows
+}
+
 export type OtherServicesSuggestionTarget = {
     type: "category",
     category: Category,
     // Personalisation answers implied by the suggestion, keyed by
     // personalisation page name
-    answers: {[personalisationPageName: string]: string},
+    answers: {[personalisationPageName: string]: Answer},
 } | {
     type: "search",
     searchText: string,
 }
 
-// Compare labels loosely so "Drugs & Alcohol Counselling" matches the
-// "Drugs and alcohol counselling" subcategory answer.
-function normaliseLabel(label: string): string {
-    return label
-        .toLowerCase()
-        .replace(/&/g, " and ")
-        .replace(/[^a-z0-9]+/g, " ")
-        .trim()
+export type OtherServicesSuggestion = {
+    label: string,
+    target: OtherServicesSuggestionTarget,
 }
 
 /*
- * Work out where a suggestion should take the user. A suggestion matching a
- * category name or one of a category's subcategory answers goes to that
- * category, otherwise it becomes a keyword search.
- * See docs/other-services-panel.md § "What clicking a suggestion does"
+ * Make ISS3 "q" values comparable regardless of case or spacing.
  */
-export function getOtherServicesSuggestionTarget(
-    label: string
-): OtherServicesSuggestionTarget {
-    const wanted = normaliseLabel(label)
-    const listedCategories = categories.filter(
-        category => !category.dontShowInCategoryList
-    )
+export function normaliseIss3Q(q: string): string {
+    return q.toLowerCase().replace(/\s+/g, " ").trim()
+}
 
-    for (const category of listedCategories) {
-        if (normaliseLabel(category.name) === wanted) {
-            return {type: "category", category, answers: {}}
+/*
+ * True if the "q" value has none of the syntax the app adds when building a
+ * query (eg "-(coordinating bodies)" exclusions or "(food parcels)" phrases),
+ * so is most likely something a person typed.
+ * See docs/other-services-panel.md § "Turning a related search back into a flow"
+ */
+function isPlainSearch(q: string): boolean {
+    return !/[()]|(^|\s)-/.test(q)
+}
+
+function getLabelForFlow(
+    category: Category,
+    answers: RelatedSearchFlow["answers"],
+): string {
+    const subcategoryAnswer = answers[`${category.key}-subcategory`]
+    if (typeof subcategoryAnswer === "string" &&
+        subcategoryAnswer !== "(skipped)"
+    ) {
+        return subcategoryAnswer
+    }
+    return category.name
+}
+
+/*
+ * Work out where a related search should take the user, or null if it can't
+ * be used.
+ * See docs/other-services-panel.md § "Turning a related search back into a flow"
+ */
+export function getOtherServicesSuggestion(
+    relatedSearch: string,
+    flows: RelatedSearchFlows,
+): OtherServicesSuggestion | null {
+    const q = normaliseIss3Q(relatedSearch)
+    const flow = flows[q]
+    if (flow) {
+        const category = categories.find(
+            category => category.key === flow.category
+        )
+        if (!category) {
+            return null
+        }
+        return {
+            label: getLabelForFlow(category, flow.answers),
+            target: {type: "category", category, answers: flow.answers},
         }
     }
+    if (q && isPlainSearch(q)) {
+        const searchText = relatedSearch.trim().replace(/\s+/g, " ")
+        return {label: searchText, target: {type: "search", searchText}}
+    }
+    return null
+}
 
-    for (const category of listedCategories) {
-        const subcategoryPage = category.personalisation.find(
-            page => page.name === `${category.key}-subcategory`
-        )
-        if (subcategoryPage?.type !== "question") {
+/*
+ * Turn the related searches for the current search into suggestions,
+ * dropping any which can't be used, are the current search or repeat an
+ * earlier suggestion.
+ * See docs/other-services-panel.md § "Where suggestions come from"
+ */
+export function getOtherServicesSuggestions(
+    relatedSearches: Array<string>,
+    currentQ: string,
+    flows: RelatedSearchFlows,
+): Array<OtherServicesSuggestion> {
+    const normalisedCurrentQ = normaliseIss3Q(currentQ)
+    const seenLabels = new Set<string>()
+    const suggestions: Array<OtherServicesSuggestion> = []
+    for (const relatedSearch of relatedSearches) {
+        if (normaliseIss3Q(relatedSearch) === normalisedCurrentQ) {
             continue
         }
-        const answer = Object.keys(subcategoryPage.possibleAnswers).find(
-            possibleAnswer => normaliseLabel(possibleAnswer) === wanted
-        )
-        if (answer) {
-            return {
-                type: "category",
-                category,
-                answers: {[subcategoryPage.name]: answer},
-            }
+        const suggestion = getOtherServicesSuggestion(relatedSearch, flows)
+        const labelKey = suggestion?.label.toLowerCase()
+        if (!suggestion || !labelKey || seenLabels.has(labelKey)) {
+            continue
         }
+        seenLabels.add(labelKey)
+        suggestions.push(suggestion)
     }
-
-    return {type: "search", searchText: label}
+    return suggestions
 }
 
 /*
@@ -80,6 +143,11 @@ export function getOtherServicesSuggestionPath(
     return `/search/${encodeURIComponent(target.searchText)}`
 }
 
+/*
+ * Save the answers which make up the suggestion's flow, replacing any answer
+ * the user gave to those pages before.
+ * See docs/other-services-panel.md § "What clicking a suggestion does"
+ */
 export function saveOtherServicesSuggestionAnswers(
     target: OtherServicesSuggestionTarget
 ): void {
@@ -87,6 +155,10 @@ export function saveOtherServicesSuggestionAnswers(
         return
     }
     for (const [pageName, answer] of Object.entries(target.answers)) {
-        storage.setItem(pageName, answer)
+        if (Array.isArray(answer)) {
+            storage.setJSON(pageName, [...answer])
+        } else {
+            storage.setItem(pageName, answer)
+        }
     }
 }

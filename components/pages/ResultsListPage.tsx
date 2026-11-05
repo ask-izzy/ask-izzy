@@ -20,9 +20,9 @@ import ScrollToTop from "@/src/components/ResultsListPage/ScrollToTop";
 import Storage from "@/src/storage";
 import Controls from "@/src/components/ResultsListPage/Controls";
 import OtherServicesPanel from "@/src/components/OtherServicesPanel";
-import otherServicesSuggestions from "@/src/constants/other-services-suggestions";
 
 import useServiceResults from "@/hooks/useServiceResults"
+import useOtherServicesSuggestions from "@/hooks/useOtherServicesSuggestions"
 
 type Props = {
     router: NextRouter
@@ -32,6 +32,7 @@ function ResultsListPage({router}: Props): ReactNode {
     const {
         searchResults,
         searchPageBoundaries,
+        izzyQuery,
         pageTitle,
         category,
         searchIsLoading,
@@ -45,6 +46,7 @@ function ResultsListPage({router}: Props): ReactNode {
         searchHasNextPage,
         loadNextSearchPage,
     } = useServiceResults(router)
+    const otherServicesSuggestions = useOtherServicesSuggestions(izzyQuery)
 
     function hasSearchResults(): boolean {
         return Boolean(

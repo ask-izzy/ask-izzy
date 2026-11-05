@@ -6,8 +6,9 @@
 | -------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | [docs/<file-name>.md](docs/<file-name>.md) | <description of when to read> |
 | [docs/historical-plans/<YYYY-MM-DD>-<title>.md](docs/historical-plans/<YYYY-MM-DD>-<title>.md)   | <description of when to read>       |
-| [docs/other-services-panel.md](docs/other-services-panel.md) | You are touching the "People also searched for" panel (other services suggestions) on the results page, where it is placed between pages of results, how suggestions map to categories or keyword searches, or why `ResultsListPage` is keyed by path. |
-| [docs/historical-plans/2026-10-07-other-services-panel.md](docs/historical-plans/2026-10-07-other-services-panel.md) | You want to know which options from the CAG presentation were chosen for the other services panel and why the suggestions are fixtures. |
+| [docs/other-services-panel.md](docs/other-services-panel.md) | You are touching the "People also searched for" panel (other services suggestions) on the results page, where it is placed between pages of results, how ISS4 related searches are turned back into categories or keyword searches, regenerating `related-search-flows.json`, or why `ResultsListPage` is keyed by path. |
+| [docs/historical-plans/2026-10-07-other-services-panel.md](docs/historical-plans/2026-10-07-other-services-panel.md) | You want to know which options from the CAG presentation were chosen for the other services panel and why the suggestions were originally fixtures. |
+| [docs/historical-plans/2026-11-05-related-searches-panel.md](docs/historical-plans/2026-11-05-related-searches-panel.md) | You want to know why the other services panel turns ISS4 related searches (raw ISS3 `q` values) back into category flows with a generated lookup table, or what sampling the real endpoint showed. |
 | [docs/historical-plans/2026-10-07-typescript-migration.md](docs/historical-plans/2026-10-07-typescript-migration.md) | You want to know why the code is TypeScript with Playwright tests, how the Flow migration was done, or why something looks like a leftover from it (eg the babel plugin order in babel.config.json). |
 
 ### Citing the documentation
