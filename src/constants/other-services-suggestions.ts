@@ -24,11 +24,18 @@ export const exampleRelatedSearchFlows: RelatedSearchFlows = {
         category: "support-and-counselling",
         answers: {
             "support-and-counselling-subcategory": "Mental and emotional health",
+            "demographics-atsi-cald-lgbtiqa": [],
         },
     },
     "-(coordinating bodies) -(holiday accommodation) (crisis accommodation)": {
         category: "housing",
-        answers: {"sleep-tonight": "No"},
+        answers: {
+            "sleep-tonight": "No",
+            "age": {
+                oneOf: ["(skipped)", "18 to 26", "27 to 39", "40 to 54", "55 to 64"],
+            },
+            "demographics": [],
+        },
     },
 }
 

@@ -16,6 +16,9 @@ import type {OtherServicesSuggestion} from "@/src/utils/other-services-suggestio
  */
 export default function useOtherServicesSuggestions(
     izzyQuery: SearchQuery | null | undefined,
+    // The category of the current results page so suggestions for it can say
+    // how they differ from the user's answers
+    currentCategoryKey?: string,
 ): Array<OtherServicesSuggestion> {
     const [suggestions, setSuggestions] =
         useState<Array<OtherServicesSuggestion>>([])
@@ -31,7 +34,12 @@ export default function useOtherServicesSuggestions(
             .then(([relatedSearches, flows]) => {
                 if (!cancelled) {
                     setSuggestions(
-                        getOtherServicesSuggestions(relatedSearches, q, flows)
+                        getOtherServicesSuggestions(
+                            relatedSearches,
+                            q,
+                            flows,
+                            currentCategoryKey,
+                        )
                     )
                 }
             })
@@ -41,7 +49,7 @@ export default function useOtherServicesSuggestions(
         return () => {
             cancelled = true
         }
-    }, [q])
+    }, [q, currentCategoryKey])
 
     return suggestions
 }

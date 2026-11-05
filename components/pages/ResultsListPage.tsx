@@ -46,7 +46,10 @@ function ResultsListPage({router}: Props): ReactNode {
         searchHasNextPage,
         loadNextSearchPage,
     } = useServiceResults(router)
-    const otherServicesSuggestions = useOtherServicesSuggestions(izzyQuery)
+    const otherServicesSuggestions = useOtherServicesSuggestions(
+        izzyQuery,
+        category.key,
+    )
 
     function hasSearchResults(): boolean {
         return Boolean(

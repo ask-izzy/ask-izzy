@@ -31,40 +31,43 @@ import {getSearchQueryChanges} from "@/src/utils/personalisation"
 import {convertIzzySearchQueryToIss3} from "@/src/iss/serviceSearch"
 import {normaliseIss3Q} from "@/src/utils/other-services-suggestions"
 import type {
+    FlowAnswers,
     RelatedSearchFlow,
     RelatedSearchFlows,
 } from "@/src/utils/other-services-suggestions"
 
 type Answer = string | Array<string>
 type Answers = Record<string, Answer>
+type Leaf = {answers: Answers, q: string}
 
 // Categories whose search query comes from the url rather than from
 // personalisation answers so can't be reached by saving answers
 const SKIPPED_CATEGORIES = ["search", "disability-advocacy-finder"]
 
-// Only the first 2 answers to a multiple choice question (in the order they
-// were selected) affect the search query, so every ordered selection of up to
-// 2 answers covers every distinct query.
+// Multiple choice answers are sorted when saved and only the first 2 affect
+// the search query, so every sorted selection of up to 2 answers covers every
+// distinct query. Skipping (or selecting nothing) comes first so it's
+// preferred when it's one of several answers with the same effect.
 function getPossibleAnswers(page: PersonalisationQuestionPage): Array<Answer> {
     const answers = Object.keys(page.possibleAnswers)
     if (page.multipleChoice) {
         return [
             [],
             ...answers.map(answer => [answer]),
-            ...answers.flatMap(first => answers
-                .filter(second => second !== first)
-                .map(second => [first, second])
+            ...answers.flatMap((first, index) => answers
+                .slice(index + 1)
+                .map(second => [first, second].sort())
             ),
         ]
     }
-    return [...answers, "(skipped)"]
+    return ["(skipped)", ...answers]
 }
 
 function saveAnswer(page: PersonalisationPage, answer: Answer | null) {
     if (answer === null) {
         storage.removeItem(page.name)
     } else if (Array.isArray(answer)) {
-        // Copied since setJSON() may sort the array in place
+        // Copied since setJSON() sorts the array in place
         storage.setJSON(page.name, [...answer])
     } else {
         storage.setItem(page.name, answer, false)
@@ -149,116 +152,121 @@ function getSearchQueryModifiers(
 function getQ(modifiers: Array<SearchQueryModifier>): string {
     // eslint-disable-next-line no-unused-vars
     const {maxPageSize, ...query} = buildSearchQueryFromModifiers(modifiers)
-    return convertIzzySearchQueryToIss3(query).q ?? ""
+    return normaliseIss3Q(convertIzzySearchQueryToIss3(query).q ?? "")
 }
 
-// If giving a different answer to the page would show or hide a later question
-// which can change the search query (eg answering "No" to sleep-tonight hides
-// the housing subcategory question) then returns every answer which shows the
-// same questions as the given answer. Otherwise returns null. Expects the
-// current answers to be in storage.
-function getAnswersShowingSameQuestions(
-    category: Category,
-    page: PersonalisationPage,
-    answer: Answer,
-): Array<Answer> | null {
-    if (page.type !== "question") {
-        return null
-    }
-    const laterPages = category.personalisation
-        .slice(category.personalisation.indexOf(page) + 1)
-        .filter(laterPage => laterPage.type === "question" &&
-            laterPage.getShouldIncludePage &&
-            Object.values(laterPage.possibleAnswers)
-                .some(changes => Object.keys(changes).length)
+// Identifies the leaves which have the same answers apart from the given page
+function getKeyWithout(answers: Answers, pageName: string): string {
+    return JSON.stringify(
+        Object.entries(answers).filter(([name]) => name !== pageName)
+    )
+}
+
+// Returns the answers in the leaf which have to be saved to reproduce its "q"
+// value.
+//
+// Following a flow only saves the answers in it, so the user's existing
+// answers (or none) are used for every other page. An answer can therefore
+// only be left out if every possible answer to that page, including skipping
+// it, gives the same "q" value. Otherwise it's kept, even if it's "(skipped)"
+// (eg skipping the food subcategory is what keeps the default food search
+// terms, which picking any subcategory would replace).
+//
+// When several answers to a page give the same "q" value (eg most ages add no
+// search terms) they're all listed with "oneOf" so a user who already gave
+// one of them keeps it. The first is saved for anyone else, which is skipping
+// (or selecting nothing) when that's one of them.
+//
+// Other answers to the page come from the other leaves with the same answers
+// to every other page. An answer which shows or hides a later question gives
+// leaves with different pages answered, so it's never treated as the same as
+// one which doesn't and the page is never left out.
+// See docs/other-services-panel.md § "Turning a related search back into a flow"
+function getFlowAnswers(
+    leaf: Leaf,
+    possibleAnswersByPage: Map<string, Array<Answer>>,
+    qsByKeyWithout: Map<string, Map<string, string>>,
+): FlowAnswers {
+    const flowAnswers: FlowAnswers = {}
+    for (const [pageName, answer] of Object.entries(leaf.answers)) {
+        const possibleAnswers = possibleAnswersByPage.get(pageName) || []
+        const qsByAnswer = qsByKeyWithout
+            .get(`${pageName}\n${getKeyWithout(leaf.answers, pageName)}`)
+        const equivalentAnswers = possibleAnswers.filter(otherAnswer =>
+            qsByAnswer?.get(JSON.stringify(otherAnswer)) === leaf.q
         )
-    if (!laterPages.length) {
-        return null
-    }
-    const getLaterPagesIncluded = () => laterPages
-        .map(laterPage => laterPage.getShouldIncludePage?.(category))
-        .join()
-    const currentLaterPagesIncluded = getLaterPagesIncluded()
-    const possibleAnswers = getPossibleAnswers(page)
-    const answersShowingSameQuestions = possibleAnswers.filter(otherAnswer => {
-        saveAnswer(page, otherAnswer)
-        return getLaterPagesIncluded() === currentLaterPagesIncluded
-    })
-    saveAnswer(page, answer)
-    return answersShowingSameQuestions.length < possibleAnswers.length ?
-        answersShowingSameQuestions
-        : null
-}
-
-// Returns the answers with any which don't affect the ISS3 "q" value removed,
-// including individual selections of multiple choice answers. Answers are
-// removed one at a time so that answers which only have no effect because of
-// another answer (eg both replace the search term with the same value) aren't
-// both removed. Answers which show or hide a later question that can change
-// the search query are kept since they affect "q" indirectly.
-function getAnswersAffectingQ(
-    category: Category,
-    answers: Answers,
-    modifiers: Array<SearchQueryModifier>,
-    shownPages: Array<PersonalisationPage>,
-): Answers {
-    const q = getQ(modifiers)
-    let remainingModifiers = modifiers
-    const remainingAnswers: Answers = {...answers}
-
-    const getModifiersWithAnswer = (pageName: string, answer: Answer | null) => {
-        const page = shownPages.find(page => page.name === pageName)
-        const newModifiers = remainingModifiers
-            .filter(modifier => modifier.name !== pageName)
-        if (answer !== null && page?.type === "question") {
-            const newAnswers = Array.isArray(answer) ? answer : [answer]
-            newModifiers.push({
-                name: pageName,
-                changes: newAnswers.map(answer => page.possibleAnswers[answer]),
-            })
-        }
-        return newModifiers
-    }
-
-    const setPageAnswer = (pageName: string, answer: Answer | null) => {
-        const newModifiers = getModifiersWithAnswer(pageName, answer)
-        if (getQ(newModifiers) !== q) {
-            return false
-        }
-        remainingModifiers = newModifiers
-        if (answer === null) {
-            delete remainingAnswers[pageName]
-        } else {
-            remainingAnswers[pageName] = answer
-        }
-        return true
-    }
-
-    for (const [pageName, answer] of Object.entries(answers)) {
-        const page = shownPages.find(page => page.name === pageName)
-        const showsOtherQuestions = page &&
-            getAnswersShowingSameQuestions(category, page, answer)
-        if (!showsOtherQuestions && setPageAnswer(pageName, null)) {
+        if (equivalentAnswers.length === possibleAnswers.length) {
             continue
         }
-        if (!Array.isArray(answer)) {
-            continue
-        }
-        for (const selection of answer) {
-            setPageAnswer(
-                pageName,
-                (remainingAnswers[pageName] as Array<string>)
-                    .filter(otherSelection => otherSelection !== selection)
-            )
-        }
+        flowAnswers[pageName] = equivalentAnswers.length > 1 ?
+            {oneOf: equivalentAnswers}
+            : answer
     }
-    return remainingAnswers
+    return flowAnswers
 }
 
+// How much following the flow could change the user's answers
 function countAnswers(flow: RelatedSearchFlow): number {
-    return Object.values(flow.answers)
-        .reduce((count, answer) => count +
-            (Array.isArray(answer) ? answer.length : 1), 0)
+    let count = 0
+    for (const answer of Object.values(flow.answers)) {
+        if (Array.isArray(answer)) {
+            count += answer.length
+        } else if (typeof answer === "object") {
+            count += 1 / answer.oneOf.length
+        } else {
+            count += 1
+        }
+    }
+    return count
+}
+
+function getLeaves(category: Category): Array<Leaf> {
+    const router = {
+        query: {categoryOrContentPageSlug: category.key},
+        route: "",
+    } as any as NextRouter
+    const leaves: Array<Leaf> = []
+    walkPages(
+        category,
+        category.personalisation,
+        {},
+        [],
+        (answers, shownPages) => leaves.push({
+            answers,
+            q: getQ(getSearchQueryModifiers(category, router, shownPages)),
+        }),
+    )
+    return leaves
+}
+
+function getPossibleAnswersByPage(
+    category: Category,
+): Map<string, Array<Answer>> {
+    const possibleAnswersByPage = new Map<string, Array<Answer>>()
+    for (const page of category.personalisation) {
+        if (page.type === "question") {
+            possibleAnswersByPage.set(page.name, getPossibleAnswers(page))
+        }
+    }
+    return possibleAnswersByPage
+}
+
+// For each page, the "q" value given by each answer to it when every other
+// page has the same answers
+function getQsByKeyWithout(
+    leaves: Array<Leaf>,
+): Map<string, Map<string, string>> {
+    const qsByKeyWithout = new Map<string, Map<string, string>>()
+    for (const leaf of leaves) {
+        for (const [pageName, answer] of Object.entries(leaf.answers)) {
+            const key = `${pageName}\n${getKeyWithout(leaf.answers, pageName)}`
+            if (!qsByKeyWithout.has(key)) {
+                qsByKeyWithout.set(key, new Map())
+            }
+            qsByKeyWithout.get(key)?.set(JSON.stringify(answer), leaf.q)
+        }
+    }
+    return qsByKeyWithout
 }
 
 export function buildRelatedSearchFlows(): RelatedSearchFlows {
@@ -274,43 +282,32 @@ export function buildRelatedSearchFlows(): RelatedSearchFlows {
             if (SKIPPED_CATEGORIES.includes(category.key)) {
                 continue
             }
-            const router = {
-                query: {categoryOrContentPageSlug: category.key},
-                route: "",
-            } as any as NextRouter
+            const leaves = getLeaves(category)
+            const possibleAnswersByPage = getPossibleAnswersByPage(category)
+            const qsByKeyWithout = getQsByKeyWithout(leaves)
 
-            walkPages(
-                category,
-                category.personalisation,
-                {},
-                [],
-                (answers, shownPages) => {
-                    const modifiers = getSearchQueryModifiers(
-                        category,
-                        router,
-                        shownPages,
-                    )
-                    const q = normaliseIss3Q(getQ(modifiers))
-                    if (!q) {
-                        return
-                    }
-                    const flow = {
-                        category: category.key,
-                        answers: getAnswersAffectingQ(
-                            category,
-                            answers,
-                            modifiers,
-                            shownPages,
-                        ),
-                    }
-                    // Several flows can produce the same "q" so keep the
-                    // simplest. Ties keep the first found which is stable
-                    // since categories and answers are walked in order.
-                    if (!flows[q] || countAnswers(flow) < countAnswers(flows[q])) {
-                        flows[q] = flow
-                    }
-                },
-            )
+            for (const leaf of leaves) {
+                if (!leaf.q) {
+                    continue
+                }
+                const flow = {
+                    category: category.key,
+                    answers: getFlowAnswers(
+                        leaf,
+                        possibleAnswersByPage,
+                        qsByKeyWithout,
+                    ),
+                }
+                // Several flows can produce the same "q" so keep the one
+                // which changes the user's answers least. Ties keep the first
+                // found which is stable since categories and answers are
+                // walked in order.
+                if (!flows[leaf.q] ||
+                    countAnswers(flow) < countAnswers(flows[leaf.q])
+                ) {
+                    flows[leaf.q] = flow
+                }
+            }
         }
     } finally {
         console.log = originalConsoleLog
