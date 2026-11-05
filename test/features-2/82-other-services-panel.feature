@@ -74,3 +74,15 @@ Feature: Other services panel
         When I visit /housing
         And I click the "relief" link
         Then I should be at /search/relief/Melbourne-VIC
+
+    # @see docs/other-services-panel.md § "Turning a related search back into a flow"
+    # @see docs/other-services-panel.md § "What clicking a suggestion does"
+    Scenario: A suggestion for the current category says what it changes and changes it
+        Given I am interested in the "Meals" subcategory for food
+        When I visit /food
+        Then I should see "Food without meals"
+
+        When I click the "Food without meals" link
+        Then I should be at /food/Melbourne-VIC
+        And I should see "Showing food services"
+        And I should not see "Food without meals"

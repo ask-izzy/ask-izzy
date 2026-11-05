@@ -47,7 +47,7 @@ export function initMockISSServer() {
 
     // ISS4 related searches used by the "People also searched for" panel.
     // The same related searches are returned for every query. They are raw
-    // ISS3 "q" values: three that are in src/constants/related-search-flows.json,
+    // ISS3 "q" values: four that are in src/constants/related-search-flows.json,
     // one plain search and one with query syntax that isn't in the table (so
     // should be dropped).
     // See docs/other-services-panel.md § "Turning a related search back into a flow"
@@ -61,6 +61,11 @@ export function initMockISSServer() {
                 "drugs alcohol",
                 "relief",
                 "(no longer used) -(coordinating bodies)",
+                // The default food search, which needs the food subcategory
+                // skipped
+                "meals -(coordinating bodies) -(home care) -(food safety) " +
+                    "-(meals on wheels) -(assistance with meals) " +
+                    "-(hire of facilities) -chsp -(meal preparation)",
             ],
         });
     });
