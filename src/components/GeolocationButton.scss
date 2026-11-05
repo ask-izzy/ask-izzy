@@ -1,6 +1,11 @@
 @use '../styles/mixins/colours';
 
 .GeoLocationButton {
+    .label {
+        display: flex;
+        gap: 1em;
+    }
+
     .LocationButton {
         padding: 0 15px 0 0;
         width: auto;
@@ -21,10 +26,7 @@
     }
 
     .SvgIcon {
-        height: 42px;
-        width: 42px;
-        margin-bottom: -4px;
-
+        height: 0.9em;
         path {
             fill: #{colours.get-static('colour-text-dark')};
             fill: var(--colour-text-dark);

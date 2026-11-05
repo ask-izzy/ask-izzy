@@ -101,3 +101,5 @@ Original icons files are stored in a separate repo hosted on GitHub. To add new 
 
 The src/icons/index.ts file will be updated, and a new ts file for the icon will be generated in src/icons.
 
+To trim the empty space around an icon run `./scripts/trim-icon-viewbox <IconName>` (eg `Tick`). This works out the tightest viewBox for the icon, updates its file in src/icons and records it in the `viewBoxOverrides` map in `scripts/iconify` so it's kept when icons are regenerated.
+
