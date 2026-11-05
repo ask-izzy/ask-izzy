@@ -35,6 +35,7 @@
     "lint-jsonlint": "find . -iname '*.json' -not -path './.next/*' -not -path './.git/*' -not -path './node_modules/*' -not -path './.cache/*' | xargs -L 1 jsonlint -q -c",
     "lint-pa11y": "npx -p @babel/node babel-node --extensions .ts,.js scripts/run-pa11y.ts --ignore-existing-issues",
     "lint-dev-pa11y": "yarn run with --test-env --dev env PORT=3000 yarn lint-pa11y",
+    "generate-related-search-flows": "npx -p @babel/node babel-node --extensions .ts,.tsx,.js scripts/generate-related-search-flows.ts",
     "lint-hadolint": "scripts/hadolint.sh Dockerfile",
     "lint-shellcheck": "find scripts components pages test -iname '*.sh' | xargs -n10 scripts/shellcheck.sh",
     "lint-storybook-components": "scripts/check-storybook-components.sh",
