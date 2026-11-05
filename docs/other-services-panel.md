@@ -36,9 +36,9 @@ The presentation also offered a single panel after the first X results
 
 - A small "People also searched for" heading sits above a row of chips, one
   per suggestion, at every screen width.
-- On narrow screens the chips stay in one row that scrolls sideways, which
-  keeps the panel short. From 800px wide (`$viewport-is-wide`) they wrap onto
-  more lines instead.
+- Chips wrap onto as many rows as they need. A chip too wide for a row by
+  itself (eg "Support and counselling without mental and emotional health" on
+  a phone) wraps its text onto more lines instead of running off screen.
 - The panel is deliberately quiet and has no collapse control. It repeats
   after every page of results, so it shouldn't compete with the results or
   nag.

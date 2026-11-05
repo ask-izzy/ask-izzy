@@ -24,21 +24,20 @@
         }
     }
 
-    // On a phone the chips sit in one row that scrolls sideways so the panel
-    // stays short. On wider screens there's room for them to wrap instead.
+    // Chips wrap onto as many rows as they need. A chip too wide for a row by
+    // itself wraps its text instead of running off screen.
     ul {
         display: flex;
         gap: 8px;
         margin: 0;
         padding: 0;
-        overflow-x: auto;
         list-style: none;
-        scrollbar-width: none;
         flex-wrap: wrap;
     }
 
     li {
         flex: none;
+        max-width: 100%;
     }
 
     a {
@@ -53,7 +52,7 @@
         font-size: 15px;
         font-weight: bold;
         text-decoration: none;
-        white-space: nowrap;
+        overflow-wrap: anywhere;
 
         &:hover {
             text-decoration: underline;
