@@ -47,6 +47,19 @@ Make sure you only cite a stated requirement. A test for something the docs do n
   dated, with who changed it and why — never a silent rewrite.
 
 
+## Testing
+
+e2e scenarios must not depend on real external services. They're replaced by:
+
+- **ISS** (including the ISS4 related searches endpoint): the mock server in
+  `test/support/mock-iss/`.
+- **The CMS**: the mock server started by `yarn mock-cms`.
+- **Google Maps**: `test/support/fake-google-maps.js`, served in place of the
+  real script by `test/e2e/run-features.ts`. Its services answer
+  `REQUEST_DENIED` unless a scenario registers a mock in `window.googleMocks`
+  (eg "googles directions matrix will return"). If the app starts using
+  another part of the Maps API, add it to the fake.
+
 ## Creating Plans/Making Major Changes
 
 Unless the user explicitly indicates otherwise the plan or major change should include:
