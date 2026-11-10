@@ -60,6 +60,7 @@ export default Yadda.localisation.English.library(dictionary)
     .when("I click the \"$STRING\" collapsible section", async function(this: StepContext, text: string) {
         await clickElementWithText(this.world.page, text, "details/summary")
     })
+    .when("I enter \"$STRING\" into the \"$STRING\" field", enterIntoField)
     .when("I search for \"$STRING\"", doSearch)
     .when("I clear the first search box", clearFirstSearchBox)
     .when("I search for \"$STRING\" and press enter", doSearchAndEnter)
@@ -294,6 +295,14 @@ async function takeScreenshot(this: StepContext): Promise<void> {
     const path = this.world.testInfo.outputPath("screenshot.png")
     await this.world.page.screenshot({path})
     this.world.log.push(`Screenshot saved to "${path}"`)
+}
+
+async function enterIntoField(
+    this: StepContext,
+    value: string,
+    label: string,
+): Promise<void> {
+    await this.world.page.getByLabel(label).fill(value)
 }
 
 async function enableDebugMode(this: StepContext): Promise<void> {

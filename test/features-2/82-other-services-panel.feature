@@ -22,14 +22,59 @@ Feature: Other services panel
         And I should see other services panels after results 4
 
     # @see docs/other-services-panel.md § "Where the panel appears"
-    Scenario: The panel is shown before each "See more results" and stays as more load
+    Scenario: The panel is shown after the 4th result, before each "See more results" and stays as more load
         When I visit /everyday-needs
         Then I should see "See more results"
-        And I should see other services panels after results 5
+        And I should see other services panels after results 4, 5
 
         When I click the "See more results" button
         And I wait for 10 results to load
-        Then I should see other services panels after results 5, 10
+        Then I should see other services panels after results 4, 5, 10
+
+    # @see docs/other-services-panel.md § "Changing where the panel appears in debug mode"
+    Scenario: In debug mode the position of the panel within the first page can be changed and is remembered
+        When I visit /everyday-needs
+        And I enable debug mode
+        And I click the "Debug other services panel" button
+        And I enter "2" into the "Also show the panel in the first page" field
+        Then I should see other services panels after results 2, 5
+
+        When I reload the page
+        Then I should see other services panels after results 2, 5
+
+        When I click the "See more results" button
+        And I wait for 10 results to load
+        Then I should see other services panels after results 2, 5, 10
+
+    # @see docs/other-services-panel.md § "Changing where the panel appears in debug mode"
+    Scenario: In debug mode the panel within the first page can be turned off
+        When I visit /everyday-needs
+        And I enable debug mode
+        And I click the "Debug other services panel" button
+        And I enter "0" into the "Also show the panel in the first page" field
+        Then I should see other services panels after results 5
+
+    # @see docs/other-services-panel.md § "Changing where the panel appears in debug mode"
+    Scenario: The changed position is only used in debug mode
+        When I visit /everyday-needs
+        And I enable debug mode
+        And I click the "Debug other services panel" button
+        And I enter "2" into the "Also show the panel in the first page" field
+        Then I should see other services panels after results 2, 5
+
+        When I click the "Turn off debug mode" button
+        Then I should see other services panels after results 4, 5
+
+    # @see docs/other-services-panel.md § "Changing where the panel appears in debug mode"
+    Scenario: The changed position can be reset to the default
+        When I visit /everyday-needs
+        And I enable debug mode
+        And I click the "Debug other services panel" button
+        And I enter "2" into the "Also show the panel in the first page" field
+        Then I should see other services panels after results 2, 5
+
+        When I click the "Reset to default (4)" button
+        Then I should see other services panels after results 4, 5
 
     # @see docs/other-services-panel.md § "Where the panel appears"
     Scenario: Crisis results don't count towards where the panel goes
