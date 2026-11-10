@@ -366,11 +366,15 @@ async function seeTheAlerts(
     table: Array<{Title: string, Body: string}>,
 ): Promise<void> {
     const alertElements = this.world.page.locator(".AlertBannerList .AlertBanner")
-    assert.strictEqual(
-        await alertElements.count(),
-        table.length,
-        "The number of actual alerts and expected alerts differ."
-    )
+    // Alerts load from the CMS after the page does (and on the results page
+    // only once there are results), so give them a chance to show up
+    await retry(async() => {
+        assert.strictEqual(
+            await alertElements.count(),
+            table.length,
+            "The number of actual alerts and expected alerts differ."
+        )
+    }, 10 * 1000)
 
     const textMatchesGlob = (text: string, glob: string) => {
         assert.match(
