@@ -1,7 +1,6 @@
 import {useEffect, useState} from "react"
 
 import Storage from "@/src/storage"
-import {useDebugModeContext} from "@/contexts/debug-mode-context"
 
 // How many results into the first page the extra other services panel goes.
 // See docs/other-services-panel.md § "Where the panel appears"
@@ -23,13 +22,13 @@ export function parseOtherServicesPanelPosition(
 
 /*
  * The number of results in the first page after which an extra other services
- * panel is shown (0 for none). In debug mode it can be overridden, and the
- * override is saved in storage so it survives reloads.
+ * panel is shown (0 for none). It can be overridden from debug mode, and the
+ * override is saved in storage so it survives reloads. Once saved it's used
+ * whether or not debug mode is still on.
  * See docs/other-services-panel.md § "Changing where the panel appears in debug mode"
  */
 export default function useOtherServicesPanelPosition(
 ): [number, SetOtherServicesPanelPosition] {
-    const [debugMode] = useDebugModeContext()
     const [override, setOverride] = useState<number | null>(null)
 
     // Read from storage after the first render so the client's first render
@@ -47,9 +46,7 @@ export default function useOtherServicesPanelPosition(
         setOverride(position)
     }
 
-    const position = debugMode && override !== null ?
-        override
-        : DEFAULT_OTHER_SERVICES_PANEL_POSITION
+    const position = override ?? DEFAULT_OTHER_SERVICES_PANEL_POSITION
 
     return [position, setPosition]
 }

@@ -55,7 +55,7 @@ Feature: Other services panel
         Then I should see other services panels after results 5
 
     # @see docs/other-services-panel.md § "Changing where the panel appears in debug mode"
-    Scenario: The changed position is only used in debug mode
+    Scenario: The changed position is still used after debug mode is turned off
         When I visit /everyday-needs
         And I enable debug mode
         And I click the "Debug other services panel" button
@@ -63,7 +63,11 @@ Feature: Other services panel
         Then I should see other services panels after results 2, 5
 
         When I click the "Turn off debug mode" button
-        Then I should see other services panels after results 4, 5
+        Then I should not see "Debug other services panel"
+        And I should see other services panels after results 2, 5
+
+        When I reload the page
+        Then I should see other services panels after results 2, 5
 
     # @see docs/other-services-panel.md § "Changing where the panel appears in debug mode"
     Scenario: The changed position can be reset to the default

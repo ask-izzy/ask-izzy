@@ -51,8 +51,10 @@ panel" section to the top of the results page. In it:
   (`debugOtherServicesPanelPosition`, in localStorage when it's available),
   so it's kept across reloads and other results pages.
 - "Reset to default" removes the saved value and goes back to 4.
-- The saved value is only used in debug mode. Turning debug mode off goes
-  back to 4, and turning it on again restores the saved value.
+- The saved value is used whether or not debug mode is on, so a tester can
+  turn debug mode off to see the page as a normal user would. Only the
+  control itself needs debug mode. Use "Reset to default" (or clear site
+  data) to go back to 4.
 
 ## How the panel looks
 
