@@ -5,6 +5,9 @@
  * matched against the step definitions in ./steps using Yadda.
  */
 
+import fs from "fs"
+import path from "path"
+
 import { test } from "@playwright/test"
 import type { BrowserContext, ConsoleMessage, Page } from "@playwright/test"
 import Yadda from "yadda"
@@ -35,34 +38,26 @@ function runStep(world: World, step: string): Promise<void> {
     })
 }
 
-// Each test gets a fresh browser context which would mean the google maps
-// api is downloaded for every test. Ask Izzy only waits a second for it to
-// load before giving up on things like travel times so cache it between tests
-// (the previous test harness reused the same browser which had the same
-// effect).
-type CachedResponse = {status: number, headers: Record<string, string>, body: Buffer}
-const googleMapsCache = new Map<string, CachedResponse>()
+// Serve a fake of the google maps api in place of the real one so scenarios
+// never depend on Google. Ask Izzy only waits a second for the api to load
+// before giving up on things like travel times, so a slow connection to Google
+// used to make scenarios fail.
+const fakeGoogleMapsScript = fs.readFileSync(
+    path.join(__dirname, "../support/fake-google-maps.js"),
+    "utf8",
+)
 
-async function cacheGoogleMapsFiles(context: BrowserContext): Promise<void> {
+async function fakeGoogleMaps(context: BrowserContext): Promise<void> {
     await context.route(/^https:\/\/maps\.(googleapis|gstatic)\.com\//, async route => {
-        const request = route.request()
-        if (request.method() !== "GET") {
-            return route.continue()
+        if (new URL(route.request().url()).pathname === "/maps/api/js") {
+            await route.fulfill({
+                status: 200,
+                contentType: "text/javascript",
+                body: fakeGoogleMapsScript,
+            })
+        } else {
+            await route.fulfill({status: 204})
         }
-        const url = request.url()
-        let cached = googleMapsCache.get(url)
-        if (!cached) {
-            const response = await route.fetch()
-            cached = {
-                status: response.status(),
-                headers: response.headers(),
-                body: await response.body(),
-            }
-            if (response.ok()) {
-                googleMapsCache.set(url, cached)
-            }
-        }
-        await route.fulfill(cached)
     })
 }
 
@@ -113,7 +108,7 @@ export default function runFeatures(directory: string): void {
 
                     try {
                         await test.step("Before scenario", async() => {
-                            await cacheGoogleMapsFiles(context)
+                            await fakeGoogleMaps(context)
                             await page.addInitScript(() => {
                                 console.log("------------- Loading Page -------------")
                                 console.log("URL: " + location.href)
