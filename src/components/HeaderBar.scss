@@ -14,10 +14,14 @@
     &.showTaper {
         min-height: 220px;
         padding-bottom: 2vw;
-        overflow-x: hidden;
 
-        /* used to hide ::after pseudo-element that creates the
-        diagonal taper at the bottom of the header */
+        /* Stop the ::after pseudo-element that creates the diagonal taper
+        at the bottom of the header from causing horizontal scrolling. Use
+        clip rather than hidden since hidden makes the header a scroll
+        container, which made the app bar disappear in older iOS Safari.
+        hidden is only a fallback for browsers without clip support. */
+        overflow-x: hidden;
+        overflow-x: clip;
 
         /* Diagonal cut-out taper at the bottom of the banner */
         &::after {
