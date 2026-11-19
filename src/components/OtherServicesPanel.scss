@@ -1,0 +1,61 @@
+@use '../styles/mixins/colours';
+
+// A quiet row of related-search chips with a small heading above them.
+// See docs/other-services-panel.md § "How the panel looks"
+.OtherServicesPanel {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    padding: 1em 16px 1.1em;
+    background-color: #{colours.get-static('colour-bg-standard')};
+    background-color: var(--colour-bg-standard);
+
+    .heading {
+        display: flex;
+        align-items: center;
+        gap: 0.1em;
+        margin: 0;
+        font-weight: 500;
+        color: #{colours.get-static('colour-text-mid')};
+        color: var(--colour-text-mid);
+
+        .SearchIcon {
+            display: block;
+        }
+    }
+
+    // Chips wrap onto as many rows as they need. A chip too wide for a row by
+    // itself wraps its text instead of running off screen.
+    ul {
+        display: flex;
+        gap: 8px;
+        margin: 0;
+        padding: 0;
+        list-style: none;
+        flex-wrap: wrap;
+    }
+
+    li {
+        flex: none;
+        max-width: 100%;
+    }
+
+    a {
+        display: inline-flex;
+        align-items: center;
+        padding: 0.6em 1.2em;
+        border-radius: 999px;
+        background-color: #{colours.get-static('colour-bg-highlight-muted-1')};
+        background-color: var(--colour-bg-highlight-muted-1);
+        color: #{colours.get-static('colour-text-brand')};
+        color: var(--colour-text-brand);
+        font-size: 15px;
+        font-weight: bold;
+        text-decoration: none;
+        overflow-wrap: anywhere;
+
+        &:hover {
+            text-decoration: underline;
+        }
+    }
+}
