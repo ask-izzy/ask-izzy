@@ -82,31 +82,39 @@ async function hotlinePositionAndText(
     expectedText: string,
 ): Promise<void> {
     const elements = this.world.page.locator(".CrisisLineItem, .ResultListItem")
-    const count = await elements.count()
+    // Results load after the page does, so give them a chance to show up
+    await retry(async() => {
+        const count = await elements.count()
+        if (count < expectedPos) {
+            throw new Error(
+                `Expected crisis line at position ${expectedPos},
+                 but there were only ${count} lines.`
+            )
+        }
+        const crisisLine = elements.nth(expectedPos - 1)
+        assert.equal(await crisisLine.getAttribute("class"), "CrisisLineItem")
 
-    if (count < expectedPos) {
-        throw new Error(
-            `Expected crisis line at position ${expectedPos},
-             but there were only ${count} lines.`
-        )
-    }
-    const crisisLine = elements.nth(expectedPos - 1)
-    assert.equal(await crisisLine.getAttribute("class"), "CrisisLineItem")
-
-    const phone = crisisLine.locator(".Phone .ContactButton").first()
-    assert.equal(normaliseText(await phone.innerText()), expectedText)
+        const phone = crisisLine.locator(".Phone .ContactButton").first()
+        assert.equal(normaliseText(await phone.innerText()), expectedText)
+    }, 10 * 1000)
 }
 
 async function assertHotlineHeading(this: StepContext, text: string): Promise<void> {
     const elements = this.world.page.locator(".CrisisLineItem, .CrisisHeader")
 
-    const classes = [
-        await elements.nth(0).getAttribute("class"),
-        await elements.nth(1).getAttribute("class"),
-    ]
+    // Results load after the page does, so give them a chance to show up
+    await retry(async() => {
+        // Checked first so getAttribute() doesn't wait for elements which
+        // aren't there yet
+        assert(await elements.count() >= 2, "Expected a crisis heading and line")
+        const classes = [
+            await elements.nth(0).getAttribute("class"),
+            await elements.nth(1).getAttribute("class"),
+        ]
 
-    assert.deepStrictEqual(classes, ["CrisisHeader", "CrisisLineItem"])
-    assert.equal(normaliseText(await elements.nth(0).innerText()), text)
+        assert.deepStrictEqual(classes, ["CrisisHeader", "CrisisLineItem"])
+        assert.equal(normaliseText(await elements.nth(0).innerText()), text)
+    }, 10 * 1000)
 }
 
 async function assertNoSuchResults(
