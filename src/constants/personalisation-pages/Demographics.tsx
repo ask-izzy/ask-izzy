@@ -5,6 +5,7 @@ import type {ReactNode} from "react";
 import type {
     PersonalisationPage,
 } from "@/types/personalisation-page"
+import demographicSuggestionLabels from "@/src/constants/demographic-suggestion-labels"
 
 export default ({
     type: "question",
@@ -77,6 +78,7 @@ export default ({
         "Aboriginal": "Aboriginal and/or Torres Strait Islander",
     },
     title: "Personal",
+    suggestionLabels: demographicSuggestionLabels,
     resetDfvOptionsOnDisplay: true,
     prettyPrintAnswer(answer: string): ReactNode {
         switch (answer) {

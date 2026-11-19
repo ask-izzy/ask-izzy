@@ -45,13 +45,15 @@ Feature: Other services panel
         And I should not see "People also searched for"
 
     # @see docs/other-services-panel.md § "How the panel looks"
-    Scenario: The suggestions are shown under a "People also searched for" heading
+    # @see docs/other-services-panel.md § "Turning a related search back into a flow"
+    Scenario: Related searches are shown under a "People also searched for" heading
         When I visit /everyday-needs
         Then I should see "People also searched for"
         And I should see "Meals"
         And I should see "Food vouchers"
-        And I should see "Drugs & Alcohol Counselling"
-        And I should see "Somewhere to sleep"
+        And I should see "Drugs and alcohol counselling"
+        And I should see "“relief”"
+        And I should not see "no longer used"
 
     # @see docs/other-services-panel.md § "What clicking a suggestion does" - All details known
     Scenario: A suggestion with every detail known shows matching services
@@ -64,11 +66,24 @@ Feature: Other services panel
     Scenario: A suggestion needing extra details shows the personalisation wizard
         Given I have not said who is looking for help with support-and-counselling
         When I visit /housing
-        And I click the "Drugs & Alcohol Counselling" link
+        And I click the "Drugs and alcohol counselling" link
         Then I should be at /support-and-counselling/Melbourne-VIC/personalise/page/who-is-looking-for-help-support-and-counselling
 
-    # @see docs/other-services-panel.md § "What clicking a suggestion does" - Anything else
-    Scenario: A suggestion that can't be matched to a category does a keyword search
+    # @see docs/other-services-panel.md § "What clicking a suggestion does" - A keyword search
+    Scenario: A plain related search that isn't a known flow does a keyword search
         When I visit /housing
-        And I click the "Somewhere to sleep" link
-        Then I should be at /search/Somewhere to sleep/Melbourne-VIC
+        And I click the "“relief”" link
+        Then I should be at /search/relief/Melbourne-VIC
+
+    # @see docs/other-services-panel.md § "Turning a related search back into a flow"
+    # @see docs/other-services-panel.md § "What clicking a suggestion does"
+    Scenario: A suggestion for the current category is told apart from it and changes it
+        Given I am interested in the "Meals" subcategory for food
+        When I visit /food
+        Then I should see "Food vouchers"
+        And I should not see "Food without meals"
+
+        When I click the "Food" link
+        Then I should be at /food/Melbourne-VIC
+        And I should see "Showing food services"
+        And I should see "Meals"

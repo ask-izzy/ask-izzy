@@ -13,6 +13,12 @@ export default ({
         "No": housingCrisisSearchQueryChanges,
     },
     title: "Sleep tonight",
+    suggestionLabels: {
+        "Yes": "for people safe tonight",
+        "No": "for people not safe tonight",
+        // Gives the same search as "Yes"
+        "(skipped)": "for people safe tonight",
+    },
     prettyPrintAnswer(answer: string): string {
         switch (answer) {
         case "Yes":
