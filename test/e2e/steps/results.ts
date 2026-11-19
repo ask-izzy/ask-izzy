@@ -28,6 +28,12 @@ export default Yadda.localisation.English.library(dictionary)
     .then("my results should not contain\n$table", assertNoSuchResults)
     .then("I should see other services panels after results $STRING", assertOtherServicesPanelPositions)
     .then("the iss search request should be:\n$lines", assertISSSearchRequestFromStep)
+    .then("I should see a \"$STRING\" suggestion", async function(this: StepContext, label: string) {
+        await assertSuggestionShown(this, label, true)
+    })
+    .then("I should not see a \"$STRING\" suggestion", async function(this: StepContext, label: string) {
+        await assertSuggestionShown(this, label, false)
+    })
 
 async function waitForResultCount(this: StepContext, expected: number): Promise<void> {
     const results = this.world.page.locator(".ResultListItem, .CrisisLineItem")
@@ -175,5 +181,27 @@ async function assertOtherServicesPanelPositions(
                 ).length)
         })
         assert.deepStrictEqual(actual, expected)
+    }, 5 * 1000)
+}
+
+/*
+ * Check whether a "People also searched for" panel has a suggestion with the
+ * given label. Unlike "I should see", the same text elsewhere on the page (eg
+ * in the answers summary) doesn't count.
+ */
+async function assertSuggestionShown(
+    stepContext: StepContext,
+    label: string,
+    shouldBeShown: boolean,
+): Promise<void> {
+    const suggestions = stepContext.world.page.locator(".OtherServicesPanel a")
+    await retry(async() => {
+        const labels = (await getVisibleTexts(suggestions)).map(normaliseText)
+        assert.equal(
+            labels.includes(label),
+            shouldBeShown,
+            `Expected "${label}" ${shouldBeShown ? "in" : "not in"} ` +
+                `suggestions: ${JSON.stringify(labels)}`,
+        )
     }, 5 * 1000)
 }

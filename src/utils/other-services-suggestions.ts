@@ -1,6 +1,7 @@
 import categories from "@/src/constants/categories"
 import Category from "@/src/constants/Category"
 import storage from "@/src/storage"
+import {rememberAnswersForCurrentPage} from "@/src/utils/answer-history"
 import type {
     PersonalisationQuestionPage,
     SuggestionLabel,
@@ -638,10 +639,13 @@ export function saveOtherServicesSuggestionAnswers(
     if (target.type !== "category") {
         return
     }
-    for (const [pageName, answer] of Object.entries(target.answers)) {
+    const changes = Object.entries(target.answers).filter(([pageName, answer]) => {
         const options = isAnswerOptions(answer) ? answer.oneOf : [answer]
-        if (!options.some(option => isSavedAnswer(pageName, option))) {
-            saveAnswer(pageName, getAnswerToSave(answer))
-        }
+        return !options.some(option => isSavedAnswer(pageName, option))
+    })
+    // So going back shows the search from before the suggestion
+    rememberAnswersForCurrentPage(changes.map(([pageName]) => pageName))
+    for (const [pageName, answer] of changes) {
+        saveAnswer(pageName, getAnswerToSave(answer))
     }
 }

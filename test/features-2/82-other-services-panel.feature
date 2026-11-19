@@ -136,3 +136,25 @@ Feature: Other services panel
         Then I should be at /food/Melbourne-VIC
         And I should see "Showing food services"
         And I should see "Meals"
+
+    # @see docs/other-services-panel.md § "Going back after clicking a suggestion"
+    Scenario: Going back after a suggestion changed answers shows the earlier search
+        Given I am interested in the "Meals" subcategory for food
+        When I visit /food
+        Then I should see a "Food vouchers" suggestion
+        And I should not see a "Meals" suggestion
+
+        When I click the "Food vouchers" link
+        Then I should be at /food/Melbourne-VIC
+        And I should see a "Meals" suggestion
+        And I should not see a "Food vouchers" suggestion
+
+        When I click back from the browser UI
+        Then I should be at /food/Melbourne-VIC
+        And I should see a "Food vouchers" suggestion
+        And I should not see a "Meals" suggestion
+
+        When I click forward from the browser UI
+        Then I should be at /food/Melbourne-VIC
+        And I should see a "Meals" suggestion
+        And I should not see a "Food vouchers" suggestion

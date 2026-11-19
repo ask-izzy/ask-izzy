@@ -19,6 +19,7 @@ import type {SearchQuery, SearchQueryModifier}
 import * as gtm from "@/src/google-tag-manager";
 import {attachTransportTimes} from "@/src/iss/travelTimes"
 import storage from "@/src/storage";
+import {onAnswersRestoredInPlace} from "@/src/utils/answer-history";
 import type {SortType} from "@/src/components/base/Dropdown"
 import type {travelTimesStatus as travelTimesStatusType} from "@/src/hooks/useTravelTimesUpdater";
 import {
@@ -83,12 +84,19 @@ export default (router: NextRouter): UseServiceResults => {
         setTravelTimesStatus,
     } = useServiceResultsContext()
 
+    // Going back or forward can restore answers without changing the URL
+    // See docs/other-services-panel.md § "Going back after clicking a suggestion"
+    const [answersRestoredCount, setAnswersRestoredCount] = useState(0)
+    useEffect(() => onAnswersRestoredInPlace(
+        () => setAnswersRestoredCount(count => count + 1)
+    ), [])
+
     useEffect(() => {
         if (router.isReady) {
             initNewSearch()
             usersnapFireEventPageView()
         }
-    }, [router.isReady, router.asPath])
+    }, [router.isReady, router.asPath, answersRestoredCount])
 
     useEffectOnChange(() => {
         if (search) {

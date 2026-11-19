@@ -25,6 +25,7 @@ import "@/src/analytics"
 import * as gtm from "@/src/google-tag-manager";
 import storage from "@/src/storage";
 import useTrackInitialRenderStatus from "@/hooks/useTrackInitialRenderStatus";
+import {restoreAnswersOnHistoryNavigation} from "@/src/utils/answer-history";
 
 // Pages can define their title and type as static properties
 type AppPropsWithPageInfo = AppProps & {
@@ -41,6 +42,9 @@ function App(appProps: AppPropsWithPageInfo): ReactNode {
     const router = useRouter()
 
     useTrackInitialRenderStatus()
+
+    // So going back after a suggestion changed answers shows the old search
+    useEffect(() => restoreAnswersOnHistoryNavigation(router), [])
 
     useEffect(() => {
         router.events.on("routeChangeError", (error, url) => {
