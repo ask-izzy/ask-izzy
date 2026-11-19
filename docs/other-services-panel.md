@@ -37,8 +37,9 @@ The presentation also offered a single panel after the first X results
 - A small "People also searched for" heading sits above a row of chips, one
   per suggestion, at every screen width.
 - Chips wrap onto as many rows as they need. A chip too wide for a row by
-  itself (eg "Support and counselling without mental and emotional health" on
-  a phone) wraps its text onto more lines instead of running off screen.
+  itself (eg "Supported accommodation and residential care: not just for
+  people on parole or recently released" on a phone) wraps its text onto
+  more lines instead of running off screen.
 - The panel is deliberately quiet and has no collapse control. It repeats
   after every page of results, so it shouldn't compete with the results or
   nag.
@@ -121,32 +122,54 @@ Each related search is handled as follows:
    answer to the category's subcategory question (eg "Meals"), or the category
    name if there isn't one (eg "Housing").
 2. **Not found, and it looks like something a person typed** (no brackets and
-   no `-` exclusions): it becomes a keyword search labelled with the text. For
-   example, "relief".
+   no `-` exclusions): it becomes a keyword search labelled with the text, in
+   italics to set it apart from categories. For example, "*relief*".
 3. **Anything else** is dropped. It's a query the app no longer produces, eg
    from an older version of a category's search terms.
 
-A suggestion for **the category the user is already in** is labelled by how
-it differs from their saved answers, since the category name alone wouldn't
-tell them anything:
+Labels carry **the least detail that tells each suggestion apart** from the
+other suggestions in the panel and from the current search. A suggestion
+whose label is already different (eg "Meals" next to "Food vouchers" while on
+Housing) gets nothing more. One that shares its label with another
+suggestion, or with the current search, gets details added:
 
-- A new subcategory answer replaces the category name, eg "Food vouchers".
-- Other answers it would change follow a colon, eg "Housing: no".
-- Answers it would remove follow "without", eg "Food without meals".
-- Answers the user already gave (including any `oneOf` option) aren't
-  mentioned.
+- **Answers it would change** follow a colon, eg "Housing: not safe tonight".
+- **Demographics it would add or remove** are the group the services are
+  for, eg "Housing: for couples" or "Housing: not just for couples".
+  Removing one broadens the search rather than leaving anyone out, hence
+  "not just for". Phrases starting the same way are merged, eg "for couples
+  and veterans".
+- **The category** goes first when the same subcategory answer is in
+  different categories, separated by " › ", eg "Support and counselling ›
+  Homelessness support" while on Housing › Homelessness support.
 
-Suggestions are sentence case, like the answers themselves. So an answer added
-part way through a label has its first word lowercased, unless that word is an
-acronym (eg "LGBTIQA+") or a proper noun (eg "Aboriginal", "Centrelink").
+Each label picks the fewest details that work, trying questions in the order
+they're asked. So two "Housing" suggestions that differ in sleep tonight,
+age and demographics are just "Housing: safe tonight" and "Housing: not safe
+tonight". Details are always relative to the user's saved answers, since
+that's what following the suggestion changes. An answer the user already has
+(including any `oneOf` option) is never mentioned, and a question the flow
+leaves alone can't be used. Labels which still match after picking are
+given the details both picked. A suggestion for the current category which
+can't be told apart from the current search at all is dropped.
 
-Several suggestions for **another category** can end up with the same label,
-eg two "Housing" flows. They're told apart by adding their answers to the
-fewest questions needed: questions are added in the order they're asked
-until every pair differs in at least one, eg "Housing: yes" and "Housing: no"
-for sleep tonight. Each suggestion's answer is what the user would have after
-following it. That's their current answer when the flow leaves the question
-alone or its `oneOf` includes it. A skipped answer isn't shown.
+The current search's own label (what suggestions mustn't look like) is its
+subcategory answer from its flow in the table, or the category name.
+
+Answers which don't make sense without their question get a phrase from the
+page's `suggestionLabels`, eg sleep tonight "No" is "not safe tonight", ages
+are "aged 0 to 17" and skipping age is "any age". A phrase can say how
+removing the answer reads too, as the demographic pages do with
+[src/constants/demographic-suggestion-labels.ts](../src/constants/demographic-suggestion-labels.ts).
+Otherwise a removed answer follows "without", eg "Housing without <phrase>".
+An answer given `null`, like "No - show me everything", counts as no
+answer. **Add a phrase when adding an answer that wouldn't read well after
+"Housing:" or "without"**, including any new demographic.
+
+Other answers are sentence case, like the answers themselves. So an answer
+added part way through a label has its first word lowercased, unless that
+word is an acronym (eg "LGBTIQA+") or a proper noun (eg "Aboriginal",
+"Centrelink").
 
 Lookups ignore case and extra whitespace. Related searches that are the
 current search are dropped. If suggestions still share a label (they can't be

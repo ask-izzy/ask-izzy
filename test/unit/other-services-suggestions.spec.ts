@@ -159,7 +159,7 @@ test.describe("Turning related searches into suggestions", function() {
         )
     })
 
-    test("tells apart suggestions for another category which would have the same label", (): void => {
+    test("tells apart suggestions with the same label by the fewest answers", (): void => {
         const suggestions = getOtherServicesSuggestions(
             [
                 "housing -(coordinating bodies) -(respite care)",
@@ -174,11 +174,11 @@ test.describe("Turning related searches into suggestions", function() {
         // demographics which also differ
         assert.deepStrictEqual(
             suggestions.map(suggestion => suggestion.label),
-            ["Housing: yes", "Housing: no"],
+            ["Housing: safe tonight", "Housing: not safe tonight"],
         )
     })
 
-    test("uses the user's answers when telling suggestions apart", (): void => {
+    test("doesn't mention an answer the user already has", (): void => {
         storage.setItem("sleep-tonight", "No")
         const suggestions = getOtherServicesSuggestions(
             ["housing (rental assistance)", "housing -(coordinating bodies) -(respite care)"],
@@ -189,7 +189,35 @@ test.describe("Turning related searches into suggestions", function() {
 
         assert.deepStrictEqual(
             suggestions.map(suggestion => suggestion.label),
-            ["Housing: no", "Housing: yes"],
+            ["Housing", "Housing: safe tonight"],
+        )
+        storage.clear()
+    })
+
+    test("adds the category when the same subcategory answer is in another category", (): void => {
+        storage.setItem("housing-subcategory", "Homelessness support")
+        const suggestions = getOtherServicesSuggestions(
+            ["(homelessness counselling)", "meals"],
+            "(homelessness)",
+            {
+                ...flows,
+                "(homelessness)": {
+                    category: "housing",
+                    answers: {"housing-subcategory": "Homelessness support"},
+                },
+                "(homelessness counselling)": {
+                    category: "support-and-counselling",
+                    answers: {
+                        "support-and-counselling-subcategory": "Homelessness support",
+                    },
+                },
+            },
+            "housing",
+        )
+
+        assert.deepStrictEqual(
+            suggestions.map(suggestion => suggestion.label),
+            ["Support and counselling › Homelessness support", "Meals"],
         )
         storage.clear()
     })
@@ -223,61 +251,110 @@ test.describe("Turning related searches into suggestions", function() {
 })
 
 /** @see docs/other-services-panel.md § "Turning a related search back into a flow" */
-test.describe("Labelling a suggestion for the category the user is in", function() {
+test.describe("Telling a suggestion apart from the current search", function() {
     test.afterEach(() => storage.clear())
 
-    function getLabel(relatedSearch: string, currentCategoryKey: string): string | undefined {
-        return getOtherServicesSuggestion(relatedSearch, flows, currentCategoryKey)?.label
+    function getLabels(
+        relatedSearches: Array<string>,
+        currentQ: string,
+        currentCategoryKey: string,
+    ): Array<string> {
+        return getOtherServicesSuggestions(
+            relatedSearches,
+            currentQ,
+            flows,
+            currentCategoryKey,
+        ).map(suggestion => suggestion.label)
     }
 
-    test("says which answer it would remove", (): void => {
+    test("needs nothing more when the subcategory answer differs", (): void => {
         storage.setItem("food-subcategory", "Meals")
 
-        assert.strictEqual(getLabel("meals -(coordinating bodies)", "food"), "Food without meals")
-        // Suggestions for other categories aren't affected
-        assert.strictEqual(getLabel("meals -(coordinating bodies)", "housing"), "Food")
+        assert.deepStrictEqual(
+            getLabels(["meals -(coordinating bodies)", "(food vouchers)"], "meals", "food"),
+            ["Food", "Food vouchers"],
+        )
     })
 
-    test("is labelled with a new subcategory answer", (): void => {
-        storage.setItem("food-subcategory", "Meals")
-
-        assert.strictEqual(getLabel("(food vouchers)", "food"), "Food vouchers")
-    })
-
-    test("lists other answers it would change", (): void => {
+    test("adds the fewest answers it would change", (): void => {
         storage.setItem("sleep-tonight", "Yes")
         storage.setItem("housing-subcategory", "Emergency accommodation")
-        storage.setItem("age", "27 to 39")
-
-        // The subcategory question isn't asked when sleep tonight is "No"
-        // so the saved subcategory isn't mentioned
-        assert.strictEqual(getLabel("housing (rental assistance)", "housing"), "Housing: no")
-    })
-
-    test("lowercases added answers unless they start with an acronym or proper noun", (): void => {
-        storage.setJSON("demographics", ["Aboriginal and/or Torres Strait Islander", "LGBTIQA+"])
-        storage.setItem("sleep-tonight", "Yes")
-
-        assert.strictEqual(
-            getLabel("housing (rental assistance)", "housing"),
-            "Housing: no",
-        )
-        assert.strictEqual(
-            getLabel("(crisis accommodation) youth", "housing"),
-            "Emergency accommodation: 0 to 17 without " +
-                "Aboriginal and/or Torres Strait Islander, LGBTIQA+",
-        )
-    })
-
-    test("leaves out answers the user already gave", (): void => {
-        storage.setItem("sleep-tonight", "Yes")
-        storage.setItem("housing-subcategory", "Affordable housing")
         storage.setItem("age", "18 to 26")
         storage.setJSON("demographics", ["Couples"])
 
-        assert.strictEqual(
-            getLabel("(crisis accommodation) youth", "housing"),
-            "Emergency accommodation: 0 to 17 without couples",
+        // Age is enough so removing couples isn't mentioned
+        assert.deepStrictEqual(
+            getLabels(["(crisis accommodation) youth"], "(crisis accommodation)", "housing"),
+            ["Emergency accommodation: aged 0 to 17"],
+        )
+    })
+
+    test("says which answer it would remove, and only one if that's enough", (): void => {
+        storage.setItem("sleep-tonight", "Yes")
+        storage.setItem("housing-subcategory", "Emergency accommodation")
+        storage.setItem("age", "0 to 17")
+        storage.setJSON("demographics", ["Aboriginal and/or Torres Strait Islander", "Couples"])
+
+        // Couples would be removed too but isn't needed to tell it apart
+        assert.deepStrictEqual(
+            getLabels(["(crisis accommodation) youth"], "(crisis accommodation)", "housing"),
+            ["Emergency accommodation: not just for Aboriginal and Torres Strait Islander people"],
+        )
+    })
+
+    test("lists several answers when one isn't enough", (): void => {
+        storage.setItem("sleep-tonight", "Yes")
+        storage.setItem("housing-subcategory", "Emergency accommodation")
+        const crisis = {
+            "sleep-tonight": "Yes",
+            "housing-subcategory": "Emergency accommodation",
+        }
+
+        assert.deepStrictEqual(
+            getOtherServicesSuggestions(
+                ["(couples veterans)", "(couples)", "(veterans)"],
+                "(crisis accommodation)",
+                {
+                    ...flows,
+                    "(couples veterans)": {
+                        category: "housing",
+                        answers: {...crisis, demographics: ["Couples", "Veteran"]},
+                    },
+                    "(couples)": {
+                        category: "housing",
+                        answers: {...crisis, demographics: ["Couples"]},
+                    },
+                    "(veterans)": {
+                        category: "housing",
+                        answers: {...crisis, demographics: ["Veteran"]},
+                    },
+                },
+                "housing",
+            ).map(suggestion => suggestion.label),
+            [
+                "Emergency accommodation: for couples and veterans",
+                "Emergency accommodation: for couples",
+                "Emergency accommodation: for veterans",
+            ],
+        )
+    })
+
+    test("uses the page's wording for answers which need the question", (): void => {
+        storage.setItem("sleep-tonight", "Yes")
+
+        assert.deepStrictEqual(
+            getLabels(["housing (rental assistance)"], "housing -(coordinating bodies) -(respite care)", "housing"),
+            ["Housing: not safe tonight"],
+        )
+    })
+
+    test("is dropped when it can't be told apart from the current search", (): void => {
+        storage.setItem("sleep-tonight", "Yes")
+        storage.setItem("housing-subcategory", "Emergency accommodation")
+
+        assert.deepStrictEqual(
+            getLabels(["(crisis accommodation)", "meals"], "(emergency housing)", "housing"),
+            ["Meals"],
         )
     })
 })

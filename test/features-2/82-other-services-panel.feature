@@ -77,12 +77,13 @@ Feature: Other services panel
 
     # @see docs/other-services-panel.md § "Turning a related search back into a flow"
     # @see docs/other-services-panel.md § "What clicking a suggestion does"
-    Scenario: A suggestion for the current category says what it changes and changes it
+    Scenario: A suggestion for the current category is told apart from it and changes it
         Given I am interested in the "Meals" subcategory for food
         When I visit /food
-        Then I should see "Food without meals"
+        Then I should see "Food vouchers"
+        And I should not see "Food without meals"
 
-        When I click the "Food without meals" link
+        When I click the "Food" link
         Then I should be at /food/Melbourne-VIC
         And I should see "Showing food services"
-        And I should not see "Food without meals"
+        And I should see "Meals"

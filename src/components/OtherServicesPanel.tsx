@@ -44,7 +44,11 @@ function OtherServicesPanel({suggestions}: Props): ReactNode {
                                     eventLabel: label,
                                 }}
                             >
-                                {label}
+                                {/* Keyword searches are in italics to set
+                                    them apart from categories */}
+                                {target.type === "search" ?
+                                    <em>{label}</em>
+                                    : label}
                             </Link>
                         </li>
                     )

@@ -1,6 +1,10 @@
 import categories from "@/src/constants/categories"
 import Category from "@/src/constants/Category"
 import storage from "@/src/storage"
+import type {
+    PersonalisationQuestionPage,
+    SuggestionLabel,
+} from "@/types/personalisation-page"
 
 type Answer = string | Array<string>
 
@@ -84,10 +88,6 @@ function isNoAnswer(answer: Answer | null | undefined): boolean {
         (Array.isArray(answer) && answer.length === 0)
 }
 
-function describeAnswer(answer: Answer): string {
-    return Array.isArray(answer) ? answer.join(", ") : answer
-}
-
 // First words of answers which are proper nouns so stay capitalised
 const PROPER_NOUNS = ["Aboriginal", "Centrelink", "I", "I'm"]
 
@@ -106,16 +106,16 @@ function lowercaseFirstWord(text: string): string {
     return text.charAt(0).toLowerCase() + text.slice(1)
 }
 
-// Describes an answer which is added part way through a label
-function describeAnswerInLabel(answer: Answer): string {
-    return Array.isArray(answer) ?
-        answer.map(lowercaseFirstWord).join(", ")
-        : lowercaseFirstWord(answer)
+function getQuestionPage(
+    category: Category,
+    pageName: string,
+): PersonalisationQuestionPage | null {
+    const page = category.personalisation.find(page => page.name === pageName)
+    return page?.type === "question" ? page : null
 }
 
 function getSavedAnswer(category: Category, pageName: string): Answer | null {
-    const page = category.personalisation.find(page => page.name === pageName)
-    if (page?.type === "question" && page.multipleChoice) {
+    if (getQuestionPage(category, pageName)?.multipleChoice) {
         const saved = storage.getJSON(pageName)
         return Array.isArray(saved) ? saved : null
     }
@@ -123,91 +123,23 @@ function getSavedAnswer(category: Category, pageName: string): Answer | null {
 }
 
 /*
- * A suggestion for another category is labelled with its subcategory answer,
- * or the category name if there isn't one. A suggestion for the category the
- * user is already in also says how it differs from their answers: answers it
- * would change are listed after a colon and answers it would remove after
- * "without", eg "Food without meals" when on Food › Meals.
- * See docs/other-services-panel.md § "Turning a related search back into a flow"
+ * How a single answer is described part way through a label, or null if it's
+ * not worth mentioning (eg skipping). Pages can give phrases for answers
+ * which don't make sense without the question, eg "not safe tonight".
  */
-function getLabelForFlow(
+function describeAnswerInLabel(
     category: Category,
-    answers: FlowAnswers,
-    currentCategoryKey?: string,
-): string {
-    if (category.key === currentCategoryKey) {
-        return getLabelForCurrentCategoryFlow(category, answers)
+    pageName: string,
+    answer: string | null,
+): SuggestionLabel | null {
+    const suggestionLabels =
+        getQuestionPage(category, pageName)?.suggestionLabels || {}
+    if (answer !== null && answer in suggestionLabels) {
+        return suggestionLabels[answer]
     }
-    const subcategoryAnswer = answers[`${category.key}-subcategory`]
-    const answerToSave = subcategoryAnswer && getAnswerToSave(subcategoryAnswer)
-    return typeof answerToSave === "string" && !isNoAnswer(answerToSave) ?
-        answerToSave
-        : category.name
-}
-
-function getLabelForCurrentCategoryFlow(
-    category: Category,
-    answers: FlowAnswers,
-): string {
-    const subcategoryPageName = `${category.key}-subcategory`
-    let label = category.name
-    const changes: Array<string> = []
-    const removals: Array<string> = []
-    for (const [pageName, answer] of Object.entries(answers)) {
-        const options = isAnswerOptions(answer) ? answer.oneOf : [answer]
-        if (options.some(option => isSavedAnswer(pageName, option))) {
-            continue
-        }
-        const newAnswer = getAnswerToSave(answer)
-        if (isNoAnswer(newAnswer)) {
-            const savedAnswer = getSavedAnswer(category, pageName)
-            if (savedAnswer && !isNoAnswer(savedAnswer)) {
-                removals.push(describeAnswerInLabel(savedAnswer))
-            }
-        } else if (pageName === subcategoryPageName) {
-            label = describeAnswer(newAnswer)
-        } else {
-            changes.push(describeAnswerInLabel(newAnswer))
-        }
-    }
-    if (changes.length) {
-        label += `: ${changes.join(", ")}`
-    }
-    if (removals.length) {
-        label += ` without ${removals.join(", ")}`
-    }
-    return label
-}
-
-/*
- * Work out where a related search should take the user, or null if it can't
- * be used.
- * See docs/other-services-panel.md § "Turning a related search back into a flow"
- */
-export function getOtherServicesSuggestion(
-    relatedSearch: string,
-    flows: RelatedSearchFlows,
-    currentCategoryKey?: string,
-): OtherServicesSuggestion | null {
-    const q = normaliseIss3Q(relatedSearch)
-    const flow = flows[q]
-    if (flow) {
-        const category = categories.find(
-            category => category.key === flow.category
-        )
-        if (!category) {
-            return null
-        }
-        return {
-            label: getLabelForFlow(category, flow.answers, currentCategoryKey),
-            target: {type: "category", category, answers: flow.answers},
-        }
-    }
-    if (q && isPlainSearch(q)) {
-        const searchText = relatedSearch.trim().replace(/\s+/g, " ")
-        return {label: searchText, target: {type: "search", searchText}}
-    }
-    return null
+    return isNoAnswer(answer) || answer === null ?
+        null
+        : lowercaseFirstWord(answer)
 }
 
 // The answer the user would have to the page after following the flow
@@ -225,96 +157,371 @@ function getResultingAnswer(
         getAnswerToSave(answer)
 }
 
+type LabelParts = {with: Array<string>, without: Array<string>}
+
 /*
- * Picks the fewest pages whose answers tell the flows apart, adding pages in
- * the order they're asked until every pair of flows differs in at least one.
+ * A detail is something a label can mention to tell suggestions apart: the
+ * category, a single choice page (by name) or one answer to a multiple
+ * choice page ("<page name>\n<answer>"), so that a label only mentions the
+ * answers that matter rather than everything that changed on the page.
  */
-function getDistinguishingPages(
-    category: Category,
-    flowAnswers: Array<FlowAnswers>,
-): Array<string> {
-    const pageNames = category.personalisation
-        .map(page => page.name)
-        .filter(pageName => flowAnswers.some(answers => pageName in answers))
-    let indistinguishablePairs: Array<[number, number]> = flowAnswers
-        .flatMap((_, first) => flowAnswers
-            .slice(first + 1)
-            .map((_, index): [number, number] => [first, first + 1 + index])
-        )
-    const distinguishingPages: Array<string> = []
-    for (const pageName of pageNames) {
-        const resultingAnswers = flowAnswers.map(answers => JSON.stringify(
-            getResultingAnswer(category, answers, pageName)
-        ))
-        const remainingPairs = indistinguishablePairs.filter(([first, second]) =>
-            resultingAnswers[first] === resultingAnswers[second]
-        )
-        if (remainingPairs.length < indistinguishablePairs.length) {
-            distinguishingPages.push(pageName)
-            indistinguishablePairs = remainingPairs
-        }
-        if (!indistinguishablePairs.length) {
-            break
-        }
+const CATEGORY_DETAIL = "(category)"
+
+function getDetailPageAndAnswer(detail: string): [string, string | null] {
+    const [pageName, answer] = detail.split("\n")
+    return [pageName, answer ?? null]
+}
+
+function describeAdded(label: SuggestionLabel | null): LabelParts {
+    if (!label) {
+        return {with: [], without: []}
     }
-    return distinguishingPages
+    return {with: [typeof label === "string" ? label : label.with], without: []}
+}
+
+// An answer with its own phrase for being removed (eg "not just for
+// couples") is listed with the changes, otherwise it's put after "without"
+function describeRemoved(label: SuggestionLabel | null): LabelParts {
+    if (!label) {
+        return {with: [], without: []}
+    }
+    return typeof label === "string" ?
+        {with: [], without: [label]}
+        : {with: [label.without], without: []}
+}
+
+// Whether following the flow would add or remove one answer to a multiple
+// choice page
+function describeMultipleChoiceChange(
+    resulting: Answer | null,
+    saved: Answer | null,
+    answer: string,
+    label: SuggestionLabel | null,
+): LabelParts {
+    const isResulting = Array.isArray(resulting) && resulting.includes(answer)
+    const isSaved = Array.isArray(saved) && saved.includes(answer)
+    if (isResulting === isSaved) {
+        return {with: [], without: []}
+    }
+    return isResulting ? describeAdded(label) : describeRemoved(label)
 }
 
 /*
- * Suggestions for another category which would have the same label (eg two
- * "Housing" flows that differ in whether somewhere to sleep is needed
- * tonight) get the answers that tell them apart added, eg "Housing: yes" and
- * "Housing: no". Answers which would be skipped aren't shown.
- * See docs/other-services-panel.md § "Turning a related search back into a flow"
+ * How following the flow would change the detail: the answer it would add
+ * or the one it would remove. Pages the flow leaves alone, and answers the
+ * user already gave, aren't mentioned.
  */
-function distinguishSameLabelSuggestions(
-    suggestions: Array<OtherServicesSuggestion>,
-    currentCategoryKey?: string,
-): Array<OtherServicesSuggestion> {
-    const groups = new Map<string, Array<OtherServicesSuggestion>>()
-    for (const suggestion of suggestions) {
-        const {target} = suggestion
-        if (target.type !== "category" || target.category.key === currentCategoryKey) {
-            continue
+function describeChange(
+    category: Category,
+    answers: FlowAnswers,
+    detail: string,
+): LabelParts {
+    const parts: LabelParts = {with: [], without: []}
+    const [pageName, multipleChoiceAnswer] = getDetailPageAndAnswer(detail)
+    if (!(pageName in answers)) {
+        return parts
+    }
+    const saved = getSavedAnswer(category, pageName)
+    const resulting = getResultingAnswer(category, answers, pageName)
+    const describe = (answer: string | null) =>
+        describeAnswerInLabel(category, pageName, answer)
+
+    if (multipleChoiceAnswer !== null) {
+        return describeMultipleChoiceChange(
+            resulting,
+            saved,
+            multipleChoiceAnswer,
+            describe(multipleChoiceAnswer),
+        )
+    }
+    if (Array.isArray(resulting) || Array.isArray(saved)) {
+        return parts
+    }
+    if (resulting === saved || (isNoAnswer(resulting) && isNoAnswer(saved))) {
+        return parts
+    }
+    const resultingLabel = describe(resulting)
+    return resultingLabel ?
+        describeAdded(resultingLabel)
+        : describeRemoved(describe(saved))
+}
+
+// A suggestion, or the current search, as something which can be labelled
+type LabelItem = {
+    category: Category,
+    // Personalisation answers of the flow. The current search has none so is
+    // never described as changing anything.
+    answers: FlowAnswers,
+    // The subcategory answer, or the category name if there isn't one
+    base: string,
+}
+
+// Details are mentioned in the order they're asked
+function getDetailOrder(category: Category, detail: string): number {
+    if (detail === CATEGORY_DETAIL) {
+        return -1
+    }
+    const [pageName, answer] = getDetailPageAndAnswer(detail)
+    const pageIndex = category.personalisation
+        .findIndex(page => page.name === pageName)
+    const answerIndex = answer === null ? 0 : Object.keys(
+        getQuestionPage(category, pageName)?.possibleAnswers || {}
+    ).indexOf(answer)
+    return pageIndex * 1000 + answerIndex
+}
+
+// Phrases about the same thing are merged so it isn't repeated, eg "for
+// couples" and "for veterans" are "for couples and veterans"
+const MERGED_PHRASE_PREFIXES = ["not just for ", "for "]
+
+function joinPhrases(phrases: Array<string>): string {
+    const groups: Array<{prefix: string, rests: Array<string>}> = []
+    for (const phrase of phrases) {
+        const prefix = MERGED_PHRASE_PREFIXES
+            .find(prefix => phrase.startsWith(prefix)) ?? ""
+        const group = prefix && groups.find(group => group.prefix === prefix)
+        if (group) {
+            group.rests.push(phrase.slice(prefix.length))
+        } else {
+            groups.push({prefix, rests: [phrase.slice(prefix.length)]})
         }
-        const key = `${target.category.key}\n${suggestion.label.toLowerCase()}`
-        groups.set(key, [...groups.get(key) || [], suggestion])
+    }
+    return groups.map(({prefix, rests}) => prefix + (rests.length > 1 ?
+        `${rests.slice(0, -1).join(", ")} and ${rests[rests.length - 1]}`
+        : rests[0]
+    )).join(", ")
+}
+
+/*
+ * Labels the item with just the given details. A changed answer is listed
+ * after a colon and a removed one after "without". The category is put
+ * before the subcategory answer (eg "Housing › Rental disputes") when it's
+ * needed to tell apart the same subcategory answer in different categories.
+ */
+function getLabel(item: LabelItem, details: Array<string>): string {
+    const withParts: Array<string> = []
+    const withoutParts: Array<string> = []
+    const orderedDetails = [...details].sort((first, second) =>
+        getDetailOrder(item.category, first) -
+            getDetailOrder(item.category, second)
+    )
+    for (const detail of orderedDetails) {
+        if (detail !== CATEGORY_DETAIL) {
+            const parts = describeChange(item.category, item.answers, detail)
+            withParts.push(...parts.with)
+            withoutParts.push(...parts.without)
+        }
+    }
+    const showCategory = details.includes(CATEGORY_DETAIL) &&
+        item.base !== item.category.name
+    let label = showCategory ?
+        `${item.category.name} › ${item.base}`
+        : item.base
+    if (withParts.length) {
+        label += `: ${joinPhrases(withParts)}`
+    }
+    if (withoutParts.length) {
+        label += `${withParts.length ? ", without" : " without"} ` +
+            withoutParts.join(" or ")
+    }
+    return label
+}
+
+function getBase(category: Category, answers: FlowAnswers): string {
+    const subcategoryAnswer = answers[`${category.key}-subcategory`]
+    const answer = subcategoryAnswer && getAnswerToSave(subcategoryAnswer)
+    if (!answer || isNoAnswer(answer)) {
+        return category.name
+    }
+    return Array.isArray(answer) ? answer.join(", ") : answer
+}
+
+// The details which could tell apart items with the same base label: the
+// category if they differ, then every page any of them has an answer for
+// (each answer separately for multiple choice pages). The subcategory is
+// already in the base label.
+function getCandidateDetails(items: Array<LabelItem>): Array<string> {
+    const details: Array<string> = []
+    if (new Set(items.map(item => item.category.key)).size > 1) {
+        details.push(CATEGORY_DETAIL)
+    }
+    for (const item of items) {
+        for (const page of item.category.personalisation) {
+            if (
+                page.name === `${item.category.key}-subcategory` ||
+                !items.some(other => page.name in other.answers)
+            ) {
+                continue
+            }
+            const pageDetails = page.type === "question" && page.multipleChoice ?
+                Object.keys(page.possibleAnswers)
+                    .map(answer => `${page.name}\n${answer}`)
+                : [page.name]
+            details.push(...pageDetails.filter(detail => !details.includes(detail)))
+        }
+    }
+    return details
+}
+
+// Every combination of the given size, in the order given
+function* getDetailCombinations(
+    details: Array<string>,
+    size: number,
+    start = 0,
+): Generator<Array<string>> {
+    if (size === 0) {
+        yield []
+        return
+    }
+    for (let index = start; index <= details.length - size; index++) {
+        for (const rest of getDetailCombinations(details, size - 1, index + 1)) {
+            yield [details[index], ...rest]
+        }
+    }
+}
+
+/*
+ * Picks the fewest details for each suggestion's label which tell it apart
+ * from every other suggestion with the same base label and from the current
+ * search. Suggestions which can't be told apart from the current search are
+ * dropped (null).
+ */
+function getMinimalLabels(
+    suggestions: Array<LabelItem>,
+    current: LabelItem | null,
+): Array<string | null> {
+    const items = current ? [...suggestions, current] : suggestions
+    const sameBase = (item: LabelItem, other: LabelItem) =>
+        item !== other && item.base.toLowerCase() === other.base.toLowerCase()
+    const differ = (item: LabelItem, other: LabelItem, details: Array<string>) =>
+        getLabel(item, details).toLowerCase() !==
+            getLabel(other, details).toLowerCase()
+
+    const chosen = suggestions.map(suggestion => {
+        const others = items.filter(other => sameBase(suggestion, other))
+        // Only details which tell it apart from at least one other are worth
+        // trying
+        const details = getCandidateDetails([suggestion, ...others])
+            .filter(detail => others.some(other =>
+                differ(suggestion, other, [detail])
+            ))
+        for (let size = 0; size <= details.length; size++) {
+            for (const combination of getDetailCombinations(details, size)) {
+                if (others.every(other => differ(suggestion, other, combination))) {
+                    return combination
+                }
+            }
+        }
+        return details
+    })
+
+    // Different suggestions can pick different details and still end up
+    // with the same label (eg two which only differ from each other by what
+    // they'd leave out). Those use the details both picked.
+    for (let pass = 0; pass < suggestions.length; pass++) {
+        let changed = false
+        suggestions.forEach((suggestion, index) => {
+            suggestions.forEach((other, otherIndex) => {
+                if (
+                    otherIndex <= index ||
+                    getLabel(suggestion, chosen[index]).toLowerCase() !==
+                        getLabel(other, chosen[otherIndex]).toLowerCase()
+                ) {
+                    return
+                }
+                const union = [...new Set([...chosen[index], ...chosen[otherIndex]])]
+                if (union.length > chosen[index].length ||
+                    union.length > chosen[otherIndex].length) {
+                    chosen[index] = union
+                    chosen[otherIndex] = union
+                    changed = true
+                }
+            })
+        })
+        if (!changed) {
+            break
+        }
     }
 
-    const labels = new Map<OtherServicesSuggestion, string>()
-    for (const group of groups.values()) {
-        const targets = group.map(suggestion => suggestion.target)
-            .filter(target => target.type === "category")
-        if (group.length < 2 || targets.length !== group.length) {
-            continue
+    return suggestions.map((suggestion, index) => {
+        if (
+            current &&
+            sameBase(suggestion, current) &&
+            !differ(suggestion, current, chosen[index])
+        ) {
+            return null
         }
-        const category = targets[0].category
-        const flowAnswers = targets.map(target => target.answers)
-        const pageNames = getDistinguishingPages(category, flowAnswers)
-        group.forEach((suggestion, index) => {
-            const shownAnswers = pageNames
-                .filter(pageName => pageName in flowAnswers[index])
-                .map(pageName =>
-                    getResultingAnswer(category, flowAnswers[index], pageName)
-                )
-                .filter((answer): answer is Answer => !isNoAnswer(answer))
-                .map(describeAnswerInLabel)
-            if (shownAnswers.length) {
-                labels.set(suggestion, `${suggestion.label}: ${shownAnswers.join(", ")}`)
-            }
-        })
+        return getLabel(suggestion, chosen[index])
+    })
+}
+
+/*
+ * Work out where a related search should take the user, or null if it can't
+ * be used. The label is the subcategory answer, or the category name if there
+ * isn't one. getOtherServicesSuggestions() adds the details needed to tell
+ * suggestions apart.
+ * See docs/other-services-panel.md § "Turning a related search back into a flow"
+ */
+export function getOtherServicesSuggestion(
+    relatedSearch: string,
+    flows: RelatedSearchFlows,
+): OtherServicesSuggestion | null {
+    const q = normaliseIss3Q(relatedSearch)
+    const flow = flows[q]
+    if (flow) {
+        const category = categories.find(
+            category => category.key === flow.category
+        )
+        if (!category) {
+            return null
+        }
+        return {
+            label: getBase(category, flow.answers),
+            target: {type: "category", category, answers: flow.answers},
+        }
     }
-    return suggestions.map(suggestion => labels.has(suggestion) ?
-        {...suggestion, label: labels.get(suggestion) || suggestion.label}
-        : suggestion
+    if (q && isPlainSearch(q)) {
+        const searchText = relatedSearch.trim().replace(/\s+/g, " ")
+        return {label: searchText, target: {type: "search", searchText}}
+    }
+    return null
+}
+
+// The current search as an item to tell suggestions apart from. Its base
+// label is worked out from its own flow when it's in the table, since a
+// saved subcategory answer may not be used (eg housing when not safe tonight).
+function getCurrentSearchItem(
+    currentQ: string,
+    flows: RelatedSearchFlows,
+    currentCategoryKey?: string,
+): LabelItem | null {
+    const category = categories.find(
+        category => category.key === currentCategoryKey
     )
+    if (!category) {
+        return null
+    }
+    const flow = flows[normaliseIss3Q(currentQ)]
+    const subcategoryPageName = `${category.key}-subcategory`
+    let base = category.name
+    const subcategoryAnswer = flow ?
+        flow.answers[subcategoryPageName] &&
+            getResultingAnswer(category, flow.answers, subcategoryPageName)
+        : getSavedAnswer(category, subcategoryPageName)
+    if (subcategoryAnswer && !isNoAnswer(subcategoryAnswer)) {
+        base = Array.isArray(subcategoryAnswer) ?
+            subcategoryAnswer.join(", ")
+            : subcategoryAnswer
+    }
+    return {category, answers: {}, base}
 }
 
 /*
  * Turn the related searches for the current search into suggestions,
- * dropping any which can't be used or are the current search. Suggestions
- * which would have the same label are told apart where possible, otherwise
- * only the first (most relevant) is kept.
+ * dropping any which can't be used or are the current search. Each label
+ * has just enough detail to tell it apart from the other suggestions and
+ * from the current search. If suggestions still share a label, only the
+ * first (most relevant) is kept.
  * See docs/other-services-panel.md § "Where suggestions come from"
  */
 export function getOtherServicesSuggestions(
@@ -328,25 +535,44 @@ export function getOtherServicesSuggestions(
         .filter(relatedSearch =>
             normaliseIss3Q(relatedSearch) !== normalisedCurrentQ
         )
-        .map(relatedSearch => getOtherServicesSuggestion(
-            relatedSearch,
-            flows,
-            currentCategoryKey,
-        ))
+        .map(relatedSearch => getOtherServicesSuggestion(relatedSearch, flows))
         .filter((suggestion): suggestion is OtherServicesSuggestion =>
             Boolean(suggestion?.label)
         )
 
-    const seenLabels = new Set<string>()
-    return distinguishSameLabelSuggestions(suggestions, currentCategoryKey)
-        .filter(suggestion => {
-            const labelKey = suggestion.label.toLowerCase()
-            if (seenLabels.has(labelKey)) {
-                return false
+    const categorySuggestions = suggestions.filter(
+        suggestion => suggestion.target.type === "category"
+    )
+    const labels = getMinimalLabels(
+        categorySuggestions.map(suggestion => {
+            const target = suggestion.target as
+                Extract<OtherServicesSuggestionTarget, {type: "category"}>
+            return {
+                category: target.category,
+                answers: target.answers,
+                base: suggestion.label,
             }
-            seenLabels.add(labelKey)
-            return true
-        })
+        }),
+        getCurrentSearchItem(currentQ, flows, currentCategoryKey),
+    )
+    const labelled = suggestions.flatMap(suggestion => {
+        const index = categorySuggestions.indexOf(suggestion)
+        if (index === -1) {
+            return [suggestion]
+        }
+        const label = labels[index]
+        return label ? [{...suggestion, label}] : []
+    })
+
+    const seenLabels = new Set<string>()
+    return labelled.filter(suggestion => {
+        const labelKey = suggestion.label.toLowerCase()
+        if (seenLabels.has(labelKey)) {
+            return false
+        }
+        seenLabels.add(labelKey)
+        return true
+    })
 }
 
 /*

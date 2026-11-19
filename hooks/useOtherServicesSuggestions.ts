@@ -16,8 +16,8 @@ import type {OtherServicesSuggestion} from "@/src/utils/other-services-suggestio
  */
 export default function useOtherServicesSuggestions(
     izzyQuery: SearchQuery | null | undefined,
-    // The category of the current results page so suggestions for it can say
-    // how they differ from the user's answers
+    // The category of the current results page so suggestions can be told
+    // apart from the current search
     currentCategoryKey?: string,
 ): Array<OtherServicesSuggestion> {
     const [suggestions, setSuggestions] =
