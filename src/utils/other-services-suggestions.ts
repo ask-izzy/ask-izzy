@@ -125,7 +125,8 @@ function getSavedAnswer(category: Category, pageName: string): Answer | null {
 /*
  * How a single answer is described part way through a label, or null if it's
  * not worth mentioning (eg skipping). Pages can give phrases for answers
- * which don't make sense without the question, eg "not safe tonight".
+ * which don't make sense without the question, eg "for people not safe
+ * tonight".
  */
 function describeAnswerInLabel(
     category: Category,
@@ -318,7 +319,12 @@ function getLabel(item: LabelItem, details: Array<string>): string {
         `${item.category.name} › ${item.base}`
         : item.base
     if (withParts.length) {
-        label += `: ${joinPhrases(withParts)}`
+        // Phrases starting with a joining word like "for" read on from the
+        // base label without a colon, eg "Housing for couples"
+        const phrases = joinPhrases(withParts)
+        const startsWithJoiningWord = MERGED_PHRASE_PREFIXES
+            .some(prefix => phrases.startsWith(prefix))
+        label += `${startsWithJoiningWord ? " " : ": "}${phrases}`
     }
     if (withoutParts.length) {
         label += `${withParts.length ? ", without" : " without"} ` +

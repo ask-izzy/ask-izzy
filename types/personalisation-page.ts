@@ -38,8 +38,9 @@ export type PersonalisationQuestionPage = PersonalisationAnyPage & {
     prettyPrintAnswer?: (arg0: string) => string | ReactNode,
     // How an answer is described part way through a "People also searched
     // for" suggestion label when it doesn't make sense without the question
-    // (eg "not safe tonight" rather than "No"). null means the answer adds
-    // nothing worth mentioning, like skipping. "(skipped)" can be given too.
+    // (eg "for people not safe tonight" rather than "No"). null means the
+    // answer adds nothing worth mentioning, like skipping. "(skipped)" can be
+    // given too.
     // See docs/other-services-panel.md § "Turning a related search back into a flow"
     suggestionLabels?: {[answer: string]: SuggestionLabel | null},
     baseTextBoxComponent?: ReactNode,

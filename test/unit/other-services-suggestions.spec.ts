@@ -174,7 +174,7 @@ test.describe("Turning related searches into suggestions", function() {
         // demographics which also differ
         assert.deepStrictEqual(
             suggestions.map(suggestion => suggestion.label),
-            ["Housing: safe tonight", "Housing: not safe tonight"],
+            ["Housing for people safe tonight", "Housing for people not safe tonight"],
         )
     })
 
@@ -189,7 +189,7 @@ test.describe("Turning related searches into suggestions", function() {
 
         assert.deepStrictEqual(
             suggestions.map(suggestion => suggestion.label),
-            ["Housing", "Housing: safe tonight"],
+            ["Housing", "Housing for people safe tonight"],
         )
         storage.clear()
     })
@@ -285,7 +285,7 @@ test.describe("Telling a suggestion apart from the current search", function() {
         // Age is enough so removing couples isn't mentioned
         assert.deepStrictEqual(
             getLabels(["(crisis accommodation) youth"], "(crisis accommodation)", "housing"),
-            ["Emergency accommodation: aged 0 to 17"],
+            ["Emergency accommodation for under 18s"],
         )
     })
 
@@ -298,7 +298,7 @@ test.describe("Telling a suggestion apart from the current search", function() {
         // Couples would be removed too but isn't needed to tell it apart
         assert.deepStrictEqual(
             getLabels(["(crisis accommodation) youth"], "(crisis accommodation)", "housing"),
-            ["Emergency accommodation: not just for Aboriginal and Torres Strait Islander people"],
+            ["Emergency accommodation not just for Aboriginal and Torres Strait Islander people"],
         )
     })
 
@@ -332,9 +332,9 @@ test.describe("Telling a suggestion apart from the current search", function() {
                 "housing",
             ).map(suggestion => suggestion.label),
             [
-                "Emergency accommodation: for couples and veterans",
-                "Emergency accommodation: for couples",
-                "Emergency accommodation: for veterans",
+                "Emergency accommodation for couples and veterans",
+                "Emergency accommodation for couples",
+                "Emergency accommodation for veterans",
             ],
         )
     })
@@ -344,7 +344,7 @@ test.describe("Telling a suggestion apart from the current search", function() {
 
         assert.deepStrictEqual(
             getLabels(["housing (rental assistance)"], "housing -(coordinating bodies) -(respite care)", "housing"),
-            ["Housing: not safe tonight"],
+            ["Housing for people not safe tonight"],
         )
     })
 

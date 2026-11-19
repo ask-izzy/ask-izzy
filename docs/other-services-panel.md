@@ -37,7 +37,7 @@ The presentation also offered a single panel after the first X results
 - A small "People also searched for" heading sits above a row of chips, one
   per suggestion, at every screen width.
 - Chips wrap onto as many rows as they need. A chip too wide for a row by
-  itself (eg "Supported accommodation and residential care: not just for
+  itself (eg "Supported accommodation and residential care not just for
   people on parole or recently released" on a phone) wraps its text onto
   more lines instead of running off screen.
 - The panel is deliberately quiet and has no collapse control. It repeats
@@ -133,20 +133,23 @@ whose label is already different (eg "Meals" next to "Food vouchers" while on
 Housing) gets nothing more. One that shares its label with another
 suggestion, or with the current search, gets details added:
 
-- **Answers it would change** follow a colon, eg "Housing: not safe tonight".
-- **Demographics it would add or remove** are the group the services are
-  for, eg "Housing: for couples" or "Housing: not just for couples".
-  Removing one broadens the search rather than leaving anyone out, hence
-  "not just for". Phrases starting the same way are merged, eg "for couples
-  and veterans".
+- **Answers it would change** say who the services are for, eg "Housing for
+  people not safe tonight", "Housing for people aged 65 or older" or
+  "Housing for couples".
+- **Demographics it would remove** are "not just for", eg "Housing not just
+  for couples", since removing one broadens the search rather than leaving
+  anyone out.
+- Phrases starting the same way are merged, eg "for couples and veterans".
+  An answer without a "for" phrase follows a colon instead, eg
+  "Housing: <answer>".
 - **The category** goes first when the same subcategory answer is in
   different categories, separated by " › ", eg "Support and counselling ›
   Homelessness support" while on Housing › Homelessness support.
 
 Each label picks the fewest details that work, trying questions in the order
 they're asked. So two "Housing" suggestions that differ in sleep tonight,
-age and demographics are just "Housing: safe tonight" and "Housing: not safe
-tonight". Details are always relative to the user's saved answers, since
+age and demographics are just "Housing for people safe tonight" and
+"Housing for people not safe tonight". Details are always relative to the user's saved answers, since
 that's what following the suggestion changes. An answer the user already has
 (including any `oneOf` option) is never mentioned, and a question the flow
 leaves alone can't be used. Labels which still match after picking are
@@ -157,14 +160,15 @@ The current search's own label (what suggestions mustn't look like) is its
 subcategory answer from its flow in the table, or the category name.
 
 Answers which don't make sense without their question get a phrase from the
-page's `suggestionLabels`, eg sleep tonight "No" is "not safe tonight", ages
-are "aged 0 to 17" and skipping age is "any age". A phrase can say how
-removing the answer reads too, as the demographic pages do with
+page's `suggestionLabels`, eg sleep tonight "No" is "for people not safe
+tonight", ages are "for people aged 18 to 26" and skipping age is "for all
+ages". A phrase can say how removing the answer reads too, as the demographic pages do with
 [src/constants/demographic-suggestion-labels.ts](../src/constants/demographic-suggestion-labels.ts).
 Otherwise a removed answer follows "without", eg "Housing without <phrase>".
 An answer given `null`, like "No - show me everything", counts as no
-answer. **Add a phrase when adding an answer that wouldn't read well after
-"Housing:" or "without"**, including any new demographic.
+answer. **Add a "for …" phrase when adding an answer to a page whose
+answers can be in labels**, including any new demographic, so labels keep
+reading the same way.
 
 Other answers are sentence case, like the answers themselves. So an answer
 added part way through a label has its first word lowercased, unless that
