@@ -76,6 +76,10 @@ export default Yadda.localisation.English.library(dictionary)
         await this.world.page.goBack({timeout: PAGE_LOAD_TIMEOUT})
         await documentReady(this.world.page)
     })
+    .when("I click forward from the browser UI", async function(this: StepContext) {
+        await this.world.page.goForward({timeout: PAGE_LOAD_TIMEOUT})
+        await documentReady(this.world.page)
+    })
     .when("I reload the page", async function(this: StepContext) {
         await this.world.page.reload({timeout: PAGE_LOAD_TIMEOUT})
         await documentReady(this.world.page)

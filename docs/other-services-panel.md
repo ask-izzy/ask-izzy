@@ -304,3 +304,30 @@ same Next.js page component. `ResultsListPage` keeps the category, title and
 search status of the path it first rendered, so
 `pages/[categoryOrContentPageSlug]/index.tsx` keys it on the path (ignoring the
 query string and hash). Each results path therefore gets a fresh instance.
+
+### Going back after clicking a suggestion
+
+Answers are saved once for the whole app, not per page of history, and a
+results page builds its search from them each time it's shown. Without extra
+handling, going back after a suggestion changed an answer would show the
+earlier page with the suggestion's answers.
+
+To avoid that, `src/utils/answer-history.ts` ties the answers a suggestion
+changes to browser history entries, using the unique `key` Next.js puts in
+each entry's `history.state`:
+
+1. Before a suggestion saves its answers, the current values of the answers it
+   changes are stored against the current entry.
+2. On going back or forward to an entry with stored answers (a `popstate`
+   listener), the same answers are stored against the entry being left, and
+   then the stored ones are restored, before Next renders the page. So going
+   forward again shows the suggestion's search. Next's `beforePopState` isn't
+   used because Next ignores the first `popstate` when the URL is unchanged.
+3. If the URL stays the same (eg a suggestion for the current category), the
+   results page isn't remounted, so `useServiceResults` is told to rebuild its
+   search.
+
+Only answers changed by a suggestion are stored. Going back still doesn't undo
+answers changed in other ways, eg editing them in the personalisation wizard.
+The stored answers are kept in the session store, so clearing your answers
+removes them as well.
