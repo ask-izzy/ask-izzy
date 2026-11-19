@@ -46,7 +46,10 @@ function ResultsListPage({router}: Props): ReactNode {
         searchHasNextPage,
         loadNextSearchPage,
     } = useServiceResults(router)
-    const otherServicesSuggestions = useOtherServicesSuggestions(
+    const {
+        suggestions: otherServicesSuggestions,
+        isLoading: otherServicesSuggestionsLoading,
+    } = useOtherServicesSuggestions(
         izzyQuery,
         category.key,
     )
@@ -137,6 +140,7 @@ function ResultsListPage({router}: Props): ReactNode {
         return (
             <OtherServicesPanel
                 suggestions={otherServicesSuggestions}
+                isLoading={otherServicesSuggestionsLoading}
             />
         )
     }

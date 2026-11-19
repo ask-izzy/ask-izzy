@@ -40,6 +40,12 @@ The presentation also offered a single panel after the first X results
   itself (eg "Supported accommodation and residential care not just for
   people on parole or recently released" on a phone) wraps its text onto
   more lines instead of running off screen.
+- While suggestions load, each copy of the panel shows its heading and four
+  grey placeholder chips that gently pulse (still for people who prefer
+  reduced motion). They're the same height as a chip, so the panel doesn't
+  jump when the real chips arrive. If there turn out to be no suggestions,
+  the panel goes away. Placeholders aren't shown when ISS4 isn't configured,
+  since no suggestions could arrive.
 - The panel is deliberately quiet and has no collapse control. It repeats
   after every page of results, so it shouldn't compete with the results or
   nag.
@@ -70,8 +76,9 @@ returns are `q` values, eg
 Suggestions are optional, so the panel is simply hidden when there aren't any.
 This covers the endpoint erroring, a 503 while its model loads,
 `NEXT_PUBLIC_ISS4_BASE_URL` or `NEXT_PUBLIC_ISS4_API_TOKEN` not being set, and
-every result being unusable. The panel is also empty until the suggestions
-have loaded.
+every result being unusable. Until the suggestions have loaded, it shows
+placeholder chips (see "How the panel looks"). Results never wait for
+suggestions.
 
 Being an external domain, the ISS4 host must be listed in
 `NEXT_PUBLIC_DOMAINS_ALLOWED_WITHOUT_PROXY` (or proxied) like the ISS3 host.
@@ -123,7 +130,8 @@ Each related search is handled as follows:
    name if there isn't one (eg "Housing").
 2. **Not found, and it looks like something a person typed** (no brackets and
    no `-` exclusions): it becomes a keyword search labelled with the text, in
-   italics to set it apart from categories. For example, "*relief*".
+   quotes to set it apart from categories. For example, “relief”. Text that's
+   already in quotes isn't quoted again.
 3. **Anything else** is dropped. It's a query the app no longer produces, eg
    from an older version of a category's search terms.
 
@@ -141,7 +149,7 @@ suggestion, or with the current search, gets details added:
   anyone out.
 - Phrases starting the same way are merged, eg "for couples and veterans".
   An answer without a "for" phrase follows a colon instead, eg
-  "Housing: <answer>".
+  `Housing: <answer>`.
 - **The category** goes first when the same subcategory answer is in
   different categories, separated by " › ", eg "Support and counselling ›
   Homelessness support" while on Housing › Homelessness support.
@@ -164,7 +172,7 @@ page's `suggestionLabels`, eg sleep tonight "No" is "for people not safe
 tonight", ages are "for people aged 18 to 26" and skipping age is "for all
 ages". A phrase can say how removing the answer reads too, as the demographic pages do with
 [src/constants/demographic-suggestion-labels.ts](../src/constants/demographic-suggestion-labels.ts).
-Otherwise a removed answer follows "without", eg "Housing without <phrase>".
+Otherwise a removed answer follows "without", eg `Housing without <phrase>`.
 An answer given `null`, like "No - show me everything", counts as no
 answer. **Add a "for …" phrase when adding an answer to a page whose
 answers can be in labels**, including any new demographic, so labels keep

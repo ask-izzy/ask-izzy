@@ -40,22 +40,50 @@
         max-width: 100%;
     }
 
-    a {
+    a,
+    .skeletonChip {
         display: inline-flex;
         align-items: center;
         padding: 0.6em 1.2em;
         border-radius: 999px;
         background-color: #{colours.get-static('colour-bg-highlight-muted-1')};
         background-color: var(--colour-bg-highlight-muted-1);
+        font-size: 15px;
+    }
+
+    a {
         color: #{colours.get-static('colour-text-brand')};
         color: var(--colour-text-brand);
-        font-size: 15px;
         font-weight: bold;
         text-decoration: none;
         overflow-wrap: anywhere;
 
         &:hover {
             text-decoration: underline;
+        }
+    }
+
+    // Placeholder chips shown while suggestions load, the same height as a
+    // chip with one line of text so the panel doesn't jump when they arrive.
+    // See docs/other-services-panel.md § "How the panel looks"
+    .skeletonChip {
+        box-sizing: content-box;
+        max-width: calc(100% - 2.4em);
+        animation: skeletonChipPulse 1.4s ease-in-out infinite;
+
+        @media (prefers-reduced-motion: reduce) {
+            animation: none;
+        }
+    }
+
+    @keyframes skeletonChipPulse {
+        0%,
+        100% {
+            opacity: 1;
+        }
+
+        50% {
+            opacity: 0.4;
         }
     }
 }

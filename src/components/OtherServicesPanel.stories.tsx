@@ -30,3 +30,9 @@ LongSuggestions.args = {
         })),
     ],
 };
+
+export const Loading: typeof Template = Template.bind({});
+Loading.args = {
+    suggestions: [],
+    isLoading: true,
+};

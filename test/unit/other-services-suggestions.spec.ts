@@ -7,6 +7,7 @@ import {
     getOtherServicesSuggestion,
     getOtherServicesSuggestions,
     getOtherServicesSuggestionPath,
+    quoteSearchText,
     saveOtherServicesSuggestionAnswers,
 } from "../../src/utils/other-services-suggestions";
 import type {
@@ -449,6 +450,22 @@ test.describe("Saving a suggestion's answers", function() {
         saveOtherServicesSuggestionAnswers({type: "search", searchText: "meals"})
 
         assert.strictEqual(storage.getItem("food-subcategory") ?? null, null)
+    })
+})
+
+/** @see docs/other-services-panel.md § "Turning a related search back into a flow" */
+test.describe("Showing a keyword search", function() {
+    test("is in quotes", (): void => {
+        assert.strictEqual(quoteSearchText("emergency relief"), "“emergency relief”")
+    })
+
+    test("isn't quoted again if it's already in quotes", (): void => {
+        assert.strictEqual(quoteSearchText("\"food bank\""), "\"food bank\"")
+        assert.strictEqual(quoteSearchText("“food bank”"), "“food bank”")
+    })
+
+    test("is quoted if it only has a quote at one end", (): void => {
+        assert.strictEqual(quoteSearchText("\"food bank"), "“\"food bank”")
     })
 })
 

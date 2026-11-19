@@ -10,6 +10,15 @@ type RelatedSearchesResponse = {
 const SEGMENT = "ask-izzy"
 const LIMIT = 8
 
+// Whether ISS4's related searches endpoint is configured, so there's any
+// point waiting for related searches
+export function isRelatedSearchesConfigured(): boolean {
+    return Boolean(
+        process.env.NEXT_PUBLIC_ISS4_BASE_URL &&
+            process.env.NEXT_PUBLIC_ISS4_API_TOKEN
+    )
+}
+
 /*
  * Get searches people often make before or after the given ISS3 "q" value from
  * ISS4's related searches endpoint. The results are raw ISS3 "q" values too.

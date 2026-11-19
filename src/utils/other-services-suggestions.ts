@@ -582,6 +582,16 @@ export function getOtherServicesSuggestions(
 }
 
 /*
+ * Keyword searches are shown in quotes to set them apart from categories,
+ * unless the search is already quoted (eg a phrase search).
+ * See docs/other-services-panel.md § "Turning a related search back into a flow"
+ */
+export function quoteSearchText(text: string): string {
+    const isQuoted = /^["“].*["”]$/.test(text)
+    return isQuoted ? text : `“${text}”`
+}
+
+/*
  * The path to send the user to for a suggestion. This deliberately leaves out
  * the location and personalisation pages: the results page works those out
  * from the saved answers when it loads, showing results if every answer is

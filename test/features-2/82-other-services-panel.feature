@@ -52,7 +52,7 @@ Feature: Other services panel
         And I should see "Meals"
         And I should see "Food vouchers"
         And I should see "Drugs and alcohol counselling"
-        And I should see "relief"
+        And I should see "“relief”"
         And I should not see "no longer used"
 
     # @see docs/other-services-panel.md § "What clicking a suggestion does" - All details known
@@ -72,7 +72,7 @@ Feature: Other services panel
     # @see docs/other-services-panel.md § "What clicking a suggestion does" - A keyword search
     Scenario: A plain related search that isn't a known flow does a keyword search
         When I visit /housing
-        And I click the "relief" link
+        And I click the "“relief”" link
         Then I should be at /search/relief/Melbourne-VIC
 
     # @see docs/other-services-panel.md § "Turning a related search back into a flow"
