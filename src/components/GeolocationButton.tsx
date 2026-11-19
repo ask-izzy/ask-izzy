@@ -5,6 +5,7 @@ import icons from "../icons";
 import * as gtm from "../google-tag-manager";
 import type {Geolocation} from "../storage";
 import Button from "./base/Button";
+import cnx from "classnames";
 
 export type GeolocationStatus = {
     type: "COMPLETE",
@@ -152,14 +153,14 @@ function GeolocationButton({
         switch (status.type) {
         case "NOT_STARTED":
             return <>
-                <icons.Location/>
+                <icons.Location noSpanWrapper={true} />
                 <span className="primary">
                         Get your location
                 </span>
             </>
         case "RUNNING":
             return <>
-                <icons.Loading />
+                <icons.Loading noSpanWrapper={true} />
                 <div className="multiLine">
                     <span className="primary">
                             Locating you...
@@ -171,7 +172,7 @@ function GeolocationButton({
             </>
         case "COMPLETE":
             return <>
-                <icons.Tick />
+                <icons.Tick noSpanWrapper={true} />
                 <span className="primary">
                         Found your location
                     {showLocationInSuccessMessage && status.location &&
@@ -183,7 +184,7 @@ function GeolocationButton({
             </>;
         case "FAILED":
             return <>
-                <icons.Cross />
+                <icons.Cross noSpanWrapper={true} />
                 <div className="multiLine">
                     <span className="primary">
                             Unable to get your location
@@ -199,7 +200,7 @@ function GeolocationButton({
     }
 
     return (
-        <div className="GeoLocationButton">
+        <div className={cnx("GeoLocationButton", status.type.toLowerCase())}>
             <Container>
                 <div
                     className="label"

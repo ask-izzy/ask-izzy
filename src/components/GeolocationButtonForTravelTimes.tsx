@@ -8,7 +8,7 @@ import type {travelTimesStatus} from "../hooks/useTravelTimesUpdater";
 import Service from "../iss/Service"
 
 type Props = {
-    showMessage?: boolean,
+    showMoreDetails?: boolean,
     servicesToUpdateTravelTimes: Array<Service>,
     onTravelTimesStatusChange: (arg0: travelTimesStatus) => void,
 }
@@ -20,7 +20,7 @@ type Props = {
  */
 function GeolocationButtonForTravelTimes({
     servicesToUpdateTravelTimes,
-    showMessage = true,
+    showMoreDetails = true,
     onTravelTimesStatusChange,
 }: Props): ReactElement<"div"> {
 
@@ -34,20 +34,7 @@ function GeolocationButtonForTravelTimes({
         onTravelTimesStatusChange(travelTimesStatus)
     }, [travelTimesStatus])
 
-    const explainerMessage = () => (
-        !storage.getUserGeolocation() && showMessage &&
-            <div className="explainer">
-                <span
-                    className="explainerIcons"
-                    aria-hidden={true}
-                >
-                    <icons.Walk/>
-                    <icons.Tram/>
-                    <icons.Car/>
-                </span>
-                Want to see estimated travel times for the services below?
-            </div>
-    )
+    const showExplainer = showMoreDetails && !storage.getUserGeolocation()
 
     const renderGeoLocateButton = () => (
         <GeolocationButton
@@ -62,7 +49,7 @@ function GeolocationButtonForTravelTimes({
             }}
             locationValue={storage.getUserGeolocation() || undefined}
             showLocationInSuccessMessage={true}
-            successMessageSuffix={showMessage ?
+            successMessageSuffix={showMoreDetails ?
                 "Travel times added below."
                 : null
             }
@@ -72,8 +59,24 @@ function GeolocationButtonForTravelTimes({
 
     return (
         <div className="GeolocationButtonForTravelTimes">
-            {explainerMessage()}
-            {renderGeoLocateButton()}
+            {showMoreDetails && (
+                <div
+                    className="explainerIcons"
+                    aria-hidden={true}
+                >
+                    <icons.Walk noSpanWrapper={true} />
+                    <icons.Tram noSpanWrapper={true} />
+                    <icons.Car noSpanWrapper={true} />
+                </div>
+            )}
+            <div className="content">
+                {showExplainer && (
+                    <div className="explainer">
+                        Want to see estimated travel times for the services below?
+                    </div>
+                )}
+                {renderGeoLocateButton()}
+            </div>
         </div>
     )
 }

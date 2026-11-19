@@ -10,16 +10,11 @@
         column-gap: 7px;
 
         .close-toast-message-button {
-            overflow: hidden;
-        }
+            display: flex;
+            padding: 4px;
 
-        svg {
-            width: 25px;
-            height: 25px;
-            margin-bottom: -7px;
-
-            path {
-                fill: var(--colour-text-very-light);
+            .icon {
+                display: flex;
             }
         }
     }
@@ -31,9 +26,8 @@
 
         .icon {
             .CrossIcon {
-                width: 55px;
-                height: auto;
-                margin: -15px -21px -24px -23px;
+                width: 15px;
+                height: 15px;
 
                 path {
                     fill: #{colours.get-static('colour-text-very-light')};

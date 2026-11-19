@@ -133,7 +133,7 @@ function ResultListItem({
             <Eligibility {...service} />
             <Accessibility service={service} />
             {!service.travelTimes && travelTimesStatus === "loading" &&
-                <icons.Loading className="small"/>
+                <icons.Loading />
             }
             {service.travelTimes && renderTravelTimes()}
             <DebugServiceRecord object={service} />
