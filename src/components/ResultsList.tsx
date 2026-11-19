@@ -25,6 +25,9 @@ type Props = {
     pageBoundaries?: Array<number>,
     // Rendered after each page of (non-crisis) results
     renderAfterPage?: () => ReactNode,
+    // Also render it after this many results within the first page (0 or
+    // undefined for none)
+    firstPagePanelPosition?: number,
 }
 
 function ResultsList({
@@ -35,6 +38,7 @@ function ResultsList({
     sortBy,
     pageBoundaries = [],
     renderAfterPage,
+    firstPagePanelPosition,
 }: Props): ReactNode {
 
     let filteredResults = crisisResults ?
@@ -50,9 +54,10 @@ function ResultsList({
             CrisisLineItem
             : ResultListItem
 
-    // Split the results into the pages they were loaded in so something can
-    // be rendered between them. Crisis results are pulled out of the pages
-    // and shown separately so they don't count towards a page's position.
+    // Split the results into the pages they were loaded in, plus once more
+    // part way through the first page, so something can be rendered between
+    // them. Crisis results are pulled out of the pages and shown separately
+    // so they don't count towards a page's position.
     // See docs/other-services-panel.md § "Where the panel appears"
     function getPageRanges(): Array<[number, number]> {
         if (crisisResults || !renderAfterPage) {
@@ -63,6 +68,12 @@ function ResultsList({
             .map(boundary => Math.max(0, boundary - numOfCrisisResults))
             .filter(end => end > 0 && end < filteredResults.length)
         pageEnds.push(filteredResults.length)
+
+        // Only within the first page. If it's where the first page ends
+        // anyway, the panel after the page covers it.
+        if (firstPagePanelPosition && firstPagePanelPosition < pageEnds[0]) {
+            pageEnds.unshift(firstPagePanelPosition)
+        }
 
         let start = 0
         const ranges: Array<[number, number]> = []

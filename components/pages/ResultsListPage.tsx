@@ -20,9 +20,12 @@ import ScrollToTop from "@/src/components/ResultsListPage/ScrollToTop";
 import Storage from "@/src/storage";
 import Controls from "@/src/components/ResultsListPage/Controls";
 import OtherServicesPanel from "@/src/components/OtherServicesPanel";
+import DebugOtherServicesPanelPosition from
+    "@/src/components/debug/DebugOtherServicesPanelPosition";
 
 import useServiceResults from "@/hooks/useServiceResults"
 import useOtherServicesSuggestions from "@/hooks/useOtherServicesSuggestions"
+import useOtherServicesPanelPosition from "@/hooks/useOtherServicesPanelPosition"
 
 type Props = {
     router: NextRouter
@@ -53,6 +56,8 @@ function ResultsListPage({router}: Props): ReactNode {
         izzyQuery,
         category.key,
     )
+    const [otherServicesPanelPosition, setOtherServicesPanelPosition] =
+        useOtherServicesPanelPosition()
 
     function hasSearchResults(): boolean {
         return Boolean(
@@ -67,6 +72,10 @@ function ResultsListPage({router}: Props): ReactNode {
                 <DebugPersonalisation
                     issQuery={getIssSearchQuery() || {}}
                     setIssParamsOverride={setIssParamsOverride}
+                />
+                <DebugOtherServicesPanelPosition
+                    position={otherServicesPanelPosition}
+                    setPosition={setOtherServicesPanelPosition}
                 />
                 <LoadingResultsHeader
                     title={pageTitle}
@@ -128,6 +137,7 @@ function ResultsListPage({router}: Props): ReactNode {
                     sortBy={sortBy}
                     pageBoundaries={searchPageBoundaries}
                     renderAfterPage={renderOtherServicesPanel}
+                    firstPagePanelPosition={otherServicesPanelPosition}
                 />
                 {renderLoadMore()}
                 {renderSuggestionBox()}
