@@ -17,5 +17,9 @@ declare namespace NodeJS {
         NEXT_PUBLIC_SHARE_SERVICES_EMAIL_PROVIDER: string,
         NEXT_PUBLIC_SHARE_SERVICES_EMAIL_TEMPLATE: string,
         NEXT_PUBLIC_PROXY_DOMAIN_SUFFIX?: string,
+        // Server only, optional: the "People also searched for" panel is
+        // hidden without them
+        ISS4_BASE_URL?: string,
+        ISS4_API_TOKEN?: string,
     }
 }

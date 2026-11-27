@@ -1,0 +1,145 @@
+/* eslint-disable prefer-arrow-callback */
+
+import { test } from "@playwright/test";
+import assert from "assert";
+
+import {fetchRelatedSearches} from "../../src/related-searches/iss4";
+
+type FetchCall = {url: string, init?: RequestInit}
+
+/** @see docs/other-services-panel.md § "Ask Izzy's related searches endpoint" */
+test.describe("Fetching related searches", function() {
+    const originalFetch = global.fetch
+    const originalEnv = {...process.env}
+    const originalWarn = console.warn
+    let calls: Array<FetchCall>
+
+    function mockFetch(status: number, body: unknown): void {
+        global.fetch = (async(url: string | URL, init?: RequestInit) => {
+            calls.push({url: String(url), init})
+            return new Response(JSON.stringify(body), {status})
+        }) as typeof fetch
+    }
+
+    test.beforeEach(() => {
+        calls = []
+        process.env.ISS4_BASE_URL = "https://iss4.example.com"
+        process.env.ISS4_API_TOKEN = "secret"
+        console.warn = () => {}
+    })
+
+    test.afterEach(() => {
+        global.fetch = originalFetch
+        process.env = {...originalEnv}
+        console.warn = originalWarn
+    })
+
+    test("asks for searches related to the q value from the ask-izzy segment", async() => {
+        mockFetch(200, {
+            query: "meals",
+            segment: "ask-izzy",
+            results: ["(food vouchers)", "relief"],
+        })
+
+        const results = await fetchRelatedSearches(" meals ")
+
+        assert.deepStrictEqual(results, ["(food vouchers)", "relief"])
+        assert.strictEqual(calls.length, 1)
+        const url = new URL(calls[0].url)
+        assert.strictEqual(
+            url.origin + url.pathname,
+            "https://iss4.example.com/api/directory/search/related/",
+        )
+        assert.strictEqual(url.searchParams.get("query"), "meals")
+        assert.strictEqual(url.searchParams.get("segment"), "ask-izzy")
+        assert.strictEqual(url.searchParams.get("limit"), "8")
+        assert.strictEqual(
+            (calls[0].init?.headers as Record<string, string>).Authorization,
+            "Token secret",
+        )
+    })
+
+    test("returns nothing when the endpoint is unavailable", async() => {
+        mockFetch(503, {detail: "Model loading"})
+
+        assert.deepStrictEqual(await fetchRelatedSearches("meals"), [])
+    })
+
+    test("returns nothing when the request fails", async() => {
+        global.fetch = (async() => {
+            throw new TypeError("Failed to fetch")
+        }) as typeof fetch
+
+        assert.deepStrictEqual(await fetchRelatedSearches("meals"), [])
+    })
+
+    test("gives up on a response taking more than 3 seconds", async() => {
+        const originalTimeout = AbortSignal.timeout
+        let timeoutMs: number | undefined
+        AbortSignal.timeout = (milliseconds: number) => {
+            timeoutMs = milliseconds
+            return originalTimeout.call(AbortSignal, 1)
+        }
+        // Never responds, so only the timeout can end it
+        global.fetch = ((url: string | URL, init?: RequestInit) =>
+            new Promise((resolve, reject) => {
+                init?.signal?.addEventListener(
+                    "abort",
+                    () => reject(init.signal?.reason),
+                )
+            })
+        ) as typeof fetch
+
+        try {
+            assert.deepStrictEqual(await fetchRelatedSearches("meals"), [])
+            assert.strictEqual(timeoutMs, 3000)
+        } finally {
+            AbortSignal.timeout = originalTimeout
+        }
+    })
+
+    test("sends the whole of a long q value", async() => {
+        mockFetch(200, {results: []})
+        const q = "(family violence) -(coordinating bodies) ".repeat(6).trim()
+
+        await fetchRelatedSearches(q)
+
+        assert(q.length > 225)
+        assert.strictEqual(new URL(calls[0].url).searchParams.get("query"), q)
+    })
+
+    test("returns nothing when the response isn't the expected shape", async() => {
+        mockFetch(200, {results: "meals"})
+
+        assert.deepStrictEqual(await fetchRelatedSearches("meals"), [])
+    })
+
+    test("ignores results which aren't strings", async() => {
+        mockFetch(200, {results: ["meals", 3, null]})
+
+        assert.deepStrictEqual(await fetchRelatedSearches("meals"), ["meals"])
+    })
+
+    test("doesn't make a request when ISS4 isn't configured", async() => {
+        mockFetch(200, {results: ["meals"]})
+        delete process.env.ISS4_BASE_URL
+
+        assert.deepStrictEqual(await fetchRelatedSearches("meals"), [])
+        assert.strictEqual(calls.length, 0)
+    })
+
+    test("doesn't make a request without a token", async() => {
+        mockFetch(200, {results: ["meals"]})
+        delete process.env.ISS4_API_TOKEN
+
+        assert.deepStrictEqual(await fetchRelatedSearches("meals"), [])
+        assert.strictEqual(calls.length, 0)
+    })
+
+    test("doesn't make a request for an empty q value", async() => {
+        mockFetch(200, {results: ["meals"]})
+
+        assert.deepStrictEqual(await fetchRelatedSearches("  "), [])
+        assert.strictEqual(calls.length, 0)
+    })
+})

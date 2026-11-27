@@ -45,6 +45,29 @@ export function initMockISSServer() {
         });
     });
 
+    // ISS4 related searches (fetched by Ask Izzy's server). Same results for
+    // every query: four in the lookup table, one plain search ("relief") and
+    // one unknown query that should be dropped.
+    // See docs/other-services-panel.md § "Ask Izzy's related searches endpoint"
+    app.get("/api/directory/search/related/", (req, res) => {
+        res.json({
+            query: String(req.query.query ?? "").trim(),
+            segment: req.query.segment ?? null,
+            results: [
+                "meals",
+                "(food vouchers)",
+                "drugs alcohol",
+                "relief",
+                "(no longer used) -(coordinating bodies)",
+                // The default food search, which needs the food subcategory
+                // skipped
+                "meals -(coordinating bodies) -(home care) -(food safety) " +
+                    "-(meals on wheels) -(assistance with meals) " +
+                    "-(hire of facilities) -chsp -(meal preparation)",
+            ],
+        });
+    });
+
     app.get("/api/v3/list-all-mocked/", (req, res) => {
         res.json(mocks);
     });
