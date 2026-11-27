@@ -8,6 +8,11 @@ import {getAnswerToSave, isNoAnswer} from "@/src/utils/flow-answers"
 import type {FlowAnswers} from "@/src/utils/flow-answers"
 import {normaliseIss3Q} from "@/src/related-searches/flows"
 import type {RelatedSearchFlows} from "@/src/related-searches/flows"
+import {
+    getCurrentSearchItem,
+    getMinimalLabels,
+} from "@/src/related-searches/labels"
+import type {CurrentAnswers, LabelItem} from "@/src/related-searches/labels"
 import type {OtherServicesSuggestion} from "@/types/other-services-suggestion"
 
 /*
@@ -66,28 +71,72 @@ export function getOtherServicesSuggestion(
 
 /*
  * Turn the related searches for the current search into suggestions,
- * dropping any which can't be used, are the current search or have the same
- * label as an earlier (more relevant) suggestion.
+ * dropping any which can't be used or are the current search. Each label
+ * has just enough detail to tell it apart from the other suggestions and
+ * from the current search, relative to the user's current answers. If
+ * suggestions still share a label, only the first (most relevant) is kept.
+ * See docs/other-services-panel.md § "Labelling suggestions"
  */
 export function getOtherServicesSuggestions(
     relatedSearches: Array<string>,
     currentQ: string,
     flows: RelatedSearchFlows,
+    currentCategoryKey?: string,
+    currentAnswers: CurrentAnswers = {},
 ): Array<OtherServicesSuggestion> {
     const normalisedCurrentQ = normaliseIss3Q(currentQ)
-    const seenLabels = new Set<string>()
-    const suggestions: Array<OtherServicesSuggestion> = []
-    for (const relatedSearch of relatedSearches) {
-        if (normaliseIss3Q(relatedSearch) === normalisedCurrentQ) {
-            continue
+    const suggestions = relatedSearches
+        .filter(relatedSearch =>
+            normaliseIss3Q(relatedSearch) !== normalisedCurrentQ
+        )
+        .map(relatedSearch => getOtherServicesSuggestion(relatedSearch, flows))
+        .filter((suggestion): suggestion is OtherServicesSuggestion =>
+            Boolean(suggestion?.label)
+        )
+
+    const categorySuggestions: Array<{
+        suggestion: OtherServicesSuggestion,
+        item: LabelItem,
+    }> = suggestions.flatMap(suggestion => {
+        const {target} = suggestion
+        const category = target.type === "category" && categories.find(
+            category => category.key === target.categoryKey
+        )
+        return target.type === "category" && category ?
+            [{
+                suggestion,
+                item: {category, answers: target.answers, base: suggestion.label},
+            }]
+            : []
+    })
+    const labels = getMinimalLabels(
+        categorySuggestions.map(({item}) => item),
+        getCurrentSearchItem(
+            flows[normalisedCurrentQ]?.answers ?? null,
+            currentCategoryKey,
+            currentAnswers,
+        ),
+        currentAnswers,
+    )
+    const labelled = suggestions.flatMap(suggestion => {
+        const index = categorySuggestions
+            .findIndex(categorySuggestion =>
+                categorySuggestion.suggestion === suggestion
+            )
+        if (index === -1) {
+            return [suggestion]
         }
-        const suggestion = getOtherServicesSuggestion(relatedSearch, flows)
-        const labelKey = suggestion?.label.toLowerCase()
-        if (!suggestion || !labelKey || seenLabels.has(labelKey)) {
-            continue
+        const label = labels[index]
+        return label ? [{...suggestion, label}] : []
+    })
+
+    const seenLabels = new Set<string>()
+    return labelled.filter(suggestion => {
+        const labelKey = suggestion.label.toLowerCase()
+        if (seenLabels.has(labelKey)) {
+            return false
         }
         seenLabels.add(labelKey)
-        suggestions.push(suggestion)
-    }
-    return suggestions
+        return true
+    })
 }

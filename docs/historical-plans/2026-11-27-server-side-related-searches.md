@@ -279,3 +279,35 @@ Then force-push 5–8, close or retarget #759 (eg reuse it for 4a), and retarget
   and free-text searches.
 - Unset `ISS4_*`: the panel hides after a brief flash of placeholders, with no errors.
 - No lookup table `q` strings appear in `.next/static`.
+
+## Notes from implementation (2026-11-27)
+
+- The server doesn't bundle the generated table. Instead it reads it from disk
+  the first time it's needed and checks its shape with zod (already in the
+  dependency tree through `@infoxchange/make-it-so`, now a direct dependency).
+  This was chosen over a `require()`, which webpack would inline so the build
+  failed if the file was missing. Reading it means `tsc`, ESLint and the unit
+  tests don't need the file to exist, so only `prebuild` and `predev` run the
+  generator. It also keeps the table out of every bundle, and a stale or
+  malformed file fails loudly rather than mislabelling.
+  A missing or invalid file at runtime only gives no suggestions plus a logged
+  error. So the deploy script refuses to build if the file isn't in the image.
+- The deploy script runs `yarn run next build`.
+- Types shared by the browser and the server live in
+  `types/other-services-suggestion.ts` and `src/utils/flow-answers.ts`, which
+  has no imports. So the browser never imports from `src/related-searches/`.
+- 4b's request only has `q`. `currentCategory` and `currentAnswers` arrived in
+  4d, where labelling first needs them. The rate limit slows after 150
+  requests a minute per IP and refuses after 300.
+- The browser sends the saved answer to every personalisation question, not
+  only the ones a suggestion could touch, because it can't know which those
+  are before the response. The hook refetches when they change, so a back
+  navigation that restores answers (branch 8) relabels.
+- Feature 82 checks that the answers reach the server: the mock ISS returns
+  two crisis accommodation flows that differ only by age for Money help
+  searches. They're labelled "Housing for all ages" for a 17 year old and
+  "Housing for under 18s" for a 27 year old.
+- `AGENTS.md` is a local file (excluded in `.git/info/exclude`), so its
+  updates (this plan's row, the server-only import rule) aren't in any PR.
+- 4c is one commit, since the loading chips and quoting are entangled with
+  the panel's new suggestion type.

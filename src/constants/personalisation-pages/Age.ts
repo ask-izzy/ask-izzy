@@ -66,6 +66,15 @@ export default ({
         },
     },
     title: "Age",
+    suggestionLabels: {
+        "(skipped)": "for all ages",
+        "0 to 17": "for under 18s",
+        "18 to 26": "for people aged 18 to 26",
+        "27 to 39": "for people aged 27 to 39",
+        "40 to 54": "for people aged 40 to 54",
+        "55 to 64": "for people aged 55 to 64",
+        "65 or older": "for people aged 65 or older",
+    },
     prettyPrintAnswer(answer: string): string {
         switch (answer) {
         case "0 to 17":

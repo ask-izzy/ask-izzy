@@ -52,6 +52,22 @@ export function initMockISSServer() {
     // syntax that isn't in the table (so should be dropped).
     // See docs/other-services-panel.md § "Turning a related search back into a flow"
     app.get("/api/directory/search/related/", (req, res) => {
+        // Money help searches get two housing flows which differ only by
+        // age, to check labels are relative to the user's saved answers.
+        // See docs/other-services-panel.md § "Labelling suggestions"
+        if (String(req.query.query ?? "").includes("-grants -heritage")) {
+            res.json({
+                query: String(req.query.query).trim(),
+                segment: req.query.segment ?? null,
+                results: [
+                    "-(coordinating bodies) -(holiday accommodation) " +
+                        "(crisis accommodation)",
+                    "-(coordinating bodies) -(holiday accommodation) " +
+                        "(crisis accommodation) children youth",
+                ],
+            });
+            return;
+        }
         res.json({
             query: String(req.query.query ?? "").trim(),
             segment: req.query.segment ?? null,
