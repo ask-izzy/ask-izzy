@@ -147,6 +147,25 @@
                     }
                 ]
             }
+        },
+        {
+            // Server only. See docs/other-services-panel.md § "Ask Izzy's
+            // related searches endpoint"
+            "files": ["**/*"],
+            "excludedFiles": [
+                "pages/api/**",
+                "src/related-searches/**",
+                "scripts/**",
+                "test/**"
+            ],
+            "rules": {
+                "no-restricted-imports": [2, {
+                    "patterns": [{
+                        "group": ["**/related-searches/*"],
+                        "message": "src/related-searches/ is server only. Use POST /api/search/related from the browser."
+                    }]
+                }]
+            }
         }
     ]
 }
