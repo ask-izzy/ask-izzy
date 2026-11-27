@@ -4,17 +4,51 @@ import type {ReactNode} from "react";
 import SearchIcon from "@/src/icons/Search";
 import Link from "@/src/components/base/Link";
 import {
-    getOtherServicesSuggestionTarget,
     getOtherServicesSuggestionPath,
+    quoteSearchText,
     saveOtherServicesSuggestionAnswers,
 } from "@/src/utils/other-services-suggestions"
+import type {OtherServicesSuggestion} from "@/types/other-services-suggestion"
 
 type Props = {
-    suggestions: Array<string>,
+    suggestions: Array<OtherServicesSuggestion>,
+    // Show placeholder chips instead of suggestions
+    isLoading?: boolean,
 }
 
-function OtherServicesPanel({suggestions}: Props): ReactNode {
+// Roughly the widths of typical labels
+const SKELETON_CHIP_WIDTHS = ["9em", "6em", "11em", "7.5em"]
+
+function OtherServicesPanel({suggestions, isLoading}: Props): ReactNode {
     const headingId = useId()
+
+    if (isLoading) {
+        return (
+            <div className="OtherServicesPanel">
+                <p className="heading">
+                    <SearchIcon aria-hidden="true" />
+                    People also searched for
+                </p>
+                <ul
+                    aria-busy="true"
+                    aria-label="Loading suggestions"
+                >
+                    {SKELETON_CHIP_WIDTHS.map(width => (
+                        <li key={width}>
+                            {/* Gives it a chip's line height */}
+                            <span
+                                className="skeletonChip"
+                                style={{width}}
+                                aria-hidden="true"
+                            >
+                                {"\u00a0"}
+                            </span>
+                        </li>
+                    ))}
+                </ul>
+            </div>
+        )
+    }
 
     if (suggestions.length === 0) {
         return null
@@ -30,10 +64,9 @@ function OtherServicesPanel({suggestions}: Props): ReactNode {
                 People also searched for
             </p>
             <ul aria-labelledby={headingId}>
-                {suggestions.map(suggestion => {
-                    const target = getOtherServicesSuggestionTarget(suggestion)
+                {suggestions.map(({label, target}) => {
                     return (
-                        <li key={suggestion}>
+                        <li key={label}>
                             <Link
                                 to={getOtherServicesSuggestionPath(target)}
                                 onClick={() =>
@@ -42,10 +75,12 @@ function OtherServicesPanel({suggestions}: Props): ReactNode {
                                 analyticsEvent={{
                                     event: "Link Followed - Other Services Suggestion",
                                     eventAction: "Other services suggestion",
-                                    eventLabel: suggestion,
+                                    eventLabel: label,
                                 }}
                             >
-                                {suggestion}
+                                {target.type === "search" ?
+                                    quoteSearchText(label)
+                                    : label}
                             </Link>
                         </li>
                     )

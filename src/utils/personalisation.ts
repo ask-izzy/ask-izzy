@@ -100,8 +100,8 @@ export function getSearchQueryChanges(
     const possibleAnswers = personalisationPage.possibleAnswers
     if (savedAnswer instanceof Array) {
         const searchQueryChanges: Array<SearchQueryChanges> = []
-        // If there are multiple answers, at most the first 2 as ordered
-        // by the order they appear in the list displayed to the user
+        // At most the first 2, sorted alphabetically since storage.setJSON()
+        // sorts them
         for (const singleSavedAnswer of savedAnswer.slice(0, 2)) {
             if (!(singleSavedAnswer in possibleAnswers)) {
                 console.error(
