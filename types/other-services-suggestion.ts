@@ -2,7 +2,7 @@
 // (POST /api/search/related) to the client, so they must be plain JSON.
 // See docs/other-services-panel.md § "Where suggestions come from"
 
-import type {FlowAnswers} from "@/src/utils/flow-answers"
+import type {Answer, FlowAnswers} from "@/src/utils/flow-answers"
 
 export type OtherServicesSuggestionTarget = {
     type: "category",
@@ -22,6 +22,11 @@ export type OtherServicesSuggestion = {
 export type RelatedSearchesRequest = {
     // The ISS3 "q" value of the current search
     q: string,
+    // The key of the current results page's category
+    currentCategory?: string,
+    // The user's saved personalisation answers, keyed by page name. Labels
+    // say how a suggestion would change them.
+    currentAnswers?: {[personalisationPageName: string]: Answer},
 }
 
 export type RelatedSearchesResponse = {

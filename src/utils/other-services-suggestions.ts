@@ -2,12 +2,42 @@
 // themselves come from POST /api/search/related.
 // See docs/other-services-panel.md § "What clicking a suggestion does"
 
+import categories from "@/src/constants/categories"
 import storage from "@/src/storage"
 import {getAnswerToSave, isAnswerOptions} from "@/src/utils/flow-answers"
 import type {Answer} from "@/src/utils/flow-answers"
 import type {
     OtherServicesSuggestionTarget,
+    RelatedSearchesRequest,
 } from "@/types/other-services-suggestion"
+
+/*
+ * The user's saved answers to every personalisation question, sent with
+ * POST /api/search/related so suggestion labels can say how following them
+ * would change those answers. Never logged by the server.
+ * See docs/other-services-panel.md § "Labelling suggestions"
+ */
+export function getCurrentAnswers(): RelatedSearchesRequest["currentAnswers"] {
+    const answers: RelatedSearchesRequest["currentAnswers"] = {}
+    for (const category of categories) {
+        for (const page of category.personalisation) {
+            if (page.type !== "question" || page.name in answers) {
+                continue
+            }
+            const answer = page.multipleChoice ?
+                storage.getJSON(page.name)
+                : storage.getItem(page.name)
+            if (
+                typeof answer === "string" ||
+                (Array.isArray(answer) &&
+                    answer.every(selection => typeof selection === "string"))
+            ) {
+                answers[page.name] = answer
+            }
+        }
+    }
+    return answers
+}
 
 /*
  * Keyword searches are shown in quotes to set them apart from categories,

@@ -77,7 +77,8 @@ table (see below) out of the browser, and keeps the ISS4 token secret.
 
 ```json
 POST /api/search/related
-{"q": "<ISS3 q of the current search>"}
+{"q": "<ISS3 q of the current search>", "currentCategory": "housing",
+ "currentAnswers": {"sleep-tonight": "No", "demographics": ["Couples"]}}
 
 200
 {"suggestions": [
@@ -91,6 +92,14 @@ POST /api/search/related
   (`convertIzzySearchQueryToIss3(query).q`). Location and other params aren't
   sent. A request without a non-empty string `q` gets a `400`, and anything but
   `POST` gets a `405`.
+- `currentCategory` is the key of the results page's category, and
+  `currentAnswers` is the user's saved answer to every personalisation
+  question. Both are only used to label suggestions (see "Labelling
+  suggestions"). An unknown category gets a `400`. Answers to unknown pages,
+  and answers which aren't a string (or a list of strings), are ignored.
+  The answers are sensitive, eg family violence or demographics, though they
+  say no more than `q` already does. So they're sent in the body rather than
+  the URL.
 - `target.answers` is the flow's answers as they are in the lookup table,
   including any `{"oneOf": [...]}`. Which option gets saved depends on what the
   user has saved when they click, so that's left to the browser.
@@ -116,19 +125,79 @@ POST /api/search/related
 
 Each related search is handled as follows:
 
-1. **Found in the table**: it goes to that flow's category. The label is the
-   answer to the category's subcategory question (eg "Meals"), or the category
-   name if there isn't one (eg "Housing"). For a subcategory with `oneOf`
-   options, it's the option that would be saved.
+1. **Found in the table**: it goes to that flow's category. Its base label is
+   the answer to the category's subcategory question (eg "Meals"), or the
+   category name if there isn't one (eg "Housing"). For a subcategory with
+   `oneOf` options, it's the option that would be saved. Details are added
+   when needed to tell it apart (see "Labelling suggestions").
 2. **Not found, and it looks like something a person typed** (no brackets and
-   no `-` exclusions): it becomes a keyword search labelled with the text.
+   no `-` exclusions): it becomes a keyword search labelled with the text,
+   shown in quotes.
 3. **Anything else** is dropped. It's a query the app no longer produces, eg
    from an older version of a category's search terms, or from a category that
    no longer exists.
 
 Lookups ignore case and extra whitespace. Related searches that are the current
-search are dropped. If suggestions share a label, only the first (most
-relevant) is kept.
+search are dropped. If suggestions still share a label after labelling (they
+can't be told apart), only the first (most relevant) is kept.
+
+### Labelling suggestions
+
+Labels carry **the least detail that tells each suggestion apart** from the
+other suggestions in the panel and from the current search. A suggestion
+whose base label is already different (eg "Meals" next to "Food vouchers"
+while on Housing) gets nothing more. One that shares its base label with
+another suggestion, or with the current search, gets details added:
+
+- **Answers it would change** say who the services are for, eg "Housing for
+  people not safe tonight", "Housing for people aged 65 or older" or
+  "Housing for couples".
+- **Demographics it would remove** are "not just for", eg "Housing not just
+  for couples", since removing one broadens the search rather than leaving
+  anyone out.
+- Phrases starting the same way are merged, eg "for couples and veterans".
+  An answer without a "for" phrase follows a colon instead, eg
+  `Housing: <answer>`.
+- **The category** goes first when the same subcategory answer is in
+  different categories, separated by " › ", eg "Support and counselling ›
+  Homelessness support" while on Housing › Homelessness support.
+
+Each label picks the fewest details that work, trying questions in the order
+they're asked. So two "Housing" suggestions that differ in sleep tonight, age
+and demographics are just "Housing for people safe tonight" and "Housing for
+people not safe tonight".
+
+**Details are always relative to the user's saved answers** (`currentAnswers`),
+since that's what following the suggestion changes. An answer the user
+already has (including any `oneOf` option) is never mentioned, and a question
+the flow leaves alone can't be used. For example, the two crisis
+accommodation flows differ only by age: for a 17 year old they're "Housing for
+all ages" and "Housing", and for a 27 year old "Housing" and "Housing for under
+18s". Labels which still match after picking are given the details both
+picked. A suggestion for the current category which can't be told apart from
+the current search at all is dropped.
+
+The current search's own base label (what suggestions mustn't look like) is
+its subcategory answer from its flow in the table, or the category name. A
+saved subcategory answer the current search doesn't use (eg housing when not
+safe tonight) is ignored.
+
+Answers which don't make sense without their question get a phrase from the
+page's `suggestionLabels`, eg sleep tonight "No" is "for people not safe
+tonight", ages are "for people aged 18 to 26" and skipping age is "for all
+ages". A phrase can say how removing the answer reads too, as the demographic
+pages do with
+[src/constants/demographic-suggestion-labels.ts](../src/constants/demographic-suggestion-labels.ts).
+Otherwise a removed answer follows "without", eg `Housing without <phrase>`.
+An answer given `null`, like "No - show me everything", counts as no
+answer. **Add a "for …" phrase when adding an answer to a page whose
+answers can be in labels**, including any new demographic, so labels keep
+reading the same way.
+
+Other answers are sentence case, like the answers themselves. So an answer
+added part way through a label has its first word lowercased, unless that
+word is an acronym (eg "LGBTIQA+") or a proper noun (eg "Aboriginal",
+"Centrelink").
 
 When sampled on 2026-11-05, 59 of 60 related searches across six searches were
 found in the table. The other was plain text.

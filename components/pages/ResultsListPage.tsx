@@ -49,7 +49,7 @@ function ResultsListPage({router}: Props): ReactNode {
     const {
         suggestions: otherServicesSuggestions,
         isLoading: otherServicesSuggestionsLoading,
-    } = useOtherServicesSuggestions(izzyQuery)
+    } = useOtherServicesSuggestions(izzyQuery, category.key)
 
     function hasSearchResults(): boolean {
         return Boolean(
