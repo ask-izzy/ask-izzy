@@ -4,6 +4,7 @@ import { test } from "@playwright/test";
 import assert from "assert";
 
 import {buildRelatedSearchFlows} from "../../scripts/lib/related-search-flows";
+import {parseRelatedSearchFlows} from "../../src/related-searches/flows";
 import type {RelatedSearchFlows} from "../../src/related-searches/flows";
 
 /** @see docs/other-services-panel.md § "Turning a related search back into a flow" */
@@ -69,6 +70,23 @@ test.describe("Related search flows lookup table", function() {
         assert.deepStrictEqual(keys, [...keys].sort())
         for (const q of keys) {
             assert.strictEqual(q, q.toLowerCase().replace(/\s+/g, " ").trim())
+        }
+    })
+
+    test("matches the schema the server checks it against when loading it", (): void => {
+        assert.deepStrictEqual(parseRelatedSearchFlows(flows), flows)
+    })
+})
+
+test.describe("Checking a loaded lookup table", function() {
+    test("rejects a table which isn't the expected shape", (): void => {
+        for (const table of [
+            [],
+            {meals: {category: "food"}},
+            {meals: {category: "food", answers: {"food-subcategory": 3}}},
+            {meals: {category: "food", answers: {age: {oneOf: []}}}},
+        ]) {
+            assert.throws(() => parseRelatedSearchFlows(table))
         }
     })
 })

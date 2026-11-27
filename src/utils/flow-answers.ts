@@ -13,3 +13,26 @@ export type AnswerOptions = {oneOf: Array<Answer>}
 
 // Keyed by personalisation page name
 export type FlowAnswers = {[personalisationPageName: string]: Answer | AnswerOptions}
+
+export function isAnswerOptions(
+    answer: Answer | AnswerOptions | null | undefined
+): answer is AnswerOptions {
+    return Boolean(answer) && typeof answer === "object" && "oneOf" in answer
+}
+
+// Skipping, or selecting nothing on a multiple choice page
+export function isNoAnswer(answer: Answer | null | undefined): boolean {
+    return !answer || answer === "(skipped)" ||
+        (Array.isArray(answer) && answer.length === 0)
+}
+
+// The answer saved for anyone who hasn't already given one of the flow's
+// answers: skipping (or selecting nothing) if that's an option, otherwise any
+// of them since they all give the same search.
+// See docs/other-services-panel.md § "What clicking a suggestion does"
+export function getAnswerToSave(answer: Answer | AnswerOptions): Answer {
+    if (!isAnswerOptions(answer)) {
+        return answer
+    }
+    return answer.oneOf.find(option => isNoAnswer(option)) ?? answer.oneOf[0]
+}
