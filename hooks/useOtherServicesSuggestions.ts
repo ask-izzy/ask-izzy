@@ -2,6 +2,7 @@ import {useEffect, useState} from "react"
 
 import type {SearchQuery} from "@/src/iss/searchQueryBuilder"
 import {convertIzzySearchQueryToIss3} from "@/src/iss/serviceSearch"
+import {getCurrentAnswers} from "@/src/utils/other-services-suggestions"
 import type {
     OtherServicesSuggestion,
     RelatedSearchesRequest,
@@ -35,11 +36,16 @@ async function fetchSuggestions(
  */
 export default function useOtherServicesSuggestions(
     izzyQuery: SearchQuery | null | undefined,
+    // Key of the current results page's category, used for labelling
+    currentCategory?: string,
 ): OtherServicesSuggestionsState {
     const [state, setState] = useState<OtherServicesSuggestionsState>(
         {suggestions: [], isLoading: false}
     )
     const q = izzyQuery ? convertIzzySearchQueryToIss3(izzyQuery).q ?? "" : ""
+    // Stringified to be a stable dependency, so suggestions are refetched (and
+    // relabelled) when saved answers change without q changing
+    const currentAnswersKey = JSON.stringify(getCurrentAnswers())
 
     useEffect(() => {
         if (!q.trim()) {
@@ -48,7 +54,11 @@ export default function useOtherServicesSuggestions(
         }
         setState({suggestions: [], isLoading: true})
         let cancelled = false
-        fetchSuggestions({q})
+        fetchSuggestions({
+            q,
+            currentCategory,
+            currentAnswers: JSON.parse(currentAnswersKey),
+        })
             .then(suggestions => {
                 if (!cancelled) {
                     setState({suggestions, isLoading: false})
@@ -64,7 +74,7 @@ export default function useOtherServicesSuggestions(
         return () => {
             cancelled = true
         }
-    }, [q])
+    }, [q, currentCategory, currentAnswersKey])
 
     return state
 }

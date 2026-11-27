@@ -28,7 +28,7 @@ export default async function handler(
         return res.status(429).json({message: "Too many requests"})
     }
 
-    // Never log the body: q can be what the user typed
+    // Never log the body: it has what the user typed and their answers
     const {status, body} = await handleRelatedSearchesRequest(
         req.method,
         req.body,

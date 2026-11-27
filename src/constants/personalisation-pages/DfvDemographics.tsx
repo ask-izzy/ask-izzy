@@ -4,6 +4,7 @@ import type {
 import React from "react";
 import type {ReactNode} from "react";
 import icons from "../../icons";
+import demographicSuggestionLabels from "@/src/constants/demographic-suggestion-labels"
 
 export default ({
     type: "question",
@@ -48,6 +49,7 @@ export default ({
     },
     oldAnswers: {},
     title: "Personal",
+    suggestionLabels: demographicSuggestionLabels,
     resetOptionsOnDisplay: [
         "under-18-dfv",
         "lgbtiqa-domestic-violence",

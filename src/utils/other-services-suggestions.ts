@@ -1,12 +1,42 @@
 // What a clicked suggestion links to and saves.
 // See docs/other-services-panel.md § "What clicking a suggestion does"
 
+import categories from "@/src/constants/categories"
 import storage from "@/src/storage"
-import {getAnswerToSave, isAnswerOptions} from "@/src/utils/flow-answers"
+import {
+    getAnswerToSave,
+    isAnswer,
+    isAnswerOptions,
+    isSameAnswer,
+} from "@/src/utils/flow-answers"
 import type {Answer} from "@/src/utils/flow-answers"
 import type {
+    CurrentAnswers,
     OtherServicesSuggestionTarget,
 } from "@/types/other-services-suggestion"
+
+/*
+ * The saved answer to every personalisation question, sent to
+ * POST /api/search/related for labelling.
+ * See docs/other-services-panel.md § "Labelling suggestions"
+ */
+export function getCurrentAnswers(): CurrentAnswers {
+    const answers: CurrentAnswers = {}
+    for (const category of categories) {
+        for (const page of category.personalisation) {
+            if (page.type !== "question" || page.name in answers) {
+                continue
+            }
+            const answer = page.multipleChoice ?
+                storage.getJSON(page.name)
+                : storage.getItem(page.name)
+            if (isAnswer(answer)) {
+                answers[page.name] = answer
+            }
+        }
+    }
+    return answers
+}
 
 /*
  * Keyword searches are shown in quotes to set them apart from categories,
@@ -33,17 +63,11 @@ export function getOtherServicesSuggestionPath(
     return `/search/${encodeURIComponent(target.searchText)}`
 }
 
-// Multiple choice answers match if their first 2 sorted selections do, since
-// only those affect the search (see getSearchQueryChanges() in
-// src/utils/personalisation.ts)
 function isSavedAnswer(pageName: string, answer: Answer): boolean {
-    if (Array.isArray(answer)) {
-        const saved = storage.getJSON(pageName)
-        return Array.isArray(saved) &&
-            JSON.stringify([...saved].sort().slice(0, 2)) ===
-                JSON.stringify([...answer].sort().slice(0, 2))
-    }
-    return storage.getItem(pageName) === answer
+    const saved = Array.isArray(answer) ?
+        storage.getJSON(pageName)
+        : storage.getItem(pageName)
+    return isSameAnswer(saved, answer)
 }
 
 function saveAnswer(pageName: string, answer: Answer): void {

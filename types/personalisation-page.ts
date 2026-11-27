@@ -20,6 +20,11 @@ type PersonalisationAnyPage = {
     searchQueryChanges?: SearchQueryChanges | null,
 }
 
+// A phrase for an answer in a suggestion label. Removing the answer is
+// "without <phrase>" unless a phrase for that is given too (eg "for couples"
+// and "not just for couples").
+export type SuggestionLabel = string | {with: string, without: string}
+
 export type PersonalisationQuestionPage = PersonalisationAnyPage & {
     title: string,
     question: string,
@@ -31,6 +36,12 @@ export type PersonalisationQuestionPage = PersonalisationAnyPage & {
     icons?: {[key: string]: typeof BaseIcon},
     oldAnswers?: {[key: string]: string},
     prettyPrintAnswer?: (arg0: string) => string | ReactNode,
+    // Phrases for answers in "People also searched for" labels, eg "for
+    // people not safe tonight" rather than "No". Other answers are used as
+    // is. null means not worth mentioning, like skipping. Can include
+    // "(skipped)".
+    // See docs/other-services-panel.md § "Labelling suggestions"
+    suggestionLabels?: {[answer: string]: SuggestionLabel | null},
     baseTextBoxComponent?: ReactNode,
     resetDfvOptionsOnDisplay?: boolean,
     resetOptionsOnDisplay?: Array<string>,

@@ -4,6 +4,7 @@ import { test } from "@playwright/test";
 import assert from "assert";
 
 import {
+    getCurrentAnswers,
     getOtherServicesSuggestionPath,
     quoteSearchText,
     saveOtherServicesSuggestionAnswers,
@@ -135,6 +136,24 @@ test.describe("Saving a suggestion's answers", function() {
         saveOtherServicesSuggestionAnswers({type: "search", searchText: "meals"})
 
         assert.strictEqual(storage.getItem("food-subcategory") ?? null, null)
+    })
+})
+
+/** @see docs/other-services-panel.md § "Labelling suggestions" */
+test.describe("The current answers sent for labelling", function() {
+    test.afterEach(() => storage.clear())
+
+    test("are the saved answers to personalisation questions", (): void => {
+        storage.setItem("sleep-tonight", "No")
+        storage.setJSON("demographics", ["Veteran", "Couples"])
+        storage.setItem("not-a-page", "something")
+
+        const answers = getCurrentAnswers()
+
+        assert.strictEqual(answers["sleep-tonight"], "No")
+        assert.deepStrictEqual(answers.demographics, ["Couples", "Veteran"])
+        assert(!("not-a-page" in answers))
+        assert(!("age" in answers))
     })
 })
 

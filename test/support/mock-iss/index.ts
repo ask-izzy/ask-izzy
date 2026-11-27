@@ -50,6 +50,22 @@ export function initMockISSServer() {
     // one unknown query that should be dropped.
     // See docs/other-services-panel.md § "Ask Izzy's related searches endpoint"
     app.get("/api/directory/search/related/", (req, res) => {
+        // Money help searches (their q has "-grants -heritage") get two
+        // housing flows which differ only by age, to check labels are relative to the user's saved answers.
+        // See docs/other-services-panel.md § "Labelling suggestions"
+        if (String(req.query.query ?? "").includes("-grants -heritage")) {
+            res.json({
+                query: String(req.query.query).trim(),
+                segment: req.query.segment ?? null,
+                results: [
+                    "-(coordinating bodies) -(holiday accommodation) " +
+                        "(crisis accommodation)",
+                    "-(coordinating bodies) -(holiday accommodation) " +
+                        "(crisis accommodation) children youth",
+                ],
+            });
+            return;
+        }
         res.json({
             query: String(req.query.query ?? "").trim(),
             segment: req.query.segment ?? null,

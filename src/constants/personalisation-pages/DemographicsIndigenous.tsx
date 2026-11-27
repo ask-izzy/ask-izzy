@@ -10,6 +10,9 @@ import {
 } from "../../utils/personalisation"
 import HealthSubcategories from "./HealthSubcategories";
 import CounsellingSubcategories from "./CounsellingSubcategories";
+import {
+    indigenousServicesSuggestionLabel,
+} from "@/src/constants/demographic-suggestion-labels"
 
 export default ({
     type: "question",
@@ -30,6 +33,12 @@ export default ({
         "No - show me everything": icons.Blank,
     },
     title: "Indigenous",
+    suggestionLabels: {
+        "Yes - show these first where possible":
+            indigenousServicesSuggestionLabel,
+        // Same search as not answering
+        "No - show me everything": null,
+    },
     prettyPrintAnswer(answer: string): ReactNode {
         switch (answer) {
         case "Yes - show these first where possible":

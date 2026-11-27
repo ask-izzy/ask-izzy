@@ -9,6 +9,14 @@ import type {RelatedSearchFlows} from "../../src/related-searches/flows";
 
 const flows: RelatedSearchFlows = {
     "meals": {category: "food", answers: {"food-subcategory": "Meals"}},
+    "housing -(coordinating bodies) -(respite care)": {
+        category: "housing",
+        answers: {"sleep-tonight": "Yes"},
+    },
+    "housing (rental assistance)": {
+        category: "housing",
+        answers: {"sleep-tonight": "No"},
+    },
 }
 
 /** @see docs/other-services-panel.md § "Ask Izzy's related searches endpoint" */
@@ -94,6 +102,51 @@ test.describe("POST /api/search/related", function() {
         assert.deepStrictEqual(result, {status: 200, body: {suggestions: []}})
     })
 
+    /** @see docs/other-services-panel.md § "Labelling suggestions" */
+    test("labels suggestions relative to the current category and answers", async() => {
+        const result = await handleRelatedSearchesRequest(
+            "POST",
+            {
+                q: "housing -(coordinating bodies) -(respite care)",
+                currentCategory: "housing",
+                currentAnswers: {"sleep-tonight": "Yes"},
+            },
+            dependencies(["housing (rental assistance)"]),
+        )
+
+        assert.deepStrictEqual(
+            "suggestions" in result.body &&
+                result.body.suggestions.map(suggestion => suggestion.label),
+            ["Housing for people not safe tonight"],
+        )
+    })
+
+    test("ignores answers to unknown pages and answers which aren't strings", async() => {
+        const result = await handleRelatedSearchesRequest(
+            "POST",
+            {
+                q: "meals",
+                currentCategory: "food",
+                currentAnswers: {
+                    "sleep-tonight": 3,
+                    "demographics": ["Couples", null],
+                    "not-a-page": "Yes",
+                },
+            },
+            dependencies([
+                "housing (rental assistance)",
+                "housing -(coordinating bodies) -(respite care)",
+            ]),
+        )
+
+        // With no valid saved sleep tonight answer both are mentioned
+        assert.deepStrictEqual(
+            "suggestions" in result.body &&
+                result.body.suggestions.map(suggestion => suggestion.label),
+            ["Housing for people not safe tonight", "Housing for people safe tonight"],
+        )
+    })
+
     test("only accepts POST", async() => {
         const result = await handleRelatedSearchesRequest(
             "GET",
@@ -111,6 +164,8 @@ test.describe("POST /api/search/related", function() {
         ["no q", {}],
         ["an empty q", {q: "  "}],
         ["a q which isn't a string", {q: 3}],
+        ["an unknown current category", {q: "meals", currentCategory: "nope"}],
+        ["a current category which isn't a string", {q: "meals", currentCategory: 1}],
     ]
     invalidBodies.forEach(([description, body]) => {
         test(`rejects a request with ${description}`, async() => {

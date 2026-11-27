@@ -8,7 +8,15 @@ import {getAnswerToSave, isNoAnswer} from "@/src/utils/flow-answers"
 import type {FlowAnswers} from "@/src/utils/flow-answers"
 import {normaliseIss3Q} from "@/src/related-searches/flows"
 import type {RelatedSearchFlows} from "@/src/related-searches/flows"
-import type {OtherServicesSuggestion} from "@/types/other-services-suggestion"
+import {
+    getCurrentSearchItem,
+    getMinimalLabels,
+} from "@/src/related-searches/labels"
+import type {LabelItem} from "@/src/related-searches/labels"
+import type {
+    CurrentAnswers,
+    OtherServicesSuggestion,
+} from "@/types/other-services-suggestion"
 
 // No brackets or "-" exclusions (syntax the app adds), so probably typed by a
 // person
@@ -63,28 +71,72 @@ export function getOtherServicesSuggestion(
 
 /*
  * Turn the related searches for the current search into suggestions,
- * dropping any which can't be used, are the current search or have the same
- * label as an earlier (more relevant) suggestion.
+ * dropping any which can't be used or are the current search. Category
+ * suggestions get the details getMinimalLabels() picks. Any still sharing a
+ * label keep only the first (most relevant).
+ * See docs/other-services-panel.md § "Labelling suggestions"
  */
 export function getOtherServicesSuggestions(
     relatedSearches: Array<string>,
     currentQ: string,
     flows: RelatedSearchFlows,
+    currentCategoryKey?: string,
+    currentAnswers: CurrentAnswers = {},
 ): Array<OtherServicesSuggestion> {
     const normalisedCurrentQ = normaliseIss3Q(currentQ)
-    const seenLabels = new Set<string>()
-    const suggestions: Array<OtherServicesSuggestion> = []
-    for (const relatedSearch of relatedSearches) {
-        if (normaliseIss3Q(relatedSearch) === normalisedCurrentQ) {
-            continue
+    const suggestions = relatedSearches
+        .filter(relatedSearch =>
+            normaliseIss3Q(relatedSearch) !== normalisedCurrentQ
+        )
+        .map(relatedSearch => getOtherServicesSuggestion(relatedSearch, flows))
+        .filter((suggestion): suggestion is OtherServicesSuggestion =>
+            Boolean(suggestion?.label)
+        )
+
+    // Only category suggestions get details. Keyword searches keep their text.
+    const categorySuggestions: Array<{
+        suggestion: OtherServicesSuggestion,
+        item: LabelItem,
+    }> = suggestions.flatMap(suggestion => {
+        const {target} = suggestion
+        const category = target.type === "category" && categories.find(
+            category => category.key === target.categoryKey
+        )
+        return target.type === "category" && category ?
+            [{
+                suggestion,
+                item: {category, answers: target.answers, base: suggestion.label},
+            }]
+            : []
+    })
+    const labels = new Map<OtherServicesSuggestion, string | null>()
+    getMinimalLabels(
+        categorySuggestions.map(({item}) => item),
+        getCurrentSearchItem(
+            flows[normalisedCurrentQ]?.answers ?? null,
+            currentCategoryKey,
+            currentAnswers,
+        ),
+        currentAnswers,
+    ).forEach((label, index) =>
+        labels.set(categorySuggestions[index].suggestion, label)
+    )
+    const labelled = suggestions.flatMap(suggestion => {
+        if (!labels.has(suggestion)) {
+            return [suggestion]
         }
-        const suggestion = getOtherServicesSuggestion(relatedSearch, flows)
-        const labelKey = suggestion?.label.toLowerCase()
-        if (!suggestion || !labelKey || seenLabels.has(labelKey)) {
-            continue
+        const label = labels.get(suggestion)
+        // null: can't be told apart from the current search
+        return label ? [{...suggestion, label}] : []
+    })
+
+    const seenLabels = new Set<string>()
+    return labelled.filter(suggestion => {
+        const labelKey = suggestion.label.toLowerCase()
+        if (seenLabels.has(labelKey)) {
+            return false
         }
         seenLabels.add(labelKey)
-        suggestions.push(suggestion)
-    }
-    return suggestions
+        return true
+    })
 }

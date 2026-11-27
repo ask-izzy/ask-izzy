@@ -75,16 +75,30 @@ Feature: Other services panel
         And I click the "“relief”" link
         Then I should be at /search/relief/Melbourne-VIC
 
-    # @see docs/other-services-panel.md § "Turning a related search back into a flow"
+    # @see docs/other-services-panel.md § "Labelling suggestions"
     # @see docs/other-services-panel.md § "What clicking a suggestion does"
-    Scenario: A suggestion for the current category changes its answers
+    Scenario: A suggestion for the current category is told apart from it and changes it
         Given I am interested in the "Meals" subcategory for food
         When I visit /food
         Then I should see a "Food" suggestion
         And I should not see a "Meals" suggestion
+        And I should not see a "Food without meals" suggestion
 
         When I click the "Food" link
         Then I should be at /food/Melbourne-VIC
         And I should see "Showing food services"
         And I should see a "Meals" suggestion
         And I should not see a "Food" suggestion
+
+    # @see docs/other-services-panel.md § "Labelling suggestions"
+    Scenario: Suggestions are labelled by how they'd change the user's answers
+        When I visit /money-help
+        Then I should see "Housing for all ages"
+        And I should not see "Housing for under 18s"
+
+    # @see docs/other-services-panel.md § "Labelling suggestions"
+    Scenario: Suggestion labels depend on the user's saved answers
+        Given I am 27 years old
+        When I visit /money-help
+        Then I should see "Housing for under 18s"
+        And I should not see "Housing for all ages"
