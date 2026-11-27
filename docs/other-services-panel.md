@@ -8,8 +8,9 @@ looking for housing may also want meals or food vouchers. It comes from the
 Code:
 
 - [src/components/OtherServicesPanel.tsx](../src/components/OtherServicesPanel.tsx): the panel itself
-- [src/utils/other-services-suggestions.ts](../src/utils/other-services-suggestions.ts): turns a suggestion into a destination
-- [src/constants/other-services-suggestions.ts](../src/constants/other-services-suggestions.ts): the suggestions (fixtures)
+- [hooks/useOtherServicesSuggestions.ts](../hooks/useOtherServicesSuggestions.ts): loads the suggestions for the current search
+- [src/utils/other-services-suggestions.ts](../src/utils/other-services-suggestions.ts): where a suggestion goes and what clicking it saves
+- [src/constants/other-services-suggestions.ts](../src/constants/other-services-suggestions.ts): example suggestions for storybook
 - [pages/api/search/related.ts](../pages/api/search/related.ts): the related searches endpoint, which is handled in [src/related-searches/](../src/related-searches/) (server only)
 - [scripts/lib/related-search-flows.ts](../scripts/lib/related-search-flows.ts): builds the `q` → flow lookup table (written by [scripts/generate-related-search-flows.ts](../scripts/generate-related-search-flows.ts))
 - [src/components/ResultsList.tsx](../src/components/ResultsList.tsx): places the panel between pages of results
@@ -38,6 +39,15 @@ The presentation also offered a single panel after the first X results
 - Chips wrap onto as many rows as they need. A chip too wide for a row by
   itself (eg "Support and counselling without mental and emotional health" on
   a phone) wraps its text onto more lines instead of running off screen.
+- Keyword search chips are in quotes, eg “relief”, to set them apart from
+  categories. Text that's already in quotes isn't quoted again.
+- While suggestions load, each copy of the panel shows its heading and four
+  grey placeholder chips that gently pulse (still for people who prefer
+  reduced motion). They're the same height as a chip, so the panel doesn't
+  jump when the real chips arrive. If there turn out to be no suggestions,
+  the panel goes away. The browser can't tell whether ISS4 is configured, so
+  where it isn't, the placeholders flash briefly before the endpoint answers
+  with no suggestions.
 - The panel is deliberately quiet and has no collapse control. It repeats
   after every page of results, so it shouldn't compete with the results or
   nag.
@@ -48,16 +58,15 @@ Callum over louder speech-bubble designs. An earlier version was a collapsible
 
 ## Where suggestions come from
 
-For now the panel shows a fixed fixture list from
-`src/constants/other-services-suggestions.ts`. Every results page shows the same
-list. Each suggestion is a plain text label, and the app maps labels to
-destinations itself (see "What clicking a suggestion does").
-
-They're being replaced by suggestions from ISS4's related searches endpoint
+The suggestions come from ISS4's related searches endpoint
 (`GET /api/directory/search/related/`). Given a search, it returns searches
 people often made before or after it, based on past search sessions, most
 relevant first. Ask Izzy asks for up to 8, with `segment=ask-izzy` so they're
 tailored to searches made through Ask Izzy.
+
+Once a results page knows its search, `useOtherServicesSuggestions` asks Ask
+Izzy's endpoint (below) for suggestions, once per `q`. Results never wait for
+suggestions, and if there aren't any the panel is hidden.
 
 ### Ask Izzy's related searches endpoint
 
@@ -189,16 +198,14 @@ of which about 2.6 seconds is the walk itself.
 
 ## What clicking a suggestion does
 
-`getOtherServicesSuggestionTarget` matches the label against the categories
-shown on the home page. Matching ignores case and punctuation and treats `&` as
-"and". It checks in this order:
-
-1. **A category name** (eg "Housing") goes to that category.
-2. **A subcategory answer** (an answer on a `<category key>-subcategory`
-   personalisation page, eg "Meals" for Food, "Drugs & Alcohol Counselling" for
-   Support and counselling) saves that answer, then goes to the category. Any
-   answer the user gave on that subcategory page before is replaced.
-3. **Anything else** becomes a keyword search for the label (`/search/<label>`).
+- **A category flow** saves the flow's answers, then goes to the category. An
+  answer the user gave before to one of those pages is replaced. For a
+  `oneOf`, the user's existing answer is kept if it's one of the options.
+  Otherwise `(skipped)` (or selecting nothing) is saved if it's an option, or
+  else any of them, since they all give the same search. Answers to other
+  pages are kept. Flows often include more than the subcategory answer, eg
+  sleep tonight, age or demographics, when those change `q`.
+- **A keyword search** goes to `/search/<text>`.
 
 The link points at the bare category or search path. The results page then
 works out where to go from the saved answers:
