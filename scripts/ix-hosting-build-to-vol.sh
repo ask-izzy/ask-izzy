@@ -58,7 +58,14 @@ if [ "$CREATE_STORAGE_BUILD_DIR_EXIT_STATUS" -eq 0 ]; then
     echo "This container is in charge of building the app"
     export TASK_DEFINITION_REVISION
     # Not `yarn build` since its prebuild step regenerates the related search
-    # flows which were already generated when the image was built
+    # flows which were already generated when the image was built. They're
+    # read at runtime rather than bundled, so check they're there.
+    RELATED_SEARCH_FLOWS="src/related-searches/related-search-flows.generated.json"
+    if [ ! -s "$RELATED_SEARCH_FLOWS" ]; then
+        echo "Error: $RELATED_SEARCH_FLOWS is missing from the image" 1>&2
+        rm -rf "$STORAGE_BUILD_DIR"
+        exit 1
+    fi
     yarn run next build
 
     # Once we've finished building copy all files into the /storage subdirectory

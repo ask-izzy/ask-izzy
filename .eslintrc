@@ -147,6 +147,21 @@
                     }
                 ]
             }
+        },
+        {
+            // Server only code, which includes the related search flows
+            // lookup table. See docs/other-services-panel.md § "Ask Izzy's
+            // related searches endpoint"
+            "files": ["components/**", "hooks/**", "pages/**", "src/**"],
+            "excludedFiles": ["pages/api/**", "src/related-searches/**"],
+            "rules": {
+                "no-restricted-imports": [2, {
+                    "patterns": [{
+                        "group": ["**/related-searches/*"],
+                        "message": "src/related-searches/ is server only. Use POST /api/search/related from the browser."
+                    }]
+                }]
+            }
         }
     ]
 }
