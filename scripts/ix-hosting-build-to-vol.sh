@@ -57,7 +57,9 @@ if [ "$CREATE_STORAGE_BUILD_DIR_EXIT_STATUS" -eq 0 ]; then
 
     echo "This container is in charge of building the app"
     export TASK_DEFINITION_REVISION
-    yarn build
+    # Not `yarn build` since its prebuild step regenerates the related search
+    # flows which were already generated when the image was built
+    yarn run next build
 
     # Once we've finished building copy all files into the /storage subdirectory
     echo "Done building, now about to copy files"

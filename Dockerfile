@@ -130,6 +130,12 @@ RUN --mount=type=cache,target=/tmp/home/.cache/yarn,uid=$UID,gid=$GID,sharing=lo
 
 COPY --chown=$UID:$GID . .
 COPY --chown=$UID:$GID --from=development /app/.next .next
+# Generated before the build above. It doesn't depend on env vars so the deploy
+# rebuild (scripts/ix-hosting-build-to-vol.sh) reuses it rather than
+# generating it again.
+COPY --chown=$UID:$GID --from=development \
+    /app/src/related-searches/related-search-flows.generated.json \
+    src/related-searches/related-search-flows.generated.json
 
 # Upgrading next.js has forced the need to upgrade storybook which has been disabled until that can be done.
 # RUN yarn with --test-env --mocks build-storybook
