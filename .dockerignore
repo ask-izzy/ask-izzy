@@ -25,3 +25,4 @@ Dockerfile
 .dockerignore
 .vscode
 *.tsbuildinfo
+/src/related-searches/related-search-flows.generated.json
